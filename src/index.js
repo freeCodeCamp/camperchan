@@ -1,6 +1,7 @@
 const { Client } = require('discord.js');
 const getConfig = require('./config/get-config');
 const validateConfig = require('./config/validate-config');
+const bootstrap = require('./commands/bootstrap');
 const client = new Client();
 
 (async () => {
@@ -11,7 +12,9 @@ const client = new Client();
     validateConfig(config);
     // rig up client callbacks
     client.on('error', console.error);
-    // TODO: bootstrap commands
+
+    bootstrap(client);
+
     client.on('message', (message) => {
       console.log('>> ', message.content);
     });
