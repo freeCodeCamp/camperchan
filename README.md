@@ -13,6 +13,7 @@ To get started working with this project locally you need to have node installed
 ## Running locally
 
 1. Be sure to provide the `TOKEN` environment variable, otherwise the bot will throw an error.
+   This variable should be from your discord api information
 2. Run in dev mode with:
 
 ```bash
