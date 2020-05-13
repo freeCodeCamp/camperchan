@@ -5,7 +5,8 @@
   "scripts": {
     "start": "node src",
     "dev": "npx nodemon src",
-    "lint": "npx eslint ."
+    "lint": "npx eslint .",
+    "inspect": "npx nodemon --inspect src"
   },
   "license": "MIT",
   "dependencies": {
