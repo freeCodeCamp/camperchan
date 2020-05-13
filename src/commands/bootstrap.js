@@ -7,7 +7,7 @@ module.exports = function bootstrap(client) {
   const commands = [eightball];
   
   client.on('guildMemberAdd', member => {
-    member.guild.channels.cache.find(ch => ch.name === 'introduction').send("**" + member.user.username + "** has joined the server! :)")
+        member.send("Welcome to the server! Please make sure you read the rules in our '#welcome' channel before you start chatting!")
   })
             
   client.on('guildMemberRemove', member => {
