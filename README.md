@@ -10,7 +10,7 @@ So, you want to contribute to this repo? We are glad to recieve PRs from anybody
 2. Fork the repo
    ![GIF - How to fork on GitHub](./README-images/fork-resized.gif)
 3. Clone your forked repo
-4. Create a new branch on the cloned repo and swith to it
+4. Create a new branch on the cloned repo and switch to it
    ![GIF - How to create a branch and switch to it with Git](./README-images/create-local-new-branch.gif)
 5. Make changes to add, update or fix a feature
 6. Review/test/debug your changes by [running the bot locally](#running-locally)
