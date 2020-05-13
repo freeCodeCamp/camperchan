@@ -2,18 +2,6 @@
 
 A discord test bot used to test out architecture and implementing a discord bot. This project is a way to get familiar with the architecture, APIs and process of maintaining a discord bot.
 
-## DISCLAIMER
-
-This is **NOT** the official Discord Bot for FCC's Discord. This repo is not affiliated with FreeCodeCamp directly, only a "side project" with the intent of learning more about building a discord bot to help FreeCodeCamp in the future.
-
-FreeCodeCamp issue (_feature request_):
-
-https://github.com/freeCodeCamp/freeCodeCamp/issues/38711
-
-FreeCodeCamp forum post:
-
-https://www.freecodecamp.org/forum/t/create-a-new-camperbot-for-the-official-discord-server/387311
-
 ## Contributing
 
 So, you want to contribute to this repo? We are glad to recieve PRs from anybody who is interested. Follow these steps if you are new to contributing to open source projects -
