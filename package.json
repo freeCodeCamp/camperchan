@@ -3,7 +3,8 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "npx nodemon src"
+    "start": "npx nodemon src",
+    "lint": "npx eslint ."
   },
   "license": "MIT",
   "dependencies": {
@@ -11,6 +12,7 @@
   },
   "devDependencies": {
     "dotenv": "^8.2.0",
+    "eslint": "^7.0.0",
     "husky": "^4.2.5",
     "lint-staged": "^10.2.2",
     "nodemon": "^2.0.3",
