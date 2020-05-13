@@ -20,4 +20,7 @@ To get started working with this project locally you need to have node installed
 npm run dev
 ```
 
+## Documentation
+- [Discord.js](https://discord.js.org/#/docs/main/stable/general/welcome)
+- [dotenv](https://www.npmjs.com/package/dotenv)
 **note** these instructions are still in progress
