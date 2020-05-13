@@ -4,7 +4,7 @@ const help = require('./help')
  * Bootstraps all commands to the client.
  */
 module.exports = function bootstrap(client) {
-  const commands = [eightball];
+  const commands = [eightball, help];
 
   client.on('message', (message) => {
     for (let command of commands) {
