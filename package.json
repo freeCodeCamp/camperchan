@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "echo 'not ready yet!'"
+    "start": "npx nodemon src"
   },
   "license": "MIT",
   "dependencies": {
@@ -11,7 +11,18 @@
   },
   "devDependencies": {
     "dotenv": "^8.2.0",
+    "husky": "^4.2.5",
+    "lint-staged": "^10.2.2",
     "nodemon": "^2.0.3",
+    "prettier": "^2.0.5",
     "rimraf": "^3.0.2"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.{js,css,md}": "prettier --write"
   }
 }
