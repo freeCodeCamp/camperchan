@@ -1,0 +1,17 @@
+{
+  "name": "discord-bot-test",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "start": "echo 'not ready yet!'"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "discord.js": "^12.2.0"
+  },
+  "devDependencies": {
+    "dotenv": "^8.2.0",
+    "nodemon": "^2.0.3",
+    "rimraf": "^3.0.2"
+  }
+}
