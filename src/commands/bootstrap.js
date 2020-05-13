@@ -7,11 +7,11 @@ module.exports = function bootstrap(client) {
   const commands = [eightball];
   
   client.on('guildMemberAdd', member => {
-    member.guild.channels.get('channelID').send("**" + member.user.username + "** has joined the server! :)")
+    member.guild.channels.cache.find(ch => ch.name === 'introduction').send("**" + member.user.username + "** has joined the server! :)")
   })
             
   client.on('guildMemberRemove', member => {
-    member.guild.channels.get('channelID').send("**" + member.user.username + "** has left the server! :(")
+    member.guild.channels.cache.find(ch => ch.name === 'introduction').send("**" + member.user.username + "** has left the server! :(")
   })
   
   client.on('message', (message) => {
