@@ -7,12 +7,14 @@ A discord test bot used to test out architecture and implementing a discord bot.
 So, you want to contribute to this repo? We are glad to recieve PRs from anybody who is interested. Follow these steps if you are new to contributing to open source projects -
 
 1. [Install the required softwares](#install-prerequisites)
-1. Fork the repo
-1. Clone your forked repo
-1. Create a new branch on the cloned repo and swith to it
-1. Make changes to add, update or fix a feature
-1. Review/test/debug your changes by [running the bot locally](#running-locally)
-1. Commit changes and do a Pull Request (aka PR in short)
+2. Fork the repo
+   ![GIF - How to fork on GitHub](./README-images/fork-resized.gif)
+3. Clone your forked repo
+4. Create a new branch on the cloned repo and swith to it
+   ![GIF - How to create a branch and switch to it with Git](./README-images/create-local-new-branch.gif)
+5. Make changes to add, update or fix a feature
+6. Review/test/debug your changes by [running the bot locally](#running-locally)
+7. Commit changes and do a Pull Request (aka PR in short)
 
 ...and that's it! You're now a contributor! 😎
 
@@ -41,14 +43,14 @@ To test and develop this bot, you have to run it locally. To run the bot locally
 TOKEN=replace-this-with-your-token
 ```
 
-2. Open the terminal in that folder
-3. Type the following command and hit enter:
+3. Open the terminal in that folder
+4. Type the following command and hit enter:
 
 ```bash
 npm i
 ```
 
-3. Type the following command and hit enter:
+5. Type the following command and hit enter:
 
 ```bash
 npm run dev
@@ -57,3 +59,17 @@ npm run dev
 ## Creating a Discord bot token
 
 If you don't have a Discord bot token, you'll have to create one. To create a Discord bot token, follow these steps -
+
+1. Go to the [Developer Portal](https://discord.com/developers/applications/) website and log in
+2. Click on the "New Application" button
+3. Enter a name
+4. Then confirm the pop-up window by clicking the "Create" button. By now you will probably see a page like this:
+   ![PNG - Created App Page](./README-images/create-app.png)
+
+5) Click on the `Bot` tab on the left pane
+   ![PNG - 'Bot' Button In Left Pane](./README-images/create-bot-in-pane.png)
+6) Click the "Add Bot" button on the right and confirm the pop-up window by clicking "Yes, do it!". After doing so, you'll see a section similar to this one:
+   ![PNG - Bot Created Successfully](./README-images/created-bot.png)
+7) Now pressing the "Copy" button will copy your `Token` to your clipboard.
+
+...and that's it!
