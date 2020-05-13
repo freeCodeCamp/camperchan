@@ -12,7 +12,8 @@ To get started working with this project locally you need to have node installed
 
 ## Running locally
 
-Run in dev mode with:
+1. Be sure to provide the `TOKEN` environment variable, otherwise the bot will throw an error.
+2. Run in dev mode with:
 
 ```bash
 npm run dev

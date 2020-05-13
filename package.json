@@ -3,7 +3,8 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "npx nodemon src",
+    "start": "node src",
+    "dev": "npx nodemon src",
     "lint": "npx eslint ."
   },
   "license": "MIT",
