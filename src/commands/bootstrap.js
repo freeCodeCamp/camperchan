@@ -1,5 +1,5 @@
 const eightball = require('./eightball');
-
+const help = require('./help')
 /**
  * Bootstraps all commands to the client.
  */
