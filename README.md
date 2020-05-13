@@ -73,3 +73,13 @@ If you don't have a Discord bot token, you'll have to create one. To create a Di
 7) Now pressing the "Copy" button will copy your `Token` to your clipboard.
 
 ...and that's it!
+
+## Additional Information
+
+This bot uses the [discord.js](https://discord.js.org) library to interact with the Discord API rather than directly doing so. You can check out the docs for the library [here](https://discord.js.org/#/docs/main/stable/general/welcome).
+
+## Ask For Help
+
+If you have any question about the project, you can create an issue and ask it. You can also reach us in the FCC's official [Discord](https://discord.gg/KVUmVXA).
+
+Happy Coding!
