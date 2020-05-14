@@ -83,3 +83,14 @@ This bot uses the [discord.js](https://discord.js.org) library to interact with 
 If you have any question about the project, you can create an issue and ask it. You can also reach us in the FCC's official [Discord](https://discord.gg/KVUmVXA).
 
 Happy Coding!
+
+### Disclaimer
+
+This test-bot was created to allow us to test the discord.js library and experiement with setting up our own Discord bot. Our intent is to help [FreeCodeCamp](https://www.freecodecamp.org) set up a bot for their Discord server - however, the files in this repository are **NOT** associated with FreeCodeCamp in any way. 
+
+FreeCodeCamp issue:
+[freeCodeCamp/freeCodeCamp#38711](https://github.com/freeCodeCamp/freeCodeCamp/issues/38711)
+
+FreeCodeCamp forum post:
+https://www.freecodecamp.org/forum/t/create-a-new-camperbot-for-the-official-discord-server/387311
+
