@@ -6,9 +6,7 @@ module.exports = {
    * Displays currently available commands.
    *
    * @param {Discord.Message} message the message provided
-   */
-
-  /**
+   *
    *Use this format to add new commands:
    *{name: "Command Name", value: "Command Description"},
    */
