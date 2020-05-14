@@ -10,10 +10,10 @@ So, you want to contribute to this repo? We are glad to recieve PRs from anybody
 
 1. [Install the required softwares](#install-prerequisites)
 2. Fork the repo
-   ![GIF - How to fork on GitHub](./README-images/fork-resized.gif)
+   ![GIF - How to fork on GitHub](../media/fork-resized.gif?raw=true)
 3. Clone your forked repo
 4. Create a new branch on the cloned repo and switch to it
-   ![GIF - How to create a branch and switch to it with Git](./README-images/create-local-new-branch.gif)
+   ![GIF - How to create a branch and switch to it with Git](../media/create-local-new-branch.gif?raw=true)
 5. Make changes to add, update or fix a feature
 6. Review/test/debug your changes by [running the bot locally](#running-locally)
 7. Commit changes and do a Pull Request (aka PR in short)
@@ -66,12 +66,12 @@ If you don't have a Discord bot token, you'll have to create one. To create a Di
 2. Click on the "New Application" button
 3. Enter a name
 4. Then confirm the pop-up window by clicking the "Create" button. By now you will probably see a page like this:
-   ![PNG - Created App Page](./README-images/create-app.png)
+   ![PNG - Created App Page](../media/create-app.png?raw=true)
 
 5) Click on the `Bot` tab on the left pane
-   ![PNG - 'Bot' Button In Left Pane](./README-images/create-bot-in-pane.png)
+   ![PNG - 'Bot' Button In Left Pane](../media/create-bot-in-pane.png?raw=true)
 6) Click the "Add Bot" button on the right and confirm the pop-up window by clicking "Yes, do it!". After doing so, you'll see a section similar to this one:
-   ![PNG - Bot Created Successfully](./README-images/created-bot.png)
+   ![PNG - Bot Created Successfully](../media/created-bot.png?raw=true)
 7) Now pressing the "Copy" button will copy your `Token` to your clipboard.
 
 ...and that's it!
