@@ -4,9 +4,8 @@
   "private": true,
   "scripts": {
     "start": "node src",
-    "dev": "npx nodemon src",
-    "lint": "npx eslint .",
-    "inspect": "npx nodemon --inspect src"
+    "dev": "npx nodemon --inspect src",
+    "lint": "npx eslint ."
   },
   "license": "MIT",
   "dependencies": {
