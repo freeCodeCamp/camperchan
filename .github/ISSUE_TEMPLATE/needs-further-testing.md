@@ -2,7 +2,7 @@
 name: Needs Further Testing
 about: Ask for testing for a currently merged feature
 title: ''
-labels: ''
+labels: 'needs testing'
 assignees: ''
 
 ---
