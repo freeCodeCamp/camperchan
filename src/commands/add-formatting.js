@@ -56,7 +56,19 @@ module.exports = {
         formatMessageWithCodeblock(detectedWithLanguageClassifier, content)
       );
     } else {
-      const reactionEmojies = ['🙂', '🙃', '😃'];
+      const reactionOptionsObj = {
+        firstOption: '🙂',
+        secondOption: '🙃',
+        thirdOption: '😃',
+      }; //['🙂', '🙃', '😃']
+
+      const reactionEmojies = [];
+
+      const objectKeys = Object.keys(reactionOptionsObj);
+
+      objectKeys.map((key) => {
+        reactionEmojies.push(reactionOptionsObj[key]);
+      });
 
       const confusedMessage = confusedMessageGenerator(
         languageGuesses,
@@ -76,7 +88,7 @@ module.exports = {
             const reactionEmoji = collectedEmojis[0]._emoji.name; // might want to change this line to enable multiple format
 
             switch (reactionEmoji) {
-              case reactionEmojies[0]: {
+              case reactionOptionsObj.firstOption: {
                 const supportedLanguage = isSuppotedByPrettier(
                   languageGuesses[0]
                 );
@@ -95,7 +107,7 @@ module.exports = {
                 }
                 break;
               }
-              case reactionEmojies[1]: {
+              case reactionOptionsObj.secondOption: {
                 const supportedLanguage = isSuppotedByPrettier(
                   languageGuesses[1]
                 );
@@ -115,7 +127,7 @@ module.exports = {
                 }
                 break;
               }
-              case reactionEmojies[2]: {
+              case reactionOptionsObj.thirdOption: {
                 const supportedLanguage = isSuppotedByPrettier(
                   languageGuesses[2]
                 );
