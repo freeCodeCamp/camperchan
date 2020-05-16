@@ -1,6 +1,7 @@
 const eightball = require("./eightball");
 const help = require("./help");
 const Discord = require("discord.js");
+
 /**
  * Bootstraps all commands to the client.
  */
@@ -20,6 +21,7 @@ module.exports = function bootstrap(client) {
       .setFooter("Thank you and Happy Coding! 😁");
     member.send(welcomeEmbed);
   });
+
 
   client.on("guildMemberRemove", (member) => {
     member.guild.channels.cache
