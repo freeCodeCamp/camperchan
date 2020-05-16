@@ -2,7 +2,7 @@ const { Client } = require('discord.js');
 const getConfig = require('./config/get-config');
 const validateConfig = require('./config/validate-config');
 const bootstrap = require('./commands/bootstrap');
-const client = new Client();
+const client = new Client({ partials: ['MESSAGE', 'CHANNEL', 'REACTION'] });
 const addFormatting = require('./commands/add-formatting');
 
 (async () => {
