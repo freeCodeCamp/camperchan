@@ -3,8 +3,10 @@ const help = require('./help');
 const Discord = require('discord.js');
 /**
  * Bootstraps all commands to the client.
+ * @param {Object.client} client the discord client
+ * @param {Object.config} config the application config
  */
-module.exports = function bootstrap(client) {
+module.exports = function bootstrap({ client, config }) {
   const commands = [eightball, help];
 
   client.on('guildMemberAdd', (member) => {
@@ -26,7 +28,6 @@ module.exports = function bootstrap(client) {
       .find((ch) => ch.name === 'introduction')
       .send('**' + member.user.username + '** has left the server! :(');
   });
-
   client.on('message', (message) => {
     for (let command of commands) {
       if (message.content.startsWith(command.prefix)) {
