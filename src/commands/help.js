@@ -10,10 +10,10 @@ module.exports = {
    *{name: "Command Name", value: "Command Description"},
    */
 
-  command: async function help(message, error) {
+  command: async function help(message) {
     //console.log("help", message);
     try {
-      const helpEmbed = await new Discord.MessageEmbed()
+      const helpEmbed = new Discord.MessageEmbed()
         .setColor('#0099ff')
         .setTitle('Bot Information')
         .setDescription(
