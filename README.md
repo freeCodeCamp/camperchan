@@ -1,5 +1,7 @@
 # Discord Test Bot
 
+[![Build Status](https://travis-ci.org/bradtaniguchi/discord-bot-test.svg?branch=master)](https://travis-ci.org/bradtaniguchi/discord-bot-test)
+
 A discord test bot used to test out architecture and implementing a discord bot. This project is a way to get familiar with the architecture, APIs and process of maintaining a discord bot.
 
 ## Contributing
@@ -86,11 +88,10 @@ Happy Coding!
 
 ### Disclaimer
 
-This test-bot was created to allow us to test the discord.js library and experiement with setting up our own Discord bot. Our intent is to help [FreeCodeCamp](https://www.freecodecamp.org) set up a bot for their Discord server - however, the files in this repository are **NOT** associated with FreeCodeCamp in any way. 
+This test-bot was created to allow us to test the discord.js library and experiement with setting up our own Discord bot. Our intent is to help [FreeCodeCamp](https://www.freecodecamp.org) set up a bot for their Discord server - however, the files in this repository are **NOT** associated with FreeCodeCamp in any way.
 
 FreeCodeCamp issue:
 [freeCodeCamp/freeCodeCamp#38711](https://github.com/freeCodeCamp/freeCodeCamp/issues/38711)
 
 FreeCodeCamp forum post:
 https://www.freecodecamp.org/forum/t/create-a-new-camperbot-for-the-official-discord-server/387311
-
