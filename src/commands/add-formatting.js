@@ -3,6 +3,7 @@ const hljs = require('highlight.js');
 const confusedMessageGenerator = require('../utilities/confusedMessageGenerator');
 const isSuppotedByPrettier = require('../utilities/isSuppotedByPrettier');
 const formatter = require('../utilities/formatter');
+const formatMessageWithCodeblock = require('../utilities/formatCodeblock');
 
 module.exports = {
   prefix: '',
@@ -44,13 +45,16 @@ module.exports = {
       if (supportedLanguage) {
         const formattedCode = formatter(content, supportedLanguage);
         message.channel.send(
-          `\`\`\`${detectedWithLanguageClassifier}\n${formattedCode}\`\`\``
+          formatMessageWithCodeblock(
+            detectedWithLanguageClassifier,
+            formattedCode
+          )
         );
-      } else {
-        message.channel.send(
-          `\`\`\`${detectedWithLanguageClassifier}\n${content}\`\`\``
-        );
+        return;
       }
+      message.channel.send(
+        formatMessageWithCodeblock(detectedWithLanguageClassifier, content)
+      );
     } else {
       const reactionEmojies = ['🙂', '🙃', '😃'];
 
@@ -79,11 +83,14 @@ module.exports = {
                 if (supportedLanguage) {
                   const formattedCode = formatter(content, supportedLanguage);
                   ref.channel.send(
-                    `\`\`\`${languageGuesses[0]}\n${formattedCode}\`\`\``
+                    formatMessageWithCodeblock(
+                      languageGuesses[0],
+                      formattedCode
+                    )
                   );
                 } else {
                   ref.channel.send(
-                    `\`\`\`${languageGuesses[0]}\n${content}\`\`\``
+                    formatMessageWithCodeblock(languageGuesses[0], content)
                   );
                 }
                 break;
@@ -96,11 +103,14 @@ module.exports = {
                   const formattedCode = formatter(content, supportedLanguage);
 
                   ref.channel.send(
-                    `\`\`\`${languageGuesses[1]}\n${formattedCode}\`\`\``
+                    formatMessageWithCodeblock(
+                      languageGuesses[1],
+                      formattedCode
+                    )
                   );
                 } else {
                   ref.channel.send(
-                    `\`\`\`${languageGuesses[1]}\n${content}\`\`\``
+                    formatMessageWithCodeblock(languageGuesses[1], content)
                   );
                 }
                 break;
@@ -113,11 +123,14 @@ module.exports = {
                 if (supportedLanguage) {
                   const formattedCode = formatter(content, supportedLanguage);
                   ref.channel.send(
-                    `\`\`\`${languageGuesses[2]}\n${formattedCode}\`\`\``
+                    formatMessageWithCodeblock(
+                      languageGuesses[2],
+                      formattedCode
+                    )`\`\`\`${languageGuesses[2]}\n${formattedCode}\`\`\``
                   );
                 } else {
                   ref.channel.send(
-                    `\`\`\`${languageGuesses[2]}\n${content}\`\`\``
+                    formatMessageWithCodeblock(languageGuesses[2], content)
                   );
                 }
                 break;
