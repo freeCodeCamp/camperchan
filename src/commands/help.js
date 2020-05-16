@@ -38,7 +38,7 @@ module.exports = {
 
       message.author.send(helpEmbed);
     } catch (error) {
-      console.log(error);
+      console.error(error);
     }
   },
 };
