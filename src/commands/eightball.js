@@ -29,7 +29,6 @@ module.exports = {
       'Yes.',
       'Yes - definitely.',
       'You may rely on it.'
-
     ];
     const rand = Math.floor(Math.random() * options.length);
     message.channel.send(options[rand]);

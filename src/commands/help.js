@@ -25,11 +25,11 @@ module.exports = {
           { name: '\u200B', value: '\u200B' },
           {
             name: 'Commands',
-            value: 'Here are my currently available commands!',
+            value: 'Here are my currently available commands!'
           },
           {
             name: '!eightball <optional string>',
-            value: 'Returns a response from a magic pool ball!',
+            value: 'Returns a response from a magic pool ball!'
           },
           //new command lines go below here.
 
@@ -42,5 +42,5 @@ module.exports = {
     } catch (error) {
       console.error(error);
     }
-  },
+  }
 };
