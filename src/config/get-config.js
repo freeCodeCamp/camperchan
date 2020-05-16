@@ -9,6 +9,6 @@ require('dotenv').config();
 
 module.exports = function getConfig() {
   return Promise.resolve({
-    TOKEN: process.env.TOKEN,
+    TOKEN: process.env.TOKEN
   });
 };

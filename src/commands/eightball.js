@@ -14,7 +14,6 @@ module.exports = {
       'Better not tell you now.',
       'Cannot predict now.',
       'Concentrate and ask again.',
-      // eslint-disable-next-line quotes
       "Don't count on it.",
       'It is certain.',
       'It is decidedly so.',
@@ -29,9 +28,9 @@ module.exports = {
       'Without a doubt.',
       'Yes.',
       'Yes - definitely.',
-      'You may rely on it.',
+      'You may rely on it.'
     ];
     const rand = Math.floor(Math.random() * options.length);
     message.channel.send(options[rand]);
-  },
+  }
 };

@@ -15,7 +15,7 @@ module.exports = function bootstrap(client) {
       .addFields({
         name: 'Rules',
         value:
-          'Please read our [rules](https://www.freecodecamp.org/news/code-of-conduct/) before posting in the server.',
+          'Please read our [rules](https://www.freecodecamp.org/news/code-of-conduct/) before posting in the server.'
       })
       .setFooter('Thank you and Happy Coding! 😁');
     member.send(welcomeEmbed);
