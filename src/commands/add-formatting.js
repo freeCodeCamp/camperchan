@@ -70,7 +70,6 @@ module.exports = {
           .then((collected) => {
             const collectedEmojis = [...collected.values()];
             const reactionEmoji = collectedEmojis[0]._emoji.name; // might want to change this line to enable multiple format
-            let response = '';
 
             switch (reactionEmoji) {
               case reactionEmojies[0]: {
