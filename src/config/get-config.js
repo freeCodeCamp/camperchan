@@ -8,7 +8,17 @@
 require('dotenv').config();
 
 module.exports = function getConfig() {
-  return Promise.resolve({
-    TOKEN: process.env.TOKEN
-  });
+  return {
+    /**
+     * The discord token
+     */
+    TOKEN: process.env.TOKEN,
+    /**
+     * The bots prefix which should be placed in-front of
+     * every command. Defaults to '!FCC' if nothing was given
+     *  **note** this is not used yet, all command still follow the :
+     * `!myCommand` format.
+     */
+    PREFIX: process.env.PREFIX
+  };
 };
