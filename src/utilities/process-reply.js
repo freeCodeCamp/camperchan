@@ -1,6 +1,6 @@
 const isSuppotedByPrettier = require('./is-suppoted-by-prettier');
 const formatter = require('./formatter');
-const formatMessageWithCodeblock = require('./formatCodeblock');
+const formatMessageWithCodeblock = require('./format-codeblock');
 
 /**
  * @name processReply
