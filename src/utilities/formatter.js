@@ -14,7 +14,7 @@ const stripAnsi = require('strip-ansi');
 
 module.exports = function formatter(unformattedCode, language) {
   let options = {
-    trailingComma: 'none',
+    trailingComma: 'none'
   };
 
   switch (language) {

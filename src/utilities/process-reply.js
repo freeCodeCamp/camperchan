@@ -16,7 +16,7 @@ module.exports = function processReply({
   reactionEmojies,
   reactionOptionsObj,
   languageGuesses,
-  content,
+  content
 }) {
   const filter = (reaction) => {
     return reactionEmojies.includes(reaction.emoji.name);

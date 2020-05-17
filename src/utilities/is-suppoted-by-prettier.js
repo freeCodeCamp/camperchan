@@ -24,7 +24,7 @@ module.exports = function isSuppotedByPrettier(languageName) {
     'scheme',
     'clojure',
     'vbscript',
-    'shell',
+    'shell'
   ];
 
   if (htmlAliases.includes(languageName)) {
