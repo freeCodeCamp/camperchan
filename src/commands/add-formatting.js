@@ -60,7 +60,7 @@ module.exports = {
       const reactionOptionsObj = {
         firstOption: '🙂',
         secondOption: '🙃',
-        thirdOption: '😃',
+        thirdOption: '😃'
       };
 
       const reactionEmojies = [];
@@ -80,7 +80,7 @@ module.exports = {
         reactionEmojies,
         reactionOptionsObj,
         languageGuesses,
-        content,
+        content
       };
 
       const refToPromptMsg = message.channel.send(confusedMessage);
@@ -88,5 +88,5 @@ module.exports = {
         processReply({ ...requiredInfoObj, ref });
       });
     }
-  },
+  }
 };
