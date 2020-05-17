@@ -1,7 +1,18 @@
 const prettier = require('prettier');
 const stripAnsi = require('strip-ansi');
 
-function formatter(unformattedCode, language) {
+/**
+ * @name formatter
+ * Formats user's unformatted code recieved from user's message
+ *
+ * @param {string} unformattedCode The unformatted code recieved from user's message
+ * @param {string} language Target language to format to
+ *
+ * @returns {string} The formatted code or a codeblock showing
+ * where syntax error occured
+ */
+
+module.exports = function formatter(unformattedCode, language) {
   let options = {
     trailingComma: 'none',
   };
@@ -41,6 +52,4 @@ function formatter(unformattedCode, language) {
   }
 
   return formattedCode;
-}
-
-module.exports = formatter;
+};
