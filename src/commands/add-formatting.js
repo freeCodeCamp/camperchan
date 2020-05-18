@@ -3,7 +3,6 @@ const confusedMessageGenerator = require('../utilities/confused-message-generato
 const processReply = require('../utilities/process-reply');
 
 module.exports = {
-  prefix: '',
   /**
    * @name add-formatting
    * Inserts any unformated code to a code block, enables syntax highlighting and formats it when a
