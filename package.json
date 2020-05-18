@@ -4,6 +4,7 @@
   "private": true,
   "scripts": {
     "start": "node src",
+    "test": "jest --detectOpenHandles",
     "dev": "npx nodemon --inspect src",
     "lint": "npx eslint ."
   },
