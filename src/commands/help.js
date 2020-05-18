@@ -20,7 +20,7 @@ module.exports = {
         description:
           'Hello! I am a test bot created by bradtaniguchi and members of FreeCodeCamp.org to experiment with the process of building a Discord Bot. You can view my source code at https://github.com/bradtaniguchi/discord-bot-test',
         fields: [],
-        footer: { text: 'I am not affiliated with FreeCodeCamp in any way.' },
+        footer: { text: 'I am not affiliated with FreeCodeCamp in any way.' }
       };
 
       fs.readdir(__dirname, (error, files) => {
