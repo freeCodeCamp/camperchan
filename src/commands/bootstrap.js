@@ -1,6 +1,6 @@
 const eightball = require('./eightball');
 const help = require('./help');
-const stats = require('./stats);
+const stats = require('./stats');
 const Discord = require('discord.js');
 /**
  * Bootstraps all commands to the client.
