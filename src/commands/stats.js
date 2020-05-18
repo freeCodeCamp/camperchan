@@ -5,7 +5,7 @@ module.exports = {
    * @name stats
    * Displays the server stats.
    *
-   * 
+   *
    */
   command: function stats(message) {
     try {
