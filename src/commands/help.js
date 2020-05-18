@@ -28,7 +28,8 @@ module.exports = {
           console.error(error);
         }
         for (let i = 0; i < files.length; i++) {
-          let lookup = require(`./${files[i]}`);
+          let filename = files[i];
+          let lookup = require(`./${filename}`);
           if (lookup.prefix == undefined || lookup.description == undefined) {
             continue;
           } else {
