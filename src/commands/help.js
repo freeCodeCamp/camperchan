@@ -1,8 +1,8 @@
-const Discord = require("discord.js");
-const fs = require("fs");
+const Discord = require('discord.js');
+const fs = require('fs');
 module.exports = {
-  prefix: "!help",
-  description: "Get the commands currently available with this bot",
+  prefix: '!help',
+  description: 'Get the commands currently available with this bot',
   /**
    * @name help
    * Displays currently available commands.
@@ -15,12 +15,12 @@ module.exports = {
     //console.log("help", message);
     try {
       const helpEmbed = {
-        color: "#0099FF",
-        title: "Bot Information",
+        color: '#0099FF',
+        title: 'Bot Information',
         description:
-          "Hello! I am a test bot created by bradtaniguchi and members of FreeCodeCamp.org to experiment with the process of building a Discord Bot. You can view my source code at https://github.com/bradtaniguchi/discord-bot-test",
+          'Hello! I am a test bot created by bradtaniguchi and members of FreeCodeCamp.org to experiment with the process of building a Discord Bot. You can view my source code at https://github.com/bradtaniguchi/discord-bot-test',
         fields: [],
-        footer: { text: "I am not affiliated with FreeCodeCamp in any way." },
+        footer: { text: 'I am not affiliated with FreeCodeCamp in any way.' },
       };
 
       fs.readdir(__dirname, (error, files) => {
@@ -34,7 +34,7 @@ module.exports = {
           } else {
             let fieldObj = {
               name: lookup.prefix.substring(0, 255),
-              value: lookup.description.substring(0, 1023),
+              value: lookup.description.substring(0, 1023)
             };
             helpEmbed.fields.push(fieldObj);
           }
@@ -45,5 +45,5 @@ module.exports = {
     } catch (error) {
       console.error(error);
     }
-  },
+  }
 };
