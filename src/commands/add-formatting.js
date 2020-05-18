@@ -11,7 +11,7 @@ module.exports = {
    *
    * @param {Discord.Message} message The message provided
    */
-  command: function addFormatting(message) {
+  command: async function addFormatting(message) {
     const { content } = message;
 
     const languageGuesses = [];
@@ -34,13 +34,7 @@ module.exports = {
       secondOption: '🙃'
     };
 
-    const reactionEmojies = [];
-
-    const objectKeys = Object.keys(reactionOptionsObj);
-
-    objectKeys.map((key) => {
-      reactionEmojies.push(reactionOptionsObj[key]);
-    });
+    const reactionEmojies = Object.values(reactionOptionsObj);
 
     const confusedMessage = confusedMessageGenerator(
       languageGuesses,
@@ -54,9 +48,11 @@ module.exports = {
       content
     };
 
-    const refToPromptMsg = message.channel.send(confusedMessage);
-    refToPromptMsg.then((ref) => {
-      processReply({ ...requiredInfoObj, ref });
-    });
+    try {
+      const refToPromptMsg = await message.channel.send(confusedMessage);
+      processReply({ ...requiredInfoObj, ref: refToPromptMsg });
+    } catch (error) {
+      // maybe write an error log or something
+    }
   }
 };

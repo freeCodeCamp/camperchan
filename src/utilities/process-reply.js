@@ -11,74 +11,78 @@ const formatMessageWithCodeblock = require('./format-codeblock');
  * process the reply
  */
 
-module.exports = function processReply({
+module.exports = async function processReply({
   ref,
   reactionEmojies,
   reactionOptionsObj,
   languageGuesses,
   content
 }) {
-  const filter = (reaction) => {
-    return reactionEmojies.includes(reaction.emoji.name);
-  };
+  try {
+    const filter = (reaction) => {
+      return reactionEmojies.includes(reaction.emoji.name);
+    };
 
-  ref
-    .awaitReactions(filter, { max: 1, time: 60000, errors: ['time'] }) // code can be formatted multiple times by chnaging this line
-    .then((collected) => {
-      const collectedEmojis = [...collected.values()];
-      const reactionEmoji = collectedEmojis[0]._emoji.name; // code can be formatted multiple times by chnaging this line
+    const reaction = await ref.awaitReactions(filter, {
+      max: 1,
+      time: 60000,
+      errors: ['time']
+    }); // code can be formatted multiple times by chnaging this line
 
-      switch (reactionEmoji) {
-        case reactionOptionsObj.firstOption: {
-          const supportedLanguage = isSuppotedByPrettier(languageGuesses[0]);
-          if (supportedLanguage) {
-            const formattedCode = formatter(content, supportedLanguage);
-            ref.channel.send(
-              formatMessageWithCodeblock(languageGuesses[0], formattedCode)
-            );
-          } else {
-            ref.channel.send(
-              formatMessageWithCodeblock(languageGuesses[0], content)
-            );
-          }
-          break;
+    const collectedEmojis = [...reaction.values()];
+    const reactionEmoji = collectedEmojis[0]._emoji.name; // code can be formatted multiple times by chnaging this line
+
+    switch (reactionEmoji) {
+      case reactionOptionsObj.firstOption: {
+        const supportedLanguage = isSuppotedByPrettier(languageGuesses[0]);
+        if (supportedLanguage) {
+          const formattedCode = formatter(content, supportedLanguage);
+          ref.channel.send(
+            formatMessageWithCodeblock(languageGuesses[0], formattedCode)
+          );
+        } else {
+          ref.channel.send(
+            formatMessageWithCodeblock(languageGuesses[0], content)
+          );
         }
-        case reactionOptionsObj.secondOption: {
-          const supportedLanguage = isSuppotedByPrettier(languageGuesses[1]);
-          if (supportedLanguage) {
-            const formattedCode = formatter(content, supportedLanguage);
-
-            ref.channel.send(
-              formatMessageWithCodeblock(languageGuesses[1], formattedCode)
-            );
-          } else {
-            ref.channel.send(
-              formatMessageWithCodeblock(languageGuesses[1], content)
-            );
-          }
-          break;
-        }
-        case reactionOptionsObj.thirdOption: {
-          const supportedLanguage = isSuppotedByPrettier(languageGuesses[2]);
-
-          if (supportedLanguage) {
-            const formattedCode = formatter(content, supportedLanguage);
-            ref.channel.send(
-              formatMessageWithCodeblock(
-                languageGuesses[2],
-                formattedCode
-              )`\`\`\`${languageGuesses[2]}\n${formattedCode}\`\`\``
-            );
-          } else {
-            ref.channel.send(
-              formatMessageWithCodeblock(languageGuesses[2], content)
-            );
-          }
-          break;
-        }
+        break;
       }
-    })
-    .catch((collected) => {
-      console.log(`Reacted: ${collected}`);
-    });
+      case reactionOptionsObj.secondOption: {
+        const supportedLanguage = isSuppotedByPrettier(languageGuesses[1]);
+        if (supportedLanguage) {
+          const formattedCode = formatter(content, supportedLanguage);
+
+          ref.channel.send(
+            formatMessageWithCodeblock(languageGuesses[1], formattedCode)
+          );
+        } else {
+          ref.channel.send(
+            formatMessageWithCodeblock(languageGuesses[1], content)
+          );
+        }
+        break;
+      }
+      case reactionOptionsObj.thirdOption: {
+        const supportedLanguage = isSuppotedByPrettier(languageGuesses[2]);
+
+        if (supportedLanguage) {
+          const formattedCode = formatter(content, supportedLanguage);
+          ref.channel.send(
+            formatMessageWithCodeblock(languageGuesses[2], formattedCode)
+          );
+        } else {
+          ref.channel.send(
+            formatMessageWithCodeblock(languageGuesses[2], content)
+          );
+        }
+        break;
+      }
+    }
+  } catch (error) {
+    try {
+      ref.channel.send('Something went wrong! Failed to format code :(');
+    } catch (error) {
+      // maybe write an error log or something
+    }
+  }
 };
