@@ -13,17 +13,14 @@ module.exports = function confusedMessageGenerator(
   possibleLanguages,
   reactionEmojies
 ) {
-  let questions = [];
-
-  possibleLanguages.map((language, index) => {
-    questions.push(
+  const questions = possibleLanguages.map(
+    (language, index) =>
       `Is it \`${language}\`? (If it is \`${language}\`, then react to the unformatted message with a ${reactionEmojies[index]} emoji)`
-    );
-  });
+  );
 
-  let confusedMessage = `${questions.join(
-    '\n'
-  )}\n\n(P.S.: React to this message...)`;
+  const joinedQuestions = questions.join('\n');
+
+  const confusedMessage = `${joinedQuestions}\n\n(P.S.: React to this message...)`;
 
   return confusedMessage;
 };

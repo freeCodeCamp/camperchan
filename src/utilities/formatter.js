@@ -13,7 +13,7 @@ const stripAnsi = require('strip-ansi');
  */
 
 module.exports = function formatter(unformattedCode, language) {
-  let options = {
+  const options = {
     trailingComma: 'none'
   };
 
@@ -46,6 +46,13 @@ module.exports = function formatter(unformattedCode, language) {
   try {
     formattedCode = prettier.format(unformattedCode, options);
   } catch (error) {
+    // When formatting code, if Prettier's parser detects a syntax error, it stops parsing
+    // and throws an error message showing where a syntax error was occured. We want
+    // to use this syntax error detection and send it do Discord. But Prettier's error
+    // message is colorrized using ANSI to help developer detect the error, which is why
+    // the message, if sent to Discord, can't be displayed. That's why we use `stripAnsi`
+    // in the next line to remove any ANSI provided by Prettier's parser
+
     formattedCode = stripAnsi(
       `SyntaxError: Unexpected token (${error.loc.start.line}:${error.loc.start.column})\n\n${error.codeFrame}`
     );
