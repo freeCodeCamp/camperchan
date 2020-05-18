@@ -3,9 +3,9 @@ module.exports = {
   description: 'Get current server information!',
   /**
    * @name stats
-   * Randomly selects an option, and returns it to chat.
+   * Displays the server stats.
    *
-   * @param tba
+   * 
    */
   command: function stats(message) {
     try {
