@@ -1,6 +1,7 @@
 module.exports = {
   prefix: '!eightball',
-  description: 'Think of your question and get an answer from a magic pool ball!',
+  description:
+  'Think of your question and get an answer from a magic pool ball!',
   /**
    * @name eightBall
    * Randomly selects an option, and returns it to chat.
