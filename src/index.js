@@ -20,33 +20,42 @@ const addFormatting = require('./commands/add-formatting');
       console.log('>> ', message.content);
     });
 
+    // The code below listens for reactions to any message in the server and if
+    // a reaction is equal to the specified trigger reaction (in this case '🤖'),
+    // then is attempts to format the message. To get a detailed explanation of the
+    // code below visit: https://discordjs.guide/popular-topics/reactions.html#listening-for-reactions-on-old-messages
+
     client.on('messageReactionAdd', async (reaction) => {
-      // When we receive a reaction we check if the reaction is partial or not
       if (reaction.partial) {
-        // If the message this reaction belongs to was removed the fetching might reject
         try {
           await reaction.fetch();
         } catch (error) {
-          reaction.message.channel.send(
-            'Something went wrong! Failed to format code :('
-          );
-          // Return as `reaction.message.author` may be undefined/null
+          try {
+            reaction.message.channel.send(
+              'Something went wrong! Failed to format code :('
+            );
+          } catch (error) {
+            // maybe write an error log or something
+          }
+
           return;
         }
       }
 
       if (reaction.emoji.name === '🤖') {
-        reaction.message.reactions
-          .removeAll()
-          .then(() => {
-            addFormatting.command(reaction.message);
-          })
-          .catch((error) => {
+        try {
+          await reaction.message.reactions.removeAll();
+
+          addFormatting.command(reaction.message);
+        } catch (error) {
+          try {
             reaction.message.channel.send(
               'Something went wrong! Failed to format code :('
             );
-            console.error(error);
-          });
+          } catch (error) {
+            // maybe write an error log or something
+          }
+        }
       }
     });
 
