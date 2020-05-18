@@ -16,30 +16,30 @@ module.exports = {
         fields: [
           {
             name: 'Server Name',
-            value: message.guild.name,
+            value: message.guild.name
           },
           {
             name: 'Created on',
-            value: message.guild.createdAt,
+            value: message.guild.createdAt
           },
           {
             name: 'You joined on',
-            value: message.member.joinedAt,
+            value: message.member.joinedAt
           },
           {
             name: 'Total Member Count is',
-            value: message.guild.memberCount,
+            value: message.guild.memberCount
           },
           {
             name: 'Server run by',
-            value: message.guild.owner,
-          },
+            value: message.guild.owner
+          }
         ],
-        footer: { text: 'Thanks for being here with us!' },
+        footer: { text: 'Thanks for being here with us!' }
       };
       message.channel.send({ embed: statsEmbed });
     } catch (error) {
       console.error(error);
     }
-  },
+  }
 };
