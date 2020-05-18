@@ -1,5 +1,6 @@
 const eightball = require('./eightball');
 const help = require('./help');
+const stats = require('./stats);
 const Discord = require('discord.js');
 /**
  * Bootstraps all commands to the client.
@@ -7,7 +8,7 @@ const Discord = require('discord.js');
  * @param {Object.config} config the application config
  */
 module.exports = function bootstrap({ client, config }) {
-  const commands = [eightball, help];
+  const commands = [eightball, help, stats];
 
   client.on('guildMemberAdd', (member) => {
     const welcomeEmbed = new Discord.MessageEmbed()
