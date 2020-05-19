@@ -76,7 +76,7 @@ Then just beside your bot's icon, you'll see your `CLIENT ID`. Copy the `CLIENT 
 
 Then replace the `YOUR_CLIENT_ID_HERE` with your bot's `CLIENT ID` in the link provided below. After that, you can use the link to add the bot to any existing or newly created Discord server.
 
-https://discordapp.com/oauth2/authorize?client_id=YOUR_CLIENT_ID_HERE&scope=bot&permissions=8192
+_https://discordapp.com/oauth2/authorize?client_id=YOUR_CLIENT_ID_HERE&scope=bot&permissions=8192_
 
 **IMPORTANT NOTE :** When you click on the link and want to add the bot to a server, it'll ask for the `Manage Messages` permission. You'll have to grant the bot permission otherwise the bot won't work.
 
