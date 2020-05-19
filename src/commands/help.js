@@ -23,7 +23,7 @@ module.exports = {
       footer: { text: 'I am not affiliated with FreeCodeCamp in any way.' }
     };
 
-    fsPromises.readdir(__dirname).then(async function (results) {
+    const results = await fsPromises.readdir(__dirname)
       console.log(results);
       results.forEach((file) => {
         const filename = file;
@@ -37,6 +37,5 @@ module.exports = {
         }
       });
       await message.author.send({ embed: helpEmbed });
-    });
+    }
   }
-};
