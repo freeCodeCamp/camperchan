@@ -30,13 +30,10 @@ const addFormatting = require('./commands/add-formatting');
         try {
           await reaction.fetch();
         } catch (error) {
-          try {
-            reaction.message.channel.send(
-              'Something went wrong! Failed to format code :('
-            );
-          } catch (error) {
-            // maybe write an error log or something
-          }
+          reaction.message.channel.send(
+            'Something went wrong! Failed to format code :('
+          );
+          console.error(error);
 
           return;
         }
@@ -48,13 +45,10 @@ const addFormatting = require('./commands/add-formatting');
 
           addFormatting.command(reaction.message);
         } catch (error) {
-          try {
-            reaction.message.channel.send(
-              'Something went wrong! Failed to format code :('
-            );
-          } catch (error) {
-            // maybe write an error log or something
-          }
+          reaction.message.channel.send(
+            'Something went wrong! Failed to format code :('
+          );
+          console.error(error);
         }
       }
     });

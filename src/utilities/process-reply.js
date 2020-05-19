@@ -79,10 +79,7 @@ module.exports = async function processReply({
       }
     }
   } catch (error) {
-    try {
-      ref.channel.send('Something went wrong! Failed to format code :(');
-    } catch (error) {
-      // maybe write an error log or something
-    }
+    ref.channel.send('Something went wrong! Failed to format code :(');
+    console.error(error);
   }
 };

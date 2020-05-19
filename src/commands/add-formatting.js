@@ -51,7 +51,7 @@ module.exports = {
       const refToPromptMsg = await message.channel.send(confusedMessage);
       processReply({ ...requiredInfoObj, ref: refToPromptMsg });
     } catch (error) {
-      // maybe write an error log or something
+      console.error(error);
     }
   }
 };
