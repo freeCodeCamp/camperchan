@@ -2,7 +2,7 @@ const Discord = require('discord.js');
 const fs = require('fs');
 const fsPromises = fs.promises;
 module.exports = {
-  prefix: '!help',
+  prefix: 'help',
   description: 'Get the commands currently available with this bot',
   /**
    * @name help
