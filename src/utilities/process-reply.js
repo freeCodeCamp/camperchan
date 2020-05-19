@@ -38,7 +38,7 @@ module.exports = async function processReply({
         if (supportedLanguage) {
           const formattedCode = formatter(content, supportedLanguage);
           ref.channel.send(
-            formatMessageWithCodeblock(languageGuesses[0], formattedCode)
+            formatMessageWithCodeblock(supportedLanguage, formattedCode)
           );
         } else {
           ref.channel.send(
@@ -53,7 +53,7 @@ module.exports = async function processReply({
           const formattedCode = formatter(content, supportedLanguage);
 
           ref.channel.send(
-            formatMessageWithCodeblock(languageGuesses[1], formattedCode)
+            formatMessageWithCodeblock(supportedLanguage, formattedCode)
           );
         } else {
           ref.channel.send(
@@ -68,7 +68,7 @@ module.exports = async function processReply({
         if (supportedLanguage) {
           const formattedCode = formatter(content, supportedLanguage);
           ref.channel.send(
-            formatMessageWithCodeblock(languageGuesses[2], formattedCode)
+            formatMessageWithCodeblock(supportedLanguage, formattedCode)
           );
         } else {
           ref.channel.send(
@@ -79,7 +79,7 @@ module.exports = async function processReply({
       }
     }
   } catch (error) {
-    ref.channel.send('Something went wrong! Failed to format code :(');
+    ref.channel.send('Message timeout!');
     console.error(error);
   }
 };
