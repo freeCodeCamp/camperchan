@@ -13,9 +13,26 @@ module.exports = {
   command: async function addFormatting(message) {
     const { content } = message;
 
+    const checkForLanguages = [
+      'HTML',
+      'CSS',
+      'SCSS',
+      'JavaScript',
+      'TypeScript',
+      'JSX',
+      'PHP',
+      'Python',
+      'Markdown',
+      'JSON',
+      'HTTP'
+    ];
+
     const languageGuesses = [];
 
-    const detectedWithHLJS = hljs.highlightAuto(message.content);
+    const detectedWithHLJS = hljs.highlightAuto(
+      message.content,
+      checkForLanguages
+    );
 
     languageGuesses.push(detectedWithHLJS.language);
     if (detectedWithHLJS.second_best) {
