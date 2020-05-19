@@ -23,9 +23,9 @@ module.exports = {
       footer: { text: 'I am not affiliated with FreeCodeCamp in any way.' }
     };
 
-    fsPromises.readdir(__dirname).then(async function(results) {
+    fsPromises.readdir(__dirname).then(async function (results) {
       console.log(results);
-      results.forEach(file => {
+      results.forEach((file) => {
         const filename = file;
         const lookup = require(`./${filename}`);
         if (lookup.prefix && lookup.description) {
