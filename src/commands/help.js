@@ -1,6 +1,6 @@
 const Discord = require('discord.js');
 module.exports = {
-  prefix: '!help',
+  prefix: 'help',
   /**
    * @name help
    * Displays currently available commands.

@@ -42,10 +42,10 @@ module.exports = function bootstrap({ client, config }) {
   client.on('message', (message) => {
     if (message.content.startsWith(config.PREFIX)) {
       // Get command after prefix
-      let commandArgument = message.content.split(' ')[1];
+      const commandArgument = message.content.split(' ')[1];
 
       // Check if there are no commands sent
-      if (commandArgument == undefined) {
+      if (!commandArgument) {
         message.channel.send('There are no command indicated!');
         return;
       }

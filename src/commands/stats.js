@@ -1,5 +1,5 @@
 module.exports = {
-  prefix: '!stats',
+  prefix: 'stats',
   description: 'Get current server information!',
   /**
    * @name stats
