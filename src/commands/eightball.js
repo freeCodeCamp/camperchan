@@ -1,5 +1,5 @@
 module.exports = {
-  prefix: '!eightball',
+  prefix: 'eightball',
   /**
    * @name eightBall
    * Randomly selects an option, and returns it to chat.

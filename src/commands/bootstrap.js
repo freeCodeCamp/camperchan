@@ -1,14 +1,16 @@
-const eightball = require('./eightball');
-const help = require('./help');
-const stats = require('./stats');
 const Discord = require('discord.js');
+const fs = require('fs');
 /**
  * Bootstraps all commands to the client.
  * @param {Object.client} client the discord client
  * @param {Object.config} config the application config
  */
 module.exports = function bootstrap({ client, config }) {
-  const commands = [eightball, help, stats];
+  // Get all the command files from commands folder
+  const commands = fs
+    .readdirSync(__dirname)
+    .filter((file) => file.endsWith('.js'));
+  client.commands = new Discord.Collection();
 
   client.on('guildMemberAdd', (member) => {
     const welcomeEmbed = new Discord.MessageEmbed()
@@ -29,11 +31,36 @@ module.exports = function bootstrap({ client, config }) {
       .find((ch) => ch.name === 'introduction')
       .send('**' + member.user.username + '** has left the server! :(');
   });
+
+  for (const file of commands) {
+    const command = require(`${__dirname}/${file}`);
+    // Set a new command file in the Discord Collection
+    // With the key as the command prefix and the value as the exported command function
+    client.commands.set(command.prefix, command);
+  }
+
   client.on('message', (message) => {
-    for (let command of commands) {
-      if (message.content.startsWith(command.prefix)) {
-        command.command(message);
-        break;
+    if (message.content.startsWith(config.PREFIX)) {
+      // Get command after prefix
+      const commandArgument = message.content.split(' ')[1];
+
+      // Check if there are no commands sent
+      if (!commandArgument) {
+        message.channel.send('There are no command indicated!');
+        return;
+      }
+
+      // Check if the command sent does not exist
+      if (!client.commands.has(commandArgument)) {
+        message.channel.send('The command does not exist!');
+        return;
+      }
+      // Execute command
+      try {
+        client.commands.get(commandArgument).command(message);
+      } catch (error) {
+        console.error(error);
+        message.reply('there was an error trying to execute that command!');
       }
     }
   });
