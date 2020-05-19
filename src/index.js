@@ -9,12 +9,12 @@ const addFormatting = require('./commands/add-formatting');
   try {
     // this iife is so we can get "top level await"
     console.log('Initalizing...');
-    const config = await getConfig();
+    const config = getConfig();
     validateConfig(config);
     // rig up client callbacks
     client.on('error', console.error);
 
-    bootstrap(client);
+    bootstrap({ client, config });
 
     client.on('message', (message) => {
       console.log('>> ', message.content);
