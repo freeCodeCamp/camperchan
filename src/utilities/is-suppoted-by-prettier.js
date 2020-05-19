@@ -13,41 +13,32 @@
 module.exports = function isSuppotedByPrettier(languageName) {
   console.log(languageName);
 
-  const htmlAliases = ['html', 'xml', 'xhtml', 'rss', 'svg'];
-  const cssAliases = ['css', 'scss', 'sass'];
-  const jsAliaseses = [
-    'javascript',
-    'js',
-    'coffeescript',
-    'xquery',
-    'stata',
-    'scheme',
-    'clojure',
-    'vbscript',
-    'shell'
-  ];
+  const languageNameInLowercase = languageName.toLowerCase();
 
-  if (htmlAliases.includes(languageName)) {
+  const cssAliases = ['css', 'scss'];
+  const jsAliaseses = ['javascript', 'js'];
+
+  if (languageNameInLowercase === 'html') {
     return 'html';
   }
 
-  if (cssAliases.includes(languageName)) {
+  if (cssAliases.includes(languageNameInLowercase)) {
     return 'css';
   }
 
-  if (jsAliaseses.includes(languageName)) {
+  if (jsAliaseses.includes(languageNameInLowercase)) {
     return 'js';
   }
 
-  if (languageName === 'json') {
+  if (languageNameInLowercase === 'json') {
     return 'json';
   }
 
-  if (languageName === 'markdown') {
+  if (languageNameInLowercase === 'markdown') {
     return 'markdown';
   }
 
-  if (languageName === 'yaml') {
+  if (languageNameInLowercase === 'yaml') {
     return 'yaml';
   }
 
