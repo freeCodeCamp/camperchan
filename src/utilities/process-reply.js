@@ -62,21 +62,6 @@ module.exports = async function processReply({
         }
         break;
       }
-      case reactionOptionsObj.thirdOption: {
-        const supportedLanguage = isSuppotedByPrettier(languageGuesses[2]);
-
-        if (supportedLanguage) {
-          const formattedCode = formatter(content, supportedLanguage);
-          ref.channel.send(
-            formatMessageWithCodeblock(supportedLanguage, formattedCode)
-          );
-        } else {
-          ref.channel.send(
-            formatMessageWithCodeblock(languageGuesses[2], content)
-          );
-        }
-        break;
-      }
     }
   } catch (error) {
     ref.channel.send('Message timeout!');
