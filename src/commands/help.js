@@ -25,7 +25,7 @@ module.exports = {
 
     const results = await fsPromises.readdir(__dirname);
     console.log(results);
-    results.forEach(file => {
+    results.forEach((file) => {
       const filename = file;
       const lookup = require(`./${filename}`);
       if (lookup.prefix && lookup.description) {
