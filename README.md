@@ -58,6 +58,28 @@ npm i
 npm run dev
 ```
 
+6. To test the bot in Discord, follow [these steps](#running-the-bot-in-Discord)
+
+## Running the bot in Discord
+
+This bot requires the `Manage Messages` permission to run. So, if you want to use this bot in a Discord server (for testing or production purpose), you'll grant it the `Manage Messages` permission. Luckily we've done
+the hard work for you, so that you don't have to do it manually.
+
+First, head over [Discord Developer Portal](https://discordapp.com/developers/applications/me) and sign in. After
+that, you will have to select your bot by clicking it's icon.
+
+![PNG - Discord Developer Portal](./imgs/dev-portal.png)
+
+Then just beside your bot's icon, you'll see your `CLIENT ID`. Copy the `CLIENT ID`.
+
+![PNG - Client ID](./imgs/client-id.png)
+
+Then replace the `YOUR_CLIENT_ID_HERE` with your bot's `CLIENT ID` in the link provided below. After that, you can use the link to add the bot to any existing or newly created Discord server.
+
+https://discordapp.com/oauth2/authorize?client_id=YOUR_CLIENT_ID_HERE&scope=bot&permissions=8192
+
+**IMPORTANT NOTE :** When you click on the link and want to add the bot to a server, it'll ask for the `Manage Messages` permission. You'll have to grant the bot permission otherwise the bot won't work.
+
 ## Creating a Discord bot token
 
 If you don't have a Discord bot token, you'll have to create one. To create a Discord bot token, follow these steps -
