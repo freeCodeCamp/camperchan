@@ -63,7 +63,7 @@ module.exports = function bootstrap({ client, config }) {
         message.reply('there was an error trying to execute that command!');
       }
     }
-        //thank command
+    //thank command
     if (message.content.toLowerCase().includes('thanks')) {
       const messageArr = message.content.split(' ');
       for (let i = 0; i < messageArr.length; i++) {
