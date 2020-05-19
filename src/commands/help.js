@@ -1,5 +1,6 @@
 const Discord = require('discord.js');
 const fs = require('fs');
+const fsPromises = fs.promises;
 module.exports = {
   prefix: '!help',
   description: 'Get the commands currently available with this bot',
@@ -23,24 +24,24 @@ module.exports = {
         footer: { text: 'I am not affiliated with FreeCodeCamp in any way.' }
       };
 
-      fs.readdir(__dirname, (error, files) => {
-        if (error) {
-          console.error(error);
-        }
-        for (let i = 0; i < files.length; i++) {
-          let filename = files[i];
-          let lookup = require(`./${filename}`);
-          if (lookup.prefix == undefined || lookup.description == undefined) {
-            continue;
-          } else {
-            let fieldObj = {
-              name: lookup.prefix.substring(0, 255),
-              value: lookup.description.substring(0, 1023)
-            };
-            helpEmbed.fields.push(fieldObj);
+      fsPromises
+        .readdir(__dirname)
+        .then((result) => {
+          for (let i = 0; i < result.length; i++) {
+            const filename = result[i];
+            const lookup = require(`./${filename}`);
+            if (!lookup.prefix || !lookup.description) {
+              continue;
+            } else {
+              const fieldObj = {
+                name: lookup.prefix.substring(0, 255),
+                value: lookup.description.substring(0, 1023)
+              };
+              helpEmbed.fields.push(fieldObj);
+            }
           }
-        }
-      });
+        })
+        .catch((error) => console.log(error));
 
       message.author.send({ embed: helpEmbed });
     } catch (error) {
