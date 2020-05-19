@@ -8,3 +8,4 @@ jobs:
     - stage: Lint JS
       script:
         - npm run lint
+        - npm run test
