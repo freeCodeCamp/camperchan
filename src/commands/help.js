@@ -23,19 +23,19 @@ module.exports = {
       footer: { text: 'I am not affiliated with FreeCodeCamp in any way.' }
     };
 
-    const results = await fsPromises.readdir(__dirname)
-      console.log(results);
-      results.forEach((file) => {
-        const filename = file;
-        const lookup = require(`./${filename}`);
-        if (lookup.prefix && lookup.description) {
-          const fieldObj = {
-            name: lookup.prefix.substring(0, 255),
-            value: lookup.description.substring(0, 1023)
-          };
-          helpEmbed.fields.push(fieldObj);
-        }
-      });
-      await message.author.send({ embed: helpEmbed });
-    }
+    const results = await fsPromises.readdir(__dirname);
+    console.log(results);
+    results.forEach(file => {
+      const filename = file;
+      const lookup = require(`./${filename}`);
+      if (lookup.prefix && lookup.description) {
+        const fieldObj = {
+          name: lookup.prefix.substring(0, 255),
+          value: lookup.description.substring(0, 1023)
+        };
+        helpEmbed.fields.push(fieldObj);
+      }
+    });
+    await message.author.send({ embed: helpEmbed });
   }
+};
