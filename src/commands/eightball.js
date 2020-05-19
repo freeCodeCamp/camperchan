@@ -1,5 +1,5 @@
 module.exports = {
-  prefix: '!eightball',
+  prefix: 'eightball',
   description:
     'Think of your question and get an answer from a magic pool ball!',
   /**
