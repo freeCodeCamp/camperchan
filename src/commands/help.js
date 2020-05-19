@@ -1,4 +1,3 @@
-const Discord = require('discord.js');
 const fs = require('fs');
 const fsPromises = fs.promises;
 module.exports = {
