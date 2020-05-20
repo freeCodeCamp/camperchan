@@ -22,7 +22,7 @@ function thanks(message) {
  * @returns {boolean}
  */
 function shouldThank(message) {
-  returns[('thanks', 'thank you')].find((thankStr) =>
+  return [('thanks', 'thank you')].find((thankStr) =>
     message.content.toLowerCase().includes(thankStr)
   );
 }

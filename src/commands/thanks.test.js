@@ -8,8 +8,18 @@ describe('thanks', () => {
           content: 'I am normal text, nothing to see here'
         }).toEqual(false)
       ));
-    test.todo('returns true if thanking 1 user');
-    test.todo('returns false if just mentioning users');
+    test('returns true if thanking with thanks', () =>
+      expect(
+        shouldThank({
+          content: 'Thanks <@86890631690977280>'
+        })
+      ).toEqual(true));
+    test('returns true if thanking self with THANK YOU', () =>
+      expect(
+        shouldThank({
+          content: 'THANK YOU <@86890631690977280>'
+        })
+      ));
   });
   describe('isSelfThanking', () => {
     test.todo('returns false only other users mentioned');
