@@ -1,5 +1,6 @@
 const Discord = require('discord.js');
 const fs = require('fs');
+const { thanks } = require('./thanks');
 /**
  * Bootstraps all commands to the client.
  * @param {Object.client} client the discord client
@@ -9,7 +10,7 @@ module.exports = function bootstrap({ client, config }) {
   // Get all the command files from commands folder
   const commands = fs
     .readdirSync(__dirname)
-    .filter((file) => file.endsWith('.js'));
+    .filter((file) => file.endsWith('.js') && !file.endsWith('.test.js'));
   client.commands = new Discord.Collection();
 
   client.on('guildMemberAdd', (member) => {
@@ -64,33 +65,39 @@ module.exports = function bootstrap({ client, config }) {
       }
     }
     //thank command
-    if (message.content.toLowerCase().includes('thanks')) {
-      const messageArr = message.content.split(' ');
-      for (let i = 0; i < messageArr.length; i++) {
-        if (messageArr[i] === 'thanks') {
-          const args = messageArr[i + 1];
-          if (args.charAt(0) !== '<') {
-            continue;
-          }
-          const thankMessage =
-            message.author.toString() +
-            ' sends brownie points to ' +
-            args +
-            ' ' +
-            '✨👍✨';
-          const thankNope =
-            'Sorry ' +
-            message.author.toString() +
-            ", you can't send brownie points to yourself! ✨✨";
-          if (args.replace('!', '') == message.author.toString()) {
-            message.channel.send(thankNope);
-            continue;
-          } else {
-            message.channel.send(thankMessage);
-            continue;
-          }
-        }
-      }
-    }
+    thanks(message);
+    // TODO: remove later, leave for reference
+    // if (message.content.toLowerCase().includes('thanks')) {
+    //   const messageArr = message.content.split(' ');
+    //   console.log('message arg', {
+    //     mentions: message.mentions,
+    //     isSelfThank: isSelfThanking(message)
+    //   });
+    //   for (let i = 0; i < messageArr.length; i++) {
+    //     if (messageArr[i] === 'thanks') {
+    //       const args = messageArr[i + 1];
+    //       if (args.charAt(0) !== '<') {
+    //         continue;
+    //       }
+    //       const thankMessage =
+    //         message.author.toString() +
+    //         ' sends brownie points to ' +
+    //         args +
+    //         ' ' +
+    //         '✨👍✨';
+    //       const thankNope =
+    //         'Sorry ' +
+    //         message.author.toString() +
+    //         ", you can't send brownie points to yourself! ✨✨";
+    //       if (args.replace('!', '') == message.author.toString()) {
+    //         message.channel.send(thankNope);
+    //         continue;
+    //       } else {
+    //         message.channel.send(thankMessage);
+    //         continue;
+    //       }
+    //     }
+    //   }
+    // }
   });
 };
