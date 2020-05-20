@@ -1,4 +1,4 @@
-const { shouldThank } = require('./thanks');
+const { shouldThank, getSelfThankMessage } = require('./thanks');
 
 describe('thanks', () => {
   describe('shouldThank', () => {
@@ -6,8 +6,8 @@ describe('thanks', () => {
       expect(
         shouldThank({
           content: 'I am normal text, nothing to see here'
-        }).toEqual(false)
-      ));
+        })
+      ).toEqual(false));
     test('returns true if thanking with thanks', () =>
       expect(
         shouldThank({
@@ -19,7 +19,7 @@ describe('thanks', () => {
         shouldThank({
           content: 'THANK YOU <@86890631690977280>'
         })
-      ));
+      ).toEqual(true));
   });
   describe('isSelfThanking', () => {
     test.todo('returns false only other users mentioned');
@@ -28,7 +28,16 @@ describe('thanks', () => {
     test.todo('should only thank users');
   });
   describe('getSelfThankMessage', () => {
-    test.todo('returns message');
+    test('returns message', () =>
+      expect(
+        getSelfThankMessage({
+          author: {
+            toString: () => 'bradtaniguchi'
+          }
+        })
+      ).toEqual(
+        `Sorry bradtaniguchi, you can't send brownie points to yourself! ✨✨`
+      ));
   });
   describe('getThankMessage', () => {
     test.todo('returns message with mentioned users');

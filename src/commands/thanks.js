@@ -22,7 +22,7 @@ function thanks(message) {
  * @returns {boolean}
  */
 function shouldThank(message) {
-  return [('thanks', 'thank you')].find((thankStr) =>
+  return !!['thanks', 'thank you'].find((thankStr) =>
     message.content.toLowerCase().includes(thankStr)
   );
 }
@@ -47,8 +47,7 @@ function isSelfThanking(message) {
  * @returns {string}
  */
 function getSelfThankMessage(message) {
-  // TODO:
-  return '';
+  return `Sorry ${message.author.toString()}, you can't send brownie points to yourself! ✨✨`;
 }
 /**
  * Returns the final thank message to send in chat. Should include all
