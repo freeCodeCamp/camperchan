@@ -37,8 +37,10 @@ function shouldThank(message) {
  * @returns {boolean}
  */
 function isSelfThanking(message) {
-  // TODO:
-  return false;
+  return (
+    message.mentions.users.size === 1 &&
+    message.mentions.users.has(message.author.id)
+  );
 }
 
 /**

@@ -1,4 +1,8 @@
-const { shouldThank, getSelfThankMessage } = require('./thanks');
+const {
+  shouldThank,
+  getSelfThankMessage,
+  isSelfThanking
+} = require('./thanks');
 
 describe('thanks', () => {
   describe('shouldThank', () => {
@@ -22,8 +26,30 @@ describe('thanks', () => {
       ).toEqual(true));
   });
   describe('isSelfThanking', () => {
-    test.todo('returns false only other users mentioned');
-    test.todo('returns true if author is the only user mentioned');
+    test('returns false only other users mentioned', () =>
+      expect(
+        isSelfThanking({
+          mentions: {
+            users: new Map().set('userId', {})
+          },
+          author: {
+            id: 'otherUserId'
+          }
+        })
+      ).toEqual(false));
+    test('returns true if author is the only user mentioned', () =>
+      expect(
+        isSelfThanking({
+          mentions: {
+            users: new Map().set('userId', {
+              id: 'userId'
+            })
+          },
+          author: {
+            id: 'userId'
+          }
+        })
+      ).toEqual(true));
     test.todo('returns false if auth and other users are mentioned');
     test.todo('should only thank users');
   });
