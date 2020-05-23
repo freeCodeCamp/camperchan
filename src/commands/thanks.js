@@ -10,7 +10,7 @@ function thanks(message) {
     return;
   }
   if (isSelfThanking(message)) {
-    return getSelfThankMessage(message);
+    return message.channel.send(getSelfThankMessage(message));
   }
   return message.channel.send(getThankMessage(message));
 }
@@ -22,8 +22,10 @@ function thanks(message) {
  * @returns {boolean}
  */
 function shouldThank(message) {
-  return !!['thanks', 'thank you'].find((thankStr) =>
-    message.content.toLowerCase().includes(thankStr)
+  return (
+    !!['thanks', 'thank you'].find((thankStr) =>
+      message.content.toLowerCase().includes(thankStr)
+    ) && !!message.mentions.users.size
   );
 }
 
@@ -68,7 +70,7 @@ function getUserIdFromStrMention(str) {
   }
   // should remove '<@' and '>'
   str = str.slice(2, -1);
-  if (mention.startsWith('!')) {
+  if (str.startsWith('!')) {
     // should remove the ! for the nickname I guess?
     return str.slice(1);
   }
@@ -81,7 +83,7 @@ function getUserIdFromStrMention(str) {
  * @returns {string}
  */
 function getSelfThankMessage(message) {
-  return `Sorry ${message.author.toString()}, you can't send brownie points to yourself! ✨✨`;
+  return `Sorry ${message.author.toString()}, you can't send brownie points to yourself!`;
 }
 /**
  * Returns the final thank message to send in chat. Should include all
@@ -91,10 +93,19 @@ function getSelfThankMessage(message) {
  */
 function getThankMessage(message) {
   const author = message.author.toString();
-  const strMentions = message.content
-    .split(' ')
-    .filter((word) => isStrMention(word) && word !== author);
-  const userIds = strMentions.map(getUserIdFromStrMention);
+  const strMentions = [
+    ...new Set(
+      message.content
+        .split(' ')
+        .map((word) => word.trim())
+        .filter(
+          (word) =>
+            isStrMention(word) &&
+            getUserIdFromStrMention(word) !== getUserIdFromStrMention(author)
+        )
+    )
+  ];
+  const userIds = strMentions;
   return `${author} sends brownie points to ${userIds} ✨👍✨`;
 }
 
