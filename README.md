@@ -108,6 +108,13 @@ If you have any question about the project, you can create an issue and ask it. 
 
 Happy Coding!
 
+## Acknowledgements
+
+- [bradtaniguchi](https://github.com/bradtaniguchi)
+- [twaha-rahman](https://github.com/twaha-rahman)
+- [nhcarrigan](https://github.com/nhcarrigan)
+- [cjcanlas01](https://github.com/cjcanlas01)
+
 ### Disclaimer
 
 This test-bot was created to allow us to test the discord.js library and experiement with setting up our own Discord bot. Our intent is to help [FreeCodeCamp](https://www.freecodecamp.org) set up a bot for their Discord server - however, the files in this repository are **NOT** associated with FreeCodeCamp in any way.
