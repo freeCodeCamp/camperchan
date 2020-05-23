@@ -1,5 +1,6 @@
 const Discord = require('discord.js');
 const fs = require('fs');
+const { thanks } = require('./thanks');
 /**
  * Bootstraps all commands to the client.
  * @param {Object.client} client the discord client
@@ -9,7 +10,7 @@ module.exports = function bootstrap({ client, config }) {
   // Get all the command files from commands folder
   const commands = fs
     .readdirSync(__dirname)
-    .filter((file) => file.endsWith('.js'));
+    .filter((file) => file.endsWith('.js') && !file.endsWith('.test.js'));
   client.commands = new Discord.Collection();
 
   client.on('guildMemberAdd', (member) => {
@@ -63,5 +64,6 @@ module.exports = function bootstrap({ client, config }) {
         message.reply('there was an error trying to execute that command!');
       }
     }
+    thanks(message);
   });
 };
