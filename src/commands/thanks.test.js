@@ -1,7 +1,8 @@
 const {
   shouldThank,
   getSelfThankMessage,
-  isSelfThanking
+  isSelfThanking,
+  getThankMessage
 } = require('./thanks');
 
 describe('thanks', () => {
@@ -50,8 +51,21 @@ describe('thanks', () => {
           }
         })
       ).toEqual(true));
-    test.todo('returns false if auth and other users are mentioned');
-    test.todo('should only thank users');
+    test('returns false if author and other users are mentioned', () =>
+      expect(
+        isSelfThanking({
+          mentions: {
+            users: new Map()
+              .set('userId', {
+                id: 'userId'
+              })
+              .set('otherUserId', {})
+          },
+          author: {
+            id: 'userId'
+          }
+        })
+      ).toEqual(false));
   });
   describe('getSelfThankMessage', () => {
     test('returns message', () =>
@@ -66,8 +80,21 @@ describe('thanks', () => {
       ));
   });
   describe('getThankMessage', () => {
-    test.todo('returns message with mentioned users');
-    test.todo('returns message with mentioned users, but not with author');
+    // TODO:
+    test.skip('returns message with mentioned users', () =>
+      expect(
+        getThankMessage({
+          author: 'brad',
+          content: ''
+        })
+      ).toEqual('Thanks <@userId>'));
+    test.skip('returns message with mentioned users, but not with author', () =>
+      expect(
+        getThankMessage({
+          author: '@brad',
+          content: ''
+        })
+      ).toEqual(''));
     test.todo('returns message without non user mentions');
   });
 });

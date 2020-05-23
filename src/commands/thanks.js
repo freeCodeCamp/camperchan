@@ -42,6 +42,38 @@ function isSelfThanking(message) {
     message.mentions.users.has(message.author.id)
   );
 }
+/**
+ * If the given string is a mention, should be a single "word"
+ * from the discord mentions content.
+ *
+ * **note** uses logic from https://discordjs.guide/miscellaneous/parsing-mention-arguments.html#implementation
+ * @param {string} str the string we are to check
+ */
+function isStrMention(str) {
+  str = str.trim();
+  return str.startsWith('<@') && str.endsWith('>');
+}
+/**
+ * Returns the userId from the strMention. Will return an empty string
+ * if the mention string isn't given. This also should be only
+ * ONE WORD
+ * @param {string} str the string that should be a mention
+ *
+ * **note** uses logic from https://discordjs.guide/miscellaneous/parsing-mention-arguments.html#implementation
+ */
+function getUserIdFromStrMention(str) {
+  if (!isStrMention(str)) {
+    // extra check if for some reason we don't do this
+    return '';
+  }
+  // should remove '<@' and '>'
+  str = str.slice(2, -1);
+  if (mention.startsWith('!')) {
+    // should remove the ! for the nickname I guess?
+    return str.slice(1);
+  }
+  return str;
+}
 
 /**
  * Returns the message to show if the user thanks **only** themselves
@@ -58,8 +90,12 @@ function getSelfThankMessage(message) {
  * @returns {string}
  */
 function getThankMessage(message) {
-  // TODO:
-  return '';
+  const author = message.author.toString();
+  const strMentions = message.content
+    .split(' ')
+    .filter((word) => isStrMention(word) && word !== author);
+  const userIds = strMentions.map(getUserIdFromStrMention);
+  return `${author} sends brownie points to ${userIds} ✨👍✨`;
 }
 
 module.exports = {
@@ -67,6 +103,9 @@ module.exports = {
   // but thanks is the main api to use
   thanks,
   shouldThank,
+  isStrMention,
+  getUserIdFromStrMention,
   isSelfThanking,
+  getThankMessage,
   getSelfThankMessage
 };
