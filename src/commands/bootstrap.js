@@ -29,7 +29,7 @@ module.exports = function bootstrap({ client, config }) {
 
   client.on('guildMemberRemove', (member) => {
     member.guild.channels.cache
-      .find((ch) => ch.name === 'introduction')
+      .find((ch) => ch.name === 'introductions')
       .send('**' + member.user.username + '** has left the server! :(');
   });
 
