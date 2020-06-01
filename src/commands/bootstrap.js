@@ -34,7 +34,7 @@ module.exports = function bootstrap({ client, config }) {
     if (goodbye == undefined) {
       console.log('Channel not found.');
       return;
-   } else {
+    } else {
       goodbye.send(`** ${member.user} has left us! :( **`);
     }
   });
