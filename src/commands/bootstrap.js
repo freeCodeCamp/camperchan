@@ -28,14 +28,14 @@ module.exports = function bootstrap({ client, config }) {
   });
 
   client.on('guildMemberRemove', function(member) {
-  const goodbye = member.guild.channels.cache.find(
-    channel => channel.name == 'introductions'
+    const goodbye = member.guild.channels.cache.find(
+      (channel) => channel.name == 'introductions'
   );
-  if (goodbye == undefined) {
-    console.log('Channel not found.');
-    return;
+    if (goodbye == undefined) {
+      console.log('Channel not found.');
+      return;
   } else {
-    goodbye.send(`** ${member.user} has left us! :( **`);
+      goodbye.send(`** ${member.user} has left us! :( **`);
   }
 });
   for (const file of commands) {
