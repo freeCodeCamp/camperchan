@@ -27,17 +27,17 @@ module.exports = function bootstrap({ client, config }) {
     member.send(welcomeEmbed);
   });
 
-  client.on('guildMemberRemove', function(member) {
+  client.on('guildMemberRemove', function (member) {
     const goodbye = member.guild.channels.cache.find(
       (channel) => channel.name == 'introductions'
-  );
+    );
     if (goodbye == undefined) {
       console.log('Channel not found.');
       return;
-  } else {
+   } else {
       goodbye.send(`** ${member.user} has left us! :( **`);
-  }
-});
+    }
+  });
   for (const file of commands) {
     const command = require(`${__dirname}/${file}`);
     // Set a new command file in the Discord Collection
