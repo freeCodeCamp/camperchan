@@ -1,5 +1,6 @@
-const fs = require('fs');
-const fsPromises = fs.promises;
+const { promises } = require('fs');
+const { readdir } = promises;
+
 module.exports = {
   prefix: 'help',
   description: 'Get the commands currently available with this bot',
@@ -10,20 +11,20 @@ module.exports = {
    * @param {Discord.Message} message the message provided
    * Now automatically adds new commands - make sure the .js file has a prefix and description,
    */
-
   command: async function help(message) {
-    //console.log("help", message);
     const helpEmbed = {
       color: '#0099FF',
       title: 'Bot Information',
       description:
-        'Hello! I am a test bot created by bradtaniguchi and members of FreeCodeCamp.org to experiment with the process of building a Discord Bot. You can view my source code at https://github.com/bradtaniguchi/discord-bot-test',
+        'Hello! I am a test bot created by bradtaniguchi and members of ' +
+        'FreeCodeCamp.org to experiment with the process of building a ' +
+        'Discord Bot. You can view my source code at ' +
+        ' https://github.com/bradtaniguchi/discord-bot-test',
       fields: [],
       footer: { text: 'I am not affiliated with FreeCodeCamp in any way.' }
     };
 
-    const results = await fsPromises.readdir(__dirname);
-    console.log(results);
+    const results = await readdir(__dirname);
     results.forEach((file) => {
       const filename = file;
       const lookup = require(`./${filename}`);

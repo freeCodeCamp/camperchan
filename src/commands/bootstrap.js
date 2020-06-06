@@ -10,7 +10,8 @@ module.exports = function bootstrap({ client, config }) {
   // Get all the command files from commands folder
   const commands = fs
     .readdirSync(__dirname)
-    .filter((file) => file.endsWith('.js') && !file.endsWith('.test.js'));
+    .filter((file) => file.endsWith('.js'));
+
   client.commands = new Discord.Collection();
 
   client.on('guildMemberAdd', (member) => {
