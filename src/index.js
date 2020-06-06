@@ -15,43 +15,12 @@ const addFormatting = require('./commands/add-formatting');
     client.on('error', console.error);
 
     bootstrap({ client, config });
-
-    client.on('message', (message) => {
-      console.log('>> ', message.content);
-    });
-
-    // The code below listens for reactions to any message in the server and if
-    // a reaction is equal to the specified trigger reaction (in this case '🤖'),
-    // then is attempts to format the message. To get a detailed explanation of the
-    // code below visit: https://discordjs.guide/popular-topics/reactions.html#listening-for-reactions-on-old-messages
-
-    client.on('messageReactionAdd', async (reaction) => {
-      if (reaction.partial) {
-        try {
-          await reaction.fetch();
-        } catch (error) {
-          reaction.message.channel.send(
-            'Something went wrong! Failed to format code :('
-          );
-          console.error(error);
-
-          return;
-        }
-      }
-
-      if (reaction.emoji.name === '🤖') {
-        try {
-          await reaction.message.reactions.removeAll();
-
-          addFormatting.command(reaction.message);
-        } catch (error) {
-          reaction.message.channel.send(
-            'Something went wrong! Failed to format code :('
-          );
-          console.error(error);
-        }
-      }
-    });
+    if (config.VERBOSE) {
+      // if we are to print each message as is.
+      client.on('message', (message) => {
+        console.log('>> ', message.content);
+      });
+    }
 
     client.once('ready', () => console.log('ready!'));
 
