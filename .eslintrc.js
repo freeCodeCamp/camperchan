@@ -2,9 +2,11 @@ module.exports = {
   env: {
     commonjs: true,
     es6: true,
-    node: true
+    node: true,
+    jest: true
   },
-  extends: 'plugin:prettier/recommended',
+  plugins: ['prettier'],
+  extends: ['eslint:recommended', 'plugin:prettier/recommended'],
   globals: {
     Atomics: 'readonly',
     SharedArrayBuffer: 'readonly'
@@ -14,6 +16,13 @@ module.exports = {
   },
   rules: {
     'linebreak-style': ['error', 'unix'],
-    semi: ['error', 'always']
+    semi: ['error', 'always'],
+    'prefer-const': [
+      'error',
+      {
+        destructuring: 'any',
+        ignoreReadBeforeAssign: false
+      }
+    ]
   }
 };
