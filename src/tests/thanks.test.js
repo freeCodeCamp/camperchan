@@ -3,7 +3,7 @@ const {
   getSelfThankMessage,
   isSelfThanking,
   getThankMessage
-} = require('./thanks');
+} = require('../commands/thanks');
 
 describe('thanks', () => {
   describe('shouldThank', () => {
