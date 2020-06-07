@@ -1,6 +1,8 @@
 const Discord = require('discord.js');
 const fs = require('fs');
+const addFormatting = require('./commands/add-formatting');
 const { thanks } = require('./thanks');
+
 /**
  * Bootstraps all commands to the client.
  * @param {Object.client} client the discord client
@@ -65,17 +67,20 @@ module.exports = function bootstrap({ client, config }) {
     });
   }
 
-  client.on('guildMemberRemove', function (member) {
-    const goodbyeChannel = member.guild.channels.cache.find(
-      (channel) => channel.name == 'introductions'
-    );
-    if (!goodbyeChannel) {
-      console.error('goodbye channel not found.');
-      return;
-    } else {
+  if (config.LEAVE_MSG_CHANNEL) {
+    // we only mention if users are removed if
+    // the leave message channel is given.
+    client.on('guildMemberRemove', function (member) {
+      const goodbyeChannel = member.guild.channels.cache.find(
+        (channel) => channel.name === config.LEAVE_MSG_CHANNEL
+      );
+      if (!goodbyeChannel) {
+        console.error('goodbye channel not found.');
+        return;
+      }
       goodbyeChannel.send(`** ${member.user} has left us! :( **`);
-    }
-  });
+    });
+  }
 
   for (const file of commands) {
     const command = require(`${__dirname}/${file}`);

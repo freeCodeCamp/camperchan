@@ -1,12 +1,11 @@
+require('dotenv').config();
+
 /**
  * @name getConfig
  * Utility function that returns the configuration for the application.
  *
- * @returns {Promise<object>} a promise, to support more complex configs
- * in the future potentially, like loading from a file async, or http.
+ * @returns {object} the config object with defaults applied.
  */
-require('dotenv').config();
-
 module.exports = function getConfig() {
   return {
     /**
@@ -19,26 +18,25 @@ module.exports = function getConfig() {
      *  **note** this is not used yet, all command still follow the :
      * `!myCommand` format.
      */
-    PREFIX: process.env.PREFIX,
+    PREFIX: process.env.PREFIX || '!FCC',
     /**
      * If the bot should log all message to the console.
-     * By default this feature is OFF to supress the amount of
+     * By default this feature is OFF to suppress the amount of
      * logs being printed.
      */
-    VERBOSE: process.env.PREFIX,
+    VERBOSE: process.env.PREFIX === 'true',
     /**
      * If the bot should send the FCC code of conduct via a DM
      * to any new user who joins the server.
      * By default this feature is OFF
      */
-    WELCOME_DM: process.env.WELCOME_DM,
+    WELCOME_DM: process.env.WELCOME_DM === 'true',
     /**
      * The name of channel to post "leave" messages to.
      * If not given, or if the channel is not found
      * the message will not be provided.
      *
-     * TODO: not added yet
      */
-    LEAVE_MSG_CHANNEL: process.env.LEAVE_MSG_CHANNEL
+    LEAVE_MSG_CHANNEL: process.env.LEAVE_MSG_CHANNEL === 'true'
   };
 };
