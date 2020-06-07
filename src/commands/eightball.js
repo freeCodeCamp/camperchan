@@ -6,10 +6,9 @@ module.exports = {
    * @name eightBall
    * Randomly selects an option, and returns it to chat.
    *
-   * @param {Discord.Message} message the message provided
+   * @param {Discord.Message} message the message provided by discord
    */
   command: function eightBall(message) {
-    console.log('eightBall', message);
     const options = [
       'As I see it, yes.',
       'Ask again later.',

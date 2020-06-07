@@ -10,8 +10,9 @@
   },
   "license": "MIT",
   "dependencies": {
-    "dotenv": "^8.2.0",
     "discord.js": "^12.2.0",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
     "highlight.js": "^10.0.3",
     "prettier": "^2.0.5",
     "strip-ansi": "^6.0.0"

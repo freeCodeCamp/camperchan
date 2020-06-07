@@ -4,8 +4,7 @@ module.exports = {
   /**
    * @name stats
    * Displays the server stats.
-   *
-   *
+   * @param {Discord.Message} message the message provided by discord
    */
   command: function stats(message) {
     try {
