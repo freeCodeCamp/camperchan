@@ -1,7 +1,9 @@
 const { Client } = require('discord.js');
+const express = require('express');
 const getConfig = require('./config/get-config');
 const validateConfig = require('./config/validate-config');
 const bootstrap = require('./commands/bootstrap');
+const expressApp = express();
 const client = new Client({ partials: ['MESSAGE', 'CHANNEL', 'REACTION'] });
 
 (async () => {
@@ -21,9 +23,17 @@ const client = new Client({ partials: ['MESSAGE', 'CHANNEL', 'REACTION'] });
       });
     }
 
-    client.once('ready', () => console.log('ready!'));
-
+    client.once('ready', () => console.log('Discord ready!'));
     client.login(config.TOKEN);
+
+    expressApp.get('/status', (_, res) =>
+      res.send({
+        code: 200,
+        message: 'Available',
+        time: new Date()
+      })
+    );
+    expressApp.listen(config.PORT, () => console.log('Express ready!'));
   } catch (err) {
     console.error(err);
     process.exit(1);

@@ -35,8 +35,12 @@ module.exports = function getConfig() {
      * The name of channel to post "leave" messages to.
      * If not given, or if the channel is not found
      * the message will not be provided.
-     *
      */
-    LEAVE_MSG_CHANNEL: process.env.LEAVE_MSG_CHANNEL === 'true'
+    LEAVE_MSG_CHANNEL: process.env.LEAVE_MSG_CHANNEL === 'true',
+    /**
+     * The port to "listen" for liveness checks.
+     * Defaults to 8080
+     */
+    PORT: process.env.PORT || 8080
   };
 };
