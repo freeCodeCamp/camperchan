@@ -96,13 +96,13 @@ module.exports = function bootstrap({ client, config }) {
 
       // Check if there are no commands sent
       if (!commandArgument) {
-        message.channel.send('There are no command indicated!');
+        message.channel.send('There is no command indicated!');
         return;
       }
 
       // Check if the command sent does not exist
       if (!client.commands.has(commandArgument)) {
-        message.channel.send('The command does not exist!');
+        message.channel.send(`The command ${commandArgument} does not exist!`);
         return;
       }
       // Execute command
