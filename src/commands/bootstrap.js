@@ -1,6 +1,6 @@
 const Discord = require('discord.js');
 const fs = require('fs');
-const addFormatting = require('./commands/add-formatting');
+const addFormatting = require('../commands/add-formatting');
 const { thanks } = require('./thanks');
 
 /**
