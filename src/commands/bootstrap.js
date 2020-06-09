@@ -118,7 +118,7 @@ module.exports = function bootstrap({ client, config }) {
       message.channel.send(deleteEmbed);
       return;
     }
-      logChannel.send(deleteEmbed);
+    logChannel.send(deleteEmbed);
   });
 
   client.on('message', (message) => {
