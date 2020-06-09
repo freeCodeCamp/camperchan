@@ -117,9 +117,8 @@ module.exports = function bootstrap({ client, config }) {
       console.error('logging channel not found');
       message.channel.send(deleteEmbed);
       return;
-    } else {
-      logChannel.send(deleteEmbed);
     }
+      logChannel.send(deleteEmbed);
   });
 
   client.on('message', (message) => {
