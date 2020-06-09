@@ -93,7 +93,7 @@ module.exports = function bootstrap({ client, config }) {
   client.on('messageDelete', function (message) {
     //change channel name to match server configuration
     const logChannel = message.guild.channels.cache.find(
-      (channel) => channel.name == config.LOG_MSG_CHANNEL
+      (channel) => channel.name === config.LOG_MSG_CHANNEL
     );
     const deleteEmbed = new Discord.MessageEmbed()
       .setTitle('A message was deleted.')
