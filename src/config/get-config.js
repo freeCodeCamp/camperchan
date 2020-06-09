@@ -38,6 +38,12 @@ module.exports = function getConfig() {
      */
     LEAVE_MSG_CHANNEL: process.env.LEAVE_MSG_CHANNEL === 'true',
     /**
+     * The name of the channel to log deleted messages to.
+     * If not given, or if the channel is not found
+     * the log will not be generated.
+     */
+    LOG_MSG_CHANNEL: process.env.LOG_MSG_CHANNEL || 'moderation-activity',
+    /**
      * The port to "listen" for liveness checks.
      * Defaults to 8080
      */
