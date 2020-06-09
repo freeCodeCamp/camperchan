@@ -88,6 +88,39 @@ module.exports = function bootstrap({ client, config }) {
     // With the key as the command prefix and the value as the exported command function
     client.commands.set(command.prefix, command);
   }
+  
+    //deleted message logging
+  client.on("messageDelete", function(message) {
+    //change channel name to match server configuration
+    const logChannel = message.guild.channels.cache.find(
+      channel => channel.name == "moderation-activity"
+    );
+    const deleteEmbed = new Discord.MessageEmbed()
+      .setTitle('A message was deleted.')
+      .setColor('#ff0000')
+      .setDescription('Here are the details of that message.')
+      .addFields(
+        {
+          name: 'Message author',
+          value: message.author
+        },
+        {
+          name: 'Channel',
+          value: message.channel
+        },
+        {
+          name: 'Content',
+          value: message.content
+        }
+      );
+    if (!logChannel) {
+      console.error('logging channel not found');
+      message.channel.send(deleteEmbed);
+      return;
+    } else {
+      logChannel.send(deleteEmbed);
+    }
+  });
 
   client.on('message', (message) => {
     if (message.content.startsWith(config.PREFIX)) {
