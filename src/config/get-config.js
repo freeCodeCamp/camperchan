@@ -42,7 +42,7 @@ module.exports = function getConfig() {
      * If not given, or if the channel is not found
      * the log will not be generated.
      */
-    LOG_MSG_CHANNEL: process.env.LOG_MSG_CHANNEL === 'true',
+    LOG_MSG_CHANNEL: process.env.LOG_MSG_CHANNEL || 'moderation-activity',
     /**
      * The port to "listen" for liveness checks.
      * Defaults to 8080
