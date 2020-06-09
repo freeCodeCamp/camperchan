@@ -88,12 +88,12 @@ module.exports = function bootstrap({ client, config }) {
     // With the key as the command prefix and the value as the exported command function
     client.commands.set(command.prefix, command);
   }
-  
-    //deleted message logging
-  client.on("messageDelete", function(message) {
+
+  //deleted message logging
+  client.on('messageDelete', function (message) {
     //change channel name to match server configuration
     const logChannel = message.guild.channels.cache.find(
-      channel => channel.name == "moderation-activity"
+      (channel) => channel.name == 'moderation-activity'
     );
     const deleteEmbed = new Discord.MessageEmbed()
       .setTitle('A message was deleted.')
