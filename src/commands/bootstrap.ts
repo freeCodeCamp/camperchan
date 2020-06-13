@@ -1,5 +1,5 @@
-const Discord = require('discord.js');
-const fs = require('fs');
+import { Client, MessageEmbed, TextChannel, Collection } from 'discord.js';
+import { Config } from '../config/get-config';
 const addFormatting = require('../commands/add-formatting');
 const { thanks } = require('./thanks');
 
@@ -8,13 +8,26 @@ const { thanks } = require('./thanks');
  * @param {Object.client} client the discord client
  * @param {Object.config} config the application config
  */
-module.exports = function bootstrap({ client, config }) {
+module.exports = function bootstrap({
+  client,
+  config
+}: {
+  client: Client;
+  config: Config;
+}) {
   // Get all the command files from commands folder
-  const commands = fs
-    .readdirSync(__dirname)
-    .filter((file) => file.endsWith('.js'));
+  // const commands = fs
+  //   .readdirSync(__dirname)
+  //   .filter((file) => file.endsWith('.js'));
+  const commands = new Collection<string, any>(); // TODO: define command
 
-  client.commands = new Discord.Collection();
+  // TODO: rig up commands using an alternate approach
+  // for (const file of commands) {
+  // const command = require(`${__dirname}/${file}`);
+  // Set a new command file in the Discord Collection
+  // With the key as the command prefix and the value as the exported command function
+  // client.commands.set(command.prefix, command);
+  // }
 
   // The code below listens for reactions to any message in the server and if
   // a reaction is equal to the specified trigger reaction (in this case '🤖'),
@@ -53,14 +66,15 @@ module.exports = function bootstrap({ client, config }) {
     // we only send this command if the WELCOME_DM environment variable
     // is passed and truthy.
     client.on('guildMemberAdd', (member) => {
-      const welcomeEmbed = new Discord.MessageEmbed()
+      const welcomeEmbed = new MessageEmbed()
         .setColor('#0099ff')
         .setTitle('Welcome!')
         .setDescription('Thank you for joining our server')
         .addFields({
           name: 'Rules',
           value:
-            'Please read our [rules](https://www.freecodecamp.org/news/code-of-conduct/) before posting in the server.'
+            'Please read our [rules](https://www.freecodecamp.org/news/code-of-conduct/)' +
+            ' before posting in the server.'
         })
         .setFooter('Thank you and Happy Coding! 😁');
       member.send(welcomeEmbed);
@@ -78,24 +92,22 @@ module.exports = function bootstrap({ client, config }) {
         console.error('goodbye channel not found.');
         return;
       }
-      goodbyeChannel.send(`** ${member.user} has left us! :( **`);
+      if (goodbyeChannel.type !== 'text') {
+        console.error('log ');
+      }
+      (goodbyeChannel as TextChannel).send(
+        `** ${member.user} has left us! :( **`
+      );
     });
-  }
-
-  for (const file of commands) {
-    const command = require(`${__dirname}/${file}`);
-    // Set a new command file in the Discord Collection
-    // With the key as the command prefix and the value as the exported command function
-    client.commands.set(command.prefix, command);
   }
 
   //deleted message logging
   client.on('messageDelete', function (message) {
     //change channel name to match server configuration
-    const logChannel = message.guild.channels.cache.find(
+    const logChannel = message.guild?.channels.cache.find(
       (channel) => channel.name === config.LOG_MSG_CHANNEL
     );
-    const deleteEmbed = new Discord.MessageEmbed()
+    const deleteEmbed = new MessageEmbed()
       .setTitle('A message was deleted.')
       .setColor('#ff0000')
       .setDescription('Here are the details of that message.')
@@ -114,10 +126,14 @@ module.exports = function bootstrap({ client, config }) {
         }
       );
     if (!logChannel) {
-      console.error('logging channel not found');
+      console.error('log channel not found');
       return;
     }
-    logChannel.send(deleteEmbed);
+    if (logChannel.type !== 'text') {
+      console.error('log channel not a text channel');
+      return;
+    }
+    (logChannel as TextChannel).send(deleteEmbed);
   });
 
   client.on('message', (message) => {
@@ -132,13 +148,13 @@ module.exports = function bootstrap({ client, config }) {
       }
 
       // Check if the command sent does not exist
-      if (!client.commands.has(commandArgument)) {
+      if (!commands.has(commandArgument)) {
         message.channel.send(`The command ${commandArgument} does not exist!`);
         return;
       }
       // Execute command
       try {
-        client.commands.get(commandArgument).command(message);
+        commands.get().command(message);
       } catch (error) {
         console.error(error);
         message.reply('there was an error trying to execute that command!');
