@@ -1,6 +1,7 @@
 import { Client, MessageEmbed, TextChannel, Collection } from 'discord.js';
 import { Config } from '../config/get-config';
-const addFormatting = require('../commands/add-formatting');
+import { addFormatting } from './add-formatting';
+
 const { thanks } = require('./thanks');
 
 /**
@@ -8,13 +9,13 @@ const { thanks } = require('./thanks');
  * @param {Object.client} client the discord client
  * @param {Object.config} config the application config
  */
-module.exports = function bootstrap({
+export function bootstrap({
   client,
   config
 }: {
   client: Client;
   config: Config;
-}) {
+}): void {
   // Get all the command files from commands folder
   // const commands = fs
   //   .readdirSync(__dirname)
@@ -50,7 +51,7 @@ module.exports = function bootstrap({
       try {
         await reaction.message.reactions.removeAll();
 
-        addFormatting.command(reaction.message);
+        addFormatting(reaction.message);
       } catch (error) {
         // A common issue with this not working correctly, is
         // if the bot does not have permissions to remove reactions.
@@ -154,7 +155,7 @@ module.exports = function bootstrap({
       }
       // Execute command
       try {
-        commands.get().command(message);
+        commands.get(commandArgument).command(message);
       } catch (error) {
         console.error(error);
         message.reply('there was an error trying to execute that command!');
@@ -162,4 +163,4 @@ module.exports = function bootstrap({
     }
     thanks(message);
   });
-};
+}
