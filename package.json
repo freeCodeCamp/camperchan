@@ -18,6 +18,8 @@
     "strip-ansi": "^6.0.0"
   },
   "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^3.2.0",
+    "@typescript-eslint/parser": "^3.2.0",
     "eslint": "^7.0.0",
     "eslint-config-prettier": "^6.11.0",
     "eslint-plugin-prettier": "^3.1.3",
@@ -25,7 +27,8 @@
     "jest": "^26.0.1",
     "lint-staged": "^10.2.2",
     "nodemon": "^2.0.3",
-    "rimraf": "^3.0.2"
+    "rimraf": "^3.0.2",
+    "typescript": "^3.9.5"
   },
   "husky": {
     "hooks": {
