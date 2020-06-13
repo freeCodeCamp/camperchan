@@ -1,8 +1,8 @@
-const { Client } = require('discord.js');
-const express = require('express');
-const getConfig = require('./config/get-config');
-const validateConfig = require('./config/validate-config');
-const bootstrap = require('./commands/bootstrap');
+import { Client } from 'discord.js';
+import express from 'express';
+import bootstrap from './commands/bootstrap';
+import { getConfig } from './config/get-config';
+import { validateConfig } from './config/validate-config';
 const expressApp = express();
 const client = new Client({ partials: ['MESSAGE', 'CHANNEL', 'REACTION'] });
 

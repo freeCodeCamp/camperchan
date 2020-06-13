@@ -1,17 +1,28 @@
+// eslint-disable-next-line @typescript-eslint/no-var-requires
 require('dotenv').config();
 
+export interface Config {
+  TOKEN: string;
+  PREFIX: string;
+  VERBOSE: boolean;
+  WELCOME_DM: boolean;
+  LEAVE_MSG_CHANNEL: boolean;
+  LOG_MSG_CHANNEL: string;
+  PORT: number | string;
+}
 /**
  * @name getConfig
  * Utility function that returns the configuration for the application.
  *
- * @returns {object} the config object with defaults applied.
+ * @returns the config object with defaults applied.
  */
-module.exports = function getConfig() {
+export function getConfig(): Config {
   return {
     /**
-     * The discord token
+     * The discord token.
+     * This is required otherwise the validate-config function will fail.
      */
-    TOKEN: process.env.TOKEN,
+    TOKEN: process.env.TOKEN || '',
     /**
      * The bots prefix which should be placed in-front of
      * every command. Defaults to '!FCC' if nothing was given
@@ -49,4 +60,4 @@ module.exports = function getConfig() {
      */
     PORT: process.env.PORT || 8080
   };
-};
+}
