@@ -1,8 +1,7 @@
 import { Client, MessageEmbed, TextChannel, Collection } from 'discord.js';
 import { Config } from '../config/get-config';
 import { addFormatting } from './add-formatting';
-
-const { thanks } = require('./thanks');
+import { thanks } from './thanks';
 
 /**
  * Bootstraps all commands to the client.
