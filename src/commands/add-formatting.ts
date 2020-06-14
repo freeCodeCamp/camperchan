@@ -1,13 +1,14 @@
-import hljs from 'highlight.js';
 import { Message } from 'discord.js';
-const confusedMessageGenerator = require('../utilities/confused-message-generator');
-const processReply = require('../utilities/process-reply');
+import hljs from 'highlight.js';
+import { confusedMessageGenerator } from '../utilities/confused-message-generator';
+import { processReply } from '../utilities/process-reply';
+
 /**
  * @name add-formatting
- * Inserts any unformated code to a code block, enables syntax highlighting and formats it when a
+ * Inserts any unformatted code to a code block, enables syntax highlighting and formats it when a
  * message gets a specific reaction
  *
- * @param {Discord.Message} message The message provided
+ * @param  message The message provided
  */
 export async function addFormatting(message: Message): Promise<void> {
   const { content } = message;
@@ -57,16 +58,15 @@ export async function addFormatting(message: Message): Promise<void> {
     reactionEmojies
   );
 
-  const requiredInfoObj = {
-    reactionEmojies,
-    reactionOptionsObj,
-    languageGuesses,
-    content
-  };
-
   try {
     const refToPromptMsg = await message.channel.send(confusedMessage);
-    processReply({ ...requiredInfoObj, ref: refToPromptMsg });
+    processReply({
+      reactionEmojies,
+      reactionOptionsObj,
+      languageGuesses,
+      content,
+      ref: refToPromptMsg
+    });
   } catch (error) {
     console.error(error);
   }
