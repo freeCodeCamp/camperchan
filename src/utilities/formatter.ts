@@ -12,7 +12,7 @@ const stripAnsi = require('strip-ansi');
  * where syntax error occured
  */
 
-module.exports = function formatter(unformattedCode, language) {
+export function formatter(unformattedCode: string, language: string): string {
   const options = {
     trailingComma: 'none'
   };
@@ -21,7 +21,6 @@ module.exports = function formatter(unformattedCode, language) {
     case 'html':
       options.parser = 'html';
       break;
-
     case 'css':
       options.parser = 'css';
       break;
@@ -59,4 +58,4 @@ module.exports = function formatter(unformattedCode, language) {
   }
 
   return formattedCode;
-};
+}

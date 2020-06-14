@@ -1,15 +1,14 @@
 /**
- * @name formatCodeblock
+ * @name formatCodeBlock
  * Adds all the formatted code and detected language inside
- * three backticks for syntax highlighting
+ * three back ticks for syntax highlighting
  *
- * @param {string} language The language's name'
- * @param {string} code The formatted code
+ * @param language The language's name'
+ * @param  code The formatted code
  *
- * @returns {string} Syntax highlighted codeblock for Discord
+ * @returns  Syntax highlighted codeblock for Discord
  */
 
-module.exports = function formatCodeblock(language, code) {
-  const formattedMessageWithCodeblock = `\`\`\`${language}\n${code}\`\`\``;
-  return formattedMessageWithCodeblock;
-};
+export function formatCodeBlock(language: string, code: string): string {
+  return `\`\`\`${language}\n${code}\`\`\``;
+}
