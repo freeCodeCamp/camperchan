@@ -124,7 +124,9 @@ module.exports = function bootstrap({ client, config }) {
     if (message.attachments.array().length > 0) {
       if (!message.attachments.array()[0].height) {
         message.delete();
-        message.channel.send('Please do not upload any files other than images or videos. For large blocks of code, use CodePen or PasteBin.');
+        message.channel.send(
+          'Please do not upload any files other than images or videos. For large blocks of code, use CodePen or PasteBin.'
+        );
       }
     }
     if (message.content.startsWith(config.PREFIX)) {
