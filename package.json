@@ -3,12 +3,13 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "node src",
+    "start": "node dist",
     "test": "jest --detectOpenHandles",
     "dev": "npx nodemon --inspect",
     "lint": "npx eslint .",
     "build": "tsc",
-    "clean": "rimraf dist"
+    "clean": "rimraf dist",
+    "postinstall": "npm run build"
   },
   "license": "MIT",
   "dependencies": {
