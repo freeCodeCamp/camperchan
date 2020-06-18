@@ -1,7 +1,8 @@
-const { promises } = require('fs');
+import { CommandDef } from './command-def';
+import { promises } from 'fs';
 const { readdir } = promises;
 
-module.exports = {
+export const help: CommandDef = {
   prefix: 'help',
   description: 'Get the commands currently available with this bot',
   /**
@@ -11,7 +12,7 @@ module.exports = {
    * @param {Discord.Message} message the message provided
    * Now automatically adds new commands - make sure the .js file has a prefix and description,
    */
-  command: async function help(message) {
+  command: async (message) => {
     const helpEmbed = {
       color: '#0099FF',
       title: 'Bot Information',
@@ -26,15 +27,16 @@ module.exports = {
 
     const results = await readdir(__dirname);
     results.forEach((file) => {
-      const filename = file;
-      const lookup = require(`./${filename}`);
-      if (lookup.prefix && lookup.description) {
-        const fieldObj = {
-          name: lookup.prefix.substring(0, 255),
-          value: lookup.description.substring(0, 1023)
-        };
-        helpEmbed.fields.push(fieldObj);
-      }
+      // TODO: update
+      // const filename = file;
+      // const lookup = require(`./${filename}`);
+      // if (lookup.prefix && lookup.description) {
+      //   const fieldObj = {
+      //     name: lookup.prefix.substring(0, 255),
+      //     value: lookup.description.substring(0, 1023)
+      //   };
+      //   helpEmbed.fields.push(fieldObj);
+      // }
     });
     await message.author.send({ embed: helpEmbed });
   }

@@ -1,10 +1,12 @@
-module.exports = {
+import { CommandDef } from './command-def';
+
+export const stats: CommandDef = {
   prefix: 'stats',
   description: 'Get current server information!',
   /**
    * @name stats
    * Displays the server stats.
-   * @param {Discord.Message} message the message provided by discord
+   * @param message the message provided by discord
    */
   command: function stats(message) {
     try {
@@ -15,23 +17,23 @@ module.exports = {
         fields: [
           {
             name: 'Server Name',
-            value: message.guild.name
+            value: message.guild?.name
           },
           {
             name: 'Created on',
-            value: message.guild.createdAt
+            value: message.guild?.createdAt
           },
           {
             name: 'You joined on',
-            value: message.member.joinedAt
+            value: message.member?.joinedAt
           },
           {
             name: 'Total Member Count is',
-            value: message.guild.memberCount
+            value: message.guild?.memberCount
           },
           {
             name: 'Server run by',
-            value: message.guild.owner
+            value: message.guild?.owner
           }
         ],
         footer: { text: 'Thanks for being here with us!' }
