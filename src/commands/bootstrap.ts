@@ -2,6 +2,10 @@ import { Client, MessageEmbed, TextChannel, Collection } from 'discord.js';
 import { Config } from '../config/get-config';
 import { addFormatting } from './add-formatting';
 import { thanks } from './thanks';
+import { CommandDef } from './command-def';
+import { eightBall } from './eightball';
+import { help } from './help';
+import { stats } from './stats';
 
 /**
  * Bootstraps all commands to the client.
@@ -15,19 +19,10 @@ export function bootstrap({
   client: Client;
   config: Config;
 }): void {
-  // Get all the command files from commands folder
-  // const commands = fs
-  //   .readdirSync(__dirname)
-  //   .filter((file) => file.endsWith('.js'));
-  const commands = new Collection<string, any>(); // TODO: define command
-
-  // TODO: rig up commands using an alternate approach
-  // for (const file of commands) {
-  // const command = require(`${__dirname}/${file}`);
-  // Set a new command file in the Discord Collection
-  // With the key as the command prefix and the value as the exported command function
-  // client.commands.set(command.prefix, command);
-  // }
+  const commands = new Collection<string, CommandDef>()
+    .set(eightBall.prefix, eightBall)
+    .set(help.prefix, help)
+    .set(stats.prefix, stats);
 
   // The code below listens for reactions to any message in the server and if
   // a reaction is equal to the specified trigger reaction (in this case '🤖'),
@@ -154,7 +149,7 @@ export function bootstrap({
       }
       // Execute command
       try {
-        commands.get(commandArgument).command(message);
+        commands.get(commandArgument)?.command(message);
       } catch (error) {
         console.error(error);
         message.reply('there was an error trying to execute that command!');
