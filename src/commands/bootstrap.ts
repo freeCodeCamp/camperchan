@@ -1,11 +1,9 @@
-import { Client, MessageEmbed, TextChannel, Collection } from 'discord.js';
+import { Client, Collection, MessageEmbed, TextChannel } from 'discord.js';
 import { Config } from '../config/get-config';
 import { addFormatting } from './add-formatting';
-import { thanks } from './thanks';
 import { CommandDef } from './command-def';
-import { eightBall } from './eightball';
-import { help } from './help';
-import { stats } from './stats';
+import { COMMANDS } from './commands';
+import { thanks } from './thanks';
 
 /**
  * Bootstraps all commands to the client.
@@ -19,11 +17,10 @@ export function bootstrap({
   client: Client;
   config: Config;
 }): void {
-  const commands = new Collection<string, CommandDef>()
-    .set(eightBall.prefix, eightBall)
-    .set(help.prefix, help)
-    .set(stats.prefix, stats);
-
+  const commands = COMMANDS.reduce(
+    (acc, commandDef) => acc.set(commandDef.prefix, commandDef),
+    new Collection<string, CommandDef>()
+  );
   // The code below listens for reactions to any message in the server and if
   // a reaction is equal to the specified trigger reaction (in this case '🤖'),
   // then is attempts to format the message. To get a detailed explanation of the

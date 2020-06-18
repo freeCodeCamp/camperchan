@@ -1,6 +1,6 @@
+import { MessageEmbedOptions } from 'discord.js';
 import { CommandDef } from './command-def';
-import { promises } from 'fs';
-const { readdir } = promises;
+import { COMMANDS } from './commands';
 
 export const help: CommandDef = {
   prefix: 'help',
@@ -9,11 +9,11 @@ export const help: CommandDef = {
    * @name help
    * Displays currently available commands.
    *
-   * @param {Discord.Message} message the message provided
+   * @param message the message provided
    * Now automatically adds new commands - make sure the .js file has a prefix and description,
    */
   command: async (message) => {
-    const helpEmbed = {
+    const helpEmbed: MessageEmbedOptions = {
       color: '#0099FF',
       title: 'Bot Information',
       description:
@@ -24,19 +24,12 @@ export const help: CommandDef = {
       fields: [],
       footer: { text: 'I am not affiliated with FreeCodeCamp in any way.' }
     };
-
-    const results = await readdir(__dirname);
-    results.forEach((file) => {
-      // TODO: update
-      // const filename = file;
-      // const lookup = require(`./${filename}`);
-      // if (lookup.prefix && lookup.description) {
-      //   const fieldObj = {
-      //     name: lookup.prefix.substring(0, 255),
-      //     value: lookup.description.substring(0, 1023)
-      //   };
-      //   helpEmbed.fields.push(fieldObj);
-      // }
+    COMMANDS.forEach((commandDef) => {
+      helpEmbed.fields?.push({
+        name: commandDef.prefix,
+        value: commandDef.description.substring(0, 1023),
+        inline: false
+      });
     });
     await message.author.send({ embed: helpEmbed });
   }
