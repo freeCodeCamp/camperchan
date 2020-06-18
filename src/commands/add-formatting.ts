@@ -42,7 +42,10 @@ export async function addFormatting(message: Message): Promise<void> {
   console.log(languageGuesses);
 
   // TODO: this is due to being a version behind, will fix later
+  // See https://www.npmjs.com/package/@types/highlightjs for version 10
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   if (!(detectedWithHLJS as any).top.aliases) {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     (detectedWithHLJS as any).top.aliases = [];
   }
 

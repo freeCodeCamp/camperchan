@@ -6,7 +6,7 @@
     "start": "node dist",
     "test": "jest --detectOpenHandles",
     "dev": "npx nodemon --inspect",
-    "lint": "npx eslint .",
+    "lint": "npx eslint src",
     "build": "tsc",
     "clean": "rimraf dist",
     "postinstall": "npm run build"
