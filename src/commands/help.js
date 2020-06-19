@@ -37,5 +37,6 @@ module.exports = {
       }
     });
     await message.author.send({ embed: helpEmbed });
+    await message.channel.send('Help message sent!');
   }
 };
