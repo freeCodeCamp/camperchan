@@ -93,40 +93,42 @@ export function bootstrap({
     });
   }
 
-  //deleted message logging
-  client.on('messageDelete', function (message) {
-    //change channel name to match server configuration
-    const logChannel = message.guild?.channels.cache.find(
-      (channel) => channel.name === config.LOG_MSG_CHANNEL
-    );
-    const deleteEmbed = new MessageEmbed()
-      .setTitle('A message was deleted.')
-      .setColor('#ff0000')
-      .setDescription('Here are the details of that message.')
-      .addFields(
-        {
-          name: 'Message author',
-          value: message.author
-        },
-        {
-          name: 'Channel',
-          value: message.channel
-        },
-        {
-          name: 'Content',
-          value: message.content
-        }
+  if (config.LOG_MSG_CHANNEL) {
+    //deleted message logging
+    client.on('messageDelete', function (message) {
+      //change channel name to match server configuration
+      const logChannel = message.guild?.channels.cache.find(
+        (channel) => channel.name === config.LOG_MSG_CHANNEL
       );
-    if (!logChannel) {
-      console.error('log channel not found');
-      return;
-    }
-    if (logChannel.type !== 'text') {
-      console.error('log channel not a text channel');
-      return;
-    }
-    (logChannel as TextChannel).send(deleteEmbed);
-  });
+      const deleteEmbed = new MessageEmbed()
+        .setTitle('A message was deleted.')
+        .setColor('#ff0000')
+        .setDescription('Here are the details of that message.')
+        .addFields(
+          {
+            name: 'Message author',
+            value: message.author
+          },
+          {
+            name: 'Channel',
+            value: message.channel
+          },
+          {
+            name: 'Content',
+            value: message.content
+          }
+        );
+      if (!logChannel) {
+        console.error('log channel not found');
+        return;
+      }
+      if (logChannel.type !== 'text') {
+        console.error('log channel not a text channel');
+        return;
+      }
+      (logChannel as TextChannel).send(deleteEmbed);
+    });
+  }
 
   client.on('message', (message) => {
     if (
