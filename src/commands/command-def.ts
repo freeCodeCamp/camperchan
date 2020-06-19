@@ -1,4 +1,4 @@
-import { Message } from 'discord.js';
+import { Message, Client } from 'discord.js';
 
 /**
  * Definition for a "prefix" command
@@ -6,5 +6,5 @@ import { Message } from 'discord.js';
 export interface CommandDef {
   prefix: string;
   description: string;
-  command: (message: Message) => void;
+  command: (message: Message, client: Client) => void;
 }

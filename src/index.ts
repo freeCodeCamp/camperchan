@@ -3,6 +3,7 @@ import express from 'express';
 import { bootstrap } from './commands/bootstrap';
 import { getConfig } from './config/get-config';
 import { validateConfig } from './config/validate-config';
+import { getBotOnlineAt } from './utilities/bot-online-time';
 const expressApp = express();
 const client = new Client({ partials: ['MESSAGE', 'CHANNEL', 'REACTION'] });
 
@@ -23,7 +24,12 @@ const client = new Client({ partials: ['MESSAGE', 'CHANNEL', 'REACTION'] });
       });
     }
 
-    client.once('ready', () => console.log('Discord ready!'));
+    client.once('ready', () => {
+      // This variable will be the variable put inside the JSON file.
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
+      const onlineAt = getBotOnlineAt();
+      console.log('Discord ready!');
+    });
     client.login(config.TOKEN);
 
     expressApp.get('/status', (_, res) =>

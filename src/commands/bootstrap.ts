@@ -7,8 +7,8 @@ import { thanks } from './thanks';
 
 /**
  * Bootstraps all commands to the client.
- * @param {Object.client} client the discord client
- * @param {Object.config} config the application config
+ * @param client the discord client
+ * @param config the application config
  */
 export function bootstrap({
   client,
@@ -157,7 +157,7 @@ export function bootstrap({
       }
       // Execute command
       try {
-        commands.get(commandArgument)?.command(message);
+        commands.get(commandArgument)?.command(message, client);
       } catch (error) {
         console.error(error);
         message.reply('there was an error trying to execute that command!');
