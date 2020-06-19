@@ -1,4 +1,4 @@
-import { Message, MessageEmbed } from 'discord.js';
+import { MessageEmbed } from 'discord.js';
 import { CommandDef } from './command-def';
 
 export const coc: CommandDef = {
