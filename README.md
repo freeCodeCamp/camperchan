@@ -2,11 +2,11 @@
 
 [![Build Status](https://travis-ci.org/bradtaniguchi/discord-bot-test.svg?branch=master)](https://travis-ci.org/bradtaniguchi/discord-bot-test)
 
-A discord test bot used to test out architecture and implementing a discord bot. This project is a way to get familiar with the architecture, APIs and process of maintaining a discord bot.
+A Discord test bot used to test out the architecture and implementation of a Discord bot. This project is a way to get familiar with the architecture, APIs and process of maintaining a Discord bot.
 
 ## Contributing
 
-So, you want to contribute to this repo? We are glad to recieve PRs from anybody who is interested. Follow these steps if you are new to contributing to open source projects -
+So, you want to contribute to this repo? We are glad to recieve PRs from anybody who is interested. Follow these steps if you are new to contributing to open source projects:
 
 1. [Install the required softwares](#install-prerequisites)
 2. Fork the repo
@@ -18,7 +18,7 @@ So, you want to contribute to this repo? We are glad to recieve PRs from anybody
 6. Review/test/debug your changes by [running the bot locally](#running-locally)
 7. Commit changes and do a Pull Request (aka PR in short)
 
-...and that's it! You're now a contributor! 😎
+...and that is it! You are now a contributor! 😎
 
 ## Install prerequisites
 
@@ -30,16 +30,16 @@ Start by installing the prerequisite softwares:
 | npm (comes bundled with Node) | `6.x`   | Does not have LTS releases, we use the version bundled with Node LTS |
 | git                           | `2.x`   | [Download Git](https://git-scm.com/)                                 |
 
-If your going to contribute to this project, you'll also need a text-editor. You can use _any_ text editor you want, but we recommend using [VSCode](https://code.visualstudio.com/).
+If youn are going to contribute to this project, you will also need a text editor. You can use _any_ text editor you want, but we recommend using [VSCode](https://code.visualstudio.com/).
 
-If you don't know what these softwares are, don't worry much. These are essential softwares required to contribute to open source projects.
+If you do not know what these softwares are, do not worry. These are essential softwares required to contribute to open source projects.
 
 ## Running locally
 
-To test and develop this bot, you have to run it locally. To run the bot locally you have to follow the following steps -
+To test and develop this bot you have to run it locally. To run the bot locally, follow these steps:
 
 1. Open the folder of your cloned repo
-2. Create a file in the folder called `.env` and add your [Discord bot token](#creating-a-discord-bot-token) like this:
+2. Create a file in that folder called `.env` and add your [Discord bot token](#creating-a-discord-bot-token) like this:
 
 ```
 TOKEN=replace-this-with-your-token
@@ -62,27 +62,27 @@ npm run dev
 
 ## Running the bot in Discord
 
-This bot requires the `Manage Messages` permission to run. So, if you want to use this bot in a Discord server (for testing or production purpose), you'll grant it the `Manage Messages` permission. Luckily we've done
+This bot requires the `Manage Messages` permission to run. So, if you want to use this bot in a Discord server (for testing or production purpose), you will need to grant it the `Manage Messages` permission. Luckily we've done
 the hard work for you, so that you don't have to do it manually.
 
 First, head over [Discord Developer Portal](https://discordapp.com/developers/applications/me) and sign in. After
-that, you will have to select your bot by clicking it's icon.
+that, select your bot by clicking it's icon.
 
 ![PNG - Discord Developer Portal](../media/dev-portal.png)
 
-Then just beside your bot's icon, you'll see your `CLIENT ID`. Copy the `CLIENT ID`.
+Just beside your bot's icon, you will see your `CLIENT ID`. Copy the `CLIENT ID`.
 
 ![PNG - Client ID](../media/client-id.png)
 
-Then replace the `YOUR_CLIENT_ID_HERE` with your bot's `CLIENT ID` in the link provided below. After that, you can use the link to add the bot to any existing or newly created Discord server.
+Then replace the `YOUR_CLIENT_ID_HERE` with your bot's `CLIENT ID` in the link provided below. After that, you can use the link to add the bot to any existing or newly created Discord server (as long as you have the `Manage Server` permission).
 
 _https://discordapp.com/oauth2/authorize?client_id=YOUR_CLIENT_ID_HERE&scope=bot&permissions=8192_
 
-**IMPORTANT NOTE :** When you click on the link and want to add the bot to a server, it'll ask for the `Manage Messages` permission. You'll have to grant the bot permission otherwise the bot won't work.
+**IMPORTANT NOTE :** When you click on the link and want to add the bot to a server, it'll ask for the `Manage Messages` permission. You have to grant the bot this permission or it will not work properly.
 
 ## Creating a Discord bot token
 
-If you don't have a Discord bot token, you'll have to create one. To create a Discord bot token, follow these steps -
+If you do not have a Discord bot token, you will have to create one. To create a Discord bot token, follow these steps:
 
 1. Go to the [Developer Portal](https://discord.com/developers/applications/) website and log in
 2. Click on the "New Application" button
@@ -96,15 +96,34 @@ If you don't have a Discord bot token, you'll have to create one. To create a Di
    ![PNG - Bot Created Successfully](../media/created-bot.png?raw=true)
 7) Now pressing the "Copy" button will copy your `Token` to your clipboard.
 
-...and that's it!
+...and that is all!
+
+## Restricting Bot Access to Channels
+
+For testing purposes, you may wish to restrict the bot's access to specific channels. 
+
+When you add the bot to your Discord server, the system will automatically create a role for that bot. In order to restrict access to channels, it is important that the bot and bot role do **not** have the "Administrator" permission (this overrides channel-specific permissions). 
+
+For each channel you want keep the bot *out* of, you need to do the following:
+
+1. Select the gear icon next to the channel.
+2. Select "Permissions". 
+3. Next to the Roles/Members, click the `+` icon. 
+4. Add the bot's role.
+5. The added role should now be selected.
+6. To the right, go through the permissions list and set each permission to the red "X".
+   The most important permissions to turn off are "Read message history", "Read messages", and "Send messages".
+7. Save your changes! The Discord application will show a pop-up at the bottom of the screen asking you to "Save Changes" or "Reset" - choose "Save Changes". 
+   
+Your bot now has no access to that channel, and users cannot send it commands from that channel!
 
 ## Additional Information
 
-This bot uses the [discord.js](https://discord.js.org) library to interact with the Discord API rather than directly doing so. You can check out the docs for the library [here](https://discord.js.org/#/docs/main/stable/general/welcome).
+This bot uses the [discord.js](https://discord.js.org) library to interact with the Discord API. You can check out the docs for the library [here](https://discord.js.org/#/docs/main/stable/general/welcome).
 
 ## Ask For Help
 
-If you have any question about the project, you can create an issue and ask it. You can also reach us in the FCC's official [Discord](https://discord.gg/KVUmVXA).
+If you have any questions or suggestions about the project, you can create an issue for your question. Please provide as much information as possible when creating an issue. You can also reach us in the FCC's official [Discord](https://discord.gg/KVUmVXA).
 
 Happy Coding!
 
