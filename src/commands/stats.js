@@ -30,6 +30,7 @@ function getUpTime(client) {
   return `${days} ${hours} ${minutes} ${seconds}`;
 }
 
+// This currently doesn't work as intended, it just need a json file to store the data into.
 function getWakeTime() {
   const date = new Date();
   const hour = date.getHours() < 10 ? `0${date.getHours()}` : date.getHours();
