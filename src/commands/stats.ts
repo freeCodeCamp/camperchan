@@ -1,3 +1,4 @@
+import { getUpTime } from '../utilities/get-up-time';
 import { CommandDef } from './command-def';
 
 export const stats: CommandDef = {
@@ -8,8 +9,10 @@ export const stats: CommandDef = {
    * Displays the server stats.
    * @param message the message provided by discord
    */
-  command: function stats(message) {
+  command: (message, client): void => {
     try {
+      const uptime = getUpTime(client);
+
       const statsEmbed = {
         color: '#0099FF',
         title: 'Server Information',
@@ -18,6 +21,14 @@ export const stats: CommandDef = {
           {
             name: 'Server Name',
             value: message.guild?.name
+          },
+          {
+            name: 'Bot Uptime',
+            value: uptime
+          },
+          {
+            name: 'Bot Online Time',
+            value: 'Wake Time from JSON file'
           },
           {
             name: 'Created on',
