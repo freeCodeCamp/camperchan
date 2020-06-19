@@ -1,3 +1,46 @@
+function getUpTime(client) {
+  let totalSeconds = client.uptime / 1000;
+  const days =
+    Math.floor(totalSeconds / 86400) <= 0
+      ? ''
+      : Math.floor(totalSeconds / 86400) < 10
+      ? `0${Math.floor(totalSeconds / 86400)} days`
+      : `${Math.floor(totalSeconds / 86400)} days`;
+
+  const hours =
+    Math.floor(totalSeconds / 3600) <= 0
+      ? ''
+      : Math.floor(totalSeconds / 3600) < 10
+      ? `0${Math.floor(totalSeconds / 3600)} hours`
+      : `${Math.floor(totalSeconds / 3600)} hours`;
+
+  totalSeconds %= 3600;
+  const minutes =
+    Math.floor(totalSeconds / 60) <= 0
+      ? ''
+      : Math.floor(totalSeconds / 60) < 10
+      ? `0${Math.floor(totalSeconds / 60)}  minutes`
+      : `${Math.floor(totalSeconds / 60)} minutes`;
+
+  const seconds =
+    Math.floor(totalSeconds % 60) < 10
+      ? `0${Math.floor(totalSeconds % 60)} seconds`
+      : `${Math.floor(totalSeconds % 60)} seconds`;
+
+  return `${days} ${hours} ${minutes} ${seconds}`;
+}
+
+function getWakeTime() {
+  const date = new Date();
+  const hour = date.getHours() < 10 ? `0${date.getHours()}` : date.getHours();
+  const mins =
+    date.getMinutes() < 10 ? `0${date.getMinutes()}` : date.getMinutes();
+  const tz = /\((.*)\)/.exec(new Date().toString())[1];
+  const am_pm = hour >= 12 ? 'PM' : 'AM';
+
+  return `${hour}:${mins} ${am_pm} ${tz}`;
+}
+
 module.exports = {
   prefix: 'stats',
   description: 'Get current server information!',
@@ -8,41 +51,8 @@ module.exports = {
    */
   command: function stats(message, client) {
     try {
-      let totalSeconds = client.uptime / 1000;
-      const days =
-        Math.floor(totalSeconds / 86400) <= 0
-          ? ''
-          : Math.floor(totalSeconds / 86400) < 10
-          ? `0${Math.floor(totalSeconds / 86400)} days`
-          : `${Math.floor(totalSeconds / 86400)} days`;
-
-      const hours =
-        Math.floor(totalSeconds / 3600) <= 0
-          ? ''
-          : Math.floor(totalSeconds / 3600) < 10
-          ? `0${Math.floor(totalSeconds / 3600)} hours`
-          : `${Math.floor(totalSeconds / 3600)} hours`;
-
-      totalSeconds %= 3600;
-      const minutes =
-        Math.floor(totalSeconds / 60) <= 0
-          ? ''
-          : Math.floor(totalSeconds / 60) < 10
-          ? `0${Math.floor(totalSeconds / 60)}  minutes`
-          : `${Math.floor(totalSeconds / 60)} minutes`;
-
-      const seconds =
-        Math.floor(totalSeconds % 60) < 10
-          ? `0${Math.floor(totalSeconds % 60)} seconds`
-          : `${Math.floor(totalSeconds % 60)} seconds`;
-
-      const date = new Date();
-      const hour =
-        date.getHours() < 10 ? `0${date.getHours()}` : date.getHours();
-      const mins =
-        date.getMinutes() < 10 ? `0${date.getMinutes()}` : date.getMinutes();
-      const tz = /\((.*)\)/.exec(new Date().toString())[1];
-      const am_pm = hour >= 12 ? 'PM' : 'AM';
+      const uptime = getUpTime(client);
+      const wakeTime = getWakeTime();
 
       const statsEmbed = {
         color: '#0099FF',
@@ -55,11 +65,11 @@ module.exports = {
           },
           {
             name: 'Bot Uptime',
-            value: `${days} ${hours} ${minutes} ${seconds}`
+            value: uptime
           },
           {
             name: 'Bot Online Time',
-            value: `${hour}:${mins} ${am_pm} ${tz}`
+            value: wakeTime
           },
           {
             name: 'Created on',
