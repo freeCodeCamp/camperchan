@@ -113,6 +113,7 @@ For each channel you want keep the bot *out* of, you need to do the following:
 5. The added role should now be selected.
 6. To the right, go through the permissions list and set each permission to the red "X".
    The most important permissions to turn off are "Read message history", "Read messages", and "Send messages".
+7. Save your changes! The Discord application will show a pop-up at the bottom of the screen asking you to "Save Changes" or "Reset" - choose "Save Changes". 
    
 Your bot now has no access to that channel, and users cannot send it commands from that channel!
 
