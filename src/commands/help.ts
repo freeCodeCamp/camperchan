@@ -32,5 +32,6 @@ export const help: CommandDef = {
       });
     });
     await message.author.send({ embed: helpEmbed });
+    message.channel.send('Help message sent!');
   }
 };

@@ -133,6 +133,7 @@ Happy Coding!
 - [twaha-rahman](https://github.com/twaha-rahman)
 - [nhcarrigan](https://github.com/nhcarrigan)
 - [cjcanlas01](https://github.com/cjcanlas01)
+- [JoshuaPelealu](https://github.com/JoshuaPelealu)
 
 ### Disclaimer
 
