@@ -9,11 +9,15 @@ module.exports = {
     const log = message.guild.channels.cache.find(
       (channel) => channel.name === config.LOG_MSG_CHANNEL
     );
+    //check for user permissions
+    if (!message.member.hasPermission('MANAGE_CHANNELS')) {
+      console.log('Missing permissions.');
+    }
     if (!log) {
       console.log('Log channel not found.');
       return;
     }
     target.delete().catch((e) => console.error(e));
-    log.send(`${message.author} deleted a channel.`)
+    log.send(`${message.author} deleted a channel.`);
   }
 };
