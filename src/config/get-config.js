@@ -48,13 +48,13 @@ module.exports = function getConfig() {
      * If not given, or if the role is not found
      * the command will not function
      */
-    SUSPEND_ROLE: process.env.SUSPEND_ROLE || `null`,
+    SUSPEND_ROLE: process.env.SUSPEND_ROLE || '',
     /**
      * The name of the category to create new
      * suspended user channels in.
      * If not given, channel will not be created.
      */
-    SUSPEND_CATEGORY: process.env.SUSPEND_CATEGORY || `null`,
+    SUSPEND_CATEGORY: process.env.SUSPEND_CATEGORY || '',
     /**
      * The port to "listen" for liveness checks.
      * Defaults to 8080
