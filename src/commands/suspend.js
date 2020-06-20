@@ -6,39 +6,54 @@ module.exports = {
   description: 'Suspends a user for the given reason',
   command: async function suspend(message) {
     //check for appropriate permissions
-    if (message.member.hasPermission('KICK_MEMBERS') == false) {
-      message.channel.send(
-        `ERROR 401: ${message.author}, missing permissions.`
+    if (!message.member.hasPermission('KICK_MEMBERS')) {
+      console.log(
+        `${message.author.username} did not have the correct permissions.`
       );
       return;
     }
-    const mod = message.author;
-    const msgArguments = message.content.split(' ');
-    const user = message.mentions.members.first();
-    //check for valid user tag
-    if (user == undefined) {
-      message.channel.send(`ERROR 400: ${mod}, invalid user tag.`);
+    //check for log channel setting
+    const modChannel = message.guild.channels.cache.find(
+      (channel) => channel.name === config.LOG_MSG_CHANNEL
+    );
+    if (!modChannel) {
+      console.log('Log channel not found.');
       return;
     }
-    //cannot target self
-    if (user === mod) {
-      message.channel.send(`ERROR 400: ${mod}, cannot target self.`);
+    //check for suspend category setting
+    const suspendCategory = config.SUSPEND_CATEGORY;
+    const category = await message.guild.channels.cache.find(
+      (c) => c.name === suspendCategory && c.type === 'category'
+    );
+    if (!category) {
+      console.log('Missing suspend category.');
       return;
     }
-    const reasonArg = msgArguments.slice(3, msgArguments.length);
-    let reason = reasonArg.join(' ');
-    //check for reason provided, if none then create one.
-    if (reason == '') {
-      reason = 'ERROR 404: No reason provided.';
-    }
-    //check for valid role.
+    //check for suspend role setting
     const suspend = message.guild.roles.cache.find(
       (role) => role.name == config.SUSPEND_ROLE
     );
     if (!suspend) {
-      message.channel.send(`ERROR 304: ${mod}, missing suspend role.`);
+      console.log(`Missing suspend role.`);
       return;
     }
+
+    const mod = message.author;
+    const msgArguments = message.content.split(' ');
+    const user = message.mentions.members.first();
+    //check for valid user tag
+    if (!user) {
+      message.channel.send(`Invalid user tag.`);
+      return;
+    }
+    //cannot target self
+    if (message.mentions.users.first() === mod) {
+      message.channel.send(`Cannot target self.`);
+      return;
+    }
+    const reasonArg = msgArguments.slice(3, msgArguments.length);
+    //check for reason provided, if none then create one.
+    const reason = reasonArg.join(' ') || 'No reason provided';
     //logging embed
     const restrictEmbed = new Discord.MessageEmbed()
       .setColor('#FF0000')
@@ -54,24 +69,12 @@ module.exports = {
         }
       )
       .setFooter('Please remember to follow our rules!');
-    const modChannel = message.guild.channels.cache.find(
-      (channel) => channel.name === config.LOG_MSG_CHANNEL
-    );
-    if (modChannel) {
-      modChannel.send(restrictEmbed);
-    }
-    if (!modChannel) {
-      message.channel.send('ERROR 404: missing log channel');
-    }
+    modChannel.send(restrictEmbed);
     //assign roles
-    user.roles.remove(user.roles).catch((e) => console.log(e));
-    user.roles.add(suspend).catch((e) => console.log(e));
+    user.roles.remove(user.roles).catch((e) => console.error(e));
+    user.roles.add(suspend).catch((e) => console.error(e));
     //create suspend channel
     const channelName = `suspended-${user.user.username}`;
-    const suspendCategory = config.SUSPEND_CATEGORY;
-    const category = await message.guild.channels.cache.find(
-      (c) => c.name === suspendCategory && c.type === 'category'
-    );
     message.guild.channels.create(channelName, {
       type: 'suspended',
       permissionOverwrites: [
@@ -86,5 +89,8 @@ module.exports = {
       ],
       parent: category
     });
+    user.send(
+      'You have been suspended for violating our Code of Conduct. A channel has been created in the server for you to discuss this with the moderation team.'
+    );
   }
 };
