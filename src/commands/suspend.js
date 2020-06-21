@@ -38,7 +38,6 @@ module.exports = {
         console.log(`Missing suspend role.`);
         return;
       }
-
       const mod = message.author;
       const msgArguments = message.content.split(' ');
       const user = message.mentions.members.first();
@@ -72,8 +71,7 @@ module.exports = {
         .setFooter('Please remember to follow our rules!');
       modChannel.send(restrictEmbed);
       //assign roles
-      user.roles.remove(user.roles);
-      user.roles.add(suspend);
+      user.roles.set([suspend]);
       //create suspend channel
       const channelName = `suspended-${user.user.username}`;
       message.guild.channels.create(channelName, {
