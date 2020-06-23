@@ -21,7 +21,7 @@ module.exports = {
       }
       if (
         !target.name.includes('suspended') ||
-        !target.parent.name.includes('Suspended')
+        !target.parent.name.includes(config.SUSPEND_CATEGORY)
       ) {
         console.log('Cannot delete non-temporary channel');
         return;
