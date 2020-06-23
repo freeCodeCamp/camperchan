@@ -13,9 +13,17 @@ module.exports = {
       //check for user permissions
       if (!message.member.hasPermission('MANAGE_CHANNELS')) {
         console.log('Missing permissions.');
+        return;
       }
       if (!log) {
         console.log('Log channel not found.');
+        return;
+      }
+      if (
+        !target.name.includes('suspended') ||
+        !target.parent.name.includes('Suspended')
+      ) {
+        console.log('Cannot delete non-temporary channel');
         return;
       }
       target.delete();
