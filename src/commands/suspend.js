@@ -3,7 +3,8 @@ const getConfig = require('../config/get-config.js');
 const config = getConfig();
 module.exports = {
   prefix: 'suspend',
-  description: 'Suspends a user for the given reason',
+  description:
+    'Suspends a user for the given reason. This command is only available to admins. Use the format "suspend <usertag> <reason>"',
   command: async function suspend(message) {
     try {
       //check for appropriate permissions
@@ -71,10 +72,10 @@ module.exports = {
         .setFooter('Please remember to follow our rules!');
       modChannel.send(restrictEmbed);
       //assign roles
-      user.roles.set([suspend]);
+      await user.roles.set([suspend]);
       //create suspend channel
       const channelName = `suspended-${user.user.username}`;
-      message.guild.channels.create(channelName, {
+      const suspendChannel = await message.guild.channels.create(channelName, {
         type: 'suspended',
         permissionOverwrites: [
           {
@@ -88,7 +89,10 @@ module.exports = {
         ],
         parent: category
       });
-      user.send(
+      await suspendChannel.send(
+        `This channel has been created for ${user} to discuss their suspension from the server. Once the discussion has concluded, an admin may use the \`close\` command to automatically close this channel.`
+      );
+      await user.send(
         'You have been suspended for violating our Code of Conduct. A channel has been created in the server for you to discuss this with the moderation team.'
       );
     } catch (error) {
