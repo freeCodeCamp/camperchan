@@ -2,7 +2,8 @@ const getConfig = require('../config/get-config.js');
 const config = getConfig();
 module.exports = {
   prefix: 'close',
-  description: 'Closes the channel.',
+  description:
+    'Closes the channel. This command requires admin privliges, and will only work on the automatically created "suspended" channels.',
   command: async function (message) {
     try {
       const target = message.channel;
@@ -26,8 +27,8 @@ module.exports = {
         console.log('Cannot delete non-temporary channel');
         return;
       }
-      target.delete();
-      log.send(`${message.author} deleted a channel.`);
+      await target.delete();
+      await log.send(`${message.author} deleted a channel.`);
     } catch (error) {
       console.error(error);
     }
