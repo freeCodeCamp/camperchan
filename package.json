@@ -12,6 +12,7 @@
   "dependencies": {
     "discord.js": "^12.2.0",
     "dotenv": "^8.2.0",
+    "editorconfig": "^0.15.3",
     "express": "^4.17.1",
     "highlight.js": "^10.0.3",
     "prettier": "^2.0.5",
