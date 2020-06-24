@@ -12,7 +12,6 @@
   "dependencies": {
     "discord.js": "^12.2.0",
     "dotenv": "^8.2.0",
-    "editorconfig": "^0.15.3",
     "express": "^4.17.1",
     "highlight.js": "^10.0.3",
     "prettier": "^2.0.5",
@@ -26,7 +25,8 @@
     "jest": "^26.0.1",
     "lint-staged": "^10.2.2",
     "nodemon": "^2.0.3",
-    "rimraf": "^3.0.2"
+    "rimraf": "^3.0.2",
+    "editorconfig": "^0.15.3"
   },
   "husky": {
     "hooks": {
