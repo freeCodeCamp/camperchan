@@ -3,7 +3,7 @@ const config = getConfig();
 module.exports = {
   prefix: 'close',
   description:
-    'Closes the channel. This command requires admin privliges, and will only work on the automatically created "suspended" channels.',
+    'Closes the channel. This command requires admin privileges, and will only work on the automatically created "suspended" channels.',
   command: async function (message) {
     try {
       const target = message.channel;
