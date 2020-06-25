@@ -36,7 +36,7 @@ module.exports = {
         if (!suspend) {
           console.log('Cannot find suspend role');
         } else {
-          message.mentions.members.first().roles.remove([suspend]);
+          await message.mentions.members.first().roles.remove([suspend]);
           status = `The appeal was approved and ${message.mentions.members.first()}'s access was restored.`;
         }
       }
