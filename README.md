@@ -100,22 +100,43 @@ If you do not have a Discord bot token, you will have to create one. To create a
 
 ## Restricting Bot Access to Channels
 
-For testing purposes, you may wish to restrict the bot's access to specific channels. 
+For testing purposes, you may wish to restrict the bot's access to specific channels.
 
-When you add the bot to your Discord server, the system will automatically create a role for that bot. In order to restrict access to channels, it is important that the bot and bot role do **not** have the "Administrator" permission (this overrides channel-specific permissions). 
+When you add the bot to your Discord server, the system will automatically create a role for that bot. In order to restrict access to channels, it is important that the bot and bot role do **not** have the "Administrator" permission (this overrides channel-specific permissions).
 
-For each channel you want keep the bot *out* of, you need to do the following:
+For each channel you want keep the bot _out_ of, you need to do the following:
 
 1. Select the gear icon next to the channel.
-2. Select "Permissions". 
-3. Next to the Roles/Members, click the `+` icon. 
+2. Select "Permissions".
+3. Next to the Roles/Members, click the `+` icon.
 4. Add the bot's role.
 5. The added role should now be selected.
 6. To the right, go through the permissions list and set each permission to the red "X".
    The most important permissions to turn off are "Read message history", "Read messages", and "Send messages".
-7. Save your changes! The Discord application will show a pop-up at the bottom of the screen asking you to "Save Changes" or "Reset" - choose "Save Changes". 
-   
+7. Save your changes! The Discord application will show a pop-up at the bottom of the screen asking you to "Save Changes" or "Reset" - choose "Save Changes".
+
 Your bot now has no access to that channel, and users cannot send it commands from that channel!
+
+## Debugging using VSCode
+
+Provided is an example `launch.json` file that should be put into `.vscode/launch.json` (this folder and file is untracked by git). This can be used **after** you start the `npm run dev` to help debug the application using breakpoints using
+vscodes internal debugger.
+
+```json
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "type": "node",
+      "request": "attach",
+      "name": "debug",
+      "restart": true,
+      "protocol": "inspector",
+      "port": 9229
+    }
+  ]
+}
+```
 
 ## Additional Information
 
