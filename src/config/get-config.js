@@ -44,6 +44,18 @@ module.exports = function getConfig() {
      */
     LOG_MSG_CHANNEL: process.env.LOG_MSG_CHANNEL || 'moderation-activity',
     /**
+     * The name of the role to suspend a user with.
+     * If not given, or if the role is not found
+     * the command will not function
+     */
+    SUSPEND_ROLE: process.env.SUSPEND_ROLE || '',
+    /**
+     * The name of the category to create new
+     * suspended user channels in.
+     * If not given, channel will not be created.
+     */
+    SUSPEND_CATEGORY: process.env.SUSPEND_CATEGORY || '',
+    /**
      * The port to "listen" for liveness checks.
      * Defaults to 8080
      */

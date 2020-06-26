@@ -76,9 +76,13 @@ Just beside your bot's icon, you will see your `CLIENT ID`. Copy the `CLIENT ID`
 
 Then replace the `YOUR_CLIENT_ID_HERE` with your bot's `CLIENT ID` in the link provided below. After that, you can use the link to add the bot to any existing or newly created Discord server (as long as you have the `Manage Server` permission).
 
-_https://discordapp.com/oauth2/authorize?client_id=YOUR_CLIENT_ID_HERE&scope=bot&permissions=8192_
+_https://discordapp.com/oauth2/authorize?client_id=YOUR_CLIENT_ID_HERE&scope=bot&permissions=268512272_
 
-**IMPORTANT NOTE :** When you click on the link and want to add the bot to a server, it'll ask for the `Manage Messages` permission. You have to grant the bot this permission or it will not work properly.
+**IMPORTANT NOTE :** When you click on the link and want to add the bot to a server, it'll ask for the following permissions. You must approve these permissions for the bot to work correctly:
+
+`Manage Roles`, `Manage Messages`, `Manage Channels`, `View Channels`, `Read Message History`, `Send Messages`
+
+This link will automatically create a role specifically for the bot. You need to ensure this role is **ABOVE** your `suspended` role in the server settings or that command will not work properly. Discord only allows a user (or bot) to assign/modify roles placed below their highest role in the list.
 
 ## Creating a Discord bot token
 
