@@ -75,7 +75,8 @@ module.exports = {
       await user.roles.set([suspend]);
       //create suspend channel
       const channelName = `suspended-${user.user.username}`;
-      const suspendChannel = await message.guild.channels.create(channelName, {
+      //assign this below line to "suspendChannel" once that feature is turned back on.
+      await message.guild.channels.create(channelName, {
         type: 'suspended',
         permissionOverwrites: [
           {
