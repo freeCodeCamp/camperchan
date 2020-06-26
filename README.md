@@ -138,6 +138,8 @@ vscode's internal debugger.
 }
 ```
 
+
+
 ## Additional Information
 
 This bot uses the [discord.js](https://discord.js.org) library to interact with the Discord API. You can check out the docs for the library [here](https://discord.js.org/#/docs/main/stable/general/welcome).
