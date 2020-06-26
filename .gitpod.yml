@@ -1,5 +1,8 @@
+image:
+  file: .gitpod.Dockerfile
 # Command to start on workspace startup
 tasks:
+  - command: mkdir -p /workspace/data && mongod --dbpath /workspace/data
   - init: npm i
     command: npx nodemon
 
