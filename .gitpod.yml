@@ -1,0 +1,9 @@
+# Command to start on workspace startup
+tasks:
+  - init: npm i
+    command: npx nodemon
+
+vscode:
+  extensions:
+    - esbenp.prettier-vscode@5.1.0:M3Ww4EayZWhGCgk49C1Ldw==
+    - dbaeumer.vscode-eslint@2.1.3:1NRvj3UKNTNwmYjptmUmIw==
