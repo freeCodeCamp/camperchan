@@ -82,6 +82,8 @@ _https://discordapp.com/oauth2/authorize?client_id=YOUR_CLIENT_ID_HERE&scope=bot
 
 `Manage Roles`, `Manage Messages`, `Manage Channels`, `View Channels`, `Read Message History`, `Send Messages`
 
+This link will automatically create a role specifically for the bot. You need to ensure this role is **ABOVE** your `suspended` role in the server settings or that command will not work properly. Discord only allows a user (or bot) to assign/modify roles placed below their highest role in the list.
+
 ## Creating a Discord bot token
 
 If you do not have a Discord bot token, you will have to create one. To create a Discord bot token, follow these steps:
