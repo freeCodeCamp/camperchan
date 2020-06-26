@@ -120,7 +120,7 @@ Your bot now has no access to that channel, and users cannot send it commands fr
 ## Debugging using VSCode
 
 Provided is an example `launch.json` file that should be put into `.vscode/launch.json` (this folder and file is untracked by git). This can be used **after** you start the `npm run dev` to help debug the application using breakpoints using
-vscodes internal debugger.
+VScodes internal debugger.
 
 ```json
 {
