@@ -39,6 +39,18 @@ export interface Config {
    */
   LOG_MSG_CHANNEL: string;
   /**
+   * The name of the role to suspend a user with.
+   * If not given, or if the role is not found
+   * the command will not function
+   */
+  SUSPEND_ROLE: string;
+  /**
+   * The name of the category to create new
+   * suspended user channels in.
+   * If not given, channel will not be created.
+   */
+  SUSPEND_CATEGORY: string;
+  /**
    * The port to "listen" for liveness checks.
    * Defaults to 8080
    */
@@ -58,6 +70,8 @@ export function getConfig(): Config {
     WELCOME_DM: process.env.WELCOME_DM === 'true',
     LEAVE_MSG_CHANNEL: process.env.LEAVE_MSG_CHANNEL || '',
     LOG_MSG_CHANNEL: process.env.LOG_MSG_CHANNEL || 'moderation-activity',
+    SUSPEND_ROLE: process.env.SUSPEND_ROLE || '',
+    SUSPEND_CATEGORY: process.env.SUSPEND_CATEGORY || '',
     PORT: process.env.PORT || 8080
   };
 }
