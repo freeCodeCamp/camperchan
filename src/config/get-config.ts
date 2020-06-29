@@ -15,6 +15,11 @@ export interface Config {
    */
   PREFIX: string;
   /**
+   * The name of the manual role to be assigned to the bot - this
+   * is different from the automatic role Discord creates.
+   */
+  BOT_ROLE: string;
+  /**
    * If the bot should log all message to the console.
    * By default this feature is OFF to suppress the amount of
    * logs being printed.
@@ -67,6 +72,7 @@ export function getConfig(): Config {
     TOKEN: process.env.TOKEN || '',
     PREFIX: process.env.PREFIX || '!FCC',
     VERBOSE: process.env.PREFIX === 'true',
+    BOT_ROLE: process.env.BOT_ROLE || '',
     WELCOME_DM: process.env.WELCOME_DM === 'true',
     LEAVE_MSG_CHANNEL: process.env.LEAVE_MSG_CHANNEL || '',
     LOG_MSG_CHANNEL: process.env.LOG_MSG_CHANNEL || 'moderation-activity',
