@@ -1,0 +1,6 @@
+{
+  "$schema": "https://github.com/SchemaStore/schemastore/blob/master/src/schemas/json/nodemon.json",
+  "verbose": false,
+  "ext": "ts",
+  "exec": "ts-node ./src/index.ts"
+}

@@ -1,9 +1,11 @@
-const Discord = require('discord.js');
-module.exports = {
+import { MessageEmbed } from 'discord.js';
+import { CommandDef } from './command-def';
+
+export const coc: CommandDef = {
   prefix: 'coc',
   description: 'Provides the Code of Conduct.',
-  command: function (message) {
-    const codeEmbed = new Discord.MessageEmbed()
+  command: (message): void => {
+    const codeEmbed = new MessageEmbed()
       .setTitle('FreeCodeCamp Code of Conduct')
       .setDescription(
         'These are the basic rules for interacting with the FreeCodeCamp community on any platform, including this Discord server. You can read the full document on the [FreeCodeCamp article](https://freecodecamp.org/news/code-of-conduct)'

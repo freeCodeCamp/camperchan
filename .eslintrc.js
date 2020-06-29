@@ -5,14 +5,17 @@ module.exports = {
     node: true,
     jest: true
   },
-  plugins: ['prettier'],
-  extends: ['eslint:recommended', 'plugin:prettier/recommended'],
+  root: true,
+  parser: '@typescript-eslint/parser',
+  plugins: ['prettier', '@typescript-eslint'],
+  extends: [
+    'eslint:recommended',
+    'plugin:prettier/recommended',
+    'plugin:@typescript-eslint/recommended'
+  ],
   globals: {
     Atomics: 'readonly',
     SharedArrayBuffer: 'readonly'
-  },
-  parserOptions: {
-    ecmaVersion: 11
   },
   rules: {
     'linebreak-style': ['error', 'unix'],
