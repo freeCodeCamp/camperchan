@@ -44,6 +44,14 @@ export const suspendCommand: CommandDef = {
         console.log(`Missing suspend role.`);
         return;
       }
+      //check for bot role
+      const bot = message.guild?.roles.cache.find(
+        (role) => role.name == config.BOT_ROLE
+      );
+      if (!bot) {
+        console.log('Bot role not found.');
+        return;
+      }
       const mod = message.author;
       const msgArguments = message.content.split(' ');
       const user = message.mentions.members?.first();
@@ -91,6 +99,10 @@ export const suspendCommand: CommandDef = {
           {
             id: message.guild.id,
             deny: ['VIEW_CHANNEL', 'READ_MESSAGE_HISTORY', 'SEND_MESSAGES']
+          },
+          {
+            id: bot,
+            allow: ['VIEW_CHANNEL', 'READ_MESSAGE_HISTORY', 'SEND_MESSAGES']
           }
         ],
         parent: category
