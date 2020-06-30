@@ -71,7 +71,7 @@ export function getConfig(): Config {
   return {
     TOKEN: process.env.TOKEN || '',
     PREFIX: process.env.PREFIX || '!FCC',
-    VERBOSE: process.env.PREFIX === 'true',
+    VERBOSE: process.env.VERBOSE === 'true',
     BOT_ROLE: process.env.BOT_ROLE || '',
     WELCOME_DM: process.env.WELCOME_DM === 'true',
     LEAVE_MSG_CHANNEL: process.env.LEAVE_MSG_CHANNEL || '',
