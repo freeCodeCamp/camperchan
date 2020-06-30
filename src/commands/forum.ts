@@ -1,6 +1,7 @@
 import { Message, MessageEmbed } from 'discord.js';
 import { CommandDef } from './command-def';
 import fetch from 'node-fetch';
+import { ForumData } from '../APIs/forum-data';
 
 export const forum: CommandDef = {
   prefix: 'forum',
@@ -8,7 +9,7 @@ export const forum: CommandDef = {
   command: async (message: Message): Promise<void> => {
     try {
       const data = await fetch('https://forum.freecodecamp.org/latest.json');
-      const parsed = await data.json();
+      const parsed: ForumData = await data.json();
       const result = parsed.topic_list.topics.slice(0, 5);
       const forumEmbed: MessageEmbed = new MessageEmbed()
         .setTitle('Latest Forum Activity')
