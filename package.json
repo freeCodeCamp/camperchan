@@ -25,7 +25,8 @@
     "jest": "^26.0.1",
     "lint-staged": "^10.2.2",
     "nodemon": "^2.0.3",
-    "rimraf": "^3.0.2"
+    "rimraf": "^3.0.2",
+    "editorconfig": "^0.15.3"
   },
   "husky": {
     "hooks": {

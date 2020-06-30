@@ -76,9 +76,13 @@ Just beside your bot's icon, you will see your `CLIENT ID`. Copy the `CLIENT ID`
 
 Then replace the `YOUR_CLIENT_ID_HERE` with your bot's `CLIENT ID` in the link provided below. After that, you can use the link to add the bot to any existing or newly created Discord server (as long as you have the `Manage Server` permission).
 
-_https://discordapp.com/oauth2/authorize?client_id=YOUR_CLIENT_ID_HERE&scope=bot&permissions=8192_
+_https://discordapp.com/oauth2/authorize?client_id=YOUR_CLIENT_ID_HERE&scope=bot&permissions=268512272_
 
-**IMPORTANT NOTE :** When you click on the link and want to add the bot to a server, it'll ask for the `Manage Messages` permission. You have to grant the bot this permission or it will not work properly.
+**IMPORTANT NOTE :** When you click on the link and want to add the bot to a server, it'll ask for the following permissions. You must approve these permissions for the bot to work correctly:
+
+`Manage Roles`, `Manage Messages`, `Manage Channels`, `View Channels`, `Read Message History`, `Send Messages`
+
+This link will automatically create a role specifically for the bot. You need to ensure this role is **ABOVE** your `suspended` role in the server settings or that command will not work properly. Discord only allows a user (or bot) to assign/modify roles placed below their highest role in the list.
 
 ## Creating a Discord bot token
 
@@ -100,22 +104,45 @@ If you do not have a Discord bot token, you will have to create one. To create a
 
 ## Restricting Bot Access to Channels
 
-For testing purposes, you may wish to restrict the bot's access to specific channels. 
+For testing purposes, you may wish to restrict the bot's access to specific channels.
 
-When you add the bot to your Discord server, the system will automatically create a role for that bot. In order to restrict access to channels, it is important that the bot and bot role do **not** have the "Administrator" permission (this overrides channel-specific permissions). 
+When you add the bot to your Discord server, the system will automatically create a role for that bot. In order to restrict access to channels, it is important that the bot and bot role do **not** have the "Administrator" permission (this overrides channel-specific permissions).
 
-For each channel you want keep the bot *out* of, you need to do the following:
+For each channel you want keep the bot _out_ of, you need to do the following:
 
 1. Select the gear icon next to the channel.
-2. Select "Permissions". 
-3. Next to the Roles/Members, click the `+` icon. 
+2. Select "Permissions".
+3. Next to the Roles/Members, click the `+` icon.
 4. Add the bot's role.
 5. The added role should now be selected.
 6. To the right, go through the permissions list and set each permission to the red "X".
    The most important permissions to turn off are "Read message history", "Read messages", and "Send messages".
-7. Save your changes! The Discord application will show a pop-up at the bottom of the screen asking you to "Save Changes" or "Reset" - choose "Save Changes". 
-   
+7. Save your changes! The Discord application will show a pop-up at the bottom of the screen asking you to "Save Changes" or "Reset" - choose "Save Changes".
+
 Your bot now has no access to that channel, and users cannot send it commands from that channel!
+
+## Debugging using VSCode
+
+Provided is an example `launch.json` file that should be put into `.vscode/launch.json` (this folder and file is untracked by git). This can be used **after** you start the `npm run dev` to help debug the application using breakpoints using
+vscode's internal debugger.
+
+```json
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "type": "node",
+      "request": "attach",
+      "name": "debug",
+      "restart": true,
+      "protocol": "inspector",
+      "port": 9229
+    }
+  ]
+}
+```
+
+
 
 ## Additional Information
 
@@ -133,6 +160,7 @@ Happy Coding!
 - [twaha-rahman](https://github.com/twaha-rahman)
 - [nhcarrigan](https://github.com/nhcarrigan)
 - [cjcanlas01](https://github.com/cjcanlas01)
+- [JoshuaPelealu](https://github.com/JoshuaPelealu)
 
 ### Disclaimer
 
