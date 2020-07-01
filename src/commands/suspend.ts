@@ -1,6 +1,7 @@
 import { getConfig } from '../config/get-config';
 import { CommandDef } from './command-def';
 import { MessageEmbed, TextChannel } from 'discord.js';
+import { userStatus, userSuspend } from '../APIs/mongo-suspend';
 
 // TODO: will be passed as command arg
 const config = getConfig();
@@ -113,6 +114,22 @@ export const suspendCommand: CommandDef = {
       await user.send(
         'You have been suspended for violating our Code of Conduct. A channel has been created in the server for you to discuss this with the moderation team.'
       );
+      await userStatus.findOne({ userid: user.id }, function (
+        err: Error,
+        data: userSuspend
+      ) {
+        if (!data) {
+          const newUserStatus = new userStatus({
+            userid: user.id,
+            suspended: true
+          });
+          newUserStatus.save((err) => console.error(err));
+        } else if (data.suspended) {
+          message.author.send(
+            `Hello! It looks like ${user} has been suspended previously. You may consider taking further action based on their offence.`
+          );
+        }
+      });
     } catch (error) {
       console.error(error);
     }

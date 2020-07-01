@@ -4,6 +4,7 @@ import { bootstrap } from './commands/bootstrap';
 import { getConfig } from './config/get-config';
 import { validateConfig } from './config/validate-config';
 import { getBotOnlineAt } from './utilities/bot-online-time';
+import Mongoose from 'mongoose';
 const expressApp = express();
 const client = new Client({ partials: ['MESSAGE', 'CHANNEL', 'REACTION'] });
 
@@ -15,6 +16,15 @@ const client = new Client({ partials: ['MESSAGE', 'CHANNEL', 'REACTION'] });
     validateConfig(config);
     // rig up client callbacks
     client.on('error', console.error);
+
+    Mongoose.connect(
+      config.MONGO_URI,
+      {
+        useNewUrlParser: true,
+        useUnifiedTopology: true
+      },
+      () => console.log('MongoDB ready!')
+    );
 
     bootstrap({ client, config });
     if (config.VERBOSE) {

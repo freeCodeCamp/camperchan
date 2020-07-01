@@ -7,6 +7,10 @@ export interface Config {
    * This is required otherwise the validate-config function will fail.
    */
   TOKEN: string;
+  /*
+   * The connection URI for the MongoDB database.
+   */
+  MONGO_URI: string;
   /**
    * The bots prefix which should be placed in-front of
    * every command. Defaults to '!FCC' if nothing was given
@@ -70,6 +74,7 @@ export interface Config {
 export function getConfig(): Config {
   return {
     TOKEN: process.env.TOKEN || '',
+    MONGO_URI: process.env.MONGO_URI || '',
     PREFIX: process.env.PREFIX || '!FCC',
     VERBOSE: process.env.VERBOSE === 'true',
     BOT_ROLE: process.env.BOT_ROLE || '',
