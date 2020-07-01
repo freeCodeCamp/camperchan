@@ -1,19 +1,25 @@
-const getConfig = require('../config/get-config.js');
-const Discord = require('discord.js');
+import { CommandDef } from './command-def';
+import { getConfig } from '../config/get-config';
+import { TextChannel, MessageEmbed } from 'discord.js';
+
+// TODO: will be passed as command arg
 const config = getConfig();
-module.exports = {
+
+export const closeCommand: CommandDef = {
   prefix: 'close',
   description:
-    'Closes the channel. This command requires admin privileges, and will only work on the automatically created "suspended" channels. Include the user if you want to remove the suspended role.',
-  command: async function (message) {
+    'Closes the channel. This command requires admin privileges, ' +
+    'and will only work on the automatically created "suspended" channels.' +
+    ' Include the user if you want to remove the suspended role.',
+  command: async (message): Promise<void> => {
     try {
-      const target = message.channel;
+      const target = message.channel as TextChannel;
       //check for log channel
-      const log = message.guild.channels.cache.find(
+      const log = message.guild?.channels.cache.find(
         (channel) => channel.name === config.LOG_MSG_CHANNEL
-      );
+      ) as TextChannel;
       //check for user permissions
-      if (!message.member.hasPermission('MANAGE_CHANNELS')) {
+      if (!message.member?.hasPermission('MANAGE_CHANNELS')) {
         console.log('Missing permissions.');
         return;
       }
@@ -23,25 +29,25 @@ module.exports = {
       }
       if (
         !target.name.includes('suspended') ||
-        !target.parent.name.includes(config.SUSPEND_CATEGORY)
+        !target.parent?.name.includes(config.SUSPEND_CATEGORY)
       ) {
         console.log('Cannot delete non-temporary channel');
         return;
       }
       let status = 'The appeal was not approved.';
-      if (message.mentions.members.first()) {
-        const suspend = message.guild.roles.cache.find(
+      if (message.mentions.members?.first()) {
+        const suspend = message.guild?.roles.cache.find(
           (role) => role.name == config.SUSPEND_ROLE
         );
         if (!suspend) {
           console.log('Cannot find suspend role');
         } else {
-          await message.mentions.members.first().roles.remove([suspend]);
+          await message.mentions.members.first()?.roles.remove([suspend]);
           status = `The appeal was approved and ${message.mentions.members.first()}'s access was restored.`;
         }
       }
       await target.delete();
-      const deleteEmbed = new Discord.MessageEmbed()
+      const deleteEmbed = new MessageEmbed()
         .setTitle('Channel Deleted')
         .setDescription(
           `${message.author} has closed and deleted the \`${target.name}\` channel`

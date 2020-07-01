@@ -1,30 +1,35 @@
-const Discord = require('discord.js');
-const getConfig = require('../config/get-config.js');
+import { getConfig } from '../config/get-config';
+import { CommandDef } from './command-def';
+import { MessageEmbed, TextChannel } from 'discord.js';
+
+// TODO: will be passed as command arg
 const config = getConfig();
-module.exports = {
+
+export const suspendCommand: CommandDef = {
   prefix: 'suspend',
   description:
-    'Suspends a user for the given reason. This command is only available to admins. Use the format "suspend <usertag> <reason>"',
-  command: async function suspend(message) {
+    'Suspends a user for the given reason. This command is only available to admins. ' +
+    'Use the format "suspend <usertag> <reason>"',
+  command: async (message): Promise<void> => {
     try {
       //check for appropriate permissions
-      if (!message.member.hasPermission('KICK_MEMBERS')) {
+      if (!message.member?.hasPermission('KICK_MEMBERS')) {
         console.log(
           `${message.author.username} did not have the correct permissions.`
         );
         return;
       }
       //check for log channel setting
-      const modChannel = message.guild.channels.cache.find(
+      const modChannel = message.guild?.channels.cache.find(
         (channel) => channel.name === config.LOG_MSG_CHANNEL
-      );
+      ) as TextChannel;
       if (!modChannel) {
         console.log('Log channel not found.');
         return;
       }
       //check for suspend category setting
       const suspendCategory = config.SUSPEND_CATEGORY;
-      const category = await message.guild.channels.cache.find(
+      const category = await message.guild?.channels.cache.find(
         (c) => c.name === suspendCategory && c.type === 'category'
       );
       if (!category) {
@@ -32,16 +37,24 @@ module.exports = {
         return;
       }
       //check for suspend role setting
-      const suspend = message.guild.roles.cache.find(
+      const suspend = message.guild?.roles.cache.find(
         (role) => role.name == config.SUSPEND_ROLE
       );
       if (!suspend) {
         console.log(`Missing suspend role.`);
         return;
       }
+      //check for bot role
+      const bot = message.guild?.roles.cache.find(
+        (role) => role.name == config.BOT_ROLE
+      );
+      if (!bot) {
+        console.log('Bot role not found.');
+        return;
+      }
       const mod = message.author;
       const msgArguments = message.content.split(' ');
-      const user = message.mentions.members.first();
+      const user = message.mentions.members?.first();
       //check for valid user tag
       if (!user) {
         message.channel.send(`Invalid user tag.`);
@@ -56,7 +69,7 @@ module.exports = {
       //check for reason provided, if none then create one.
       const reason = reasonArg.join(' ') || 'No reason provided';
       //logging embed
-      const restrictEmbed = new Discord.MessageEmbed()
+      const restrictEmbed = new MessageEmbed()
         .setColor('#FF0000')
         .setTitle(`Access Restricted!`)
         .addFields(
@@ -76,8 +89,8 @@ module.exports = {
       //create suspend channel
       const channelName = `suspended-${user.user.username}`;
       //assign this below line to "suspendChannel" once that feature is turned back on.
-      await message.guild.channels.create(channelName, {
-        type: 'suspended',
+      await message.guild?.channels.create(channelName, {
+        type: 'text',
         permissionOverwrites: [
           {
             id: user.id,
@@ -86,6 +99,10 @@ module.exports = {
           {
             id: message.guild.id,
             deny: ['VIEW_CHANNEL', 'READ_MESSAGE_HISTORY', 'SEND_MESSAGES']
+          },
+          {
+            id: bot,
+            allow: ['VIEW_CHANNEL', 'READ_MESSAGE_HISTORY', 'SEND_MESSAGES']
           }
         ],
         parent: category
