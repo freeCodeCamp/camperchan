@@ -1,8 +1,8 @@
 import { Message } from 'discord.js';
 import hljs from 'highlight.js';
-import { confusedMessageGenerator } from '../utilities/confused-message-generator';
-import { processReply } from '../utilities/process-reply';
-
+import { formatter } from '../utilities/formatter';
+import { formatCodeBlock } from '../utilities/format-codeblock';
+import { isSupportedByPrettier } from '../utilities/is-supported-by-prettier';
 /**
  * @name add-formatting
  * Inserts any unformatted code to a code block, enables syntax highlighting and formats it when a
@@ -49,28 +49,17 @@ export async function addFormatting(message: Message): Promise<void> {
     (detectedWithHLJS as any).top.aliases = [];
   }
 
-  const reactionOptionsObj = {
-    firstOption: '🙂',
-    secondOption: '🙃'
-  };
-
-  const reactionEmojies = Object.values(reactionOptionsObj);
-
-  const confusedMessage = confusedMessageGenerator(
-    languageGuesses,
-    reactionEmojies
-  );
-
-  try {
-    const refToPromptMsg = await message.channel.send(confusedMessage);
-    processReply({
-      reactionEmojies,
-      reactionOptionsObj,
-      languageGuesses,
-      content,
-      ref: refToPromptMsg
-    });
-  } catch (error) {
-    console.error(error);
+  if (
+    languageGuesses.includes('HTML') &&
+    (languageGuesses.includes('CSS') || languageGuesses.includes('JavaScript'))
+  ) {
+    languageGuesses[0] = 'XML';
+  }
+  const supportedLanguage = isSupportedByPrettier(languageGuesses[0]);
+  if (supportedLanguage) {
+    const formattedCode = formatter(content, supportedLanguage);
+    message.channel.send(formatCodeBlock(supportedLanguage, formattedCode));
+  } else {
+    message.channel.send(formatCodeBlock(languageGuesses[0], content));
   }
 }
