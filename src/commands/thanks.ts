@@ -1,5 +1,6 @@
 import { Message } from 'discord.js';
 
+const thankregex = /((?:^|\s)(?:(?:th(?:n[qx]|x)|t[xyq]|tn(?:[x]){0,2})|\w*\s*[.,]*\s*than[kx](?:[sxz]){0,2}|than[kx](?:[sxz]){0,2}(?:[uq]|y(?:ou)?)?)|grazie|arigato(?:[u]{0,1})|doumo|gracias?|spasibo|dhanyavaad(?:hamulu)?|o?brigad(?:o|a)|dziekuje|(?:re)?merci|multumesc|shukra?an|danke)\b/gi;
 /**
  * Thanks handler that will show a nice message
  * for "brownie points" when thanking other users.
@@ -24,9 +25,8 @@ export async function thanks(message: Message): Promise<Message | void> {
  */
 export function shouldThank(message: Message): boolean {
   return (
-    !!['thanks', 'thank you'].find((thankStr) =>
-      message.content.toLowerCase().includes(thankStr)
-    ) && !!message.mentions.users.size
+    !!thankregex.test(message.content.toLowerCase()) &&
+    !!message.mentions.users.size
   );
 }
 
