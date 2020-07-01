@@ -1,4 +1,7 @@
-module.exports = {
+import { Message } from 'discord.js';
+import { CommandDef } from './command-def';
+
+export const eightBall: CommandDef = {
   prefix: 'eightball',
   description:
     'Think of your question and get an answer from a magic pool ball!',
@@ -6,9 +9,9 @@ module.exports = {
    * @name eightBall
    * Randomly selects an option, and returns it to chat.
    *
-   * @param {Discord.Message} message the message provided by discord
+   * @param message the message provided by discord
    */
-  command: function eightBall(message) {
+  command: (message: Message): void => {
     const options = [
       'As I see it, yes.',
       'Ask again later.',

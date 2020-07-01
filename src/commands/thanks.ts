@@ -1,11 +1,13 @@
+import { Message } from 'discord.js';
+
 /**
  * Thanks handler that will show a nice message
  * for "brownie points" when thanking other users.
  *
  * TODO: maybe rename to be more clear what this does?
- * @param {Discord.message} message the message we are to check against.
+ * @param message the message we are to check against.
  */
-function thanks(message) {
+export async function thanks(message: Message): Promise<Message | void> {
   if (!shouldThank(message)) {
     return;
   }
@@ -18,10 +20,9 @@ function thanks(message) {
 /**
  * If we should execute any "thank" logic. If anywhere in the message
  * the user has `thanks` or `thank you`, **and** mentions other users
- * @param {Discord.message} message the message we want to check
- * @returns {boolean}
+ * @param message the message we want to check
  */
-function shouldThank(message) {
+export function shouldThank(message: Message): boolean {
   return (
     !!['thanks', 'thank you'].find((thankStr) =>
       message.content.toLowerCase().includes(thankStr)
@@ -35,10 +36,9 @@ function shouldThank(message) {
  * will be skipped.
  *
  * **note** should only include users
- * @param {Discord.message} message
- * @returns {boolean}
+ * @param message
  */
-function isSelfThanking(message) {
+export function isSelfThanking(message: Message): boolean {
   return (
     message.mentions.users.size === 1 &&
     message.mentions.users.has(message.author.id)
@@ -49,9 +49,9 @@ function isSelfThanking(message) {
  * from the discord mentions content.
  *
  * **note** uses logic from https://discordjs.guide/miscellaneous/parsing-mention-arguments.html#implementation
- * @param {string} str the string we are to check
+ * @param  str the string we are to check
  */
-function isStrMention(str) {
+export function isStrMention(str: string): boolean {
   str = str.trim();
   return str.startsWith('<@') && str.endsWith('>');
 }
@@ -59,11 +59,11 @@ function isStrMention(str) {
  * Returns the userId from the strMention. Will return an empty string
  * if the mention string isn't given. This also should be only
  * ONE WORD
- * @param {string} str the string that should be a mention
+ * @param str the string that should be a mention
  *
  * **note** uses logic from https://discordjs.guide/miscellaneous/parsing-mention-arguments.html#implementation
  */
-function getUserIdFromStrMention(str) {
+export function getUserIdFromStrMention(str: string): string {
   if (!isStrMention(str)) {
     // extra check if for some reason we don't do this
     return '';
@@ -79,19 +79,17 @@ function getUserIdFromStrMention(str) {
 
 /**
  * Returns the message to show if the user thanks **only** themselves
- * @param {Discord.message} message
- * @returns {string}
+ * @param message
  */
-function getSelfThankMessage(message) {
+export function getSelfThankMessage(message: Message): string {
   return `Sorry ${message.author.toString()}, you can't send brownie points to yourself!`;
 }
 /**
  * Returns the final thank message to send in chat. Should include all
  * user's mentioned in the post, but not include the author
- * @param {Discord.message} message
- * @returns {string}
+ * @param message
  */
-function getThankMessage(message) {
+export function getThankMessage(message: Message): string {
   const author = message.author.toString();
   const strMentions = [
     ...new Set(
@@ -108,15 +106,3 @@ function getThankMessage(message) {
   const userIds = strMentions;
   return `${author} sends brownie points to ${userIds} ✨👍✨`;
 }
-
-module.exports = {
-  // **note** all of these are exported primarily for testing,
-  // but thanks is the main api to use
-  thanks,
-  shouldThank,
-  isStrMention,
-  getUserIdFromStrMention,
-  isSelfThanking,
-  getThankMessage,
-  getSelfThankMessage
-};
