@@ -2,8 +2,6 @@ import { getUpTime } from '../utilities/get-up-time';
 import { CommandDef } from './command-def';
 import getRepoInfo from 'git-repo-info';
 const info = getRepoInfo();
-import dotenv from 'dotenv';
-dotenv.config();
 
 export const stats: CommandDef = {
   prefix: 'stats',
@@ -18,11 +16,8 @@ export const stats: CommandDef = {
       const uptime = getUpTime(client);
 
       // If run locally, it will get the commit hash using a different approach
-      const versionHash = process.env.SOURCE_VERSION;
       const commitHash =
-        versionHash == undefined
-          ? info.abbreviatedSha
-          : versionHash.slice(0, 10);
+        process.env.SOURCE_VERSION?.slice(0, 10) || info.abbreviatedSha;
 
       const statsEmbed = {
         color: '#0099FF',
