@@ -34,7 +34,11 @@ export const stats: CommandDef = {
           },
           {
             name: 'Bot Online Time',
-            value: 'Wake Time from JSON file'
+            value: `[${onlineAt}](https://google.com/search?q=${tzSearch})`
+          },
+          {
+            name: 'Version',
+            value: `[${commitHash}](https://github.com/bradtaniguchi/discord-bot-test/commit/${commitHash})`
           },
           {
             name: 'Version',
