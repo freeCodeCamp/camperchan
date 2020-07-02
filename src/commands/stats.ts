@@ -1,5 +1,6 @@
 import { getUpTime } from '../utilities/get-up-time';
 import { CommandDef } from './command-def';
+import { onlineAt } from '../index';
 import getRepoInfo from 'git-repo-info';
 const info = getRepoInfo();
 
@@ -18,6 +19,7 @@ export const stats: CommandDef = {
       // If run locally, it will get the commit hash using a different approach
       const commitHash =
         process.env.SOURCE_VERSION?.slice(0, 10) || info.abbreviatedSha;
+      const tzSearch = onlineAt.replace(/ /g, '%20');
 
       const statsEmbed = {
         color: '#0099FF',
@@ -34,7 +36,7 @@ export const stats: CommandDef = {
           },
           {
             name: 'Bot Online Time',
-            value: 'Wake Time from JSON file'
+            value: `[${onlineAt}](https://google.com/search?q=${tzSearch})`
           },
           {
             name: 'Version',
