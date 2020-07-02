@@ -1,5 +1,6 @@
 import { getUpTime } from '../utilities/get-up-time';
 import { CommandDef } from './command-def';
+import { getConfig } from '../config/get-config';
 import getRepoInfo from 'git-repo-info';
 const info = getRepoInfo();
 
@@ -34,11 +35,7 @@ export const stats: CommandDef = {
           },
           {
             name: 'Bot Online Time',
-            value: `[${onlineAt}](https://google.com/search?q=${tzSearch})`
-          },
-          {
-            name: 'Version',
-            value: `[${commitHash}](https://github.com/bradtaniguchi/discord-bot-test/commit/${commitHash})`
+            value: getConfig().ONLINE_AT
           },
           {
             name: 'Version',
