@@ -19,7 +19,6 @@ export const stats: CommandDef = {
       // If run locally, it will get the commit hash using a different approach
       const commitHash =
         process.env.SOURCE_VERSION?.slice(0, 10) || info.abbreviatedSha;
-      const tzSearchQuery: string = onlineAt.replace(/ /g, '%20');
 
       const statsEmbed = {
         color: '#0099FF',
