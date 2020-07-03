@@ -1,6 +1,5 @@
 import { getUpTime } from '../utilities/get-up-time';
 import { CommandDef } from './command-def';
-import { getConfig } from '../config/get-config';
 import getRepoInfo from 'git-repo-info';
 const info = getRepoInfo();
 
@@ -12,7 +11,7 @@ export const stats: CommandDef = {
    * Displays the server stats.
    * @param message the message provided by discord
    */
-  command: (message, client): void => {
+  command: (message, { client, config }): void => {
     try {
       const uptime = getUpTime(client);
 
@@ -35,7 +34,7 @@ export const stats: CommandDef = {
           },
           {
             name: 'Bot Online Time',
-            value: getConfig().ONLINE_AT
+            value: config.ONLINE_AT
           },
           {
             name: 'Version',
