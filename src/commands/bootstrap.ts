@@ -157,7 +157,7 @@ export function bootstrap({
       }
       // Execute command
       try {
-        commands.get(commandArgument)?.command(message, client);
+        commands.get(commandArgument)?.command(message, { client, config });
       } catch (error) {
         console.error(error);
         message.reply('there was an error trying to execute that command!');
