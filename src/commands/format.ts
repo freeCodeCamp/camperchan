@@ -4,14 +4,15 @@ import { addFormatting } from './add-formatting';
 
 export const format: CommandDef = {
   prefix: 'format',
-  description: 'Formats the code contained in the message ID.',
+  description: 'Formats the code contained in the message URL.',
   command: async (message: Message): Promise<void> => {
     try {
       if (message.content.split(' ').length < 3) {
         console.log('Missing message ID');
         return;
       }
-      const messageID = message.content.split(' ')[2];
+      const messageURL = message.content.split(' ')[2];
+      const messageID = messageURL.split('/')[messageURL.split('/').length - 1];
       if (!messageID || isNaN(parseInt(messageID))) {
         message.channel.send('Invalid syntax');
         return;
