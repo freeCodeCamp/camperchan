@@ -1,16 +1,12 @@
-import { getConfig } from '../config/get-config';
 import { CommandDef } from './command-def';
 import { MessageEmbed, TextChannel } from 'discord.js';
-
-// TODO: will be passed as command arg
-const config = getConfig();
 
 export const suspendCommand: CommandDef = {
   prefix: 'suspend',
   description:
     'Suspends a user for the given reason. This command is only available to admins. ' +
     'Use the format "suspend <usertag> <reason>"',
-  command: async (message): Promise<void> => {
+  command: async (message, { config }): Promise<void> => {
     try {
       //check for appropriate permissions
       if (!message.member?.hasPermission('KICK_MEMBERS')) {
