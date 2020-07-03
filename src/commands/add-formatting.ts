@@ -59,7 +59,7 @@ export async function addFormatting(message: Message): Promise<void> {
   if (supportedLanguage) {
     const formattedCode = formatter(content, supportedLanguage);
     message.channel.send(formatCodeBlock(supportedLanguage, formattedCode));
-  } else {
-    message.channel.send(formatCodeBlock(languageGuesses[0], content));
+    return;
   }
+  message.channel.send(formatCodeBlock(languageGuesses[0], content));
 }
