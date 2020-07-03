@@ -11,7 +11,7 @@ export const stats: CommandDef = {
    * Displays the server stats.
    * @param message the message provided by discord
    */
-  command: (message, client): void => {
+  command: (message, { client }): void => {
     try {
       const uptime = getUpTime(client);
 
