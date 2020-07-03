@@ -24,13 +24,13 @@ describe('thanks', () => {
           mentions: { users: new Map().set('86890631690977280', {}) }
         } as Partial<Message>) as never)
       ).toEqual(true));
-    test('returns false if thanking self with THANK YOU', () =>
+    test('returns true if thanking self with THANK YOU', () =>
       expect(
         shouldThank(({
           content: 'THANK YOU <@86890631690977280>',
           mentions: { users: new Map().set('86890631690977280', {}) }
         } as Partial<Message>) as never)
-      ).toEqual(false));
+      ).toEqual(true));
     test('returns false if thanking no one', () =>
       expect(
         shouldThank(({
