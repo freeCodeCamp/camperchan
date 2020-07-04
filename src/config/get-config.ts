@@ -1,3 +1,5 @@
+import { getBotOnlineAt } from '../utilities/bot-online-time';
+
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 require('dotenv').config();
 
@@ -64,6 +66,11 @@ export interface Config {
    * Defaults to 8080
    */
   PORT: number | string;
+  /**
+   * Get the bot Start Time/ Online Time in a
+   * [HH:MM:SS PM/AM TZ] format
+   */
+  ONLINE_AT: string;
 }
 /**
  * @name getConfig
@@ -83,6 +90,7 @@ export function getConfig(): Config {
     LOG_MSG_CHANNEL: process.env.LOG_MSG_CHANNEL || 'moderation-activity',
     SUSPEND_ROLE: process.env.SUSPEND_ROLE || '',
     SUSPEND_CATEGORY: process.env.SUSPEND_CATEGORY || '',
-    PORT: process.env.PORT || 8080
+    PORT: process.env.PORT || 8080,
+    ONLINE_AT: getBotOnlineAt() || ''
   };
 }

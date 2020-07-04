@@ -1,5 +1,7 @@
 import { getUpTime } from '../utilities/get-up-time';
 import { CommandDef } from './command-def';
+import getRepoInfo from 'git-repo-info';
+const info = getRepoInfo();
 
 export const stats: CommandDef = {
   prefix: 'stats',
@@ -9,9 +11,13 @@ export const stats: CommandDef = {
    * Displays the server stats.
    * @param message the message provided by discord
    */
-  command: (message, client): void => {
+  command: (message, { client, config }): void => {
     try {
       const uptime = getUpTime(client);
+
+      // If run locally, it will get the commit hash using a different approach
+      const commitHash =
+        process.env.SOURCE_VERSION?.slice(0, 10) || info.abbreviatedSha;
 
       const statsEmbed = {
         color: '#0099FF',
@@ -28,7 +34,11 @@ export const stats: CommandDef = {
           },
           {
             name: 'Bot Online Time',
-            value: 'Wake Time from JSON file'
+            value: config.ONLINE_AT
+          },
+          {
+            name: 'Version',
+            value: `[${commitHash}](https://github.com/bradtaniguchi/discord-bot-test/commit/${commitHash})`
           },
           {
             name: 'Created on',
