@@ -53,6 +53,33 @@ export function bootstrap({
         console.error(error);
       }
     }
+
+    if (reaction.emoji.name === '📌') {
+      try {
+        reaction.users.fetch().then((users) => {
+          // Get user that reacted with the pushpin emoji
+          const user = users.first();
+          const pinnedEmbed = new MessageEmbed()
+            .setColor('#0099ff')
+            .setTitle("Here's your pinned message buddy!")
+            .addFields(
+              { name: 'Author', value: reaction.message.author },
+              { name: 'Content', value: reaction.message.content }
+            )
+            .setFooter('Happy Coding! 😁');
+
+          user?.send(pinnedEmbed);
+
+          // Remove reaction from the message
+          reaction.message.reactions.cache
+            .get('📌')
+            ?.remove()
+            .catch((err) => console.log('Failed to remove reaction: ', err));
+        });
+      } catch (error) {
+        console.error(error);
+      }
+    }
   });
   if (config.WELCOME_DM) {
     // we only send this command if the WELCOME_DM environment variable
