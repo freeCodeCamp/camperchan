@@ -1,13 +1,13 @@
 import { Document, Schema, model } from 'mongoose';
 
-export interface userSuspend extends Document {
-  userid: string;
+export interface UserSuspend extends Document {
+  userId: string;
   suspended: boolean;
 }
 
 export const userSchema = new Schema({
-  userid: String,
+  userId: String,
   suspended: Boolean
 });
 
-export const userStatus = model<userSuspend>('user', userSchema);
+export const userModel = model<UserSuspend>('user', userSchema);

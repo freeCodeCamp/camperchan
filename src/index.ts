@@ -17,14 +17,16 @@ const client = new Client({ partials: ['MESSAGE', 'CHANNEL', 'REACTION'] });
     // rig up client callbacks
     client.on('error', console.error);
 
-    Mongoose.connect(
-      config.MONGO_URI,
-      {
-        useNewUrlParser: true,
-        useUnifiedTopology: true
-      },
-      () => console.log('MongoDB ready!')
-    );
+    if (config.MONGO_URI) {
+      await Mongoose.connect(
+        config.MONGO_URI,
+        {
+          useNewUrlParser: true,
+          useUnifiedTopology: true
+        },
+        () => console.log('MongoDB ready!')
+      );
+    }
 
     bootstrap({ client, config });
     if (config.VERBOSE) {

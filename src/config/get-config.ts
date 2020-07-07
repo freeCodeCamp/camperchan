@@ -11,6 +11,7 @@ export interface Config {
   TOKEN: string;
   /*
    * The connection URI for the MongoDB database.
+   * TODO: Make this required in the validate-config!
    */
   MONGO_URI: string;
   /**
