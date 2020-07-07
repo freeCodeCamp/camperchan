@@ -1,6 +1,6 @@
 import { CommandDef } from './command-def';
 import { MessageEmbed, TextChannel } from 'discord.js';
-import { userModel, UserSuspend } from '../APIs/mongo-suspend';
+import { userSuspendModel, UserSuspend } from '../APIs/mongo-suspend';
 
 export const suspendCommand: CommandDef = {
   prefix: 'suspend',
@@ -111,11 +111,11 @@ export const suspendCommand: CommandDef = {
         'You have been suspended for violating our Code of Conduct. A channel has been created in the server for you to discuss this with the moderation team.'
       );
       if (config.MONGO_URI) {
-        await userModel.findOne(
+        await userSuspendModel.findOne(
           { userId: user.id },
           async (err: Error, data: UserSuspend) => {
             if (!data) {
-              const newUser = new userModel({
+              const newUser = new userSuspendModel({
                 userId: user.id,
                 suspended: true
               });

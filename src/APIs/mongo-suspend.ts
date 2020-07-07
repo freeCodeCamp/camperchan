@@ -5,9 +5,9 @@ export interface UserSuspend extends Document {
   suspended: boolean;
 }
 
-export const userSchema = new Schema({
+export const userSuspendSchema = new Schema({
   userId: String,
   suspended: Boolean
 });
 
-export const userModel = model<UserSuspend>('user', userSchema);
+export const userSuspendModel = model<UserSuspend>('user', userSuspendSchema);
