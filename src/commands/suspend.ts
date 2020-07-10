@@ -111,7 +111,9 @@ export const suspendCommand: CommandDef = {
         'You have been suspended for violating our Code of Conduct. A channel has been created in the server for you to discuss this with the moderation team.'
       );
       if (config.MONGO_URI) {
-        const userSuspend = await userSuspendModel.findOne({ userId: user.id });
+        const userSuspend: UserSuspend | null = await userSuspendModel.findOne({
+          userId: user.id
+        });
         if (userSuspend) {
           await message.author.send(
             `Hello! It looks like ${user} has been suspended previously. You may consider taking further action based on their offence.`
