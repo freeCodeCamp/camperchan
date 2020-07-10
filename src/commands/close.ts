@@ -1,9 +1,5 @@
 import { CommandDef } from './command-def';
-import { getConfig } from '../config/get-config';
 import { TextChannel, MessageEmbed } from 'discord.js';
-
-// TODO: will be passed as command arg
-const config = getConfig();
 
 export const closeCommand: CommandDef = {
   prefix: 'close',
@@ -11,7 +7,7 @@ export const closeCommand: CommandDef = {
     'Closes the channel. This command requires admin privileges, ' +
     'and will only work on the automatically created "suspended" channels.' +
     ' Include the user if you want to remove the suspended role.',
-  command: async (message): Promise<void> => {
+  command: async (message, { config }): Promise<void> => {
     try {
       const target = message.channel as TextChannel;
       //check for log channel
