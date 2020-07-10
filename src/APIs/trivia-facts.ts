@@ -1,0 +1,14 @@
+export const triviaFacts = [
+  {
+    fact: 'Brad is awesome',
+    source: 'nhcarrigan'
+  },
+  {
+    fact: 'nhcarrigan is awesome',
+    source: 'Everyone!'
+  },
+  {
+    fact: 'bjorno might be evil',
+    source: 'bjorno'
+  }
+];

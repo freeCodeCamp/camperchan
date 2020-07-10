@@ -7,6 +7,7 @@ import { closeCommand } from './close';
 import { suspendCommand } from './suspend';
 import { forum } from './forum';
 import { format } from './format';
+import { triviaCommand } from './trivia';
 
 export const COMMANDS: Array<CommandDef> = [
   eightBall,
@@ -16,5 +17,6 @@ export const COMMANDS: Array<CommandDef> = [
   suspendCommand,
   closeCommand,
   forum,
-  format
+  format,
+  triviaCommand
 ];
