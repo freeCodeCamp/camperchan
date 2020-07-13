@@ -6,7 +6,11 @@ A Discord test bot used to test out the architecture and implementation of a Dis
 
 ## Contributing
 
-So, you want to contribute to this repo? We are glad to recieve PRs from anybody who is interested. Follow these steps if you are new to contributing to open source projects:
+So, you want to contribute to this repo? We are glad to recieve PRs from anybody who is interested.
+
+The easiest way to contribute to the development of the bot is using [![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](http://gitpod.io/#https://github.com/bradtaniguchi/discord-bot-test). It starts up an already working version of the bot with all the code so you can start working right now! (You'll have to add the `TOKEN` variable in the `.env` file)
+
+Follow these steps if you are new to contributing to open source projects:
 
 1. [Install the required softwares](#install-prerequisites)
 2. Fork the repo
