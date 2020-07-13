@@ -64,7 +64,12 @@ export function bootstrap({
           .setTitle("Here's your pinned message buddy!")
           .addFields(
             { name: 'Author', value: reaction.message.author },
-            { name: 'Content', value: reaction.message.content || "Embedded messages cannot be pinned."}
+            {
+              name: 'Content',
+              value:
+                reaction.message.content ||
+                'Embedded messages cannot be pinned.'
+            }
           )
           .setFooter('Happy Coding! 😁');
 
