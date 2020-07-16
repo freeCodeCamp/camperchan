@@ -10,9 +10,11 @@ export const formatReaction: ReactionDef = {
 
       addFormatting(reaction.message);
     } catch (error) {
-      // A common issue with this not working correctly, is
-      // if the bot does not have permissions to remove reactions.
-      // Check the README.md file for details on setting the correct permissions
+      /* A common issue with this not working correctly, is
+       * if the bot does not have permissions to remove reactions.
+       * Check the README.md file for details on setting the correct permissions
+       */
+
       reaction.message.channel.send(
         'Something went wrong! Failed to format code :('
       );
