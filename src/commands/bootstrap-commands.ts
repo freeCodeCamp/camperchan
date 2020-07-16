@@ -10,13 +10,13 @@ import { thanks } from './thanks';
  * @param client the discord client
  * @param config the application config
  */
-export function bootstrap({
+export const bootstrapCommands = ({
   client,
   config
 }: {
   client: Client;
   config: Config;
-}): void {
+}): void => {
   const commands = COMMANDS.reduce(
     (acc, commandDef) => acc.set(commandDef.prefix, commandDef),
     new Collection<string, CommandDef>()
@@ -193,4 +193,4 @@ export function bootstrap({
     }
     thanks(message);
   });
-}
+};
