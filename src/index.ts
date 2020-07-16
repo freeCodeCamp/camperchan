@@ -3,6 +3,7 @@ import express from 'express';
 import { bootstrapCommands } from './commands/bootstrap-commands';
 import { getConfig } from './config/get-config';
 import { validateConfig } from './config/validate-config';
+import { bootstrapReactions } from './reactions/bootstrap-reactions';
 
 const expressApp = express();
 const client = new Client({ partials: ['MESSAGE', 'CHANNEL', 'REACTION'] });
@@ -17,6 +18,7 @@ const client = new Client({ partials: ['MESSAGE', 'CHANNEL', 'REACTION'] });
     client.on('error', console.error);
 
     bootstrapCommands({ client, config });
+    bootstrapReactions({ client, config });
     if (config.VERBOSE) {
       // if we are to print each message as is.
       client.on('message', (message) => {
