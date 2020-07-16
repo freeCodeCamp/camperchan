@@ -11,7 +11,7 @@ export const pin: ReactionDef = {
       const user = users.first();
       const pinnedEmbed = new MessageEmbed()
         .setColor('#0099ff')
-        .setTitle("Here's your pinned message buddy!")
+        .setTitle('Pinned Message:')
         .addFields(
           { name: 'Author', value: reaction.message.author },
           {
