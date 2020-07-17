@@ -16,7 +16,6 @@
     "common-tags": "^1.8.0",
     "discord.js": "^12.2.0",
     "dotenv": "^8.2.0",
-    "express": "^4.17.1",
     "git-repo-info": "^2.1.1",
     "highlight.js": "^10.0.3",
     "luxon": "^1.24.1",
@@ -26,7 +25,6 @@
   },
   "devDependencies": {
     "@types/common-tags": "^1.8.0",
-    "@types/express": "^4.17.6",
     "@types/highlightjs": "^9.12.0",
     "@types/jest": "^26.0.0",
     "@types/luxon": "^1.24.1",
