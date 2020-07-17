@@ -1,5 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
-import { CommandDef } from '../commands/command-def';
 import { COMMANDS } from '../commands/commands';
 import { readFile, writeFile } from 'fs';
 import { stripIndents } from 'common-tags';
