@@ -11,6 +11,7 @@ const commandTable = stripIndents`
   ${COMMANDS.map(
     (command) => '| ' + command.prefix + ' | ' + command.description + ' |\n'
   ).join('')}
+  ##
 `;
 
 // if there is an argument --autoUpdateReadme while running the command,
@@ -21,7 +22,7 @@ if (flags.includes('--autoUpdateReadme')) {
 
     // Change the regex in this line to determine where you're going to put it at...
     const results = data.replace(
-      /## Available Commands.*## Additional Information/gs,
+      /## Available Commands[^#]*##/gs,
       commandTable
     );
 
