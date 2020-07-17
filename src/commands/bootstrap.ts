@@ -40,9 +40,9 @@ export function bootstrap({
 
     if (reaction.emoji.name === '🤖') {
       try {
-        await reaction.message.reactions.removeAll();
+        await addFormatting(reaction.message);
 
-        addFormatting(reaction.message);
+        reaction.message.reactions.cache.get('🤖')?.remove();
       } catch (error) {
         // A common issue with this not working correctly, is
         // if the bot does not have permissions to remove reactions.
