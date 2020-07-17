@@ -6,9 +6,9 @@ export const formatReaction: ReactionDef = {
   description: 'Guesses and formats the message',
   command: async (reaction) => {
     try {
-      await reaction.message.reactions.removeAll();
+      await addFormatting(reaction.message);
 
-      addFormatting(reaction.message);
+      reaction.message.reactions.cache.get('🤖')?.remove();
     } catch (error) {
       /* A common issue with this not working correctly, is
        * if the bot does not have permissions to remove reactions.
