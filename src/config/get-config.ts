@@ -63,11 +63,6 @@ export interface Config {
    */
   SUSPEND_CATEGORY: string;
   /**
-   * The port to "listen" for liveness checks.
-   * Defaults to 8080
-   */
-  PORT: number | string;
-  /**
    * Get the bot Start Time/ Online Time in a
    * [HH:MM:SS PM/AM TZ] format
    */
@@ -91,7 +86,6 @@ export function getConfig(): Config {
     LOG_MSG_CHANNEL: process.env.LOG_MSG_CHANNEL || 'moderation-activity',
     SUSPEND_ROLE: process.env.SUSPEND_ROLE || '',
     SUSPEND_CATEGORY: process.env.SUSPEND_CATEGORY || '',
-    PORT: process.env.PORT || 8080,
     ONLINE_AT: getBotOnlineAt() || ''
   };
 }
