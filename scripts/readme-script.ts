@@ -30,12 +30,9 @@ if (flags.includes('--autoUpdateReadme')) {
         commandTable
       );
 
-      writeFile('README.md', results, 'utf8')
-        .then(() => {
-          console.log('README.md updated');
-        })
-        .catch((err) => console.log(err));
+      return writeFile('README.md', results, 'utf-8');
     })
+    .then(() => console.log('README.md updated'))
     .catch((err) => console.log(err));
 } else {
   console.log(commandTable);
