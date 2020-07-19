@@ -16,7 +16,6 @@ const client = new Client({ partials: ['MESSAGE', 'CHANNEL', 'REACTION'] });
     // rig up client callbacks
     client.on('error', console.error);
 
-
     if (config.MONGO_URI) {
       await Mongoose.connect(
         config.MONGO_URI,
