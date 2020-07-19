@@ -1,10 +1,9 @@
 import { Client } from 'discord.js';
-import express from 'express';
-import { bootstrap } from './commands/bootstrap';
+import { bootstrapCommands } from './commands/bootstrap-commands';
 import { getConfig } from './config/get-config';
 import { validateConfig } from './config/validate-config';
+import { bootstrapReactions } from './reactions/bootstrap-reactions';
 
-const expressApp = express();
 const client = new Client({ partials: ['MESSAGE', 'CHANNEL', 'REACTION'] });
 
 (async () => {
@@ -16,7 +15,8 @@ const client = new Client({ partials: ['MESSAGE', 'CHANNEL', 'REACTION'] });
     // rig up client callbacks
     client.on('error', console.error);
 
-    bootstrap({ client, config });
+    bootstrapCommands({ client, config });
+    bootstrapReactions({ client, config });
     if (config.VERBOSE) {
       // if we are to print each message as is.
       client.on('message', (message) => {
@@ -28,15 +28,6 @@ const client = new Client({ partials: ['MESSAGE', 'CHANNEL', 'REACTION'] });
       console.log('Discord ready!');
     });
     client.login(config.TOKEN);
-
-    expressApp.get('/status', (_, res) =>
-      res.send({
-        code: 200,
-        message: 'Available',
-        time: new Date()
-      })
-    );
-    expressApp.listen(config.PORT, () => console.log('Express ready!'));
   } catch (err) {
     console.error(err);
     process.exit(1);
