@@ -1,6 +1,5 @@
 import { Client, Collection, MessageEmbed, TextChannel } from 'discord.js';
 import { Config } from '../config/get-config';
-import { addFormatting } from './add-formatting';
 import { CommandDef } from './command-def';
 import { COMMANDS } from './commands';
 import { thanks } from './thanks';
@@ -10,50 +9,17 @@ import { thanks } from './thanks';
  * @param client the discord client
  * @param config the application config
  */
-export function bootstrap({
+export const bootstrapCommands = ({
   client,
   config
 }: {
   client: Client;
   config: Config;
-}): void {
+}): void => {
   const commands = COMMANDS.reduce(
     (acc, commandDef) => acc.set(commandDef.prefix, commandDef),
     new Collection<string, CommandDef>()
   );
-  // The code below listens for reactions to any message in the server and if
-  // a reaction is equal to the specified trigger reaction (in this case '🤖'),
-  // then is attempts to format the message. To get a detailed explanation of the
-  // code below visit: https://discordjs.guide/popular-topics/reactions.html#listening-for-reactions-on-old-messages
-  client.on('messageReactionAdd', async (reaction) => {
-    if (reaction.partial) {
-      try {
-        await reaction.fetch();
-      } catch (error) {
-        reaction.message.channel.send(
-          'Something went wrong! Failed to format code :('
-        );
-        console.error(error);
-        return;
-      }
-    }
-
-    if (reaction.emoji.name === '🤖') {
-      try {
-        await reaction.message.reactions.removeAll();
-
-        addFormatting(reaction.message);
-      } catch (error) {
-        // A common issue with this not working correctly, is
-        // if the bot does not have permissions to remove reactions.
-        // Check the README.md file for details on setting the correct permissions
-        reaction.message.channel.send(
-          'Something went wrong! Failed to format code :('
-        );
-        console.error(error);
-      }
-    }
-  });
   if (config.WELCOME_DM) {
     // we only send this command if the WELCOME_DM environment variable
     // is passed and truthy.
@@ -157,7 +123,7 @@ export function bootstrap({
       }
       // Execute command
       try {
-        commands.get(commandArgument)?.command(message, client);
+        commands.get(commandArgument)?.command(message, { client, config });
       } catch (error) {
         console.error(error);
         message.reply('there was an error trying to execute that command!');
@@ -165,4 +131,4 @@ export function bootstrap({
     }
     thanks(message);
   });
-}
+};

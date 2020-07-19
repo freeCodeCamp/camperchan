@@ -6,6 +6,7 @@ import { coc } from './coc';
 import { closeCommand } from './close';
 import { suspendCommand } from './suspend';
 import { forum } from './forum';
+import { format } from './format';
 
 export const COMMANDS: Array<CommandDef> = [
   eightBall,
@@ -14,5 +15,6 @@ export const COMMANDS: Array<CommandDef> = [
   coc,
   suspendCommand,
   closeCommand,
-  forum
+  forum,
+  format
 ];
