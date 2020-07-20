@@ -81,7 +81,7 @@ export const bootstrapCommands = ({
           },
           {
             name: 'Content',
-            value: message.content
+            value: message.content || 'Embedded messages cannot be logged.'
           }
         );
       if (!logChannel) {
