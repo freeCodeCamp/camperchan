@@ -2,6 +2,7 @@ import { Client } from 'discord.js';
 import { bootstrapCommands } from './commands/bootstrap-commands';
 import { getConfig } from './config/get-config';
 import { validateConfig } from './config/validate-config';
+import Mongoose from 'mongoose';
 import { bootstrapReactions } from './reactions/bootstrap-reactions';
 
 const client = new Client({ partials: ['MESSAGE', 'CHANNEL', 'REACTION'] });
@@ -15,6 +16,16 @@ const client = new Client({ partials: ['MESSAGE', 'CHANNEL', 'REACTION'] });
     // rig up client callbacks
     client.on('error', console.error);
 
+    if (config.MONGO_URI) {
+      await Mongoose.connect(
+        config.MONGO_URI,
+        {
+          useNewUrlParser: true,
+          useUnifiedTopology: true
+        },
+        () => console.log('MongoDB ready!')
+      );
+    }
     bootstrapCommands({ client, config });
     bootstrapReactions({ client, config });
     if (config.VERBOSE) {
