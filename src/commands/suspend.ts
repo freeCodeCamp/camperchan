@@ -1,5 +1,6 @@
 import { CommandDef } from './command-def';
 import { MessageEmbed, TextChannel } from 'discord.js';
+import { userSuspendModel, UserSuspend } from '../APIs/mongo-suspend';
 
 export const suspendCommand: CommandDef = {
   prefix: 'suspend',
@@ -109,6 +110,22 @@ export const suspendCommand: CommandDef = {
       await user.send(
         'You have been suspended for violating our Code of Conduct. A channel has been created in the server for you to discuss this with the moderation team.'
       );
+      if (config.MONGO_URI) {
+        const userSuspend: UserSuspend | null = await userSuspendModel.findOne({
+          userId: user.id
+        });
+        if (userSuspend) {
+          await message.author.send(
+            `Hello! It looks like ${user} has been suspended previously. You may consider taking further action based on their offence.`
+          );
+          return;
+        }
+        const newUser = new userSuspendModel({
+          userId: user.id,
+          suspended: true
+        });
+        await newUser.save();
+      }
     } catch (error) {
       console.error(error);
     }
