@@ -9,6 +9,7 @@
     "lint": "npx eslint src",
     "build": "tsc",
     "clean": "rimraf dist",
+    "update-readme": "ts-node ./scripts/readme-script.ts",
     "postinstall": "npm run build"
   },
   "license": "MIT",
@@ -24,6 +25,7 @@
     "strip-ansi": "^6.0.0"
   },
   "devDependencies": {
+    "@types/common-tags": "^1.8.0",
     "@types/highlightjs": "^9.12.0",
     "@types/jest": "^26.0.0",
     "@types/luxon": "^1.24.1",
@@ -33,6 +35,8 @@
     "@types/strip-ansi": "^5.2.1",
     "@typescript-eslint/eslint-plugin": "^3.2.0",
     "@typescript-eslint/parser": "^3.2.0",
+    "chalk": "^4.1.0",
+    "common-tags": "^1.8.0",
     "editorconfig": "^0.15.3",
     "eslint": "^7.0.0",
     "eslint-config-prettier": "^6.11.0",
