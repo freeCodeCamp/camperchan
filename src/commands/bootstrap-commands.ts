@@ -2,7 +2,8 @@ import { Client, Collection, MessageEmbed, TextChannel } from 'discord.js';
 import { Config } from '../config/get-config';
 import { CommandDef } from './command-def';
 import { COMMANDS } from './commands';
-import { thanks } from './thanks';
+import { thanks } from '../listeners/thanks';
+import { github } from '../listeners/github';
 
 /**
  * Bootstraps all commands to the client.
@@ -130,5 +131,6 @@ export const bootstrapCommands = ({
       }
     }
     thanks(message);
+    github(message);
   });
 };

@@ -3,7 +3,7 @@ import {
   isSelfThanking,
   getSelfThankMessage,
   getThankMessage
-} from '../commands/thanks';
+} from '../listeners/thanks';
 import { Message } from 'discord.js';
 
 describe('thanks', () => {
