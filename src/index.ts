@@ -4,6 +4,8 @@ import { getConfig } from './config/get-config';
 import { validateConfig } from './config/validate-config';
 import Mongoose from 'mongoose';
 import { bootstrapReactions } from './reactions/bootstrap-reactions';
+import { quoteDef } from './APIs/quote-def';
+import fetch from 'node-fetch';
 
 const client = new Client({ partials: ['MESSAGE', 'CHANNEL', 'REACTION'] });
 
@@ -26,7 +28,13 @@ const client = new Client({ partials: ['MESSAGE', 'CHANNEL', 'REACTION'] });
         () => console.log('MongoDB ready!')
       );
     }
-    bootstrapCommands({ client, config });
+
+    const quoteFetch = await fetch(
+      'https://raw.githubusercontent.com/freeCodeCamp/freeCodeCamp/master/config/motivational-quotes.json'
+    );
+    const quoteData: quoteDef = await quoteFetch.json();
+
+    bootstrapCommands({ client, config, quoteData });
     bootstrapReactions({ client, config });
     if (config.VERBOSE) {
       // if we are to print each message as is.
