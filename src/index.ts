@@ -4,7 +4,7 @@ import { getConfig } from './config/get-config';
 import { validateConfig } from './config/validate-config';
 import Mongoose from 'mongoose';
 import { bootstrapReactions } from './reactions/bootstrap-reactions';
-import { quoteDef } from './APIs/quote-def';
+import { QuoteDef } from './APIs/quote-def';
 import fetch from 'node-fetch';
 
 const client = new Client({ partials: ['MESSAGE', 'CHANNEL', 'REACTION'] });
@@ -32,7 +32,7 @@ const client = new Client({ partials: ['MESSAGE', 'CHANNEL', 'REACTION'] });
     const quoteFetch = await fetch(
       'https://raw.githubusercontent.com/freeCodeCamp/freeCodeCamp/master/config/motivational-quotes.json'
     );
-    const quoteData: quoteDef = await quoteFetch.json();
+    const quoteData: QuoteDef = await quoteFetch.json();
 
     bootstrapCommands({ client, config, quoteData });
     bootstrapReactions({ client, config });

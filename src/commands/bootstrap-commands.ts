@@ -3,7 +3,7 @@ import { Config } from '../config/get-config';
 import { CommandDef } from './command-def';
 import { COMMANDS } from './commands';
 import { thanks } from './thanks';
-import { quoteDef } from '../APIs/quote-def';
+import { QuoteDef } from '../APIs/quote-def';
 
 /**
  * Bootstraps all commands to the client.
@@ -17,7 +17,7 @@ export const bootstrapCommands = ({
 }: {
   client: Client;
   config: Config;
-  quoteData: quoteDef;
+  quoteData: QuoteDef;
 }): void => {
   const commands = COMMANDS.reduce(
     (acc, commandDef) => acc.set(commandDef.prefix, commandDef),

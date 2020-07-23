@@ -1,6 +1,6 @@
 import { Message, Client } from 'discord.js';
 import { Config } from '../config/get-config';
-import { quoteDef } from '../APIs/quote-def';
+import { QuoteDef } from '../APIs/quote-def';
 
 /**
  * Extra arguments passed to each command.
@@ -8,7 +8,7 @@ import { quoteDef } from '../APIs/quote-def';
 export interface CommandDefArgs {
   client: Client;
   config: Config;
-  quoteData: quoteDef;
+  quoteData: QuoteDef;
 }
 
 /**

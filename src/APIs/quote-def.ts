@@ -1,7 +1,9 @@
+export interface MotivationalDef {
+  quote: string;
+  author: string;
+}
+
 export interface QuoteDef {
   compliments: Array<string>;
-  motivationalQuotes: Array<{
-    quote: string;
-    author: string;
-  }>;
+  motivationalQuotes: Array<MotivationalDef>;
 }
