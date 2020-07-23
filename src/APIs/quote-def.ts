@@ -1,4 +1,7 @@
 export interface quoteDef {
   compliments: Array<string>;
-  motivationalQuotes: Array<Record<string, unknown>>;
+  motivationalQuotes: Array<{
+    quote: string;
+    author: string;
+  }>;
 }
