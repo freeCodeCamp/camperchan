@@ -3,6 +3,7 @@ import { Config } from '../config/get-config';
 import { CommandDef } from './command-def';
 import { COMMANDS } from './commands';
 import { thanks } from './thanks';
+import { QuoteDef } from '../APIs/quote-def';
 
 /**
  * Bootstraps all commands to the client.
@@ -11,10 +12,12 @@ import { thanks } from './thanks';
  */
 export const bootstrapCommands = ({
   client,
-  config
+  config,
+  quoteData
 }: {
   client: Client;
   config: Config;
+  quoteData: QuoteDef;
 }): void => {
   const commands = COMMANDS.reduce(
     (acc, commandDef) => acc.set(commandDef.prefix, commandDef),
@@ -81,7 +84,7 @@ export const bootstrapCommands = ({
           },
           {
             name: 'Content',
-            value: message.content
+            value: message.content || 'Embedded messages cannot be logged.'
           }
         );
       if (!logChannel) {
@@ -123,7 +126,9 @@ export const bootstrapCommands = ({
       }
       // Execute command
       try {
-        commands.get(commandArgument)?.command(message, { client, config });
+        commands
+          .get(commandArgument)
+          ?.command(message, { client, config, quoteData });
       } catch (error) {
         console.error(error);
         message.reply('there was an error trying to execute that command!');
