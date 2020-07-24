@@ -9,7 +9,7 @@
     "lint": "npx eslint src",
     "build": "tsc",
     "clean": "rimraf dist",
-    "update-readme": "ts-node ./scripts/readme-script.ts",
+    "update-readme": "ts-node ./scripts/readme-script.ts && npx markdown-toc -i README.md",
     "postinstall": "npm run build"
   },
   "license": "MIT",
@@ -44,6 +44,7 @@
     "husky": "^4.2.5",
     "jest": "^26.0.1",
     "lint-staged": "^10.2.2",
+    "markdown-toc": "^1.2.0",
     "nodemon": "^2.0.3",
     "rimraf": "^3.0.2",
     "ts-jest": "^26.1.0",
