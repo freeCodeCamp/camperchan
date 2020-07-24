@@ -9,7 +9,7 @@
     "lint": "npx eslint src",
     "build": "tsc",
     "clean": "rimraf dist",
-    "update-readme": "ts-node ./scripts/readme-script.ts && npx markdown-toc -i README.md",
+    "update-readme": "ts-node ./scripts/readme-script.ts --autoUpdateReadme && npx markdown-toc -i README.md",
     "postinstall": "npm run build"
   },
   "license": "MIT",
