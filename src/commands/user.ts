@@ -22,10 +22,7 @@ export const userCommand: CommandDef = {
     const userSuspend: UserSuspend | null = await userSuspendModel.findOne({
       userId: user.id
     });
-    let suspended = userSuspend?.suspended;
-    if (!suspended) {
-      suspended = false;
-    }
+    const suspended = !!userSuspend?.suspended;
     const userEmbed = new MessageEmbed()
       .setTitle(user.nickname || user.user.username)
       .setDescription('Here is the available data on them.')
