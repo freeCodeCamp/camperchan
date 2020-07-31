@@ -4,6 +4,24 @@
 
 A Discord test bot used to test out the architecture and implementation of a Discord bot. This project is a way to get familiar with the architecture, APIs and process of maintaining a Discord bot.
 
+## Contents
+
+<!-- toc -->
+
+- [Contributing](#contributing)
+- [Install prerequisites](#install-prerequisites)
+- [Running locally](#running-locally)
+- [Running the bot in Discord](#running-the-bot-in-discord)
+- [Creating a Discord bot token](#creating-a-discord-bot-token)
+- [Restricting Bot Access to Channels](#restricting-bot-access-to-channels)
+- [Debugging using VSCode](#debugging-using-vscode)
+- [Available Commands](#available-commands)
+- [Ask For Help](#ask-for-help)
+- [Acknowledgements](#acknowledgements)
+- [Disclaimer](#disclaimer)
+
+<!-- tocstop -->
+
 ## Contributing
 
 So, you want to contribute to this repo? We are glad to recieve PRs from anybody who is interested.
@@ -26,7 +44,7 @@ Follow these steps if you are new to contributing to open source projects:
 
 ## Install prerequisites
 
-Start by installing the prerequisite softwares:
+Start by installing the prerequisite software:
 
 | Name                          | Version | Notes                                                                |
 | ----------------------------- | ------- | -------------------------------------------------------------------- |
@@ -34,9 +52,9 @@ Start by installing the prerequisite softwares:
 | npm (comes bundled with Node) | `6.x`   | Does not have LTS releases, we use the version bundled with Node LTS |
 | git                           | `2.x`   | [Download Git](https://git-scm.com/)                                 |
 
-If youn are going to contribute to this project, you will also need a text editor. You can use _any_ text editor you want, but we recommend using [VSCode](https://code.visualstudio.com/).
+If you are going to contribute to this project, you will also need a text editor. You can use _any_ text editor you want, but we recommend using [VSCode](https://code.visualstudio.com/).
 
-If you do not know what these softwares are, do not worry. These are essential softwares required to contribute to open source projects.
+If you do not know what these software are, do not worry. These are essential software required to contribute to open source projects.
 
 ## Running locally
 
@@ -148,11 +166,18 @@ vscode's internal debugger.
 
 ## Available Commands
 
-| Prefix | Description |
-| :----: | :---------: |
-
-
-## Additional Information
+|  Prefix   |                                                                                         Description                                                                                          |
+| :-------: | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: |
+| eightball |                                                               Think of your question and get an answer from a magic pool ball!                                                               |
+|   help    |                                                                      Get the commands currently available with this bot                                                                      |
+|   stats   |                                                                               Get current server information!                                                                                |
+|    coc    |                                                                                Provides the Code of Conduct.                                                                                 |
+|  suspend  |                                 Suspends a user for the given reason. This command is only available to admins. Use the format "suspend <usertag> <reason>"                                  |
+|   close   | Closes the channel. This command requires admin privileges, and will only work on the automatically created "suspended" channels. Include the user if you want to remove the suspended role. |
+|   forum   |                                                                               Gets the recent forum activity.                                                                                |
+|  format   |                                                                        Formats the code contained in the message URL.                                                                        |
+|  trivia   |                                                                               Returns a random bit of trivia!                                                                                |
+|   quote   |                                                                    Returns a quote from the FCC motivational quotes file                                                                     |
 
 This bot uses the [discord.js](https://discord.js.org) library to interact with the Discord API. You can check out the docs for the library [here](https://discord.js.org/#/docs/main/stable/general/welcome).
 
@@ -170,9 +195,9 @@ Happy Coding!
 - [cjcanlas01](https://github.com/cjcanlas01)
 - [JoshuaPelealu](https://github.com/JoshuaPelealu)
 
-### Disclaimer
+## Disclaimer
 
-This test-bot was created to allow us to test the discord.js library and experiement with setting up our own Discord bot. Our intent is to help [FreeCodeCamp](https://www.freecodecamp.org) set up a bot for their Discord server - however, the files in this repository are **NOT** associated with FreeCodeCamp in any way.
+This test-bot was created to allow us to test the discord.js library and experiment with setting up our own Discord bot. Our intent is to help [FreeCodeCamp](https://www.freecodecamp.org) set up a bot for their Discord server - however, the files in this repository are **NOT** associated with FreeCodeCamp in any way.
 
 FreeCodeCamp issue:
 [freeCodeCamp/freeCodeCamp#38711](https://github.com/freeCodeCamp/freeCodeCamp/issues/38711)
