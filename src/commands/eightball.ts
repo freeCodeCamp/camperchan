@@ -5,7 +5,7 @@ export const eightBall: CommandDef = {
   prefix: 'eightball',
   description:
     'Think of your question and get an answer from a magic pool ball!',
-  usage: `\`eightball [message]\``,
+  usage: 'eightball',
   /**
    * @name eightBall
    * Randomly selects an option, and returns it to chat.
