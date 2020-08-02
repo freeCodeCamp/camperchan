@@ -6,6 +6,7 @@ const info = getRepoInfo();
 export const stats: CommandDef = {
   prefix: 'stats',
   description: 'Get current server information!',
+  usage: 'stats',
   /**
    * @name stats
    * Displays the server stats.

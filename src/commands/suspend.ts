@@ -5,8 +5,8 @@ import { userSuspendModel, UserSuspend } from '../APIs/mongo-suspend';
 export const suspendCommand: CommandDef = {
   prefix: 'suspend',
   description:
-    'Suspends a user for the given reason. This command is only available to admins. ' +
-    'Use the format "suspend <usertag> <reason>"',
+    'Suspends a user for the given reason. This command is only available to admins. ',
+  usage: 'suspend <usertag> <reason>',
   command: async (message, { config }): Promise<void> => {
     try {
       //check for appropriate permissions

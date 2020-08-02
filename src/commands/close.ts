@@ -7,6 +7,7 @@ export const closeCommand: CommandDef = {
     'Closes the channel. This command requires admin privileges, ' +
     'and will only work on the automatically created "suspended" channels.' +
     ' Include the user if you want to remove the suspended role.',
+  usage: 'close',
   command: async (message, { config }): Promise<void> => {
     try {
       const target = message.channel as TextChannel;

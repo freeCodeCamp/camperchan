@@ -4,7 +4,8 @@ import { MessageEmbed } from 'discord.js';
 
 export const userCommand: CommandDef = {
   prefix: 'user',
-  description: "Get data on a current user. Use the syntax 'user [username]'.",
+  description: 'Get data on a given user, or the command caller themselves.',
+  usage: 'user [username]',
   command: async (message, { config }) => {
     const user = message.mentions.members?.first();
     if (!user) {

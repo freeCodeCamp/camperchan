@@ -4,6 +4,7 @@ import { CommandDef } from './command-def';
 export const coc: CommandDef = {
   prefix: 'coc',
   description: 'Provides the Code of Conduct.',
+  usage: 'coc',
   command: (message): void => {
     const codeEmbed = new MessageEmbed()
       .setTitle('FreeCodeCamp Code of Conduct')

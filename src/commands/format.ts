@@ -5,6 +5,7 @@ import { addFormatting } from './add-formatting';
 export const format: CommandDef = {
   prefix: 'format',
   description: 'Formats the code contained in the message URL.',
+  usage: 'format <message URL>',
   command: async (message: Message): Promise<void> => {
     try {
       if (message.content.split(' ').length < 3) {

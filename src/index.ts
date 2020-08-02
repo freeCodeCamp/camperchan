@@ -46,6 +46,7 @@ const client = new Client({ partials: ['MESSAGE', 'CHANNEL', 'REACTION'] });
     client.once('ready', () => {
       console.log('Discord ready!');
     });
+
     client.login(config.TOKEN);
   } catch (err) {
     console.error(err);
