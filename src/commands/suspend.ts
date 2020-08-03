@@ -6,57 +6,53 @@ export const suspendCommand: CommandDef = {
   prefix: 'suspend',
   description:
     'Suspends a user for the given reason. This command is only available to admins. ',
-  usage: 'suspend <usertag> <reason>',
+  usage: 'suspend <user> [reason]',
   command: async (message, { config }): Promise<void> => {
     try {
       //check for appropriate permissions
-      if (!message.member?.hasPermission('KICK_MEMBERS')) {
-        console.log(
+      if (!message.member?.hasPermission('KICK_MEMBERS'))
+        return console.log(
           `${message.author.username} did not have the correct permissions.`
         );
-        return;
-      }
+
       //check for log channel setting
       const modChannel = message.guild?.channels.cache.find(
         (channel) => channel.name === config.LOG_MSG_CHANNEL
       ) as TextChannel;
-      if (!modChannel) {
-        console.log('Log channel not found.');
-        return;
-      }
+
+      if (!modChannel) return console.log('Log channel not found.');
+
       //check for suspend category setting
       const suspendCategory = config.SUSPEND_CATEGORY;
       const category = await message.guild?.channels.cache.find(
         (c) => c.name === suspendCategory && c.type === 'category'
       );
-      if (!category) {
-        console.log('Missing suspend category.');
-        return;
-      }
+
+      if (!category) return console.log('Missing suspend category.');
+
       //check for suspend role setting
       const suspend = message.guild?.roles.cache.find(
         (role) => role.name == config.SUSPEND_ROLE
       );
-      if (!suspend) {
-        console.log(`Missing suspend role.`);
-        return;
-      }
+      if (!suspend) return console.log(`Missing suspend role.`);
+
       //check for bot role
       const bot = message.guild?.roles.cache.find(
         (role) => role.name == config.BOT_ROLE
       );
-      if (!bot) {
-        console.log('Bot role not found.');
-        return;
-      }
+
+      if (!bot) return console.log('Bot role not found.');
+
       const mod = message.author;
       const msgArguments = message.content.split(' ');
       const user = message.mentions.members?.first();
+
       //check for valid user tag
       if (!user) {
         message.channel.send(`Invalid user tag.`);
         return;
       }
+
       //cannot target self
       if (message.mentions.users.first() === mod) {
         message.channel.send(`Cannot target self.`);

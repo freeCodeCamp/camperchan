@@ -1,13 +1,15 @@
 import { CommandDef } from './command-def';
 import { TextChannel, MessageEmbed } from 'discord.js';
+import { oneLine } from 'common-tags';
 
 export const closeCommand: CommandDef = {
   prefix: 'close',
-  description:
-    'Closes the channel. This command requires admin privileges, ' +
-    'and will only work on the automatically created "suspended" channels.' +
-    ' Include the user if you want to remove the suspended role.',
-  usage: 'close',
+  description: oneLine`
+    Closes the channel. This command requires admin privileges,
+    and will only work on the automatically created "suspended" channels.
+    Mentioning user with the command will remove the suspended role from the user.
+  `,
+  usage: 'close [user]',
   command: async (message, { config }): Promise<void> => {
     try {
       const target = message.channel as TextChannel;
@@ -16,21 +18,18 @@ export const closeCommand: CommandDef = {
         (channel) => channel.name === config.LOG_MSG_CHANNEL
       ) as TextChannel;
       //check for user permissions
-      if (!message.member?.hasPermission('MANAGE_CHANNELS')) {
-        console.log('Missing permissions.');
-        return;
-      }
-      if (!log) {
-        console.log('Log channel not found.');
-        return;
-      }
+      if (!message.member?.hasPermission('MANAGE_CHANNELS'))
+        return console.log('Missing permissions.');
+
+      if (!log) return console.log('Log channel not found.');
+
       if (
         !target.name.includes('suspended') ||
         !target.parent?.name.includes(config.SUSPEND_CATEGORY)
       ) {
-        console.log('Cannot delete non-temporary channel');
-        return;
+        return console.log('Cannot delete non-temporary channel');
       }
+
       let status = 'The appeal was not approved.';
       if (message.mentions.members?.first()) {
         const suspend = message.guild?.roles.cache.find(

@@ -9,6 +9,7 @@ export const formatReaction: ReactionDef = {
       await addFormatting(reaction.message);
 
       reaction.message.reactions.cache.get('🤖')?.remove();
+      reaction.message.react('✅');
     } catch (error) {
       /* A common issue with this not working correctly, is
        * if the bot does not have permissions to remove reactions.
