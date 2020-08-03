@@ -40,7 +40,7 @@ function sendFullList({ message, config }: helpFunctionArgs): void {
     )
     .setFooter('I am not affiliated with FreeCodeCamp in any way.');
   message.author.send(helpEmbed);
-  message.channel.send('Your help message is sent through DM');
+  message.channel.send('DM sent with the requested information');
 }
 
 function sendSpecificCommand({ message, Command }: helpFunctionArgs) {
@@ -57,7 +57,7 @@ function sendSpecificCommand({ message, Command }: helpFunctionArgs) {
 
   message.author.send(helpEmbed);
   message.channel.send(
-    'Your help message with the command you requested is sent through DM'
+    `DM sent with information on the ${commandFound.prefix} command`
   );
 }
 
