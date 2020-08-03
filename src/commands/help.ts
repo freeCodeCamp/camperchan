@@ -79,10 +79,8 @@ export const help: CommandDef = {
    */
   command: async (message, { config }) => {
     const Command = message.content.split(' ')[2];
-    if (!Command) {
-      sendFullList({ message, config });
-    } else {
-      sendSpecificCommand({ message, Command });
-    }
+    // If there is no Command specified, then it will send a full list of commands
+    if (!Command) return sendFullList({ message, config });
+    sendSpecificCommand({ message, Command });
   }
 };
