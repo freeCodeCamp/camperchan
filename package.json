@@ -3,7 +3,6 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "prestart": "npm run build",
     "start": "node dist",
     "test": "jest --detectOpenHandles",
     "dev": "npx nodemon --inspect",
@@ -23,8 +22,7 @@
     "mongoose": "^5.9.20",
     "node-fetch": "^2.6.0",
     "prettier": "^2.0.5",
-    "strip-ansi": "^6.0.0",
-    "winston": "^3.3.3"
+    "strip-ansi": "^6.0.0"
   },
   "devDependencies": {
     "@types/common-tags": "^1.8.0",
