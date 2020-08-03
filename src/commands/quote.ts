@@ -5,7 +5,7 @@ import { MotivationalDef } from '../APIs/quote-def';
 export const quote: CommandDef = {
   prefix: 'quote',
   description:
-    "Returns a quote fetched from freeCodeCamp's motivational quotes API",
+    "Returns a quote from freeCodeCamp's motivational quotes file fetched using the GitHub API",
   usage: 'quote',
   command: (message, { quoteData }) => {
     const quotes: Array<MotivationalDef> = quoteData.motivationalQuotes;
