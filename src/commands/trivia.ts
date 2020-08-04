@@ -5,6 +5,7 @@ import { MessageEmbed } from 'discord.js';
 export const triviaCommand: CommandDef = {
   prefix: 'trivia',
   description: 'Returns a random bit of trivia!',
+  usage: 'trivia',
   command: (message) => {
     const random = Math.floor(Math.random() * facts.length);
     const triviaEmbed = new MessageEmbed().setTitle('Random Fact!').addFields(
