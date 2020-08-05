@@ -8,6 +8,7 @@ import { suspendCommand } from './suspend';
 import { forum } from './forum';
 import { format } from './format';
 import { triviaCommand } from './trivia';
+import { userCommand } from './user';
 import { quote } from './quote';
 
 export const COMMANDS: Array<CommandDef> = [
@@ -20,5 +21,6 @@ export const COMMANDS: Array<CommandDef> = [
   forum,
   format,
   triviaCommand,
+  userCommand,
   quote
 ];

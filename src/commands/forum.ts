@@ -5,7 +5,8 @@ import { ForumData } from '../APIs/forum-data';
 
 export const forum: CommandDef = {
   prefix: 'forum',
-  description: 'Gets the recent forum activity.',
+  description: 'Gets the most recent activity from the freeCodeCamp forums.',
+  usage: 'forum',
   command: async (message: Message): Promise<void> => {
     try {
       const data = await fetch('https://forum.freecodecamp.org/latest.json');
