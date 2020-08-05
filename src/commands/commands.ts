@@ -10,6 +10,7 @@ import { format } from './format';
 import { triviaCommand } from './trivia';
 import { userCommand } from './user';
 import { quote } from './quote';
+import { mod } from './mod';
 
 export const COMMANDS: Array<CommandDef> = [
   eightBall,
@@ -22,5 +23,6 @@ export const COMMANDS: Array<CommandDef> = [
   format,
   triviaCommand,
   userCommand,
-  quote
+  quote,
+  mod
 ];
