@@ -17,5 +17,6 @@ export interface CommandDefArgs {
 export interface CommandDef {
   prefix: string;
   description: string;
+  usage: string;
   command: (message: Message, args: CommandDefArgs) => void;
 }

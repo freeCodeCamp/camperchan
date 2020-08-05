@@ -44,8 +44,13 @@ const client = new Client({ partials: ['MESSAGE', 'CHANNEL', 'REACTION'] });
     }
 
     client.once('ready', () => {
+      // Set up activity
+      client.user?.setActivity(`${getConfig().PREFIX} help`, {
+        type: 'LISTENING'
+      });
       console.log('Discord ready!');
     });
+
     client.login(config.TOKEN);
   } catch (err) {
     console.error(err);
