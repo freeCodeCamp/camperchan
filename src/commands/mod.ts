@@ -4,6 +4,7 @@ import { MessageEmbed } from 'discord.js';
 export const mod: CommandDef = {
   prefix: 'mod',
   description: 'Provides helpful mod links.',
+  usage: `mod`,
   command: (message) => {
     const modEmbed = new MessageEmbed().setTitle('Helpful Links!').addFields(
       {
@@ -24,6 +25,5 @@ export const mod: CommandDef = {
       }
     );
     message.channel.send(modEmbed);
-  },
-  usage: `mod`
+  }
 };
