@@ -16,6 +16,7 @@ A Discord test bot used to test out the architecture and implementation of a Dis
 - [Restricting Bot Access to Channels](#restricting-bot-access-to-channels)
 - [Debugging using VSCode](#debugging-using-vscode)
 - [Available Commands](#available-commands)
+- [Available Reactions](#available-reactions)
 - [Ask For Help](#ask-for-help)
 - [Acknowledgements](#acknowledgements)
 - [Disclaimer](#disclaimer)
@@ -180,6 +181,13 @@ vscode's internal debugger.
 |   quote   |                                                                    Returns a quote from the FCC motivational quotes file                                                                     |
 
 This bot uses the [discord.js](https://discord.js.org) library to interact with the Discord API. You can check out the docs for the library [here](https://discord.js.org/#/docs/main/stable/general/welcome).
+
+## Available Reactions
+
+| Prefix |                Description                |
+| :----: | :---------------------------------------: |
+|   📌   | Sends message to the current user as a DM |
+|   🤖   |      Guesses and formats the message      |
 
 ## Ask For Help
 
