@@ -34,14 +34,14 @@ const reactionTable = stripIndents`
 // if there is an argument --autoUpdateReadme while running the command,
 // it will run this
 if (flags.includes('--autoUpdateReadme')) {
-  readFile('README.md', 'utf-8')
+  readFile('./README.md', 'utf-8')
     .then((data) => {
       // Change the regex in this line to determine where you're going to put it at...
       const results = data
-        .replace(/## Available Commands[^#]*##/, commandTable)
-        .replace(/## Available Reactions[^#]*##/, reactionTable);
+        .replace(/## Available Commands[^#]*##/gs, commandTable)
+        .replace(/## Available Reactions[^#]*##/gs, reactionTable);
 
-      return writeFile('README.md', results, 'utf-8');
+      return writeFile('./README.md', results, 'utf-8');
     })
     .then(() => console.log('README.md updated'))
     .catch((err) => console.log(err));
