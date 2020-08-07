@@ -1,8 +1,8 @@
 import { COMMANDS } from '../src/commands/commands';
 import { promises } from 'fs';
 import { stripIndents } from 'common-tags';
-import chalk from 'chalk';
 const { readFile, writeFile } = promises;
+import { REACTIONS } from '../src/reactions/reactions';
 
 /**
  * Available Flags:
@@ -17,6 +17,16 @@ const commandTable = stripIndents`
   ${COMMANDS.map(
     (command) => '| ' + command.prefix + ' | ' + command.description + ' |\n'
   ).join('')}
+  ##
+`;
+
+const reactionTable = stripIndents`
+  ## Available Reactions
+  | Prefix | Description |
+  | :-: | :-: |
+  ${REACTIONS.map(
+    (reaction) => '| ' + reaction.emoji + ' | ' + reaction.description + ' |\n'
+  ).join('')}
 `;
 
 // if there is an argument --autoUpdateReadme while running the command,
@@ -25,10 +35,9 @@ if (flags.includes('--autoUpdateReadme')) {
   readFile('README.md', 'utf-8')
     .then((data) => {
       // Change the regex in this line to determine where you're going to put it at...
-      const results = data.replace(
-        /## Available Commands.*## Additional Information/gs,
-        commandTable
-      );
+      const results = data
+        .replace(/## Available Commands.*##/gs, commandTable)
+        .replace(/## Available Reactions.*##/gs, reactionTable);
 
       return writeFile('README.md', results, 'utf-8');
     })
