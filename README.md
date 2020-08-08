@@ -16,6 +16,7 @@ A Discord test bot used to test out the architecture and implementation of a Dis
 - [Restricting Bot Access to Channels](#restricting-bot-access-to-channels)
 - [Debugging using VSCode](#debugging-using-vscode)
 - [Available Commands](#available-commands)
+- [Available Reactions](#available-reactions)
 - [Ask For Help](#ask-for-help)
 - [Acknowledgements](#acknowledgements)
 - [Disclaimer](#disclaimer)
@@ -166,20 +167,27 @@ vscode's internal debugger.
 
 ## Available Commands
 
-|  Prefix   |                                                                                         Description                                                                                          |
-| :-------: | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: |
-| eightball |                                                               Think of your question and get an answer from a magic pool ball!                                                               |
-|   help    |                                                                      Get the commands currently available with this bot                                                                      |
-|   stats   |                                                                               Get current server information!                                                                                |
-|    coc    |                                                                                Provides the Code of Conduct.                                                                                 |
-|  suspend  |                                 Suspends a user for the given reason. This command is only available to admins. Use the format "suspend <usertag> <reason>"                                  |
-|   close   | Closes the channel. This command requires admin privileges, and will only work on the automatically created "suspended" channels. Include the user if you want to remove the suspended role. |
-|   forum   |                                                                               Gets the recent forum activity.                                                                                |
-|  format   |                                                                        Formats the code contained in the message URL.                                                                        |
-|  trivia   |                                                                               Returns a random bit of trivia!                                                                                |
-|   quote   |                                                                    Returns a quote from the FCC motivational quotes file                                                                     |
+|  Prefix   |                                                                                                   Description                                                                                                    |
+| :-------: | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: |
+| eightball |                                                                         Think of your question and get an answer from a magic pool ball!                                                                         |
+|   help    |            If a command is not specified, it will display all the available commands into a list. If a command is specified, it will display the usage for that command and the description for them.            |
+|   stats   |                                                                       Get the server's information along with some simple bot information.                                                                       |
+|    coc    |                                                                                          Provides the Code of Conduct.                                                                                           |
+|  suspend  |                                                                 Suspends a user for the given reason. This command is only available to admins.                                                                  |
+|   close   | Closes the channel. This command requires admin privileges, and will only work on the automatically created "suspended" channels. Mentioning user with the command will remove the suspended role from the user. |
+|   forum   |                                                                           Gets the most recent activity from the freeCodeCamp forums.                                                                            |
+|  format   |                                                                                   Formats the code from the given message URL.                                                                                   |
+|  trivia   |                                                                                         Returns a random bit of trivia!                                                                                          |
+|   user    |                                                                                         Get data on the user mentioned.                                                                                          |
+|   quote   |                                                            Returns a quote from freeCodeCamp's motivational quotes file fetched using the GitHub API                                                             |
+|    mod    |                                                                                           Provides helpful mod links.                                                                                            |
 
-This bot uses the [discord.js](https://discord.js.org) library to interact with the Discord API. You can check out the docs for the library [here](https://discord.js.org/#/docs/main/stable/general/welcome).
+## Available Reactions
+
+| Prefix |                Description                |
+| :----: | :---------------------------------------: |
+|   📌   | Sends message to the current user as a DM |
+|   🤖   |      Guesses and formats the message      |
 
 ## Ask For Help
 

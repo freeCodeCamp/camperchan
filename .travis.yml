@@ -2,12 +2,12 @@ language: node_js
 install: npm ci
 jobs:
   include:
-    - stage: Lint JS
-      script:
-        - npm run lint
-        - npm run test
+  - stage: Lint JS
+    script:
+    - npm run lint
+    - npm run test
 deploy:
   provider: heroku
   app: discord-bot-test-btaniguchi
   api_key:
-    secure: l1P/0t8LB9+bryVsiOjKDPjZIO2+ayHQhbeDcPWjrMkqKnTsyCmH8W6rRIp2vN9mFRNJJWVvltBvlfD0fxx9xqTaYxJGrIxSk0z6LXo58ScT/7qE19VrfjuURwb/n3n+Q9OtrMBl2us/10EDXbCcT9ryBiZ5prqiIWtNNAgqOh2bE06tlmZbTSe6cGr3gipnxBxSnRbE8jrRWbBk9c/vPmuWmQLgV8fqOZAdsNxkNyFAgJLpYGoSPii8FBAlGMdrPKFfM2UpY9W1NAqcixSpMhJJ7AHMImwHIVE5+x58IDBAgPFVa2gDPcIRzmPVAlirNKvhLe4Le4u1jLPHMtMuKUIles+O8uUrREDEUe+Py+jn0oALMQAxlWWOy8pbAWVq65Wgcox2NjtjkpLsG2+GQ2YneHISva++D/4Xb+FDn5suEQv1ZEphS8eXVBq7Ebhzolz27Ak6ADEIYinrV5BkQ6gIlFmeex59dyKo58KTDC/Qvp7AgDgUuy2U6IuE8ticspAJAUZzeFIpYEbsQO3RM+vIxkuiVS2DVd2k2iy8HF3t/d0QeS22Vzp8LD439yr8i/g358LvChvu0HscEq5ysbQ6eZyPoC6MFDLXX4oKNmgRA7gy+HlYr9bIVLnTRdwxXSyx0tqj2OsDoKMAFd8pkJB5vQiCDKUIC4q1vPpM1KY=
+    secure: DHL1ICmJY3WH1x0l18I8kwE459OZB9JwonkCEsatKosrm4iJumOsAf6H4m3V3WzrEYcotYF+gLPaxXYIFyYuGMK1naUPbTNc+ZEFnQL/idX4Hv87ZDWcMTPrgTwiahUR/yGqyUO65iU9f1bQ81f9POpJK1Atx5ouD1/jiBnUMkfRhf9GvOWTGl1bq1g5FYUV2UTzDq/fi7+QVJj/wt9xEcdYFBMoruqEipsNDD3wywY2qUiU0JRlRMp/5N/gXr8gptRMGzKP5OqrAk0/kMC+x5az4Pq4Sj9q98VjvhUTvP+QPIvh10yp7vqawxGTsoUWuTf1PZWyN89tujubB3FGryH7nWGMpV5iloex4Zv/sUmwT63zBphjXudIDoFemFFxVVrKRlVer6KB1fgyAl/XXLgFI9zAB+HQTswiObRrbr+KsH9AJ4jgOQa525zYT5KfQAzPsYvTuZWsnapzhrdcuqvE0B41sZKVEjEA6OMnh2LB5luiGrn01ZEFFDNr15a2iVeR9+J2lvada5bYR2voke7lYpvrmMSTedffcWBEtghHY7FYcUao1yxpvZ3v1o9Pl15nyPZdScIvq5ceQQF/7HYkcG8rvyhDRSAf7nCp6/WXrrHiRZf3OXAfwaJEOE06YO7mmVepn5qY+XuXoNVIlbXzWVgFiOys209mFLZh7mk=
