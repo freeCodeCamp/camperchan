@@ -22,6 +22,11 @@ export const mod: CommandDef = {
       {
         name: 'News Contributing',
         value: 'https://www.freecodecamp.org/news/developer-news-style-guide/'
+      },
+      {
+        name: 'Pull Request Reviews',
+        value:
+          '[PRs Ready for Review](https://github.com/freeCodeCamp/freeCodeCamp/pulls?q=is%3Aopen+is%3Apr+-label%3A%22status%3A+blocked%22+-label%3A%22status%3A+merge+conflict%22+status%3Asuccess+draft%3Afalse)'
       }
     );
     message.channel.send(modEmbed);
