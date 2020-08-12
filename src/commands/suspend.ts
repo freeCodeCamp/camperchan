@@ -43,6 +43,10 @@ export const suspendCommand: CommandDef = {
 
       if (!bot) return console.log('Bot role not found.');
 
+      //check for moderator role
+      const modRole = config.MOD_ROLE;
+      if (!modRole) return console.log('Mod role not found.');
+
       const mod = message.author;
       const msgArguments = message.content.split(' ');
       const user = message.mentions.members?.first();
@@ -95,6 +99,10 @@ export const suspendCommand: CommandDef = {
           },
           {
             id: bot,
+            allow: ['VIEW_CHANNEL', 'READ_MESSAGE_HISTORY', 'SEND_MESSAGES']
+          },
+          {
+            id: modRole,
             allow: ['VIEW_CHANNEL', 'READ_MESSAGE_HISTORY', 'SEND_MESSAGES']
           }
         ],
