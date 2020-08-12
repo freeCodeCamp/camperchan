@@ -9,9 +9,16 @@ export const closeCommand: CommandDef = {
     and will only work on the automatically created "suspended" channels.
     Mentioning user with the command will remove the suspended role from the user.
   `,
-  usage: 'close [user]',
+  usage: 'close [accepted | denied] [user]',
   command: async (message, { config }): Promise<void> => {
     try {
+      if (!message.member?.hasPermission('MANAGE_CHANNELS'))
+        return console.log(
+          `${message.author.username} did not have the correct permissions.`
+        );
+      const flag = message.content.split(' ')[2];
+      if (flag !== 'accepted' && flag !== 'denied')
+        return console.log('invalid paramater');
       const target = message.channel as TextChannel;
       //check for log channel
       const log = message.guild?.channels.cache.find(
@@ -31,7 +38,7 @@ export const closeCommand: CommandDef = {
       }
 
       let status = 'The appeal was not approved.';
-      if (message.mentions.members?.first()) {
+      if (message.mentions.members?.first() && flag === 'accepted') {
         const suspend = message.guild?.roles.cache.find(
           (role) => role.name == config.SUSPEND_ROLE
         );
