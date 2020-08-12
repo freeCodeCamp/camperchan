@@ -23,6 +23,7 @@ A Discord test bot used to test out the architecture and implementation of a Dis
 - [Ask For Help](#ask-for-help)
 - [Acknowledgements](#acknowledgements)
 - [Disclaimer](#disclaimer)
+- [FreeCodeCamp Moderation](#freecodecamp-moderation)
 
 <!-- tocstop -->
 
@@ -208,10 +209,14 @@ Happy Coding!
 
 ## Disclaimer
 
-This test-bot was created to allow us to test the discord.js library and experiment with setting up our own Discord bot. Our intent is to help [FreeCodeCamp](https://www.freecodecamp.org) set up a bot for their Discord server - however, the files in this repository are **NOT** associated with FreeCodeCamp in any way.
+This test-bot was created to allow us to test the discord.js library and experiment with setting up our own Discord bot. Our intent is to help [FreeCodeCamp](https://www.freecodecamp.org) set up a bot for their Discord server - however, the files in this repository are **NOT** associated with freeCodeCamp in any way.
 
 FreeCodeCamp issue:
 [freeCodeCamp/freeCodeCamp#38711](https://github.com/freeCodeCamp/freeCodeCamp/issues/38711)
 
 FreeCodeCamp forum post:
 https://www.freecodecamp.org/forum/t/create-a-new-camperbot-for-the-official-discord-server/387311
+
+## FreeCodeCamp Moderation
+
+As mentioned above, this bot is not officially connected to freeCodeCamp. However, the bot _is_ currently serving as a proof-of-concept or minimum viable product - as such, freeCodeCamp moderators may find themselves here for instruction on using the bot. If this applies to you, documentation for how to utilise the bot's moderation features can be found at the [freeCodeCamp Moderator Handbook](https://forum.freecodecamp.org/t/the-freecodecamp-moderator-handbook/18295).
