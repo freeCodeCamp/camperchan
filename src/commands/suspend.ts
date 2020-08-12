@@ -68,7 +68,7 @@ export const suspendCommand: CommandDef = {
       }
       const reasonArg = msgArguments.slice(3, msgArguments.length);
       //check for reason provided, if none then create one.
-      const reason = reasonArg.join(' ') || 'No reason provided';
+      const reason = reasonArg.join(' ') || 'violation of the rules';
       //logging embed
       const restrictEmbed = new MessageEmbed()
         .setColor('#FF0000')
@@ -95,28 +95,39 @@ export const suspendCommand: CommandDef = {
         permissionOverwrites: [
           {
             id: user.id,
-            allow: ['VIEW_CHANNEL', 'READ_MESSAGE_HISTORY', 'SEND_MESSAGES']
+            allow: ['VIEW_CHANNEL', 'READ_MESSAGE_HISTORY', 'SEND_MESSAGES'],
+            deny: ['CREATE_INSTANT_INVITE']
           },
           {
             id: message.guild.id,
-            deny: ['VIEW_CHANNEL', 'READ_MESSAGE_HISTORY', 'SEND_MESSAGES']
+            deny: [
+              'VIEW_CHANNEL',
+              'READ_MESSAGE_HISTORY',
+              'SEND_MESSAGES',
+              'CREATE_INSTANT_INVITE'
+            ]
           },
           {
             id: bot,
-            allow: ['VIEW_CHANNEL', 'READ_MESSAGE_HISTORY', 'SEND_MESSAGES']
+            allow: ['VIEW_CHANNEL', 'READ_MESSAGE_HISTORY', 'SEND_MESSAGES'],
+            deny: ['CREATE_INSTANT_INVITE']
           },
           {
             id: modRole,
-            allow: ['VIEW_CHANNEL', 'READ_MESSAGE_HISTORY', 'SEND_MESSAGES']
+            allow: ['VIEW_CHANNEL', 'READ_MESSAGE_HISTORY', 'SEND_MESSAGES'],
+            deny: ['CREATE_INSTANT_INVITE']
           }
         ],
         parent: category
       });
       await suspendChannel?.send(
-        `This channel has been created for ${user} to discuss their suspension from the server. Once the discussion has concluded, an admin may use the \`close\` command to automatically close this channel.`
-      );
-      await user.send(
-        'You have been suspended for violating our Code of Conduct. A channel has been created in the server for you to discuss this with the moderation team.'
+        `This is a standard message notifying ${user} that you have been suspended from freeCodeCamp's Discord for ${reason}.
+
+       This channel has been created for you to appeal this decision. In order to appeal the decision, you must complete the following steps:
+
+        1. Read our Code of Conduct: https://code-of-conduct.freecodecamp.org/
+        2. Confirm in this channel that you have read it.
+        3. Explain in this channel why you feel you should be un-suspended.`
       );
       if (config.MONGO_URI) {
         const userSuspend: UserSuspend | null = await userSuspendModel.findOne({
