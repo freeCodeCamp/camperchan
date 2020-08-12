@@ -12,6 +12,10 @@ export const closeCommand: CommandDef = {
   usage: 'close [accepted | denied] [user]',
   command: async (message, { config }): Promise<void> => {
     try {
+      if (!message.member?.hasPermission('MANAGE_CHANNELS'))
+        return console.log(
+          `${message.author.username} did not have the correct permissions.`
+        );
       const flag = message.content.split(' ')[2];
       if (flag !== 'accepted' && flag !== 'denied')
         return console.log('invalid paramater');
