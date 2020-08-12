@@ -67,6 +67,11 @@ export interface Config {
    * [HH:MM:SS PM/AM TZ] format
    */
   ONLINE_AT: string;
+  /**
+   * The name of the moderator role. Ensure all moderators
+   * have this role to be able to access the suspended channels.
+   */
+  MOD_ROLE: string;
 }
 /**
  * @name getConfig
@@ -86,6 +91,7 @@ export function getConfig(): Config {
     LOG_MSG_CHANNEL: process.env.LOG_MSG_CHANNEL || 'moderation-activity',
     SUSPEND_ROLE: process.env.SUSPEND_ROLE || '',
     SUSPEND_CATEGORY: process.env.SUSPEND_CATEGORY || '',
-    ONLINE_AT: getBotOnlineAt() || ''
+    ONLINE_AT: getBotOnlineAt() || '',
+    MOD_ROLE: process.env.MOD_ROLE || ''
   };
 }
