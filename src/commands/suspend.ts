@@ -127,7 +127,9 @@ export const suspendCommand: CommandDef = {
 
         1. Read our Code of Conduct: https://code-of-conduct.freecodecamp.org/
         2. Confirm in this channel that you have read it.
-        3. Explain in this channel why you feel you should be un-suspended.`
+        3. Explain in this channel why you feel you should be un-suspended.
+
+        /cc ${modRole}`
       );
       if (config.MONGO_URI) {
         const userSuspend: UserSuspend | null = await userSuspendModel.findOne({
