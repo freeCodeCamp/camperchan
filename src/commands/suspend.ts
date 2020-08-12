@@ -82,7 +82,7 @@ export const suspendCommand: CommandDef = {
       //create suspend channel
       const channelName = `suspended-${user.user.username}`;
       //assign this below line to "suspendChannel" once that feature is turned back on.
-      await message.guild?.channels.create(channelName, {
+      const suspendChannel = await message.guild?.channels.create(channelName, {
         type: 'text',
         permissionOverwrites: [
           {
@@ -100,9 +100,9 @@ export const suspendCommand: CommandDef = {
         ],
         parent: category
       });
-      /*await suspendChannel.send(
+      await suspendChannel?.send(
         `This channel has been created for ${user} to discuss their suspension from the server. Once the discussion has concluded, an admin may use the \`close\` command to automatically close this channel.`
-      ); */
+      );
       await user.send(
         'You have been suspended for violating our Code of Conduct. A channel has been created in the server for you to discuss this with the moderation team.'
       );
