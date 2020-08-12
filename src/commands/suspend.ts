@@ -44,7 +44,9 @@ export const suspendCommand: CommandDef = {
       if (!bot) return console.log('Bot role not found.');
 
       //check for moderator role
-      const modRole = config.MOD_ROLE;
+      const modRole = message.guild?.roles.cache.find(
+        (role) => role.name == config.MOD_ROLE
+      );
       if (!modRole) return console.log('Mod role not found.');
 
       const mod = message.author;
