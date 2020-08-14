@@ -53,7 +53,7 @@ describe('formatCodeBlock tests', () => {
     'Should format `%s` codeblock',
     (languageName, codeblock) => {
       expect(formatCodeBlock(languageName, codeblock)).toBe(
-        `\`\`\`${languageName}\n${codeblock}\`\`\``
+        '```' + languageName + '\n' + codeblock + '```'
       );
     }
   );
