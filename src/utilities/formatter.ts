@@ -37,8 +37,6 @@ export function formatter(unformattedCode: string, language: string): string {
       break;
   }
 
-  console.log(options);
-
   let formattedCode = '';
 
   try {
