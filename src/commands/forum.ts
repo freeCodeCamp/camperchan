@@ -11,11 +11,11 @@ export const forum: CommandDef = {
     try {
       const data = await fetch('https://forum.freecodecamp.org/latest.json');
       const parsed: ForumData = await data.json();
-      const result = parsed.topic_list.topics.slice(0, 5);
+      const topics: Topic[] = parsed.topic_list.topics.slice(0, 5);
       const forumEmbed: MessageEmbed = new MessageEmbed()
         .setTitle('Latest Forum Activity')
         .setDescription('Here are the five most recent posts.');
-      result.forEach((el: Topic) =>
+      topics.forEach((el) =>
         forumEmbed.addFields({
           name: `${el.title}`,
           value: `[${el.last_poster_username} replied on ${new Date(
