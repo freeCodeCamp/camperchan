@@ -2,6 +2,7 @@ import { Client, Collection } from 'discord.js';
 import { Config } from '../config/get-config';
 import { REACTIONS } from './reactions';
 import { ReactionDef } from './reaction-def';
+import { logger } from '../utilities/logger';
 
 export const bootstrapReactions = ({
   client,
@@ -23,7 +24,7 @@ export const bootstrapReactions = ({
         reaction.message.channel.send(
           'Something went wrong! Failed to format code :('
         );
-        console.error(error);
+        logger.error(error);
         return;
       }
     }
@@ -35,8 +36,8 @@ export const bootstrapReactions = ({
     try {
       reactions.get(reaction.emoji.name)?.command(reaction, { client, config });
     } catch (error) {
-      console.error(error);
       // don't warn end users, just log the error
+      logger.error(error);
     }
   });
 };
