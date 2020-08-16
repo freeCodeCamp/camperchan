@@ -1,5 +1,6 @@
-import { ReactionDef } from './reaction-def';
 import { addFormatting } from '../commands/add-formatting';
+import { logger } from '../utilities/logger';
+import { ReactionDef } from './reaction-def';
 
 export const formatReaction: ReactionDef = {
   emoji: '🤖',
@@ -19,7 +20,7 @@ export const formatReaction: ReactionDef = {
       reaction.message.channel.send(
         'Something went wrong! Failed to format code :('
       );
-      console.error(error);
+      logger.error(error);
     }
   }
 };
