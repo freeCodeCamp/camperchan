@@ -1,6 +1,7 @@
 import { CommandDef } from './command-def';
 import { MessageEmbed, TextChannel } from 'discord.js';
 import { userSuspendModel, UserSuspend } from '../APIs/mongo-suspend';
+import { logger } from '../utilities/logger';
 
 export const suspendCommand: CommandDef = {
   prefix: 'suspend',
@@ -10,17 +11,22 @@ export const suspendCommand: CommandDef = {
   command: async (message, { config }): Promise<void> => {
     try {
       //check for appropriate permissions
-      if (!message.member?.hasPermission('KICK_MEMBERS'))
-        return console.log(
+      if (!message.member?.hasPermission('KICK_MEMBERS')) {
+        logger.warn(
           `${message.author.username} did not have the correct permissions.`
         );
+        return;
+      }
 
       //check for log channel setting
       const modChannel = message.guild?.channels.cache.find(
         (channel) => channel.name === config.LOG_MSG_CHANNEL
       ) as TextChannel;
 
-      if (!modChannel) return console.log('Log channel not found.');
+      if (!modChannel) {
+        logger.warn('Log channel not found.');
+        return;
+      }
 
       //check for suspend category setting
       const suspendCategory = config.SUSPEND_CATEGORY;
@@ -28,20 +34,29 @@ export const suspendCommand: CommandDef = {
         (c) => c.name === suspendCategory && c.type === 'category'
       );
 
-      if (!category) return console.log('Missing suspend category.');
+      if (!category) {
+        logger.warn('Missing suspend category.');
+        return;
+      }
 
       //check for suspend role setting
       const suspend = message.guild?.roles.cache.find(
         (role) => role.name == config.SUSPEND_ROLE
       );
-      if (!suspend) return console.log(`Missing suspend role.`);
+      if (!suspend) {
+        logger.warn(`Missing suspend role.`);
+        return;
+      }
 
       //check for bot role
-      const bot = message.guild?.roles.cache.find(
+      const botRole = message.guild?.roles.cache.find(
         (role) => role.name == config.BOT_ROLE
       );
 
-      if (!bot) return console.log('Bot role not found.');
+      if (!botRole) {
+        logger.warn('Bot role not found.');
+        return;
+      }
 
       //check for moderator role
 
@@ -49,7 +64,10 @@ export const suspendCommand: CommandDef = {
         (role) => role.name == config.MOD_ROLE
       );
 
-      if (!modRole) return console.log('Mod role not found.');
+      if (!modRole) {
+        logger.warn('Mod role not found.');
+        return;
+      }
 
       const mod = message.author;
       const msgArguments = message.content.split(' ');
@@ -108,7 +126,7 @@ export const suspendCommand: CommandDef = {
             ]
           },
           {
-            id: bot,
+            id: botRole,
             allow: ['VIEW_CHANNEL', 'READ_MESSAGE_HISTORY', 'SEND_MESSAGES'],
             deny: ['CREATE_INSTANT_INVITE']
           },
@@ -148,7 +166,7 @@ export const suspendCommand: CommandDef = {
         await newUser.save();
       }
     } catch (error) {
-      console.error(error);
+      logger.error(error);
     }
   }
 };
