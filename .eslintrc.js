@@ -26,6 +26,7 @@ module.exports = {
         destructuring: 'any',
         ignoreReadBeforeAssign: false
       }
-    ]
+    ],
+    'no-console': 'error'
   }
 };
