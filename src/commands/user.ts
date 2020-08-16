@@ -1,6 +1,7 @@
 import { CommandDef } from './command-def';
 import { UserSuspend, userSuspendModel } from '../APIs/mongo-suspend';
 import { MessageEmbed } from 'discord.js';
+import { logger } from '../utilities/logger';
 
 export const userCommand: CommandDef = {
   prefix: 'user',
@@ -9,12 +10,20 @@ export const userCommand: CommandDef = {
   command: async (message, { config }) => {
     const user = message.mentions.members?.first();
 
-    if (!user) return console.log('No user provided.');
+    if (!user) {
+      logger.warn('No user provided.');
+      return;
+    }
 
-    if (!message.member?.hasPermission('KICK_MEMBERS'))
-      return console.log('Invalid permissions');
+    if (!message.member?.hasPermission('KICK_MEMBERS')) {
+      logger.warn('Invalid permissions');
+      return;
+    }
 
-    if (!config.MONGO_URI) return console.log('No database configured');
+    if (!config.MONGO_URI) {
+      logger.warn('No database configured');
+      return;
+    }
 
     const userSuspend: UserSuspend | null = await userSuspendModel.findOne({
       userId: user.id
@@ -24,6 +33,6 @@ export const userCommand: CommandDef = {
       .setTitle(user.nickname || user.user.username)
       .setDescription('Here is the available data on them.')
       .addFields({ name: 'Prior Suspension?', value: suspended });
-    message.channel.send(userEmbed);
+    message.channel.send(userEmbed).catch(logger.error);
   }
 };
