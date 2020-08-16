@@ -1,4 +1,4 @@
-import { createLogger, transports } from 'winston';
+import { createLogger, transports, format } from 'winston';
 
 /**
  * Global logger that can be used everywhere for
@@ -6,5 +6,7 @@ import { createLogger, transports } from 'winston';
  */
 export const logger = createLogger({
   level: 'silly',
+  // **Note** this can be updated based on environment
+  format: format.simple(),
   transports: [new transports.Console()]
 });
