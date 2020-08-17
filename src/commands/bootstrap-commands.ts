@@ -57,7 +57,7 @@ export const bootstrapCommands = ({
         console.error('log ');
       }
       (goodbyeChannel as TextChannel).send(
-        `** ${member.user} has left us! :( **`
+        `** ${member.user} (${member.user?.username}) has left us! :( **`
       );
     });
   }
