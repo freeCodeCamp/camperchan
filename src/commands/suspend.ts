@@ -32,13 +32,13 @@ export const suspendCommand: CommandDef = {
 
       //check for suspend role setting
       const suspend = message.guild?.roles.cache.find(
-        (role) => role.name == config.SUSPEND_ROLE
+        (role) => role.name === config.SUSPEND_ROLE
       );
       if (!suspend) return console.log(`Missing suspend role.`);
 
       //check for bot role
       const bot = message.guild?.roles.cache.find(
-        (role) => role.name == config.BOT_ROLE
+        (role) => role.name === config.BOT_ROLE
       );
 
       if (!bot) return console.log('Bot role not found.');
@@ -46,7 +46,7 @@ export const suspendCommand: CommandDef = {
       //check for moderator role
 
       const modRole = message.guild?.roles.cache.find(
-        (role) => role.name == config.MOD_ROLE
+        (role) => role.name === config.MOD_ROLE
       );
 
       if (!modRole) return console.log('Mod role not found.');

@@ -40,7 +40,7 @@ export const closeCommand: CommandDef = {
       let status = 'The appeal was not approved.';
       if (message.mentions.members?.first() && flag === 'accepted') {
         const suspend = message.guild?.roles.cache.find(
-          (role) => role.name == config.SUSPEND_ROLE
+          (role) => role.name === config.SUSPEND_ROLE
         );
         if (!suspend) {
           console.log('Cannot find suspend role');
