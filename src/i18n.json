@@ -36,6 +36,23 @@
             "commandExecutionError": "There was an error trying to execute that command!"
           }
         }
+      },
+      "close": {
+        "description": "Closes the channel. This command requires admin privileges, and will only work on the automatically created 'suspended' channels. Mentioning user with the command will remove the suspended role from the user.",
+        "responses": {
+          "incorrectPermission": "$$$ did not have the correct permissions.",
+          "appealApproved": "The appeal was approved and $$$'s access was restored.",
+          "appealNotApproved": "The appeal was not approved."
+        },
+        "embed": {
+          "setTitle": "Channel Deleted",
+          "setDescription": "$$$ has closed and deleted the \`$$$\` channel",
+          "addFields": [
+            {
+              "name": "Decision"
+            }
+          ]
+        }
       }
     }
   },
