@@ -1,0 +1,50 @@
+{
+  "english": {
+    "commands": {
+      "bootstrapCommands": {
+        "on": {
+          "guildMemberAdd": {
+            "setTitle": "Welcome!",
+            "setDescription": "Thank you for joining our server",
+            "addFields": [
+              {
+                "name": "Rules",
+                "value": "Please read our [rules](https://www.freecodecamp.org/news/code-of-conduct/) before posting in the server."
+              }
+            ],
+            "setFooter": "Thank you and Happy Coding! 😁"
+          },
+          "guildMemberRemove": {
+            "goodbyeChannel": "** $$$ has left us! :( **"
+          },
+          "messageDelete": {
+            "setTitle": "A message was deleted.",
+            "setDescription": "Here are the details of that message.",
+            "addFields": [
+              { "name": "Message author" },
+              { "name": "Channel" },
+              {
+                "name": "Content",
+                "value": "Embedded messages cannot be logged."
+              }
+            ]
+          },
+          "message": {
+            "warnFileUpload": "Please do not upload any files other than images or videos. For large blocks of code, use CodePen or PasteBin.",
+            "noCommandArgument": "There is no command indicated!",
+            "commandNotDefined": "The command $$$ does not exist!",
+            "commandExecutionError": "There was an error trying to execute that command!"
+          }
+        }
+      }
+    }
+  },
+
+  "hindi": {
+    "commands": {
+      "bootstrapCommands": {
+        "setTitle": "Welcome!"
+      }
+    }
+  }
+}
