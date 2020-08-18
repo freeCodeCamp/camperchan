@@ -56,9 +56,11 @@ export const bootstrapCommands = ({
       if (goodbyeChannel.type !== 'text') {
         console.error('log ');
       }
-      (goodbyeChannel as TextChannel).send(
-        `${member.user} (**${member.user?.username}**) has left us! :(`
-      );
+      if (member.roles.cache.has('720740563472744521')) {
+        (goodbyeChannel as TextChannel).send(
+          `${member.user} (** ${member.user?.username}**) has left us! :(`
+        );
+      }
     });
   }
 
