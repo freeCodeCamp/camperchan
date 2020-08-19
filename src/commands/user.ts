@@ -22,9 +22,11 @@ export const userCommand: CommandDef = {
       message.channel.send(`${user} has a clean record!`);
       return;
     }
-    const log = userSuspend.suspended
-      .map((el) => `${el.date}: ${el.reason}`)
-      .join(' | ');
-    message.channel.send(`Here is the record for ${user}: ${log}`);
+    message.channel.send(`Generating suspend record for ${user}...`);
+    userSuspend.suspended.forEach((el) => {
+      message.channel.send(
+        `Suspended on ${el.date.split(',')[0]} for ${el.reason}`
+      );
+    });
   }
 };
