@@ -1,6 +1,5 @@
 import { CommandDef } from './command-def';
 import { UserSuspend, userSuspendModel } from '../APIs/mongo-suspend';
-import { MessageEmbed } from 'discord.js';
 
 export const userCommand: CommandDef = {
   prefix: 'user',
@@ -19,11 +18,11 @@ export const userCommand: CommandDef = {
     const userSuspend: UserSuspend | null = await userSuspendModel.findOne({
       userId: user.id
     });
-    const suspended = !!userSuspend?.suspended;
-    const userEmbed = new MessageEmbed()
-      .setTitle(user.nickname || user.user.username)
-      .setDescription('Here is the available data on them.')
-      .addFields({ name: 'Prior Suspension?', value: suspended });
-    message.channel.send(userEmbed);
+    if (!userSuspend) {
+      message.channel.send(`${user} has a clean record!`);
+      return;
+    }
+    const log = userSuspend.suspended.map((el) => JSON.stringify(el));
+    message.channel.send(`Here is the record for ${user}: ${log}`);
   }
 };
