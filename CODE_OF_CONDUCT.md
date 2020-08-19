@@ -4,12 +4,10 @@
 
 <!-- toc -->
 
-- [Available Commands](#available-commands)
-- [Available Reactions](#available-reactions)
-- [Ask For Help](#ask-for-help)
-- [Acknowledgements](#acknowledgements)
-- [Disclaimer](#disclaimer)
-- [FreeCodeCamp Moderation](#freecodecamp-moderation)
+- [Be Polite](#be-polite)
+- [No spam](#no-spam)
+- [Malicious Code](#malicious-code)
+- [Have Questions?](#have-questions)
 
 <!-- tocstop -->
 
