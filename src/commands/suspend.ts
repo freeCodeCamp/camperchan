@@ -139,11 +139,18 @@ export const suspendCommand: CommandDef = {
           await message.author.send(
             `Hello! It looks like ${user} has been suspended previously. You may consider taking further action based on their offence.`
           );
+          userSuspend.suspended.push({
+            date: new Date(Date.now()).toLocaleString(),
+            reason: reason
+          });
+          await userSuspend.save();
           return;
         }
         const newUser = new userSuspendModel({
           userId: user.id,
-          suspended: true
+          suspended: [
+            { date: new Date(Date.now()).toLocaleString(), reason: reason }
+          ]
         });
         await newUser.save();
       }
