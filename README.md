@@ -6,6 +6,8 @@
 ![PRs](https://img.shields.io/github/issues-pr/bradtaniguchi/discord-bot-test)
 [![Total alerts](https://img.shields.io/lgtm/alerts/g/bradtaniguchi/discord-bot-test.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/bradtaniguchi/discord-bot-test/alerts/)
 [![Setup Automated](https://img.shields.io/badge/setup-automated-blue?logo=gitpod)](https://gitpod.io/from-referrer/)
+[![Pull Requests Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat)](http://makeapullrequest.com)
+[![first-timers-only Friendly](https://img.shields.io/badge/first--timers--only-friendly-blue.svg)](http://www.firsttimersonly.com/)
 
 A Discord test bot used to test out the architecture and implementation of a Discord bot. This project is a way to get familiar with the architecture, APIs and process of maintaining a Discord bot.
 
