@@ -1,7 +1,7 @@
 import { Message, MessageEmbed } from 'discord.js';
 import { CommandDef } from './command-def';
 import fetch from 'node-fetch';
-import { ForumData } from '../APIs/forum-data';
+import { ForumData, Topic } from '../APIs/forum-data';
 
 export const forum: CommandDef = {
   prefix: 'forum',
@@ -11,14 +11,16 @@ export const forum: CommandDef = {
     try {
       const data = await fetch('https://forum.freecodecamp.org/latest.json');
       const parsed: ForumData = await data.json();
-      const result = parsed.topic_list.topics.slice(0, 5);
+      const topics: Topic[] = parsed.topic_list.topics.slice(0, 5);
       const forumEmbed: MessageEmbed = new MessageEmbed()
         .setTitle('Latest Forum Activity')
         .setDescription('Here are the five most recent posts.');
-      result.forEach((el: Record<string, unknown>) =>
+      topics.forEach((el) =>
         forumEmbed.addFields({
           name: `${el.title}`,
-          value: `[${el.last_poster_username} replied on ${el.last_posted_at}](https://forum.freecodecamp.org/t/${el.id})`
+          value: `[${el.last_poster_username} replied on ${new Date(
+            el.last_posted_at
+          ).toLocaleString()}](https://forum.freecodecamp.org/t/${el.id})`
         })
       );
       message.channel.send(forumEmbed);

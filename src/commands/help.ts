@@ -44,7 +44,7 @@ function sendFullList({ message, config }: helpFunctionArgs): void {
 }
 
 function sendSpecificCommand({ message, Command }: helpFunctionArgs) {
-  const commandFound = COMMANDS.find((command) => command.prefix == Command);
+  const commandFound = COMMANDS.find((command) => command.prefix === Command);
   if (!commandFound)
     return message.channel.send(
       `Cannot find the command you specified -> \`${Command}\``
