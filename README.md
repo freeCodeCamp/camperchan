@@ -15,6 +15,7 @@ A Discord test bot used to test out the architecture and implementation of a Dis
 
 <!-- toc -->
 
+- [Contributing](#contributing)
 - [Available Commands](#available-commands)
 - [Available Reactions](#available-reactions)
 - [Ask For Help](#ask-for-help)
@@ -23,6 +24,10 @@ A Discord test bot used to test out the architecture and implementation of a Dis
 - [FreeCodeCamp Moderation](#freecodecamp-moderation)
 
 <!-- tocstop -->
+
+## Contributing
+
+If you are interested in contributing to this project, please review our [contributing guidelines](CONTRIBUTING.md)
 
 ## Available Commands
 
