@@ -23,10 +23,17 @@ export const userCommand: CommandDef = {
       return;
     }
     message.channel.send(`Generating suspend record for ${user}...`);
-    userSuspend.suspended.forEach((el) => {
+    message.channel.send(
+      `This user was last seen as ${userSuspend.currentUsername}`
+    );
+    if (userSuspend.currentNickname)
       message.channel.send(
-        `Suspended on ${el.date.split(',')[0]} for ${el.reason}`
+        `This user last used the nickname ${userSuspend.currentNickname}`
       );
-    });
+    const suspendLog = userSuspend.suspended.map(
+      (el) =>
+        `${el.mod} suspended them on ${el.date.split(',')[0]} for ${el.reason}`
+    );
+    message.channel.send(suspendLog.join('\n'));
   }
 };

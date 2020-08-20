@@ -141,15 +141,24 @@ export const suspendCommand: CommandDef = {
           );
           userSuspend.suspended.push({
             date: new Date(Date.now()).toLocaleString(),
+            mod: message.author.username,
             reason: reason
           });
+          userSuspend.currentUsername = user.user.username;
+          userSuspend.currentNickname = user.nickname || '';
           await userSuspend.save();
           return;
         }
         const newUser = new userSuspendModel({
           userId: user.id,
+          currentUsername: user.user.username,
+          currentNickname: user.nickname,
           suspended: [
-            { date: new Date(Date.now()).toLocaleString(), reason: reason }
+            {
+              date: new Date(Date.now()).toLocaleString(),
+              mod: message.author.username,
+              reason: reason
+            }
           ]
         });
         await newUser.save();
