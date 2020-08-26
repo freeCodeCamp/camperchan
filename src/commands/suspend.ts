@@ -76,7 +76,7 @@ export const suspendCommand: CommandDef = {
         .addFields(
           {
             name: 'What happened?',
-            value: `${mod} has suspended ${user}.`
+            value: `${mod} has suspended **${user.user.username}** (${user}).`
           },
           {
             name: 'Reason',
