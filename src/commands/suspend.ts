@@ -139,11 +139,27 @@ export const suspendCommand: CommandDef = {
           await message.author.send(
             `Hello! It looks like ${user} has been suspended previously. You may consider taking further action based on their offence.`
           );
+          userSuspend.suspended.push({
+            date: new Date(Date.now()).toLocaleString(),
+            mod: message.author.username,
+            reason: reason
+          });
+          userSuspend.currentUsername = user.user.username;
+          userSuspend.currentNickname = user.nickname || '';
+          await userSuspend.save();
           return;
         }
         const newUser = new userSuspendModel({
           userId: user.id,
-          suspended: true
+          currentUsername: user.user.username,
+          currentNickname: user.nickname,
+          suspended: [
+            {
+              date: new Date(Date.now()).toLocaleString(),
+              mod: message.author.username,
+              reason: reason
+            }
+          ]
         });
         await newUser.save();
       }
