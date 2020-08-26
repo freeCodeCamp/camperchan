@@ -1,14 +1,14 @@
-import { Moderator, moderatorSchema } from './moderator';
-import { Schema, Document } from 'mongoose';
-import { User } from 'discord.js';
+import { Document, Schema } from 'mongoose';
+import { User } from './user';
 import { ObjectId } from 'mongodb';
+import { Moderator, moderatorSchema } from './moderator';
 import { Collections } from './collections';
 
 /**
- * A user-suspension is used to keep track of suspensions
- * made on a user by admins.
+ * A user-log is used to keep track of things saved
+ * by admins via the `userlog` command
  */
-export interface UserSuspension extends Document {
+export interface UserLog extends Document {
   /**
    * The parent user
    *
@@ -30,7 +30,7 @@ export interface UserSuspension extends Document {
   createdAt: Date;
 }
 
-export const userSuspensionSchema = new Schema(
+export const userLogSchema = new Schema(
   {
     user: {
       type: Schema.Types.ObjectId,
@@ -38,10 +38,10 @@ export const userSuspensionSchema = new Schema(
       immutable: true,
       ref: Collections.USER
     },
-    reason: {
-      type: Schema.Types.String
-      // TODO: add default
-      // TODO: add length
+    message: {
+      type: Schema.Types.String,
+      required: true,
+      immutable: true
     },
     moderator: moderatorSchema
   },

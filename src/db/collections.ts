@@ -3,5 +3,6 @@
  */
 export enum Collections {
   USER = 'users',
-  USER_SUSPENSIONS = 'user_suspensions'
+  USER_SUSPENSIONS = 'user_suspensions',
+  USER_LOGS = 'user_logs'
 }
