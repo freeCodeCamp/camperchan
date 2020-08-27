@@ -21,7 +21,7 @@ A Discord test bot used to test out the architecture and implementation of a Dis
 - [Available Commands](#available-commands)
 - [Available Reactions](#available-reactions)
 - [Ask For Help](#ask-for-help)
-- [Acknowledgements](#acknowledgements)
+- [Contributors](#contributors)
 - [Disclaimer](#disclaimer)
 - [FreeCodeCamp Moderation](#freecodecamp-moderation)
 
@@ -61,13 +61,7 @@ If you have any questions or suggestions about the project, you can create an is
 
 Happy Coding!
 
-## Acknowledgements
-
-- [bradtaniguchi](https://github.com/bradtaniguchi)
-- [twaha-rahman](https://github.com/twaha-rahman)
-- [nhcarrigan](https://github.com/nhcarrigan)
-- [cjcanlas01](https://github.com/cjcanlas01)
-- [JoshuaPelealu](https://github.com/JoshuaPelealu)
+## Contributors
 
 ## Disclaimer
 
