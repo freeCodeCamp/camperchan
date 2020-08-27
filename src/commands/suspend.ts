@@ -10,17 +10,20 @@ export const suspendCommand: CommandDef = {
   command: async (message, { config }): Promise<void> => {
     try {
       //check for appropriate permissions
-      if (!message.member?.hasPermission('KICK_MEMBERS'))
+      if (!message.member?.hasPermission('KICK_MEMBERS')) {
         return console.log(
           `${message.author.username} did not have the correct permissions.`
         );
+      }
 
       //check for log channel setting
       const modChannel = message.guild?.channels.cache.find(
         (channel) => channel.name === config.LOG_MSG_CHANNEL
       ) as TextChannel;
 
-      if (!modChannel) return console.log('Log channel not found.');
+      if (!modChannel) {
+        return console.log('Log channel not found.');
+      }
 
       //check for suspend category setting
       const suspendCategory = config.SUSPEND_CATEGORY;
@@ -28,20 +31,26 @@ export const suspendCommand: CommandDef = {
         (c) => c.name === suspendCategory && c.type === 'category'
       );
 
-      if (!category) return console.log('Missing suspend category.');
+      if (!category) {
+        return console.log('Missing suspend category.');
+      }
 
       //check for suspend role setting
       const suspend = message.guild?.roles.cache.find(
         (role) => role.name === config.SUSPEND_ROLE
       );
-      if (!suspend) return console.log(`Missing suspend role.`);
+      if (!suspend) {
+        return console.log(`Missing suspend role.`);
+      }
 
       //check for bot role
       const bot = message.guild?.roles.cache.find(
         (role) => role.name === config.BOT_ROLE
       );
 
-      if (!bot) return console.log('Bot role not found.');
+      if (!bot) {
+        return console.log('Bot role not found.');
+      }
 
       //check for moderator role
 
@@ -49,7 +58,9 @@ export const suspendCommand: CommandDef = {
         (role) => role.name === config.MOD_ROLE
       );
 
-      if (!modRole) return console.log('Mod role not found.');
+      if (!modRole) {
+        return console.log('Mod role not found.');
+      }
 
       const mod = message.author;
       const msgArguments = message.content.split(' ');
