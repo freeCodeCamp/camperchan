@@ -5,9 +5,11 @@
 ![Issues](https://img.shields.io/github/issues/bradtaniguchi/discord-bot-test)
 ![PRs](https://img.shields.io/github/issues-pr/bradtaniguchi/discord-bot-test)
 [![Total alerts](https://img.shields.io/lgtm/alerts/g/bradtaniguchi/discord-bot-test.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/bradtaniguchi/discord-bot-test/alerts/)
+[![Language grade: JavaScript](https://img.shields.io/lgtm/grade/javascript/g/bradtaniguchi/discord-bot-test.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/bradtaniguchi/discord-bot-test/context:javascript)
 [![Setup Automated](https://img.shields.io/badge/setup-automated-blue?logo=gitpod)](https://gitpod.io/from-referrer/)
 [![Pull Requests Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat)](http://makeapullrequest.com)
 [![first-timers-only Friendly](https://img.shields.io/badge/first--timers--only-friendly-blue.svg)](http://www.firsttimersonly.com/)
+[![Dependabot Status](https://api.dependabot.com/badges/status?host=github&repo=bradtaniguchi/discord-bot-test)](https://dependabot.com)
 
 A Discord test bot used to test out the architecture and implementation of a Discord bot. This project is a way to get familiar with the architecture, APIs and process of maintaining a Discord bot.
 
