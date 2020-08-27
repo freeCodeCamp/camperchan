@@ -27,6 +27,7 @@ module.exports = {
         ignoreReadBeforeAssign: false
       }
     ],
-    eqeqeq: ['error', 'always']
+    eqeqeq: ['error', 'always'],
+    curly: ['error']
   }
 };
