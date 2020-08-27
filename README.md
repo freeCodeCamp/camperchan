@@ -52,8 +52,8 @@ If you are interested in contributing to this project, please review our [contri
 
 | Prefix |                Description                |
 | :----: | :---------------------------------------: |
-|   📌   | Sends message to the current user as a DM |
-|   🤖   |      Guesses and formats the message      |
+|   p   | Sends message to the current user as a DM |
+|   p$   |      Guesses and formats the message      |
 
 ## Ask For Help
 
@@ -61,7 +61,53 @@ If you have any questions or suggestions about the project, you can create an is
 
 Happy Coding!
 
-## Contributors
+## Contributors :sparkles:
+<table>
+<tr>
+                <td align="center">
+                    <a href="https://github.com/nhcarrigan">
+                        <img src="https://avatars1.githubusercontent.com/u/63889819?v=4" width="100;" alt="nhcarrigan"/>
+                        <br />
+                        <sub><b>Nicholas Carrigan</b></sub>
+                    </a>
+                </td>
+                <td align="center">
+                    <a href="https://github.com/Twaha-Rahman">
+                        <img src="https://avatars1.githubusercontent.com/u/39026437?v=4" width="100;" alt="Twaha-Rahman"/>
+                        <br />
+                        <sub><b>Twaha Rahman</b></sub>
+                    </a>
+                </td>
+                <td align="center">
+                    <a href="https://github.com/bradtaniguchi">
+                        <img src="https://avatars3.githubusercontent.com/u/10079147?v=4" width="100;" alt="bradtaniguchi"/>
+                        <br />
+                        <sub><b>Brad</b></sub>
+                    </a>
+                </td>
+                <td align="center">
+                    <a href="https://github.com/JoshuaPelealu">
+                        <img src="https://avatars1.githubusercontent.com/u/45566099?v=4" width="100;" alt="JoshuaPelealu"/>
+                        <br />
+                        <sub><b>Joshua Pelealu</b></sub>
+                    </a>
+                </td>
+                <td align="center">
+                    <a href="https://github.com/cjcanlas01">
+                        <img src="https://avatars1.githubusercontent.com/u/40020298?v=4" width="100;" alt="cjcanlas01"/>
+                        <br />
+                        <sub><b>Christian John Canlas</b></sub>
+                    </a>
+                </td>
+                <td align="center">
+                    <a href="https://github.com/takuma-watanabe">
+                        <img src="https://avatars2.githubusercontent.com/u/32568002?v=4" width="100;" alt="takuma-watanabe"/>
+                        <br />
+                        <sub><b>Takuma</b></sub>
+                    </a>
+                </td></tr>
+</table>
+
 
 ## Disclaimer
 
