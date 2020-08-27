@@ -12,23 +12,28 @@ export const closeCommand: CommandDef = {
   usage: 'close [accepted | denied] [user]',
   command: async (message, { config }): Promise<void> => {
     try {
-      if (!message.member?.hasPermission('MANAGE_CHANNELS'))
+      if (!message.member?.hasPermission('MANAGE_CHANNELS')) {
         return console.log(
           `${message.author.username} did not have the correct permissions.`
         );
+      }
       const flag = message.content.split(' ')[2];
-      if (flag !== 'accepted' && flag !== 'denied')
+      if (flag !== 'accepted' && flag !== 'denied') {
         return console.log('invalid paramater');
+      }
       const target = message.channel as TextChannel;
       //check for log channel
       const log = message.guild?.channels.cache.find(
         (channel) => channel.name === config.LOG_MSG_CHANNEL
       ) as TextChannel;
       //check for user permissions
-      if (!message.member?.hasPermission('MANAGE_CHANNELS'))
+      if (!message.member?.hasPermission('MANAGE_CHANNELS')) {
         return console.log('Missing permissions.');
+      }
 
-      if (!log) return console.log('Log channel not found.');
+      if (!log) {
+        return console.log('Log channel not found.');
+      }
 
       if (
         !target.name.includes('suspended') ||
