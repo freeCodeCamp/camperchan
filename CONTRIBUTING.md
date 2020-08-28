@@ -173,7 +173,7 @@ Keep an eye out for open issues that are labelled with `documentation` - these a
 
 ### Submit Feature Requests
 
-Do you have an idea for a new bot feature? _Anyone_ is welcome to submit a feature request, even if you have no idea how to write the code for that feature! Please feel free to submit your ideas as [GitHub issues]() so we may review them and determine the implementation method and use case.
+Do you have an idea for a new bot feature? _Anyone_ is welcome to submit a feature request, even if you have no idea how to write the code for that feature! Please feel free to submit your ideas [here](https://github.com/bradtaniguchi/discord-bot-test/issues/new/choose) so we may review them and determine the implementation method and use case.
 
 ### Our Commitment to You
 
