@@ -161,7 +161,7 @@ vscode's internal debugger.
 
 ## First Timers Welcome!
 
-If you are new to contributing to open source, or even new to contributing to this project specifically, we gladly welcome your contributions! Contributing directly to the codebase will require some familiarity with `node.js` and TypeScript, but if you are unfamiliar with these technologies that is okay! Here are a few other ways you can contribute to the bot!
+If you are new to contributing to open source, or even new to contributing to this project specifically, we gladly welcome your contributions! Contributing directly to the codebase will require some familiarity with [node.js](https://nodejs.org/en/about/) and [TypeScript](https://www.typescriptlang.org/), but if you are unfamiliar with these technologies that is okay! Here are a few other ways you can contribute to the bot!
 
 ### Testing Features
 
