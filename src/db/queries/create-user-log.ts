@@ -1,22 +1,22 @@
 import { GuildMember, User } from 'discord.js';
 import { models } from '../models';
 import { User as DbUser } from '../user';
-import { UserSuspension } from '../user-suspension';
 import { updateExistingIdentity } from './update-existing-identity';
 import { createNewUser } from './create-new-user';
+import { UserLog } from '../user-log';
 
 /**
- * Creates a user-suspension for the given user.
+ * Creates a user-log entry for the given user.
  */
-export const createUserSuspension = async ({
-  reason,
+export const createUserLog = async ({
+  message,
   user,
   moderator
 }: {
   /**
    * The reason the user is suspended.
    */
-  reason: string;
+  message: string;
   /**
    * The user who to create a user-suspension for.
    * This function will automatically create a user entry
@@ -29,19 +29,12 @@ export const createUserSuspension = async ({
    */
   moderator: User;
 }): Promise<{
-  /**
-   * The user updated/created
-   */
   dbUser: DbUser;
-  /**
-   * The suspension created
-   */
-  userSuspension: UserSuspension;
+  userLog: UserLog;
 }> => {
   const existingUser = await models.users.findOne({
     _id: user.id
   });
-
   const manageUser = async (): Promise<DbUser> =>
     existingUser
       ? await updateExistingIdentity({
@@ -49,9 +42,10 @@ export const createUserSuspension = async ({
           user
         })
       : await createNewUser(user);
-  const createSuspension = (): Promise<UserSuspension> =>
-    models.user_suspensions.create({
-      reason,
+
+  const createLog = (): Promise<UserLog> =>
+    models.user_logs.create({
+      message,
       user: user.id,
       moderator: {
         _id: moderator.id,
@@ -59,11 +53,7 @@ export const createUserSuspension = async ({
       },
       createdAt: new Date()
     });
+  const [dbUser, userLog] = await Promise.all([manageUser(), createLog()]);
 
-  const [dbUser, userSuspension] = await Promise.all([
-    manageUser(),
-    createSuspension()
-  ]);
-
-  return { dbUser, userSuspension };
+  return { dbUser, userLog };
 };

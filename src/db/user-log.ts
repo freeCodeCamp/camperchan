@@ -18,9 +18,9 @@ export interface UserLog extends Document {
    */
   user: Snowflake;
   /**
-   * The reason the user was suspended.
+   * The message we are to save against the user
    */
-  reason: string;
+  message: string;
   /**
    * The moderator who performed this action
    */
