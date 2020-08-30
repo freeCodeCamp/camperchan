@@ -11,9 +11,9 @@ import { Schema } from 'mongoose';
  */
 export interface Moderator {
   /**
-   * The discord server userId for the mod
+   * The discord user's _id
    */
-  userId: string | Snowflake;
+  _id: Snowflake;
   /**
    * The discord server nickname of the mod
    */
@@ -24,26 +24,25 @@ export interface Moderator {
   nickname: string;
 }
 
-export const moderatorSchema = new Schema(
-  {
-    userId: {
-      type: Schema.Types.String,
-      required: true,
-      immutable: true
-      // TODO: Add length validation check
-    },
-    username: {
-      type: Schema.Types.String,
-      required: true,
-      immutable: true
-      // TODO: Add entry limitations, check discord api
-    },
-    nickname: {
-      type: Schema.Types.String,
-      required: true,
-      immutable: true
-      // TODO: Add entry limitations, check discord api
-    }
+export const moderatorSchema = new Schema({
+  _id: {
+    type: Schema.Types.String,
+    required: true,
+    immutable: true,
+    unique: true
+    // TODO: Add length validation check, is it 17 or 18???
+    // See snowflake documentation: https://discord.com/developers/docs/reference#snowflakes
   },
-  { _id: false }
-);
+  username: {
+    type: Schema.Types.String,
+    required: true,
+    immutable: true
+    // TODO: Add entry limitations, check discord api
+  },
+  nickname: {
+    type: Schema.Types.String,
+    required: true,
+    immutable: true
+    // TODO: Add entry limitations, check discord api
+  }
+});

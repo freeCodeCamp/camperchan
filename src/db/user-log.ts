@@ -1,8 +1,7 @@
+import { Snowflake } from 'discord.js';
 import { Document, Schema } from 'mongoose';
-import { User } from './user';
-import { ObjectId } from 'mongodb';
-import { Moderator, moderatorSchema } from './moderator';
 import { Collections } from './collections';
+import { Moderator, moderatorSchema } from './moderator';
 
 /**
  * A user-log is used to keep track of things saved
@@ -14,8 +13,10 @@ export interface UserLog extends Document {
    *
    * **NOTE** I'm unsure if we should keep this as the objectId reference
    * or use the discord provided snowflake
+   *
+   * The discord user's _id
    */
-  user: string | ObjectId | User;
+  user: Snowflake;
   /**
    * The reason the user was suspended.
    */
@@ -33,7 +34,7 @@ export interface UserLog extends Document {
 export const userLogSchema = new Schema(
   {
     user: {
-      type: Schema.Types.ObjectId,
+      type: Schema.Types.String,
       required: true,
       immutable: true,
       ref: Collections.USER

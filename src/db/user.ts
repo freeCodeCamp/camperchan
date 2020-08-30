@@ -1,6 +1,6 @@
-import { ObjectId } from 'mongodb';
+import { Snowflake } from 'discord.js';
+import { Document, Schema } from 'mongoose';
 import { UserIdentity, userIdentitySchema } from './user-identity';
-import { Schema, Document } from 'mongoose';
 /**
  * This is an entry for a user, this is normalized
  * for "future" proofing future features that will
@@ -8,9 +8,9 @@ import { Schema, Document } from 'mongoose';
  */
 export interface User extends Document {
   /**
-   * The discord server userId
+   * The discord user's _id
    */
-  userId: string | ObjectId;
+  _id: Snowflake;
   /**
    * List of previous "identity" information
    * for a given user. Used to keep track of
@@ -21,13 +21,13 @@ export interface User extends Document {
 
 export const userSchema = new Schema(
   {
-    userId: {
+    _id: {
       type: Schema.Types.String,
       required: true,
       unique: true,
-      // this isn't "seen" by types and available after 5.6
       immutable: true
-      // TODO: Add length validation check
+      // TODO: Add length validation check, is it 17 or 18???
+      // See snowflake documentation: https://discord.com/developers/docs/reference#snowflakes
     },
     identities: [userIdentitySchema]
   },
