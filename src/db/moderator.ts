@@ -18,10 +18,6 @@ export interface Moderator {
    * The discord server nickname of the mod
    */
   username: string;
-  /**
-   * The discord server nickname of the mod
-   */
-  nickname: string;
 }
 
 export const moderatorSchema = new Schema({
@@ -34,12 +30,6 @@ export const moderatorSchema = new Schema({
     // See snowflake documentation: https://discord.com/developers/docs/reference#snowflakes
   },
   username: {
-    type: Schema.Types.String,
-    required: true,
-    immutable: true
-    // TODO: Add entry limitations, check discord api
-  },
-  nickname: {
     type: Schema.Types.String,
     required: true,
     immutable: true
