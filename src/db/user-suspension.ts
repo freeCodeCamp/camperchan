@@ -1,6 +1,6 @@
 import { Moderator, moderatorSchema } from './moderator';
 import { Schema, Document } from 'mongoose';
-import { User } from 'discord.js';
+import { User, Snowflake } from 'discord.js';
 import { ObjectId } from 'mongodb';
 import { Collections } from './collections';
 
@@ -15,7 +15,7 @@ export interface UserSuspension extends Document {
    * **NOTE** I'm unsure if we should keep this as the objectId reference
    * or use the discord provided snowflake
    */
-  user: string | ObjectId | User;
+  user: Snowflake;
   /**
    * The reason the user was suspended.
    */
@@ -33,7 +33,7 @@ export interface UserSuspension extends Document {
 export const userSuspensionSchema = new Schema(
   {
     user: {
-      type: Schema.Types.ObjectId,
+      type: Schema.Types.String,
       required: true,
       immutable: true,
       ref: Collections.USER
