@@ -50,7 +50,7 @@ export const suspendCommand: CommandDef = {
 
       //check for bot role
       const botRole = message.guild?.roles.cache.find(
-        (role) => role.name == config.BOT_ROLE
+        (role) => role.name === config.BOT_ROLE
       );
 
       if (!botRole) {
