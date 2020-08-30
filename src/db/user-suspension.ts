@@ -1,8 +1,7 @@
-import { Moderator, moderatorSchema } from './moderator';
-import { Schema, Document } from 'mongoose';
-import { User, Snowflake } from 'discord.js';
-import { ObjectId } from 'mongodb';
+import { Snowflake } from 'discord.js';
+import { Document, Schema } from 'mongoose';
 import { Collections } from './collections';
+import { Moderator, moderatorSchema } from './moderator';
 
 /**
  * A user-suspension is used to keep track of suspensions
