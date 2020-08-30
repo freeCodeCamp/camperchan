@@ -27,8 +27,10 @@ function sendFullList({ message, config }: helpFunctionArgs): void {
         a.prefix.toUpperCase() > b.prefix.toUpperCase() ? 1 : -1
       )
         .map((command, i) => {
-          if ((i + 1) % 4 === 0) return `\`${command.prefix}\n\``;
-          else return `\`${command.prefix}\``;
+          if ((i + 1) % 4 === 0) {
+            return `\`${command.prefix}\n\``;
+          }
+          return `\`${command.prefix}\``;
         })
         .join(' ') +
         stripIndent`
@@ -44,11 +46,12 @@ function sendFullList({ message, config }: helpFunctionArgs): void {
 }
 
 function sendSpecificCommand({ message, Command }: helpFunctionArgs) {
-  const commandFound = COMMANDS.find((command) => command.prefix == Command);
-  if (!commandFound)
+  const commandFound = COMMANDS.find((command) => command.prefix === Command);
+  if (!commandFound) {
     return message.channel.send(
       `Cannot find the command you specified -> \`${Command}\``
     );
+  }
   const helpEmbed = new MessageEmbed()
     .setColor('#0099FF')
     .setTitle(`\`${commandFound.usage}\``)
@@ -80,7 +83,9 @@ export const help: CommandDef = {
   command: async (message, { config }) => {
     const Command = message.content.split(' ')[2];
     // If there is no Command specified, then it will send a full list of commands
-    if (!Command) return sendFullList({ message, config });
+    if (!Command) {
+      return sendFullList({ message, config });
+    }
     sendSpecificCommand({ message, Command });
   }
 };

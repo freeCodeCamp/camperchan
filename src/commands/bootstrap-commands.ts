@@ -47,6 +47,9 @@ export const bootstrapCommands = ({
     // we only mention if users are removed if
     // the leave message channel is given.
     client.on('guildMemberRemove', function (member) {
+      const suspendRole = member.guild.roles.cache.find(
+        (role) => role.name === config.SUSPEND_ROLE
+      );
       const goodbyeChannel = member.guild.channels.cache.find(
         (channel) => channel.name === config.LEAVE_MSG_CHANNEL
       );
@@ -57,9 +60,11 @@ export const bootstrapCommands = ({
       if (goodbyeChannel.type !== 'text') {
         logger.error('log ');
       }
-      (goodbyeChannel as TextChannel).send(
-        `** ${member.user} has left us! :( **`
-      );
+      if (suspendRole && member.roles.cache.has(suspendRole?.id)) {
+        (goodbyeChannel as TextChannel).send(
+          `${member.user} (**${member.user?.username}**) has left us! :(`
+        );
+      }
     });
   }
 

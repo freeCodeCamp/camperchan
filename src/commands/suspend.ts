@@ -41,7 +41,7 @@ export const suspendCommand: CommandDef = {
 
       //check for suspend role setting
       const suspend = message.guild?.roles.cache.find(
-        (role) => role.name == config.SUSPEND_ROLE
+        (role) => role.name === config.SUSPEND_ROLE
       );
       if (!suspend) {
         logger.warn(`Missing suspend role.`);
@@ -61,7 +61,7 @@ export const suspendCommand: CommandDef = {
       //check for moderator role
 
       const modRole = message.guild?.roles.cache.find(
-        (role) => role.name == config.MOD_ROLE
+        (role) => role.name === config.MOD_ROLE
       );
 
       if (!modRole) {
@@ -94,7 +94,7 @@ export const suspendCommand: CommandDef = {
         .addFields(
           {
             name: 'What happened?',
-            value: `${mod} has suspended ${user}.`
+            value: `${mod} has suspended **${user.user.username}** (${user}).`
           },
           {
             name: 'Reason',
