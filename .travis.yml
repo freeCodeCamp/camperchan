@@ -1,11 +1,3 @@
-language: node_js
-install: npm ci
-jobs:
-  include:
-  - stage: Lint JS
-    script:
-    - npm run lint
-    - npm run test
 deploy:
   provider: heroku
   app: discord-bot-test-btaniguchi
