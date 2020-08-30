@@ -8,12 +8,17 @@ export const userCommand: CommandDef = {
   command: async (message, { config }) => {
     const user = message.mentions.members?.first();
 
-    if (!user) return console.log('No user provided.');
+    if (!user) {
+      return console.log('No user provided.');
+    }
 
-    if (!message.member?.hasPermission('KICK_MEMBERS'))
+    if (!message.member?.hasPermission('KICK_MEMBERS')) {
       return console.log('Invalid permissions');
+    }
 
-    if (!config.MONGO_URI) return console.log('No database configured');
+    if (!config.MONGO_URI) {
+      return console.log('No database configured');
+    }
 
     const userSuspend: UserSuspend | null = await userSuspendModel.findOne({
       userId: user.id
