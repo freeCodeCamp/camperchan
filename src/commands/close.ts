@@ -58,7 +58,7 @@ export const closeCommand: CommandDef = {
       const deleteEmbed = new MessageEmbed()
         .setTitle('Channel Deleted')
         .setDescription(
-          `${message.author} has closed and deleted the \`${target.name}\` channel`
+          `${message.author} has closed and deleted the \`${target.name}\` (ID: \`${target.id}\`) channel`
         )
         .addFields({ name: 'Decision', value: status });
       await log.send(deleteEmbed);

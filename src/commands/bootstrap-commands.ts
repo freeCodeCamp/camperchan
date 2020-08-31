@@ -84,6 +84,10 @@ export const bootstrapCommands = ({
             value: message.author
           },
           {
+            name: 'Message ID',
+            value: message.id
+          },
+          {
             name: 'Channel',
             value: message.channel
           },
