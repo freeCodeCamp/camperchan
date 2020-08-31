@@ -9,6 +9,10 @@
 - [Creating a Discord bot token](#creating-a-discord-bot-token)
 - [Restricting Bot Access to Channels](#restricting-bot-access-to-channels)
 - [Debugging using VSCode](#debugging-using-vscode)
+- [First Timers Welcome!](#first-timers-welcome)
+  - [Testing Features](#testing-features)
+  - [Documentation](#documentation)
+  - [Submit Feature Requests](#submit-feature-requests)
 
 <!-- tocstop -->
 
@@ -153,3 +157,19 @@ vscode's internal debugger.
   ]
 }
 ```
+
+## First Timers Welcome!
+
+If you are new to contributing to open source, or even new to contributing to this project specifically, we gladly welcome your contributions! Contributing directly to the codebase will require some familiarity with [node.js](https://nodejs.org/en/about/) and [TypeScript](https://www.typescriptlang.org/), but if you are unfamiliar with these technologies that is okay! Here are a few other ways you can contribute to the bot!
+
+### Testing Features
+
+You can assist us with the review of Pull Request submissions and current features by testing them! The most efficient way to do so is to fork the repository, clone your fork to your local machine, and follow the steps above for setting up your Discord Bot application and configuring the code to connect to that application. However, if you are unable to run this locally (or uncomfortable/unfamiliar with the process) you can also spin up a [GitPod instance](http://gitpod.io/#https://github.com/bradtaniguchi/discord-bot-test) and test features through that as well.
+
+### Documentation
+
+Keep an eye out for open issues that are labelled with `documentation` - these are issues specifically related to the project documentation files (such as this one!). Contributing to these issues requires less knowledge of the codebase and how the code functions and more knowledge of how the bot and its features function.
+
+### Submit Feature Requests
+
+Do you have an idea for a new bot feature? _Anyone_ is welcome to submit a feature request, even if you have no idea how to write the code for that feature! Please feel free to submit your ideas as [GitHub issues]() so we may review them and determine the implementation method and use case.
