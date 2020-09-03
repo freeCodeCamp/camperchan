@@ -1,7 +1,6 @@
-import { CommandDef } from './command-def';
 import { UserSuspend, userSuspendModel } from '../APIs/mongo-suspend';
-import { MessageEmbed } from 'discord.js';
 import { logger } from '../utilities/logger';
+import { CommandDef } from './command-def';
 
 export const userCommand: CommandDef = {
   prefix: 'user',
