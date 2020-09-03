@@ -1,6 +1,7 @@
 import { getUpTime } from '../utilities/get-up-time';
 import { CommandDef } from './command-def';
 import getRepoInfo from 'git-repo-info';
+import { logger } from '../utilities/logger';
 const info = getRepoInfo();
 
 export const stats: CommandDef = {
@@ -63,7 +64,7 @@ export const stats: CommandDef = {
       };
       message.channel.send({ embed: statsEmbed });
     } catch (error) {
-      console.error(error);
+      logger.error(error);
     }
   }
 };

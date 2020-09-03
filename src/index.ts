@@ -1,22 +1,23 @@
 import { Client } from 'discord.js';
+import Mongoose from 'mongoose';
+import fetch from 'node-fetch';
+import { QuoteDef } from './APIs/quote-def';
 import { bootstrapCommands } from './commands/bootstrap-commands';
 import { getConfig } from './config/get-config';
 import { validateConfig } from './config/validate-config';
-import Mongoose from 'mongoose';
 import { bootstrapReactions } from './reactions/bootstrap-reactions';
-import { QuoteDef } from './APIs/quote-def';
-import fetch from 'node-fetch';
+import { logger } from './utilities/logger';
 
 const client = new Client({ partials: ['MESSAGE', 'CHANNEL', 'REACTION'] });
 
 (async () => {
   try {
     // this iife is so we can get "top level await"
-    console.log('Initalizing...');
+    logger.info('Initalizing...');
     const config = getConfig();
     validateConfig(config);
     // rig up client callbacks
-    client.on('error', console.error);
+    client.on('error', logger.error);
 
     if (config.MONGO_URI) {
       await Mongoose.connect(
@@ -25,7 +26,7 @@ const client = new Client({ partials: ['MESSAGE', 'CHANNEL', 'REACTION'] });
           useNewUrlParser: true,
           useUnifiedTopology: true
         },
-        () => console.log('MongoDB ready!')
+        () => logger.info('MongoDB ready!')
       );
     }
 
@@ -39,7 +40,7 @@ const client = new Client({ partials: ['MESSAGE', 'CHANNEL', 'REACTION'] });
     if (config.VERBOSE) {
       // if we are to print each message as is.
       client.on('message', (message) => {
-        console.log('>> ', message.content);
+        logger.silly('>> ', message.content);
       });
     }
 
@@ -48,12 +49,12 @@ const client = new Client({ partials: ['MESSAGE', 'CHANNEL', 'REACTION'] });
       client.user?.setActivity(`${getConfig().PREFIX} help`, {
         type: 'LISTENING'
       });
-      console.log('Discord ready!');
+      logger.info('Discord ready!');
     });
 
     client.login(config.TOKEN);
   } catch (err) {
-    console.error(err);
+    logger.error(err);
     process.exit(1);
   }
 })();

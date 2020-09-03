@@ -1,6 +1,7 @@
 import { CommandDef } from './command-def';
 import { TextChannel, MessageEmbed } from 'discord.js';
 import { oneLine } from 'common-tags';
+import { logger } from '../utilities/logger';
 
 export const closeCommand: CommandDef = {
   prefix: 'close',
@@ -13,13 +14,15 @@ export const closeCommand: CommandDef = {
   command: async (message, { config }): Promise<void> => {
     try {
       if (!message.member?.hasPermission('MANAGE_CHANNELS')) {
-        return console.log(
+        logger.warn(
           `${message.author.username} did not have the correct permissions.`
         );
+        return;
       }
       const flag = message.content.split(' ')[2];
       if (flag !== 'accepted' && flag !== 'denied') {
-        return console.log('invalid paramater');
+        logger.warn('invalid paramater');
+        return;
       }
       const target = message.channel as TextChannel;
       //check for log channel
@@ -28,18 +31,20 @@ export const closeCommand: CommandDef = {
       ) as TextChannel;
       //check for user permissions
       if (!message.member?.hasPermission('MANAGE_CHANNELS')) {
-        return console.log('Missing permissions.');
+        logger.warn('Missing permissions.');
+        return;
       }
-
       if (!log) {
-        return console.log('Log channel not found.');
+        logger.warn('Log channel not found.');
+        return;
       }
 
       if (
         !target.name.includes('suspended') ||
         !target.parent?.name.includes(config.SUSPEND_CATEGORY)
       ) {
-        return console.log('Cannot delete non-temporary channel');
+        logger.warn('Cannot delete non-temporary channel');
+        return;
       }
 
       let status = 'The appeal was not approved.';
@@ -48,7 +53,7 @@ export const closeCommand: CommandDef = {
           (role) => role.name === config.SUSPEND_ROLE
         );
         if (!suspend) {
-          console.log('Cannot find suspend role');
+          logger.warn('Cannot find suspend role');
         } else {
           await message.mentions.members.first()?.roles.remove([suspend]);
           status = `The appeal was approved and ${message.mentions.members.first()}'s access was restored.`;
@@ -63,7 +68,7 @@ export const closeCommand: CommandDef = {
         .addFields({ name: 'Decision', value: status });
       await log.send(deleteEmbed);
     } catch (error) {
-      console.error(error);
+      logger.error(error);
     }
   }
 };

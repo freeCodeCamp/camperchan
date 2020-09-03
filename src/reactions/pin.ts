@@ -1,5 +1,6 @@
-import { ReactionDef } from './reaction-def';
 import { MessageEmbed } from 'discord.js';
+import { logger } from '../utilities/logger';
+import { ReactionDef } from './reaction-def';
 
 export const pin: ReactionDef = {
   emoji: '📌',
@@ -27,7 +28,7 @@ export const pin: ReactionDef = {
       // Remove reaction from the message
       reaction.message.reactions.cache.get('📌')?.remove();
     } catch (error) {
-      console.error(error);
+      logger.error(error);
     }
   }
 };

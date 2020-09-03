@@ -1,5 +1,6 @@
-import { CommandDef } from './command-def';
 import { UserSuspend, userSuspendModel } from '../APIs/mongo-suspend';
+import { logger } from '../utilities/logger';
+import { CommandDef } from './command-def';
 
 export const userCommand: CommandDef = {
   prefix: 'user',
@@ -9,15 +10,18 @@ export const userCommand: CommandDef = {
     const user = message.mentions.members?.first();
 
     if (!user) {
-      return console.log('No user provided.');
+      logger.warn('No user provided.');
+      return;
     }
 
     if (!message.member?.hasPermission('KICK_MEMBERS')) {
-      return console.log('Invalid permissions');
+      logger.warn('Invalid permissions');
+      return;
     }
 
     if (!config.MONGO_URI) {
-      return console.log('No database configured');
+      logger.warn('No database configured');
+      return;
     }
 
     const userSuspend: UserSuspend | null = await userSuspendModel.findOne({
