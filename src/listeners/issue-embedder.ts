@@ -18,7 +18,7 @@ export function issueEmbedder(message: Message): void {
 
         message.channel.send(issueEmbed);
       } catch (error) {
-        new logger(error);
+        logger.error(error);
       }
     });
   }
