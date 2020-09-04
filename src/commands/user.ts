@@ -11,16 +11,23 @@ export const userCommand: CommandDef = {
 
     if (!user) {
       logger.warn('No user provided.');
+      message.channel.send('Sorry, please provide a valid user mention.');
       return;
     }
 
     if (!message.member?.hasPermission('KICK_MEMBERS')) {
       logger.warn('Invalid permissions');
+      message.channel.send(
+        'Sorry, but this command is restricted to moderators.'
+      );
       return;
     }
 
     if (!config.MONGO_URI) {
       logger.warn('No database configured');
+      message.channel.send(
+        'Sorry, but this command requires an active database connection.'
+      );
       return;
     }
 
