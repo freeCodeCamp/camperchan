@@ -29,7 +29,7 @@ export function issueEmbedder(message: Message): void {
 
         message.channel.send(issueEmbed);
       } catch (error) {
-        logger(error);
+        new logger(error);
       }
     });
   }
