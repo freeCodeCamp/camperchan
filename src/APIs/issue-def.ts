@@ -29,9 +29,17 @@ export interface IssueData {
   closed_at?: string;
   author_association: string;
   active_lock_reason?: string;
+  pull_request?: PullRequest;
   body: string;
   closed_by?: ClosedBy;
   performed_via_github_app?: boolean;
+}
+
+interface PullRequest {
+  url: string;
+  html_url: string;
+  diff_url: string;
+  patch_url: string;
 }
 
 interface ClosedBy {
