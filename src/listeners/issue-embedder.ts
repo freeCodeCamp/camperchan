@@ -1,12 +1,10 @@
-import { Octokit } from '@octokit/rest';
 import { Message } from 'discord.js';
 
 import { getIssueNumbers } from '../utilities/get-issue-numbers';
 import { issueEmbedGenerator } from '../utilities/issue-embed-generator';
 import { IssueDef } from '../APIs/issue-def';
 import { logger } from '../utilities/logger';
-
-const octokit = new Octokit();
+import { getIssueData } from '../utilities/get-issue-data';
 
 export function issueEmbedder(message: Message): void {
   const issues = getIssueNumbers(message.content);
@@ -14,16 +12,7 @@ export function issueEmbedder(message: Message): void {
   if (issues.length > 0) {
     issues.forEach(async (issueNumber) => {
       try {
-        const infoToFeatch = {
-          owner: 'freeCodeCamp',
-          repo: 'freeCodeCamp',
-          issue_number: issueNumber
-        };
-
-        const issueData: IssueDef = await octokit.request(
-          'GET /repos/{owner}/{repo}/issues/{issue_number}',
-          infoToFeatch
-        );
+        const issueData: IssueDef = await getIssueData(issueNumber);
 
         const issueEmbed = issueEmbedGenerator(issueData.data);
 

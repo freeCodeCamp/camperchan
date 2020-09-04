@@ -1,18 +1,18 @@
-export function getIssueNumbers(text: string): (number | undefined)[] {
+export function getIssueNumbers(text: string): number[] {
   let processedString = text;
   if (processedString.includes('>')) {
-    processedString = processedString.replace(/>(?<=>)(.*)(?=\n)/gi, '');
+    processedString = processedString.replace(/>(?<=>)(.*)(?=\n)/g, '');
   }
   const issueStrings = processedString.match(/#[0-9]+/g);
 
-  let issueNumbers: (number | undefined)[] = [];
+  const issueNumbers: number[] = [];
 
   if (issueStrings) {
-    issueNumbers = issueStrings.map((issue) => {
+    issueStrings.forEach((issue) => {
       const issueNumberOrNaN = Number(issue.substr(1));
 
       if (!isNaN(issueNumberOrNaN)) {
-        return issueNumberOrNaN;
+        issueNumbers.push(issueNumberOrNaN);
       }
     });
   }
