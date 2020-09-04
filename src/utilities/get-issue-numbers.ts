@@ -12,7 +12,9 @@ export function getIssueNumbers(text: string): number[] {
       const issueNumberOrNaN = Number(issue.substr(1));
 
       if (!isNaN(issueNumberOrNaN)) {
-        issueNumbers.push(issueNumberOrNaN);
+        if (issueNumberOrNaN > 50) {
+          issueNumbers.push(issueNumberOrNaN);
+        }
       }
     });
   }
