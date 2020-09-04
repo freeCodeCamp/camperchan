@@ -4,6 +4,7 @@ import { CommandDef } from './command-def';
 import { COMMANDS } from './commands';
 import { thanks } from './thanks';
 import { QuoteDef } from '../APIs/quote-def';
+import { issueEmbedder } from '../listeners/issue-embedder';
 
 /**
  * Bootstraps all commands to the client.
@@ -142,6 +143,9 @@ export const bootstrapCommands = ({
         console.error(error);
         message.reply('there was an error trying to execute that command!');
       }
+    }
+    if (message.content.includes('#')) {
+      issueEmbedder(message);
     }
     thanks(message);
   });
