@@ -7,7 +7,6 @@ import { QuoteDef } from '../APIs/quote-def';
 import { issueEmbedder } from '../listeners/issue-embedder';
 import { logger } from '../utilities/logger';
 
-
 /**
  * Bootstraps all commands to the client.
  * @param client the discord client

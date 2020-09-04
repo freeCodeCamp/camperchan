@@ -4,6 +4,7 @@ import { Message } from 'discord.js';
 import { getIssueNumbers } from '../utilities/get-issue-numbers';
 import { issueEmbedGenerator } from '../utilities/issue-embed-generator';
 import { IssueDef } from '../APIs/issue-def';
+import { logger } from '../utilities/logger';
 
 const octokit = new Octokit();
 
@@ -28,7 +29,7 @@ export function issueEmbedder(message: Message): void {
 
         message.channel.send(issueEmbed);
       } catch (error) {
-        console.error(error);
+        logger(error);
       }
     });
   }
