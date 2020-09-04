@@ -1,6 +1,7 @@
 import { CommandDef } from './command-def';
 import { MessageEmbed } from 'discord.js';
 import { MotivationalDef } from '../APIs/quote-def';
+import { logger } from '../utilities/logger';
 
 export const quote: CommandDef = {
   prefix: 'quote',
@@ -16,6 +17,6 @@ export const quote: CommandDef = {
       .setTitle(compliments[randomComp])
       .setDescription(quotes[randomQuote].quote)
       .setFooter(quotes[randomQuote].author);
-    message.channel.send(quoteEmbed).catch(console.error);
+    message.channel.send(quoteEmbed).catch(logger.error);
   }
 };

@@ -2,6 +2,7 @@ import { Message, MessageEmbed } from 'discord.js';
 import { CommandDef } from './command-def';
 import fetch from 'node-fetch';
 import { ForumData, Topic } from '../APIs/forum-data';
+import { logger } from '../utilities/logger';
 
 export const forum: CommandDef = {
   prefix: 'forum',
@@ -25,7 +26,7 @@ export const forum: CommandDef = {
       );
       message.channel.send(forumEmbed);
     } catch (error) {
-      console.error(error);
+      logger.error(error);
     }
   }
 };

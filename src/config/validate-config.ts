@@ -1,4 +1,5 @@
 import { Config } from './get-config';
+import { logger } from '../utilities/logger';
 
 /**
  * @name validateConfig
@@ -21,9 +22,9 @@ export function validateConfig(config: Config): void {
     );
     if (missingConfigProps.length) {
       missingConfigProps.forEach((prop) =>
-        console.log(`missing config: ${prop}`)
+        logger.debug(`missing config: ${prop}`)
       );
-      console.log('read the README for setting up locally');
+      logger.debug('read the README for setting up locally');
       throw new Error('Config is missing prop(s)');
     }
     return;

@@ -1,5 +1,6 @@
 import { MessageEmbed } from 'discord.js';
 import { CommandDef } from './command-def';
+import { logger } from '../utilities/logger';
 
 export const coc: CommandDef = {
   prefix: 'coc',
@@ -30,6 +31,6 @@ export const coc: CommandDef = {
       )
       .setFooter("Thank you for following freeCodeCamp's Code of Conduct");
 
-    message.channel.send(codeEmbed).catch((error) => console.log(error));
+    message.channel.send(codeEmbed).catch(logger.error);
   }
 };

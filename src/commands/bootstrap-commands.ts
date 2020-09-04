@@ -5,6 +5,8 @@ import { COMMANDS } from './commands';
 import { thanks } from './thanks';
 import { QuoteDef } from '../APIs/quote-def';
 import { issueEmbedder } from '../listeners/issue-embedder';
+import { logger } from '../utilities/logger';
+
 
 /**
  * Bootstraps all commands to the client.
@@ -54,11 +56,11 @@ export const bootstrapCommands = ({
         (channel) => channel.name === config.LEAVE_MSG_CHANNEL
       );
       if (!goodbyeChannel) {
-        console.error('goodbye channel not found.');
+        logger.error('goodbye channel not found.');
         return;
       }
       if (goodbyeChannel.type !== 'text') {
-        console.error('log ');
+        logger.error('log ');
       }
       if (suspendRole && member.roles.cache.has(suspendRole?.id)) {
         (goodbyeChannel as TextChannel).send(
@@ -98,11 +100,11 @@ export const bootstrapCommands = ({
           }
         );
       if (!logChannel) {
-        console.error('log channel not found');
+        logger.error('log channel not found');
         return;
       }
       if (logChannel.type !== 'text') {
-        console.error('log channel not a text channel');
+        logger.error('log channel not a text channel');
         return;
       }
       (logChannel as TextChannel).send(deleteEmbed);
@@ -140,7 +142,7 @@ export const bootstrapCommands = ({
           .get(commandArgument)
           ?.command(message, { client, config, quoteData });
       } catch (error) {
-        console.error(error);
+        logger.error(error);
         message.reply('there was an error trying to execute that command!');
       }
     }
