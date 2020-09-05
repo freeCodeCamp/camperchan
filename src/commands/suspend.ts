@@ -15,6 +15,9 @@ export const suspendCommand: CommandDef = {
         logger.warn(
           `${message.author.username} did not have the correct permissions.`
         );
+        message.channel.send(
+          'Sorry, this command is restricted to moderators.'
+        );
         return;
       }
 
@@ -25,6 +28,7 @@ export const suspendCommand: CommandDef = {
 
       if (!modChannel) {
         logger.warn('Log channel not found.');
+        message.channel.send('Sorry, I could not find your log channel.');
         return;
       }
 
@@ -36,6 +40,7 @@ export const suspendCommand: CommandDef = {
 
       if (!category) {
         logger.warn('Missing suspend category.');
+        message.channel.send('Sorry, I could not find your suspend category.');
         return;
       }
 
@@ -45,6 +50,7 @@ export const suspendCommand: CommandDef = {
       );
       if (!suspend) {
         logger.warn(`Missing suspend role.`);
+        message.channel.send('Sorry, I could not find your suspend role.');
         return;
       }
 
@@ -55,6 +61,7 @@ export const suspendCommand: CommandDef = {
 
       if (!botRole) {
         logger.warn('Bot role not found.');
+        message.channel.send('Sorry, I could not find my bot role.');
         return;
       }
 
@@ -66,6 +73,7 @@ export const suspendCommand: CommandDef = {
 
       if (!modRole) {
         logger.warn('Mod role not found.');
+        message.channel.send('Sorry, I could not find your moderator role.');
         return;
       }
 
@@ -76,6 +84,9 @@ export const suspendCommand: CommandDef = {
       //check for valid user tag
       if (!user) {
         message.channel.send(`Invalid user tag.`);
+        message.channel.send(
+          'Sorry, but you did not provide a valid user tag.'
+        );
         return;
       }
 
