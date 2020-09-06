@@ -14,7 +14,7 @@ export function issueEmbedder(message: Message): void {
       try {
         const issueData: IssueDef = await getIssueData(issueNumber);
 
-        const issueEmbed = issueEmbedGenerator(issueData.data);
+        const issueEmbed = issueEmbedGenerator(issueData.data, false);
 
         message.channel.send(issueEmbed);
       } catch (error) {
