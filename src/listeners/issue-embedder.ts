@@ -6,7 +6,7 @@ import { IssueDef } from '../APIs/issue-def';
 import { logger } from '../utilities/logger';
 import { getIssueData } from '../utilities/get-issue-data';
 
-export function issueHyperlinker(message: Message): void {
+export function issueEmbedder(message: Message): void {
   const issues = getIssueNumbers(message.content);
 
   if (issues.length > 0) {
