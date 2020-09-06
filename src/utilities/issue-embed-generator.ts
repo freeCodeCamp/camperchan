@@ -41,7 +41,8 @@ export function issueEmbedGenerator(
   } else {
     issueEmbed = new MessageEmbed()
       .setTitle(`${embedType} #${number}`)
-      .setColor(state === 'closed' ? 'RED' : 'GREEN');
+      .setColor(state === 'closed' ? 'RED' : 'GREEN')
+      .setURL(html_url);
   }
 
   return issueEmbed;
