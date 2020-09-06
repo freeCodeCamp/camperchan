@@ -4,7 +4,7 @@ import { CommandDef } from './command-def';
 import { COMMANDS } from './commands';
 import { thanks } from './thanks';
 import { QuoteDef } from '../APIs/quote-def';
-import { issueEmbedder } from '../listeners/issue-embedder';
+import { issueHyperlinker } from '../listeners/issue-hyperlinker';
 import { logger } from '../utilities/logger';
 
 /**
@@ -146,7 +146,7 @@ export const bootstrapCommands = ({
       }
     }
     if (message.content.includes('#')) {
-      issueEmbedder(message);
+      issueHyperlinker(message);
     }
     thanks(message);
   });
