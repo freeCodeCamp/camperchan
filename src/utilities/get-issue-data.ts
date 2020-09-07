@@ -1,18 +1,18 @@
 import { Octokit } from '@octokit/rest';
-import { IssueDef } from '../APIs/issue-def';
+import { GithubResponse } from '../APIs/github-def';
 
-export function getIssueData(issueNumber: number): Promise<IssueDef> {
+export function getIssueData(issueNumber: number): Promise<GithubResponse> {
   const octokit = new Octokit();
 
-  const infoToFeatch = {
+  const infoToFetch = {
     owner: 'freeCodeCamp',
     repo: 'freeCodeCamp',
     issue_number: issueNumber
   };
 
-  const issueData: Promise<IssueDef> = octokit.request(
+  const issueData: Promise<GithubResponse> = octokit.request(
     'GET /repos/{owner}/{repo}/issues/{issue_number}',
-    infoToFeatch
+    infoToFetch
   );
 
   return issueData;
