@@ -28,7 +28,6 @@ module.exports = {
       }
     ],
     'no-console': 'error',
-    eqeqeq: ['error', 'always'],
-    curly: ['error']
+    eqeqeq: ['error', 'always']
   }
 };

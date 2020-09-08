@@ -5,20 +5,19 @@ import { issueEmbedGenerator } from '../utilities/issue-embed-generator';
 import { logger } from '../utilities/logger';
 import { getIssueData } from '../utilities/get-issue-data';
 
-export function issueEmbedder(message: Message): void {
+export async function issueEmbedder(message: Message): Promise<void> {
   const issues = getIssueNumbers(message.content);
 
-  if (issues.length > 0) {
-    issues.forEach(async (issueNumber) => {
-      try {
-        const issueData = await getIssueData(issueNumber);
+  if (issues.length === 0) return;
+  for (const issueNumber of issues) {
+    try {
+      const issueData = await getIssueData(issueNumber);
 
-        const issueEmbed = issueEmbedGenerator(issueData.data, false);
+      const issueEmbed = issueEmbedGenerator(issueData.data, false);
 
-        message.channel.send(issueEmbed);
-      } catch (error) {
-        logger.error(error);
-      }
-    });
+      message.channel.send(issueEmbed);
+    } catch (error) {
+      logger.error(error);
+    }
   }
 }
