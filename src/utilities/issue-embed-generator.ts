@@ -17,17 +17,12 @@ export function issueEmbedGenerator(
   const bannerImageLink =
     'https://camo.githubusercontent.com/60c67cf9ac2db30d478d21755289c423e1f985c6/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f66726565636f646563616d702f776964652d736f6369616c2d62616e6e65722e706e67';
 
-  let embedType = 'Issue';
-  if (pull_request) {
-    embedType = 'Pull Request';
-  }
-
   let issueEmbed;
 
   if (isFullEmbed) {
     issueEmbed = new MessageEmbed()
       .setTitle(title)
-      .addField('Type', embedType, true)
+      .addField('Type', pull_request ? 'Pull Request' : 'Issue', true)
       .addField('ID', `#${number}`, true)
       .addField('Comments', comments.toString(), true)
       .addField('Status', state.toUpperCase(), true)
@@ -40,7 +35,7 @@ export function issueEmbedGenerator(
       );
   } else {
     issueEmbed = new MessageEmbed()
-      .setTitle(`${embedType} #${number}`)
+      .setTitle(`${pull_request ? 'Pull Request' : 'Issue'} #${number}`)
       .setColor(state === 'closed' ? 'RED' : 'GREEN')
       .setURL(html_url);
   }
