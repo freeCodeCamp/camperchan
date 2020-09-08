@@ -1,8 +1,8 @@
 import { MessageEmbed } from 'discord.js';
-import { GithubData } from '../APIs/github-def';
+import { GHIssueData } from '../APIs/github-def';
 
 export function issueEmbedGenerator(
-  issueData: GithubData,
+  issueData: GHIssueData,
   isFullEmbed: boolean
 ): MessageEmbed {
   const {

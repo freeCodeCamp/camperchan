@@ -1,7 +1,7 @@
 import { Octokit } from '@octokit/rest';
-import { GithubResponse } from '../APIs/github-def';
+import { GHIssueResponse } from '../APIs/github-def';
 
-export function getIssueData(issueNumber: number): Promise<GithubResponse> {
+export function getIssueData(issueNumber: number): Promise<GHIssueResponse> {
   const octokit = new Octokit();
 
   const infoToFetch = {
@@ -10,7 +10,7 @@ export function getIssueData(issueNumber: number): Promise<GithubResponse> {
     issue_number: issueNumber
   };
 
-  const issueData: Promise<GithubResponse> = octokit.request(
+  const issueData: Promise<GHIssueResponse> = octokit.request(
     'GET /repos/{owner}/{repo}/issues/{issue_number}',
     infoToFetch
   );
