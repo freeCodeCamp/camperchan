@@ -5,11 +5,16 @@ import { issueEmbedGenerator } from '../utilities/issue-embed-generator';
 import { logger } from '../utilities/logger';
 import { getIssueData } from '../utilities/get-issue-data';
 
-export async function issueEmbedder(message: Message): Promise<void> {
+export async function issueEmbedder(
+  message: Message,
+  autoLinkLimit: number
+): Promise<void> {
   const issues = getIssueNumbers(message.content);
-
   if (issues.length === 0) return;
-  for (const issueNumber of issues) {
+
+  const limtedIssues = issues.slice(0, autoLinkLimit);
+
+  for (const issueNumber of limtedIssues) {
     try {
       const issueData = await getIssueData(issueNumber);
 

@@ -72,6 +72,10 @@ export interface Config {
    * have this role to be able to access the suspended channels.
    */
   MOD_ROLE: string;
+  /**
+   * Limits the number of issue/PR auto linking feature to agiven number
+   */
+  AUTO_LINK_LIMIT: number;
 }
 /**
  * @name getConfig
@@ -92,6 +96,7 @@ export function getConfig(): Config {
     SUSPEND_ROLE: process.env.SUSPEND_ROLE || '',
     SUSPEND_CATEGORY: process.env.SUSPEND_CATEGORY || '',
     ONLINE_AT: getBotOnlineAt() || '',
-    MOD_ROLE: process.env.MOD_ROLE || ''
+    MOD_ROLE: process.env.MOD_ROLE || '',
+    AUTO_LINK_LIMIT: Number(process.env.AUTO_LINK_LIMIT) || 5
   };
 }

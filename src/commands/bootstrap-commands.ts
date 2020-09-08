@@ -146,7 +146,7 @@ export const bootstrapCommands = ({
       }
     }
     if (message.content.includes('#')) {
-      issueEmbedder(message);
+      issueEmbedder(message, config.AUTO_LINK_LIMIT);
     }
     thanks(message);
   });
