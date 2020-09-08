@@ -4,20 +4,17 @@ export function getIssueNumbers(text: string): number[] {
     processedString = processedString.replace(/>(?<=>)(.*)(?=\n)/g, '');
   }
   const issueStrings = processedString.match(/#[\d]+\s/g);
+  if (!issueStrings) return [];
 
   const issueNumbers: number[] = [];
 
-  if (issueStrings) {
-    issueStrings.forEach((issue) => {
-      const issueNumberOrNaN = Number(issue.substr(1));
+  issueStrings.forEach((issue) => {
+    const issueNumberOrNaN = Number(issue.substr(1).trim());
 
-      if (!isNaN(issueNumberOrNaN)) {
-        if (issueNumberOrNaN > 50) {
-          issueNumbers.push(issueNumberOrNaN);
-        }
-      }
-    });
-  }
+    if (!isNaN(issueNumberOrNaN) && issueNumberOrNaN > 50) {
+      issueNumbers.push(issueNumberOrNaN);
+    }
+  });
 
   return issueNumbers;
 }
