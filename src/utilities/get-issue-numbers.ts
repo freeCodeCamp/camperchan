@@ -3,7 +3,7 @@ export function getIssueNumbers(text: string): number[] {
   if (processedString.includes('>')) {
     processedString = processedString.replace(/>(?<=>)(.*)(?=\n)/g, '');
   }
-  const issueStrings = processedString.match(/#[\d]+( |$)/g);
+  const issueStrings = processedString.match(/#[\d]+(\s|$)/g);
   if (!issueStrings) return [];
 
   const issueNumbers: number[] = [];
