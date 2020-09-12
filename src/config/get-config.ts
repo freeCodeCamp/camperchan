@@ -76,6 +76,11 @@ export interface Config {
    * Limits the number of issue/PR auto linking feature to agiven number
    */
   AUTO_LINK_LIMIT: number;
+  /**
+   * Limits the auto linking feature of issue/PRs to the specified channel. If it
+   * is set to `false`, then the feature will be available in all channels
+   */
+  AUTO_LINK_CHANNEL: string | false;
 }
 /**
  * @name getConfig
@@ -97,6 +102,7 @@ export function getConfig(): Config {
     SUSPEND_CATEGORY: process.env.SUSPEND_CATEGORY || '',
     ONLINE_AT: getBotOnlineAt() || '',
     MOD_ROLE: process.env.MOD_ROLE || '',
-    AUTO_LINK_LIMIT: Number(process.env.AUTO_LINK_LIMIT) || 5
+    AUTO_LINK_LIMIT: Number(process.env.AUTO_LINK_LIMIT) || 5,
+    AUTO_LINK_CHANNEL: process.env.AUTO_LINK_CHANNEL || false
   };
 }

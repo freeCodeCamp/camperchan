@@ -16,9 +16,9 @@ export async function issueEmbedder(
 
   for (const issueNumber of limtedIssues) {
     try {
-      const issueData = await getIssueData(issueNumber);
+      const { data } = await getIssueData(issueNumber);
 
-      const issueEmbed = issueEmbedGenerator(issueData.data, false);
+      const issueEmbed = issueEmbedGenerator(data, false);
 
       message.channel.send(issueEmbed);
     } catch (error) {

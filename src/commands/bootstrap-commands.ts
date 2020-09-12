@@ -146,7 +146,18 @@ export const bootstrapCommands = ({
       }
     }
     if (message.content.includes('#')) {
-      issueEmbedder(message, config.AUTO_LINK_LIMIT);
+      const { AUTO_LINK_CHANNEL, AUTO_LINK_LIMIT } = config;
+
+      if (!AUTO_LINK_CHANNEL) {
+        issueEmbedder(message, AUTO_LINK_LIMIT);
+      } else {
+        if (
+          message.channel.type === 'text' &&
+          message.channel.name === AUTO_LINK_CHANNEL
+        ) {
+          issueEmbedder(message, AUTO_LINK_LIMIT);
+        }
+      }
     }
     thanks(message);
   });

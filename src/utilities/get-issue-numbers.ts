@@ -11,7 +11,7 @@ export function getIssueNumbers(text: string): number[] {
   issueStrings.forEach((issue) => {
     const issueNumberOrNaN = Number(issue.substr(1).trim());
 
-    if (!isNaN(issueNumberOrNaN) && issueNumberOrNaN > 50) {
+    if (!isNaN(issueNumberOrNaN)) {
       issueNumbers.push(issueNumberOrNaN);
     }
   });
