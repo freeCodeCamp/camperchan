@@ -28,6 +28,7 @@ module.exports = {
       }
     ],
     'no-console': 'error',
-    eqeqeq: ['error', 'always']
+    eqeqeq: ['error', 'always'],
+    curly: ['error']
   }
 };

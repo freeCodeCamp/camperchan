@@ -10,7 +10,9 @@ export async function issueEmbedder(
   autoLinkLimit: number
 ): Promise<void> {
   const issues = getIssueNumbers(message.content);
-  if (issues.length === 0) return;
+  if (issues.length === 0) {
+    return;
+  }
 
   const limtedIssues = issues.slice(0, autoLinkLimit);
 
