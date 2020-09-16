@@ -4,7 +4,9 @@ export function getIssueNumbers(text: string): number[] {
     processedString = processedString.replace(/>(?<=>)(.*)(?=\n)/g, '');
   }
   const issueStrings = processedString.match(/#[\d]+(\s|$)/g);
-  if (!issueStrings) return [];
+  if (!issueStrings) {
+    return [];
+  }
 
   const issueNumbers: number[] = [];
 
