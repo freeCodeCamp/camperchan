@@ -4,6 +4,7 @@ import { CommandDef } from './command-def';
 import { COMMANDS } from './commands';
 import { thanks } from './thanks';
 import { QuoteDef } from '../APIs/quote-def';
+import { issueEmbedder } from '../listeners/issue-embedder';
 import { logger } from '../utilities/logger';
 
 /**
@@ -142,6 +143,20 @@ export const bootstrapCommands = ({
       } catch (error) {
         logger.error(error);
         message.reply('there was an error trying to execute that command!');
+      }
+    }
+    if (message.content.includes('#')) {
+      const { AUTO_LINK_CHANNEL, AUTO_LINK_LIMIT } = config;
+
+      if (!AUTO_LINK_CHANNEL) {
+        issueEmbedder(message, AUTO_LINK_LIMIT);
+      } else {
+        if (
+          message.channel.type === 'text' &&
+          message.channel.name === AUTO_LINK_CHANNEL
+        ) {
+          issueEmbedder(message, AUTO_LINK_LIMIT);
+        }
       }
     }
     thanks(message);
