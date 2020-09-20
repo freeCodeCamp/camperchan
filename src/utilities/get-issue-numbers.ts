@@ -17,6 +17,7 @@ export function getIssueNumbers(text: string): number[] {
       issueNumbers.push(issueNumberOrNaN);
     }
   });
+  const issueNumbersWithoutDuplicate = [...new Set(issueNumbers)];
 
-  return issueNumbers;
+  return issueNumbersWithoutDuplicate;
 }
