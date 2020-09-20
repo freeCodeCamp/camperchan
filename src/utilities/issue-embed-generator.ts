@@ -35,7 +35,7 @@ export function issueEmbedGenerator(
       );
   } else {
     issueEmbed = new MessageEmbed()
-      .setTitle(`${pull_request ? 'Pull Request' : 'Issue'} #${number}`)
+      .setTitle(`${pull_request ? 'PR' : 'Issue'} #${number}: ${title}`)
       .setColor(state === 'closed' ? 'RED' : 'GREEN')
       .setURL(html_url);
   }
