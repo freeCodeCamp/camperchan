@@ -158,4 +158,4 @@ https://www.freecodecamp.org/forum/t/create-a-new-camperbot-for-the-official-dis
 
 ## FreeCodeCamp Moderation
 
-As mentioned above, this bot is not officially connected to freeCodeCamp. However, the bot _is_ currently serving as a proof-of-concept or minimum viable product - as such, freeCodeCamp moderators may find themselves here for instruction on using the bot. If this applies to you, documentation for how to utilise the bot's moderation features can be found at the [freeCodeCamp Moderator Handbook](https://forum.freecodecamp.org/t/the-freecodecamp-moderator-handbook/18295).
+As mentioned above, this bot is not officially connected to freeCodeCamp. However, the bot _is_ currently serving as a proof-of-concept or minimum viable product - as such, freeCodeCamp moderators may find themselves here for instruction on using the bot. If this applies to you, documentation for how to utilise the bot's moderation features can be found at the [freeCodeCamp Moderator Handbook](https://contribute.freecodecamp.org/#/flight-manuals/moderator-handbook).

@@ -13,7 +13,8 @@ export const mod: CommandDef = {
       },
       {
         name: 'Moderator Handbook',
-        value: 'https://forum.freecodecamp.org/t/18295'
+        value:
+          'https://contribute.freecodecamp.org/#/flight-manuals/moderator-handbook'
       },
       {
         name: 'Contributing Guidelines',
