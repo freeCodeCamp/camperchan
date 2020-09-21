@@ -8,16 +8,16 @@ export function getIssueNumbers(text: string): number[] {
     return [];
   }
 
-  const issueNumbers: number[] = [];
+  const issueNumbers: Set<number> = new Set([]);
 
   issueStrings.forEach((issue) => {
     const issueNumberOrNaN = Number(issue.substr(1).trim());
 
     if (!isNaN(issueNumberOrNaN)) {
-      issueNumbers.push(issueNumberOrNaN);
+      issueNumbers.add(issueNumberOrNaN);
     }
   });
-  const issueNumbersWithoutDuplicate = [...new Set(issueNumbers)];
+  const issueNumbersWithoutDuplicate = [...issueNumbers];
 
   return issueNumbersWithoutDuplicate;
 }
