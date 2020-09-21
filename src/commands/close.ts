@@ -13,7 +13,7 @@ export const closeCommand: CommandDef = {
   usage: 'close [accepted | denied] [user]',
   command: async (message, { config }): Promise<void> => {
     try {
-      if (!message.member?.hasPermission('MANAGE_CHANNELS')) {
+      if (!message.member?.hasPermission('KICK_MEMBERS')) {
         logger.warn(
           `${message.author.username} did not have the correct permissions.`
         );
