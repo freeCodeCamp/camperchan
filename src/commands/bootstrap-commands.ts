@@ -120,6 +120,14 @@ export const bootstrapCommands = ({
         'Please do not upload any files other than images or videos. For large blocks of code, use CodePen or PasteBin.'
       );
     }
+    if (
+      message.content.toLowerCase().includes('php') &&
+      message.author.id !== client.user?.id
+    ) {
+      message.channel.send(
+        '<@!219789977230245888> is our resident PHP expert.'
+      );
+    }
     if (message.content.startsWith(config.PREFIX)) {
       // Get command after prefix
       const commandArgument = message.content.split(' ')[1];
