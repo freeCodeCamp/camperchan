@@ -150,7 +150,6 @@ export const suspendCommand: CommandDef = {
         parent: category
       });
       await suspendChannel?.send(
-        /* eslint-disable indent */
         `This is a standard message notifying ${user} that you have been suspended from freeCodeCamp's Discord for ${reason}.
 
 This channel has been created for you to appeal this decision. In order to appeal the decision, you must complete the following steps:
@@ -161,7 +160,6 @@ This channel has been created for you to appeal this decision. In order to appea
   4. Explain in this channel why you feel you should be un-suspended.
 
 /cc ${modRole}`
-        /* eslint-enable indent */
       );
       if (config.MONGO_URI) {
         const userSuspend: UserSuspend | null = await userSuspendModel.findOne({
