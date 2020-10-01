@@ -16,7 +16,7 @@ export const bootstrapReactions = ({
     new Collection<string, ReactionDef>()
   );
 
-  client.on('messageReactionAdd', async (reaction) => {
+  client.on('messageReactionAdd', async (reaction, user) => {
     if (reaction.partial) {
       try {
         await reaction.fetch();
@@ -34,7 +34,9 @@ export const bootstrapReactions = ({
       return;
     }
     try {
-      reactions.get(reaction.emoji.name)?.command(reaction, { client, config });
+      reactions
+        .get(reaction.emoji.name)
+        ?.command(reaction, { client, config, user });
     } catch (error) {
       // don't warn end users, just log the error
       logger.error(error);

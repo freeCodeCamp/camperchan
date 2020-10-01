@@ -1,4 +1,4 @@
-import { MessageReaction, Client } from 'discord.js';
+import { MessageReaction, Client, User, PartialUser } from 'discord.js';
 import { Config } from '../config/get-config';
 
 /**
@@ -7,6 +7,7 @@ import { Config } from '../config/get-config';
 export interface ReactionDefArgs {
   client: Client;
   config: Config;
+  user: User | PartialUser;
 }
 /**
  * A reaction def defines how to handle specific

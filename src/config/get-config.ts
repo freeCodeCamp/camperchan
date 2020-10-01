@@ -81,6 +81,15 @@ export interface Config {
    * is set to `false`, then the feature will be available in all channels
    */
   AUTO_LINK_CHANNEL: string | false;
+  /**
+   * The role to assign to users who wish to be notified of new live streams.
+   */
+  STREAM_NOTIF_ROLE: string;
+  /**
+   * The message ID for the livestream role assignment - users react to this
+   * message to be assigned the role.
+   */
+  STREAM_MSG_ID: string;
 }
 /**
  * @name getConfig
@@ -103,6 +112,8 @@ export function getConfig(): Config {
     ONLINE_AT: getBotOnlineAt() || '',
     MOD_ROLE: process.env.MOD_ROLE || '',
     AUTO_LINK_LIMIT: Number(process.env.AUTO_LINK_LIMIT) || 5,
-    AUTO_LINK_CHANNEL: process.env.AUTO_LINK_CHANNEL || false
+    AUTO_LINK_CHANNEL: process.env.AUTO_LINK_CHANNEL || false,
+    STREAM_NOTIF_ROLE: process.env.STREAM_NOTIF_ROLE || '',
+    STREAM_MSG_ID: process.env.STREAM_MSG_ID || ''
   };
 }
