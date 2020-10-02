@@ -6,7 +6,7 @@ export const liveStreamReaction: ReactionDef = {
   description: 'Adds the livestream role to the user who reacts',
   command: async (reaction, { config, user }) => {
     const streamRole = reaction.message.guild?.roles.cache.find(
-      (role) => role.name === config.STREAM_NOTIF_ROLE
+      (role) => role.name === config.STREAM_NOTIFY_ROLE
     );
     if (!streamRole) {
       logger.warn('Stream role not found');
