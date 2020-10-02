@@ -84,10 +84,11 @@ export interface Config {
   /**
    * The role to assign to users who wish to be notified of new live streams.
    */
-  STREAM_NOTIF_ROLE: string;
+  STREAM_NOTIFY_ROLE: string;
   /**
    * The message ID for the livestream role assignment - users react to this
-   * message to be assigned the role.
+   * message to be assigned the role. This ID is obtained by right clicking
+   * on the message you want to use for reactions and selecting "Copy ID".
    */
   STREAM_MSG_ID: string;
 }
@@ -113,7 +114,7 @@ export function getConfig(): Config {
     MOD_ROLE: process.env.MOD_ROLE || '',
     AUTO_LINK_LIMIT: Number(process.env.AUTO_LINK_LIMIT) || 5,
     AUTO_LINK_CHANNEL: process.env.AUTO_LINK_CHANNEL || false,
-    STREAM_NOTIF_ROLE: process.env.STREAM_NOTIF_ROLE || '',
+    STREAM_NOTIFY_ROLE: process.env.STREAM_NOTIFY_ROLE || '',
     STREAM_MSG_ID: process.env.STREAM_MSG_ID || ''
   };
 }
