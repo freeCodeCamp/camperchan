@@ -24,7 +24,7 @@ export const closeCommand: CommandDef = {
       }
       const flag = message.content.split(' ')[2];
       if (flag !== 'accepted' && flag !== 'denied') {
-        logger.warn('invalid paramater');
+        logger.warn('invalid parameter');
         message.channel.send(
           "I don't see the right flags. Please use `close [accepted/denied] [@user]`."
         );
@@ -54,7 +54,13 @@ export const closeCommand: CommandDef = {
       }
 
       let status = 'The appeal was not approved.';
-      if (message.mentions.members?.first() && flag === 'accepted') {
+      if (flag === 'accepted') {
+        if (!message.mentions.members?.first()) {
+          message.channel.send(
+            'Please provide the user mention for the user to unsuspend.'
+          );
+          return;
+        }
         const suspend = message.guild?.roles.cache.find(
           (role) => role.name === config.SUSPEND_ROLE
         );
