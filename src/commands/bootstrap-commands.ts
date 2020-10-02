@@ -159,6 +159,6 @@ export const bootstrapCommands = ({
         }
       }
     }
-    thanks(message);
+    thanks(message, config);
   });
 };

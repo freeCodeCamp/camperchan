@@ -91,6 +91,10 @@ export interface Config {
    * on the message you want to use for reactions and selecting "Copy ID".
    */
   STREAM_MSG_ID: string;
+  /**
+   * Option to enable/disable the thanks feature.
+   */
+  THANK_OPTION: boolean;
 }
 /**
  * @name getConfig
@@ -115,6 +119,7 @@ export function getConfig(): Config {
     AUTO_LINK_LIMIT: Number(process.env.AUTO_LINK_LIMIT) || 5,
     AUTO_LINK_CHANNEL: process.env.AUTO_LINK_CHANNEL || false,
     STREAM_NOTIFY_ROLE: process.env.STREAM_NOTIFY_ROLE || '',
-    STREAM_MSG_ID: process.env.STREAM_MSG_ID || ''
+    STREAM_MSG_ID: process.env.STREAM_MSG_ID || '',
+    THANK_OPTION: !!process.env.THANK_OPTION || false
   };
 }
