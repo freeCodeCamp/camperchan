@@ -1,4 +1,5 @@
 import { Message } from 'discord.js';
+import { Config } from '../config/get-config';
 
 /**
  * Thanks handler that will show a nice message
@@ -7,7 +8,13 @@ import { Message } from 'discord.js';
  * TODO: maybe rename to be more clear what this does?
  * @param message the message we are to check against.
  */
-export async function thanks(message: Message): Promise<Message | void> {
+export async function thanks(
+  message: Message,
+  config: Config
+): Promise<Message | void> {
+  if (!config.THANK_OPTION) {
+    return;
+  }
   if (!shouldThank(message)) {
     return;
   }
