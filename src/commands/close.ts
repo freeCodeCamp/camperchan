@@ -52,10 +52,10 @@ export const closeCommand: CommandDef = {
         );
         return;
       }
-
+      const member = message.mentions.members?.first();
       let status = 'The appeal was not approved.';
       if (flag === 'accepted') {
-        if (!message.mentions.members?.first()) {
+        if (!member) {
           message.channel.send(
             'Please provide the user mention for the user to unsuspend.'
           );
@@ -68,8 +68,8 @@ export const closeCommand: CommandDef = {
           logger.warn('Cannot find suspend role');
           message.channel.send('Sorry, I could not find your suspended role.');
         } else {
-          await message.mentions.members.first()?.roles.remove([suspend]);
-          status = `The appeal was approved and ${message.mentions.members.first()}'s access was restored.`;
+          await member.roles.remove([suspend]);
+          status = `The appeal was approved and \`${member.user.username}\`'s access was restored.`;
         }
       }
       await target.delete();
