@@ -95,6 +95,14 @@ export interface Config {
    * Option to enable/disable the thanks feature.
    */
   THANK_OPTION: boolean;
+  /**
+   * Announcement message ID for Halloween event
+   */
+  HALLOWEEN_ANNOUNCEMENT: string;
+  /**
+   * Role for Halloween event.
+   */
+  HALLOWEEN_ROLE: string;
 }
 /**
  * @name getConfig
@@ -120,6 +128,8 @@ export function getConfig(): Config {
     AUTO_LINK_CHANNEL: process.env.AUTO_LINK_CHANNEL || false,
     STREAM_NOTIFY_ROLE: process.env.STREAM_NOTIFY_ROLE || '',
     STREAM_MSG_ID: process.env.STREAM_MSG_ID || '',
-    THANK_OPTION: !!process.env.THANK_OPTION || false
+    THANK_OPTION: !!process.env.THANK_OPTION || false,
+    HALLOWEEN_ANNOUNCEMENT: process.env.HALLOWEEN_ANNOUNCEMENT || '',
+    HALLOWEEN_ROLE: process.env.HALLOWEEN_ROLE || ''
   };
 }
