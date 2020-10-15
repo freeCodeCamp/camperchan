@@ -96,11 +96,13 @@ export interface Config {
    */
   THANK_OPTION: boolean;
   /**
-   * Announcement message ID for Halloween event
+   * Announcement message ID for Halloween event. This should be the ID
+   * of the message users can react to and receive HALLOWEEN_ROLE.
    */
   HALLOWEEN_ANNOUNCEMENT: string;
   /**
-   * Role for Halloween event.
+   * Role for Halloween event. The role grants access to the halloween event channel,
+   * which is the channel the Trick'cord Treat bot will be operating in.
    */
   HALLOWEEN_ROLE: string;
 }
