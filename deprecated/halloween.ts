@@ -1,5 +1,7 @@
-import { logger } from '../utilities/logger';
-import { ReactionDef } from './reaction-def';
+//@ts-nocheck
+//disable error checking for archived code
+import { logger } from '../src/utilities/logger';
+import { ReactionDef } from '../src/reactions/reaction-def';
 
 export const halloweenReaction: ReactionDef = {
   emoji: '🎃',
