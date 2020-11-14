@@ -22,7 +22,3 @@ Please refrain from spamming issues, pull requests, or comments. Do not link to 
 ## Malicious Code
 
 Opening a PR that intentionally contains malicious code will result in being blocked from this repository.
-
-## Have Questions?
-
-Feel free to join the [Bot Test Server](https://discord.gg/BqRZ85t) to connect with us!
