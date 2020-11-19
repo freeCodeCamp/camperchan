@@ -1,7 +1,6 @@
 # Discord Test Bot
 
 [![Build Status](https://travis-ci.org/bradtaniguchi/discord-bot-test.svg?branch=master)](https://travis-ci.org/bradtaniguchi/discord-bot-test)
-[![Discord](https://img.shields.io/discord/705679411936100416?color=purple)](https://discord.gg/BqRZ85t)
 ![Issues](https://img.shields.io/github/issues/bradtaniguchi/discord-bot-test)
 ![PRs](https://img.shields.io/github/issues-pr/bradtaniguchi/discord-bot-test)
 [![Total alerts](https://img.shields.io/lgtm/alerts/g/bradtaniguchi/discord-bot-test.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/bradtaniguchi/discord-bot-test/alerts/)
