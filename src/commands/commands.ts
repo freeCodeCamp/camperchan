@@ -11,6 +11,7 @@ import { triviaCommand } from './trivia';
 import { userCommand } from './user';
 import { quote } from './quote';
 import { mod } from './mod';
+import { privateCmd } from './private';
 
 export const COMMANDS: Array<CommandDef> = [
   eightBall,
@@ -24,5 +25,6 @@ export const COMMANDS: Array<CommandDef> = [
   triviaCommand,
   userCommand,
   quote,
-  mod
+  mod,
+  privateCmd
 ];
