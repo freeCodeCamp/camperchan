@@ -8,8 +8,20 @@ export const privateCmd: CommandDef = {
   usage: 'private <user>',
   command: async (message, { config }) => {
     try {
+      //check for moderator role
+
+      const modRole = message.guild?.roles.cache.find(
+        (role) => role.name === config.MOD_ROLE
+      );
+
+      if (!modRole) {
+        logger.warn('Mod role not found.');
+        message.channel.send('Sorry, I could not find your moderator role.');
+        return;
+      }
+
       //check for appropriate permissions
-      if (!message.member?.hasPermission('KICK_MEMBERS')) {
+      if (!message.member?.roles.cache.has(modRole.id)) {
         logger.warn(
           `${message.author.username} did not have the correct permissions.`
         );
@@ -53,18 +65,6 @@ export const privateCmd: CommandDef = {
         return;
       }
 
-      //check for moderator role
-
-      const modRole = message.guild?.roles.cache.find(
-        (role) => role.name === config.MOD_ROLE
-      );
-
-      if (!modRole) {
-        logger.warn('Mod role not found.');
-        message.channel.send('Sorry, I could not find your moderator role.');
-        return;
-      }
-
       const mod = message.author;
       const user = message.mentions.members?.first();
 
@@ -82,19 +82,23 @@ export const privateCmd: CommandDef = {
         message.channel.send(`Cannot target self.`);
         return;
       }
+
       //logging embed
-      const restrictEmbed = new MessageEmbed()
+      const privateEmbed = new MessageEmbed()
         .setColor('#FF0000')
         .setTitle(`Private Channel Created`)
         .addFields({
           name: 'What happened?',
           value: `${mod} has created a private discussion channel for **${user.user.username}** (${user}).`
         })
-        .setFooter('Please remember to follow our rules!');
-      modChannel.send(restrictEmbed);
+        .setFooter(
+          'This is not a suspension, but the notice is created for our records.'
+        );
+      modChannel.send(privateEmbed);
+
       //create suspend channel
       const channelName = `private-${user.user.username}`;
-      //assign this below line to "suspendChannel" once that feature is turned back on.
+
       await message.guild?.channels.create(channelName, {
         type: 'text',
         permissionOverwrites: [
