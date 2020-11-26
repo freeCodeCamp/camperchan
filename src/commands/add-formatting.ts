@@ -53,11 +53,11 @@ export async function addFormatting(message: Message): Promise<void> {
   ) {
     languageGuesses[0] = 'XML';
   }
-  const supportedLanguage = isSupportedByPrettier(languageGuesses[0]);
+  const supportedLanguage = isSupportedByPrettier(languageGuesses[0] || '');
   if (supportedLanguage) {
     const formattedCode = formatter(content, supportedLanguage);
     message.channel.send(formatCodeBlock(supportedLanguage, formattedCode));
     return;
   }
-  message.channel.send(formatCodeBlock(languageGuesses[0], content));
+  message.channel.send(formatCodeBlock(languageGuesses[0] || '', content));
 }
