@@ -1,7 +1,6 @@
 import { TextChannel } from 'discord.js';
 import { close } from '../command-functions/moderate/close';
 import { privateCommand } from '../command-functions/moderate/private';
-import { suspend } from '../command-functions/moderate/suspend';
 import { logger } from '../utilities/logger';
 import { CommandDef } from './command-def';
 
@@ -14,13 +13,7 @@ export const moderate: CommandDef = {
   command: async (message, { config }) => {
     // Extract values
     const { member, content, channel, mentions, guild } = message;
-    const {
-      LOG_MSG_CHANNEL,
-      SUSPEND_ROLE,
-      MOD_ROLE,
-      SUSPEND_CATEGORY,
-      BOT_ROLE
-    } = config;
+    const { LOG_MSG_CHANNEL, MOD_ROLE, PRIVATE_CATEGORY, BOT_ROLE } = config;
 
     // Error handling
     if (!guild) {
@@ -51,7 +44,7 @@ export const moderate: CommandDef = {
     const [action] = content.split(' ').slice(2);
 
     // Handle invalid action
-    if (action !== 'suspend' && action !== 'private' && action !== 'close') {
+    if (action !== 'private' && action !== 'close') {
       await channel.send(
         `${action} is not a valid action for this command. Please try again, and tell me if you would like to suspend, private, or close.`
       );
@@ -68,24 +61,14 @@ export const moderate: CommandDef = {
       return;
     }
 
-    // Check for suspend role
-    const suspendRole = guild?.roles.cache.find(
-      (role) => role.name === SUSPEND_ROLE
-    );
-
-    if (!suspendRole) {
-      await channel.send('Sorry, but I could not find your suspended role.');
-      return;
-    }
-
     if (action === 'close') {
-      await close(message, { modRole, suspendRole, logChannel });
+      await close(message, { modRole, logChannel });
       return;
     }
 
     // If not closing channel, locate correct category
     const category = guild?.channels.cache.find(
-      (c) => c.name === SUSPEND_CATEGORY && c.type === 'category'
+      (c) => c.name === PRIVATE_CATEGORY && c.type === 'category'
     );
     if (!category) {
       logger.warn('Missing private category.');
@@ -120,27 +103,12 @@ export const moderate: CommandDef = {
     }
 
     // Now handle creating private channels
-    if (action === 'private') {
-      await privateCommand(message, {
-        modRole,
-        suspendRole,
-        logChannel,
-        category,
-        botRole,
-        targetUser
-      });
-      return;
-    }
-
-    // Last option is suspend... Remove the user mention from command arguments
-    await suspend(message, {
+    await privateCommand(message, {
       modRole,
-      suspendRole,
       logChannel,
       category,
       botRole,
       targetUser
     });
-    return;
   }
 };

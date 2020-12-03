@@ -39,29 +39,17 @@ export interface Config {
    */
   WELCOME_DM: boolean;
   /**
-   * The name of channel to post "leave" messages to.
-   * If not given, or if the channel is not found
-   * the message will not be provided.
-   */
-  LEAVE_MSG_CHANNEL: string;
-  /**
    * The name of the channel to log deleted messages to.
    * If not given, or if the channel is not found
    * the log will not be generated.
    */
   LOG_MSG_CHANNEL: string;
   /**
-   * The name of the role to suspend a user with.
-   * If not given, or if the role is not found
-   * the command will not function
-   */
-  SUSPEND_ROLE: string;
-  /**
    * The name of the category to create new
    * suspended user channels in.
    * If not given, channel will not be created.
    */
-  SUSPEND_CATEGORY: string;
+  PRIVATE_CATEGORY: string;
   /**
    * Get the bot Start Time/ Online Time in a
    * [HH:MM:SS PM/AM TZ] format
@@ -110,10 +98,8 @@ export function getConfig(): Config {
     VERBOSE: process.env.VERBOSE === 'true',
     BOT_ROLE: process.env.BOT_ROLE || '',
     WELCOME_DM: process.env.WELCOME_DM === 'true',
-    LEAVE_MSG_CHANNEL: process.env.LEAVE_MSG_CHANNEL || '',
     LOG_MSG_CHANNEL: process.env.LOG_MSG_CHANNEL || 'moderation-activity',
-    SUSPEND_ROLE: process.env.SUSPEND_ROLE || '',
-    SUSPEND_CATEGORY: process.env.SUSPEND_CATEGORY || '',
+    PRIVATE_CATEGORY: process.env.PRIVATE_CATEGORY || '',
     ONLINE_AT: getBotOnlineAt() || '',
     MOD_ROLE: process.env.MOD_ROLE || '',
     AUTO_LINK_LIMIT: Number(process.env.AUTO_LINK_LIMIT) || 5,
