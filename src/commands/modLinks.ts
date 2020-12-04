@@ -1,8 +1,8 @@
 import { CommandDef } from './command-def';
 import { MessageEmbed } from 'discord.js';
 
-export const mod: CommandDef = {
-  prefix: 'mod',
+export const modLinks: CommandDef = {
+  prefix: 'modlinks',
   description: 'Provides helpful mod links.',
   usage: `mod`,
   command: (message) => {

@@ -44,31 +44,6 @@ export const bootstrapCommands = ({
     });
   }
 
-  if (config.LEAVE_MSG_CHANNEL) {
-    // we only mention if users are removed if
-    // the leave message channel is given.
-    client.on('guildMemberRemove', function (member) {
-      const suspendRole = member.guild.roles.cache.find(
-        (role) => role.name === config.SUSPEND_ROLE
-      );
-      const goodbyeChannel = member.guild.channels.cache.find(
-        (channel) => channel.name === config.LEAVE_MSG_CHANNEL
-      );
-      if (!goodbyeChannel) {
-        logger.error('goodbye channel not found.');
-        return;
-      }
-      if (goodbyeChannel.type !== 'text') {
-        logger.error('log ');
-      }
-      if (suspendRole && member.roles.cache.has(suspendRole?.id)) {
-        (goodbyeChannel as TextChannel).send(
-          `${member.user} (**${member.user?.username}**) has left us! :(`
-        );
-      }
-    });
-  }
-
   if (config.LOG_MSG_CHANNEL) {
     //deleted message logging
     client.on('messageDelete', function (message) {
