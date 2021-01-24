@@ -10,16 +10,19 @@ export const moderate: CommandDef = {
     'This handles the moderation commands. It can create a `private` discussion channel, `suspend` a user, and `close` a private/suspended channel.',
   usage:
     'moderate <suspend|private> <@user> [reason] || moderate close <accepted|denied> <@user>',
-  command: async (message, { config }) => {
+  command: async (message, { client, config }) => {
     // Extract values
     const { member, content, channel, mentions, guild } = message;
     const { LOG_MSG_CHANNEL, MOD_ROLE, PRIVATE_CATEGORY, BOT_ROLE } = config;
+    const { user } = client;
 
     // Error handling
-    if (!guild) {
+    if (!guild || !user) {
       logger.error('Guild error.');
       return;
     }
+
+    const botId = user.id;
 
     // Check for moderator role
     const modRole = guild.roles.cache.find((role) => role.name === MOD_ROLE);
@@ -43,6 +46,13 @@ export const moderate: CommandDef = {
     // Get action
     const [action] = content.split(' ').slice(2);
 
+    if (!action) {
+      await channel.send(
+        'Please provide an action for this command: `private` or `close`.'
+      );
+      return;
+    }
+
     // Handle invalid action
     if (action !== 'private' && action !== 'close') {
       await channel.send(
@@ -62,17 +72,7 @@ export const moderate: CommandDef = {
     }
 
     if (action === 'close') {
-      await close(message, { modRole, logChannel });
-      return;
-    }
-
-    // If not closing channel, locate correct category
-    const category = guild?.channels.cache.find(
-      (c) => c.name === PRIVATE_CATEGORY && c.type === 'category'
-    );
-    if (!category) {
-      logger.warn('Missing private category.');
-      channel.send('Sorry, I could not find your private category.');
+      await close(message, { modRole, logChannel, botId });
       return;
     }
 
@@ -85,6 +85,30 @@ export const moderate: CommandDef = {
       logger.warn('Bot role not found.');
       message.channel.send('Sorry, I could not find my bot role.');
       return;
+    }
+
+    // If not closing channel, locate correct category
+    let category = guild.channels.cache.find(
+      (c) => c.name === PRIVATE_CATEGORY && c.type === 'category'
+    );
+    if (!category) {
+      category = await guild.channels.create(PRIVATE_CATEGORY, {
+        type: 'category',
+        permissionOverwrites: [
+          {
+            id: guild.id,
+            deny: ['VIEW_CHANNEL', 'READ_MESSAGE_HISTORY', 'SEND_MESSAGES']
+          },
+          {
+            id: modRole.id,
+            allow: ['VIEW_CHANNEL', 'READ_MESSAGE_HISTORY', 'SEND_MESSAGES']
+          },
+          {
+            id: botId,
+            allow: ['VIEW_CHANNEL', 'READ_MESSAGE_HISTORY', 'SEND_MESSAGES']
+          }
+        ]
+      });
     }
 
     // Check for mentioned user
@@ -107,7 +131,7 @@ export const moderate: CommandDef = {
       modRole,
       logChannel,
       category,
-      botRole,
+      botId,
       targetUser
     });
   }
