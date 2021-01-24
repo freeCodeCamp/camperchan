@@ -7,10 +7,10 @@ export const privateCommand = async (
 ): Promise<void> => {
   // Extract values
   const { author, guild } = message;
-  const { modRole, botRole, targetUser, category, logChannel } = moderate;
+  const { modRole, botId, targetUser, category, logChannel } = moderate;
 
   // This is already handled in the command...
-  if (!targetUser || !botRole || !modRole) {
+  if (!targetUser || !botId || !modRole) {
     return;
   }
 
@@ -35,7 +35,7 @@ export const privateCommand = async (
         ]
       },
       {
-        id: botRole,
+        id: botId,
         allow: ['VIEW_CHANNEL', 'READ_MESSAGE_HISTORY', 'SEND_MESSAGES'],
         deny: ['CREATE_INSTANT_INVITE']
       },

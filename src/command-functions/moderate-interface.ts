@@ -4,6 +4,6 @@ export interface ModerateConfig {
   modRole: Role;
   logChannel: TextChannel;
   category?: Channel;
-  botRole?: Role;
+  botId: string;
   targetUser?: GuildMember;
 }
