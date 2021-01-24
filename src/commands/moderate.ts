@@ -46,6 +46,13 @@ export const moderate: CommandDef = {
     // Get action
     const [action] = content.split(' ').slice(2);
 
+    if (!action) {
+      await channel.send(
+        'Please provide an action for this command: `private` or `close`.'
+      );
+      return;
+    }
+
     // Handle invalid action
     if (action !== 'private' && action !== 'close') {
       await channel.send(

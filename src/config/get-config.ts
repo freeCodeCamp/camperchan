@@ -61,7 +61,7 @@ export interface Config {
    */
   MOD_ROLE: string;
   /**
-   * Limits the number of issue/PR auto linking feature to agiven number
+   * Limits the number of issue/PR auto linking feature to a given number
    */
   AUTO_LINK_LIMIT: number;
   /**
@@ -99,7 +99,7 @@ export function getConfig(): Config {
     BOT_ROLE: process.env.BOT_ROLE || '',
     WELCOME_DM: process.env.WELCOME_DM === 'true',
     LOG_MSG_CHANNEL: process.env.LOG_MSG_CHANNEL || 'moderation-activity',
-    PRIVATE_CATEGORY: process.env.PRIVATE_CATEGORY || '',
+    PRIVATE_CATEGORY: process.env.PRIVATE_CATEGORY || 'private',
     ONLINE_AT: getBotOnlineAt() || '',
     MOD_ROLE: process.env.MOD_ROLE || '',
     AUTO_LINK_LIMIT: Number(process.env.AUTO_LINK_LIMIT) || 5,
