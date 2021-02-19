@@ -31,7 +31,7 @@ const client = new Client({ partials: ['MESSAGE', 'CHANNEL', 'REACTION'] });
     }
 
     const quoteFetch = await fetch(
-      'https://raw.githubusercontent.com/freeCodeCamp/freeCodeCamp/master/config/motivational-quotes.json'
+      'https://raw.githubusercontent.com/freeCodeCamp/freeCodeCamp/main/client/i18n/locales/english/motivation.json'
     );
     const quoteData: QuoteDef = await quoteFetch.json();
 
@@ -46,7 +46,7 @@ const client = new Client({ partials: ['MESSAGE', 'CHANNEL', 'REACTION'] });
 
     client.once('ready', () => {
       // Set up activity
-      client.user?.setActivity(`${getConfig().PREFIX} help`, {
+      client.user?.setActivity(`${config.PREFIX} help`, {
         type: 'LISTENING'
       });
       logger.info('Discord ready!');
