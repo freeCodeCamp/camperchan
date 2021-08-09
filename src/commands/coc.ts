@@ -31,6 +31,6 @@ export const coc: CommandDef = {
       )
       .setFooter("Thank you for following freeCodeCamp's Code of Conduct");
 
-    message.channel.send(codeEmbed).catch(logger.error);
+    message.channel.send({ embeds: [codeEmbed] }).catch(logger.error);
   }
 };

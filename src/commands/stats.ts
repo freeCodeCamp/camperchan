@@ -23,13 +23,13 @@ export const stats: CommandDef = {
         process.env.SOURCE_VERSION?.slice(0, 10) || info.abbreviatedSha;
 
       const statsEmbed = {
-        color: '#0099FF',
+        color: 0x0099ff,
         title: 'Server Information',
         description: 'Here is some information on our server!',
         fields: [
           {
             name: 'Server Name',
-            value: message.guild?.name
+            value: message.guild?.name || 'unknown'
           },
           {
             name: 'Bot Uptime',
@@ -45,24 +45,20 @@ export const stats: CommandDef = {
           },
           {
             name: 'Created on',
-            value: message.guild?.createdAt
+            value: message.guild?.createdAt.toString() || 'unknown'
           },
           {
             name: 'You joined on',
-            value: message.member?.joinedAt
+            value: message.member?.joinedAt?.toString() || 'unknown'
           },
           {
             name: 'Total Member Count is',
-            value: message.guild?.memberCount
-          },
-          {
-            name: 'Server run by',
-            value: message.guild?.owner
+            value: message.guild?.memberCount.toString() || 'unknown'
           }
         ],
         footer: { text: 'Thanks for being here with us!' }
       };
-      message.channel.send({ embed: statsEmbed });
+      message.channel.send({ embeds: [statsEmbed] });
     } catch (error) {
       logger.error(error);
     }

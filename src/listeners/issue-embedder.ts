@@ -22,7 +22,7 @@ export async function issueEmbedder(
 
       const issueEmbed = issueEmbedGenerator(data, false);
 
-      message.channel.send(issueEmbed);
+      message.channel.send({ embeds: [issueEmbed] });
     } catch (error) {
       logger.error(error);
     }

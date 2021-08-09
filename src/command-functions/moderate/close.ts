@@ -27,5 +27,5 @@ export const close = async (
 
   // Handle flow for private channel
   await channel.delete();
-  await logChannel.send(deleteEmbed);
+  await logChannel.send({ embeds: [deleteEmbed] });
 };

@@ -1,9 +1,9 @@
-import { Channel, GuildMember, Role, TextChannel } from 'discord.js';
+import { GuildChannel, GuildMember, Role, TextChannel } from 'discord.js';
 
 export interface ModerateConfig {
   modRole: Role;
   logChannel: TextChannel;
-  category?: Channel;
+  category?: GuildChannel;
   botId: string;
   targetUser?: GuildMember;
 }

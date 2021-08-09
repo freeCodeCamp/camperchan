@@ -18,7 +18,7 @@ export const liveStreamReaction: ReactionDef = {
     if (user.partial) {
       user = await user.fetch();
     }
-    const target = reaction.message.guild?.member(user);
+    const target = await reaction.message.guild?.members.fetch(user);
     if (!target) {
       logger.warn('user error');
       return;

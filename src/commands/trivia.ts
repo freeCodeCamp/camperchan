@@ -18,6 +18,6 @@ export const triviaCommand: CommandDef = {
         value: `${facts[random].source}`
       }
     );
-    message.channel.send(triviaEmbed);
+    message.channel.send({ embeds: [triviaEmbed] });
   }
 };

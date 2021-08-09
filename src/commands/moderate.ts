@@ -1,4 +1,4 @@
-import { TextChannel } from 'discord.js';
+import { GuildChannel, TextChannel } from 'discord.js';
 import { close } from '../command-functions/moderate/close';
 import { privateCommand } from '../command-functions/moderate/private';
 import { logger } from '../utilities/logger';
@@ -89,11 +89,11 @@ export const moderate: CommandDef = {
 
     // If not closing channel, locate correct category
     let category = guild.channels.cache.find(
-      (c) => c.name === PRIVATE_CATEGORY && c.type === 'category'
+      (c) => c.name === PRIVATE_CATEGORY && c.type === 'GUILD_CATEGORY'
     );
     if (!category) {
       category = await guild.channels.create(PRIVATE_CATEGORY, {
-        type: 'category',
+        type: 'GUILD_CATEGORY',
         permissionOverwrites: [
           {
             id: guild.id,
@@ -130,7 +130,7 @@ export const moderate: CommandDef = {
     await privateCommand(message, {
       modRole,
       logChannel,
-      category,
+      category: category as GuildChannel,
       botId,
       targetUser
     });

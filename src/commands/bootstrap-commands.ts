@@ -40,7 +40,7 @@ export const bootstrapCommands = ({
             ' before posting in the server.'
         })
         .setFooter('Thank you and Happy Coding! 😁');
-      member.send(welcomeEmbed);
+      member.send({ embeds: [welcomeEmbed] });
     });
   }
 
@@ -58,7 +58,7 @@ export const bootstrapCommands = ({
         .addFields(
           {
             name: 'Message author',
-            value: message.author
+            value: message.author?.username || 'unknown author'
           },
           {
             name: 'Message ID',
@@ -66,7 +66,7 @@ export const bootstrapCommands = ({
           },
           {
             name: 'Channel',
-            value: message.channel
+            value: message.channel.toString()
           },
           {
             name: 'Content',
@@ -77,18 +77,18 @@ export const bootstrapCommands = ({
         logger.error('log channel not found');
         return;
       }
-      if (logChannel.type !== 'text') {
+      if (logChannel.type !== 'GUILD_TEXT') {
         logger.error('log channel not a text channel');
         return;
       }
-      (logChannel as TextChannel).send(deleteEmbed);
+      (logChannel as TextChannel).send({ embeds: [deleteEmbed] });
     });
   }
 
   client.on('message', (message) => {
     if (
-      message.attachments.array().length > 0 &&
-      !message.attachments.array()[0].height
+      Array.from(message.attachments).length > 0 &&
+      !Array.from(message.attachments)[0][1].height
     ) {
       message.delete();
       message.channel.send(
@@ -127,7 +127,7 @@ export const bootstrapCommands = ({
         issueEmbedder(message, AUTO_LINK_LIMIT);
       } else {
         if (
-          message.channel.type === 'text' &&
+          message.channel.type === 'GUILD_TEXT' &&
           message.channel.name === AUTO_LINK_CHANNEL
         ) {
           issueEmbedder(message, AUTO_LINK_LIMIT);

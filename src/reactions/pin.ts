@@ -14,7 +14,10 @@ export const pin: ReactionDef = {
         .setColor('#0099ff')
         .setTitle('Pinned Message:')
         .addFields(
-          { name: 'Author', value: reaction.message.author },
+          {
+            name: 'Author',
+            value: reaction.message.author?.username || 'unknown author'
+          },
           {
             name: 'Content',
             value:
@@ -23,7 +26,7 @@ export const pin: ReactionDef = {
         )
         .setFooter('Happy Coding! 😁');
 
-      user?.send(pinnedEmbed);
+      user?.send({ embeds: [pinnedEmbed] });
 
       // Remove reaction from the message
       reaction.message.reactions.cache.get('📌')?.remove();

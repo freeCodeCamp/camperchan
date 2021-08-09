@@ -1,3 +1,4 @@
+import { Message } from 'discord.js';
 import { addFormatting } from '../commands/add-formatting';
 import { logger } from '../utilities/logger';
 import { ReactionDef } from './reaction-def';
@@ -7,7 +8,11 @@ export const formatReaction: ReactionDef = {
   description: 'Guesses and formats the message',
   command: async (reaction) => {
     try {
-      await addFormatting(reaction.message);
+      let message = reaction.message;
+      if (reaction.message.partial) {
+        message = await reaction.message.fetch();
+      }
+      await addFormatting(message as Message);
 
       reaction.message.reactions.cache.get('🤖')?.remove();
       reaction.message.react('✅');

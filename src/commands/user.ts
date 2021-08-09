@@ -15,7 +15,7 @@ export const userCommand: CommandDef = {
       return;
     }
 
-    if (!message.member?.hasPermission('KICK_MEMBERS')) {
+    if (!message.member?.permissions.has('KICK_MEMBERS')) {
       logger.warn('Invalid permissions');
       message.channel.send(
         'Sorry, but this command is restricted to moderators.'
