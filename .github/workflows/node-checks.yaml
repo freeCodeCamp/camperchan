@@ -3,7 +3,7 @@ on:
   push:
   pull_request:
     branches:
-      - master
+      - main
 
 jobs:
   lint:
@@ -28,6 +28,6 @@ jobs:
 
       - name: Lint Source Files
         run: npm run lint
-      
+
       - name: Run Tests
         run: npm run test
