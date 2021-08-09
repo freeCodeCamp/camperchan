@@ -35,8 +35,8 @@ export async function addFormatting(message: Message): Promise<void> {
   );
 
   languageGuesses.push(detectedWithHLJS.language);
-  if (detectedWithHLJS.second_best) {
-    languageGuesses.push(detectedWithHLJS.second_best.language);
+  if (detectedWithHLJS.secondBest) {
+    languageGuesses.push(detectedWithHLJS.secondBest.language);
   }
 
   // TODO: this is due to being a version behind, will fix later
