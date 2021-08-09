@@ -5,7 +5,7 @@ describe('botOnlineTime tests', () => {
     expect(getBotOnlineAt()).toBeDefined();
   });
 
-  it('Should return colon sparated Hour:Minute:Second', () => {
+  it('Should return colon separated Hour:Minute:Second', () => {
     expect(getBotOnlineAt()).toMatch(
       /([0-9][0-9]|[0-9]):([0-9][0-9]|[0-9]):([0-9][0-9]|[0-9])/g
     );

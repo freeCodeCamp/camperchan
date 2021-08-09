@@ -50,7 +50,7 @@ export function formatter(unformattedCode: string, language: string): string {
     // in the next line to remove any ANSI provided by Prettier's parser
 
     formattedCode = stripAnsi(
-      `Saw Language: ${language}\nSyntaxError: Unexpected token (${error.loc.start.line}:${error.loc.start.column})\n\n${error.codeFrame}`
+      `SyntaxError: Unexpected token (${error.loc.start.line}:${error.loc.start.column})\n\n${error.codeFrame}`
     );
   }
 

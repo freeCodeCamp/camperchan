@@ -116,9 +116,9 @@ github:
     it('Should show syntax errors for JS', () => {
       const formattedCode = formatter('cons a = 132;', 'js');
 
-      const expectedOutput = `SyntaxError: Unexpected token (1:6)\n
+      const expectedOutput = `SyntaxError: Unexpected token (1:5)\n
 > 1 | cons a = 132;
-    |      ^`;
+    |     ^`;
 
       expect(formattedCode).toBe(expectedOutput);
     });
