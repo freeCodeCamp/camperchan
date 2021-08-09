@@ -1,5 +1,6 @@
 import { format, Options } from 'prettier';
-import stripAnsi from 'strip-ansi';
+// TODO: Resolve import error here...
+// import stripAnsi from 'strip-ansi';
 /**
  * @name formatter
  * Formats user's unformatted code received from user's message
@@ -49,9 +50,8 @@ export function formatter(unformattedCode: string, language: string): string {
     // the message, if sent to Discord, can't be displayed. That's why we use `stripAnsi`
     // in the next line to remove any ANSI provided by Prettier's parser
 
-    formattedCode = stripAnsi(
-      `SyntaxError: Unexpected token (${error.loc.start.line}:${error.loc.start.column})\n\n${error.codeFrame}`
-    );
+    formattedCode = `Saw Language: ${language}\nSyntaxError: Unexpected token (${error.loc.start.line}:${error.loc.start.column})\n\n${error.codeFrame}`;
+    //);
   }
 
   return formattedCode;
