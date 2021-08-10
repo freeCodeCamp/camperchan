@@ -1,6 +1,7 @@
 import { Endpoints } from '@octokit/types';
 
-type GHIssueEndpoint = Endpoints['GET /repos/:owner/:repo/issues/:issue_number'];
+type GHIssueEndpoint =
+  Endpoints['GET /repos/{owner}/{repo}/issues/{issue_number}'];
 
 export type GHIssueResponse = GHIssueEndpoint['response'];
 

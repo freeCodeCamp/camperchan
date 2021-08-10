@@ -1,4 +1,4 @@
-import { Client, Collection } from 'discord.js';
+import { Client, Collection, MessageReaction } from 'discord.js';
 import { Config } from '../config/get-config';
 import { REACTIONS } from './reactions';
 import { ReactionDef } from './reaction-def';
@@ -29,14 +29,14 @@ export const bootstrapReactions = ({
       }
     }
 
-    if (!reactions.has(reaction.emoji.name)) {
+    if (!reactions.has(reaction.emoji.name || 'no emote found')) {
       // we don't care about this emoji
       return;
     }
     try {
       reactions
-        .get(reaction.emoji.name)
-        ?.command(reaction, { client, config, user });
+        .get(reaction.emoji.name || 'no emote found')
+        ?.command(reaction as MessageReaction, { client, config, user });
     } catch (error) {
       // don't warn end users, just log the error
       logger.error(error);

@@ -17,6 +17,6 @@ export const quote: CommandDef = {
       .setTitle(compliments[randomComp])
       .setDescription(quotes[randomQuote].quote)
       .setFooter(quotes[randomQuote].author);
-    message.channel.send(quoteEmbed).catch(logger.error);
+    message.channel.send({ embeds: [quoteEmbed] }).catch(logger.error);
   }
 };

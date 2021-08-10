@@ -24,7 +24,7 @@ export const forum: CommandDef = {
           ).toLocaleString()}](https://forum.freecodecamp.org/t/${el.id})`
         })
       );
-      message.channel.send(forumEmbed);
+      message.channel.send({ embeds: [forumEmbed] });
     } catch (error) {
       logger.error(error);
     }

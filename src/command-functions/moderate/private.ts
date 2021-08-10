@@ -1,4 +1,9 @@
-import { Message, MessageEmbed } from 'discord.js';
+import {
+  CategoryChannel,
+  GuildChannelCreateOptions,
+  Message,
+  MessageEmbed
+} from 'discord.js';
 import { ModerateConfig } from '../moderate-interface';
 
 export const privateCommand = async (
@@ -10,15 +15,15 @@ export const privateCommand = async (
   const { modRole, botId, targetUser, category, logChannel } = moderate;
 
   // This is already handled in the command...
-  if (!targetUser || !botId || !modRole) {
+  if (!targetUser || !botId || !modRole || !guild) {
     return;
   }
 
   // Create channel
   const channelName = `private-${targetUser.user.username}`;
 
-  await guild?.channels.create(channelName, {
-    type: 'text',
+  const channelOpts: GuildChannelCreateOptions = {
+    type: 'GUILD_TEXT',
     permissionOverwrites: [
       {
         id: targetUser.id,
@@ -44,9 +49,14 @@ export const privateCommand = async (
         allow: ['VIEW_CHANNEL', 'READ_MESSAGE_HISTORY', 'SEND_MESSAGES'],
         deny: ['CREATE_INSTANT_INVITE']
       }
-    ],
-    parent: category
-  });
+    ]
+  };
+
+  if (category) {
+    channelOpts.parent = category as CategoryChannel;
+  }
+
+  await guild?.channels.create(channelName, channelOpts);
 
   // Send log
   const privateEmbed = new MessageEmbed()
@@ -59,6 +69,6 @@ export const privateCommand = async (
     .setFooter(
       'This is not a suspension, but the notice is created for our records.'
     );
-  logChannel.send(privateEmbed);
+  logChannel.send({ embeds: [privateEmbed] });
   return;
 };

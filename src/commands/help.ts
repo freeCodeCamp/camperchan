@@ -41,7 +41,7 @@ function sendFullList({ message, config }: helpFunctionArgs): void {
         } help <command>\``
     )
     .setFooter('I am not affiliated with FreeCodeCamp in any way.');
-  message.author.send(helpEmbed);
+  message.author.send({ embeds: [helpEmbed] });
   message.channel.send('DM sent with the requested information');
 }
 
@@ -58,7 +58,7 @@ function sendSpecificCommand({ message, Command }: helpFunctionArgs) {
     .addField('Description', commandFound.description)
     .addField('\u200b', 'Required: `<>` | Optional: `[]`');
 
-  message.author.send(helpEmbed);
+  message.author.send({ embeds: [helpEmbed] });
   message.channel.send(
     `DM sent with information on the ${commandFound.prefix} command`
   );

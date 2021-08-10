@@ -4,11 +4,15 @@ import fetch from 'node-fetch';
 import { QuoteDef } from './APIs/quote-def';
 import { bootstrapCommands } from './commands/bootstrap-commands';
 import { getConfig } from './config/get-config';
+import { IntentOptions } from './config/IntentOptions';
 import { validateConfig } from './config/validate-config';
 import { bootstrapReactions } from './reactions/bootstrap-reactions';
 import { logger } from './utilities/logger';
 
-const client = new Client({ partials: ['MESSAGE', 'CHANNEL', 'REACTION'] });
+const client = new Client({
+  intents: IntentOptions,
+  partials: ['MESSAGE', 'CHANNEL', 'REACTION']
+});
 
 (async () => {
   try {
@@ -17,7 +21,9 @@ const client = new Client({ partials: ['MESSAGE', 'CHANNEL', 'REACTION'] });
     const config = getConfig();
     validateConfig(config);
     // rig up client callbacks
-    client.on('error', logger.error);
+    client.on('error', async (error) => {
+      logger.error(error);
+    });
 
     if (config.MONGO_URI) {
       await Mongoose.connect(
