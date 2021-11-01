@@ -83,6 +83,10 @@ export interface Config {
    * Option to enable/disable the thanks feature.
    */
   THANK_OPTION: boolean;
+  /**
+   * Option to allow non-mods to use commands.
+   */
+  PUBLIC_COMMANDS: boolean;
 }
 /**
  * @name getConfig
@@ -106,6 +110,7 @@ export function getConfig(): Config {
     AUTO_LINK_CHANNEL: process.env.AUTO_LINK_CHANNEL || false,
     STREAM_NOTIFY_ROLE: process.env.STREAM_NOTIFY_ROLE || '',
     STREAM_MSG_ID: process.env.STREAM_MSG_ID || '',
-    THANK_OPTION: !!process.env.THANK_OPTION || false
+    THANK_OPTION: !!process.env.THANK_OPTION || false,
+    PUBLIC_COMMANDS: !!process.env.PUBLIC_COMMANDS || false
   };
 }

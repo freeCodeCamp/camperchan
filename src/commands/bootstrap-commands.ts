@@ -126,7 +126,8 @@ export const bootstrapCommands = ({
     });
   }
 
-  client.on('message', (message) => {
+  client.on('messageCreate', (message) => {
+    /*
     if (
       Array.from(message.attachments).length > 0 &&
       !Array.from(message.attachments)[0][1].height
@@ -136,6 +137,17 @@ export const bootstrapCommands = ({
         'Please do not upload any files other than images or videos. For large blocks of code, use CodePen or PasteBin.'
       );
     }
+    */
+    const isMod = message.member?.roles.cache.find(
+      (role) => role.name === config.MOD_ROLE
+    );
+
+    console.log(config.PUBLIC_COMMANDS);
+
+    if (!isMod && !config.PUBLIC_COMMANDS) {
+      return;
+    }
+
     if (message.content.startsWith(config.PREFIX)) {
       // Get command after prefix
       const commandArgument = message.content.split(' ')[1];
