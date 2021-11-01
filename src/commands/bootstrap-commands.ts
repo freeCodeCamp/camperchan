@@ -83,9 +83,51 @@ export const bootstrapCommands = ({
       }
       (logChannel as TextChannel).send({ embeds: [deleteEmbed] });
     });
+
+    client.on('messageUpdate', (oldMessage, newMessage) => {
+      const logChannel = newMessage.guild?.channels.cache.find(
+        (channel) => channel.name === config.LOG_MSG_CHANNEL
+      );
+      const editEmbed = new MessageEmbed();
+      editEmbed.setTitle('A message was edited.');
+      editEmbed.setColor('YELLOW');
+      editEmbed.setDescription('Here are the details of that message.');
+      editEmbed.addField(
+        'Old Content',
+        oldMessage.content?.slice(0, 2000) || '*unknown message*'
+      );
+      editEmbed.addField(
+        'New Content',
+        newMessage.content?.slice(0, 2000) || '*unknown message*'
+      );
+      editEmbed.addFields(
+        {
+          name: 'Message author',
+          value: newMessage.author?.username || 'unknown author'
+        },
+        {
+          name: 'Message Link',
+          value: newMessage.url
+        },
+        {
+          name: 'Channel',
+          value: newMessage.channel.toString()
+        }
+      );
+      if (!logChannel) {
+        logger.error('log channel not found');
+        return;
+      }
+      if (logChannel.type !== 'GUILD_TEXT') {
+        logger.error('log channel not a text channel');
+        return;
+      }
+      (logChannel as TextChannel).send({ embeds: [editEmbed] });
+    });
   }
 
-  client.on('message', (message) => {
+  client.on('messageCreate', (message) => {
+    /*
     if (
       Array.from(message.attachments).length > 0 &&
       !Array.from(message.attachments)[0][1].height
@@ -95,6 +137,15 @@ export const bootstrapCommands = ({
         'Please do not upload any files other than images or videos. For large blocks of code, use CodePen or PasteBin.'
       );
     }
+    */
+    const isMod = message.member?.roles.cache.find(
+      (role) => role.name === config.MOD_ROLE
+    );
+
+    if (!isMod && !config.PUBLIC_COMMANDS) {
+      return;
+    }
+
     if (message.content.startsWith(config.PREFIX)) {
       // Get command after prefix
       const commandArgument = message.content.split(' ')[1];
