@@ -142,8 +142,6 @@ export const bootstrapCommands = ({
       (role) => role.name === config.MOD_ROLE
     );
 
-    console.log(config.PUBLIC_COMMANDS);
-
     if (!isMod && !config.PUBLIC_COMMANDS) {
       return;
     }
