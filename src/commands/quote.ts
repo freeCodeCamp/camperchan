@@ -1,22 +1,28 @@
-import { CommandDef } from './command-def';
-import { MessageEmbed } from 'discord.js';
-import { MotivationalDef } from '../APIs/quote-def';
-import { logger } from '../utilities/logger';
+import { SlashCommandBuilder } from "@discordjs/builders";
+import { MessageEmbed } from "discord.js";
 
-export const quote: CommandDef = {
-  prefix: 'quote',
-  description:
-    "Returns a quote from freeCodeCamp's motivational quotes file fetched using the GitHub API",
-  usage: 'quote',
-  command: (message, { quoteData }) => {
-    const quotes: Array<MotivationalDef> = quoteData.motivationalQuotes;
-    const compliments: Array<string> = quoteData.compliments;
-    const randomComp = Math.floor(Math.random() * compliments.length);
-    const randomQuote = Math.floor(Math.random() * quotes.length);
-    const quoteEmbed = new MessageEmbed()
-      .setTitle(compliments[randomComp])
-      .setDescription(quotes[randomQuote].quote)
-      .setFooter(quotes[randomQuote].author);
-    message.channel.send({ embeds: [quoteEmbed] }).catch(logger.error);
-  }
+import { Command } from "../interfaces/Command";
+import { errorHandler } from "../utils/errorHandler";
+
+export const quote: Command = {
+  data: new SlashCommandBuilder()
+    .setName("quote")
+    .setDescription("Returns a motivational quote."),
+  run: async (Bot, interaction) => {
+    try {
+      await interaction.deferReply();
+      const quotes = Bot.quotes.motivationalQuotes;
+      const compliments = Bot.quotes.compliments;
+      const randomComp = Math.floor(Math.random() * compliments.length);
+      const randomQuote = Math.floor(Math.random() * quotes.length);
+      const quoteEmbed = new MessageEmbed()
+        .setTitle(compliments[randomComp])
+        .setDescription(quotes[randomQuote].quote)
+        .setFooter({ text: quotes[randomQuote].author });
+      await interaction.editReply({ embeds: [quoteEmbed] });
+    } catch (err) {
+      await errorHandler(Bot, err);
+      await interaction.editReply("Something went wrong.");
+    }
+  },
 };
