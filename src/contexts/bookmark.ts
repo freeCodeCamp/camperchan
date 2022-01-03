@@ -31,15 +31,11 @@ export const bookmark: Context = {
       const author = message.author as User;
 
       const bookmarkEmbed = new MessageEmbed();
-      bookmarkEmbed.setTitle(`Your saved message!`);
-      bookmarkEmbed.setDescription(
-        `${customSubstring(message.content || "no content found!", 4000)}`
-      );
-      bookmarkEmbed.setAuthor({
-        name: author.tag,
-        iconURL: author.displayAvatarURL(),
+      bookmarkEmbed.setTitle(`You saved a message!`);
+      bookmarkEmbed.setDescription(`[View the message](${message.url})`);
+      bookmarkEmbed.setFooter({
+        text: "Helpful tip: Reply to this message to leave yourself a note on what you saved.",
       });
-      bookmarkEmbed.addField("Link", message.url);
 
       const deleteButton = new MessageButton()
         .setCustomId("delete-bookmark")
