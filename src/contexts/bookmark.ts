@@ -3,11 +3,9 @@ import {
   MessageActionRow,
   MessageButton,
   MessageEmbed,
-  User,
 } from "discord.js";
 
 import { Context } from "../interfaces/Context";
-import { customSubstring } from "../utils/customSubstring";
 import { errorHandler } from "../utils/errorHandler";
 
 export const bookmark: Context = {
@@ -27,8 +25,6 @@ export const bookmark: Context = {
         );
         return;
       }
-
-      const author = message.author as User;
 
       const bookmarkEmbed = new MessageEmbed();
       bookmarkEmbed.setTitle(`You saved a message!`);
