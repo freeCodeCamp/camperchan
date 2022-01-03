@@ -1,32 +1,36 @@
-import { Message, MessageEmbed } from 'discord.js';
-import { CommandDef } from './command-def';
-import fetch from 'node-fetch';
-import { ForumData, Topic } from '../APIs/forum-data';
-import { logger } from '../utilities/logger';
+import { SlashCommandBuilder } from "@discordjs/builders";
+import { MessageEmbed } from "discord.js";
+import fetch from "node-fetch";
 
-export const forum: CommandDef = {
-  prefix: 'forum',
-  description: 'Gets the most recent activity from the freeCodeCamp forums.',
-  usage: 'forum',
-  command: async (message: Message): Promise<void> => {
+import { Command } from "../interfaces/Command";
+import { ForumData } from "../interfaces/Forum";
+import { errorHandler } from "../utils/errorHandler";
+
+export const forum: Command = {
+  data: new SlashCommandBuilder()
+    .setName("forum")
+    .setDescription("Returns the latest activity on the forum."),
+  run: async (Bot, interaction) => {
     try {
-      const data = await fetch('https://forum.freecodecamp.org/latest.json');
-      const parsed: ForumData = await data.json();
-      const topics: Topic[] = parsed.topic_list.topics.slice(0, 5);
-      const forumEmbed: MessageEmbed = new MessageEmbed()
-        .setTitle('Latest Forum Activity')
-        .setDescription('Here are the five most recent posts.');
+      await interaction.deferReply();
+      const data = await fetch("https://forum.freecodecamp.org/latest.json");
+      const parsed = (await data.json()) as ForumData;
+      const topics = parsed.topic_list.topics.slice(0, 5);
+      const forumEmbed = new MessageEmbed()
+        .setTitle("Latest Forum Activity")
+        .setDescription("Here are the five most recent posts.");
       topics.forEach((el) =>
         forumEmbed.addFields({
           name: `${el.title}`,
           value: `[${el.last_poster_username} replied on ${new Date(
             el.last_posted_at
-          ).toLocaleString()}](https://forum.freecodecamp.org/t/${el.id})`
+          ).toLocaleString()}](https://forum.freecodecamp.org/t/${el.id})`,
         })
       );
-      message.channel.send({ embeds: [forumEmbed] });
-    } catch (error) {
-      logger.error(error);
+      await interaction.editReply({ embeds: [forumEmbed] });
+    } catch (err) {
+      await errorHandler(Bot, err);
+      await interaction.editReply("Something went wrong.");
     }
-  }
+  },
 };
