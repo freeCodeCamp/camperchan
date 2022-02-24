@@ -29,6 +29,18 @@ export const role: Command = {
   run: async (Bot, interaction) => {
     try {
       await interaction.deferReply();
+
+      if (
+        !interaction.member ||
+        typeof interaction.member.permissions === "string" ||
+        !interaction.member.permissions.has("MANAGE_ROLES")
+      ) {
+        await interaction.editReply(
+          "You do not have permission to use this command."
+        );
+        return;
+      }
+
       const channel = interaction.options.getChannel("channel", true);
       const title = interaction.options.getString("header", true);
       const role = interaction.options.getRole("role", true);
