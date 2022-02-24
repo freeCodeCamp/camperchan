@@ -2,6 +2,7 @@ import { Interaction, Message } from "discord.js";
 
 import { Camperbot } from "../../interfaces/Camperbot";
 import { closePrivateChannel } from "../../modules/closePrivateChannel";
+import { reactionRoleClick } from "../../modules/reactionRoleClick";
 
 /**
  * Handles the interaction events from Discord.
@@ -46,6 +47,9 @@ export const handleInteractionCreate = async (
     }
     if (interaction.customId === "close-channel") {
       await closePrivateChannel(Bot, interaction);
+    }
+    if (interaction.customId.startsWith("rr-")) {
+      await reactionRoleClick(Bot, interaction);
     }
   }
 };
