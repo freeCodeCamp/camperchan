@@ -47,6 +47,7 @@ export const role: Command = {
       const row = new MessageActionRow().addComponents(button);
 
       await channel.send({ content: title, components: [row] });
+      await interaction.editReply("Posted the role buttons.");
     } catch (err) {
       await errorHandler(Bot, err);
       await interaction.editReply("Something went wrong.");
