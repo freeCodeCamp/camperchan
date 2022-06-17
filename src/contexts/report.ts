@@ -45,6 +45,7 @@ export const report: Context = {
       });
       reportEmbed.addField("Link", message.url, true);
       reportEmbed.addField("Channel", `<#${message.channel.id}>`, true);
+      reportEmbed.addField("Reported By", `<@${interaction.user.id}>`, true);
 
       await reportChannel.send({ embeds: [reportEmbed] });
       await interaction.editReply(
