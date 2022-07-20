@@ -1,5 +1,5 @@
 import { SlashCommandBuilder } from "@discordjs/builders";
-import { MessageEmbed } from "discord.js";
+import { EmbedBuilder, PermissionFlagsBits } from "discord.js";
 
 import { Command } from "../interfaces/Command";
 import { sendModerationDm } from "../modules/sendModerationDm";
@@ -29,12 +29,24 @@ export const mute: Command = {
         .setName("unit")
         .setDescription("The unit of time for the duration.")
         .setRequired(true)
-        .addChoices([
-          ["Minutes", "minutes"],
-          ["Hours", "hours"],
-          ["Days", "days"],
-          ["Weeks", "weeks"],
-        ])
+        .addChoices(
+          {
+            name: "Minutes",
+            value: "minutes",
+          },
+          {
+            name: "Hours",
+            value: "hours",
+          },
+          {
+            name: "Days",
+            value: "days",
+          },
+          {
+            name: "Weeks",
+            value: "weeks",
+          }
+        )
     )
     .addStringOption((option) =>
       option
@@ -80,7 +92,7 @@ export const mute: Command = {
       if (
         !member ||
         typeof member.permissions === "string" ||
-        !member.permissions.has("MODERATE_MEMBERS")
+        !member.permissions.has(PermissionFlagsBits.ModerateMembers)
       ) {
         await interaction.editReply(
           "You do not have permission to use this command."
@@ -111,12 +123,23 @@ export const mute: Command = {
 
       await updateHistory(Bot, "mute", target.id);
 
-      const muteEmbed = new MessageEmbed();
+      const muteEmbed = new EmbedBuilder();
       muteEmbed.setTitle("A user has been muted!");
       muteEmbed.setDescription(`They were muted by ${member.user.username}`);
-      muteEmbed.addField("Reason", customSubstring(reason, 1000));
-      muteEmbed.addField("Duration", `${duration} ${durationUnit}`);
-      muteEmbed.addField("User Notified?", String(sentNotice));
+      muteEmbed.addFields(
+        {
+          name: "Reason",
+          value: customSubstring(reason, 1000),
+        },
+        {
+          name: "Duration",
+          value: `${duration} ${durationUnit}`,
+        },
+        {
+          name: "User Notified?",
+          value: String(sentNotice),
+        }
+      );
       muteEmbed.setTimestamp();
       muteEmbed.setAuthor({
         name: target.tag,

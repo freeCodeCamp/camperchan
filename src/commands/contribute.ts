@@ -1,5 +1,5 @@
 import { SlashCommandBuilder } from "@discordjs/builders";
-import { MessageEmbed } from "discord.js";
+import { EmbedBuilder } from "discord.js";
 
 import { Command } from "../interfaces/Command";
 import { errorHandler } from "../utils/errorHandler";
@@ -13,7 +13,7 @@ export const contribute: Command = {
   run: async (Bot, interaction) => {
     try {
       await interaction.deferReply();
-      const modEmbed = new MessageEmbed().setTitle("Helpful Links!").addFields(
+      const modEmbed = new EmbedBuilder().setTitle("Helpful Links!").addFields(
         {
           name: "Code of Conduct",
           value: "https://freecodecamp.org/news/code-of-conduct",

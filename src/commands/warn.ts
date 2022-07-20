@@ -1,5 +1,5 @@
 import { SlashCommandBuilder } from "@discordjs/builders";
-import { MessageEmbed } from "discord.js";
+import { EmbedBuilder, PermissionFlagsBits } from "discord.js";
 
 import { Command } from "../interfaces/Command";
 import { sendModerationDm } from "../modules/sendModerationDm";
@@ -37,7 +37,7 @@ export const warn: Command = {
       if (
         !member ||
         typeof member.permissions === "string" ||
-        !member.permissions.has("KICK_MEMBERS")
+        !member.permissions.has(PermissionFlagsBits.KickMembers)
       ) {
         await interaction.editReply(
           "You do not have permission to use this command."
@@ -68,11 +68,19 @@ export const warn: Command = {
 
       await updateHistory(Bot, "warn", target.id);
 
-      const warnEmbed = new MessageEmbed();
+      const warnEmbed = new EmbedBuilder();
       warnEmbed.setTitle("A user has been warned.");
       warnEmbed.setDescription(`Warning issued by ${member.user.username}`);
-      warnEmbed.addField("Reason", customSubstring(reason, 1000));
-      warnEmbed.addField("User Notified?", String(sentNotice));
+      warnEmbed.addFields(
+        {
+          name: "Reason",
+          value: customSubstring(reason, 1000),
+        },
+        {
+          name: "User Notified?",
+          value: String(sentNotice),
+        }
+      );
       warnEmbed.setTimestamp();
       warnEmbed.setAuthor({
         name: target.tag,

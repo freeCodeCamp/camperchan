@@ -1,5 +1,5 @@
 import { SlashCommandBuilder } from "@discordjs/builders";
-import { MessageEmbed } from "discord.js";
+import { EmbedBuilder, PermissionFlagsBits } from "discord.js";
 
 import { Command } from "../interfaces/Command";
 import { sendModerationDm } from "../modules/sendModerationDm";
@@ -40,7 +40,7 @@ export const kick: Command = {
       if (
         !member ||
         typeof member.permissions === "string" ||
-        !member.permissions.has("KICK_MEMBERS")
+        !member.permissions.has(PermissionFlagsBits.KickMembers)
       ) {
         await interaction.editReply(
           "You do not have permission to use this command."
@@ -76,13 +76,21 @@ export const kick: Command = {
 
       await updateHistory(Bot, "kick", target.id);
 
-      const kickLogEmbed = new MessageEmbed();
+      const kickLogEmbed = new EmbedBuilder();
       kickLogEmbed.setTitle("Member kicked.");
       kickLogEmbed.setDescription(
         `Member removal was requested by ${member.user.username}`
       );
-      kickLogEmbed.addField("Reason", customSubstring(reason, 1000));
-      kickLogEmbed.addField("User Notified?", String(sentNotice));
+      kickLogEmbed.addFields(
+        {
+          name: "Reason",
+          value: customSubstring(reason, 1000),
+        },
+        {
+          name: "User notified?",
+          value: String(sentNotice),
+        }
+      );
       kickLogEmbed.setTimestamp();
       kickLogEmbed.setAuthor({
         name: target.tag,

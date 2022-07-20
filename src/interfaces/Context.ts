@@ -1,4 +1,4 @@
-import { ContextMenuInteraction } from "discord.js";
+import { ContextMenuCommandInteraction } from "discord.js";
 
 import { Camperbot } from "./Camperbot";
 
@@ -7,5 +7,8 @@ export interface Context {
     name: string;
     type: 2 | 3;
   };
-  run: (Bot: Camperbot, interaction: ContextMenuInteraction) => Promise<void>;
+  run: (
+    Bot: Camperbot,
+    interaction: ContextMenuCommandInteraction
+  ) => Promise<void>;
 }

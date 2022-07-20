@@ -1,4 +1,4 @@
-import { GuildMember, PermissionResolvable } from "discord.js";
+import { GuildMember, PermissionFlagsBits } from "discord.js";
 
 /**
  * Takes a list of moderator permissions and checks if the member has
@@ -8,13 +8,13 @@ import { GuildMember, PermissionResolvable } from "discord.js";
  * @returns {boolean} True if the member has at least one of the configured permissions.
  */
 export const isModerator = (member: GuildMember) => {
-  const modPermissions: PermissionResolvable = [
-    "BAN_MEMBERS",
-    "KICK_MEMBERS",
-    "MODERATE_MEMBERS",
-    "MANAGE_MESSAGES",
-    "MANAGE_GUILD",
-    "ADMINISTRATOR",
+  const modPermissions = [
+    PermissionFlagsBits.BanMembers,
+    PermissionFlagsBits.KickMembers,
+    PermissionFlagsBits.ModerateMembers,
+    PermissionFlagsBits.ManageMessages,
+    PermissionFlagsBits.ManageGuild,
+    PermissionFlagsBits.Administrator,
   ];
   return modPermissions.some((perm) => member.permissions.has(perm));
 };

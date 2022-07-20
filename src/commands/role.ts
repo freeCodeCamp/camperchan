@@ -1,5 +1,10 @@
 import { SlashCommandBuilder } from "@discordjs/builders";
-import { MessageActionRow, MessageButton } from "discord.js";
+import {
+  ActionRowBuilder,
+  ButtonBuilder,
+  ButtonStyle,
+  PermissionFlagsBits,
+} from "discord.js";
 
 import { Command } from "../interfaces/Command";
 import { errorHandler } from "../utils/errorHandler";
@@ -33,7 +38,7 @@ export const role: Command = {
       if (
         !interaction.member ||
         typeof interaction.member.permissions === "string" ||
-        !interaction.member.permissions.has("MANAGE_ROLES")
+        !interaction.member.permissions.has(PermissionFlagsBits.ManageRoles)
       ) {
         await interaction.editReply(
           "You do not have permission to use this command."
@@ -52,11 +57,11 @@ export const role: Command = {
         return;
       }
 
-      const button = new MessageButton()
+      const button = new ButtonBuilder()
         .setLabel(role.name)
         .setCustomId(`rr-${role.id}`)
-        .setStyle("SECONDARY");
-      const row = new MessageActionRow().addComponents(button);
+        .setStyle(ButtonStyle.Secondary);
+      const row = new ActionRowBuilder<ButtonBuilder>().addComponents(button);
 
       await channel.send({ content: title, components: [row] });
       await interaction.editReply("Posted the role buttons.");

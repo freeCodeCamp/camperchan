@@ -1,5 +1,5 @@
 import { SlashCommandBuilder } from "@discordjs/builders";
-import { MessageEmbed } from "discord.js";
+import { EmbedBuilder } from "discord.js";
 
 import { Command } from "../interfaces/Command";
 import { errorHandler } from "../utils/errorHandler";
@@ -15,7 +15,7 @@ export const quote: Command = {
       const compliments = Bot.quotes.compliments;
       const randomComp = Math.floor(Math.random() * compliments.length);
       const randomQuote = Math.floor(Math.random() * quotes.length);
-      const quoteEmbed = new MessageEmbed()
+      const quoteEmbed = new EmbedBuilder()
         .setTitle(compliments[randomComp])
         .setDescription(quotes[randomQuote].quote)
         .setFooter({ text: quotes[randomQuote].author });

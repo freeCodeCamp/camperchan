@@ -1,5 +1,5 @@
 import { SlashCommandBuilder } from "@discordjs/builders";
-import { MessageEmbed } from "discord.js";
+import { EmbedBuilder, PermissionFlagsBits } from "discord.js";
 
 import HistoryModel from "../database/models/HistoryModel";
 import { Command } from "../interfaces/Command";
@@ -28,9 +28,9 @@ export const history: Command = {
 
       if (
         typeof member.permissions === "string" ||
-        (!member.permissions.has("KICK_MEMBERS") &&
-          !member.permissions.has("BAN_MEMBERS") &&
-          !member.permissions.has("MODERATE_MEMBERS"))
+        (!member.permissions.has(PermissionFlagsBits.KickMembers) &&
+          !member.permissions.has(PermissionFlagsBits.BanMembers) &&
+          !member.permissions.has(PermissionFlagsBits.ModerateMembers))
       ) {
         await interaction.editReply(
           "You do not have permission to use this command."
@@ -49,15 +49,37 @@ export const history: Command = {
         return;
       }
 
-      const embed = new MessageEmbed();
+      const embed = new EmbedBuilder();
       embed.setTitle(`${target.tag}'s history`);
       embed.setDescription("Here are the actions taken against this member.");
       embed.setThumbnail(target.displayAvatarURL());
-      embed.addField("Bans", String(targetRecord.bans), true);
-      embed.addField("Kicks", String(targetRecord.kicks), true);
-      embed.addField("Warnings", String(targetRecord.warns), true);
-      embed.addField("Mutes", String(targetRecord.mutes), true);
-      embed.addField("Unmutes", String(targetRecord.unmutes), true);
+      embed.addFields(
+        {
+          name: "Bans",
+          value: String(targetRecord.bans),
+          inline: true,
+        },
+        {
+          name: "Kicks",
+          value: String(targetRecord.kicks),
+          inline: true,
+        },
+        {
+          name: "Mutes",
+          value: String(targetRecord.mutes),
+          inline: true,
+        },
+        {
+          name: "Warnings",
+          value: String(targetRecord.warns),
+          inline: true,
+        },
+        {
+          name: "Unmutes",
+          value: String(targetRecord.unmutes),
+          inline: true,
+        }
+      );
 
       await interaction.editReply({
         embeds: [embed],

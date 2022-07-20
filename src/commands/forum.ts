@@ -1,5 +1,5 @@
 import { SlashCommandBuilder } from "@discordjs/builders";
-import { MessageEmbed } from "discord.js";
+import { EmbedBuilder } from "discord.js";
 import fetch from "node-fetch";
 
 import { Command } from "../interfaces/Command";
@@ -16,7 +16,7 @@ export const forum: Command = {
       const data = await fetch("https://forum.freecodecamp.org/latest.json");
       const parsed = (await data.json()) as ForumData;
       const topics = parsed.topic_list.topics.slice(0, 5);
-      const forumEmbed = new MessageEmbed()
+      const forumEmbed = new EmbedBuilder()
         .setTitle("Latest Forum Activity")
         .setDescription("Here are the five most recent posts.");
       topics.forEach((el) =>

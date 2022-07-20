@@ -14,7 +14,7 @@ export const handleInteractionCreate = async (
   Bot: Camperbot,
   interaction: Interaction
 ) => {
-  if (interaction.isCommand()) {
+  if (interaction.isChatInputCommand()) {
     const target = Bot.commands.find(
       (command) => command.data.name === interaction.commandName
     );
@@ -27,7 +27,7 @@ export const handleInteractionCreate = async (
     await target.run(Bot, interaction);
   }
 
-  if (interaction.isContextMenu()) {
+  if (interaction.isContextMenuCommand()) {
     const target = Bot.contexts.find(
       (context) => context.data.name === interaction.commandName
     );

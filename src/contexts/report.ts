@@ -1,4 +1,4 @@
-import { Guild, Message, MessageEmbed } from "discord.js";
+import { Guild, Message, EmbedBuilder } from "discord.js";
 
 import { Context } from "../interfaces/Context";
 import { errorHandler } from "../utils/errorHandler";
@@ -36,16 +36,22 @@ export const report: Context = {
 
       const author = message.author;
 
-      const reportEmbed = new MessageEmbed();
+      const reportEmbed = new EmbedBuilder();
       reportEmbed.setTitle("A message was flagged for review!");
       reportEmbed.setDescription(message.content.slice(0, 4000));
       reportEmbed.setAuthor({
         name: author.tag,
         iconURL: author.displayAvatarURL(),
       });
-      reportEmbed.addField("Link", message.url, true);
-      reportEmbed.addField("Channel", `<#${message.channel.id}>`, true);
-      reportEmbed.addField("Reported By", `<@${interaction.user.id}>`, true);
+      reportEmbed.addFields(
+        { name: "Link", value: message.url, inline: true },
+        { name: "Channel", value: `<#${message.channel.id}>`, inline: true },
+        {
+          name: "Reported By",
+          value: `<@${interaction.user.id}>`,
+          inline: true,
+        }
+      );
 
       await reportChannel.send({ embeds: [reportEmbed] });
       await interaction.editReply(

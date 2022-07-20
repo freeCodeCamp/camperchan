@@ -1,4 +1,4 @@
-import { MessageEmbed, User } from "discord.js";
+import { EmbedBuilder, User } from "discord.js";
 
 import { Camperbot } from "../interfaces/Camperbot";
 import { ModerationActions } from "../interfaces/ModerationActions";
@@ -23,7 +23,7 @@ export const sendModerationDm = async (
   reason: string
 ): Promise<boolean> => {
   try {
-    const embed = new MessageEmbed();
+    const embed = new EmbedBuilder();
     embed.setTitle(`${action} Notification!`);
     embed.setDescription(
       `You have received a ${action} in ${guildName} for: \n\n${customSubstring(
@@ -33,10 +33,11 @@ export const sendModerationDm = async (
     );
 
     if (action === "ban") {
-      embed.addField(
-        "Appeals",
-        "You can use [this google form](https://docs.google.com/forms/d/e/1FAIpQLSdhJjpK8dPlktQMEatUwmXworqZF9ig14oiwmiZzd0skz5ekQ/viewform) to appeal your ban after you have [read our code of conduct](https://www.freecodecamp.org/news/code-of-conduct)."
-      );
+      embed.addFields({
+        name: "Appeals",
+        value:
+          "You can use [this google form](https://docs.google.com/forms/d/e/1FAIpQLSdhJjpK8dPlktQMEatUwmXworqZF9ig14oiwmiZzd0skz5ekQ/viewform) to appeal your ban after you have [read our code of conduct](https://www.freecodecamp.org/news/code-of-conduct).",
+      });
     }
 
     const sent = await user

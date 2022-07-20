@@ -1,5 +1,5 @@
 import { SlashCommandBuilder } from "@discordjs/builders";
-import { MessageEmbed } from "discord.js";
+import { EmbedBuilder, PermissionFlagsBits } from "discord.js";
 
 import { Command } from "../interfaces/Command";
 import { sendModerationDm } from "../modules/sendModerationDm";
@@ -40,7 +40,7 @@ export const unmute: Command = {
       if (
         !member ||
         typeof member.permissions === "string" ||
-        !member.permissions.has("MODERATE_MEMBERS")
+        !member.permissions.has(PermissionFlagsBits.ModerateMembers)
       ) {
         await interaction.editReply(
           "You do not have permission to use this command."
@@ -71,11 +71,19 @@ export const unmute: Command = {
         reason
       );
 
-      const muteEmbed = new MessageEmbed();
+      const muteEmbed = new EmbedBuilder();
       muteEmbed.setTitle("A user is no longer silenced!");
       muteEmbed.setDescription(`They were unmuted by ${member.user.username}`);
-      muteEmbed.addField("Reason", customSubstring(reason, 1000));
-      muteEmbed.addField("User Notified?", String(sentNotice));
+      muteEmbed.addFields(
+        {
+          name: "Reason",
+          value: customSubstring(reason, 1000),
+        },
+        {
+          name: "User Notified?",
+          value: String(sentNotice),
+        }
+      );
       muteEmbed.setTimestamp();
       muteEmbed.setAuthor({
         name: target.tag,
