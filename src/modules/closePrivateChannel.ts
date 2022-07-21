@@ -1,4 +1,9 @@
-import { ButtonInteraction, MessageEmbed, TextChannel } from "discord.js";
+import {
+  ButtonInteraction,
+  ChannelType,
+  EmbedBuilder,
+  PermissionFlagsBits,
+} from "discord.js";
 
 import { Camperbot } from "../interfaces/Camperbot";
 import { errorHandler } from "../utils/errorHandler";
@@ -19,14 +24,14 @@ export const closePrivateChannel = async (
   try {
     await interaction.deferReply();
     const { channel, member } = interaction;
-    if (!channel || !member) {
+    if (!channel || !member || channel.type === ChannelType.DM) {
       await interaction.editReply("Cannot find your member object.");
       return;
     }
 
     if (
       typeof member.permissions === "string" ||
-      !member.permissions.has("MODERATE_MEMBERS")
+      !member.permissions.has(PermissionFlagsBits.ModerateMembers)
     ) {
       await interaction.editReply(
         "Only moderators may close a private channel."
@@ -34,13 +39,13 @@ export const closePrivateChannel = async (
       return;
     }
 
-    const logEmbed = new MessageEmbed();
+    const logEmbed = new EmbedBuilder();
     logEmbed.setTitle("Private Channel Closed");
     logEmbed.setDescription(`Channel closed by ${member.user.username}`);
-    logEmbed.addField(
-      "User",
-      (channel as TextChannel).name.split("-").slice(1).join("-") || "Unknown"
-    );
+    logEmbed.addFields({
+      name: "User",
+      value: channel.name.split("-").slice(1).join("-") || "Unknown",
+    });
     const logFile = await generateLogs(Bot, channel.id);
     await Bot.config.mod_hook.send({ embeds: [logEmbed], files: [logFile] });
     await channel.delete();

@@ -1,7 +1,7 @@
 import { readFile, writeFile } from "fs/promises";
 import { join } from "path";
 
-import { Message } from "discord.js";
+import { ChannelType, Message } from "discord.js";
 
 import { Camperbot } from "../../interfaces/Camperbot";
 
@@ -13,7 +13,7 @@ import { Camperbot } from "../../interfaces/Camperbot";
  */
 export const handleMessageCreate = async (Bot: Camperbot, message: Message) => {
   if (
-    message.channel.type !== "GUILD_TEXT" ||
+    message.channel.type !== ChannelType.GuildText ||
     !message.channel.name.startsWith("private-")
   ) {
     return;

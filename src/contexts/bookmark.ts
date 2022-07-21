@@ -1,8 +1,9 @@
 import {
   Message,
-  MessageActionRow,
-  MessageButton,
-  MessageEmbed,
+  ActionRowBuilder,
+  ButtonBuilder,
+  EmbedBuilder,
+  ButtonStyle,
 } from "discord.js";
 
 import { Context } from "../interfaces/Context";
@@ -26,19 +27,21 @@ export const bookmark: Context = {
         return;
       }
 
-      const bookmarkEmbed = new MessageEmbed();
+      const bookmarkEmbed = new EmbedBuilder();
       bookmarkEmbed.setTitle(`You saved a message!`);
       bookmarkEmbed.setDescription(`[View the message](${message.url})`);
       bookmarkEmbed.setFooter({
         text: "Helpful tip: Reply to this message to leave yourself a note on what you saved.",
       });
 
-      const deleteButton = new MessageButton()
+      const deleteButton = new ButtonBuilder()
         .setCustomId("delete-bookmark")
         .setLabel("Delete this bookmark.")
-        .setStyle("DANGER");
+        .setStyle(ButtonStyle.Danger);
 
-      const row = new MessageActionRow().addComponents([deleteButton]);
+      const row = new ActionRowBuilder<ButtonBuilder>().addComponents([
+        deleteButton,
+      ]);
 
       await interaction.user
         .send({ embeds: [bookmarkEmbed], components: [row] })

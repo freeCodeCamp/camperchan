@@ -1,4 +1,4 @@
-import { Message, MessageEmbed } from "discord.js";
+import { Message, EmbedBuilder } from "discord.js";
 
 import { Camperbot } from "../../interfaces/Camperbot";
 import { customSubstring } from "../../utils/customSubstring";
@@ -24,22 +24,30 @@ export const handleMessageEdit = async (
       return;
     }
 
-    const updateEmbed = new MessageEmbed();
+    const updateEmbed = new EmbedBuilder();
     updateEmbed.setTitle("Message Updated");
     updateEmbed.setAuthor({
       name: author.tag,
       iconURL: author.displayAvatarURL(),
     });
-    updateEmbed.addField(
-      "Old Message",
-      customSubstring(oldContent || "No content here.", 1000)
+    updateEmbed.addFields(
+      {
+        name: "Old Content",
+        value: customSubstring(oldContent || "`No content.`", 1000),
+      },
+      {
+        name: "New Content",
+        value: customSubstring(newContent || "`No content.`", 1000),
+      },
+      {
+        name: "Channel",
+        value: `<#${newMessage.channel.id}>`,
+      },
+      {
+        name: "Message Link",
+        value: newMessage.url,
+      }
     );
-    updateEmbed.addField(
-      "New Content",
-      customSubstring(newContent || "`No content here.`", 1000)
-    );
-    updateEmbed.addField("Channel", `<#${newMessage.channel.id}>`);
-    updateEmbed.addField("Message Link", newMessage.url);
 
     await Bot.config.mod_hook.send({ embeds: [updateEmbed] });
   } catch (err) {

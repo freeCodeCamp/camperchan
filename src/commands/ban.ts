@@ -1,5 +1,5 @@
 import { SlashCommandBuilder } from "@discordjs/builders";
-import { MessageEmbed } from "discord.js";
+import { EmbedBuilder, PermissionFlagsBits } from "discord.js";
 
 import { Command } from "../interfaces/Command";
 import { sendModerationDm } from "../modules/sendModerationDm";
@@ -40,7 +40,7 @@ export const ban: Command = {
       if (
         !member ||
         typeof member.permissions === "string" ||
-        !member.permissions.has("BAN_MEMBERS")
+        !member.permissions.has(PermissionFlagsBits.BanMembers)
       ) {
         await interaction.editReply(
           "You do not have permission to use this command."
@@ -74,18 +74,26 @@ export const ban: Command = {
 
       await targetMember.ban({
         reason: customSubstring(reason, 1000),
-        days: 1,
+        deleteMessageDays: 1,
       });
 
       await updateHistory(Bot, "ban", target.id);
 
-      const banLogEmbed = new MessageEmbed();
+      const banLogEmbed = new EmbedBuilder();
       banLogEmbed.setTitle("Member banned.");
       banLogEmbed.setDescription(
         `Member ban was requested by ${member.user.username}`
       );
-      banLogEmbed.addField("Reason", customSubstring(reason, 1000));
-      banLogEmbed.addField("User notified?", String(sentNotice));
+      banLogEmbed.addFields([
+        {
+          name: "Reason",
+          value: customSubstring(reason, 1000),
+        },
+        {
+          name: "User notified?",
+          value: String(sentNotice),
+        },
+      ]);
       banLogEmbed.setTimestamp();
       banLogEmbed.setAuthor({
         name: target.tag,

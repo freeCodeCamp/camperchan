@@ -1,4 +1,4 @@
-import { MessageEmbed } from "discord.js";
+import { EmbedBuilder } from "discord.js";
 
 import { Camperbot } from "../interfaces/Camperbot";
 
@@ -13,9 +13,12 @@ import { logHandler } from "./logHandler";
 export const errorHandler = async (Bot: Camperbot, err: unknown) => {
   const error = err as Error;
   logHandler.log("error", error.message);
-  const errorEmbed = new MessageEmbed();
+  const errorEmbed = new EmbedBuilder();
   errorEmbed.setTitle(`Error occurred!`);
   errorEmbed.setDescription(`${error.message}`);
-  errorEmbed.addField("Stack Trace:", `\`\`\`\n${error.stack}\n\`\`\``);
+  errorEmbed.addFields({
+    name: "Stack Trace:",
+    value: `\`\`\`\n${error.stack}\n\`\`\``,
+  });
   await Bot.config.debug_hook.send({ embeds: [errorEmbed] });
 };

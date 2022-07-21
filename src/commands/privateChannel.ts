@@ -2,9 +2,11 @@ import { SlashCommandBuilder } from "@discordjs/builders";
 import {
   CategoryChannel,
   GuildChannelCreateOptions,
-  MessageActionRow,
-  MessageButton,
-  TextChannel,
+  ActionRowBuilder,
+  ButtonBuilder,
+  PermissionFlagsBits,
+  ChannelType,
+  ButtonStyle,
 } from "discord.js";
 
 import { Command } from "../interfaces/Command";
@@ -42,7 +44,7 @@ export const privateChannel: Command = {
 
       if (
         typeof member.permissions === "string" ||
-        !member.permissions.has("MODERATE_MEMBERS")
+        !member.permissions.has(PermissionFlagsBits.ModerateMembers)
       ) {
         await interaction.editReply(
           "You do not have permission to use this command."
@@ -54,23 +56,37 @@ export const privateChannel: Command = {
 
       let category = guild.channels.cache.find(
         (c) =>
-          c.id === Bot.config.private_category && c.type === "GUILD_CATEGORY"
+          c.id === Bot.config.private_category &&
+          c.type === ChannelType.GuildCategory
       );
       if (!category) {
-        category = await guild.channels.create("Private Discussions", {
-          type: "GUILD_CATEGORY",
+        category = await guild.channels.create({
+          name: "Private Channel",
+          type: ChannelType.GuildCategory,
           permissionOverwrites: [
             {
               id: guild.id,
-              deny: ["VIEW_CHANNEL", "READ_MESSAGE_HISTORY", "SEND_MESSAGES"],
+              deny: [
+                PermissionFlagsBits.ViewChannel,
+                PermissionFlagsBits.ReadMessageHistory,
+                PermissionFlagsBits.SendMessages,
+              ],
             },
             {
               id: modRole.id,
-              allow: ["VIEW_CHANNEL", "READ_MESSAGE_HISTORY", "SEND_MESSAGES"],
+              allow: [
+                PermissionFlagsBits.ViewChannel,
+                PermissionFlagsBits.ReadMessageHistory,
+                PermissionFlagsBits.SendMessages,
+              ],
             },
             {
               id: Bot.config.bot_id,
-              allow: ["VIEW_CHANNEL", "READ_MESSAGE_HISTORY", "SEND_MESSAGES"],
+              allow: [
+                PermissionFlagsBits.ViewChannel,
+                PermissionFlagsBits.ReadMessageHistory,
+                PermissionFlagsBits.SendMessages,
+              ],
             },
           ],
         });
@@ -80,31 +96,44 @@ export const privateChannel: Command = {
       const channelName = `private-${target.username}`;
 
       const channelOpts: GuildChannelCreateOptions = {
-        type: "GUILD_TEXT",
+        name: channelName,
+        type: ChannelType.GuildText,
         permissionOverwrites: [
           {
             id: target.id,
-            allow: ["VIEW_CHANNEL", "READ_MESSAGE_HISTORY", "SEND_MESSAGES"],
-            deny: ["CREATE_INSTANT_INVITE"],
+            allow: [
+              PermissionFlagsBits.ViewChannel,
+              PermissionFlagsBits.ReadMessageHistory,
+              PermissionFlagsBits.SendMessages,
+            ],
+            deny: [PermissionFlagsBits.CreateInstantInvite],
           },
           {
             id: guild.id,
             deny: [
-              "VIEW_CHANNEL",
-              "READ_MESSAGE_HISTORY",
-              "SEND_MESSAGES",
-              "CREATE_INSTANT_INVITE",
+              PermissionFlagsBits.ViewChannel,
+              PermissionFlagsBits.ReadMessageHistory,
+              PermissionFlagsBits.SendMessages,
+              PermissionFlagsBits.CreateInstantInvite,
             ],
           },
           {
             id: Bot.config.bot_id,
-            allow: ["VIEW_CHANNEL", "READ_MESSAGE_HISTORY", "SEND_MESSAGES"],
-            deny: ["CREATE_INSTANT_INVITE"],
+            allow: [
+              PermissionFlagsBits.ViewChannel,
+              PermissionFlagsBits.ReadMessageHistory,
+              PermissionFlagsBits.SendMessages,
+            ],
+            deny: [PermissionFlagsBits.CreateInstantInvite],
           },
           {
             id: modRole,
-            allow: ["VIEW_CHANNEL", "READ_MESSAGE_HISTORY", "SEND_MESSAGES"],
-            deny: ["CREATE_INSTANT_INVITE"],
+            allow: [
+              PermissionFlagsBits.ViewChannel,
+              PermissionFlagsBits.ReadMessageHistory,
+              PermissionFlagsBits.SendMessages,
+            ],
+            deny: [PermissionFlagsBits.CreateInstantInvite],
           },
         ],
       };
@@ -113,19 +142,18 @@ export const privateChannel: Command = {
         channelOpts.parent = category as CategoryChannel;
       }
 
-      const newChannel = (await guild.channels.create(
-        channelName,
-        channelOpts
-      )) as TextChannel;
+      const newChannel = await guild.channels.create(channelOpts);
 
       await createLogFile(Bot, newChannel.id);
 
-      const closeButton = new MessageButton()
+      const closeButton = new ButtonBuilder()
         .setCustomId("close-channel")
         .setLabel("Close")
         .setEmoji("❌")
-        .setStyle("DANGER");
-      const row = new MessageActionRow().addComponents([closeButton]);
+        .setStyle(ButtonStyle.Danger);
+      const row = new ActionRowBuilder<ButtonBuilder>().addComponents([
+        closeButton,
+      ]);
 
       await newChannel.send({
         content: `Hey <@!${target.id}>!\n\nThe moderation team have created this private channel to discuss something with you.`,
