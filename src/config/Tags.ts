@@ -16,4 +16,9 @@ export const Tags: Tag[] = [
     message:
       "Discord has support for code block syntax. Please repost your code using this syntax:\n\n\\`\\`\\`lang\ncode here\n\\`\\`\\`\n\nYou can replace `lang` with your code's language, such as `js`, to get syntax highlighting.",
   },
+  {
+    name: "ask",
+    "message:
+      "Don't ask to ask, just ask\n<https://dontasktoask.com>"
+  }
 ];
