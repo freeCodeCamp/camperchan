@@ -27,6 +27,12 @@ export const role: Command = {
         .setRequired(true)
     )
     .addRoleOption((option) =>
+      option
+        .setName("role1")
+        .setDescription("Role to create a button for.")
+        .setRequired(true)
+    )
+    .addRoleOption((option) =>
       option.setName("role2").setDescription("Role to create a button for.")
     )
     .addRoleOption((option) =>
