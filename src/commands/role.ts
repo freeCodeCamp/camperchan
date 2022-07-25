@@ -27,10 +27,61 @@ export const role: Command = {
         .setRequired(true)
     )
     .addRoleOption((option) =>
-      option
-        .setName("role")
-        .setDescription("Role to create a button for.")
-        .setRequired(true)
+      option.setName("role2").setDescription("Role to create a button for.")
+    )
+    .addRoleOption((option) =>
+      option.setName("role3").setDescription("Role to create a button for.")
+    )
+    .addRoleOption((option) =>
+      option.setName("role4").setDescription("Role to create a button for.")
+    )
+    .addRoleOption((option) =>
+      option.setName("role5").setDescription("Role to create a button for.")
+    )
+    .addRoleOption((option) =>
+      option.setName("role6").setDescription("Role to create a button for.")
+    )
+    .addRoleOption((option) =>
+      option.setName("role7").setDescription("Role to create a button for.")
+    )
+    .addRoleOption((option) =>
+      option.setName("role8").setDescription("Role to create a button for.")
+    )
+    .addRoleOption((option) =>
+      option.setName("role9").setDescription("Role to create a button for.")
+    )
+    .addRoleOption((option) =>
+      option.setName("role10").setDescription("Role to create a button for.")
+    )
+    .addRoleOption((option) =>
+      option.setName("role11").setDescription("Role to create a button for.")
+    )
+    .addRoleOption((option) =>
+      option.setName("role12").setDescription("Role to create a button for.")
+    )
+    .addRoleOption((option) =>
+      option.setName("role13").setDescription("Role to create a button for.")
+    )
+    .addRoleOption((option) =>
+      option.setName("role14").setDescription("Role to create a button for.")
+    )
+    .addRoleOption((option) =>
+      option.setName("role15").setDescription("Role to create a button for.")
+    )
+    .addRoleOption((option) =>
+      option.setName("role16").setDescription("Role to create a button for.")
+    )
+    .addRoleOption((option) =>
+      option.setName("role17").setDescription("Role to create a button for.")
+    )
+    .addRoleOption((option) =>
+      option.setName("role18").setDescription("Role to create a button for.")
+    )
+    .addRoleOption((option) =>
+      option.setName("role19").setDescription("Role to create a button for.")
+    )
+    .addRoleOption((option) =>
+      option.setName("role20").setDescription("Role to create a button for.")
     ),
   run: async (Bot, interaction) => {
     try {
