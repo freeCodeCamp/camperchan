@@ -4,6 +4,7 @@ import {
   ButtonBuilder,
   ButtonStyle,
   PermissionFlagsBits,
+  Role,
 } from "discord.js";
 
 import { Command } from "../interfaces/Command";
@@ -48,23 +49,56 @@ export const role: Command = {
 
       const channel = interaction.options.getChannel("channel", true);
       const title = interaction.options.getString("header", true);
-      const role = interaction.options.getRole("role", true);
-
       if (!("send" in channel)) {
-        await interaction.editReply(
-          "Channel does not appear to be a text channel."
-        );
+        await interaction.editReply("I can't send messages in that channel!");
         return;
       }
+      const roleArray = [
+        interaction.options.getRole("role1", true),
+        interaction.options.getRole("role2"),
+        interaction.options.getRole("role3"),
+        interaction.options.getRole("role4"),
+        interaction.options.getRole("role5"),
+        interaction.options.getRole("role6"),
+        interaction.options.getRole("role7"),
+        interaction.options.getRole("role8"),
+        interaction.options.getRole("role9"),
+        interaction.options.getRole("role10"),
+        interaction.options.getRole("role11"),
+        interaction.options.getRole("role12"),
+        interaction.options.getRole("role13"),
+        interaction.options.getRole("role14"),
+        interaction.options.getRole("role15"),
+        interaction.options.getRole("role16"),
+        interaction.options.getRole("role17"),
+        interaction.options.getRole("role18"),
+        interaction.options.getRole("role19"),
+        interaction.options.getRole("role20"),
+      ].filter((el) => el) as Role[];
 
-      const button = new ButtonBuilder()
-        .setLabel(role.name)
-        .setCustomId(`rr-${role.id}`)
-        .setStyle(ButtonStyle.Secondary);
-      const row = new ActionRowBuilder<ButtonBuilder>().addComponents(button);
+      const dividedRoles: Role[][] = [];
+      while (roleArray.length) {
+        dividedRoles.push(roleArray.splice(0, 5));
+      }
 
-      await channel.send({ content: title, components: [row] });
-      await interaction.editReply("Posted the role buttons.");
+      const components: ActionRowBuilder<ButtonBuilder>[] = [];
+      for (const roleBlock of dividedRoles) {
+        const buttons = roleBlock.map((el) =>
+          new ButtonBuilder()
+            .setLabel(el.name)
+            .setCustomId(`rr-${el.id}`)
+            .setStyle(ButtonStyle.Secondary)
+        );
+        const row = new ActionRowBuilder<ButtonBuilder>().addComponents(
+          buttons
+        );
+        components.push(row);
+      }
+      await interaction.editReply({ content: "I've created the role post!" });
+      await channel.send({
+        content: title,
+        components,
+      });
     } catch (err) {
       await errorHandler(Bot, err);
       await interaction.editReply("Something went wrong.");
