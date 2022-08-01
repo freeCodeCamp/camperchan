@@ -109,7 +109,14 @@ export const mute: Command = {
         return;
       }
 
-      const targetMember = await guild.members.fetch(target.id);
+      const targetMember = await guild.members
+        .fetch(target.id)
+        .catch(() => null);
+
+      if (!targetMember) {
+        await interaction.editReply("They don't seem to be in this server.");
+        return;
+      }
 
       const sentNotice = await sendModerationDm(
         Bot,

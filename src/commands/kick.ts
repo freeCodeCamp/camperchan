@@ -57,9 +57,11 @@ export const kick: Command = {
         return;
       }
 
-      const targetMember = await guild.members.fetch(target.id);
+      const targetMember = await guild.members
+        .fetch(target.id)
+        .catch(() => null);
 
-      if (!targetMember.kickable) {
+      if (!targetMember || !targetMember.kickable) {
         await interaction.editReply("I cannot kick them.");
         return;
       }
