@@ -7,6 +7,7 @@ export interface History extends Document {
   mutes: number;
   unmutes: number;
   warns: number;
+  unbans: number;
 }
 
 export const HistorySchema = new Schema({
@@ -16,6 +17,7 @@ export const HistorySchema = new Schema({
   mutes: Number,
   unmutes: Number,
   warns: Number,
+  unbans: Number,
 });
 
 export default model<History>("history", HistorySchema);
