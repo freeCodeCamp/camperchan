@@ -56,27 +56,32 @@ export const history: Command = {
       embed.addFields(
         {
           name: "Bans",
-          value: String(targetRecord.bans),
+          value: String(targetRecord.bans || 0),
           inline: true,
         },
         {
           name: "Kicks",
-          value: String(targetRecord.kicks),
+          value: String(targetRecord.kicks || 0),
           inline: true,
         },
         {
           name: "Mutes",
-          value: String(targetRecord.mutes),
+          value: String(targetRecord.mutes || 0),
           inline: true,
         },
         {
           name: "Warnings",
-          value: String(targetRecord.warns),
+          value: String(targetRecord.warns || 0),
           inline: true,
         },
         {
           name: "Unmutes",
-          value: String(targetRecord.unmutes),
+          value: String(targetRecord.unmutes || 0),
+          inline: true,
+        },
+        {
+          name: "Unbans",
+          value: String(targetRecord.unbans || 0),
           inline: true,
         }
       );

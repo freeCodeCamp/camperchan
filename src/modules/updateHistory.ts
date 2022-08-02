@@ -27,6 +27,7 @@ export const updateHistory = async (
         mutes: 0,
         unmutes: 0,
         warns: 0,
+        unbans: 0,
       }));
 
     userRecord[`${action}s`]++;
