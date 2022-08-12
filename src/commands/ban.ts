@@ -57,9 +57,11 @@ export const ban: Command = {
         return;
       }
 
-      const targetMember = await guild.members.fetch(target.id);
+      const targetMember = await guild.members
+        .fetch(target.id)
+        .catch(() => null);
 
-      if (!targetMember.bannable) {
+      if (!targetMember || !targetMember.bannable) {
         await interaction.editReply("I cannot ban them.");
         return;
       }

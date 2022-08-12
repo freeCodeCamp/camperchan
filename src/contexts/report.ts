@@ -25,7 +25,9 @@ export const report: Context = {
         return;
       }
 
-      const reportChannel = await guild.channels.fetch("987427452529836072");
+      const reportChannel = await guild.channels
+        .fetch("987427452529836072")
+        .catch(() => null);
 
       if (!reportChannel || !("send" in reportChannel)) {
         await interaction.editReply(

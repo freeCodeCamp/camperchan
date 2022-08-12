@@ -27,27 +27,10 @@ export const updateHistory = async (
         mutes: 0,
         unmutes: 0,
         warns: 0,
+        unbans: 0,
       }));
 
-    switch (action) {
-      case "kick":
-        userRecord.kicks++;
-        break;
-      case "ban":
-        userRecord.bans++;
-        break;
-      case "mute":
-        userRecord.mutes++;
-        break;
-      case "unmute":
-        userRecord.unmutes++;
-        break;
-      case "warn":
-        userRecord.warns++;
-        break;
-      default:
-        break;
-    }
+    userRecord[`${action}s`]++;
 
     await userRecord.save();
   } catch (err) {

@@ -2,25 +2,24 @@ import { SlashCommandBuilder } from "@discordjs/builders";
 import { EmbedBuilder, PermissionFlagsBits } from "discord.js";
 
 import { Command } from "../interfaces/Command";
-import { sendModerationDm } from "../modules/sendModerationDm";
 import { updateHistory } from "../modules/updateHistory";
 import { customSubstring } from "../utils/customSubstring";
 import { errorHandler } from "../utils/errorHandler";
 
-export const kick: Command = {
+export const ban: Command = {
   data: new SlashCommandBuilder()
-    .setName("kick")
-    .setDescription("Kicks a user from the server.")
+    .setName("unban")
+    .setDescription("Remove's a user's ban.")
     .addUserOption((option) =>
       option
         .setName("target")
-        .setDescription("The user to kick.")
+        .setDescription("The user to unban")
         .setRequired(true)
     )
     .addStringOption((option) =>
       option
         .setName("reason")
-        .setDescription("The reason for kicking the user.")
+        .setDescription("The reason for unbanning the user.")
         .setRequired(true)
     ),
   run: async (Bot, interaction) => {
@@ -40,7 +39,7 @@ export const kick: Command = {
       if (
         !member ||
         typeof member.permissions === "string" ||
-        !member.permissions.has(PermissionFlagsBits.KickMembers)
+        !member.permissions.has(PermissionFlagsBits.BanMembers)
       ) {
         await interaction.editReply(
           "You do not have permission to use this command."
@@ -49,58 +48,46 @@ export const kick: Command = {
       }
 
       if (target.id === member.user.id) {
-        await interaction.editReply("You cannot kick yourself.");
+        await interaction.editReply("You cannot unban yourself.");
         return;
       }
       if (target.id === Bot.user?.id) {
-        await interaction.editReply("You cannot kick the bot.");
+        await interaction.editReply("You cannot unban the bot.");
         return;
       }
 
-      const targetMember = await guild.members
-        .fetch(target.id)
-        .catch(() => null);
+      const targetBan = await guild.bans.fetch(target.id).catch(() => null);
 
-      if (!targetMember || !targetMember.kickable) {
-        await interaction.editReply("I cannot kick them.");
+      if (!targetBan) {
+        await interaction.editReply("That user does not appear to be banned.");
         return;
       }
 
-      const sentNotice = await sendModerationDm(
-        Bot,
-        "kick",
-        target,
-        guild.name,
-        reason
+      await guild.bans.remove(target.id);
+
+      await updateHistory(Bot, "unban", target.id);
+
+      const banLogEmbed = new EmbedBuilder();
+      banLogEmbed.setTitle("Member unban.");
+      banLogEmbed.setDescription(
+        `Member unban was requested by ${member.user.username}`
       );
-
-      await targetMember.kick(customSubstring(reason, 1000));
-
-      await updateHistory(Bot, "kick", target.id);
-
-      const kickLogEmbed = new EmbedBuilder();
-      kickLogEmbed.setTitle("Member kicked.");
-      kickLogEmbed.setDescription(
-        `Member removal was requested by ${member.user.username}`
-      );
-      kickLogEmbed.addFields(
+      banLogEmbed.addFields([
         {
           name: "Reason",
           value: customSubstring(reason, 1000),
         },
-        {
-          name: "User notified?",
-          value: String(sentNotice),
-        }
-      );
-      kickLogEmbed.setTimestamp();
-      kickLogEmbed.setAuthor({
+      ]);
+      banLogEmbed.setTimestamp();
+      banLogEmbed.setAuthor({
         name: target.tag,
         iconURL: target.displayAvatarURL(),
       });
 
-      await Bot.config.mod_hook.send({ embeds: [kickLogEmbed] });
-      await interaction.editReply({ content: "They have been kicked." });
+      await Bot.config.mod_hook.send({ embeds: [banLogEmbed] });
+      await interaction.editReply({
+        content: "They have been unbanned.",
+      });
     } catch (err) {
       await errorHandler(Bot, err);
       await interaction.editReply("Something went wrong.");

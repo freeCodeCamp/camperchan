@@ -29,7 +29,7 @@ export const reactionRoleClick = async (
     }
 
     const roleId = customId.split("-")[1];
-    const role = await guild.roles.fetch(roleId);
+    const role = await guild.roles.fetch(roleId).catch(() => null);
 
     if (!role) {
       await interaction.editReply("Cannot find that role.");
