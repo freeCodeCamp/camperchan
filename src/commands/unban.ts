@@ -6,7 +6,7 @@ import { updateHistory } from "../modules/updateHistory";
 import { customSubstring } from "../utils/customSubstring";
 import { errorHandler } from "../utils/errorHandler";
 
-export const ban: Command = {
+export const unban: Command = {
   data: new SlashCommandBuilder()
     .setName("unban")
     .setDescription("Remove's a user's ban.")
