@@ -6,6 +6,7 @@ import { handleMessageCreate } from "./handlers/handleMessageCreate";
 import { handleMessageDelete } from "./handlers/handleMessageDelete";
 import { handleMessageEdit } from "./handlers/handleMessageEdit";
 import { handleReady } from "./handlers/handleReady";
+import { handleThreadCreate } from "./handlers/handleThreadCreate";
 
 /**
  * Attaches the event listeners to the bot's instance.
@@ -24,6 +25,10 @@ export const registerEvents = async (Bot: Camperbot) => {
     Bot.on(
       "interactionCreate",
       async (interaction) => await handleInteractionCreate(Bot, interaction)
+    );
+    Bot.on(
+      "threadCreate",
+      async (thread) => await handleThreadCreate(Bot, thread)
     );
   } catch (err) {
     await errorHandler(Bot, err);
