@@ -23,7 +23,7 @@ If you are interested in contributing to this project, please review our [contri
 ## Available Commands
 
 |  Prefix   |                                                                                                   Description                                                                                                    |
-| :-------: | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: |
+|:---------:|:----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------:|
 | eightball |                                                                         Think of your question and get an answer from a magic pool ball!                                                                         |
 |   help    |            If a command is not specified, it will display all the available commands into a list. If a command is specified, it will display the usage for that command and the description for them.            |
 |   stats   |                                                                       Get the server's information along with some simple bot information.                                                                       |
@@ -33,6 +33,7 @@ If you are interested in contributing to this project, please review our [contri
 |   forum   |                                                                           Gets the most recent activity from the freeCodeCamp forums.                                                                            |
 |  format   |                                                                                   Formats the code from the given message URL.                                                                                   |
 |  trivia   |                                                                                         Returns a random bit of trivia!                                                                                          |
+|   tags    |                                                                      Outputs standard blocks of text. Tag list [here](/src/config/Tags.ts).                                                                      |
 |   user    |                                                                                         Get data on the user mentioned.                                                                                          |
 |   quote   |                                                            Returns a quote from freeCodeCamp's motivational quotes file fetched using the GitHub API                                                             |
 |    mod    |                                                                                           Provides helpful mod links.                                                                                            |
