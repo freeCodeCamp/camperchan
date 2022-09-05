@@ -20,4 +20,10 @@ export const Tags: Tag[] = [
     name: "ask",
     message: "Don't ask to ask, just ask\n<https://dontasktoask.com>",
   },
+  {
+    name: "xy",
+    message:
+      "It looks like you're asking about your attempted solution rather then your actual problem. We need to know what your problem is before we can help.\n" +
+      "https://xyproblem.info",
+  },
 ];
