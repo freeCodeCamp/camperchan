@@ -1,5 +1,7 @@
-import { Interaction, Message } from "discord.js";
+import { Interaction, InteractionType, Message } from "discord.js";
+import { compareTwoStrings } from "string-similarity";
 
+import { Tags } from "../../config/Tags";
 import { Camperbot } from "../../interfaces/Camperbot";
 import { closePrivateChannel } from "../../modules/closePrivateChannel";
 import { reactionRoleClick } from "../../modules/reactionRoleClick";
@@ -14,6 +16,27 @@ export const handleInteractionCreate = async (
   Bot: Camperbot,
   interaction: Interaction
 ) => {
+  if (interaction.type === InteractionType.ApplicationCommandAutocomplete) {
+    if (interaction.commandName === "tags") {
+      const option = interaction.options.getFocused(true);
+
+      if (option.name === "name") {
+        const tagNames = Tags.map((tag) => tag.name);
+        for (const tag of Tags) {
+          tagNames.push(...tag.aliases);
+        }
+        const search = option.value.toLowerCase();
+        const choices = tagNames
+          .sort((a, b) =>
+            compareTwoStrings(b, search) > compareTwoStrings(a, search) ? 1 : -1
+          )
+          .slice(0, 5);
+        await interaction.respond(
+          choices.map((choice) => ({ name: choice, value: choice }))
+        );
+      }
+    }
+  }
   if (interaction.isChatInputCommand()) {
     const target = Bot.commands.find(
       (command) => command.data.name === interaction.commandName

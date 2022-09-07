@@ -15,6 +15,7 @@ export const tags: Command = {
         .setName("name")
         .setDescription("The name of the tag to display.")
         .setRequired(true)
+        .setAutocomplete(true)
     )
     .addUserOption((option) =>
       option
@@ -42,7 +43,9 @@ export const tags: Command = {
       }
 
       const name = interaction.options.getString("name", true);
-      const targetTag = Tags.find((tag) => tag.name === name);
+      const targetTag = Tags.find(
+        (tag) => tag.name === name || tag.aliases.includes(name)
+      );
       const user = interaction.options.getUser("user");
 
       if (!targetTag) {

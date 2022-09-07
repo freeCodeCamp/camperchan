@@ -24,6 +24,7 @@
     "luxon": "^2.3.1",
     "mongoose": "^6.2.3",
     "node-fetch": "^2.6.7",
+    "string-similarity": "^4.0.4",
     "strip-ansi": "^6.0.1",
     "winston": "^3.6.0"
   },
@@ -36,6 +37,7 @@
     "@types/mongoose": "^5.11.96",
     "@types/node-fetch": "^2.6.1",
     "@types/prettier": "^2.4.4",
+    "@types/string-similarity": "^4.0.0",
     "@types/strip-ansi": "^5.2.1",
     "@typescript-eslint/eslint-plugin": "^5.12.1",
     "@typescript-eslint/parser": "^5.12.1",
