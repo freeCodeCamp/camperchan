@@ -15,6 +15,7 @@ export const tags: Command = {
         .setName("name")
         .setDescription("The name of the tag to display.")
         .setRequired(true)
+        .setAutocomplete(true)
     )
     .addUserOption((option) =>
       option
