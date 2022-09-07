@@ -22,6 +22,9 @@ export const handleInteractionCreate = async (
 
       if (option.name === "name") {
         const tagNames = Tags.map((tag) => tag.name);
+        for (const tag of Tags) {
+          tagNames.push(...tag.aliases);
+        }
         const search = option.value.toLowerCase();
         const choices = tagNames
           .sort((a, b) =>

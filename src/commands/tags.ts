@@ -43,7 +43,9 @@ export const tags: Command = {
       }
 
       const name = interaction.options.getString("name", true);
-      const targetTag = Tags.find((tag) => tag.name === name);
+      const targetTag = Tags.find(
+        (tag) => tag.name === name || tag.aliases.includes(name)
+      );
       const user = interaction.options.getUser("user");
 
       if (!targetTag) {
