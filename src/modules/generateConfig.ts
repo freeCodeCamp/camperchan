@@ -14,7 +14,8 @@ export const generateConfig = (): Camperbot["config"] => {
     !process.env.DEBUG_HOOK ||
     !process.env.MOD_HOOK ||
     !process.env.HOME_GUILD ||
-    !process.env.BOT_ID
+    !process.env.BOT_ID ||
+    !process.env.REPORT_CHANNEL
   ) {
     throw new Error("Missing required config variables");
   }
@@ -27,5 +28,6 @@ export const generateConfig = (): Camperbot["config"] => {
     bot_id: process.env.BOT_ID,
     mod_role: process.env.MOD_ROLE || "no role set",
     private_category: process.env.PRIVATE_CATEGORY || "no category set",
+    report_channel: process.env.REPORT_CHANNEL,
   };
 };

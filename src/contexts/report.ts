@@ -26,7 +26,7 @@ export const report: Context = {
       }
 
       const reportChannel = await guild.channels
-        .fetch("987427452529836072")
+        .fetch(Bot.config.report_channel)
         .catch(() => null);
 
       if (!reportChannel || !("send" in reportChannel)) {

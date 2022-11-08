@@ -14,6 +14,7 @@ export interface Camperbot extends Client {
     bot_id: Snowflake;
     mod_role: Snowflake;
     private_category: Snowflake;
+    report_channel: Snowflake;
   };
   quotes: QuoteList;
   commands: Command[];
