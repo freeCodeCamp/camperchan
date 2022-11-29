@@ -29,9 +29,7 @@
     "winston": "^3.6.0"
   },
   "devDependencies": {
-    "@types/chalk": "^2.2.0",
     "@types/common-tags": "^1.8.1",
-    "@types/highlightjs": "^9.12.2",
     "@types/jest": "^27.4.1",
     "@types/luxon": "^2.0.9",
     "@types/mongoose": "^5.11.96",
@@ -46,7 +44,7 @@
     "eslint": "^8.9.0",
     "eslint-config-prettier": "^8.4.0",
     "eslint-plugin-import": "^2.25.4",
-    "eslint-plugin-jsdoc": "^37.9.4",
+    "eslint-plugin-jsdoc": "^39.6.4",
     "eslint-plugin-prettier": "^4.0.0",
     "jest": "^27.5.1",
     "markdown-toc": "^1.2.0",
