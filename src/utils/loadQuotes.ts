@@ -9,7 +9,7 @@ import { errorHandler } from "./errorHandler";
  * Fetches quote data from the freeCodeCamp repository.
  *
  * @param {Camperbot} Bot The bot's Discord instance.
- * @returns {Object} The quote data.
+ * @returns The quote data.
  */
 export const loadQuotes = async (Bot: Camperbot) => {
   try {

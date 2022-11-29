@@ -5,7 +5,7 @@ import { Camperbot } from "../interfaces/Camperbot";
 /**
  * Bootstraps the config from the ENV into the Bot's instance.
  *
- * @returns {Object} The bot's config.
+ * @returns The bot's config.
  */
 export const generateConfig = (): Camperbot["config"] => {
   if (
