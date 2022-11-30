@@ -45,6 +45,7 @@
       }
     ],
     "jsdoc/require-description-complete-sentence": "error",
+    "jsdoc/require-returns-type": "off",
     "import/first": "error",
     "import/exports-last": "error",
     "import/newline-after-import": "error",
