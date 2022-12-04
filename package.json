@@ -8,15 +8,13 @@
     "lint": "eslint src --max-warnings 0",
     "prebuild": "rm -rf ./dist",
     "build": "tsc",
-    "clean": "rimraf dist",
-    "update-readme": "ts-node ./scripts/readme-script.ts --autoUpdateReadme && npx markdown-toc -i README.md"
+    "clean": "rimraf dist"
   },
   "license": "MIT",
   "dependencies": {
     "@discordjs/rest": "^1.0.0",
     "@octokit/rest": "^18.12.0",
     "@octokit/types": "^6.34.0",
-    "common-tags": "^1.8.2",
     "discord.js": "^14.0.3",
     "dotenv": "^16.0.0",
     "git-repo-info": "^2.1.1",
@@ -39,7 +37,6 @@
     "@types/strip-ansi": "^5.2.1",
     "@typescript-eslint/eslint-plugin": "^5.12.1",
     "@typescript-eslint/parser": "^5.12.1",
-    "chalk": "^5.0.0",
     "editorconfig": "^0.15.3",
     "eslint": "^8.9.0",
     "eslint-config-prettier": "^8.4.0",

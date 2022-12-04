@@ -20,31 +20,6 @@ A Discord test bot used to test out the architecture and implementation of a Dis
 
 If you are interested in contributing to this project, please review our [contributing guidelines](CONTRIBUTING.md)
 
-## Available Commands
-
-|  Prefix   |                                                                                                   Description                                                                                                    |
-|:---------:|:----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------:|
-| eightball |                                                                         Think of your question and get an answer from a magic pool ball!                                                                         |
-|   help    |            If a command is not specified, it will display all the available commands into a list. If a command is specified, it will display the usage for that command and the description for them.            |
-|   stats   |                                                                       Get the server's information along with some simple bot information.                                                                       |
-|    coc    |                                                                                          Provides the Code of Conduct.                                                                                           |
-|  suspend  |                                                                 Suspends a user for the given reason. This command is only available to admins.                                                                  |
-|   close   | Closes the channel. This command requires admin privileges, and will only work on the automatically created "suspended" channels. Mentioning user with the command will remove the suspended role from the user. |
-|   forum   |                                                                           Gets the most recent activity from the freeCodeCamp forums.                                                                            |
-|  format   |                                                                                   Formats the code from the given message URL.                                                                                   |
-|  trivia   |                                                                                         Returns a random bit of trivia!                                                                                          |
-|   tags    |                                                                      Outputs standard blocks of text. Tag list [here](/src/config/Tags.ts).                                                                      |
-|   user    |                                                                                         Get data on the user mentioned.                                                                                          |
-|   quote   |                                                            Returns a quote from freeCodeCamp's motivational quotes file fetched using the GitHub API                                                             |
-|    mod    |                                                                                           Provides helpful mod links.                                                                                            |
-
-## Available Reactions
-
-| Prefix |                Description                |
-| :----: | :---------------------------------------: |
-|   p    | Sends message to the current user as a DM |
-|  p\$   |      Guesses and formats the message      |
-
 ## Ask For Help
 
 If you have any questions or suggestions about the project, you can create an issue for your question. Please provide as much information as possible when creating an issue. You can also reach us in the FCC's official [Discord](https://discord.gg/KVUmVXA).
@@ -148,4 +123,4 @@ https://www.freecodecamp.org/forum/t/create-a-new-camperbot-for-the-official-dis
 
 ## FreeCodeCamp Moderation
 
-As mentioned above, this bot is not officially connected to freeCodeCamp. However, the bot _is_ currently serving as a proof-of-concept or minimum viable product - as such, freeCodeCamp moderators may find themselves here for instruction on using the bot. If this applies to you, documentation for how to utilise the bot's moderation features can be found at the [freeCodeCamp Moderator Handbook](https://contribute.freecodecamp.org/#/flight-manuals/moderator-handbook).
+As mentioned above, this bot is not officially connected to freeCodeCamp. However, the bot _is_ currently serving as a proof-of-concept or minimum viable product - as such, freeCodeCamp moderators may find themselves here for instruction on using the bot. If this applies to you, documentation for how to utilize the bot's moderation features can be found at the [freeCodeCamp Moderator Handbook](https://contribute.freecodecamp.org/#/flight-manuals/moderator-handbook).
