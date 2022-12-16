@@ -2,6 +2,8 @@ import { Camperbot } from "../interfaces/Camperbot";
 import { errorHandler } from "../utils/errorHandler";
 
 import { handleInteractionCreate } from "./handlers/handleInteractionCreate";
+import { handleMemberAdd } from "./handlers/handleMemberAdd";
+import { handleMemberRemove } from "./handlers/handleMemberRemove";
 import { handleMessageCreate } from "./handlers/handleMessageCreate";
 import { handleMessageDelete } from "./handlers/handleMessageDelete";
 import { handleMessageEdit } from "./handlers/handleMessageEdit";
@@ -29,6 +31,14 @@ export const registerEvents = async (Bot: Camperbot) => {
     Bot.on(
       "threadCreate",
       async (thread) => await handleThreadCreate(Bot, thread)
+    );
+    Bot.on(
+      "guildMemberAdd",
+      async (member) => await handleMemberAdd(Bot, member)
+    );
+    Bot.on(
+      "guildMemberRemove",
+      async (member) => await handleMemberRemove(Bot, member)
     );
   } catch (err) {
     await errorHandler(Bot, err);
