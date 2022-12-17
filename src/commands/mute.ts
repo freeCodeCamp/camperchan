@@ -152,6 +152,9 @@ export const mute: Command = {
         name: target.tag,
         iconURL: target.displayAvatarURL(),
       });
+      muteEmbed.setFooter({
+        text: `ID: ${target.id}`,
+      });
 
       await Bot.config.mod_hook.send({ embeds: [muteEmbed] });
 

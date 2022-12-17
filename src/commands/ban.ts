@@ -101,6 +101,9 @@ export const ban: Command = {
         name: target.tag,
         iconURL: target.displayAvatarURL(),
       });
+      banLogEmbed.setFooter({
+        text: `ID: ${target.id}`,
+      });
 
       await Bot.config.mod_hook.send({ embeds: [banLogEmbed] });
       await interaction.editReply({

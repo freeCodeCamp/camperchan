@@ -86,6 +86,9 @@ export const warn: Command = {
         name: target.tag,
         iconURL: target.displayAvatarURL(),
       });
+      warnEmbed.setFooter({
+        text: `ID: ${target.id}`,
+      });
 
       await interaction.editReply(
         sentNotice ? "They have been warned." : "I could not warn them."

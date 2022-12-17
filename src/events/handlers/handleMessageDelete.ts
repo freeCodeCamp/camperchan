@@ -43,6 +43,9 @@ export const handleMessageDelete = async (
         name: author.tag,
         iconURL: author.displayAvatarURL(),
       });
+      deleteEmbed.setFooter({
+        text: `ID: ${author.id}`,
+      });
     }
 
     const attached = attachments.first();

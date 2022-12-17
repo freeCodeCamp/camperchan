@@ -54,6 +54,9 @@ export const report: Context = {
           inline: true,
         }
       );
+      reportEmbed.setFooter({
+        text: `ID: ${author.id}`,
+      });
 
       await reportChannel.send({ embeds: [reportEmbed] });
       await interaction.editReply(
