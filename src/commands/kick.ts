@@ -98,6 +98,9 @@ export const kick: Command = {
         name: target.tag,
         iconURL: target.displayAvatarURL(),
       });
+      kickLogEmbed.setFooter({
+        text: `ID: ${target.id}`,
+      });
 
       await Bot.config.mod_hook.send({ embeds: [kickLogEmbed] });
       await interaction.editReply({ content: "They have been kicked." });

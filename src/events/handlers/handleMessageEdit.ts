@@ -52,6 +52,9 @@ export const handleMessageEdit = async (
         value: newMessage.url,
       }
     );
+    updateEmbed.setFooter({
+      text: `ID: ${author?.id || "unknown"}`,
+    });
 
     await Bot.config.mod_hook.send({ embeds: [updateEmbed] });
   } catch (err) {
