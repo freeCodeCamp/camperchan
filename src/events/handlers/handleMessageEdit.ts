@@ -1,4 +1,4 @@
-import { Message, EmbedBuilder } from "discord.js";
+import { Message, EmbedBuilder, PartialMessage } from "discord.js";
 
 import { Camperbot } from "../../interfaces/Camperbot";
 import { customSubstring } from "../../utils/customSubstring";
@@ -13,10 +13,13 @@ import { errorHandler } from "../../utils/errorHandler";
  */
 export const handleMessageEdit = async (
   Bot: Camperbot,
-  oldMessage: Message,
-  newMessage: Message
+  oldMessage: Message | PartialMessage,
+  newMessage: Message | PartialMessage
 ) => {
   try {
+    if (!oldMessage) {
+      return;
+    }
     const { author, content: newContent } = newMessage;
     const { content: oldContent } = oldMessage;
 
@@ -27,8 +30,9 @@ export const handleMessageEdit = async (
     const updateEmbed = new EmbedBuilder();
     updateEmbed.setTitle("Message Updated");
     updateEmbed.setAuthor({
-      name: author.tag,
-      iconURL: author.displayAvatarURL(),
+      name: author?.tag || "unknown",
+      iconURL:
+        author?.displayAvatarURL() || "https:/cdn.nhcarrigan.com/profile.png",
     });
     updateEmbed.addFields(
       {
