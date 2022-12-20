@@ -37,7 +37,7 @@ export const bookmark: Context = {
       const deleteButton = new ButtonBuilder()
         .setCustomId("delete-bookmark")
         .setLabel("Delete this bookmark.")
-        .setStyle(ButtonStyle.Danger);
+        .setStyle(ButtonStyle.Secondary);
 
       const row = new ActionRowBuilder<ButtonBuilder>().addComponents([
         deleteButton,
