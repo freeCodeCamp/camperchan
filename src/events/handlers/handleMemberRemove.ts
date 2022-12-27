@@ -35,7 +35,7 @@ export const handleMemberRemove = async (
     embed.setFooter({
       text: `ID: ${member.id}`,
     });
-    await Bot.config.mod_hook.send({
+    await Bot.config.welcome_hook.send({
       embeds: [embed],
     });
   } catch (err) {
