@@ -15,7 +15,8 @@ export const generateConfig = (): Camperbot["config"] => {
     !process.env.MOD_HOOK ||
     !process.env.HOME_GUILD ||
     !process.env.BOT_ID ||
-    !process.env.REPORT_CHANNEL
+    !process.env.REPORT_CHANNEL ||
+    !process.env.WELCOME_HOOK
   ) {
     throw new Error("Missing required config variables");
   }
@@ -24,6 +25,7 @@ export const generateConfig = (): Camperbot["config"] => {
     mongo_uri: process.env.MONGO_URI,
     debug_hook: new WebhookClient({ url: process.env.DEBUG_HOOK }),
     mod_hook: new WebhookClient({ url: process.env.MOD_HOOK }),
+    welcome_hook: new WebhookClient({ url: process.env.WELCOME_HOOK }),
     home_guild: process.env.HOME_GUILD,
     bot_id: process.env.BOT_ID,
     mod_role: process.env.MOD_ROLE || "no role set",
