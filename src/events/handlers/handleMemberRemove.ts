@@ -37,6 +37,8 @@ export const handleMemberRemove = async (
     });
     await Bot.config.welcome_hook.send({
       embeds: [embed],
+      username: member.user.username,
+      avatarURL: member.user.displayAvatarURL(),
     });
   } catch (err) {
     await errorHandler(Bot, err);

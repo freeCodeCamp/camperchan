@@ -30,6 +30,8 @@ export const handleMemberAdd = async (
     });
     await Bot.config.welcome_hook.send({
       embeds: [embed],
+      username: member.user.username,
+      avatarURL: member.user.displayAvatarURL(),
     });
   } catch (err) {
     await errorHandler(Bot, err);
