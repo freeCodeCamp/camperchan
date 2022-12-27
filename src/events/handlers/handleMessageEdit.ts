@@ -3,6 +3,7 @@ import { Message, EmbedBuilder, PartialMessage } from "discord.js";
 import { Camperbot } from "../../interfaces/Camperbot";
 import { customSubstring } from "../../utils/customSubstring";
 import { errorHandler } from "../../utils/errorHandler";
+import { generateDiff } from "../../utils/generateDiff";
 
 /**
  * Handles the message edit event from Discord.
@@ -27,6 +28,11 @@ export const handleMessageEdit = async (
       return;
     }
 
+    const diffContent =
+      oldContent && newContent
+        ? generateDiff(oldContent, newContent)
+        : "This message appears to have no content.";
+
     const updateEmbed = new EmbedBuilder();
     updateEmbed.setTitle("Message Updated");
     updateEmbed.setAuthor({
@@ -34,15 +40,10 @@ export const handleMessageEdit = async (
       iconURL:
         author?.displayAvatarURL() || "https:/cdn.nhcarrigan.com/profile.png",
     });
+    updateEmbed.setDescription(
+      `\`\`\`diff\n${customSubstring(diffContent, 4000)}\`\`\``
+    );
     updateEmbed.addFields(
-      {
-        name: "Old Content",
-        value: customSubstring(oldContent || "`No content.`", 1000),
-      },
-      {
-        name: "New Content",
-        value: customSubstring(newContent || "`No content.`", 1000),
-      },
       {
         name: "Channel",
         value: `<#${newMessage.channel.id}>`,

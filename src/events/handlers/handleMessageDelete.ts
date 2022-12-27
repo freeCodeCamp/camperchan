@@ -15,7 +15,8 @@ export const handleMessageDelete = async (
   message: Message | PartialMessage
 ) => {
   try {
-    const { author, channel, content, guild, embeds, attachments } = message;
+    const { author, channel, content, guild, embeds, attachments, stickers } =
+      message;
 
     if (!guild) {
       return;
@@ -32,7 +33,8 @@ export const handleMessageDelete = async (
       {
         name: "Content",
         value: customSubstring(
-          content || "`No content. Embeds or attachments may be coming.`",
+          content + stickers.map((el) => el.name).join(" ") ||
+            "`No content. Embeds or attachments may be coming.`",
           1000
         ),
       }
