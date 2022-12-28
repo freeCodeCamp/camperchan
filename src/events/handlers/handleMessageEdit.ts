@@ -28,9 +28,13 @@ export const handleMessageEdit = async (
       return;
     }
 
+    if (!oldContent && !newContent) {
+      return;
+    }
+
     const diffContent =
-      oldContent && newContent
-        ? generateDiff(oldContent, newContent)
+      oldContent || newContent
+        ? generateDiff(oldContent || "", newContent || "")
         : "This message appears to have no content.";
 
     const updateEmbed = new EmbedBuilder();
