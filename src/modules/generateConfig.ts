@@ -8,18 +8,38 @@ import { Camperbot } from "../interfaces/Camperbot";
  * @returns The bot's config.
  */
 export const generateConfig = (): Camperbot["config"] => {
-  if (
-    !process.env.TOKEN ||
-    !process.env.MONGO_URI ||
-    !process.env.DEBUG_HOOK ||
-    !process.env.MOD_HOOK ||
-    !process.env.HOME_GUILD ||
-    !process.env.BOT_ID ||
-    !process.env.REPORT_CHANNEL ||
-    !process.env.WELCOME_HOOK
-  ) {
-    throw new Error("Missing required config variables");
+  if (!process.env.TOKEN) {
+    throw new Error("Missing TOKEN");
   }
+
+  if (!process.env.MONGO_URI) {
+    throw new Error("Missing MONGO_URI");
+  }
+
+  if (!process.env.DEBUG_HOOK) {
+    throw new Error("Missing DEBUG_HOOK");
+  }
+
+  if (!process.env.MOD_HOOK) {
+    throw new Error("Missing MOD_HOOK");
+  }
+
+  if (!process.env.HOME_GUILD) {
+    throw new Error("Missing HOME_GUILD");
+  }
+
+  if (!process.env.BOT_ID) {
+    throw new Error("Missing BOT_ID");
+  }
+
+  if (!process.env.REPORT_CHANNEL) {
+    throw new Error("Missing REPORT_CHANNEL");
+  }
+
+  if (!process.env.WELCOME_HOOK) {
+    throw new Error("Missing WELCOME_HOOK");
+  }
+
   return {
     token: process.env.TOKEN,
     mongo_uri: process.env.MONGO_URI,
