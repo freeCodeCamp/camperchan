@@ -24,7 +24,7 @@ export const levelListener = async (Bot: Camperbot, message: Message) => {
     const user =
       (await LevelModel.findOne({ userId: author.id })) ||
       (await LevelModel.create({
-        userID: author.id,
+        userId: author.id,
         userTag: author.tag,
         points: 0,
         level: 0,
