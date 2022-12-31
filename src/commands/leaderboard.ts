@@ -19,7 +19,7 @@ export const leaderboard: Command = {
       await interaction.deferReply();
 
       const levels = await LevelModel.find({})
-        .sort({ experience: "descending" })
+        .sort({ points: "descending" })
         .lean()
         .exec();
 
