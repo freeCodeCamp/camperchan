@@ -24,6 +24,11 @@ export const handleMessageEdit = async (
     const { author, content: newContent } = newMessage;
     const { content: oldContent } = oldMessage;
 
+    // deferred interactions trigger an edit event?
+    if (newMessage.interaction || oldMessage.interaction) {
+      return;
+    }
+
     if (oldContent && newContent && oldContent === newContent) {
       return;
     }
