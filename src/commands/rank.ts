@@ -14,6 +14,7 @@ export const rank: Command = {
     ),
   run: async (Bot, interaction) => {
     try {
+      await interaction.deferReply();
       const { guildId, guild, user } = interaction;
 
       if (!guildId || !guild) {
