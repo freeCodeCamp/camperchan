@@ -10,9 +10,7 @@ export const rank: Command = {
     .setName("rank")
     .setDescription("See your level in our community.")
     .addUserOption((option) =>
-      option
-        .setName("user-level")
-        .setDescription("The user to check the level of.")
+      option.setName("target").setDescription("The user to check the level of.")
     ),
   run: async (Bot, interaction) => {
     try {
@@ -25,7 +23,7 @@ export const rank: Command = {
         return;
       }
 
-      const target = interaction.options.getUser("user-level") || user;
+      const target = interaction.options.getUser("target") || user;
       const isSelf = target.id === interaction.user.id;
       const name =
         interaction.options.getUser("target")?.username ||
