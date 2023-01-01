@@ -24,8 +24,8 @@ export const rank: Command = {
         return;
       }
 
-      const target = interaction.options.getUser("target") || user;
-      const isSelf = target.id === interaction.user.id;
+      const target = interaction.options.getUser("target")?.id || user.id;
+      const isSelf = target === user.id;
       const name =
         interaction.options.getUser("target")?.username ||
         interaction.user.username;
