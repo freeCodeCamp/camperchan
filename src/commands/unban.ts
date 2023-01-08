@@ -1,12 +1,14 @@
 import { SlashCommandBuilder } from "@discordjs/builders";
 import { EmbedBuilder, PermissionFlagsBits } from "discord.js";
 
-import { Command } from "../interfaces/Command";
+import { PrivilegedCommand } from "../interfaces/PrivilegedCommand";
 import { updateHistory } from "../modules/updateHistory";
 import { customSubstring } from "../utils/customSubstring";
 import { errorHandler } from "../utils/errorHandler";
 
-export const unban: Command = {
+export const unban: PrivilegedCommand = {
+  guildOnly: true,
+  requiredPermissions: [PermissionFlagsBits.BanMembers],
   data: new SlashCommandBuilder()
     .setName("unban")
     .setDescription("Remove's a user's ban.")
@@ -28,24 +30,6 @@ export const unban: Command = {
       const { guild, member } = interaction;
       const target = interaction.options.getUser("target", true);
       const reason = interaction.options.getString("reason", true);
-
-      if (!guild) {
-        await interaction.editReply(
-          "This command can only be used in a guild."
-        );
-        return;
-      }
-
-      if (
-        !member ||
-        typeof member.permissions === "string" ||
-        !member.permissions.has(PermissionFlagsBits.BanMembers)
-      ) {
-        await interaction.editReply(
-          "You do not have permission to use this command."
-        );
-        return;
-      }
 
       if (target.id === member.user.id) {
         await interaction.editReply("You cannot unban yourself.");

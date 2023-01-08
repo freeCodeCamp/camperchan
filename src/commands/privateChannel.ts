@@ -1,19 +1,21 @@
 import { SlashCommandBuilder } from "@discordjs/builders";
 import {
-  CategoryChannel,
-  GuildChannelCreateOptions,
   ActionRowBuilder,
   ButtonBuilder,
-  PermissionFlagsBits,
-  ChannelType,
   ButtonStyle,
+  CategoryChannel,
+  ChannelType,
+  GuildChannelCreateOptions,
+  PermissionFlagsBits,
 } from "discord.js";
 
-import { Command } from "../interfaces/Command";
+import { PrivilegedCommand } from "../interfaces/PrivilegedCommand";
 import { createLogFile } from "../modules/createLogFile";
 import { errorHandler } from "../utils/errorHandler";
 
-export const privateChannel: Command = {
+export const privateChannel: PrivilegedCommand = {
+  guildOnly: true,
+  requiredPermissions: [PermissionFlagsBits.ModerateMembers],
   data: new SlashCommandBuilder()
     .setName("private")
     .setDescription("Creates a private discussion channel with a user.")

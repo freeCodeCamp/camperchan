@@ -7,10 +7,12 @@ import {
   Role,
 } from "discord.js";
 
-import { Command } from "../interfaces/Command";
+import { PrivilegedCommand } from "../interfaces/PrivilegedCommand";
 import { errorHandler } from "../utils/errorHandler";
 
-export const role: Command = {
+export const role: PrivilegedCommand = {
+  guildOnly: true,
+  requiredPermissions: [PermissionFlagsBits.ManageRoles],
   data: new SlashCommandBuilder()
     .setName("role")
     .setDescription("Creates a post with buttons for self-assignable roles.")
@@ -92,17 +94,6 @@ export const role: Command = {
   run: async (Bot, interaction) => {
     try {
       await interaction.deferReply();
-
-      if (
-        !interaction.member ||
-        typeof interaction.member.permissions === "string" ||
-        !interaction.member.permissions.has(PermissionFlagsBits.ManageRoles)
-      ) {
-        await interaction.editReply(
-          "You do not have permission to use this command."
-        );
-        return;
-      }
 
       const channel = interaction.options.getChannel("channel", true);
       const title = interaction.options.getString("header", true);
