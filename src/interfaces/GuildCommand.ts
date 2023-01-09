@@ -1,4 +1,5 @@
 import { ChatInputCommandInteraction, SlashCommandBuilder } from "discord.js";
+
 import { Camperbot } from "./Camperbot";
 
 export interface GuildCommand {

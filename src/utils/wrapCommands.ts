@@ -5,20 +5,6 @@ import { WrappedCommand } from "../interfaces/WrappedCommand";
 
 type UnwrappedCommand = Command | GuildCommand | PrivilegedCommand;
 
-export const wrapCommands = (
-  commands: UnwrappedCommand[]
-): WrappedCommand[] => {
-  return commands.map((command) => {
-    if (isPrivilegedCommand(command)) {
-      return wrapPrivilegedCommand(command);
-    } else if (isGuildCommand(command)) {
-      return wrapGuildCommand(command);
-    }
-
-    return wrapCommand(command);
-  });
-};
-
 const isPrivilegedCommand = (
   command: UnwrappedCommand
 ): command is PrivilegedCommand => {
@@ -42,7 +28,7 @@ const wrapPrivilegedCommand = (command: PrivilegedCommand): WrappedCommand => {
       );
 
       if (typeof permissions === "string" || !hasAllRequiredPermissions) {
-        await interaction.editReply(
+        await interaction.reply(
           "You do not have permission to use this command."
         );
         return;
@@ -59,9 +45,7 @@ const wrapGuildCommand = (command: GuildCommand): WrappedCommand => {
     wrapped: true,
     async run(Bot, interaction) {
       if (!interaction.inCachedGuild()) {
-        await interaction.editReply(
-          "This command can only be used in a guild."
-        );
+        await interaction.reply("This command can only be used in a guild.");
         return;
       }
 
@@ -75,4 +59,31 @@ const wrapCommand = (command: Command): WrappedCommand => {
     ...command,
     wrapped: true,
   };
+};
+
+/**
+ * Wrap higher-level commands (e.g. Privileged and Guild commands) with their
+ * appropriate gates.
+ *
+ * For example, PrivilegedCommands carry information about the required
+ * permissions to execute them. But their implementation doesn't stop
+ * unauthorized users from executing them. "Wrapping" them adds this logic
+ * and converts them to WrappedCommand objects in order to assert they're
+ * safe to register.
+ *
+ * @param {UnwrappedCommand[]} commands The commands to wrap.
+ * @returns {WrappedCommand[]} Wrapped versions of the provided commands.
+ */
+export const wrapCommands = (
+  commands: UnwrappedCommand[]
+): WrappedCommand[] => {
+  return commands.map((command) => {
+    if (isPrivilegedCommand(command)) {
+      return wrapPrivilegedCommand(command);
+    } else if (isGuildCommand(command)) {
+      return wrapGuildCommand(command);
+    }
+
+    return wrapCommand(command);
+  });
 };
