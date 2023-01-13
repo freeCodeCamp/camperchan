@@ -80,7 +80,8 @@ export const wrapCommands = (
   return commands.map((command) => {
     if (isPrivilegedCommand(command)) {
       return wrapPrivilegedCommand(command);
-    } else if (isGuildCommand(command)) {
+    }
+    if (isGuildCommand(command)) {
       return wrapGuildCommand(command);
     }
 
