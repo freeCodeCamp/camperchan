@@ -19,7 +19,7 @@ export const handleMemberRemove = async (
       return;
     }
     const embed = new EmbedBuilder();
-    embed.setTitle("Member Joined");
+    embed.setTitle("Member Left");
     embed.setDescription("A member has left the server~!");
     embed.addFields([
       {
