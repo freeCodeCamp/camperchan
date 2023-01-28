@@ -5,6 +5,12 @@ import { WrappedCommand } from "../interfaces/WrappedCommand";
 
 type UnwrappedCommand = Command | GuildCommand | PrivilegedCommand;
 
+/**
+ * Type guard to determine if command is a PrivilegedCommand.
+ *
+ * @param {UnwrappedCommand} command An unwrapped command that may or may not be privileged.
+ * @returns {command is PrivilegedCommand} Whether the command is a PrivilegedCommand.
+ */
 const isPrivilegedCommand = (
   command: UnwrappedCommand
 ): command is PrivilegedCommand => {
@@ -14,10 +20,33 @@ const isPrivilegedCommand = (
   );
 };
 
+/**
+ * Type guard to determine if command is a GuildCommand.
+ *
+ * @param {UnwrappedCommand} command An unwrapped command that may or may not be guild-only.
+ * @returns {command is GuildCommand} Whether the command is a GuildCommand.
+ */
 const isGuildCommand = (command: UnwrappedCommand): command is GuildCommand => {
   return (command as GuildCommand)?.guildOnly === true;
 };
 
+/**
+ * Wrap a PrivilegedCommand.
+ *
+ * Accepts a PrivilegedCommand and returns a WrappedCommand where the source command's run
+ * method will only be invoked if the calling entity has all the permissions enumerated
+ * in the source command's requiredPermissions property.
+ *
+ * If the calling entity does not have sufficient permissions, the command will be
+ * rejected with a replay informing the calling entity that they lack permissions to
+ * execute the command.
+ *
+ * This function *also* wraps the source command as a GuildCommand because all
+ * PrivilegedCommands must be GuildCommands (as permissions are attached to Guilds).
+ *
+ * @param {PrivilegedCommand} command The source command.
+ * @returns {WrappedCommand} A wrapped version of the source command.
+ */
 const wrapPrivilegedCommand = (command: PrivilegedCommand): WrappedCommand => {
   return wrapGuildCommand({
     ...command,
@@ -39,6 +68,16 @@ const wrapPrivilegedCommand = (command: PrivilegedCommand): WrappedCommand => {
   });
 };
 
+/**
+ * Wrap a PrivilegedCommand.
+ *
+ * Accepts a PrivilegedCommand and returns a WrappedCommand where the source command's run
+ * method will only be invoked if the calling entity has all the permissions enumerated
+ * in the source command's requiredPermissions property.
+ *
+ * @param {PrivilegedCommand} command The source command.
+ * @returns {WrappedCommand} A wrapped version of the source command.
+ */
 const wrapGuildCommand = (command: GuildCommand): WrappedCommand => {
   return {
     ...command,
@@ -54,6 +93,15 @@ const wrapGuildCommand = (command: GuildCommand): WrappedCommand => {
   };
 };
 
+/**
+ * Helper function to declare that a source Command is now Wrapped.
+ *
+ * This function does not actually wrap the command. Make sure to do
+ * that separately.
+ *
+ * @param {Command} command The source command.
+ * @returns {WrappedCommand} The source command as a WrappedCommand.
+ */
 const wrapCommand = (command: Command): WrappedCommand => {
   return {
     ...command,
