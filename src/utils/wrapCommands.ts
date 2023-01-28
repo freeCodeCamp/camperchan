@@ -15,7 +15,7 @@ const isPrivilegedCommand = (
 };
 
 const isGuildCommand = (command: UnwrappedCommand): command is GuildCommand => {
-  return !!(command as GuildCommand).guildOnly;
+  return (command as GuildCommand)?.guildOnly === true;
 };
 
 const wrapPrivilegedCommand = (command: PrivilegedCommand): WrappedCommand => {
