@@ -20,7 +20,7 @@ export const handleMemberAdd = async (
     }
     const embed = new EmbedBuilder();
     embed.setTitle("Member Joined");
-    embed.setDescription("A member has joined the server~!");
+    embed.setDescription(`<@!${member.id}> has joined the server~!`);
     embed.setAuthor({
       name: member.user.tag,
       iconURL: member.user.displayAvatarURL(),
