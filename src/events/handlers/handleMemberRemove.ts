@@ -20,12 +20,16 @@ export const handleMemberRemove = async (
     }
     const embed = new EmbedBuilder();
     embed.setTitle("Member Left");
-    embed.setDescription("A member has left the server~!");
+    embed.setDescription(`<@!${member.id}> has left the server~!`);
     embed.addFields([
       {
         name: "Roles",
         value:
-          member.roles?.cache.map((role) => role.name).join(", ") || "unknown",
+          member.roles?.cache
+            .map((role) =>
+              role.id === member.guild.id ? role.name : `<@&${role.id}>`
+            )
+            .join(", ") || "unknown",
       },
     ]);
     embed.setAuthor({
