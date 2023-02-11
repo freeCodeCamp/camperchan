@@ -1,13 +1,15 @@
 import { SlashCommandBuilder } from "@discordjs/builders";
 import { EmbedBuilder, PermissionFlagsBits } from "discord.js";
 
-import { Command } from "../interfaces/Command";
+import { PrivilegedCommand } from "../interfaces/PrivilegedCommand";
 import { sendModerationDm } from "../modules/sendModerationDm";
 import { updateHistory } from "../modules/updateHistory";
 import { customSubstring } from "../utils/customSubstring";
 import { errorHandler } from "../utils/errorHandler";
 
-export const kick: Command = {
+export const kick: PrivilegedCommand = {
+  guildOnly: true,
+  requiredPermissions: [PermissionFlagsBits.KickMembers],
   data: new SlashCommandBuilder()
     .setName("kick")
     .setDescription("Kicks a user from the server.")
@@ -29,24 +31,6 @@ export const kick: Command = {
       const { guild, member } = interaction;
       const target = interaction.options.getUser("target", true);
       const reason = interaction.options.getString("reason", true);
-
-      if (!guild) {
-        await interaction.editReply(
-          "This command can only be used in a guild."
-        );
-        return;
-      }
-
-      if (
-        !member ||
-        typeof member.permissions === "string" ||
-        !member.permissions.has(PermissionFlagsBits.KickMembers)
-      ) {
-        await interaction.editReply(
-          "You do not have permission to use this command."
-        );
-        return;
-      }
 
       if (target.id === member.user.id) {
         await interaction.editReply("You cannot kick yourself.");

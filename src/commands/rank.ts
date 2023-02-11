@@ -2,10 +2,11 @@ import { EmbedBuilder } from "@discordjs/builders";
 import { SlashCommandBuilder } from "discord.js";
 
 import LevelModel from "../database/models/LevelModel";
-import { Command } from "../interfaces/Command";
+import { GuildCommand } from "../interfaces/GuildCommand";
 import { errorHandler } from "../utils/errorHandler";
 
-export const rank: Command = {
+export const rank: GuildCommand = {
+  guildOnly: true,
   data: new SlashCommandBuilder()
     .setName("rank")
     .setDescription("See your level in our community.")
@@ -15,14 +16,7 @@ export const rank: Command = {
   run: async (Bot, interaction) => {
     try {
       await interaction.deferReply();
-      const { guildId, guild, user } = interaction;
-
-      if (!guildId || !guild) {
-        await interaction.editReply({
-          content: "This command can only be used in a guild.",
-        });
-        return;
-      }
+      const { user } = interaction;
 
       const target = interaction.options.getUser("target")?.id || user.id;
       const isSelf = target === user.id;

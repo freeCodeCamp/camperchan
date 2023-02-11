@@ -1,8 +1,8 @@
 import { Client, Snowflake, WebhookClient } from "discord.js";
 
-import { Command } from "./Command";
 import { Context } from "./Context";
 import { QuoteList } from "./Quotes";
+import { WrappedCommand } from "./WrappedCommand";
 
 export interface Camperbot extends Client {
   config: {
@@ -18,7 +18,7 @@ export interface Camperbot extends Client {
     report_channel: Snowflake;
   };
   quotes: QuoteList;
-  commands: Command[];
+  commands: WrappedCommand[];
   contexts: Context[];
   private_logs: { [key: string]: string };
 }

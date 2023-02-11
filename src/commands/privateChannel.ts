@@ -1,19 +1,21 @@
 import { SlashCommandBuilder } from "@discordjs/builders";
 import {
-  CategoryChannel,
-  GuildChannelCreateOptions,
   ActionRowBuilder,
   ButtonBuilder,
-  PermissionFlagsBits,
-  ChannelType,
   ButtonStyle,
+  CategoryChannel,
+  ChannelType,
+  GuildChannelCreateOptions,
+  PermissionFlagsBits,
 } from "discord.js";
 
-import { Command } from "../interfaces/Command";
+import { PrivilegedCommand } from "../interfaces/PrivilegedCommand";
 import { createLogFile } from "../modules/createLogFile";
 import { errorHandler } from "../utils/errorHandler";
 
-export const privateChannel: Command = {
+export const privateChannel: PrivilegedCommand = {
+  guildOnly: true,
+  requiredPermissions: [PermissionFlagsBits.ModerateMembers],
   data: new SlashCommandBuilder()
     .setName("private")
     .setDescription("Creates a private discussion channel with a user.")
@@ -26,29 +28,14 @@ export const privateChannel: Command = {
   run: async (Bot, interaction) => {
     try {
       await interaction.deferReply();
-      const { member, guild } = interaction;
-      if (!member || !guild) {
-        await interaction.editReply(
-          "This command can only be used in a server."
-        );
-        return;
-      }
+      const { guild } = interaction;
+
       const modRole = guild.roles.cache.find(
         (role) => role.id === Bot.config.mod_role
       );
 
       if (!modRole) {
         await interaction.editReply("The mod role does not exist.");
-        return;
-      }
-
-      if (
-        typeof member.permissions === "string" ||
-        !member.permissions.has(PermissionFlagsBits.ModerateMembers)
-      ) {
-        await interaction.editReply(
-          "You do not have permission to use this command."
-        );
         return;
       }
 

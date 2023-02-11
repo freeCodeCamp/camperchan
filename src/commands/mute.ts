@@ -1,14 +1,16 @@
 import { SlashCommandBuilder } from "@discordjs/builders";
 import { EmbedBuilder, PermissionFlagsBits } from "discord.js";
 
-import { Command } from "../interfaces/Command";
+import { PrivilegedCommand } from "../interfaces/PrivilegedCommand";
 import { sendModerationDm } from "../modules/sendModerationDm";
 import { updateHistory } from "../modules/updateHistory";
 import { calculateMilliseconds } from "../utils/calculateMilliseconds";
 import { customSubstring } from "../utils/customSubstring";
 import { errorHandler } from "../utils/errorHandler";
 
-export const mute: Command = {
+export const mute: PrivilegedCommand = {
+  guildOnly: true,
+  requiredPermissions: [PermissionFlagsBits.ModerateMembers],
   data: new SlashCommandBuilder()
     .setName("mute")
     .setDescription("Mutes a user via your configured muted role.")
@@ -79,24 +81,6 @@ export const mute: Command = {
         await interaction.editReply({
           content: "You cannot mute someone for longer than a month.",
         });
-        return;
-      }
-
-      if (!guild) {
-        await interaction.editReply(
-          "This command can only be run in a server."
-        );
-        return;
-      }
-
-      if (
-        !member ||
-        typeof member.permissions === "string" ||
-        !member.permissions.has(PermissionFlagsBits.ModerateMembers)
-      ) {
-        await interaction.editReply(
-          "You do not have permission to use this command."
-        );
         return;
       }
 

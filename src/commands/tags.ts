@@ -2,11 +2,12 @@ import { SlashCommandBuilder } from "@discordjs/builders";
 import { GuildMember } from "discord.js";
 
 import { Tags } from "../config/Tags";
-import { Command } from "../interfaces/Command";
+import { GuildCommand } from "../interfaces/GuildCommand";
 import { errorHandler } from "../utils/errorHandler";
 import { isModerator } from "../utils/isModerator";
 
-export const tags: Command = {
+export const tags: GuildCommand = {
+  guildOnly: true,
   data: new SlashCommandBuilder()
     .setName("tags")
     .setDescription("Display a commonly used canned response.")
@@ -25,14 +26,6 @@ export const tags: Command = {
   run: async (bot, interaction) => {
     try {
       const { member } = interaction;
-
-      if (!member) {
-        await interaction.reply({
-          content: "You must be in a guild to use this command.",
-          ephemeral: true,
-        });
-        return;
-      }
 
       if (!isModerator(member as GuildMember)) {
         await interaction.reply({

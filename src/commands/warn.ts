@@ -1,13 +1,15 @@
 import { SlashCommandBuilder } from "@discordjs/builders";
 import { EmbedBuilder, PermissionFlagsBits } from "discord.js";
 
-import { Command } from "../interfaces/Command";
+import { PrivilegedCommand } from "../interfaces/PrivilegedCommand";
 import { sendModerationDm } from "../modules/sendModerationDm";
 import { updateHistory } from "../modules/updateHistory";
 import { customSubstring } from "../utils/customSubstring";
 import { errorHandler } from "../utils/errorHandler";
 
-export const warn: Command = {
+export const warn: PrivilegedCommand = {
+  guildOnly: true,
+  requiredPermissions: [PermissionFlagsBits.KickMembers],
   data: new SlashCommandBuilder()
     .setName("warn")
     .setDescription("Issues a warning to a user.")
@@ -27,23 +29,6 @@ export const warn: Command = {
     try {
       await interaction.deferReply();
       const { guild, member } = interaction;
-      if (!guild) {
-        await interaction.editReply(
-          "This command can only be used in a server."
-        );
-        return;
-      }
-
-      if (
-        !member ||
-        typeof member.permissions === "string" ||
-        !member.permissions.has(PermissionFlagsBits.KickMembers)
-      ) {
-        await interaction.editReply(
-          "You do not have permission to use this command."
-        );
-        return;
-      }
 
       const target = interaction.options.getUser("target", true);
       const reason = interaction.options.getString("reason", true);

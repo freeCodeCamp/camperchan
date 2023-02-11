@@ -2,10 +2,16 @@ import { SlashCommandBuilder } from "@discordjs/builders";
 import { EmbedBuilder, PermissionFlagsBits } from "discord.js";
 
 import HistoryModel from "../database/models/HistoryModel";
-import { Command } from "../interfaces/Command";
+import { PrivilegedCommand } from "../interfaces/PrivilegedCommand";
 import { errorHandler } from "../utils/errorHandler";
 
-export const history: Command = {
+export const history: PrivilegedCommand = {
+  guildOnly: true,
+  requiredPermissions: [
+    PermissionFlagsBits.KickMembers,
+    PermissionFlagsBits.BanMembers,
+    PermissionFlagsBits.ModerateMembers,
+  ],
   data: new SlashCommandBuilder()
     .setName("history")
     .setDescription("Views the moderation history of a user.")
@@ -18,25 +24,7 @@ export const history: Command = {
   run: async (Bot, interaction) => {
     try {
       await interaction.deferReply();
-      const { guild, member } = interaction;
       const target = interaction.options.getUser("target", true);
-
-      if (!guild || !member) {
-        await interaction.editReply("This command must be run in a guild.");
-        return;
-      }
-
-      if (
-        typeof member.permissions === "string" ||
-        (!member.permissions.has(PermissionFlagsBits.KickMembers) &&
-          !member.permissions.has(PermissionFlagsBits.BanMembers) &&
-          !member.permissions.has(PermissionFlagsBits.ModerateMembers))
-      ) {
-        await interaction.editReply(
-          "You do not have permission to use this command."
-        );
-        return;
-      }
 
       const targetRecord = await HistoryModel.findOne({
         userId: target.id,
