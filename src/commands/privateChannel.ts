@@ -143,7 +143,7 @@ export const privateChannel: PrivilegedCommand = {
       ]);
 
       await newChannel.send({
-        content: `Hey <@!${target.id}>!\n\nThe moderation team have created this private channel to discuss something with you.`,
+        content: `Hey <@!${target.id}>!\n\nA private channel was created. This channel is visible to only you and the moderation team.`,
         components: [row],
       });
       await Bot.config.mod_hook.send(
