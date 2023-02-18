@@ -31,4 +31,28 @@ export const Tags: Tag[] = [
       "https://xyproblem.info",
     aliases: [],
   },
+  {
+    name: "markdown",
+    message:
+      `
+Discord has support for Markdown formatting:
+
+**Bold** - \`**Bold**\`
+*Italic* - \`*Italic*\` or \`_Italic_\`
+***Bold Italic*** - \`***Bold Italic***\`
+__Underline__ - \`__Underline__\`
+~~Strikethrough~~ - \`~~Strikethrough~~\`
+__*Underline Italic*__ - \`__*Underline Italic*__\`
+__**Underline Bold**__ - \`__**Underline Bold**__\`
+__***Underline Bold Italic***__ - \`__***Underline Bold Italic***__\`
+
+> Blockquote
+\`> Blockquote\`
+
+` +
+      "`Inline Code` - \\`Inline Code\\`" +
+      "\n\n```\nCode Block\n```\n\\`\\`\\`\nCode Block\n\\`\\`\\`" +
+      "||```\nSpoilered Code\n```||\n\\|\\|\\`\\`\\`\nSpoilered Code\n\\`\\`\\`\\|\\|",
+    aliases: ["markdown-formatting", "md", "md-formatting"],
+  },
 ];
