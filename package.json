@@ -26,7 +26,6 @@
     "highlight.js": "11.7.0",
     "luxon": "3.3.0",
     "mongoose": "7.0.2",
-    "node-fetch": "3.3.1",
     "string-similarity": "4.0.4",
     "strip-ansi": "7.0.1",
     "winston": "3.8.2"
@@ -37,7 +36,6 @@
     "@types/jest": "29.5.0",
     "@types/luxon": "3.2.0",
     "@types/mongoose": "5.11.96",
-    "@types/node-fetch": "2.6.2",
     "@types/prettier": "2.7.2",
     "@types/string-similarity": "4.0.0",
     "@types/strip-ansi": "5.2.1",
