@@ -1,9 +1,9 @@
-import { REST } from "@discordjs/rest";
 import {
+  REST,
   RESTPostAPIApplicationCommandsJSONBody,
   RESTPostAPIChatInputApplicationCommandsJSONBody,
   Routes,
-} from "discord-api-types/v9";
+} from "discord.js";
 
 import { Camperbot } from "../interfaces/Camperbot";
 
@@ -27,11 +27,7 @@ export const registerCommands = async (Bot: Camperbot): Promise<boolean> => {
       | RESTPostAPIChatInputApplicationCommandsJSONBody
     )[] = [];
 
-    Bot.commands.forEach((command) =>
-      commandData.push(
-        command.data.toJSON() as RESTPostAPIApplicationCommandsJSONBody
-      )
-    );
+    Bot.commands.forEach((command) => commandData.push(command.data.toJSON()));
     Bot.contexts.forEach((context) => commandData.push(context.data));
     logHandler.log("debug", "registering to home guild only");
     await rest.put(

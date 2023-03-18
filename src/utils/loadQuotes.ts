@@ -1,5 +1,3 @@
-import fetch from "node-fetch";
-
 import { Camperbot } from "../interfaces/Camperbot";
 import { QuoteList } from "../interfaces/Quotes";
 
