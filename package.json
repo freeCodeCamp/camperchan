@@ -41,7 +41,7 @@
     "eslint-plugin-import": "2.27.5",
     "eslint-plugin-jsdoc": "40.1.0",
     "eslint-plugin-prettier": "4.2.1",
-    "prettier": "2.8.4",
+    "prettier": "2.8.7",
     "rimraf": "4.4.1",
     "ts-jest": "29.0.5",
     "ts-node": "10.9.1",
