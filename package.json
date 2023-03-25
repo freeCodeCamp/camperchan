@@ -29,7 +29,7 @@
   },
   "devDependencies": {
     "@types/common-tags": "1.8.1",
-    "@types/diff": "5.0.2",
+    "@types/diff": "5.0.3",
     "@types/luxon": "3.2.0",
     "@types/prettier": "2.7.2",
     "@types/string-similarity": "4.0.0",
