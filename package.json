@@ -28,23 +28,27 @@
     "winston": "3.8.2"
   },
   "devDependencies": {
+    "@types/chai": "4.3.4",
     "@types/common-tags": "1.8.1",
     "@types/diff": "5.0.3",
-    "@types/jest": "29.5.0",
     "@types/luxon": "3.3.0",
+    "@types/mocha": "10.0.1",
     "@types/prettier": "2.7.2",
     "@types/string-similarity": "4.0.0",
     "@typescript-eslint/eslint-plugin": "5.57.1",
     "@typescript-eslint/parser": "5.57.1",
+    "chai": "4.3.7",
     "editorconfig": "1.0.2",
     "eslint": "8.38.0",
     "eslint-config-prettier": "8.8.0",
     "eslint-plugin-import": "2.27.5",
     "eslint-plugin-jsdoc": "40.1.2",
     "eslint-plugin-prettier": "4.2.1",
+    "mocha": "10.2.0",
     "prettier": "2.8.7",
     "rimraf": "4.4.1",
     "ts-jest": "29.1.0",
+    "ts-mocha": "10.0.0",
     "ts-node": "10.9.1",
     "typescript": "5.0.4"
   }
