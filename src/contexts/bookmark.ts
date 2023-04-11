@@ -4,6 +4,7 @@ import {
   ButtonBuilder,
   EmbedBuilder,
   ButtonStyle,
+  ApplicationCommandType,
 } from "discord.js";
 
 import { Context } from "../interfaces/Context";
@@ -12,7 +13,7 @@ import { errorHandler } from "../utils/errorHandler";
 export const bookmark: Context = {
   data: {
     name: "bookmark",
-    type: 3,
+    type: ApplicationCommandType.Message,
   },
   run: async (Bot, interaction): Promise<void> => {
     try {

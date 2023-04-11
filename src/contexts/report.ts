@@ -1,4 +1,9 @@
-import { Guild, Message, EmbedBuilder } from "discord.js";
+import {
+  Guild,
+  Message,
+  EmbedBuilder,
+  ApplicationCommandType,
+} from "discord.js";
 
 import { Context } from "../interfaces/Context";
 import { errorHandler } from "../utils/errorHandler";
@@ -6,7 +11,7 @@ import { errorHandler } from "../utils/errorHandler";
 export const report: Context = {
   data: {
     name: "report",
-    type: 3,
+    type: ApplicationCommandType.Message,
   },
   run: async (Bot, interaction) => {
     try {
