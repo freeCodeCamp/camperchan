@@ -4,7 +4,10 @@ import { EmbedBuilder, PermissionFlagsBits } from "discord.js";
 import { PrivilegedCommand } from "../interfaces/PrivilegedCommand";
 import { sendModerationDm } from "../modules/sendModerationDm";
 import { updateHistory } from "../modules/updateHistory";
-import { calculateMilliseconds } from "../utils/calculateMilliseconds";
+import {
+  calculateMilliseconds,
+  isValidTimeUnit,
+} from "../utils/calculateMilliseconds";
 import { customSubstring } from "../utils/customSubstring";
 import { errorHandler } from "../utils/errorHandler";
 
@@ -64,6 +67,13 @@ export const mute: PrivilegedCommand = {
       const duration = interaction.options.getInteger("duration", true);
       const durationUnit = interaction.options.getString("unit", true);
       const reason = interaction.options.getString("reason", true);
+
+      if (!isValidTimeUnit(durationUnit)) {
+        await interaction.editReply({
+          content: `${durationUnit} is not a valid duration unit.`,
+        });
+        return;
+      }
 
       const durationMilliseconds = calculateMilliseconds(
         duration,
