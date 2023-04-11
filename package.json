@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "start": "node -r dotenv/config dist/index.js",
-    "test": "echo 'No tests yet.'",
+    "test": "jest --runInBand --detectOpenHandles --forceExit",
     "lint": "eslint src --max-warnings 0",
     "prebuild": "rm -rf ./dist",
     "build": "tsc",
@@ -30,6 +30,7 @@
   "devDependencies": {
     "@types/common-tags": "1.8.1",
     "@types/diff": "5.0.3",
+    "@types/jest": "29.5.0",
     "@types/luxon": "3.3.0",
     "@types/prettier": "2.7.2",
     "@types/string-similarity": "4.0.0",
