@@ -4,9 +4,16 @@ import { EmbedBuilder, PermissionFlagsBits } from "discord.js";
 import { PrivilegedCommand } from "../interfaces/PrivilegedCommand";
 import { sendModerationDm } from "../modules/sendModerationDm";
 import { updateHistory } from "../modules/updateHistory";
-import { calculateMilliseconds } from "../utils/calculateMilliseconds";
+import {
+  calculateMilliseconds,
+  timeMeasurements,
+} from "../utils/calculateMilliseconds";
 import { customSubstring } from "../utils/customSubstring";
 import { errorHandler } from "../utils/errorHandler";
+
+function isValidTimeUnit(str: string): str is timeMeasurements {
+  return Object.values(timeMeasurements).includes(str as timeMeasurements);
+}
 
 export const mute: PrivilegedCommand = {
   guildOnly: true,
@@ -34,19 +41,19 @@ export const mute: PrivilegedCommand = {
         .addChoices(
           {
             name: "Minutes",
-            value: "minutes",
+            value: timeMeasurements.MINUTES,
           },
           {
             name: "Hours",
-            value: "hours",
+            value: timeMeasurements.HOURS,
           },
           {
             name: "Days",
-            value: "days",
+            value: timeMeasurements.DAYS,
           },
           {
             name: "Weeks",
-            value: "weeks",
+            value: timeMeasurements.WEEKS,
           }
         )
     )
@@ -65,17 +72,17 @@ export const mute: PrivilegedCommand = {
       const durationUnit = interaction.options.getString("unit", true);
       const reason = interaction.options.getString("reason", true);
 
-      const durationMilliseconds = calculateMilliseconds(
-        duration,
-        durationUnit
-      );
-
-      if (!durationMilliseconds) {
+      if (!isValidTimeUnit(durationUnit)) {
         await interaction.editReply({
           content: `${duration}${durationUnit} is not a valid duration.`,
         });
         return;
       }
+
+      const durationMilliseconds = calculateMilliseconds(
+        duration,
+        durationUnit as timeMeasurements
+      );
 
       if (durationMilliseconds > 2419200000) {
         await interaction.editReply({

@@ -1,3 +1,11 @@
+enum timeMeasurements {
+  SECONDS = "seconds",
+  MINUTES = "minutes",
+  HOURS = "hours",
+  DAYS = "days",
+  WEEKS = "weeks",
+}
+
 /**
  * Parses a value/unit pair into a number of milliseconds. For example,
  * (1, "second") would return one second in milliseconds.
@@ -6,19 +14,24 @@
  * @param {string} unit The unit of time to convert to milliseconds.
  * @returns {number} The number of milliseconds.
  */
-export const calculateMilliseconds = (value: number, unit: string): number => {
-  switch (unit.toLowerCase()) {
-    case "seconds":
+const calculateMilliseconds = (
+  value: number,
+  unit: timeMeasurements
+): number => {
+  switch (unit) {
+    case timeMeasurements.SECONDS:
       return value * 1000;
-    case "minutes":
+    case timeMeasurements.MINUTES:
       return value * 60000;
-    case "hours":
+    case timeMeasurements.HOURS:
       return value * 3600000;
-    case "days":
+    case timeMeasurements.DAYS:
       return value * 86400000;
-    case "weeks":
+    case timeMeasurements.WEEKS:
       return value * 604800000;
     default:
       return 0;
   }
 };
+
+export { calculateMilliseconds, timeMeasurements };
