@@ -19,11 +19,10 @@ export const generateLogs = async (
   channelId: string
 ): Promise<AttachmentBuilder> => {
   try {
-    const logName = Bot.private_logs[channelId];
     delete Bot.private_logs[channelId];
 
     const logs = await readFile(
-      join(process.cwd(), "logs", `${logName}.txt`),
+      join(process.cwd(), "logs", `${channelId}.txt`),
       "utf8"
     ).catch(() => "no logs found...");
 
@@ -31,7 +30,7 @@ export const generateLogs = async (
       name: "log.txt",
     });
 
-    await unlink(join(process.cwd(), "logs", `${logName}.txt`));
+    await unlink(join(process.cwd(), "logs", `${channelId}.txt`));
 
     return attachment;
   } catch (err) {
