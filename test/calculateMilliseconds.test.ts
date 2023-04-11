@@ -1,4 +1,4 @@
-import { calculateMilliseconds } from "../utils/calculateMilliseconds";
+import { calculateMilliseconds } from "../src/utils/calculateMilliseconds";
 
 test("10 seconds equals 10,000 milliseconds", () => {
   expect(calculateMilliseconds(10, "seconds")).toBe(10000);
