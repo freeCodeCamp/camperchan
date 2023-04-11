@@ -16,7 +16,7 @@ export const mute: PrivilegedCommand = {
   requiredPermissions: [PermissionFlagsBits.ModerateMembers],
   data: new SlashCommandBuilder()
     .setName("mute")
-    .setDescription("Mutes a user via your configured muted role.")
+    .setDescription("Mutes a user.")
     .addUserOption((option) =>
       option
         .setName("target")

@@ -11,11 +11,11 @@ export const unban: PrivilegedCommand = {
   requiredPermissions: [PermissionFlagsBits.BanMembers],
   data: new SlashCommandBuilder()
     .setName("unban")
-    .setDescription("Remove's a user's ban.")
+    .setDescription("Removes a user's ban.")
     .addUserOption((option) =>
       option
         .setName("target")
-        .setDescription("The user to unban")
+        .setDescription("The user to unban.")
         .setRequired(true)
     )
     .addStringOption((option) =>

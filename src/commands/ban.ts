@@ -16,13 +16,13 @@ export const ban: PrivilegedCommand = {
     .addUserOption((option) =>
       option
         .setName("target")
-        .setDescription("The user to kick.")
+        .setDescription("The user to ban.")
         .setRequired(true)
     )
     .addStringOption((option) =>
       option
         .setName("reason")
-        .setDescription("The reason for kicking the user.")
+        .setDescription("The reason for banning the user.")
         .setRequired(true)
     ),
   run: async (Bot, interaction) => {

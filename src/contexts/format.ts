@@ -1,4 +1,4 @@
-import { Message } from "discord.js";
+import { ApplicationCommandType, Message } from "discord.js";
 
 import { Context } from "../interfaces/Context";
 import { addFormatting } from "../modules/addFormatting";
@@ -7,7 +7,7 @@ import { errorHandler } from "../utils/errorHandler";
 export const format: Context = {
   data: {
     name: "format",
-    type: 3,
+    type: ApplicationCommandType.Message,
   },
   run: async (Bot, interaction) => {
     try {
