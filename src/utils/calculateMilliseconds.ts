@@ -6,7 +6,10 @@
  * @param {string} unit The unit of time to convert to milliseconds.
  * @returns {number} The number of milliseconds.
  */
-export const calculateMilliseconds = (value: number, unit: string): number => {
+export const calculateMilliseconds = (
+  value: number,
+  unit: "seconds" | "minutes" | "hours" | "days" | "weeks"
+): number => {
   switch (unit.toLowerCase()) {
     case "seconds":
       return value * 1000;
