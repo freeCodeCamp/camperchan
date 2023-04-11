@@ -7,5 +7,7 @@
  * @returns {string} Syntax highlighted codeblock for Discord.
  */
 export function formatCodeBlock(language: string, code: string): string {
-  return `\`\`\`${language}\n${code}\`\`\``;
+  return code.endsWith("\n")
+    ? `\`\`\`${language}\n${code}\`\`\``
+    : `\`\`\`${language}\n${code}\n\`\`\``;
 }
