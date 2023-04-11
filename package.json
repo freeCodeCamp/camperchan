@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "start": "node -r dotenv/config dist/index.js",
-    "test": "jest --runInBand --detectOpenHandles --forceExit",
+    "test": "ts-mocha -u tdd --file test/root.ts test/**/*.spec.ts --recursive --exit --timeout 10000",
     "lint": "eslint src --max-warnings 0",
     "prebuild": "rm -rf ./dist",
     "build": "tsc",
