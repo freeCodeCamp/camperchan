@@ -8,7 +8,8 @@
     "clean": "rimraf dist",
     "lint": "eslint src test --max-warnings 0",
     "start": "node -r dotenv/config dist/index.js",
-    "test": "ts-mocha -u tdd --file test/root.ts test/**/*.spec.ts --recursive --exit --timeout 10000"
+    "test": "ts-mocha -u tdd --file test/root.ts test/**/*.spec.ts --recursive --exit --timeout 10000",
+    "posttest": "./test/noOnly.sh"
   },
   "engines": {
     "node": "18.15.0",
