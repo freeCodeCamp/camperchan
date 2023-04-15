@@ -11,7 +11,7 @@
     "test": "ts-mocha -u tdd --file test/root.ts test/**/*.spec.ts --recursive --exit --timeout 10000"
   },
   "engines": {
-    "node": "18.15.0",
+    "node": "18.16.0",
     "npm": "9.6.4"
   },
   "license": "MIT",
