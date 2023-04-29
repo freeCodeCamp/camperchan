@@ -20,7 +20,7 @@
     "discord.js": "14.9.0",
     "dotenv": "16.0.3",
     "git-repo-info": "2.1.1",
-    "highlight.js": "11.7.0",
+    "highlight.js": "11.8.0",
     "luxon": "3.3.0",
     "mongoose": "7.1.0",
     "string-similarity": "4.0.4",
