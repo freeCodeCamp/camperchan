@@ -58,9 +58,9 @@ export const formatTextToTable = (
     return acc;
   }, baseColumnWidths) as number[];
 
-  const rowSeperatorStr = columnWidths.length
+  const rowSeparatorStr = columnWidths.length
     ? new Array(
-        // **note** we add an extra one for the space seperation applied
+        // **note** we add an extra one for the space separation applied
         // to each column.
         columnWidths.reduce(
           (acc, num) => acc + num + 2 + columnDelimiter.length
@@ -81,7 +81,7 @@ export const formatTextToTable = (
 
   return [
     headersStr,
-    rowSeperatorStr,
+    rowSeparatorStr,
     ...(hasInferredHeaders ? dataStr.slice(1) : dataStr),
   ]
     .filter((_) => _)

@@ -22,7 +22,7 @@ suite("formatTextToTable", () => {
       "",
       "function did not return empty string"
     ));
-  test("given 2d empty array, with seperate defined headers, returns headers", () =>
+  test("given 2d empty array, with separate defined headers, returns headers", () =>
     assert.deepEqual(
       formatTextToTable([], {
         headers: ["one", "two"],
@@ -30,14 +30,52 @@ suite("formatTextToTable", () => {
       "one | two\n---------",
       "did not return headers"
     ));
-  // TODO: add tests to check for custom column delimiters
-  test("given 2d empty array, with empty seperate defined headers, returns empty string", () =>
+  test("given 2d empty array, with separate defined headers and a custom column delimiter, returns headers", () =>
+    assert.deepEqual(
+      formatTextToTable([], {
+        headers: ["one", "two"],
+        columnDelimiter: "l",
+      }),
+      "one l two\n---------",
+      "did not return headers"
+    ));
+  test("given 2d array, with separate defined headers and a custom column delimiter, returns table", () =>
+    assert.deepEqual(
+      formatTextToTable(
+        [
+          ["chicken", "egg"],
+          ["true", "false"],
+        ],
+        {
+          headers: ["one", "two"],
+          columnDelimiter: "l",
+        }
+      ),
+      "one     l two  \n---------------\nchicken l egg  \ntrue    l false",
+      "did not return headers"
+    ));
+  test("given 2d empty array, with empty separate defined headers, returns empty string", () =>
     assert.deepEqual(
       formatTextToTable([[]], {
         headers: [],
       }),
       "",
       "did not return empty string"
+    ));
+  test("given 2d array with data with headers and custom row delimiter, display table ", () =>
+    assert.deepEqual(
+      formatTextToTable(
+        [
+          ["brad", "100"],
+          ["foo", "50"],
+        ],
+        {
+          headers: ["name", "score"],
+          rowDelimiter: "_",
+        }
+      ),
+      "name | score\n____________\nbrad | 100  \nfoo  | 50   ",
+      "did not return table"
     ));
   test("given 2d array with data with long headers, display table", () =>
     assert.deepEqual(
