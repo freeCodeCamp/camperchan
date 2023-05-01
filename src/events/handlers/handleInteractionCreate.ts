@@ -74,5 +74,25 @@ export const handleInteractionCreate = async (
     if (interaction.customId.startsWith("rr-")) {
       await reactionRoleClick(Bot, interaction);
     }
+    if (interaction.customId === "acknowledge") {
+      await interaction.deferUpdate();
+      const embed = (interaction.message as Message).embeds[0];
+      await interaction.editReply({
+        embeds: [
+          {
+            title: embed.title || "lost it oopsie",
+            description: embed.description || "lost it oopsie",
+            fields: [
+              ...embed.fields,
+              {
+                name: "Acknowledged by",
+                value: `<@!${interaction.user.id}>`,
+              },
+            ],
+          },
+        ],
+        components: [],
+      });
+    }
   }
 };
