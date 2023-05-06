@@ -12,7 +12,7 @@
   },
   "engines": {
     "node": "18.16.0",
-    "npm": "9.6.5"
+    "npm": "9.6.6"
   },
   "license": "MIT",
   "dependencies": {
