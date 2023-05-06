@@ -17,7 +17,7 @@
   "license": "MIT",
   "dependencies": {
     "diff": "5.1.0",
-    "discord.js": "14.9.0",
+    "discord.js": "14.11.0",
     "dotenv": "16.0.3",
     "git-repo-info": "2.1.1",
     "highlight.js": "11.8.0",
