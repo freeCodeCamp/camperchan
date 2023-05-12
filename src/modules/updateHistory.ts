@@ -16,6 +16,9 @@ export const updateHistory = async (
   userId: string
 ) => {
   try {
+    if (global.test && global.suite) {
+      return;
+    }
     const userRecord =
       (await HistoryModel.findOne({
         userId: userId,

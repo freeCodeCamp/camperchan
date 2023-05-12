@@ -17,7 +17,7 @@
   "license": "MIT",
   "dependencies": {
     "diff": "5.1.0",
-    "discord.js": "14.9.0",
+    "discord.js": "14.10.2",
     "dotenv": "16.0.3",
     "git-repo-info": "2.1.1",
     "highlight.js": "11.8.0",
@@ -38,6 +38,7 @@
     "@typescript-eslint/eslint-plugin": "5.59.1",
     "@typescript-eslint/parser": "5.59.1",
     "chai": "4.3.7",
+    "discordjs-testing": "0.0.0-epsilon",
     "editorconfig": "1.0.2",
     "eslint": "8.39.0",
     "eslint-config-prettier": "8.8.0",
