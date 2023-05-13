@@ -22,7 +22,7 @@
     "git-repo-info": "2.1.1",
     "highlight.js": "11.8.0",
     "luxon": "3.3.0",
-    "mongoose": "7.1.0",
+    "mongoose": "7.1.1",
     "string-similarity": "4.0.4",
     "strip-ansi": "6.0.1",
     "winston": "3.8.2"
