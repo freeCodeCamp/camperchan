@@ -1,9 +1,9 @@
 import { Client } from "discord.js";
-
 import { IntentOptions } from "./config/IntentOptions";
+import { Camperbot } from "./interfaces/Camperbot";
+
 import { connectDatabase } from "./database/connectDatabase";
 import { registerEvents } from "./events/registerEvents";
-import { Camperbot } from "./interfaces/Camperbot";
 import { generateConfig } from "./modules/generateConfig";
 import { loadCommands } from "./utils/loadCommands";
 import { loadContexts } from "./utils/loadContexts";
