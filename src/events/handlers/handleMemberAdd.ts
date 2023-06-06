@@ -1,5 +1,4 @@
-import { EmbedBuilder } from "@discordjs/builders";
-import { GuildMember, PartialGuildMember } from "discord.js";
+import { EmbedBuilder, GuildMember, PartialGuildMember } from "discord.js";
 
 import { Camperbot } from "../../interfaces/Camperbot";
 import { errorHandler } from "../../utils/errorHandler";

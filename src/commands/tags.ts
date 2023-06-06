@@ -1,5 +1,4 @@
-import { SlashCommandBuilder } from "@discordjs/builders";
-import { GuildMember } from "discord.js";
+import { GuildMember, SlashCommandBuilder } from "discord.js";
 
 import { Tags } from "../config/Tags";
 import { GuildCommand } from "../interfaces/GuildCommand";

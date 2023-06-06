@@ -1,5 +1,4 @@
-import { EmbedBuilder } from "@discordjs/builders";
-import { SlashCommandBuilder } from "discord.js";
+import { EmbedBuilder, SlashCommandBuilder } from "discord.js";
 
 import LevelModel from "../database/models/LevelModel";
 import { GuildCommand } from "../interfaces/GuildCommand";

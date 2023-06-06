@@ -1,10 +1,10 @@
-import { SlashCommandBuilder } from "@discordjs/builders";
 import {
   ActionRowBuilder,
   ButtonBuilder,
   ButtonStyle,
   PermissionFlagsBits,
   Role,
+  SlashCommandBuilder,
 } from "discord.js";
 
 import { PrivilegedCommand } from "../interfaces/PrivilegedCommand";
