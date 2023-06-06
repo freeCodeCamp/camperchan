@@ -1,7 +1,6 @@
 import { Message } from "discord.js";
 
 import levelScale from "../config/levelScale";
-import LevelModel from "../database/models/LevelModel";
 import { Camperbot } from "../interfaces/Camperbot";
 import { errorHandler } from "../utils/errorHandler";
 
@@ -21,16 +20,20 @@ export const levelListener = async (Bot: Camperbot, message: Message) => {
 
     const bonus = Math.floor(content.length / 10);
     const pointsEarned = Math.floor(Math.random() * (20 + bonus)) + 5;
-    const user =
-      (await LevelModel.findOne({ userId: author.id })) ||
-      (await LevelModel.create({
+    const user = await Bot.db.levels.upsert({
+      where: {
+        userId: author.id,
+      },
+      update: {},
+      create: {
         userId: author.id,
         userTag: author.tag,
         points: 0,
         level: 0,
         lastSeen: new Date(Date.now()),
         cooldown: 0,
-      }));
+      },
+    });
 
     if (Date.now() - user.cooldown < 60000 || user.level >= 100) {
       return;
@@ -47,7 +50,18 @@ export const levelListener = async (Bot: Camperbot, message: Message) => {
       levelUp = true;
     }
 
-    await user.save();
+    await Bot.db.levels.update({
+      where: {
+        userId: author.id,
+      },
+      data: {
+        points: user.points,
+        level: user.level,
+        lastSeen: user.lastSeen,
+        userTag: user.userTag,
+        cooldown: user.cooldown,
+      },
+    });
 
     if (levelUp) {
       await message.reply({

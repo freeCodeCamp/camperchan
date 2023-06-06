@@ -4,7 +4,6 @@ import {
   SlashCommandBuilder,
 } from "discord.js";
 
-import HistoryModel from "../database/models/HistoryModel";
 import { PrivilegedCommand } from "../interfaces/PrivilegedCommand";
 import { errorHandler } from "../utils/errorHandler";
 
@@ -29,8 +28,10 @@ export const history: PrivilegedCommand = {
       await interaction.deferReply();
       const target = interaction.options.getUser("target", true);
 
-      const targetRecord = await HistoryModel.findOne({
-        userId: target.id,
+      const targetRecord = await Bot.db.histories.findUnique({
+        where: {
+          userId: target.id,
+        },
       });
 
       if (!targetRecord) {

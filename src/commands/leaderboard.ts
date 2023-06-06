@@ -7,7 +7,6 @@ import {
   SlashCommandBuilder,
 } from "discord.js";
 
-import LevelModel from "../database/models/LevelModel";
 import { Command } from "../interfaces/Command";
 import { errorHandler } from "../utils/errorHandler";
 import { formatTextToTable } from "../utils/formatText";
@@ -20,10 +19,11 @@ export const leaderboard: Command = {
     try {
       await interaction.deferReply();
 
-      const levels = await LevelModel.find({})
-        .sort({ points: "descending" })
-        .lean()
-        .exec();
+      const levels = await Bot.db.levels.findMany({
+        orderBy: {
+          points: "desc",
+        },
+      });
 
       const mappedWithId = levels.map((user, index) => [
         index + 1,

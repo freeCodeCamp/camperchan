@@ -1,16 +1,18 @@
-import { connect } from "mongoose";
+import { PrismaClient } from "@prisma/client";
 
 import { Camperbot } from "../interfaces/Camperbot";
 import { errorHandler } from "../utils/errorHandler";
 
 /**
- * Handles connecting to the database.
+ * Handles connecting to the database and attaching the database to
+ * Camperbot.
  *
  * @param {Camperbot} Bot The bot's Discord instance.
  */
 export const connectDatabase = async (Bot: Camperbot) => {
   try {
-    await connect(Bot.config.mongo_uri);
+    Bot.db = new PrismaClient();
+    await Bot.db.$connect();
     await Bot.config.debug_hook.send("Database Connected");
   } catch (err) {
     await errorHandler(Bot, err);
