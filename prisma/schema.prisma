@@ -9,3 +9,27 @@ datasource db {
   provider = "mongodb"
   url      = env("MONGO_URI")
 }
+
+model histories {
+  id     String @id @default(auto()) @map("_id") @db.ObjectId
+  v      Int?   @map("__v") @ignore
+  userId String
+  bans   Int    @default(0)
+  kicks  Int    @default(0)
+  mutes  Int    @default(0)
+  warns  Int    @default(0)
+  unbans Int    @default(0)
+
+  @@unique([userId], map: "userId_1")
+}
+
+model levels {
+  id       String   @id @default(auto()) @map("_id") @db.ObjectId
+  v        Int?     @map("__v") @ignore
+  userId   String
+  userTag  String   @default("")
+  points   Int      @default(0)
+  level    Int      @default(0)
+  lastSeen DateTime @default(now())
+  cooldown Int      @default(0)
+}
