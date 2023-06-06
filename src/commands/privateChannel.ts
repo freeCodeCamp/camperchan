@@ -1,4 +1,3 @@
-import { SlashCommandBuilder } from "@discordjs/builders";
 import {
   ActionRowBuilder,
   ButtonBuilder,
@@ -7,6 +6,7 @@ import {
   ChannelType,
   GuildChannelCreateOptions,
   PermissionFlagsBits,
+  SlashCommandBuilder,
 } from "discord.js";
 
 import { PrivilegedCommand } from "../interfaces/PrivilegedCommand";

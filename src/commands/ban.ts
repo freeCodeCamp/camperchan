@@ -1,5 +1,8 @@
-import { SlashCommandBuilder } from "@discordjs/builders";
-import { EmbedBuilder, PermissionFlagsBits } from "discord.js";
+import {
+  EmbedBuilder,
+  PermissionFlagsBits,
+  SlashCommandBuilder,
+} from "discord.js";
 
 import { PrivilegedCommand } from "../interfaces/PrivilegedCommand";
 import { sendModerationDm } from "../modules/sendModerationDm";

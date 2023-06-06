@@ -1,5 +1,4 @@
-import { SlashCommandBuilder } from "@discordjs/builders";
-import { EmbedBuilder } from "discord.js";
+import { EmbedBuilder, SlashCommandBuilder } from "discord.js";
 
 import { Command } from "../interfaces/Command";
 import { ForumData } from "../interfaces/Forum";

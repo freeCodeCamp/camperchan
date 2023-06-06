@@ -1,9 +1,11 @@
 import {
   ActionRowBuilder,
   ButtonBuilder,
+  ButtonStyle,
+  ComponentType,
+  Message,
   SlashCommandBuilder,
-} from "@discordjs/builders";
-import { ButtonStyle, ComponentType, Message } from "discord.js";
+} from "discord.js";
 
 import LevelModel from "../database/models/LevelModel";
 import { Command } from "../interfaces/Command";
