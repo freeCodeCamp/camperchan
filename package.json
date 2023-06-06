@@ -9,7 +9,8 @@
     "clean": "rimraf dist",
     "lint": "eslint src test --max-warnings 0",
     "start": "node -r dotenv/config dist/index.js",
-    "test": "ts-mocha -u tdd --file test/root.ts test/**/*.spec.ts --recursive --exit --timeout 10000"
+    "test": "ts-mocha -u tdd test/**/*.spec.ts --recursive --exit --timeout 10000",
+    "db:deploy": "prisma db push"
   },
   "engines": {
     "node": "18.16.0",
@@ -24,7 +25,6 @@
     "git-repo-info": "2.1.1",
     "highlight.js": "11.8.0",
     "luxon": "3.3.0",
-    "mongoose": "7.2.2",
     "string-similarity": "4.0.4",
     "strip-ansi": "6.0.1",
     "winston": "3.9.0"

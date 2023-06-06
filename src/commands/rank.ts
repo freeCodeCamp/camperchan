@@ -1,6 +1,5 @@
 import { EmbedBuilder, SlashCommandBuilder } from "discord.js";
 
-import LevelModel from "../database/models/LevelModel";
 import { GuildCommand } from "../interfaces/GuildCommand";
 import { errorHandler } from "../utils/errorHandler";
 
@@ -23,7 +22,11 @@ export const rank: GuildCommand = {
         interaction.options.getUser("target")?.username ||
         interaction.user.username;
 
-      const record = await LevelModel.findOne({ userId: target });
+      const record = await Bot.db.levels.findUnique({
+        where: {
+          userId: target,
+        },
+      });
 
       if (!record) {
         await interaction.editReply({

@@ -11,14 +11,15 @@ datasource db {
 }
 
 model histories {
-  id     String @id @default(auto()) @map("_id") @db.ObjectId
-  v      Int?   @map("__v") @ignore
-  userId String
-  bans   Int    @default(0)
-  kicks  Int    @default(0)
-  mutes  Int    @default(0)
-  warns  Int    @default(0)
-  unbans Int    @default(0)
+  id      String @id @default(auto()) @map("_id") @db.ObjectId
+  v       Int?   @map("__v") @ignore
+  userId  String
+  bans    Int    @default(0)
+  kicks   Int    @default(0)
+  mutes   Int    @default(0)
+  warns   Int    @default(0)
+  unbans  Int    @default(0)
+  unmutes Int    @default(0)
 
   @@unique([userId], map: "userId_1")
 }
@@ -32,4 +33,6 @@ model levels {
   level    Int      @default(0)
   lastSeen DateTime @default(now())
   cooldown Int      @default(0)
+
+  @@unique([userId], map: "userId_1")
 }
