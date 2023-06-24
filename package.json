@@ -13,7 +13,7 @@
     "db:deploy": "prisma db push"
   },
   "engines": {
-    "node": "18.16.0",
+    "node": "18.16.1",
     "pnpm": "8.6.3"
   },
   "license": "MIT",
