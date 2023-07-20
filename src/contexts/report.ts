@@ -6,6 +6,9 @@ import {
   ButtonBuilder,
   ButtonStyle,
   ActionRowBuilder,
+  TextInputBuilder,
+  TextInputStyle,
+  ModalBuilder,
 } from "discord.js";
 
 import { Context } from "../interfaces/Context";
@@ -18,31 +21,25 @@ export const report: Context = {
   },
   run: async (Bot, interaction) => {
     try {
-      await interaction.deferReply({ ephemeral: true });
-      const guild = interaction.guild as Guild;
+      const guild = interaction.guild;
       if (!guild) {
-        await interaction.editReply("You cannot report DM messages!");
+        await interaction.reply({
+          content: "You cannot report DM messages!",
+          ephemeral: true,
+        });
         return;
       }
       const message = interaction.options.getMessage("message") as Message;
 
       if (!message) {
-        await interaction.editReply(
-          "Something broke horribly. Please ping Naomi."
-        );
+        await interaction.reply({
+          content: `The message could not be loaded. Please try again. If the issue persists, ping <@!465650873650118659>`,
+          ephemeral: true,
+        });
         return;
       }
 
-      const reportChannel = await guild.channels
-        .fetch(Bot.config.report_channel)
-        .catch(() => null);
-
-      if (!reportChannel || !("send" in reportChannel)) {
-        await interaction.editReply(
-          "Something broke horribly. Please ping Naomi."
-        );
-        return;
-      }
+      const reportChannel = Bot.reportChannel;
 
       const author = message.author;
 
@@ -79,10 +76,24 @@ export const report: Context = {
         text: `ID: ${author.id}`,
       });
 
-      await reportChannel.send({ embeds: [reportEmbed], components: [row] });
-      await interaction.editReply(
-        "This message has been flagged. Thanks for keeping the freeCodeCamp community safe!"
+      const log = await reportChannel.send({
+        embeds: [reportEmbed],
+        components: [row],
+      });
+
+      const reason = new TextInputBuilder()
+        .setLabel("Why are you reporting this message?")
+        .setCustomId("reason")
+        .setStyle(TextInputStyle.Paragraph)
+        .setRequired(true);
+      const modalRow = new ActionRowBuilder<TextInputBuilder>().addComponents(
+        reason
       );
+      const modal = new ModalBuilder()
+        .setCustomId(`report-${log.id}`)
+        .setTitle("Message Report")
+        .addComponents(modalRow);
+      await interaction.showModal(modal);
     } catch (err) {
       await errorHandler(Bot, err);
     }

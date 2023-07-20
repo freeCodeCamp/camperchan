@@ -1,4 +1,9 @@
-import { Interaction, InteractionType, Message } from "discord.js";
+import {
+  ComponentType,
+  Interaction,
+  InteractionType,
+  Message,
+} from "discord.js";
 import { compareTwoStrings } from "string-similarity";
 
 import { Tags } from "../../config/Tags";
@@ -92,6 +97,35 @@ export const handleInteractionCreate = async (
           },
         ],
         components: [],
+      });
+    }
+  }
+
+  if (interaction.isModalSubmit()) {
+    if (interaction.customId.startsWith(`report-`)) {
+      const messageId = interaction.customId.split("-")[1];
+      const reportChannel = Bot.reportChannel;
+      const message = await reportChannel.messages.fetch(messageId);
+      const embed = message.embeds[0];
+      const reason = interaction.fields.getTextInputValue("reason");
+      await message.edit({
+        embeds: [
+          {
+            title: embed.title || "lost it oopsie",
+            description: embed.description || "lost it oopsie",
+            fields: [
+              ...embed.fields,
+              {
+                name: "Reason",
+                value: reason,
+              },
+            ],
+          },
+        ],
+      });
+      await interaction.reply({
+        content: "Thank you for reporting!",
+        ephemeral: true,
       });
     }
   }
