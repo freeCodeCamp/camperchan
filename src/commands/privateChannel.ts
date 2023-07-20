@@ -2,7 +2,6 @@ import {
   ActionRowBuilder,
   ButtonBuilder,
   ButtonStyle,
-  CategoryChannel,
   ChannelType,
   GuildChannelCreateOptions,
   PermissionFlagsBits,
@@ -41,43 +40,7 @@ export const privateChannel: PrivilegedCommand = {
 
       const target = interaction.options.getUser("target", true);
 
-      let category = guild.channels.cache.find(
-        (c) =>
-          c.id === Bot.config.private_category &&
-          c.type === ChannelType.GuildCategory
-      );
-      if (!category) {
-        category = await guild.channels.create({
-          name: "Private Channel",
-          type: ChannelType.GuildCategory,
-          permissionOverwrites: [
-            {
-              id: guild.id,
-              deny: [
-                PermissionFlagsBits.ViewChannel,
-                PermissionFlagsBits.ReadMessageHistory,
-                PermissionFlagsBits.SendMessages,
-              ],
-            },
-            {
-              id: modRole.id,
-              allow: [
-                PermissionFlagsBits.ViewChannel,
-                PermissionFlagsBits.ReadMessageHistory,
-                PermissionFlagsBits.SendMessages,
-              ],
-            },
-            {
-              id: Bot.config.bot_id,
-              allow: [
-                PermissionFlagsBits.ViewChannel,
-                PermissionFlagsBits.ReadMessageHistory,
-                PermissionFlagsBits.SendMessages,
-              ],
-            },
-          ],
-        });
-      }
+      const category = Bot.privateCategory;
 
       // Create channel
       const channelName = `private-${target.username}`;
@@ -85,6 +48,7 @@ export const privateChannel: PrivilegedCommand = {
       const channelOpts: GuildChannelCreateOptions = {
         name: channelName,
         type: ChannelType.GuildText,
+        parent: category,
         permissionOverwrites: [
           {
             id: target.id,
@@ -124,10 +88,6 @@ export const privateChannel: PrivilegedCommand = {
           },
         ],
       };
-
-      if (category) {
-        channelOpts.parent = category as CategoryChannel;
-      }
 
       const newChannel = await guild.channels.create(channelOpts);
 

@@ -1,5 +1,12 @@
 import { PrismaClient } from "@prisma/client";
-import { Client, Snowflake, WebhookClient } from "discord.js";
+import {
+  CategoryChannel,
+  Client,
+  Guild,
+  Snowflake,
+  TextBasedChannel,
+  WebhookClient,
+} from "discord.js";
 
 import { Context } from "./Context";
 import { QuoteList } from "./Quotes";
@@ -23,4 +30,7 @@ export interface Camperbot extends Client {
   contexts: Context[];
   private_logs: { [key: string]: string };
   db: PrismaClient;
+  homeGuild: Guild;
+  reportChannel: TextBasedChannel;
+  privateCategory: CategoryChannel;
 }
