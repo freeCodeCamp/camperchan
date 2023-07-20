@@ -1,4 +1,5 @@
 import { ChannelType } from "discord.js";
+
 import { Camperbot } from "../../interfaces/Camperbot";
 import { errorHandler } from "../../utils/errorHandler";
 
@@ -15,7 +16,9 @@ export const handleReady = async (Bot: Camperbot) => {
       await Bot.config.debug_hook.send("The home guild could not be loaded.");
       return;
     }
-    Bot.homeGuild = homeGuild;
+    if (!Bot.homeGuild) {
+      Bot.homeGuild = homeGuild;
+    }
     const reportChannel = await homeGuild.channels.fetch(
       Bot.config.report_channel
     );
@@ -29,7 +32,9 @@ export const handleReady = async (Bot: Camperbot) => {
       await Bot.config.debug_hook.send("The report channel is not text based.");
       return;
     }
-    Bot.reportChannel = reportChannel;
+    if (!Bot.reportChannel) {
+      Bot.reportChannel = reportChannel;
+    }
     const privateCategory = await homeGuild.channels.fetch(
       Bot.config.private_category
     );
@@ -45,7 +50,9 @@ export const handleReady = async (Bot: Camperbot) => {
       );
       return;
     }
-    Bot.privateCategory = privateCategory;
+    if (!Bot.privateCategory) {
+      Bot.privateCategory = privateCategory;
+    }
     await Bot.config.debug_hook.send("All channels loaded.");
   } catch (err) {
     await errorHandler(Bot, err);

@@ -2,7 +2,6 @@ import {
   ActionRowBuilder,
   ButtonBuilder,
   ButtonStyle,
-  CategoryChannel,
   ChannelType,
   GuildChannelCreateOptions,
   PermissionFlagsBits,

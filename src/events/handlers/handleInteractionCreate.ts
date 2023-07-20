@@ -1,9 +1,4 @@
-import {
-  ComponentType,
-  Interaction,
-  InteractionType,
-  Message,
-} from "discord.js";
+import { Interaction, InteractionType, Message } from "discord.js";
 import { compareTwoStrings } from "string-similarity";
 
 import { Tags } from "../../config/Tags";
