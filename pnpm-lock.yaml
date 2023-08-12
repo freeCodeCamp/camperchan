@@ -24,8 +24,8 @@ dependencies:
     specifier: 11.8.0
     version: 11.8.0
   luxon:
-    specifier: 3.3.0
-    version: 3.3.0
+    specifier: 3.4.0
+    version: 3.4.0
   string-similarity:
     specifier: 4.0.4
     version: 4.0.4
@@ -3411,8 +3411,8 @@ packages:
     engines: {node: 14 || >=16.14}
     dev: true
 
-  /luxon@3.3.0:
-    resolution: {integrity: sha512-An0UCfG/rSiqtAIiBPO0Y9/zAnHUZxAMiCpTd5h2smgsj7GGmcenvrvww2cqNA8/4A5ZrD1gJpHN2mIHZQF+Mg==}
+  /luxon@3.4.0:
+    resolution: {integrity: sha512-7eDo4Pt7aGhoCheGFIuq4Xa2fJm4ZpmldpGhjTYBNUYNCN6TIEP6v7chwwwt3KRp7YR+rghbfvjyo3V5y9hgBw==}
     engines: {node: '>=12'}
     dev: false
 
