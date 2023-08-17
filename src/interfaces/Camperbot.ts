@@ -11,6 +11,7 @@ import {
 import { Context } from "./Context";
 import { QuoteList } from "./Quotes";
 import { WrappedCommand } from "./WrappedCommand";
+import { Octokit } from "@octokit/rest";
 
 export interface Camperbot extends Client {
   config: {
@@ -24,7 +25,9 @@ export interface Camperbot extends Client {
     mod_role: Snowflake;
     private_category: Snowflake;
     report_channel: Snowflake;
+    githubToken: string;
   };
+  octokit: Octokit;
   quotes: QuoteList;
   commands: WrappedCommand[];
   contexts: Context[];

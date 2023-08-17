@@ -10,12 +10,16 @@ import { loadContexts } from "./utils/loadContexts";
 import { loadQuotes } from "./utils/loadQuotes";
 import { registerCommands } from "./utils/registerCommands";
 import { wrapCommands } from "./utils/wrapCommands";
+import { Octokit } from "@octokit/rest";
 
 (async () => {
   const Bot = new Client({
     intents: IntentOptions,
   }) as Camperbot;
   Bot.config = generateConfig();
+  Bot.octokit = new Octokit({
+    auth: Bot.config.githubToken,
+  });
   await connectDatabase(Bot);
   await registerEvents(Bot);
   Bot.commands = wrapCommands(await loadCommands(Bot));

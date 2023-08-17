@@ -18,6 +18,7 @@
   },
   "license": "MIT",
   "dependencies": {
+    "@octokit/rest": "20.0.1",
     "@prisma/client": "4.16.2",
     "diff": "5.1.0",
     "discord.js": "14.12.1",
