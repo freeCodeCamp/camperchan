@@ -1,3 +1,4 @@
+import { Octokit } from "@octokit/rest";
 import { Client } from "discord.js";
 
 import { IntentOptions } from "./config/IntentOptions";
@@ -10,7 +11,6 @@ import { loadContexts } from "./utils/loadContexts";
 import { loadQuotes } from "./utils/loadQuotes";
 import { registerCommands } from "./utils/registerCommands";
 import { wrapCommands } from "./utils/wrapCommands";
-import { Octokit } from "@octokit/rest";
 
 (async () => {
   const Bot = new Client({

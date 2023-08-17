@@ -1,3 +1,4 @@
+import { Octokit } from "@octokit/rest";
 import { PrismaClient } from "@prisma/client";
 import {
   CategoryChannel,
@@ -11,7 +12,6 @@ import {
 import { Context } from "./Context";
 import { QuoteList } from "./Quotes";
 import { WrappedCommand } from "./WrappedCommand";
-import { Octokit } from "@octokit/rest";
 
 export interface Camperbot extends Client {
   config: {
