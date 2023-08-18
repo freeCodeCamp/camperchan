@@ -8,6 +8,7 @@ export const CommandNames = [
   "leaderboard",
   "mute",
   "private",
+  "pull-comment",
   "quote",
   "rank",
   "role",

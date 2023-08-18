@@ -1,3 +1,4 @@
+import { Octokit } from "@octokit/rest";
 import { PrismaClient } from "@prisma/client";
 import {
   CategoryChannel,
@@ -24,7 +25,9 @@ export interface Camperbot extends Client {
     mod_role: Snowflake;
     private_category: Snowflake;
     report_channel: Snowflake;
+    githubToken: string;
   };
+  octokit: Octokit;
   quotes: QuoteList;
   commands: WrappedCommand[];
   contexts: Context[];

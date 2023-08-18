@@ -1,3 +1,4 @@
+import { Octokit } from "@octokit/rest";
 import { Client } from "discord.js";
 
 import { IntentOptions } from "./config/IntentOptions";
@@ -16,6 +17,9 @@ import { wrapCommands } from "./utils/wrapCommands";
     intents: IntentOptions,
   }) as Camperbot;
   Bot.config = generateConfig();
+  Bot.octokit = new Octokit({
+    auth: Bot.config.githubToken,
+  });
   await connectDatabase(Bot);
   await registerEvents(Bot);
   Bot.commands = wrapCommands(await loadCommands(Bot));
