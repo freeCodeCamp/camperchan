@@ -68,8 +68,8 @@ devDependencies:
     specifier: 5.62.0
     version: 5.62.0(eslint@8.47.0)(typescript@5.1.6)
   chai:
-    specifier: 4.3.7
-    version: 4.3.7
+    specifier: 4.3.8
+    version: 4.3.8
   editorconfig:
     specifier: 1.0.4
     version: 1.0.4
@@ -1683,8 +1683,8 @@ packages:
     resolution: {integrity: sha512-F6x5IEuigtUfU5ZMQK2jsy5JqUUlEFRVZq8bO2a+ysq5K7jD6PPc9YXZj78xDNS3uNchesp1Jw47YXEqr+Viyg==}
     dev: true
 
-  /chai@4.3.7:
-    resolution: {integrity: sha512-HLnAzZ2iupm25PlN0xFreAlBA5zaBSv3og0DdeGA4Ar6h6rJ3A0rolRUKJhSF2V10GZKDgWF/VmAEsNWjCRB+A==}
+  /chai@4.3.8:
+    resolution: {integrity: sha512-vX4YvVVtxlfSZ2VecZgFUTU5qPCYsobVI2O9FmwEXBhDigYGQA6jRXCycIs1yJnnWbZ6/+a2zNIF5DfVCcJBFQ==}
     engines: {node: '>=4'}
     dependencies:
       assertion-error: 1.1.0
