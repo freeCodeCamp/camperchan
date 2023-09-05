@@ -55,11 +55,11 @@ export const handleMessageDelete = async (
       deleteEmbed.setImage(attached.proxyURL);
     }
 
-    await Bot.config.mod_hook.send({ embeds: [deleteEmbed] });
+    await Bot.config.message_hook.send({ embeds: [deleteEmbed] });
 
     if (embeds.length) {
       embeds.forEach(
-        async (embed) => await Bot.config.mod_hook.send({ embeds: [embed] })
+        async (embed) => await Bot.config.message_hook.send({ embeds: [embed] })
       );
     }
   } catch (err) {

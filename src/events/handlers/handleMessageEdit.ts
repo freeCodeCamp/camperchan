@@ -66,7 +66,7 @@ export const handleMessageEdit = async (
       text: `ID: ${author?.id || "unknown"}`,
     });
 
-    await Bot.config.mod_hook.send({ embeds: [updateEmbed] });
+    await Bot.config.message_hook.send({ embeds: [updateEmbed] });
   } catch (err) {
     await errorHandler(Bot, err);
   }
