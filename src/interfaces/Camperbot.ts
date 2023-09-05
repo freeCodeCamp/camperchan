@@ -18,6 +18,7 @@ export interface Camperbot extends Client {
     token: string;
     mongo_uri: string;
     debug_hook: WebhookClient;
+    message_hook: WebhookClient;
     mod_hook: WebhookClient;
     welcome_hook: WebhookClient;
     home_guild: Snowflake;

@@ -13,6 +13,7 @@ export const generateConfig = (): Camperbot["config"] => {
     !process.env.MONGO_URI ||
     !process.env.DEBUG_HOOK ||
     !process.env.MOD_HOOK ||
+    !process.env.MESSAGE_HOOK ||
     !process.env.HOME_GUILD ||
     !process.env.BOT_ID ||
     !process.env.REPORT_CHANNEL ||
@@ -26,6 +27,7 @@ export const generateConfig = (): Camperbot["config"] => {
     mongo_uri: process.env.MONGO_URI,
     debug_hook: new WebhookClient({ url: process.env.DEBUG_HOOK }),
     mod_hook: new WebhookClient({ url: process.env.MOD_HOOK }),
+    message_hook: new WebhookClient({ url: process.env.MESSAGE_HOOK }),
     welcome_hook: new WebhookClient({ url: process.env.WELCOME_HOOK }),
     home_guild: process.env.HOME_GUILD,
     bot_id: process.env.BOT_ID,

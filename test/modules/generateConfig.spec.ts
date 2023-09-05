@@ -23,6 +23,8 @@ suite("generateConfig", () => {
       "https://discord.com/api/webhooks/11111111111111111/AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA";
     process.env.MOD_HOOK =
       "https://discord.com/api/webhooks/11111111111111111/AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA";
+    process.env.MESSAGE_HOOK =
+      "https://discord.com/api/webhooks/11111111111111111/AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA";
     process.env.WELCOME_HOOK =
       "https://discord.com/api/webhooks/11111111111111111/AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA";
     process.env.GITHUB_TOKEN = "meow";
@@ -34,6 +36,7 @@ suite("generateConfig", () => {
     assert.equal(result.report_channel, "Scream");
     assert.instanceOf(result.debug_hook, WebhookClient);
     assert.instanceOf(result.mod_hook, WebhookClient);
+    assert.instanceOf(result.message_hook, WebhookClient);
     assert.instanceOf(result.welcome_hook, WebhookClient);
     assert.equal(result.debug_hook.url, process.env.DEBUG_HOOK);
     assert.equal(result.mod_hook.url, process.env.MOD_HOOK);
