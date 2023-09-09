@@ -24,7 +24,7 @@ export const handleThreadCreate = async (
       { name: "Channel:", value: `<#${thread.parentId}>`, inline: true },
     ]);
 
-    await Bot.config.mod_hook.send({ embeds: [embed] });
+    await Bot.config.message_hook.send({ embeds: [embed] });
   } catch (err) {
     await errorHandler(Bot, err);
   }
