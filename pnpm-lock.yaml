@@ -44,8 +44,8 @@ devDependencies:
     specifier: 4.3.6
     version: 4.3.6
   '@types/common-tags':
-    specifier: 1.8.1
-    version: 1.8.1
+    specifier: 1.8.2
+    version: 1.8.2
   '@types/diff':
     specifier: 5.0.3
     version: 5.0.3
@@ -1129,8 +1129,8 @@ packages:
     resolution: {integrity: sha512-VOVRLM1mBxIRxydiViqPcKn6MIxZytrbMpd6RJLIWKxUNr3zux8no0Oc7kJx0WAPIitgZ0gkrDS+btlqQpubpw==}
     dev: true
 
-  /@types/common-tags@1.8.1:
-    resolution: {integrity: sha512-20R/mDpKSPWdJs5TOpz3e7zqbeCNuMCPhV7Yndk9KU2Rbij2r5W4RzwDPkzC+2lzUqXYu9rFzTktCBnDjHuNQg==}
+  /@types/common-tags@1.8.2:
+    resolution: {integrity: sha512-Z5UcOnlqxFm0tCCTEhkcVOfSihWOMyKypIWHtQNSYh6fMdPUIVpNdLBYutDpDXVHsMUrYzI2IczUHXIzpUovmQ==}
     dev: true
 
   /@types/diff@5.0.3:
