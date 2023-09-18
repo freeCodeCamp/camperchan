@@ -9,12 +9,14 @@ export const pullComment: PrivilegedCommand = {
   guildOnly: true,
   data: new SlashCommandBuilder()
     .setName("pull-comment")
-    .setDescription("Adds a friendly comment to a pull request.")
+    .setDescription(
+      "Adds a friendly comment to a pull request. Scoped to the freeCodeCamp organisation."
+    )
     .addStringOption((option) =>
       option
         .setName("repository")
         .setDescription(
-          "The URL-friendly name of the repository to comment on."
+          "The URL-friendly name of the repository to comment on. Must be a freeCodeCamp owned repository."
         )
         .setRequired(true)
     )
