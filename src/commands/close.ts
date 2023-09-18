@@ -47,6 +47,14 @@ export const close: PrivilegedCommand = {
         });
         return;
       }
+      if (data.data.state === "closed") {
+        await interaction.editReply({
+          content: `The [${
+            data.data.pull_request ? "pull request" : "issue"
+          }](${data.data.html_url}) is already closed.`,
+        });
+        return;
+      }
       const isPull = data.data.pull_request;
       await Bot.octokit.issues.createComment({
         owner: "freeCodeCamp",
