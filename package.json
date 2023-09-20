@@ -9,8 +9,10 @@
     "clean": "rimraf dist",
     "lint": "eslint src test --max-warnings 0",
     "start": "node -r dotenv/config dist/index.js",
+    "pretest": "rimraf ./.nyc_output && ts-node test/validateCoverage.ts",
     "test": "nyc --check-coverage ts-mocha -u tdd  'test/**/*.spec.ts' --recursive --exit --timeout 10000",
     "test:nocov": "MOCHA=true ts-mocha -u tdd  'test/**/*.spec.ts' --recursive --exit --timeout 10000",
+    "posttest": "ts-node test/validateCoverage.ts --post-coverage",
     "db:deploy": "prisma db push"
   },
   "engines": {
