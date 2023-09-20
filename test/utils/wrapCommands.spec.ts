@@ -39,7 +39,7 @@ suite("wrapCommands", () => {
     assert.isTrue(wrapped[1].wrapped);
     assert.match(
       wrapped[1].run.toString(),
-      /if \(!interaction\.inCachedGuild\(\)\)/
+      /if\s*\(!interaction\.inCachedGuild\(\)\)/
     );
   });
 });

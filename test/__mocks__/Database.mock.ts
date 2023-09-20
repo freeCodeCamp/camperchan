@@ -30,6 +30,10 @@ class History {
     });
     if (exists) {
       for (const key of Object.keys(options.update)) {
+        if (options.update[key].increment) {
+          exists[key] += options.update[key].increment;
+          continue;
+        }
         exists[key] = options.update[key];
       }
       return exists;
@@ -81,6 +85,10 @@ class Level {
     });
     if (exists) {
       for (const key of Object.keys(options.update)) {
+        if (options.update[key].increment) {
+          exists[key] += options.update[key].increment;
+          continue;
+        }
         exists[key] = options.update[key];
       }
       return exists;
@@ -116,6 +124,7 @@ export class Database {
    */
   constructor() {
     this._level = new Level();
+    this._history = new History();
   }
 
   /**
