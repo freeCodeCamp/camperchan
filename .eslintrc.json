@@ -71,5 +71,13 @@
       }
     ],
     "no-only-tests/no-only-tests": "error"
-  }
+  },
+  "overrides": [
+    {
+      "files": ["test/__mocks__/Database.mock.ts"],
+      "rules": {
+        "require-await": "off"
+      }
+    }
+  ]
 }
