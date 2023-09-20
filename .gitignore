@@ -5,3 +5,7 @@ dist/
 
 ## Don't commit actual log files
 /logs/*.txt
+
+# Test Coverage
+/.nyc_output/
+/coverage/
