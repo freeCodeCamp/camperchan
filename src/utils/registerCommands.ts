@@ -16,11 +16,15 @@ import { logHandler } from "./logHandler";
  * for registering commands.
  *
  * @param {Camperbot} Bot Bot's Discord instance.
+ * @param {REST} restClass The REST class to use for registering commands.
  * @returns {boolean} True if the commands were registered, false on error.
  */
-export const registerCommands = async (Bot: Camperbot): Promise<boolean> => {
+export const registerCommands = async (
+  Bot: Camperbot,
+  restClass = REST
+): Promise<REST | null> => {
   try {
-    const rest = new REST({ version: "9" }).setToken(Bot.config.token);
+    const rest = new restClass({ version: "10" }).setToken(Bot.config.token);
 
     const commandData: (
       | RESTPostAPIApplicationCommandsJSONBody
@@ -34,9 +38,9 @@ export const registerCommands = async (Bot: Camperbot): Promise<boolean> => {
       Routes.applicationGuildCommands(Bot.config.bot_id, Bot.config.home_guild),
       { body: commandData }
     );
-    return true;
+    return rest;
   } catch (err) {
     await errorHandler(Bot, err);
-    return false;
+    return null;
   }
 };

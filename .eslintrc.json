@@ -71,5 +71,19 @@
       }
     ],
     "no-only-tests/no-only-tests": "error"
-  }
+  },
+  "overrides": [
+    {
+      "files": ["test/__mocks__/Database.mock.ts"],
+      "rules": {
+        "require-await": "off"
+      }
+    },
+    {
+      "files": ["test/utils/wrapCommands.spec.ts"],
+      "rules": {
+        "@typescript-eslint/no-empty-function": "off"
+      }
+    }
+  ]
 }
