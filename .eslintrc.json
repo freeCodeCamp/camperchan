@@ -78,6 +78,12 @@
       "rules": {
         "require-await": "off"
       }
+    },
+    {
+      "files": ["test/utils/wrapCommands.spec.ts"],
+      "rules": {
+        "@typescript-eslint/no-empty-function": "off"
+      }
     }
   ]
 }
