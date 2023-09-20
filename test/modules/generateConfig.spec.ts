@@ -10,6 +10,7 @@ suite("generateConfig", () => {
   });
 
   test("should throw an error on missing environment", () => {
+    delete process.env.TOKEN;
     assert.throw(generateConfig, "Missing required config variables");
   });
 
