@@ -37,7 +37,7 @@ const channel = new MockChannel({
   type: ChannelType.GuildText,
 });
 
-suite.only("coc command", () => {
+suite("coc command", () => {
   test("coc command is defined", () => {
     assert.isDefined(coc);
   });

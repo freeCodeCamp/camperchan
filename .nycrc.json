@@ -3,5 +3,5 @@
   "include": ["src/**/*"],
   "reporter": ["text", "html"],
   "all": true,
-  "lines": 33
+  "lines": 34
 }
