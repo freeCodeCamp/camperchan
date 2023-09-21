@@ -16,7 +16,7 @@ export const pullComment: PrivilegedCommand = {
       option
         .setName("repository")
         .setDescription(
-          "The URL-friendly name of the repository to comment on. Must be a freeCodeCamp owned repository."
+          "The name of the repository, under freeCodeCamp's GitHub org, to comment on"
         )
         .setRequired(true)
     )
