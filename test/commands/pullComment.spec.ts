@@ -31,7 +31,7 @@ suite("pullComment command", () => {
     assert.equal(pullComment.data.name, "pull-comment");
     assert.equal(
       pullComment.data.description,
-      "Adds a friendly comment to a pull request."
+      "Adds a friendly comment to a pull request. Scoped to the freeCodeCamp organisation."
     );
     assert.lengthOf(pullComment.data.options, 3);
   });
