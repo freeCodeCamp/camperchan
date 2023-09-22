@@ -1,6 +1,9 @@
 import { assert } from "chai";
 
-import { calculateMilliseconds } from "../../src/utils/calculateMilliseconds";
+import {
+  calculateMilliseconds,
+  isValidTimeUnit,
+} from "../../src/utils/calculateMilliseconds";
 
 suite("calculateMilliseconds", () => {
   test("10 seconds equals 10,000 milliseconds", () => {
@@ -21,5 +24,20 @@ suite("calculateMilliseconds", () => {
 
   test("10 weeks equals 6,048,000,000 milliseconds", () => {
     assert.equal(calculateMilliseconds(10, "weeks"), 6048000000);
+  });
+
+  test("should handle invalid time units", () => {
+    // @ts-expect-error intentionally ignoring type for testing
+    assert.equal(calculateMilliseconds(10, "invalid"), 0);
+  });
+});
+
+suite("isValidTimeUnit", () => {
+  test("should return true for valid time units", () => {
+    assert.isTrue(isValidTimeUnit("seconds"));
+  });
+
+  test("should return false for invalid time units", () => {
+    assert.isFalse(isValidTimeUnit("invalid"));
   });
 });

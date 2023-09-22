@@ -9,7 +9,10 @@
     "clean": "rimraf dist",
     "lint": "eslint src test --max-warnings 0",
     "start": "node -r dotenv/config dist/index.js",
-    "test": "ts-mocha -u tdd test/**/*.spec.ts --recursive --exit --timeout 10000",
+    "pretest": "rimraf ./.nyc_output && ts-node test/validateCoverage.ts",
+    "test": "nyc --check-coverage ts-mocha -u tdd  'test/**/*.spec.ts' --recursive --exit --timeout 10000",
+    "test:nocov": "MOCHA=true ts-mocha -u tdd  'test/**/*.spec.ts' --recursive --exit --timeout 10000",
+    "posttest": "ts-node test/validateCoverage.ts --post-coverage",
     "db:deploy": "prisma db push"
   },
   "engines": {
@@ -41,6 +44,7 @@
     "@typescript-eslint/eslint-plugin": "5.62.0",
     "@typescript-eslint/parser": "5.62.0",
     "chai": "4.3.8",
+    "discordjs-testing": "0.2.0",
     "editorconfig": "1.0.4",
     "eslint": "8.49.0",
     "eslint-config-prettier": "8.10.0",
@@ -49,6 +53,7 @@
     "eslint-plugin-no-only-tests": "3.1.0",
     "eslint-plugin-prettier": "4.2.1",
     "mocha": "10.2.0",
+    "nyc": "15.1.0",
     "prettier": "2.8.8",
     "prisma": "4.16.2",
     "rimraf": "4.4.1",

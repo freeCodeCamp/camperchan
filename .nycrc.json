@@ -1,0 +1,7 @@
+{
+  "extension": [".ts", ".tsx"],
+  "include": ["src/**/*"],
+  "reporter": ["text", "html"],
+  "all": true,
+  "lines": 38
+}
