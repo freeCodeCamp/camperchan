@@ -1,5 +1,6 @@
 export const CommandNames = [
   "ban",
+  "close",
   "coc",
   "contribute",
   "forum",
