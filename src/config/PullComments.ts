@@ -4,6 +4,11 @@ export const PullComments: { key: string; message: string }[] = [
     message:
       "We realize you're looking to get help as soon as possible. Rather than pinging someone directly, which can be considered rude, would you mind [joining our Discord](https://discord.gg/KVUmVXA) and asking your question there? Someone might be more readily available to help.",
   },
+  {
+    key: "Hacktoberfest requirements",
+    message:
+      "Thank you for contributing a PR for hacktoberfest, however it seems you have not followed all the instructions. Please read the guidelines in the hacktoberfest issue thread and our other contributing guidelines, and make necessary changes.",
+  },
 ];
 
 export const PullClose = `Thank you for opening this pull request.
