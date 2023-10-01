@@ -7,7 +7,7 @@ export const PullComments: { key: string; message: string }[] = [
   {
     key: "Hacktoberfest requirements",
     message:
-      "Thank you for contributing a PR for hacktoberfest, however it seems you have not followed all the instructions. Please read the guidelines in the hacktoberfest issue thread and our other contributing guidelines, and make necessary changes.",
+      "Thank you for submitting a pull request for Hacktoberfest. However, it appears that you have not followed the instructions provided in the Hacktoberfest issue thread or our other contributing guidelines. Please review them and make the necessary changes.",
   },
 ];
 
