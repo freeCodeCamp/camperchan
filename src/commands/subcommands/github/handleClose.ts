@@ -1,35 +1,17 @@
-import { SlashCommandBuilder } from "discord.js";
+import { PermissionFlagsBits } from "discord.js";
 
-import { IssueClose, PullClose } from "../config/PullComments";
-import { Command } from "../interfaces/Command";
-import { errorHandler } from "../utils/errorHandler";
+import { IssueClose, PullClose } from "../../../config/PullComments";
+import { Subcommand } from "../../../interfaces/Subcommand";
+import { errorHandler } from "../../../utils/errorHandler";
 
-export const close: Command = {
-  data: new SlashCommandBuilder()
-    .setName("close")
-    .setDescription(
-      "Close an issue or pull request under the freeCodeCamp organisation."
-    )
-    .addStringOption((option) =>
-      option
-        .setName("repository")
-        .setDescription(
-          "The name of the repository, under freeCodeCamp's GitHub org, to comment on"
-        )
-        .setRequired(true)
-    )
-    .addIntegerOption((option) =>
-      option
-        .setName("number")
-        .setDescription("The number of the issue or pull to close.")
-        .setRequired(true)
-    )
-    .addBooleanOption((option) =>
-      option
-        .setName("spam")
-        .setDescription("Label the PR as spam for Hacktoberfest?")
-    ),
-  run: async (Bot, interaction) => {
+export const handleClose: Subcommand = {
+  permissionValidator: (member) =>
+    [
+      PermissionFlagsBits.ModerateMembers,
+      PermissionFlagsBits.KickMembers,
+      PermissionFlagsBits.BanMembers,
+    ].some((p) => member.permissions.has(p)),
+  execute: async (Bot, interaction) => {
     try {
       await interaction.deferReply();
       const repo = interaction.options.getString("repository", true);

@@ -1,16 +1,11 @@
-import { EmbedBuilder, SlashCommandBuilder } from "discord.js";
+import { EmbedBuilder } from "discord.js";
 
-import { Command } from "../interfaces/Command";
-import { errorHandler } from "../utils/errorHandler";
+import { Subcommand } from "../../../interfaces/Subcommand";
+import { errorHandler } from "../../../utils/errorHandler";
 
-export const rank: Command = {
-  data: new SlashCommandBuilder()
-    .setName("rank")
-    .setDescription("See your level in our community.")
-    .addUserOption((option) =>
-      option.setName("target").setDescription("The user to check the level of.")
-    ),
-  run: async (Bot, interaction) => {
+export const handleRank: Subcommand = {
+  permissionValidator: () => true,
+  execute: async (Bot, interaction) => {
     try {
       await interaction.deferReply();
       const { user } = interaction;

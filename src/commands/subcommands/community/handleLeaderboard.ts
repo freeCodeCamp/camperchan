@@ -4,18 +4,15 @@ import {
   ButtonStyle,
   ComponentType,
   Message,
-  SlashCommandBuilder,
 } from "discord.js";
 
-import { Command } from "../interfaces/Command";
-import { errorHandler } from "../utils/errorHandler";
-import { formatTextToTable } from "../utils/formatText";
+import { Subcommand } from "../../../interfaces/Subcommand";
+import { errorHandler } from "../../../utils/errorHandler";
+import { formatTextToTable } from "../../../utils/formatText";
 
-export const leaderboard: Command = {
-  data: new SlashCommandBuilder()
-    .setName("leaderboard")
-    .setDescription("View the server leaderboard."),
-  run: async (Bot, interaction) => {
+export const handleLeaderboard: Subcommand = {
+  permissionValidator: () => true,
+  execute: async (Bot, interaction) => {
     try {
       await interaction.deferReply();
 

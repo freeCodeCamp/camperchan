@@ -1,62 +1,19 @@
-import { EmbedBuilder, SlashCommandBuilder } from "discord.js";
+import { EmbedBuilder, PermissionFlagsBits } from "discord.js";
 
-import { Command } from "../interfaces/Command";
-import { sendModerationDm } from "../modules/sendModerationDm";
-import { updateHistory } from "../modules/updateHistory";
+import { Subcommand } from "../../../interfaces/Subcommand";
+import { sendModerationDm } from "../../../modules/sendModerationDm";
+import { updateHistory } from "../../../modules/updateHistory";
 import {
   calculateMilliseconds,
   isValidTimeUnit,
-} from "../utils/calculateMilliseconds";
-import { customSubstring } from "../utils/customSubstring";
-import { errorHandler } from "../utils/errorHandler";
+} from "../../../utils/calculateMilliseconds";
+import { customSubstring } from "../../../utils/customSubstring";
+import { errorHandler } from "../../../utils/errorHandler";
 
-export const mute: Command = {
-  data: new SlashCommandBuilder()
-    .setName("mute")
-    .setDescription("Mutes a user.")
-    .addUserOption((option) =>
-      option
-        .setName("target")
-        .setDescription("The user to mute.")
-        .setRequired(true)
-    )
-    .addIntegerOption((option) =>
-      option
-        .setName("duration")
-        .setDescription("The length of time to mute the user.")
-        .setRequired(true)
-    )
-    .addStringOption((option) =>
-      option
-        .setName("unit")
-        .setDescription("The unit of time for the duration.")
-        .setRequired(true)
-        .addChoices(
-          {
-            name: "Minutes",
-            value: "minutes",
-          },
-          {
-            name: "Hours",
-            value: "hours",
-          },
-          {
-            name: "Days",
-            value: "days",
-          },
-          {
-            name: "Weeks",
-            value: "weeks",
-          }
-        )
-    )
-    .addStringOption((option) =>
-      option
-        .setName("reason")
-        .setDescription("The reason for muting the user.")
-        .setRequired(true)
-    ),
-  run: async (Bot, interaction) => {
+export const handleMute: Subcommand = {
+  permissionValidator: (member) =>
+    member.permissions.has(PermissionFlagsBits.ModerateMembers),
+  execute: async (Bot, interaction) => {
     try {
       await interaction.deferReply();
       const { guild, member } = interaction;

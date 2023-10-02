@@ -1,28 +1,15 @@
-import { EmbedBuilder, SlashCommandBuilder } from "discord.js";
+import { EmbedBuilder, PermissionFlagsBits } from "discord.js";
 
-import { Command } from "../interfaces/Command";
-import { sendModerationDm } from "../modules/sendModerationDm";
-import { updateHistory } from "../modules/updateHistory";
-import { customSubstring } from "../utils/customSubstring";
-import { errorHandler } from "../utils/errorHandler";
+import { Subcommand } from "../../../interfaces/Subcommand";
+import { sendModerationDm } from "../../../modules/sendModerationDm";
+import { updateHistory } from "../../../modules/updateHistory";
+import { customSubstring } from "../../../utils/customSubstring";
+import { errorHandler } from "../../../utils/errorHandler";
 
-export const kick: Command = {
-  data: new SlashCommandBuilder()
-    .setName("kick")
-    .setDescription("Kicks a user from the server.")
-    .addUserOption((option) =>
-      option
-        .setName("target")
-        .setDescription("The user to kick.")
-        .setRequired(true)
-    )
-    .addStringOption((option) =>
-      option
-        .setName("reason")
-        .setDescription("The reason for kicking the user.")
-        .setRequired(true)
-    ),
-  run: async (Bot, interaction) => {
+export const handleKick: Subcommand = {
+  permissionValidator: (member) =>
+    member.permissions.has(PermissionFlagsBits.KickMembers),
+  execute: async (Bot, interaction) => {
     try {
       await interaction.deferReply();
       const { guild, member } = interaction;

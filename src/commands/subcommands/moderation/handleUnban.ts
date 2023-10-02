@@ -1,27 +1,14 @@
-import { EmbedBuilder, SlashCommandBuilder } from "discord.js";
+import { EmbedBuilder, PermissionFlagsBits } from "discord.js";
 
-import { Command } from "../interfaces/Command";
-import { updateHistory } from "../modules/updateHistory";
-import { customSubstring } from "../utils/customSubstring";
-import { errorHandler } from "../utils/errorHandler";
+import { Subcommand } from "../../../interfaces/Subcommand";
+import { updateHistory } from "../../../modules/updateHistory";
+import { customSubstring } from "../../../utils/customSubstring";
+import { errorHandler } from "../../../utils/errorHandler";
 
-export const unban: Command = {
-  data: new SlashCommandBuilder()
-    .setName("unban")
-    .setDescription("Removes a user's ban.")
-    .addUserOption((option) =>
-      option
-        .setName("target")
-        .setDescription("The user to unban.")
-        .setRequired(true)
-    )
-    .addStringOption((option) =>
-      option
-        .setName("reason")
-        .setDescription("The reason for unbanning the user.")
-        .setRequired(true)
-    ),
-  run: async (Bot, interaction) => {
+export const handleUnban: Subcommand = {
+  permissionValidator: (member) =>
+    member.permissions.has(PermissionFlagsBits.BanMembers),
+  execute: async (Bot, interaction) => {
     try {
       await interaction.deferReply();
       const { guild, member } = interaction;

@@ -1,15 +1,11 @@
-import { EmbedBuilder, SlashCommandBuilder } from "discord.js";
+import { EmbedBuilder } from "discord.js";
 
-import { Command } from "../interfaces/Command";
-import { errorHandler } from "../utils/errorHandler";
+import { Subcommand } from "../../../interfaces/Subcommand";
+import { errorHandler } from "../../../utils/errorHandler";
 
-export const contribute: Command = {
-  data: new SlashCommandBuilder()
-    .setName("contribute")
-    .setDescription(
-      "Returns helpful links for folks interested in contributing."
-    ),
-  run: async (Bot, interaction) => {
+export const handleContribute: Subcommand = {
+  permissionValidator: () => true,
+  execute: async (Bot, interaction) => {
     try {
       await interaction.deferReply();
       const modEmbed = new EmbedBuilder().setTitle("Helpful Links!").addFields(

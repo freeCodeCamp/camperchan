@@ -1,14 +1,12 @@
-import { EmbedBuilder, SlashCommandBuilder } from "discord.js";
+import { EmbedBuilder } from "discord.js";
 
-import { Command } from "../interfaces/Command";
-import { ForumData } from "../interfaces/Forum";
-import { errorHandler } from "../utils/errorHandler";
+import { ForumData } from "../../../interfaces/Forum";
+import { Subcommand } from "../../../interfaces/Subcommand";
+import { errorHandler } from "../../../utils/errorHandler";
 
-export const forum: Command = {
-  data: new SlashCommandBuilder()
-    .setName("forum")
-    .setDescription("Returns the latest activity on the forum."),
-  run: async (Bot, interaction) => {
+export const handleForum: Subcommand = {
+  permissionValidator: () => true,
+  execute: async (Bot, interaction) => {
     try {
       await interaction.deferReply();
       const data = await fetch("https://forum.freecodecamp.org/latest.json");

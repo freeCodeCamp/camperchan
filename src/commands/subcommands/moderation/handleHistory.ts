@@ -1,19 +1,16 @@
-import { EmbedBuilder, SlashCommandBuilder } from "discord.js";
+import { EmbedBuilder, PermissionFlagsBits } from "discord.js";
 
-import { Command } from "../interfaces/Command";
-import { errorHandler } from "../utils/errorHandler";
+import { Subcommand } from "../../../interfaces/Subcommand";
+import { errorHandler } from "../../../utils/errorHandler";
 
-export const history: Command = {
-  data: new SlashCommandBuilder()
-    .setName("history")
-    .setDescription("Views the moderation history of a user.")
-    .addUserOption((option) =>
-      option
-        .setName("target")
-        .setDescription("The user to view the moderation history of.")
-        .setRequired(true)
-    ),
-  run: async (Bot, interaction) => {
+export const handleHistory: Subcommand = {
+  permissionValidator: (member) =>
+    [
+      PermissionFlagsBits.ModerateMembers,
+      PermissionFlagsBits.KickMembers,
+      PermissionFlagsBits.BanMembers,
+    ].some((p) => member.permissions.has(p)),
+  execute: async (Bot, interaction) => {
     try {
       await interaction.deferReply();
       const target = interaction.options.getUser("target", true);

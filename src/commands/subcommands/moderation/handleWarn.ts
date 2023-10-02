@@ -1,28 +1,15 @@
-import { EmbedBuilder, SlashCommandBuilder } from "discord.js";
+import { EmbedBuilder, PermissionFlagsBits } from "discord.js";
 
-import { Command } from "../interfaces/Command";
-import { sendModerationDm } from "../modules/sendModerationDm";
-import { updateHistory } from "../modules/updateHistory";
-import { customSubstring } from "../utils/customSubstring";
-import { errorHandler } from "../utils/errorHandler";
+import { Subcommand } from "../../../interfaces/Subcommand";
+import { sendModerationDm } from "../../../modules/sendModerationDm";
+import { updateHistory } from "../../../modules/updateHistory";
+import { customSubstring } from "../../../utils/customSubstring";
+import { errorHandler } from "../../../utils/errorHandler";
 
-export const warn: Command = {
-  data: new SlashCommandBuilder()
-    .setName("warn")
-    .setDescription("Issues a warning to a user.")
-    .addUserOption((option) =>
-      option
-        .setName("target")
-        .setDescription("The user to warn.")
-        .setRequired(true)
-    )
-    .addStringOption((option) =>
-      option
-        .setName("reason")
-        .setDescription("The reason for issuing this warning.")
-        .setRequired(true)
-    ),
-  run: async (Bot, interaction) => {
+export const handleWarn: Subcommand = {
+  permissionValidator: (member) =>
+    member.permissions.has(PermissionFlagsBits.ModerateMembers),
+  execute: async (Bot, interaction) => {
     try {
       await interaction.deferReply();
       const { guild, member } = interaction;

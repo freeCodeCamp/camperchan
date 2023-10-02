@@ -1,13 +1,11 @@
-import { EmbedBuilder, SlashCommandBuilder } from "discord.js";
+import { EmbedBuilder } from "discord.js";
 
-import { Command } from "../interfaces/Command";
-import { errorHandler } from "../utils/errorHandler";
+import { Subcommand } from "../../../interfaces/Subcommand";
+import { errorHandler } from "../../../utils/errorHandler";
 
-export const coc: Command = {
-  data: new SlashCommandBuilder()
-    .setName("coc")
-    .setDescription("Returns information on freeCodeCamp's Code of Conduct."),
-  run: async (Bot, interaction) => {
+export const handleCodeOfConduct: Subcommand = {
+  permissionValidator: () => true,
+  execute: async (Bot, interaction) => {
     try {
       await interaction.deferReply();
       const codeEmbed = new EmbedBuilder()

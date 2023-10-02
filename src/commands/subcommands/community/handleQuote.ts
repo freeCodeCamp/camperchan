@@ -1,13 +1,11 @@
-import { EmbedBuilder, SlashCommandBuilder } from "discord.js";
+import { EmbedBuilder } from "discord.js";
 
-import { Command } from "../interfaces/Command";
-import { errorHandler } from "../utils/errorHandler";
+import { Subcommand } from "../../../interfaces/Subcommand";
+import { errorHandler } from "../../../utils/errorHandler";
 
-export const quote: Command = {
-  data: new SlashCommandBuilder()
-    .setName("quote")
-    .setDescription("Returns a motivational quote."),
-  run: async (Bot, interaction) => {
+export const handleQuote: Subcommand = {
+  permissionValidator: () => true,
+  execute: async (Bot, interaction) => {
     try {
       await interaction.deferReply();
       const quotes = Bot.quotes.motivationalQuotes;

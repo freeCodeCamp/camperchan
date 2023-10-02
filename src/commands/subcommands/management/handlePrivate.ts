@@ -5,24 +5,20 @@ import {
   ChannelType,
   GuildChannelCreateOptions,
   PermissionFlagsBits,
-  SlashCommandBuilder,
 } from "discord.js";
 
-import { Command } from "../interfaces/Command";
-import { createLogFile } from "../modules/createLogFile";
-import { errorHandler } from "../utils/errorHandler";
+import { Subcommand } from "../../../interfaces/Subcommand";
+import { createLogFile } from "../../../modules/createLogFile";
+import { errorHandler } from "../../../utils/errorHandler";
 
-export const privateChannel: Command = {
-  data: new SlashCommandBuilder()
-    .setName("private")
-    .setDescription("Creates a private discussion channel with a user.")
-    .addUserOption((option) =>
-      option
-        .setName("target")
-        .setDescription("The user to create a private channel with.")
-        .setRequired(true)
-    ),
-  run: async (Bot, interaction) => {
+export const handlePrivate: Subcommand = {
+  permissionValidator: (member) =>
+    [
+      PermissionFlagsBits.ModerateMembers,
+      PermissionFlagsBits.KickMembers,
+      PermissionFlagsBits.BanMembers,
+    ].some((p) => member.permissions.has(p)),
+  execute: async (Bot, interaction) => {
     try {
       await interaction.deferReply();
       const { guild } = interaction;
