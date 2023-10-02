@@ -65,7 +65,7 @@ export const pullComment: PrivilegedCommand = {
         return;
       }
       await interaction.editReply({
-        content: `Successfully added a [comment](${comment.data.html_url})`,
+        content: `Successfully added a [comment](<${comment.data.html_url}>)`,
       });
     } catch (err) {
       await errorHandler(Bot, err);
