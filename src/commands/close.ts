@@ -51,7 +51,7 @@ export const close: PrivilegedCommand = {
         await interaction.editReply({
           content: `The [${
             data.data.pull_request ? "pull request" : "issue"
-          }](${data.data.html_url}) is already closed.`,
+          }](<${data.data.html_url}>) is already closed.`,
         });
         return;
       }
@@ -71,7 +71,7 @@ export const close: PrivilegedCommand = {
       await interaction.editReply({
         content: `Successfully closed the [${
           isPull ? "pull request" : "issue"
-        }](${data.data.html_url}).`,
+        }](<${data.data.html_url}>).`,
       });
     } catch (err) {
       await errorHandler(Bot, err);
