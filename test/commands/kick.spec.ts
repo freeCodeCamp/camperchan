@@ -1,5 +1,5 @@
 import { assert } from "chai";
-import { ApplicationCommandOptionType, PermissionFlagsBits } from "discord.js";
+import { ApplicationCommandOptionType } from "discord.js";
 
 import { kick } from "../../src/commands/kick";
 
@@ -13,15 +13,6 @@ suite("kick command", () => {
     assert.isObject(kick.data);
     assert.isDefined(kick.run);
     assert.isFunction(kick.run);
-  });
-
-  test("kick command has correct configuration", () => {
-    assert.isTrue(kick.guildOnly, "kick command is not guild only");
-    assert.include(
-      kick.requiredPermissions,
-      PermissionFlagsBits.KickMembers,
-      "kick command does not require KickMembers permission"
-    );
   });
 
   test("kick command has correct data", () => {

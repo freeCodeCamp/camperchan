@@ -1,17 +1,11 @@
-import {
-  EmbedBuilder,
-  PermissionFlagsBits,
-  SlashCommandBuilder,
-} from "discord.js";
+import { EmbedBuilder, SlashCommandBuilder } from "discord.js";
 
-import { PrivilegedCommand } from "../interfaces/PrivilegedCommand";
+import { Command } from "../interfaces/Command";
 import { updateHistory } from "../modules/updateHistory";
 import { customSubstring } from "../utils/customSubstring";
 import { errorHandler } from "../utils/errorHandler";
 
-export const unban: PrivilegedCommand = {
-  guildOnly: true,
-  requiredPermissions: [PermissionFlagsBits.BanMembers],
+export const unban: Command = {
   data: new SlashCommandBuilder()
     .setName("unban")
     .setDescription("Removes a user's ban.")

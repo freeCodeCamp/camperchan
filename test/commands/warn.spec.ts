@@ -1,5 +1,5 @@
 import { assert } from "chai";
-import { ApplicationCommandOptionType, PermissionFlagsBits } from "discord.js";
+import { ApplicationCommandOptionType } from "discord.js";
 
 import { warn } from "../../src/commands/warn";
 
@@ -13,15 +13,6 @@ suite("warn command", () => {
     assert.isObject(warn.data);
     assert.isDefined(warn.run);
     assert.isFunction(warn.run);
-  });
-
-  test("warn command has correct configuration", () => {
-    assert.isTrue(warn.guildOnly, "warn command is not guild only");
-    assert.include(
-      warn.requiredPermissions,
-      PermissionFlagsBits.KickMembers,
-      "warn command does not require KickMembers permission"
-    );
   });
 
   test("warn command has correct data", () => {

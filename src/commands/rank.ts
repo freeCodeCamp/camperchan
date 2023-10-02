@@ -1,10 +1,9 @@
 import { EmbedBuilder, SlashCommandBuilder } from "discord.js";
 
-import { GuildCommand } from "../interfaces/GuildCommand";
+import { Command } from "../interfaces/Command";
 import { errorHandler } from "../utils/errorHandler";
 
-export const rank: GuildCommand = {
-  guildOnly: true,
+export const rank: Command = {
   data: new SlashCommandBuilder()
     .setName("rank")
     .setDescription("See your level in our community.")

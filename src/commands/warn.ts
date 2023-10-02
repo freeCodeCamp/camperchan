@@ -1,18 +1,12 @@
-import {
-  EmbedBuilder,
-  PermissionFlagsBits,
-  SlashCommandBuilder,
-} from "discord.js";
+import { EmbedBuilder, SlashCommandBuilder } from "discord.js";
 
-import { PrivilegedCommand } from "../interfaces/PrivilegedCommand";
+import { Command } from "../interfaces/Command";
 import { sendModerationDm } from "../modules/sendModerationDm";
 import { updateHistory } from "../modules/updateHistory";
 import { customSubstring } from "../utils/customSubstring";
 import { errorHandler } from "../utils/errorHandler";
 
-export const warn: PrivilegedCommand = {
-  guildOnly: true,
-  requiredPermissions: [PermissionFlagsBits.KickMembers],
+export const warn: Command = {
   data: new SlashCommandBuilder()
     .setName("warn")
     .setDescription("Issues a warning to a user.")

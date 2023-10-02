@@ -1,5 +1,5 @@
 import { assert } from "chai";
-import { ApplicationCommandOptionType, PermissionFlagsBits } from "discord.js";
+import { ApplicationCommandOptionType } from "discord.js";
 
 import { ban } from "../../src/commands/ban";
 
@@ -13,15 +13,6 @@ suite("ban command", () => {
     assert.isObject(ban.data);
     assert.isDefined(ban.run);
     assert.isFunction(ban.run);
-  });
-
-  test("ban command has correct configuration", () => {
-    assert.isTrue(ban.guildOnly, "ban command is not guild only");
-    assert.include(
-      ban.requiredPermissions,
-      PermissionFlagsBits.BanMembers,
-      "ban command does not require BanMembers permission"
-    );
   });
 
   test("ban command has correct data", () => {

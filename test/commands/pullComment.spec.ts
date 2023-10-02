@@ -1,5 +1,4 @@
 import { assert } from "chai";
-import { PermissionFlagsBits } from "discord.js";
 
 import { pullComment } from "../../src/commands/pullComment";
 
@@ -13,18 +12,6 @@ suite("pullComment command", () => {
     assert.isObject(pullComment.data);
     assert.isDefined(pullComment.run);
     assert.isFunction(pullComment.run);
-  });
-
-  test("pullComment command has correct configuration", () => {
-    assert.isTrue(
-      pullComment.guildOnly,
-      "pullComment command is not guild only"
-    );
-    assert.include(
-      pullComment.requiredPermissions,
-      PermissionFlagsBits.ModerateMembers,
-      "pullComment command does not require ModerateMembers permission"
-    );
   });
 
   test("pullComment command has correct data", () => {

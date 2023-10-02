@@ -5,6 +5,7 @@ import { Tags } from "../../config/Tags";
 import { Camperbot } from "../../interfaces/Camperbot";
 import { closePrivateChannel } from "../../modules/closePrivateChannel";
 import { reactionRoleClick } from "../../modules/reactionRoleClick";
+import { isGuildCommandInteraction } from "../../utils/typeGuards";
 
 /**
  * Handles the interaction events from Discord.
@@ -44,6 +45,12 @@ export const handleInteractionCreate = async (
     if (!target) {
       await interaction.reply(
         "That does not appear to be a valid slash command..."
+      );
+      return;
+    }
+    if (!isGuildCommandInteraction(interaction)) {
+      await interaction.reply(
+        "This command can only be used in a server, not a DM."
       );
       return;
     }

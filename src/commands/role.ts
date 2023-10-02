@@ -2,17 +2,14 @@ import {
   ActionRowBuilder,
   ButtonBuilder,
   ButtonStyle,
-  PermissionFlagsBits,
   Role,
   SlashCommandBuilder,
 } from "discord.js";
 
-import { PrivilegedCommand } from "../interfaces/PrivilegedCommand";
+import { Command } from "../interfaces/Command";
 import { errorHandler } from "../utils/errorHandler";
 
-export const role: PrivilegedCommand = {
-  guildOnly: true,
-  requiredPermissions: [PermissionFlagsBits.ManageRoles],
+export const role: Command = {
   data: new SlashCommandBuilder()
     .setName("role")
     .setDescription("Creates a post with buttons for self-assignable roles.")

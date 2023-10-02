@@ -15,10 +15,6 @@ suite("rank command", () => {
     assert.isFunction(rank.run);
   });
 
-  test("rank command has correct configuration", () => {
-    assert.isTrue(rank.guildOnly, "rank command is not guild only");
-  });
-
   test("rank command has correct data", () => {
     assert.equal(rank.data.name, "rank");
     assert.equal(rank.data.description, "See your level in our community.");

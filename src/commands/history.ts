@@ -1,19 +1,9 @@
-import {
-  EmbedBuilder,
-  PermissionFlagsBits,
-  SlashCommandBuilder,
-} from "discord.js";
+import { EmbedBuilder, SlashCommandBuilder } from "discord.js";
 
-import { PrivilegedCommand } from "../interfaces/PrivilegedCommand";
+import { Command } from "../interfaces/Command";
 import { errorHandler } from "../utils/errorHandler";
 
-export const history: PrivilegedCommand = {
-  guildOnly: true,
-  requiredPermissions: [
-    PermissionFlagsBits.KickMembers,
-    PermissionFlagsBits.BanMembers,
-    PermissionFlagsBits.ModerateMembers,
-  ],
+export const history: Command = {
   data: new SlashCommandBuilder()
     .setName("history")
     .setDescription("Views the moderation history of a user.")

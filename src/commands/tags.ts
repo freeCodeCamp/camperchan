@@ -1,12 +1,11 @@
 import { GuildMember, SlashCommandBuilder } from "discord.js";
 
 import { Tags } from "../config/Tags";
-import { GuildCommand } from "../interfaces/GuildCommand";
+import { Command } from "../interfaces/Command";
 import { errorHandler } from "../utils/errorHandler";
 import { isModerator } from "../utils/isModerator";
 
-export const tags: GuildCommand = {
-  guildOnly: true,
+export const tags: Command = {
   data: new SlashCommandBuilder()
     .setName("tags")
     .setDescription("Display a commonly used canned response.")

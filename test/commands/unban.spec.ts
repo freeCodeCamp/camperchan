@@ -1,5 +1,5 @@
 import { assert } from "chai";
-import { ApplicationCommandOptionType, PermissionFlagsBits } from "discord.js";
+import { ApplicationCommandOptionType } from "discord.js";
 
 import { unban } from "../../src/commands/unban";
 
@@ -13,15 +13,6 @@ suite("unban command", () => {
     assert.isObject(unban.data);
     assert.isDefined(unban.run);
     assert.isFunction(unban.run);
-  });
-
-  test("unban command has correct configuration", () => {
-    assert.isTrue(unban.guildOnly, "unban command is not guild only");
-    assert.include(
-      unban.requiredPermissions,
-      PermissionFlagsBits.BanMembers,
-      "unban command does not require BanMembers permission"
-    );
   });
 
   test("unban command has correct data", () => {

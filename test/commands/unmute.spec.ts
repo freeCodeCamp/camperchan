@@ -1,5 +1,5 @@
 import { assert } from "chai";
-import { ApplicationCommandOptionType, PermissionFlagsBits } from "discord.js";
+import { ApplicationCommandOptionType } from "discord.js";
 
 import { unmute } from "../../src/commands/unmute";
 
@@ -13,15 +13,6 @@ suite("unmute command", () => {
     assert.isObject(unmute.data);
     assert.isDefined(unmute.run);
     assert.isFunction(unmute.run);
-  });
-
-  test("unmute command has correct configuration", () => {
-    assert.isTrue(unmute.guildOnly, "unmute command is not guild only");
-    assert.include(
-      unmute.requiredPermissions,
-      PermissionFlagsBits.ModerateMembers,
-      "unmute command does not require ModerateMembers permission"
-    );
   });
 
   test("unmute command has correct data", () => {

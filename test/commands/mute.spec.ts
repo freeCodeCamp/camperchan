@@ -1,5 +1,5 @@
 import { assert } from "chai";
-import { ApplicationCommandOptionType, PermissionFlagsBits } from "discord.js";
+import { ApplicationCommandOptionType } from "discord.js";
 
 import { mute } from "../../src/commands/mute";
 
@@ -13,15 +13,6 @@ suite("mute command", () => {
     assert.isObject(mute.data);
     assert.isDefined(mute.run);
     assert.isFunction(mute.run);
-  });
-
-  test("mute command has correct configuration", () => {
-    assert.isTrue(mute.guildOnly, "mute command is not guild only");
-    assert.include(
-      mute.requiredPermissions,
-      PermissionFlagsBits.ModerateMembers,
-      "mute command does not require ModerateMembers permission"
-    );
   });
 
   test("mute command has correct data", () => {

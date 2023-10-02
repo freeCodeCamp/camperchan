@@ -1,12 +1,10 @@
-import { PermissionFlagsBits, SlashCommandBuilder } from "discord.js";
+import { SlashCommandBuilder } from "discord.js";
 
 import { PullComments } from "../config/PullComments";
-import { PrivilegedCommand } from "../interfaces/PrivilegedCommand";
+import { Command } from "../interfaces/Command";
 import { errorHandler } from "../utils/errorHandler";
 
-export const pullComment: PrivilegedCommand = {
-  requiredPermissions: [PermissionFlagsBits.ModerateMembers],
-  guildOnly: true,
+export const pullComment: Command = {
   data: new SlashCommandBuilder()
     .setName("pull-comment")
     .setDescription(

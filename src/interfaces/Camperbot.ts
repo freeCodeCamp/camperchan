@@ -9,9 +9,9 @@ import {
   WebhookClient,
 } from "discord.js";
 
+import { Command } from "./Command";
 import { Context } from "./Context";
 import { QuoteList } from "./Quotes";
-import { WrappedCommand } from "./WrappedCommand";
 
 export interface Camperbot extends Client {
   config: {
@@ -30,7 +30,7 @@ export interface Camperbot extends Client {
   };
   octokit: Octokit;
   quotes: QuoteList;
-  commands: WrappedCommand[];
+  commands: Command[];
   contexts: Context[];
   private_logs: { [key: string]: string };
   db: PrismaClient;

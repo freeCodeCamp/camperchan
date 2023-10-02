@@ -1,5 +1,5 @@
 import { assert } from "chai";
-import { ApplicationCommandOptionType, PermissionFlagsBits } from "discord.js";
+import { ApplicationCommandOptionType } from "discord.js";
 
 import { privateChannel } from "../../src/commands/privateChannel";
 
@@ -13,18 +13,6 @@ suite("privateChannel command", () => {
     assert.isObject(privateChannel.data);
     assert.isDefined(privateChannel.run);
     assert.isFunction(privateChannel.run);
-  });
-
-  test("privateChannel command has correct configuration", () => {
-    assert.isTrue(
-      privateChannel.guildOnly,
-      "privateChannel command is not guild only"
-    );
-    assert.include(
-      privateChannel.requiredPermissions,
-      PermissionFlagsBits.ModerateMembers,
-      "privateChannel command does not require ModerateMembers permission"
-    );
   });
 
   test("privateChannel command has correct data", () => {

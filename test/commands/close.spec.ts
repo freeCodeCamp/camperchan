@@ -15,10 +15,6 @@ suite("close command", () => {
     assert.isFunction(close.run);
   });
 
-  test("close command has correct configuration", () => {
-    assert.isTrue(close.guildOnly, "close command is not guild only");
-  });
-
   test("close command has correct data", () => {
     assert.equal(close.data.name, "close");
     assert.equal(

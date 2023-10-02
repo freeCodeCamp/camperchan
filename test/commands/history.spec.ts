@@ -1,5 +1,5 @@
 import { assert } from "chai";
-import { ApplicationCommandOptionType, PermissionFlagsBits } from "discord.js";
+import { ApplicationCommandOptionType } from "discord.js";
 
 import { history } from "../../src/commands/history";
 
@@ -13,25 +13,6 @@ suite("history command", () => {
     assert.isObject(history.data);
     assert.isDefined(history.run);
     assert.isFunction(history.run);
-  });
-
-  test("history command has correct configuration", () => {
-    assert.isTrue(history.guildOnly, "history command is not guild only");
-    assert.include(
-      history.requiredPermissions,
-      PermissionFlagsBits.BanMembers,
-      "history command does not require BanMembers permission"
-    );
-    assert.include(
-      history.requiredPermissions,
-      PermissionFlagsBits.KickMembers,
-      "history command does not require KickMembers permission"
-    );
-    assert.include(
-      history.requiredPermissions,
-      PermissionFlagsBits.ModerateMembers,
-      "history command does not require ModerateMembers permission"
-    );
   });
 
   test("history command has correct data", () => {

@@ -1,5 +1,5 @@
 import { assert } from "chai";
-import { ApplicationCommandOptionType, PermissionFlagsBits } from "discord.js";
+import { ApplicationCommandOptionType } from "discord.js";
 
 import { role } from "../../src/commands/role";
 
@@ -13,15 +13,6 @@ suite("role command", () => {
     assert.isObject(role.data);
     assert.isDefined(role.run);
     assert.isFunction(role.run);
-  });
-
-  test("role command has correct configuration", () => {
-    assert.isTrue(role.guildOnly, "role command is not guild only");
-    assert.include(
-      role.requiredPermissions,
-      PermissionFlagsBits.ManageRoles,
-      "role command does not require ManageRoles permission"
-    );
   });
 
   test("role command has correct data", () => {

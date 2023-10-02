@@ -15,10 +15,6 @@ suite("tags command", () => {
     assert.isFunction(tags.run);
   });
 
-  test("tags command has correct configuration", () => {
-    assert.isTrue(tags.guildOnly, "tags command is not guild only");
-  });
-
   test("tags command has correct data", () => {
     assert.equal(tags.data.name, "tags");
     assert.equal(
