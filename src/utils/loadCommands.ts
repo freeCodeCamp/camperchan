@@ -1,4 +1,4 @@
-import { readdir } from "fs/promises";
+import { readdir, stat } from "fs/promises";
 import { join } from "path";
 
 import { Camperbot } from "../interfaces/Camperbot";
@@ -21,6 +21,10 @@ export const loadCommands = async (Bot: Camperbot): Promise<Command[]> => {
       "utf-8"
     );
     for (const file of files) {
+      const status = await stat(join(process.cwd(), "dist", "commands", file));
+      if (status.isDirectory()) {
+        continue;
+      }
       const name = file.split(".")[0];
       const mod = await import(join(process.cwd() + `/dist/commands/${file}`));
       result.push(mod[name] as Command);

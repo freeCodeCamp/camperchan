@@ -8,7 +8,11 @@ import { errorHandler } from "../../../utils/errorHandler";
 
 export const handleWarn: Subcommand = {
   permissionValidator: (member) =>
-    member.permissions.has(PermissionFlagsBits.ModerateMembers),
+    [
+      PermissionFlagsBits.ModerateMembers,
+      PermissionFlagsBits.KickMembers,
+      PermissionFlagsBits.BanMembers,
+    ].some((p) => member.permissions.has(p)),
   execute: async (Bot, interaction) => {
     try {
       await interaction.deferReply();

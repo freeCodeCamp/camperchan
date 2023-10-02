@@ -8,7 +8,7 @@ import {
   MockUser,
 } from "discordjs-testing";
 
-import { contribute } from "../../src/commands/contribute";
+import { handleContribute } from "../../../../src/commands/subcommands/community/handleContribute";
 
 const guild = new MockGuild({
   name: "Test Guild",
@@ -37,37 +37,18 @@ const channel = new MockChannel({
   type: ChannelType.GuildText,
 });
 
-suite("contribute command", () => {
-  test("contribute command is defined", () => {
-    assert.isDefined(contribute);
-  });
-
-  test("contribute is a command object", () => {
-    assert.isDefined(contribute.data);
-    assert.isObject(contribute.data);
-    assert.isDefined(contribute.run);
-    assert.isFunction(contribute.run);
-  });
-
-  test("contribute command has correct data", () => {
-    assert.equal(contribute.data.name, "contribute");
-    assert.equal(
-      contribute.data.description,
-      "Returns helpful links for folks interested in contributing."
-    );
-    assert.lengthOf(contribute.data.options, 0);
-  });
-
+suite("contribute Handler", () => {
   test("should send an embed with contributing information", async () => {
     const command = new MockChatInputCommandInteraction({
-      commandName: "coc",
+      commandName: "community",
+      subcommandName: "contribute",
       guild,
       bot,
       user,
       member,
       channel,
     });
-    await contribute.run({} as never, command as never);
+    await handleContribute.execute({} as never, command as never);
     assert.equal(command.replies.length, 1);
     const embed = command.replies?.[0]?.embeds?.[0] as EmbedBuilder;
     assert.equal(embed.data.title, "Helpful Links!");

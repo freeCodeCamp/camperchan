@@ -8,7 +8,7 @@ import {
   MockUser,
 } from "discordjs-testing";
 
-import { coc } from "../../src/commands/coc";
+import { handleCodeOfConduct } from "../../../../src/commands/subcommands/community/handleCodeOfConduct";
 
 const guild = new MockGuild({
   name: "Test Guild",
@@ -37,37 +37,18 @@ const channel = new MockChannel({
   type: ChannelType.GuildText,
 });
 
-suite("coc command", () => {
-  test("coc command is defined", () => {
-    assert.isDefined(coc);
-  });
-
-  test("coc is a command object", () => {
-    assert.isDefined(coc.data);
-    assert.isObject(coc.data);
-    assert.isDefined(coc.run);
-    assert.isFunction(coc.run);
-  });
-
-  test("coc command has correct data", () => {
-    assert.equal(coc.data.name, "coc");
-    assert.equal(
-      coc.data.description,
-      "Returns information on freeCodeCamp's Code of Conduct."
-    );
-    assert.lengthOf(coc.data.options, 0);
-  });
-
+suite("codeOfConduct Handler", () => {
   test("should send an embed with the code of conduct", async () => {
     const command = new MockChatInputCommandInteraction({
-      commandName: "coc",
+      commandName: "community",
+      subcommandName: "code-of-conduct",
       guild,
       bot,
       user,
       member,
       channel,
     });
-    await coc.run({} as never, command as never);
+    await handleCodeOfConduct.execute({} as never, command as never);
     assert.equal(command.replies.length, 1);
     const embed = command.replies?.[0]?.embeds?.[0] as EmbedBuilder;
     assert.equal(embed.data.title, "freeCodeCamp Code of Conduct");

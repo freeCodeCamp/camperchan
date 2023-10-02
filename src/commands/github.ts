@@ -13,7 +13,7 @@ const handlers: { [key: string]: Subcommand } = {
   comment: handleComment,
 };
 
-export const management: Command = {
+export const github: Command = {
   data: new SlashCommandBuilder()
     .setName("github")
     .setDescription("Commands related to managing github")
