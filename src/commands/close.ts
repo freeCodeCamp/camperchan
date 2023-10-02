@@ -25,12 +25,18 @@ export const close: PrivilegedCommand = {
         .setName("number")
         .setDescription("The number of the issue or pull to close.")
         .setRequired(true)
+    )
+    .addBooleanOption((option) =>
+      option
+        .setName("spam")
+        .setDescription("Label the PR as spam for Hacktoberfest?")
     ),
   run: async (Bot, interaction) => {
     try {
       await interaction.deferReply();
       const repo = interaction.options.getString("repository", true);
       const number = interaction.options.getInteger("number", true);
+      const isSpam = interaction.options.getBoolean("spam") ?? false;
 
       const data = await Bot.octokit.issues
         .get({
@@ -68,6 +74,14 @@ export const close: PrivilegedCommand = {
         issue_number: number,
         state: "closed",
       });
+      if (isPull && isSpam) {
+        await Bot.octokit.issues.addLabels({
+          owner: "freeCodeCamp",
+          repo,
+          issue_number: number,
+          labels: ["spam"],
+        });
+      }
       await interaction.editReply({
         content: `Successfully closed the [${
           isPull ? "pull request" : "issue"
