@@ -25,9 +25,10 @@ suite("close command", () => {
       close.data.description,
       "Close an issue or pull request under the freeCodeCamp organisation."
     );
-    assert.lengthOf(close.data.options, 2);
+    assert.lengthOf(close.data.options, 3);
     const stringOption = close.data.options[0].toJSON();
     const integerOption = close.data.options[1].toJSON();
+    const boolOption = close.data.options[2].toJSON();
     assert.equal(stringOption.name, "repository");
     assert.equal(
       stringOption.description,
@@ -42,5 +43,12 @@ suite("close command", () => {
     );
     assert.equal(integerOption.type, ApplicationCommandOptionType.Integer);
     assert.isTrue(integerOption.required);
+    assert.equal(boolOption.name, "spam");
+    assert.equal(
+      boolOption.description,
+      "Label the PR as spam for Hacktoberfest?"
+    );
+    assert.equal(boolOption.type, ApplicationCommandOptionType.Boolean);
+    assert.isFalse(boolOption.required);
   });
 });
