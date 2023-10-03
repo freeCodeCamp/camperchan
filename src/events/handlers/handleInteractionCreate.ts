@@ -18,7 +18,7 @@ export const handleInteractionCreate = async (
   interaction: Interaction
 ) => {
   if (interaction.type === InteractionType.ApplicationCommandAutocomplete) {
-    if (interaction.commandName === "tags") {
+    if (interaction.options.getSubcommand() === "tags") {
       const option = interaction.options.getFocused(true);
 
       if (option.name === "name") {
