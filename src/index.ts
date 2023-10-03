@@ -10,7 +10,6 @@ import { loadCommands } from "./utils/loadCommands";
 import { loadContexts } from "./utils/loadContexts";
 import { loadQuotes } from "./utils/loadQuotes";
 import { registerCommands } from "./utils/registerCommands";
-import { wrapCommands } from "./utils/wrapCommands";
 
 (async () => {
   const Bot = new Client({
@@ -22,7 +21,7 @@ import { wrapCommands } from "./utils/wrapCommands";
   });
   await connectDatabase(Bot);
   await registerEvents(Bot);
-  Bot.commands = wrapCommands(await loadCommands(Bot));
+  Bot.commands = await loadCommands(Bot);
   Bot.contexts = await loadContexts(Bot);
   await registerCommands(Bot);
   Bot.quotes = await loadQuotes(Bot);
