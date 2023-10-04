@@ -29,7 +29,7 @@ suite("github command", () => {
       close?.description,
       "Close an issue or pull request under the freeCodeCamp organisation."
     );
-    assert.lengthOf(close?.options || "hi", 3);
+    assert.lengthOf(close?.options || "hi", 4);
     assert.strictEqual(close?.options?.[0].name, "repository");
     assert.strictEqual(
       close?.options?.[0].description,
@@ -50,14 +50,24 @@ suite("github command", () => {
       close?.options?.[1].type,
       ApplicationCommandOptionType.Integer
     );
-    assert.strictEqual(close?.options?.[2].name, "spam");
+    assert.strictEqual(close?.options?.[2].name, "comment");
     assert.strictEqual(
       close?.options?.[2].description,
-      "Label the PR as spam for Hacktoberfest?"
+      "The comment to leave when closing. Defaults to the standard close message."
     );
     assert.isFalse(close?.options?.[2].required);
     assert.strictEqual(
       close?.options?.[2].type,
+      ApplicationCommandOptionType.String
+    );
+    assert.strictEqual(close?.options?.[3].name, "spam");
+    assert.strictEqual(
+      close?.options?.[3].description,
+      "Label the PR as spam for Hacktoberfest?"
+    );
+    assert.isFalse(close?.options?.[3].required);
+    assert.strictEqual(
+      close?.options?.[3].type,
       ApplicationCommandOptionType.Boolean
     );
   });
