@@ -1,8 +1,19 @@
 import { PermissionFlagsBits } from "discord.js";
 
-import { IssueClose, PullClose } from "../../../config/PullComments";
+import {
+  IssueClose,
+  PullClose,
+  PullComments,
+} from "../../../config/PullComments";
 import { Subcommand } from "../../../interfaces/Subcommand";
 import { errorHandler } from "../../../utils/errorHandler";
+
+const commentBody = (isPull: boolean, comment: string | null) => {
+  return (
+    PullComments.find((c) => c.key === comment)?.message ??
+    (isPull ? PullClose : IssueClose)
+  );
+};
 
 export const handleClose: Subcommand = {
   permissionValidator: (member) =>
@@ -16,6 +27,7 @@ export const handleClose: Subcommand = {
       await interaction.deferReply();
       const repo = interaction.options.getString("repository", true);
       const number = interaction.options.getInteger("number", true);
+      const comment = interaction.options.getString("comment") ?? null;
       const isSpam = interaction.options.getBoolean("spam") ?? false;
 
       const data = await Bot.octokit.issues
@@ -41,12 +53,12 @@ export const handleClose: Subcommand = {
         });
         return;
       }
-      const isPull = data.data.pull_request;
+      const isPull = !!data.data.pull_request;
       await Bot.octokit.issues.createComment({
         owner: "freeCodeCamp",
         repo,
         issue_number: number,
-        body: isPull ? PullClose : IssueClose,
+        body: commentBody(isPull, comment),
       });
       await Bot.octokit.issues.update({
         owner: "freeCodeCamp",
