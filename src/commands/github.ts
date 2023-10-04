@@ -38,6 +38,16 @@ export const github: Command = {
             .setDescription("The number of the issue or pull to close.")
             .setRequired(true)
         )
+        .addStringOption((option) =>
+          option
+            .setName("comment")
+            .setDescription(
+              "The comment to leave when closing. Defaults to the standard close message."
+            )
+            .addChoices(
+              ...PullComments.map((c) => ({ name: c.key, value: c.key }))
+            )
+        )
         .addBooleanOption((option) =>
           option
             .setName("spam")
