@@ -51,6 +51,11 @@ export const PullComments: { key: string; message: string }[] = [
     message:
       "Please stop and read our contributing guide.\n\nhttps://contribute.freecodecamp.org/\n\nThis issue is not marked as ready for contributions or help wanted. Also, we do not assign issues.",
   },
+  {
+    key: "Failing CI",
+    message:
+      "We would love to be able to merge your changes but it looks like there is an error with the CI build. ⚠️\n\nOnce you resolve these issues, we will be able to review your PR and merge it. 😊\n\n---\n\nFeel free to reference the [contributing guidelines](how-to-work-on-coding-challenges.md#testing-challenges) for instructions on running the CI build locally. ✅",
+  },
 ];
 
 export const PullClose = `Thank you for opening this pull request.
