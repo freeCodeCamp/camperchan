@@ -54,7 +54,7 @@ export const PullComments: { key: string; message: string }[] = [
   {
     key: "Failing CI",
     message:
-      "We would love to be able to merge your changes but it looks like there is an error with the CI build. ⚠️\n\nOnce you resolve these issues, we will be able to review your PR and merge it. 😊\n\n---\n\nFeel free to reference the [contributing guidelines](how-to-work-on-coding-challenges.md#testing-challenges) for instructions on running the CI build locally. ✅",
+      "We would love to be able to merge your changes but it looks like there is an error with the CI build. ⚠️\n\nOnce you resolve these issues, we will be able to review your PR and merge it. 😊\n\n---\n\nFeel free to reference the [contributing guidelines](https://contribute.freecodecamp.org/#/how-to-work-on-coding-challenges.md#testing-challenges) for instructions on running the CI build locally. ✅",
   },
 ];
 
