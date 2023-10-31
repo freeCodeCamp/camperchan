@@ -47,7 +47,12 @@ export const handleComment: Subcommand = {
       });
     } catch (err) {
       await errorHandler(Bot, err);
-      await interaction.editReply("Something went wrong.");
+      await interaction.editReply(
+        `Something went wrong: ${
+          (err as Error).message ??
+          "Unable to parse error. Please check the logs."
+        }`
+      );
     }
   },
 };
