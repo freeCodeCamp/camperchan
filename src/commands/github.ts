@@ -5,12 +5,16 @@ import { Command } from "../interfaces/Command";
 import { Subcommand } from "../interfaces/Subcommand";
 import { errorHandler } from "../utils/errorHandler";
 
+import { handleAddLabels } from "./subcommands/github/handleAddLabels";
 import { handleClose } from "./subcommands/github/handleClose";
 import { handleComment } from "./subcommands/github/handleComment";
+import { handleSyncLabels } from "./subcommands/github/handleSyncLabels";
 
 const handlers: { [key: string]: Subcommand } = {
   close: handleClose,
   comment: handleComment,
+  "add-labels": handleAddLabels,
+  "sync-labels": handleSyncLabels,
 };
 
 export const github: Command = {
@@ -82,6 +86,60 @@ export const github: Command = {
             .addChoices(
               ...PullComments.map((c) => ({ name: c.key, value: c.key }))
             )
+        )
+    )
+    .addSubcommand(
+      new SlashCommandSubcommandBuilder()
+        .setName("sync-labels")
+        .setDescription(
+          "Specify the exact list of labels an issue/PR should have. Labels not on the list will be removed."
+        )
+        .addStringOption((option) =>
+          option
+            .setName("repository")
+            .setDescription(
+              "The name of the repository, under freeCodeCamp's GitHub org, to comment on"
+            )
+            .setRequired(true)
+        )
+        .addIntegerOption((option) =>
+          option
+            .setName("number")
+            .setDescription("The number of the pull request to comment on.")
+            .setRequired(true)
+        )
+        .addStringOption((option) =>
+          option
+            .setName("labels")
+            .setDescription("The comma separated list of labels to sync")
+            .setRequired(true)
+        )
+    )
+    .addSubcommand(
+      new SlashCommandSubcommandBuilder()
+        .setName("add-labels")
+        .setDescription(
+          "Specify a list of labels to add to an issue/PR. Existing labels will not be removed."
+        )
+        .addStringOption((option) =>
+          option
+            .setName("repository")
+            .setDescription(
+              "The name of the repository, under freeCodeCamp's GitHub org, to comment on"
+            )
+            .setRequired(true)
+        )
+        .addIntegerOption((option) =>
+          option
+            .setName("number")
+            .setDescription("The number of the pull request to comment on.")
+            .setRequired(true)
+        )
+        .addStringOption((option) =>
+          option
+            .setName("labels")
+            .setDescription("The comma separated list of labels to add")
+            .setRequired(true)
         )
     ),
   run: async (bot, interaction) => {
