@@ -98,14 +98,14 @@ export const github: Command = {
           option
             .setName("repository")
             .setDescription(
-              "The name of the repository, under freeCodeCamp's GitHub org, to comment on"
+              "The name of the repository, under freeCodeCamp's GitHub org, to label"
             )
             .setRequired(true)
         )
         .addIntegerOption((option) =>
           option
             .setName("number")
-            .setDescription("The number of the pull request to comment on.")
+            .setDescription("The number of the pull request to label.")
             .setRequired(true)
         )
         .addStringOption((option) =>
@@ -125,14 +125,14 @@ export const github: Command = {
           option
             .setName("repository")
             .setDescription(
-              "The name of the repository, under freeCodeCamp's GitHub org, to comment on"
+              "The name of the repository, under freeCodeCamp's GitHub org, to label"
             )
             .setRequired(true)
         )
         .addIntegerOption((option) =>
           option
             .setName("number")
-            .setDescription("The number of the pull request to comment on.")
+            .setDescription("The number of the pull request to label.")
             .setRequired(true)
         )
         .addStringOption((option) =>
