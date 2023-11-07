@@ -24,7 +24,7 @@ export const snippet: Context = {
         !isModerator(interaction.member as GuildMember)
       ) {
         await interaction.editReply({
-          content: "Only Mama may use this command.",
+          content: "Only moderators may use this command.",
         });
         return;
       }
