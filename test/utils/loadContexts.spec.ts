@@ -19,7 +19,7 @@ suite("loadContexts", () => {
     const result = await loadContexts({} as Camperbot);
     assert.equal(
       result.length,
-      3,
+      4,
       "does not return the expected number of commands"
     );
     const names = result.map((el) => el.data.name);

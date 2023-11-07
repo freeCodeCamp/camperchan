@@ -2,37 +2,33 @@ import { Tag } from "../interfaces/Tag";
 
 export const Tags: Tag[] = [
   {
-    name: "picture",
+    name: "Please don't post pictures of code.",
     message:
       "Pictures of code are hard to read and cannot be copied into a local IDE for debugging. Please send your actual code or a link to your repository, instead of a picture.",
-    aliases: ["pictures", "image", "images"],
   },
   {
-    name: "gist",
+    name: "For large blocks of code, use a PasteBin or Gist.",
     message:
       "Large amounts of code are disruptive to chat. Instead, please send a link to your repository, or a link to a [GitHub gist](https://gist.github.com/), [PasteBin](https://pastebin.com/), or similar.",
-    aliases: ["gists"],
   },
   {
-    name: "format",
+    name: "How to format code",
     message:
       "Discord has support for code block syntax. Please repost your code using this syntax:\n\n\\`\\`\\`lang\ncode here\n\\`\\`\\`\n\nYou can replace `lang` with your code's language, such as `js`, to get syntax highlighting.",
-    aliases: ["formatting", "code", "codeblock"],
   },
   {
-    name: "ask",
-    message: "Don't ask to ask, just ask\n<https://dontasktoask.com>",
-    aliases: [],
+    name: "How to ask a question",
+    message:
+      "Don't ask to ask, just ask\n<https://dontasktoask.com>. For details on how to ask a strong question, visit https://canary.discord.com/channels/692816967895220344/1033845883822948502",
   },
   {
-    name: "xy",
+    name: "XY Problem",
     message:
       "It looks like you're asking about your attempted solution rather then your actual problem. We need to know what your problem is before we can help.\n" +
       "https://xyproblem.info",
-    aliases: [],
   },
   {
-    name: "markdown",
+    name: "Discord Markdown Formatting",
     message:
       `
 Discord has support for Markdown formatting:
@@ -53,6 +49,15 @@ __***Underline Bold Italic***__ - \`__***Underline Bold Italic***__\`
       "`Inline Code` - \\`Inline Code\\`" +
       "\n\n```\nCode Block\n```\n\\`\\`\\`\nCode Block\n\\`\\`\\`" +
       "||```\nSpoilered Code\n```||\n\\|\\|\\`\\`\\`\nSpoilered Code\n\\`\\`\\`\\|\\|",
-    aliases: ["markdown-formatting", "md", "md-formatting"],
+  },
+  {
+    name: "Programming questions in contributor channels",
+    message:
+      "This channel is specifically for facilitating contributor efforts. For general programming questions, you should ask in <#718214639669870683>.",
+  },
+  {
+    name: "No chatter in 100 Days of Code",
+    message:
+      "This channel is only for sharing 100 Days of Code updates. Please take conversation to <#693145545878929499>.",
   },
 ];

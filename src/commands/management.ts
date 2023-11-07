@@ -6,12 +6,10 @@ import { errorHandler } from "../utils/errorHandler";
 
 import { handlePrivate } from "./subcommands/management/handlePrivate";
 import { handleRole } from "./subcommands/management/handleRole";
-import { handleTags } from "./subcommands/management/handleTags";
 
 const handlers: { [key: string]: Subcommand } = {
   private: handlePrivate,
   role: handleRole,
-  tags: handleTags,
 };
 
 export const management: Command = {
@@ -65,23 +63,6 @@ export const management: Command = {
         )
         .addRoleOption((option) =>
           option.setName("role5").setDescription("Role to create a button for.")
-        )
-    )
-    .addSubcommand(
-      new SlashCommandSubcommandBuilder()
-        .setName("tags")
-        .setDescription("Display a commonly used canned response.")
-        .addStringOption((option) =>
-          option
-            .setName("name")
-            .setDescription("The name of the tag to display.")
-            .setRequired(true)
-            .setAutocomplete(true)
-        )
-        .addUserOption((option) =>
-          option
-            .setName("user")
-            .setDescription("User to ping with the tag response?")
         )
     ),
   run: async (bot, interaction) => {

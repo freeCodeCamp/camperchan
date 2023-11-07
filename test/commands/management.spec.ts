@@ -18,7 +18,7 @@ suite("management command", () => {
       "Commands related to server management."
     );
     assert.isFalse(management.data.dm_permission);
-    assert.lengthOf(subcommands, 3);
+    assert.lengthOf(subcommands, 2);
   });
 
   test("has correct private", () => {
