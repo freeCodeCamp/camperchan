@@ -60,4 +60,9 @@ __***Underline Bold Italic***__ - \`__***Underline Bold Italic***__\`
     message:
       "This channel is only for sharing 100 Days of Code updates. Please take conversation to <#693145545878929499>.",
   },
+  {
+    name: "Don't spam the same question in multiple channels",
+    message:
+      "Posting the same message to multiple channels is spammy and can result in redundant responses and confusion. Please delete the duplicates.",
+  },
 ];
