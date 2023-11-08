@@ -35,7 +35,7 @@
   "devDependencies": {
     "@types/chai": "4.3.10",
     "@types/common-tags": "1.8.4",
-    "@types/diff": "5.0.7",
+    "@types/diff": "5.0.8",
     "@types/luxon": "3.3.4",
     "@types/mocha": "10.0.4",
     "@types/prettier": "2.7.3",
