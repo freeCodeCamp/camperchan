@@ -26,7 +26,7 @@ export const handleMessageCreate = async (Bot: Camperbot, message: Message) => {
       .map((r) => `${r.userTag},${r.points}`);
     await message.reply(`Found ${above1000.length} qualifying records.`);
     const fileContents = `usertag,points\n${above1000.join("\n")}`;
-    const file = new AttachmentBuilder(fileContents, {
+    const file = new AttachmentBuilder(Buffer.from(fileContents, "utf-8"), {
       name: "contributors.csv",
     });
     await message.reply({
