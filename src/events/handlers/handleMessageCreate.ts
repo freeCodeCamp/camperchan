@@ -5,6 +5,7 @@ import { AttachmentBuilder, ChannelType, Message } from "discord.js";
 
 import { Camperbot } from "../../interfaces/Camperbot";
 import { levelListener } from "../../modules/levelListener";
+import { messageCounter } from "../../modules/messageCounter";
 
 /**
  * Handles the message create events.
@@ -33,6 +34,7 @@ export const handleMessageCreate = async (Bot: Camperbot, message: Message) => {
       files: [file],
     });
   }
+  await messageCounter(Bot, message);
   await levelListener(Bot, message);
 
   if (
