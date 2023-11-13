@@ -1,7 +1,7 @@
 import { readFile, writeFile } from "fs/promises";
 import { join } from "path";
 
-import { ChannelType, Message } from "discord.js";
+import { AttachmentBuilder, ChannelType, Message } from "discord.js";
 
 import { Camperbot } from "../../interfaces/Camperbot";
 import { levelListener } from "../../modules/levelListener";
@@ -13,6 +13,26 @@ import { levelListener } from "../../modules/levelListener";
  * @param {Message} message The message payload from Discord.
  */
 export const handleMessageCreate = async (Bot: Camperbot, message: Message) => {
+  if (
+    message.author.id === "465650873650118659" &&
+    message.content === "~contributors" &&
+    message.guild
+  ) {
+    await message.reply("Fetching records.");
+    const allRecords = await Bot.db.levels.findMany({});
+    const above1000 = allRecords
+      .filter((r) => r.points >= 1000)
+      .sort((a, b) => b.points - a.points)
+      .map((r) => `${r.userTag},${r.points}`);
+    await message.reply(`Found ${above1000.length} qualifying records.`);
+    const fileContents = `usertag,points\n${above1000.join("\n")}`;
+    const file = new AttachmentBuilder(fileContents, {
+      name: "contributors.csv",
+    });
+    await message.reply({
+      files: [file],
+    });
+  }
   await levelListener(Bot, message);
 
   if (
