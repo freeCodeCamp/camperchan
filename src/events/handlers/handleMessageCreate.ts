@@ -5,6 +5,7 @@ import { AttachmentBuilder, ChannelType, Message } from "discord.js";
 
 import { Camperbot } from "../../interfaces/Camperbot";
 import { levelListener } from "../../modules/levelListener";
+import { messageCounter } from "../../modules/messageCounter";
 
 /**
  * Handles the message create events.
@@ -19,13 +20,13 @@ export const handleMessageCreate = async (Bot: Camperbot, message: Message) => {
     message.guild
   ) {
     await message.reply("Fetching records.");
-    const allRecords = await Bot.db.levels.findMany({});
+    const allRecords = await Bot.db.messages.findMany({});
     const above1000 = allRecords
-      .filter((r) => r.points >= 1000)
-      .sort((a, b) => b.points - a.points)
-      .map((r) => `${r.userTag},${r.points}`);
+      .filter((r) => r.messages >= 1000)
+      .sort((a, b) => b.messages - a.messages)
+      .map((r) => `${r.userTag},${r.messages}`);
     await message.reply(`Found ${above1000.length} qualifying records.`);
-    const fileContents = `usertag,points\n${above1000.join("\n")}`;
+    const fileContents = `username,messages\n${above1000.join("\n")}`;
     const file = new AttachmentBuilder(Buffer.from(fileContents, "utf-8"), {
       name: "contributors.csv",
     });
@@ -33,6 +34,7 @@ export const handleMessageCreate = async (Bot: Camperbot, message: Message) => {
       files: [file],
     });
   }
+  await messageCounter(Bot, message);
   await levelListener(Bot, message);
 
   if (

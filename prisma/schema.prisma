@@ -36,3 +36,12 @@ model levels {
 
   @@unique([userId], map: "userId_1")
 }
+
+model messages {
+  id       String @id @default(auto()) @map("_id") @db.ObjectId
+  userId   String
+  userTag  String @default("")
+  messages Int    @default(0)
+
+  @@unique([userId], map: "userId_1")
+}
