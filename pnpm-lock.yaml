@@ -38,8 +38,8 @@ dependencies:
 
 devDependencies:
   '@types/chai':
-    specifier: 4.3.10
-    version: 4.3.10
+    specifier: 4.3.11
+    version: 4.3.11
   '@types/common-tags':
     specifier: 1.8.4
     version: 1.8.4
@@ -1137,8 +1137,8 @@ packages:
       '@babel/types': 7.22.4
     dev: true
 
-  /@types/chai@4.3.10:
-    resolution: {integrity: sha512-of+ICnbqjmFCiixUnqRulbylyXQrPqIGf/B3Jax1wIF3DvSheysQxAWvqHhZiW3IQrycvokcLcFQlveGp+vyNg==}
+  /@types/chai@4.3.11:
+    resolution: {integrity: sha512-qQR1dr2rGIHYlJulmr8Ioq3De0Le9E4MJ5AiaeAETJJpndT1uUNHsGFK3L/UIu+rbkQSdj8J/w2bCsBZc/Y5fQ==}
     dev: true
 
   /@types/common-tags@1.8.4:
