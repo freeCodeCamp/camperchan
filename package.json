@@ -33,7 +33,7 @@
     "winston": "3.11.0"
   },
   "devDependencies": {
-    "@types/chai": "4.3.10",
+    "@types/chai": "4.3.11",
     "@types/common-tags": "1.8.4",
     "@types/diff": "5.0.8",
     "@types/luxon": "3.3.5",
