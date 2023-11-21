@@ -50,8 +50,8 @@ devDependencies:
     specifier: 3.3.5
     version: 3.3.5
   '@types/mocha':
-    specifier: 10.0.4
-    version: 10.0.4
+    specifier: 10.0.5
+    version: 10.0.5
   '@types/prettier':
     specifier: 2.7.3
     version: 2.7.3
@@ -1184,8 +1184,8 @@ packages:
     resolution: {integrity: sha512-1cyf6Ge/94zlaWIZA2ei1pE6SZ8xpad2hXaYa5JEFiaUH0YS494CZwyi4MXNpXD9oEuv6ZH0Bmh0e7F9sPhmZA==}
     dev: true
 
-  /@types/mocha@10.0.4:
-    resolution: {integrity: sha512-xKU7bUjiFTIttpWaIZ9qvgg+22O1nmbA+HRxdlR+u6TWsGfmFdXrheJoK4fFxrHNVIOBDvDNKZG+LYBpMHpX3w==}
+  /@types/mocha@10.0.5:
+    resolution: {integrity: sha512-JUI82qwkRhYJYesuKSeFy46fKbhLaV9RU1gAh2PHmyoEECvlTf5UYeIivYlMszp1WT2CwJ4ziC3zoxsodhsGwg==}
     dev: true
 
   /@types/node@20.2.5:
