@@ -47,8 +47,8 @@ devDependencies:
     specifier: 5.0.8
     version: 5.0.8
   '@types/luxon':
-    specifier: 3.3.5
-    version: 3.3.5
+    specifier: 3.3.6
+    version: 3.3.6
   '@types/mocha':
     specifier: 10.0.6
     version: 10.0.6
@@ -1180,8 +1180,8 @@ packages:
     requiresBuild: true
     dev: true
 
-  /@types/luxon@3.3.5:
-    resolution: {integrity: sha512-1cyf6Ge/94zlaWIZA2ei1pE6SZ8xpad2hXaYa5JEFiaUH0YS494CZwyi4MXNpXD9oEuv6ZH0Bmh0e7F9sPhmZA==}
+  /@types/luxon@3.3.6:
+    resolution: {integrity: sha512-LblarKeI26YsMLxHDIQ0295wPSLjkl98eNwDcVhz3zbo1H+kfnkzR01H5Ai5LBzSeddX0ZJSpGwKEZihGb5diw==}
     dev: true
 
   /@types/mocha@10.0.6:
