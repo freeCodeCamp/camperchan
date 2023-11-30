@@ -65,4 +65,9 @@ __***Underline Bold Italic***__ - \`__***Underline Bold Italic***__\`
     message:
       "Posting the same message to multiple channels is spammy and can result in redundant responses and confusion. Please delete the duplicates.",
   },
+  {
+    name: "Suicide/self-harm",
+    message:
+      "Since you just mentioned suicide or self-harm, we need to point that we are not trained medical professionals. We encourage you to call one of the numbers here for immediate help: <http://www.suicide.org/international-suicide-hotlines.html>.",
+  },
 ];
