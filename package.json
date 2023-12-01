@@ -44,7 +44,7 @@
     "chai": "4.3.10",
     "discordjs-testing": "0.2.0",
     "editorconfig": "1.0.4",
-    "eslint": "8.54.0",
+    "eslint": "8.55.0",
     "eslint-config-prettier": "8.10.0",
     "eslint-plugin-import": "2.29.0",
     "eslint-plugin-jsdoc": "40.3.0",
