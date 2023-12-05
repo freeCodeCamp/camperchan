@@ -45,3 +45,9 @@ model messages {
 
   @@unique([userId], map: "userId_1")
 }
+
+model supporters {
+  id     String @id @default(auto()) @map("_id") @db.ObjectId
+  userId String @unique
+  email  String @unique
+}
