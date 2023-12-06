@@ -47,8 +47,8 @@ devDependencies:
     specifier: 1.8.4
     version: 1.8.4
   '@types/diff':
-    specifier: 5.0.8
-    version: 5.0.8
+    specifier: 5.0.9
+    version: 5.0.9
   '@types/luxon':
     specifier: 3.3.7
     version: 3.3.7
@@ -1154,8 +1154,8 @@ packages:
     resolution: {integrity: sha512-S+1hLDJPjWNDhcGxsxEbepzaxWqURP/o+3cP4aa2w7yBXgdcmKGQtZzP8JbyfOd0m+33nh+8+kvxYE2UJtBDkg==}
     dev: true
 
-  /@types/diff@5.0.8:
-    resolution: {integrity: sha512-kR0gRf0wMwpxQq6ME5s+tWk9zVCfJUl98eRkD05HWWRbhPB/eu4V1IbyZAsvzC1Gn4znBJ0HN01M4DGXdBEV8Q==}
+  /@types/diff@5.0.9:
+    resolution: {integrity: sha512-RWVEhh/zGXpAVF/ZChwNnv7r4rvqzJ7lYNSmZSVTxjV0PBLf6Qu7RNg+SUtkpzxmiNkjCx0Xn2tPp7FIkshJwQ==}
     dev: true
 
   /@types/graceful-fs@4.1.6:
