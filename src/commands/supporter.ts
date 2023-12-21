@@ -1,11 +1,12 @@
+import { readFile } from "fs/promises";
+import { join } from "path";
+
 import { SlashCommandBuilder } from "discord.js";
 
 import { SupporterRoleId } from "../config/Supporter";
 import { Command } from "../interfaces/Command";
 import { errorHandler } from "../utils/errorHandler";
 import { fetchLearnRecord } from "../utils/fetchLearnRecord";
-import { readFile } from "fs/promises";
-import { join } from "path";
 
 export const supporter: Command = {
   data: new SlashCommandBuilder()
