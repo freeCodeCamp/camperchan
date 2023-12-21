@@ -1,3 +1,6 @@
+import { readFile } from "fs/promises";
+import { join } from "path";
+
 import { SlashCommandBuilder } from "discord.js";
 
 import { SupporterRoleId } from "../config/Supporter";
@@ -76,6 +79,14 @@ export const supporter: Command = {
         content:
           "Congrats! You now have the supporter role, with access to special channels.",
       });
+      const donorCTA2023 = await readFile(
+        join(process.cwd(), process.env.EMAIL_LIST ?? "Naomi messed up."),
+        "utf-8"
+      );
+      const isCTAMember = donorCTA2023.split("\n").includes(email);
+      if (isCTAMember) {
+        await member.roles.add("1186748788665225336");
+      }
     } catch (err) {
       await errorHandler(bot, err);
     }
