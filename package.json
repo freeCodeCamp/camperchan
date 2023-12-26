@@ -7,7 +7,7 @@
     "prebuild": "npm run clean",
     "build": "tsc",
     "clean": "rimraf dist",
-    "lint": "eslint src test --max-warnings 0",
+    "lint": "eslint src test --max-warnings 0 && prettier src test --check",
     "start": "node -r dotenv/config dist/index.js",
     "pretest": "rimraf ./.nyc_output && ts-node test/validateCoverage.ts",
     "test": "nyc --check-coverage ts-mocha -u tdd  'test/**/*.spec.ts' --recursive --exit --timeout 10000",
