@@ -1,6 +1,6 @@
 # Contributing
 
-To develop this project locally you will need to be running [NodeJS v18](https://nodejs.org/en/) and [npm v9](https://www.npmjs.com/).
+To develop this project locally you will need to be running [NodeJS v20](https://nodejs.org/en/) and [pnpm v8](https://pnpm.io/).
 
 ## Environment Variables
 
