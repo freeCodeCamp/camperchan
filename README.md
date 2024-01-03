@@ -4,7 +4,7 @@ A bot that facilitates moderation and community management for the freeCodeCamp 
 
 ## Contributing
 
-If you are interested in contributing to this project, please review our [contributing guidelines](CONTRIBUTING.md)
+If you are interested in contributing to this project, please review our [contributing guidelines](CONTRIBUTING.md).
 
 ## Ask For Help
 
