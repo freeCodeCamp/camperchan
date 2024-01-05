@@ -8,6 +8,7 @@ import { handleBan } from "./subcommands/moderation/handleBan";
 import { handleHistory } from "./subcommands/moderation/handleHistory";
 import { handleKick } from "./subcommands/moderation/handleKick";
 import { handleMute } from "./subcommands/moderation/handleMute";
+import { handlePrune } from "./subcommands/moderation/handlePrune";
 import { handleUnban } from "./subcommands/moderation/handleUnban";
 import { handleUnmute } from "./subcommands/moderation/handleUnmute";
 import { handleWarn } from "./subcommands/moderation/handleWarn";
@@ -17,6 +18,7 @@ const handlers: { [key: string]: Subcommand } = {
   history: handleHistory,
   kick: handleKick,
   mute: handleMute,
+  prune: handlePrune,
   unban: handleUnban,
   unmute: handleUnmute,
   warn: handleWarn,
@@ -116,6 +118,19 @@ export const moderation: Command = {
           option
             .setName("reason")
             .setDescription("The reason for muting the user.")
+            .setRequired(true)
+        )
+    )
+    .addSubcommand(
+      new SlashCommandSubcommandBuilder()
+        .setName("prune")
+        .setDescription("Prunes messages from THIS channel.")
+        .addIntegerOption((option) =>
+          option
+            .setName("count")
+            .setDescription("Number of messages to delete. Maximum of 100.")
+            .setMinValue(1)
+            .setMaxValue(100)
             .setRequired(true)
         )
     )
