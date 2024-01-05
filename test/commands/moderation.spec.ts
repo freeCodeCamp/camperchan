@@ -15,7 +15,7 @@ suite("moderation command", () => {
     assert.strictEqual(moderation.data.name, "moderation");
     assert.strictEqual(moderation.data.description, "Moderation commands.");
     assert.isFalse(moderation.data.dm_permission);
-    assert.lengthOf(subcommands, 7);
+    assert.lengthOf(subcommands, 8);
   });
 
   test("has correct ban", () => {
@@ -127,6 +127,26 @@ suite("moderation command", () => {
     assert.strictEqual(
       mute?.options?.[3].type,
       ApplicationCommandOptionType.String
+    );
+  });
+
+  test("has correct prune", () => {
+    const prune = subcommands.find((sub) => sub.name === "prune");
+    assert.exists(prune);
+    assert.strictEqual(
+      prune?.description,
+      "Prunes messages from THIS channel."
+    );
+    assert.lengthOf(prune?.options || "hello", 1);
+    assert.strictEqual(prune?.options?.[0].name, "count");
+    assert.strictEqual(
+      prune?.options?.[0].description,
+      "Number of messages to delete. Maximum of 100."
+    );
+    assert.isTrue(prune?.options?.[0].required);
+    assert.strictEqual(
+      prune?.options?.[0].type,
+      ApplicationCommandOptionType.Integer
     );
   });
 
