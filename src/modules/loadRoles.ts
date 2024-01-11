@@ -29,7 +29,11 @@ export const loadRoles = async (bot: Camperbot) => {
           ", "
         )}`,
       });
+      return;
     }
+    await bot.config.debug_hook.send({
+      content: "Language roles loaded~!",
+    });
   } catch (err) {
     await errorHandler(bot, err);
   }
