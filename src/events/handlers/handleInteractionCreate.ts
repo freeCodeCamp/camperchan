@@ -1,5 +1,7 @@
 import { Interaction, Message } from "discord.js";
+import { compareTwoStrings } from "string-similarity";
 
+import { Languages } from "../../config/Languages";
 import { Camperbot } from "../../interfaces/Camperbot";
 import { closePrivateChannel } from "../../modules/closePrivateChannel";
 import { reactionRoleClick } from "../../modules/reactionRoleClick";
@@ -106,6 +108,18 @@ export const handleInteractionCreate = async (
         content: "Thank you for reporting!",
         ephemeral: true,
       });
+    }
+  }
+
+  if (interaction.isAutocomplete()) {
+    if (interaction.commandName === "translator") {
+      const input = interaction.options.getString("language", true);
+      const similar = Languages.sort(
+        (a, b) => compareTwoStrings(b, input) - compareTwoStrings(a, input)
+      );
+      await interaction.respond(
+        similar.slice(0, 5).map((el) => ({ name: el, value: el }))
+      );
     }
   }
 };

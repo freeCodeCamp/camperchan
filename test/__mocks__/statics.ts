@@ -4,6 +4,7 @@ export const CommandNames = [
   "management",
   "moderation",
   "supporter",
+  "translator",
 ];
 
 export const ContextNames = ["bookmark", "format", "report", "snippet"];

@@ -2,6 +2,7 @@ import { ChannelType } from "discord.js";
 import { scheduleJob } from "node-schedule";
 
 import { Camperbot } from "../../interfaces/Camperbot";
+import { loadRoles } from "../../modules/loadRoles";
 import { send100DaysOfCode } from "../../modules/send100DaysOfCode";
 import { errorHandler } from "../../utils/errorHandler";
 
@@ -56,6 +57,8 @@ export const handleReady = async (Bot: Camperbot) => {
       Bot.privateCategory = privateCategory;
     }
     await Bot.config.debug_hook.send("All channels loaded.");
+
+    await loadRoles(Bot);
 
     scheduleJob("0 9 * * *", async () => {
       await send100DaysOfCode(Bot);
