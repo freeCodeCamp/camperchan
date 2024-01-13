@@ -1,6 +1,6 @@
 # Contributing
 
-To develop this project locally you will need to be running [NodeJS v20](https://nodejs.org/en/) and [pnpm v8](https://pnpm.io/).
+To develop this project locally, you will need to be running [NodeJS v20](https://nodejs.org/en/) and [pnpm v8](https://pnpm.io/).
 
 ## Environment Variables
 
@@ -23,14 +23,14 @@ Paste that token as `TOKEN` in your `.env` file. Switch back to the `General Inf
 
 Next, head over to [MongoDB Atlas](https://www.mongodb.com/cloud/atlas) and either [set up an account](https://www.freecodecamp.org/news/get-started-with-mongodb-atlas/) or sign in. Choose the database you'd like to use, and get your connection string. Paste that as `MONGO_URI` in your `.env` file.
 
-The bot uses two Discord webhooks, one for debug logging and one for moderation action logs. For the purposes of local testing, you can use the same webhook URL for both. Right click on a channel in your server, select `Edit Channel`, and pick the `Integrations` tab on the sidebar. Click the `Create Webhook` button, give it a name, and copy the URL. Paste that as `DEBUG_HOOK` and `MOD_HOOK` in your `.env` file.
+The bot uses two Discord webhooks, one for debug logging and one for moderation action logs. For the purposes of local testing, you can use the same webhook URL for both. Right-click on a channel in your server, select `Edit Channel`, and pick the `Integrations` tab on the sidebar. Click the `Create Webhook` button, give it a name, and copy the URL. Paste that as `DEBUG_HOOK` and `MOD_HOOK` in your `.env` file.
 
-Right click on your Discord server icon (the one you'll be running the bot in) and select `Copy ID`. This goes in your `.env` file as `HOME_GUILD`.
+Right-click on your Discord server icon (the one you'll be running the bot in) and select `Copy ID`. This goes in your `.env` file as `HOME_GUILD`.
 
 > **Note:**
 > This bot is designed for a single-guild use case. Commands will only be registered in the server specified by `HOME_GUILD`.
 
-Finally, for the private conversation system you need to specify a moderation role (which gets added to each ticket) and the category private channels should be opened in. Right click on the role you'd like to use and select `Copy ID`. Paste that as `MOD_ROLE` in your `.env` file. Right click on the **category** you'd like to use and select `Copy ID`. Paste that as `PRIVATE_CATEGORY` in your `.env` file.
+Finally, for the private conversation system, you need to specify a moderation role (which gets added to each ticket) and the category private channels should be opened in. Right-click on the role you'd like to use and select `Copy ID`. Paste that as `MOD_ROLE` in your `.env` file. Right-click on the **category** you'd like to use and select `Copy ID`. Paste that as `PRIVATE_CATEGORY` in your `.env` file.
 
 ## Preparing the Code
 
@@ -67,7 +67,7 @@ Discord marks specific gateway intents as "privileged". Back on your application
 
 ## Running the Bot
 
-Finally everything should be set up to run the bot. Start it with:
+Finally, everything should be set up to run the bot. Start it with:
 
 ```bash
 npm start
