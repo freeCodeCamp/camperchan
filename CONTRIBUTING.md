@@ -23,9 +23,9 @@ Paste that token as `TOKEN` in your `.env` file. Switch back to the `General Inf
 
 Next, head over to [MongoDB Atlas](https://www.mongodb.com/cloud/atlas) and either [set up an account](https://www.freecodecamp.org/news/get-started-with-mongodb-atlas/) or sign in. Choose the database you'd like to use, and get your connection string. Paste that as `MONGO_URI` in your `.env` file.
 
-The bot uses two Discord webhooks, one for debug logging and one for moderation action logs. For the purposes of local testing, you can use the same webhook URL for both. Right-click on a channel in your server, select `Edit Channel`, and pick the `Integrations` tab on the sidebar. Click the `Create Webhook` button, give it a name, and copy the URL. Paste that as `DEBUG_HOOK` and `MOD_HOOK` in your `.env` file.
+The bot uses two Discord webhooks, one for debug logging and one for moderation action logs. For local testing, you can use the same webhook URL for both. Right-click on a channel in your server, select `Edit Channel`, and pick the `Integrations` tab on the sidebar. Click the `Create Webhook` button, give it a name, and copy the URL. Paste that as `DEBUG_HOOK` and `MOD_HOOK` in your `.env` file.
 
-Right-click on your Discord server icon (the one you'll be running the bot in) and select `Copy ID`. This goes in your `.env` file as `HOME_GUILD`.
+Right-click on your Discord server icon (the one in which you'll be running the bot) and select `Copy ID`. This goes in your `.env` file as `HOME_GUILD`.
 
 > **Note:**
 > This bot is designed for a single-guild use case. Commands will only be registered in the server specified by `HOME_GUILD`.
