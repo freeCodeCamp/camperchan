@@ -41,7 +41,7 @@
     "@types/diff": "5.0.9",
     "@types/luxon": "3.4.1",
     "@types/mocha": "10.0.6",
-    "@types/node": "20.11.4",
+    "@types/node": "20.11.5",
     "@types/node-schedule": "2.1.5",
     "@types/prettier": "2.7.3",
     "@types/string-similarity": "4.0.2",
