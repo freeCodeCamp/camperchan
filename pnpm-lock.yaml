@@ -12,8 +12,8 @@ dependencies:
     specifier: 4.16.2
     version: 4.16.2(prisma@4.16.2)
   diff:
-    specifier: 5.1.0
-    version: 5.1.0
+    specifier: 5.2.0
+    version: 5.2.0
   discord.js:
     specifier: 14.14.1
     version: 14.14.1
@@ -2065,8 +2065,8 @@ packages:
     engines: {node: '>=0.3.1'}
     dev: true
 
-  /diff@5.1.0:
-    resolution: {integrity: sha512-D+mk+qE8VC/PAUrlAU34N+VfXev0ghe5ywmpqrawphmVZc1bEfn56uo9qpyGp1p4xpzOHkSW4ztBd6L7Xx4ACw==}
+  /diff@5.2.0:
+    resolution: {integrity: sha512-uIFDxqpRZGZ6ThOk84hEfqWoHx2devRFvpTZcTHur85vImfaxUbTW9Ryh4CpCuDnToOP1CEtXKIgytHBPVff5A==}
     engines: {node: '>=0.3.1'}
     dev: false
 
