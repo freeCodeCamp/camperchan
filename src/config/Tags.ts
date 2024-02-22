@@ -24,7 +24,7 @@ export const Tags: Tag[] = [
   {
     name: "XY Problem",
     message:
-      "It looks like you're asking about your attempted solution rather then your actual problem. We need to know what your problem is before we can help.\n" +
+      "It looks like you're asking about your attempted solution rather than your actual problem. We need to know what your problem is before we can help.\n" +
       "https://xyproblem.info",
   },
   {
@@ -69,5 +69,10 @@ __***Underline Bold Italic***__ - \`__***Underline Bold Italic***__\`
     name: "Suicide/self-harm",
     message:
       "Since you just mentioned suicide or self-harm, we need to point that we are not trained medical professionals. We encourage you to call one of the numbers here for immediate help: <http://www.suicide.org/international-suicide-hotlines.html>.",
+  },
+  {
+    name: "No self-promotion",
+    message:
+      "Please refrain from self-promotion of your social media (e.g. YouTube, LinkedIn, Twitter). You may include such links in your Discord profile if you wish. Links to projects for the limited purpose of debugging or review are also acceptable as long as the purpose for posting is not to drive traffic to the project.",
   },
 ];
