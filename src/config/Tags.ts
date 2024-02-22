@@ -72,6 +72,7 @@ __***Underline Bold Italic***__ - \`__***Underline Bold Italic***__\`
   },
   {
     name: "No self-promotion",
-    message: "Please refrain from self-promotion of your social media (e.g. YouTube, LinkedIn, Twitter). You may include such links in your Discord profile if you wish. Links to projects for the limited purpose of debugging or review are also acceptable as long as the purpose for posting is not to drive traffic to the project."
+    message:
+      "Please refrain from self-promotion of your social media (e.g. YouTube, LinkedIn, Twitter). You may include such links in your Discord profile if you wish. Links to projects for the limited purpose of debugging or review are also acceptable as long as the purpose for posting is not to drive traffic to the project.",
   },
 ];
