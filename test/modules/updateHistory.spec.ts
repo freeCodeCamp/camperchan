@@ -14,8 +14,8 @@ suite("updateHistory", () => {
     await updateHistory({ db } as never, "ban", "123");
     const history = await db.histories.findUnique({
       where: {
-        userId: "123",
-      },
+        userId: "123"
+      }
     });
     assert.isObject(history);
     assert.equal(history?.bans, 1);
@@ -31,8 +31,8 @@ suite("updateHistory", () => {
     await updateHistory({ db } as never, "mute", "123");
     const history = await db.histories.findUnique({
       where: {
-        userId: "123",
-      },
+        userId: "123"
+      }
     });
     assert.isObject(history);
     assert.equal(history?.bans, 2);

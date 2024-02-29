@@ -13,19 +13,19 @@ export const messageCounter = async (bot: Camperbot, message: Message) => {
   try {
     await bot.db.messages.upsert({
       where: {
-        userId: message.author.id,
+        userId: message.author.id
       },
       create: {
         userId: message.author.id,
         userTag: message.author.displayName || message.author.tag,
-        messages: 1,
+        messages: 1
       },
       update: {
         userTag: message.author.displayName || message.author.tag,
         messages: {
-          increment: 1,
-        },
-      },
+          increment: 1
+        }
+      }
     });
   } catch (err) {
     await errorHandler(bot, err);

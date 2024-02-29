@@ -54,27 +54,27 @@ export const handleKick: Subcommand = {
       kickLogEmbed.addFields(
         {
           name: "Reason",
-          value: customSubstring(reason, 1000),
+          value: customSubstring(reason, 1000)
         },
         {
           name: "User notified?",
-          value: String(sentNotice),
+          value: String(sentNotice)
         }
       );
       kickLogEmbed.setTimestamp();
       kickLogEmbed.setAuthor({
         name: target.tag,
-        iconURL: target.displayAvatarURL(),
+        iconURL: target.displayAvatarURL()
       });
       kickLogEmbed.setFooter({
-        text: `ID: ${target.id}`,
+        text: `ID: ${target.id}`
       });
 
-      await Bot.config.mod_hook.send({ embeds: [kickLogEmbed] });
+      await Bot.config.modHook.send({ embeds: [kickLogEmbed] });
       await interaction.editReply({ content: "They have been kicked." });
     } catch (err) {
       await errorHandler(Bot, err);
       await interaction.editReply("Something went wrong.");
     }
-  },
+  }
 };

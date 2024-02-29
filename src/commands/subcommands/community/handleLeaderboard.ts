@@ -3,7 +3,7 @@ import {
   ButtonBuilder,
   ButtonStyle,
   ComponentType,
-  Message,
+  Message
 } from "discord.js";
 
 import { Subcommand } from "../../../interfaces/Subcommand";
@@ -18,8 +18,8 @@ export const handleLeaderboard: Subcommand = {
 
       const levels = await Bot.db.levels.findMany({
         orderBy: {
-          points: "desc",
-        },
+          points: "desc"
+        }
       });
 
       const mappedWithId = levels.map((user, index) => [
@@ -27,14 +27,14 @@ export const handleLeaderboard: Subcommand = {
         user.userTag,
         user.level,
         user.points,
-        user.userId,
+        user.userId
       ]);
 
       const mapped = levels.map((user, index) => [
         index + 1,
         user.userTag,
         user.level,
-        user.points,
+        user.points
       ]);
 
       const userData = mappedWithId.find((el) => el[4] === interaction.user.id);
@@ -65,14 +65,14 @@ export const handleLeaderboard: Subcommand = {
           new ActionRowBuilder<ButtonBuilder>().addComponents(
             pageBack,
             pageForward
-          ),
-        ],
+          )
+        ]
       })) as Message;
 
       const clickyClick =
         sent.createMessageComponentCollector<ComponentType.Button>({
           time: 300000,
-          filter: (click) => click.user.id === interaction.user.id,
+          filter: (click) => click.user.id === interaction.user.id
         });
 
       clickyClick.on("collect", async (click) => {
@@ -105,8 +105,8 @@ export const handleLeaderboard: Subcommand = {
             new ActionRowBuilder<ButtonBuilder>().addComponents(
               pageBack,
               pageForward
-            ),
-          ],
+            )
+          ]
         });
       });
 
@@ -118,15 +118,15 @@ export const handleLeaderboard: Subcommand = {
             new ActionRowBuilder<ButtonBuilder>().addComponents(
               pageBack,
               pageForward
-            ),
-          ],
+            )
+          ]
         });
       });
     } catch (err) {
       await errorHandler(Bot, err);
       await interaction.editReply({
-        content: "Something went wrong! Please try again later.",
+        content: "Something went wrong! Please try again later."
       });
     }
-  },
+  }
 };

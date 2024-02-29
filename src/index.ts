@@ -13,11 +13,11 @@ import { registerCommands } from "./utils/registerCommands";
 
 (async () => {
   const Bot = new Client({
-    intents: IntentOptions,
+    intents: IntentOptions
   }) as Camperbot;
   Bot.config = generateConfig();
   Bot.octokit = new Octokit({
-    auth: Bot.config.githubToken,
+    auth: Bot.config.githubToken
   });
   await connectDatabase(Bot);
   await registerEvents(Bot);
@@ -25,7 +25,7 @@ import { registerCommands } from "./utils/registerCommands";
   Bot.contexts = await loadContexts(Bot);
   await registerCommands(Bot);
   Bot.quotes = await loadQuotes(Bot);
-  Bot.private_logs = {};
+  Bot.privateLogs = {};
 
   await Bot.login(Bot.config.token);
 })();

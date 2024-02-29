@@ -6,7 +6,7 @@ const bot = {
   events: {},
   on: (event: string, callback: () => void) => {
     bot.events[event] = callback;
-  },
+  }
 };
 
 suite("registerEvents", () => {

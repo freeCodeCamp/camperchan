@@ -18,7 +18,7 @@ export const errorHandler = async (Bot: Camperbot, err: unknown) => {
   errorEmbed.setDescription(`${error.message}`);
   errorEmbed.addFields({
     name: "Stack Trace:",
-    value: `\`\`\`\n${error.stack}\n\`\`\``,
+    value: `\`\`\`\n${error.stack}\n\`\`\``
   });
-  await Bot.config.debug_hook.send({ embeds: [errorEmbed] });
+  await Bot.config.debugHook.send({ embeds: [errorEmbed] });
 };

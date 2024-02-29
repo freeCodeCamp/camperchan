@@ -24,7 +24,7 @@ export const fetchLearnRecord = async (
       PROD_USER,
       PROD_PASS,
       PROD_DB,
-      PROD_COLLECTION,
+      PROD_COLLECTION
     } = process.env;
     if (
       !PROD_URI ||
@@ -40,7 +40,7 @@ export const fetchLearnRecord = async (
         "PROD_USER",
         "PROD_PASS",
         "PROD_DB",
-        "PROD_COLLECTION",
+        "PROD_COLLECTION"
       ].filter((s) => !process.env[s]);
       logHandler.log(
         "error",
@@ -52,8 +52,8 @@ export const fetchLearnRecord = async (
       replicaSet: PROD_REPLICA,
       auth: {
         username: PROD_USER,
-        password: PROD_PASS,
-      },
+        password: PROD_PASS
+      }
     });
     const db = client.db(PROD_DB);
     const collection = db.collection(PROD_COLLECTION);

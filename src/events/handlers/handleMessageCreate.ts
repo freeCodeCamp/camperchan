@@ -31,10 +31,10 @@ export const handleMessageCreate = async (Bot: Camperbot, message: Message) => {
       await message.reply(`Found ${above1000.length} qualifying records.`);
       const fileContents = `username,messages\n${above1000.join("\n")}`;
       const file = new AttachmentBuilder(Buffer.from(fileContents, "utf-8"), {
-        name: "contributors.csv",
+        name: "contributors.csv"
       });
       await message.reply({
-        files: [file],
+        files: [file]
       });
     }
   }
@@ -47,7 +47,7 @@ export const handleMessageCreate = async (Bot: Camperbot, message: Message) => {
   ) {
     return;
   }
-  const logId = Bot.private_logs[message.channel.id];
+  const logId = Bot.privateLogs[message.channel.id];
   if (!logId) {
     return;
   }

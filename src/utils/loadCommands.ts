@@ -5,6 +5,7 @@ import { Camperbot } from "../interfaces/Camperbot";
 import { Command } from "../interfaces/Command";
 
 import { errorHandler } from "./errorHandler";
+import { logHandler } from "./logHandler";
 
 /**
  * Reads the `/commands` directory and dynamically imports the files,
@@ -26,6 +27,10 @@ export const loadCommands = async (Bot: Camperbot): Promise<Command[]> => {
         continue;
       }
       const name = file.split(".")[0];
+      if (!name) {
+        logHandler.error(`Cannot find name from ${file}.`);
+        continue;
+      }
       const mod = await import(join(process.cwd() + `/dist/commands/${file}`));
       result.push(mod[name] as Command);
     }

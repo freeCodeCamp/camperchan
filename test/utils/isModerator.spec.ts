@@ -7,25 +7,22 @@ const typeCoerce = (obj: unknown) => obj as GuildMember;
 
 const basePermissions = [
   PermissionFlagsBits.ViewChannel,
-  PermissionFlagsBits.SendMessages,
+  PermissionFlagsBits.SendMessages
 ];
 const kickMembersSet = typeCoerce({
-  permissions: new Set([PermissionFlagsBits.KickMembers, ...basePermissions]),
+  permissions: new Set([PermissionFlagsBits.KickMembers, ...basePermissions])
 });
 const banMembersSet = typeCoerce({
-  permissions: new Set([PermissionFlagsBits.BanMembers, ...basePermissions]),
+  permissions: new Set([PermissionFlagsBits.BanMembers, ...basePermissions])
 });
 const manageMessagesSet = typeCoerce({
-  permissions: new Set([
-    PermissionFlagsBits.ManageMessages,
-    ...basePermissions,
-  ]),
+  permissions: new Set([PermissionFlagsBits.ManageMessages, ...basePermissions])
 });
 const moderateMembersSet = typeCoerce({
   permissions: new Set([
     PermissionFlagsBits.ModerateMembers,
-    ...basePermissions,
-  ]),
+    ...basePermissions
+  ])
 });
 
 suite("isModerator", () => {

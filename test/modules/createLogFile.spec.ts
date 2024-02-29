@@ -13,10 +13,10 @@ suite("createLogFile", () => {
   });
 
   test("returns the expected data structure", async () => {
-    const mockBot = { private_logs: {} } as Camperbot;
+    const mockBot = { privateLogs: {} } as Camperbot;
     await createLogFile(mockBot, "Naomi");
-    assert.property(mockBot.private_logs, "Naomi", "Naomi is not defined");
-    assert.equal(mockBot.private_logs.Naomi, "Naomi", "Naomi is not Naomi");
+    assert.property(mockBot.privateLogs, "Naomi", "Naomi is not defined");
+    assert.equal(mockBot.privateLogs.Naomi, "Naomi", "Naomi is not Naomi");
     const logPath = join(process.cwd(), "logs", "Naomi.txt");
     const status = await stat(logPath);
     assert.isTrue(status.isFile(), "Naomi.txt is not a file");

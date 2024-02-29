@@ -7,5 +7,5 @@ export const IntentOptions: GatewayIntentBits[] = [
   GatewayIntentBits.GuildMessages,
   GatewayIntentBits.GuildMessageReactions,
   GatewayIntentBits.MessageContent,
-  GatewayIntentBits.GuildVoiceStates,
+  GatewayIntentBits.GuildVoiceStates
 ];

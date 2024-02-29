@@ -13,7 +13,7 @@ export const connectDatabase = async (Bot: Camperbot) => {
   try {
     Bot.db = new PrismaClient();
     await Bot.db.$connect();
-    await Bot.config.debug_hook.send("Database Connected");
+    await Bot.config.debugHook.send("Database Connected");
   } catch (err) {
     await errorHandler(Bot, err);
   }

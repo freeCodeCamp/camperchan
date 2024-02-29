@@ -47,7 +47,7 @@ export const handleMessageEdit = async (
     updateEmbed.setAuthor({
       name: author?.tag || "unknown",
       iconURL:
-        author?.displayAvatarURL() || "https:/cdn.nhcarrigan.com/profile.png",
+        author?.displayAvatarURL() || "https:/cdn.nhcarrigan.com/profile.png"
     });
     updateEmbed.setDescription(
       `\`\`\`diff\n${customSubstring(diffContent, 4000)}\`\`\``
@@ -55,18 +55,18 @@ export const handleMessageEdit = async (
     updateEmbed.addFields(
       {
         name: "Channel",
-        value: `<#${newMessage.channel.id}>`,
+        value: `<#${newMessage.channel.id}>`
       },
       {
         name: "Message Link",
-        value: newMessage.url,
+        value: newMessage.url
       }
     );
     updateEmbed.setFooter({
-      text: `ID: ${author?.id || "unknown"}`,
+      text: `ID: ${author?.id || "unknown"}`
     });
 
-    await Bot.config.message_hook.send({ embeds: [updateEmbed] });
+    await Bot.config.messageHook.send({ embeds: [updateEmbed] });
   } catch (err) {
     await errorHandler(Bot, err);
   }

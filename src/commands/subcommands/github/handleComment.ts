@@ -9,7 +9,7 @@ export const handleComment: Subcommand = {
     [
       PermissionFlagsBits.ModerateMembers,
       PermissionFlagsBits.KickMembers,
-      PermissionFlagsBits.BanMembers,
+      PermissionFlagsBits.BanMembers
     ].some((p) => member.permissions.has(p)),
   execute: async (Bot, interaction) => {
     try {
@@ -21,7 +21,7 @@ export const handleComment: Subcommand = {
 
       if (!message) {
         await interaction.editReply({
-          content: `Could not find the ${messageKey} message.`,
+          content: `Could not find the ${messageKey} message.`
         });
         return;
       }
@@ -31,19 +31,19 @@ export const handleComment: Subcommand = {
           owner: "freeCodeCamp",
           repo,
           issue_number: pull,
-          body: message,
+          body: message
         })
         .catch(() => null);
 
       if (!comment) {
         await interaction.editReply({
           content:
-            "There was an error creating the comment. Please try again later.",
+            "There was an error creating the comment. Please try again later."
         });
         return;
       }
       await interaction.editReply({
-        content: `Successfully added a [comment](<${comment.data.html_url}>)`,
+        content: `Successfully added a [comment](<${comment.data.html_url}>)`
       });
     } catch (err) {
       await errorHandler(Bot, err);
@@ -54,5 +54,5 @@ export const handleComment: Subcommand = {
         }`
       );
     }
-  },
+  }
 };

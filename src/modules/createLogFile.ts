@@ -15,7 +15,7 @@ export const createLogFile = async (
   channelId: string
 ): Promise<void> => {
   try {
-    Bot.private_logs[channelId] = channelId;
+    Bot.privateLogs[channelId] = channelId;
 
     await writeFile(
       join(process.cwd(), "logs", `${channelId}.txt`),

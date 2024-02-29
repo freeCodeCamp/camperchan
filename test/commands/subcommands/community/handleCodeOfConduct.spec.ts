@@ -5,36 +5,36 @@ import {
   MockChatInputCommandInteraction,
   MockGuild,
   MockMember,
-  MockUser,
+  MockUser
 } from "discordjs-testing";
 
 import { handleCodeOfConduct } from "../../../../src/commands/subcommands/community/handleCodeOfConduct";
 
 const guild = new MockGuild({
-  name: "Test Guild",
+  name: "Test Guild"
 });
 const bot = new MockUser({
   username: "Test Bot",
   avatar: "test",
   discriminator: 1234,
   bot: true,
-  system: false,
+  system: false
 });
 const user = new MockUser({
   username: "Test User",
   avatar: "test",
   discriminator: 1234,
   bot: false,
-  system: false,
+  system: false
 });
 const member = new MockMember({
   guild,
-  user,
+  user
 });
 const channel = new MockChannel({
   name: "test-channel",
   guild,
-  type: ChannelType.GuildText,
+  type: ChannelType.GuildText
 });
 
 suite("codeOfConduct Handler", () => {
@@ -46,7 +46,7 @@ suite("codeOfConduct Handler", () => {
       bot,
       user,
       member,
-      channel,
+      channel
     });
     await handleCodeOfConduct.execute({} as never, command as never);
     assert.equal(command.replies.length, 1);

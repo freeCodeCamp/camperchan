@@ -26,58 +26,58 @@ export const supporter: Command = {
       const { member } = interaction;
       if (member.roles.cache.has(SupporterRoleId)) {
         await interaction.editReply({
-          content: "You have already claimed the supporter role.",
+          content: "You have already claimed the supporter role."
         });
         return;
       }
       const existsByUserId = await bot.db.supporters.findUnique({
         where: {
-          userId: member.id,
-        },
+          userId: member.id
+        }
       });
       if (existsByUserId) {
         await interaction.editReply({
           content:
-            "A supporter record already exists on your Discord account. If you believe this is an error, please contact Naomi.",
+            "A supporter record already exists on your Discord account. If you believe this is an error, please contact Naomi."
         });
         return;
       }
       const existsByEmail = await bot.db.supporters.findUnique({
         where: {
-          email,
-        },
+          email
+        }
       });
       if (existsByEmail) {
         await interaction.editReply({
           content:
-            "A supporter record already exists on your email. If you believe this is an error, please contact Naomi.",
+            "A supporter record already exists on your email. If you believe this is an error, please contact Naomi."
         });
         return;
       }
       const learnRecord = await fetchLearnRecord(bot, email);
       if (!learnRecord) {
         await interaction.editReply({
-          content: `There does not appear to be a learn account associated with ${email}. If you believe this is an error, please contact Naomi.`,
+          content: `There does not appear to be a learn account associated with ${email}. If you believe this is an error, please contact Naomi.`
         });
         return;
       }
       if (!learnRecord.isDonating) {
         await interaction.editReply({
           content:
-            "You do not appear to be actively supporting freeCodeCamp at this time. If you believe this is an error, please contact Naomi.",
+            "You do not appear to be actively supporting freeCodeCamp at this time. If you believe this is an error, please contact Naomi."
         });
         return;
       }
       await bot.db.supporters.create({
         data: {
           userId: member.id,
-          email,
-        },
+          email
+        }
       });
       await member.roles.add(SupporterRoleId);
       await interaction.editReply({
         content:
-          "Congrats! You now have the supporter role, with access to special channels.",
+          "Congrats! You now have the supporter role, with access to special channels."
       });
       const donorCTA2023 = await readFile(
         join(process.cwd(), process.env.EMAIL_LIST ?? "Naomi messed up."),
@@ -90,5 +90,5 @@ export const supporter: Command = {
     } catch (err) {
       await errorHandler(bot, err);
     }
-  },
+  }
 };

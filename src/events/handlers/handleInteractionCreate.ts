@@ -66,18 +66,18 @@ export const handleInteractionCreate = async (
       await interaction.editReply({
         embeds: [
           {
-            title: embed.title || "lost it oopsie",
-            description: embed.description || "lost it oopsie",
+            title: embed?.title || "lost it oopsie",
+            description: embed?.description || "lost it oopsie",
             fields: [
-              ...embed.fields,
+              ...(embed?.fields ?? []),
               {
                 name: "Acknowledged by",
-                value: `<@!${interaction.user.id}>`,
-              },
-            ],
-          },
+                value: `<@!${interaction.user.id}>`
+              }
+            ]
+          }
         ],
-        components: [],
+        components: []
       });
     }
   }
@@ -85,6 +85,12 @@ export const handleInteractionCreate = async (
   if (interaction.isModalSubmit()) {
     if (interaction.customId.startsWith(`report-`)) {
       const messageId = interaction.customId.split("-")[1];
+      if (!messageId) {
+        await interaction.reply({
+          content: "Error loading messgae. Please try again."
+        });
+        return;
+      }
       const reportChannel = Bot.reportChannel;
       const message = await reportChannel.messages.fetch(messageId);
       const embed = message.embeds[0];
@@ -92,21 +98,21 @@ export const handleInteractionCreate = async (
       await message.edit({
         embeds: [
           {
-            title: embed.title || "lost it oopsie",
-            description: embed.description || "lost it oopsie",
+            title: embed?.title || "lost it oopsie",
+            description: embed?.description || "lost it oopsie",
             fields: [
-              ...embed.fields,
+              ...(embed?.fields ?? []),
               {
                 name: "Reason",
-                value: reason,
-              },
-            ],
-          },
-        ],
+                value: reason
+              }
+            ]
+          }
+        ]
       });
       await interaction.reply({
         content: "Thank you for reporting!",
-        ephemeral: true,
+        ephemeral: true
       });
     }
   }

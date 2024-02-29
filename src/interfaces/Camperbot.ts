@@ -6,7 +6,7 @@ import {
   Guild,
   Snowflake,
   TextBasedChannel,
-  WebhookClient,
+  WebhookClient
 } from "discord.js";
 
 import { Command } from "./Command";
@@ -16,23 +16,23 @@ import { QuoteList } from "./Quotes";
 export interface Camperbot extends Client {
   config: {
     token: string;
-    mongo_uri: string;
-    debug_hook: WebhookClient;
-    message_hook: WebhookClient;
-    mod_hook: WebhookClient;
-    welcome_hook: WebhookClient;
-    home_guild: Snowflake;
-    bot_id: Snowflake;
-    mod_role: Snowflake;
-    private_category: Snowflake;
-    report_channel: Snowflake;
+    mongoUrl: string;
+    debugHook: WebhookClient;
+    messageHook: WebhookClient;
+    modHook: WebhookClient;
+    welcomeHook: WebhookClient;
+    homeGuild: Snowflake;
+    botId: Snowflake;
+    modRole: Snowflake;
+    privateCategory: Snowflake;
+    reportChannel: Snowflake;
     githubToken: string;
   };
   octokit: Octokit;
   quotes: QuoteList;
   commands: Command[];
   contexts: Context[];
-  private_logs: { [key: string]: string };
+  privateLogs: { [key: string]: string };
   db: PrismaClient;
   homeGuild: Guild;
   reportChannel: TextBasedChannel;

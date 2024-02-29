@@ -17,21 +17,21 @@ export const handleCodeOfConduct: Subcommand = {
           {
             name: "No harassment",
             value:
-              "Harassment includes sexual language and imagery, deliberate intimidation, stalking, name-calling, unwelcome attention, libel, and any malicious hacking or social engineering. freeCodeCamp should be a harassment-free experience for everyone, regardless of gender, gender identity and expression, age, sexual orientation, disability, physical appearance, body size, race, national origin, or religion (or lack thereof).",
+              "Harassment includes sexual language and imagery, deliberate intimidation, stalking, name-calling, unwelcome attention, libel, and any malicious hacking or social engineering. freeCodeCamp should be a harassment-free experience for everyone, regardless of gender, gender identity and expression, age, sexual orientation, disability, physical appearance, body size, race, national origin, or religion (or lack thereof)."
           },
           {
             name: "No trolling",
             value:
-              "Trolling includes posting inflammatory comments to provoke an emotional response or disrupt discussions.",
+              "Trolling includes posting inflammatory comments to provoke an emotional response or disrupt discussions."
           },
           {
             name: "No spamming",
             value:
-              "Spamming includes posting off-topic messages to disrupt discussions, promoting a product, soliciting donations, advertising a job / internship / gig, or flooding discussions with files or text.",
+              "Spamming includes posting off-topic messages to disrupt discussions, promoting a product, soliciting donations, advertising a job / internship / gig, or flooding discussions with files or text."
           }
         )
         .setFooter({
-          text: "Thank you for following freeCodeCamp's Code of Conduct",
+          text: "Thank you for following freeCodeCamp's Code of Conduct"
         })
         .setURL("https://freecodecamp.org/news/code-of-conduct");
       await interaction.editReply({ embeds: [codeEmbed] });
@@ -39,5 +39,5 @@ export const handleCodeOfConduct: Subcommand = {
       await errorHandler(Bot, err);
       await interaction.editReply("Something went wrong.");
     }
-  },
+  }
 };

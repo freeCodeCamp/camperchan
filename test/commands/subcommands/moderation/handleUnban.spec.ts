@@ -7,7 +7,7 @@ suite("unban handler", () => {
   test("does not allow non-moderators permission", () => {
     assert.isFalse(
       handleUnban.permissionValidator({
-        permissions: new Set([PermissionFlagsBits.SendMessages]),
+        permissions: new Set([PermissionFlagsBits.SendMessages])
       } as never)
     );
   });
@@ -15,7 +15,7 @@ suite("unban handler", () => {
   test("does not allow moderate members permission", () => {
     assert.isFalse(
       handleUnban.permissionValidator({
-        permissions: new Set([PermissionFlagsBits.ModerateMembers]),
+        permissions: new Set([PermissionFlagsBits.ModerateMembers])
       } as never)
     );
   });
@@ -23,7 +23,7 @@ suite("unban handler", () => {
   test("does not allow kick members permission", () => {
     assert.isFalse(
       handleUnban.permissionValidator({
-        permissions: new Set([PermissionFlagsBits.KickMembers]),
+        permissions: new Set([PermissionFlagsBits.KickMembers])
       } as never)
     );
   });
@@ -31,7 +31,7 @@ suite("unban handler", () => {
   test("allows ban members permission", () => {
     assert.isTrue(
       handleUnban.permissionValidator({
-        permissions: new Set([PermissionFlagsBits.BanMembers]),
+        permissions: new Set([PermissionFlagsBits.BanMembers])
       } as never)
     );
   });

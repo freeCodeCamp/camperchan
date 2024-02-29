@@ -7,7 +7,7 @@ suite("prune handler", () => {
   test("does not allow non-moderators permission", () => {
     assert.isFalse(
       handlePrune.permissionValidator({
-        permissions: new Set([PermissionFlagsBits.SendMessages]),
+        permissions: new Set([PermissionFlagsBits.SendMessages])
       } as never)
     );
   });
@@ -15,7 +15,7 @@ suite("prune handler", () => {
   test("allows manage messages permission", () => {
     assert.isTrue(
       handlePrune.permissionValidator({
-        permissions: new Set([PermissionFlagsBits.ManageMessages]),
+        permissions: new Set([PermissionFlagsBits.ManageMessages])
       } as never)
     );
   });
@@ -23,7 +23,7 @@ suite("prune handler", () => {
   test("does not allow moderate members permission", () => {
     assert.isFalse(
       handlePrune.permissionValidator({
-        permissions: new Set([PermissionFlagsBits.ModerateMembers]),
+        permissions: new Set([PermissionFlagsBits.ModerateMembers])
       } as never)
     );
   });
@@ -31,7 +31,7 @@ suite("prune handler", () => {
   test("does not allow kick members permission", () => {
     assert.isFalse(
       handlePrune.permissionValidator({
-        permissions: new Set([PermissionFlagsBits.KickMembers]),
+        permissions: new Set([PermissionFlagsBits.KickMembers])
       } as never)
     );
   });
@@ -39,7 +39,7 @@ suite("prune handler", () => {
   test("does not allow ban members permission", () => {
     assert.isFalse(
       handlePrune.permissionValidator({
-        permissions: new Set([PermissionFlagsBits.BanMembers]),
+        permissions: new Set([PermissionFlagsBits.BanMembers])
       } as never)
     );
   });

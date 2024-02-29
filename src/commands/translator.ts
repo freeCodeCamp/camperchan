@@ -31,13 +31,13 @@ export const translator: Command = {
       );
       if (!isValidLang) {
         await interaction.editReply({
-          content: `${lang} is not one of the languages we are translating at this time.`,
+          content: `${lang} is not one of the languages we are translating at this time.`
         });
         return;
       }
       if (!isValidRole) {
         await interaction.editReply({
-          content: `${lang} does not have a role associated with it. Please notify Naomi.`,
+          content: `${lang} does not have a role associated with it. Please notify Naomi.`
         });
         return;
       }
@@ -53,5 +53,5 @@ export const translator: Command = {
     } catch (err) {
       await errorHandler(bot, err);
     }
-  },
+  }
 };

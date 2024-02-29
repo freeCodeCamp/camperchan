@@ -12,7 +12,7 @@ export const loadRoles = async (bot: Camperbot) => {
   try {
     const roles = await bot.homeGuild.roles.fetch(undefined, {
       cache: true,
-      force: true,
+      force: true
     });
     const missingRoles: string[] = [];
     for (const language of Languages) {
@@ -24,15 +24,15 @@ export const loadRoles = async (bot: Camperbot) => {
       }
     }
     if (missingRoles.length) {
-      await bot.config.debug_hook.send({
+      await bot.config.debugHook.send({
         content: `WARNING!!!!!! The following languages do not have a matching role.\n${missingRoles.join(
           ", "
-        )}`,
+        )}`
       });
       return;
     }
-    await bot.config.debug_hook.send({
-      content: "Language roles loaded~!",
+    await bot.config.debugHook.send({
+      content: "Language roles loaded~!"
     });
   } catch (err) {
     await errorHandler(bot, err);

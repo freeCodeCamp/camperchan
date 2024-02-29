@@ -14,7 +14,7 @@ export const isModerator = (member: GuildMember) => {
     PermissionFlagsBits.ModerateMembers,
     PermissionFlagsBits.ManageMessages,
     PermissionFlagsBits.ManageGuild,
-    PermissionFlagsBits.Administrator,
+    PermissionFlagsBits.Administrator
   ];
   return modPermissions.some((perm) => member.permissions.has(perm));
 };

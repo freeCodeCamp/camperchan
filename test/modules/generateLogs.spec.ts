@@ -7,7 +7,7 @@ import { Camperbot } from "../../src/interfaces/Camperbot";
 import { createLogFile } from "../../src/modules/createLogFile";
 import { generateLogs } from "../../src/modules/generateLogs";
 
-const mockBot = { private_logs: {} } as Camperbot;
+const mockBot = { privateLogs: {} } as Camperbot;
 
 suite("generateLogs", () => {
   test("is defined", () => {
@@ -17,7 +17,7 @@ suite("generateLogs", () => {
 
   test("generates logs as expected", async () => {
     await createLogFile(mockBot, "Naomi");
-    assert.property(mockBot.private_logs, "Naomi", "Naomi is not defined");
+    assert.property(mockBot.privateLogs, "Naomi", "Naomi is not defined");
     const attachment = await generateLogs(mockBot, "Naomi");
     assert.property(attachment, "name", "attachment is not defined");
     assert.property(attachment, "attachment", "attachment is not defined");

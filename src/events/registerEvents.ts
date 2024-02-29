@@ -40,6 +40,9 @@ export const registerEvents = async (Bot: Camperbot) => {
       "guildMemberRemove",
       async (member) => await handleMemberRemove(Bot, member)
     );
+    Bot.on("error", async (err) => {
+      await errorHandler(Bot, err);
+    });
   } catch (err) {
     await errorHandler(Bot, err);
   }

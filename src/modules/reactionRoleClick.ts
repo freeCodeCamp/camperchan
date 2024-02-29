@@ -29,6 +29,10 @@ export const reactionRoleClick = async (
     }
 
     const roleId = customId.split("-")[1];
+    if (!roleId) {
+      await interaction.editReply({ content: "Error loading that role data." });
+      return;
+    }
     const role = await guild.roles.fetch(roleId).catch(() => null);
 
     if (!role) {

@@ -43,25 +43,25 @@ export const handleUnban: Subcommand = {
       banLogEmbed.addFields([
         {
           name: "Reason",
-          value: customSubstring(reason, 1000),
-        },
+          value: customSubstring(reason, 1000)
+        }
       ]);
       banLogEmbed.setTimestamp();
       banLogEmbed.setAuthor({
         name: target.tag,
-        iconURL: target.displayAvatarURL(),
+        iconURL: target.displayAvatarURL()
       });
       banLogEmbed.setFooter({
-        text: `ID: ${target.id}`,
+        text: `ID: ${target.id}`
       });
 
-      await Bot.config.mod_hook.send({ embeds: [banLogEmbed] });
+      await Bot.config.modHook.send({ embeds: [banLogEmbed] });
       await interaction.editReply({
-        content: "They have been unbanned.",
+        content: "They have been unbanned."
       });
     } catch (err) {
       await errorHandler(Bot, err);
       await interaction.editReply("Something went wrong.");
     }
-  },
+  }
 };

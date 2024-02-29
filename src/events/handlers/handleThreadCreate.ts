@@ -21,10 +21,10 @@ export const handleThreadCreate = async (
     embed.setDescription(`The thread <#${thread.id}> was created.`);
     embed.addFields([
       { name: "Created By:", value: `<@!${thread.ownerId}>`, inline: true },
-      { name: "Channel:", value: `<#${thread.parentId}>`, inline: true },
+      { name: "Channel:", value: `<#${thread.parentId}>`, inline: true }
     ]);
 
-    await Bot.config.message_hook.send({ embeds: [embed] });
+    await Bot.config.messageHook.send({ embeds: [embed] });
   } catch (err) {
     await errorHandler(Bot, err);
   }

@@ -28,7 +28,7 @@ export const handleMessageDelete = async (
     deleteEmbed.addFields(
       {
         name: "Channel",
-        value: `<#${channel.id}>`,
+        value: `<#${channel.id}>`
       },
       {
         name: "Content",
@@ -36,17 +36,17 @@ export const handleMessageDelete = async (
           content + stickers.map((el) => el.name).join(" ") ||
             "`No content. Embeds or attachments may be coming.`",
           1000
-        ),
+        )
       }
     );
 
     if (author) {
       deleteEmbed.setAuthor({
         name: author.tag,
-        iconURL: author.displayAvatarURL(),
+        iconURL: author.displayAvatarURL()
       });
       deleteEmbed.setFooter({
-        text: `ID: ${author.id}`,
+        text: `ID: ${author.id}`
       });
     }
 
@@ -55,11 +55,11 @@ export const handleMessageDelete = async (
       deleteEmbed.setImage(attached.proxyURL);
     }
 
-    await Bot.config.message_hook.send({ embeds: [deleteEmbed] });
+    await Bot.config.messageHook.send({ embeds: [deleteEmbed] });
 
     if (embeds.length) {
       embeds.forEach(
-        async (embed) => await Bot.config.message_hook.send({ embeds: [embed] })
+        async (embed) => await Bot.config.messageHook.send({ embeds: [embed] })
       );
     }
   } catch (err) {

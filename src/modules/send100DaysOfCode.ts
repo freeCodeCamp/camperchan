@@ -12,7 +12,7 @@ export const send100DaysOfCode = async (bot: Camperbot) => {
       bot.homeGuild.channels.cache.get("697124514982527086") ||
       (await bot.homeGuild.channels.fetch("697124514982527086"));
     if (!channel || !("send" in channel)) {
-      await bot.config.debug_hook.send("Cannot find 100 days of code channel.");
+      await bot.config.debugHook.send("Cannot find 100 days of code channel.");
       return;
     }
 
@@ -26,7 +26,7 @@ Heya <@&1189043630489473074> friends! This is your daily reminder to post your p
 - Want to chat with your fellow developers? Head over to https://canary.discord.com/channels/692816967895220344/693145545878929499!
 - Make sure to encourage and support your fellow https://canary.discord.com/channels/692816967895220344/697124514982527086 participants!
 
-To opt in/out of these notifications, visit <id:customize>.`,
+To opt in/out of these notifications, visit <id:customize>.`
     });
   } catch (err) {
     await errorHandler(bot, err);

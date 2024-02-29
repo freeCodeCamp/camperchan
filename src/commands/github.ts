@@ -14,7 +14,7 @@ const handlers: { [key: string]: Subcommand } = {
   close: handleClose,
   comment: handleComment,
   "add-labels": handleAddLabels,
-  "sync-labels": handleSyncLabels,
+  "sync-labels": handleSyncLabels
 };
 
 export const github: Command = {
@@ -157,5 +157,5 @@ export const github: Command = {
     } catch (err) {
       await errorHandler(bot, err);
     }
-  },
+  }
 };

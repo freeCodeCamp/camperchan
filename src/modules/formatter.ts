@@ -8,9 +8,12 @@ import stripAnsi from "strip-ansi";
  * @returns {string} The formatted code or a code-block showing
  * where syntax error ocurred.
  */
-export function formatter(unformattedCode: string, language: string): string {
+export async function formatter(
+  unformattedCode: string,
+  language: string
+): Promise<string> {
   const options: Options = {
-    trailingComma: "none",
+    trailingComma: "none"
   };
 
   switch (language) {
@@ -22,6 +25,9 @@ export function formatter(unformattedCode: string, language: string): string {
       break;
     case "js":
       options.parser = "babel";
+      break;
+    case "ts":
+      options.parser = "typescript";
       break;
     case "json":
       options.parser = "json";
@@ -37,7 +43,7 @@ export function formatter(unformattedCode: string, language: string): string {
   let formattedCode = "";
 
   try {
-    formattedCode = format(unformattedCode, options);
+    formattedCode = await format(unformattedCode, options);
   } catch (err) {
     // When formatting code, if Prettier's parser detects a syntax error, it stops parsing
     // and throws an error message showing where a syntax error was occurred. We want

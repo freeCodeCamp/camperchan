@@ -2,7 +2,7 @@ import {
   REST,
   RESTPostAPIApplicationCommandsJSONBody,
   RESTPostAPIChatInputApplicationCommandsJSONBody,
-  Routes,
+  Routes
 } from "discord.js";
 
 import { Camperbot } from "../interfaces/Camperbot";
@@ -35,7 +35,7 @@ export const registerCommands = async (
     Bot.contexts.forEach((context) => commandData.push(context.data));
     logHandler.log("debug", "registering to home guild only");
     await rest.put(
-      Routes.applicationGuildCommands(Bot.config.bot_id, Bot.config.home_guild),
+      Routes.applicationGuildCommands(Bot.config.botId, Bot.config.homeGuild),
       { body: commandData }
     );
     return rest;

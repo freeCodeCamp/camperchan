@@ -5,6 +5,7 @@ import { Camperbot } from "../interfaces/Camperbot";
 import { Context } from "../interfaces/Context";
 
 import { errorHandler } from "./errorHandler";
+import { logHandler } from "./logHandler";
 
 /**
  * Reads the `/contexts` directory and dynamically imports the files,
@@ -22,6 +23,10 @@ export const loadContexts = async (Bot: Camperbot): Promise<Context[]> => {
     );
     for (const file of files) {
       const name = file.split(".")[0];
+      if (!name) {
+        logHandler.error(`Cannot find name from ${file}.`);
+        continue;
+      }
       const mod = await import(join(process.cwd() + `/dist/contexts/${file}`));
       result.push(mod[name] as Context);
     }

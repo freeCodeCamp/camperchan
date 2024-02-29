@@ -2,7 +2,7 @@ import { assert } from "chai";
 
 import {
   calculateMilliseconds,
-  isValidTimeUnit,
+  isValidTimeUnit
 } from "../../src/utils/calculateMilliseconds";
 
 suite("calculateMilliseconds", () => {

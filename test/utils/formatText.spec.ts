@@ -25,7 +25,7 @@ suite("formatTextToTable", () => {
   test("given 2d empty array, with separate defined headers, returns headers", () =>
     assert.deepEqual(
       formatTextToTable([], {
-        headers: ["one", "two"],
+        headers: ["one", "two"]
       }),
       "one | two\n---------",
       "did not return headers"
@@ -34,7 +34,7 @@ suite("formatTextToTable", () => {
     assert.deepEqual(
       formatTextToTable([], {
         headers: ["one", "two"],
-        columnDelimiter: "l",
+        columnDelimiter: "l"
       }),
       "one l two\n---------",
       "did not return headers"
@@ -44,11 +44,11 @@ suite("formatTextToTable", () => {
       formatTextToTable(
         [
           ["chicken", "egg"],
-          ["true", "false"],
+          ["true", "false"]
         ],
         {
           headers: ["one", "two"],
-          columnDelimiter: "l",
+          columnDelimiter: "l"
         }
       ),
       "one     l two  \n---------------\nchicken l egg  \ntrue    l false",
@@ -57,7 +57,7 @@ suite("formatTextToTable", () => {
   test("given 2d empty array, with empty separate defined headers, returns empty string", () =>
     assert.deepEqual(
       formatTextToTable([[]], {
-        headers: [],
+        headers: []
       }),
       "",
       "did not return empty string"
@@ -67,11 +67,11 @@ suite("formatTextToTable", () => {
       formatTextToTable(
         [
           ["brad", "100"],
-          ["foo", "50"],
+          ["foo", "50"]
         ],
         {
           headers: ["name", "score"],
-          rowDelimiter: "_",
+          rowDelimiter: "_"
         }
       ),
       "name | score\n____________\nbrad | 100  \nfoo  | 50   ",
@@ -82,10 +82,10 @@ suite("formatTextToTable", () => {
       formatTextToTable(
         [
           ["brad", "100"],
-          ["foo", "bar"],
+          ["foo", "bar"]
         ],
         {
-          headers: ["name", "aggeeeeeeeee"],
+          headers: ["name", "aggeeeeeeeee"]
         }
       ),
       "name | aggeeeeeeeee\n-------------------\nbrad | 100         \nfoo  | bar         ",

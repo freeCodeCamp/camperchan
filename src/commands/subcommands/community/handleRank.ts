@@ -18,15 +18,15 @@ export const handleRank: Subcommand = {
 
       const record = await Bot.db.levels.findUnique({
         where: {
-          userId: target,
-        },
+          userId: target
+        }
       });
 
       if (!record) {
         await interaction.editReply({
           content: isSelf
             ? "You haven't earned any levels yet. You should interact with the community more!"
-            : "They haven't earned any levels yet. Try reaching out to them!",
+            : "They haven't earned any levels yet. Try reaching out to them!"
         });
         return;
       }
@@ -37,24 +37,24 @@ export const handleRank: Subcommand = {
         {
           name: "Experience",
           value: record.points.toString(),
-          inline: true,
+          inline: true
         },
         {
           name: "Level",
           value: record.level.toString(),
-          inline: true,
+          inline: true
         },
         {
           name: "Last Seen",
-          value: `${new Date(record.lastSeen).toLocaleDateString()}`,
-        },
+          value: `${new Date(record.lastSeen).toLocaleDateString()}`
+        }
       ]);
 
       await interaction.editReply({
-        embeds: [levelEmbed],
+        embeds: [levelEmbed]
       });
     } catch (err) {
       await errorHandler(Bot, err);
     }
-  },
+  }
 };
