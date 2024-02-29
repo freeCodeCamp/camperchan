@@ -51,7 +51,8 @@ export const formatTextToTable = (
   const columnWidths = rows.reduce((acc: number[], row) => {
     row.forEach((column, index) => {
       const currentColumnLength = toStr(column).length;
-      if (currentColumnLength > acc[index]) {
+      const curr = acc[index];
+      if (curr && currentColumnLength > curr) {
         acc[index] = currentColumnLength;
       }
     });
@@ -72,11 +73,13 @@ export const formatTextToTable = (
 
   const dataStr = rows.map((row) =>
     row
-      .map((column, index) => toStr(column).padEnd(columnWidths[index], " "))
+      .map((column, index) =>
+        toStr(column).padEnd(columnWidths[index] ?? 0, " ")
+      )
       .join(` ${columnDelimiter} `)
   );
   const headersStr = headers
-    .map((header, index) => header.padEnd(columnWidths[index]))
+    .map((header, index) => header.padEnd(columnWidths[index] ?? 0))
     .join(` ${columnDelimiter} `);
 
   return [

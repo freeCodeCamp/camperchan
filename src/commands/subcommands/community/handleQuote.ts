@@ -13,9 +13,11 @@ export const handleQuote: Subcommand = {
       const randomComp = Math.floor(Math.random() * compliments.length);
       const randomQuote = Math.floor(Math.random() * quotes.length);
       const quoteEmbed = new EmbedBuilder()
-        .setTitle(compliments[randomComp])
-        .setDescription(quotes[randomQuote].quote)
-        .setFooter({ text: quotes[randomQuote].author });
+        .setTitle(compliments[randomComp] ?? "No data found")
+        .setDescription(
+          quotes[randomQuote]?.quote ?? "I probably broke something again."
+        )
+        .setFooter({ text: quotes[randomQuote]?.author ?? "Naomi Carrigan" });
       await interaction.editReply({ embeds: [quoteEmbed] });
     } catch (err) {
       await errorHandler(Bot, err);

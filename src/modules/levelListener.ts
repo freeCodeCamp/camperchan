@@ -45,7 +45,7 @@ export const levelListener = async (Bot: Camperbot, message: Message) => {
     user.cooldown = Date.now();
     let levelUp = false;
 
-    while (user.points > levelScale[user.level + 1]) {
+    while (user.points > (levelScale[user.level + 1] ?? 505000)) {
       user.level++;
       levelUp = true;
     }
