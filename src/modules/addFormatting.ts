@@ -11,7 +11,7 @@ import { isSupportedByPrettier } from "./isSupportedByPrettier";
  * @param {Message} message The message payload from Discord.
  * @returns {string} The formatted message content.
  */
-export function addFormatting(message: Message): string {
+export async function addFormatting(message: Message): Promise<string> {
   const { content } = message;
 
   const checkForLanguages = [
@@ -48,7 +48,7 @@ export function addFormatting(message: Message): string {
   }
   const supportedLanguage = isSupportedByPrettier(languageGuesses[0] || "");
   if (supportedLanguage) {
-    const formattedCode = formatter(content, supportedLanguage);
+    const formattedCode = await formatter(content, supportedLanguage);
     return formatCodeBlock(supportedLanguage, formattedCode);
   }
   return formatCodeBlock(languageGuesses[0] || "", content);
