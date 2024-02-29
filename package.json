@@ -39,7 +39,7 @@
     "@types/chai": "4.3.12",
     "@types/diff": "5.0.9",
     "@types/mocha": "10.0.6",
-    "@types/node": "20.11.22",
+    "@types/node": "20.11.23",
     "@types/node-schedule": "2.1.6",
     "@types/prettier": "2.7.3",
     "@types/string-similarity": "4.0.2",
