@@ -25,7 +25,7 @@ export function addFormatting(message: Message): string {
     "Python",
     "Markdown",
     "JSON",
-    "HTTP",
+    "HTTP"
   ];
 
   const languageGuesses = [];

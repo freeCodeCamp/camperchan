@@ -12,9 +12,9 @@ suite("registerCommands", () => {
   });
   test("registers the command payload", async () => {
     const bot = {
-      config: { token: "hi", home_guild: "home", bot_id: "user" },
+      config: { token: "hi", homeGuild: "home", botId: "user" },
       commands: [],
-      contexts: [],
+      contexts: []
     };
     await loadCommands(bot as never);
     const result = (await registerCommands(

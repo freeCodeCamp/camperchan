@@ -55,5 +55,5 @@ export const Languages = [
   "Uzbek",
   "Vietnamese",
   "Yoruba",
-  "Zulu",
+  "Zulu"
 ];

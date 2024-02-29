@@ -3,7 +3,7 @@ import {
   ButtonBuilder,
   ButtonStyle,
   PermissionFlagsBits,
-  Role,
+  Role
 } from "discord.js";
 
 import { Subcommand } from "../../../interfaces/Subcommand";
@@ -27,7 +27,7 @@ export const handleRole: Subcommand = {
         interaction.options.getRole("role2"),
         interaction.options.getRole("role3"),
         interaction.options.getRole("role4"),
-        interaction.options.getRole("role5"),
+        interaction.options.getRole("role5")
       ].filter((el) => el) as Role[];
 
       const dividedRoles: Role[][] = [];
@@ -51,11 +51,11 @@ export const handleRole: Subcommand = {
       await interaction.editReply({ content: "I've created the role post!" });
       await channel.send({
         content: title,
-        components,
+        components
       });
     } catch (err) {
       await errorHandler(Bot, err);
       await interaction.editReply("Something went wrong.");
     }
-  },
+  }
 };

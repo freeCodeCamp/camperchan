@@ -72,12 +72,12 @@ export const handleInteractionCreate = async (
               ...embed.fields,
               {
                 name: "Acknowledged by",
-                value: `<@!${interaction.user.id}>`,
-              },
-            ],
-          },
+                value: `<@!${interaction.user.id}>`
+              }
+            ]
+          }
         ],
-        components: [],
+        components: []
       });
     }
   }
@@ -98,15 +98,15 @@ export const handleInteractionCreate = async (
               ...embed.fields,
               {
                 name: "Reason",
-                value: reason,
-              },
-            ],
-          },
-        ],
+                value: reason
+              }
+            ]
+          }
+        ]
       });
       await interaction.reply({
         content: "Thank you for reporting!",
-        ephemeral: true,
+        ephemeral: true
       });
     }
   }

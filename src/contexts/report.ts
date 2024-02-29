@@ -7,7 +7,7 @@ import {
   ActionRowBuilder,
   TextInputBuilder,
   TextInputStyle,
-  ModalBuilder,
+  ModalBuilder
 } from "discord.js";
 
 import { Context } from "../interfaces/Context";
@@ -16,7 +16,7 @@ import { errorHandler } from "../utils/errorHandler";
 export const report: Context = {
   data: {
     name: "report",
-    type: ApplicationCommandType.Message,
+    type: ApplicationCommandType.Message
   },
   run: async (Bot, interaction) => {
     try {
@@ -24,7 +24,7 @@ export const report: Context = {
       if (!guild) {
         await interaction.reply({
           content: "You cannot report DM messages!",
-          ephemeral: true,
+          ephemeral: true
         });
         return;
       }
@@ -33,7 +33,7 @@ export const report: Context = {
       if (!message) {
         await interaction.reply({
           content: `The message could not be loaded. Please try again. If the issue persists, ping <@!465650873650118659>`,
-          ephemeral: true,
+          ephemeral: true
         });
         return;
       }
@@ -53,7 +53,7 @@ export const report: Context = {
         .setEmoji("✅");
       const row = new ActionRowBuilder<ButtonBuilder>().addComponents([
         linkButton,
-        acknowledgeButton,
+        acknowledgeButton
       ]);
 
       const reportEmbed = new EmbedBuilder();
@@ -61,23 +61,23 @@ export const report: Context = {
       reportEmbed.setDescription(message.content.slice(0, 4000));
       reportEmbed.setAuthor({
         name: author.tag,
-        iconURL: author.displayAvatarURL(),
+        iconURL: author.displayAvatarURL()
       });
       reportEmbed.addFields(
         { name: "Channel", value: `<#${message.channel.id}>`, inline: true },
         {
           name: "Reported By",
           value: `<@${interaction.user.id}>`,
-          inline: true,
+          inline: true
         }
       );
       reportEmbed.setFooter({
-        text: `ID: ${author.id}`,
+        text: `ID: ${author.id}`
       });
 
       const log = await reportChannel.send({
         embeds: [reportEmbed],
-        components: [row],
+        components: [row]
       });
 
       const reason = new TextInputBuilder()
@@ -96,5 +96,5 @@ export const report: Context = {
     } catch (err) {
       await errorHandler(Bot, err);
     }
-  },
+  }
 };

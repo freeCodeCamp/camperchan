@@ -6,6 +6,12 @@
       "rules": {
         "require-await": "off"
       }
+    },
+    {
+      "files": ["src/commands/subcommands/github/*.ts"],
+      "rules": {
+        "camelcase": ["error", { "allow": ["issue_number"] }]
+      }
     }
   ]
 }

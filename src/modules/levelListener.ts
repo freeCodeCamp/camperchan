@@ -22,7 +22,7 @@ export const levelListener = async (Bot: Camperbot, message: Message) => {
     const pointsEarned = Math.floor(Math.random() * (20 + bonus)) + 5;
     const user = await Bot.db.levels.upsert({
       where: {
-        userId: author.id,
+        userId: author.id
       },
       update: {},
       create: {
@@ -31,8 +31,8 @@ export const levelListener = async (Bot: Camperbot, message: Message) => {
         points: 0,
         level: 0,
         lastSeen: new Date(Date.now()),
-        cooldown: 0,
-      },
+        cooldown: 0
+      }
     });
 
     if (Date.now() - user.cooldown < 60000 || user.level >= 100) {
@@ -52,20 +52,20 @@ export const levelListener = async (Bot: Camperbot, message: Message) => {
 
     await Bot.db.levels.update({
       where: {
-        userId: author.id,
+        userId: author.id
       },
       data: {
         points: user.points,
         level: user.level,
         lastSeen: user.lastSeen,
         userTag: user.userTag,
-        cooldown: user.cooldown,
-      },
+        cooldown: user.cooldown
+      }
     });
 
     if (levelUp) {
       await message.reply({
-        content: `Congrats~! You are now level ${user.level}!!!`,
+        content: `Congrats~! You are now level ${user.level}!!!`
       });
     }
   } catch (err) {

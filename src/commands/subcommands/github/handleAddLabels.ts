@@ -8,7 +8,7 @@ export const handleAddLabels: Subcommand = {
     [
       PermissionFlagsBits.ModerateMembers,
       PermissionFlagsBits.KickMembers,
-      PermissionFlagsBits.BanMembers,
+      PermissionFlagsBits.BanMembers
     ].some((p) => member.permissions.has(p)),
   execute: async (Bot, interaction) => {
     try {
@@ -22,13 +22,13 @@ export const handleAddLabels: Subcommand = {
         owner: "freeCodeCamp",
         issue_number: number,
         repo,
-        labels: labelNames,
+        labels: labelNames
       });
 
       await interaction.editReply({
         content: `[Issue labels](<https://github.com/freeCodeCamp/${repo}/issues/${number}>) have been added: ${labelNames.join(
           ", "
-        )}`,
+        )}`
       });
     } catch (err) {
       await errorHandler(Bot, err);
@@ -39,5 +39,5 @@ export const handleAddLabels: Subcommand = {
         }`
       );
     }
-  },
+  }
 };

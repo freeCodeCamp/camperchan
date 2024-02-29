@@ -8,7 +8,7 @@ export const handleHistory: Subcommand = {
     [
       PermissionFlagsBits.ModerateMembers,
       PermissionFlagsBits.KickMembers,
-      PermissionFlagsBits.BanMembers,
+      PermissionFlagsBits.BanMembers
     ].some((p) => member.permissions.has(p)),
   execute: async (Bot, interaction) => {
     try {
@@ -17,13 +17,13 @@ export const handleHistory: Subcommand = {
 
       const targetRecord = await Bot.db.histories.findUnique({
         where: {
-          userId: target.id,
-        },
+          userId: target.id
+        }
       });
 
       if (!targetRecord) {
         await interaction.editReply({
-          content: "That user is absolutely squeaky clean!",
+          content: "That user is absolutely squeaky clean!"
         });
         return;
       }
@@ -36,41 +36,41 @@ export const handleHistory: Subcommand = {
         {
           name: "Bans",
           value: String(targetRecord.bans || 0),
-          inline: true,
+          inline: true
         },
         {
           name: "Kicks",
           value: String(targetRecord.kicks || 0),
-          inline: true,
+          inline: true
         },
         {
           name: "Mutes",
           value: String(targetRecord.mutes || 0),
-          inline: true,
+          inline: true
         },
         {
           name: "Warnings",
           value: String(targetRecord.warns || 0),
-          inline: true,
+          inline: true
         },
         {
           name: "Unmutes",
           value: String(targetRecord.unmutes || 0),
-          inline: true,
+          inline: true
         },
         {
           name: "Unbans",
           value: String(targetRecord.unbans || 0),
-          inline: true,
+          inline: true
         }
       );
 
       await interaction.editReply({
-        embeds: [embed],
+        embeds: [embed]
       });
     } catch (err) {
       await errorHandler(Bot, err);
       await interaction.editReply("Something went wrong.");
     }
-  },
+  }
 };

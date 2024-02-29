@@ -2,7 +2,7 @@ import {
   ButtonInteraction,
   ChannelType,
   EmbedBuilder,
-  PermissionFlagsBits,
+  PermissionFlagsBits
 } from "discord.js";
 
 import { Camperbot } from "../interfaces/Camperbot";
@@ -44,10 +44,10 @@ export const closePrivateChannel = async (
     logEmbed.setDescription(`Channel closed by ${member.user.username}`);
     logEmbed.addFields({
       name: "User",
-      value: channel.name.split("-").slice(1).join("-") || "Unknown",
+      value: channel.name.split("-").slice(1).join("-") || "Unknown"
     });
     const logFile = await generateLogs(Bot, channel.id);
-    await Bot.config.mod_hook.send({ embeds: [logEmbed], files: [logFile] });
+    await Bot.config.modHook.send({ embeds: [logEmbed], files: [logFile] });
     await channel.delete();
   } catch (err) {
     await errorHandler(Bot, err);

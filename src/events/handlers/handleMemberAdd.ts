@@ -22,15 +22,15 @@ export const handleMemberAdd = async (
     embed.setDescription(`<@!${member.id}> has joined the server~!`);
     embed.setAuthor({
       name: member.user.tag,
-      iconURL: member.user.displayAvatarURL(),
+      iconURL: member.user.displayAvatarURL()
     });
     embed.setFooter({
-      text: `ID: ${member.id}`,
+      text: `ID: ${member.id}`
     });
-    await Bot.config.welcome_hook.send({
+    await Bot.config.welcomeHook.send({
       embeds: [embed],
       username: member.user.username,
-      avatarURL: member.user.displayAvatarURL(),
+      avatarURL: member.user.displayAvatarURL()
     });
   } catch (err) {
     await errorHandler(Bot, err);

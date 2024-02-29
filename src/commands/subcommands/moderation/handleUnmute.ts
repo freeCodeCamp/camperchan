@@ -52,30 +52,30 @@ export const handleUnmute: Subcommand = {
       muteEmbed.addFields(
         {
           name: "Reason",
-          value: customSubstring(reason, 1000),
+          value: customSubstring(reason, 1000)
         },
         {
           name: "User Notified?",
-          value: String(sentNotice),
+          value: String(sentNotice)
         }
       );
       muteEmbed.setTimestamp();
       muteEmbed.setAuthor({
         name: target.tag,
-        iconURL: target.displayAvatarURL(),
+        iconURL: target.displayAvatarURL()
       });
       muteEmbed.setFooter({
-        text: `ID: ${target.id}`,
+        text: `ID: ${target.id}`
       });
 
-      await Bot.config.mod_hook.send({ embeds: [muteEmbed] });
+      await Bot.config.modHook.send({ embeds: [muteEmbed] });
 
       await interaction.editReply({
-        content: "That user has been unmuted.",
+        content: "That user has been unmuted."
       });
     } catch (err) {
       await errorHandler(Bot, err);
       await interaction.editReply("Something went wrong!");
     }
-  },
+  }
 };

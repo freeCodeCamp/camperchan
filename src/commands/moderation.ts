@@ -21,7 +21,7 @@ const handlers: { [key: string]: Subcommand } = {
   prune: handlePrune,
   unban: handleUnban,
   unmute: handleUnmute,
-  warn: handleWarn,
+  warn: handleWarn
 };
 
 export const moderation: Command = {
@@ -98,19 +98,19 @@ export const moderation: Command = {
             .addChoices(
               {
                 name: "Minutes",
-                value: "minutes",
+                value: "minutes"
               },
               {
                 name: "Hours",
-                value: "hours",
+                value: "hours"
               },
               {
                 name: "Days",
-                value: "days",
+                value: "days"
               },
               {
                 name: "Weeks",
-                value: "weeks",
+                value: "weeks"
               }
             )
         )
@@ -200,5 +200,5 @@ export const moderation: Command = {
     } catch (err) {
       await errorHandler(bot, err);
     }
-  },
+  }
 };

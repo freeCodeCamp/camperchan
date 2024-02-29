@@ -7,7 +7,7 @@ import { errorHandler } from "../utils/errorHandler";
 export const format: Context = {
   data: {
     name: "format",
-    type: ApplicationCommandType.Message,
+    type: ApplicationCommandType.Message
   },
   run: async (Bot, interaction) => {
     try {
@@ -19,5 +19,5 @@ export const format: Context = {
       await errorHandler(Bot, err);
       await interaction.editReply("Something went wrong.");
     }
-  },
+  }
 };

@@ -3,7 +3,7 @@ import {
   ComponentType,
   GuildMember,
   Message,
-  StringSelectMenuBuilder,
+  StringSelectMenuBuilder
 } from "discord.js";
 
 import { Tags } from "../config/Tags";
@@ -14,7 +14,7 @@ import { isModerator } from "../utils/isModerator";
 export const snippet: Context = {
   data: {
     name: "snippet",
-    type: 3,
+    type: 3
   },
   run: async (bot, interaction) => {
     try {
@@ -24,7 +24,7 @@ export const snippet: Context = {
         !isModerator(interaction.member as GuildMember)
       ) {
         await interaction.editReply({
-          content: "Only moderators may use this command.",
+          content: "Only moderators may use this command."
         });
         return;
       }
@@ -38,7 +38,7 @@ export const snippet: Context = {
         .addOptions(
           ...Tags.map(({ name }) => ({
             label: name,
-            value: name,
+            value: name
           }))
         )
         .setMaxValues(1)
@@ -49,12 +49,12 @@ export const snippet: Context = {
 
       const response = await interaction.editReply({
         content: "Which snippet would you like to send?",
-        components: [row],
+        components: [row]
       });
 
       const collector =
         response.createMessageComponentCollector<ComponentType.StringSelect>({
-          time: 1000 * 60 * 60,
+          time: 1000 * 60 * 60
         });
 
       collector.on("collect", async (selection) => {
@@ -63,16 +63,16 @@ export const snippet: Context = {
         const target = Tags.find((t) => t.name === name);
         if (!target) {
           await selection.editReply({
-            content: `Cannot find a snippet with the name ${name}.`,
+            content: `Cannot find a snippet with the name ${name}.`
           });
           return;
         }
         await message.reply({
-          content: target.message,
+          content: target.message
         });
         await interaction.editReply({
           content: "Response sent!",
-          components: [],
+          components: []
         });
       });
 
@@ -84,12 +84,12 @@ export const snippet: Context = {
          */
         await interaction
           .editReply({
-            components: [],
+            components: []
           })
           .catch(() => null);
       });
     } catch (err) {
       await errorHandler(bot, err);
     }
-  },
+  }
 };

@@ -15,10 +15,10 @@ export const logHandler = createLogger({
   transports: [new transports.Console()],
   format: combine(
     timestamp({
-      format: "YYYY-MM-DD HH:mm:ss",
+      format: "YYYY-MM-DD HH:mm:ss"
     }),
     colorize(),
     printf((info) => `${info.level}: ${[info.timestamp]}: ${info.message}`)
   ),
-  exitOnError: false,
+  exitOnError: false
 });

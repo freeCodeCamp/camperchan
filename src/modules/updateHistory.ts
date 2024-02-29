@@ -17,12 +17,12 @@ export const updateHistory = async (
   try {
     await Bot.db.histories.upsert({
       where: {
-        userId,
+        userId
       },
       update: {
         [`${action}s`]: {
-          increment: 1,
-        },
+          increment: 1
+        }
       },
       create: {
         userId,
@@ -32,8 +32,8 @@ export const updateHistory = async (
         unmutes: 0,
         warns: 0,
         unbans: 0,
-        [`${action}s`]: 1,
-      },
+        [`${action}s`]: 1
+      }
     });
   } catch (err) {
     await errorHandler(Bot, err);

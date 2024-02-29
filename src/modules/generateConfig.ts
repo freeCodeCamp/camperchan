@@ -5,7 +5,7 @@ import { Camperbot } from "../interfaces/Camperbot";
 /**
  * Bootstraps the config from the ENV into the Bot's instance.
  *
- * @returns The bot's config.
+ * @returns {Camperbot["config"]} The bot's config.
  */
 export const generateConfig = (): Camperbot["config"] => {
   if (
@@ -24,16 +24,16 @@ export const generateConfig = (): Camperbot["config"] => {
   }
   return {
     token: process.env.TOKEN,
-    mongo_uri: process.env.MONGO_URI,
-    debug_hook: new WebhookClient({ url: process.env.DEBUG_HOOK }),
-    mod_hook: new WebhookClient({ url: process.env.MOD_HOOK }),
-    message_hook: new WebhookClient({ url: process.env.MESSAGE_HOOK }),
-    welcome_hook: new WebhookClient({ url: process.env.WELCOME_HOOK }),
-    home_guild: process.env.HOME_GUILD,
-    bot_id: process.env.BOT_ID,
-    mod_role: process.env.MOD_ROLE || "no role set",
-    private_category: process.env.PRIVATE_CATEGORY || "no category set",
-    report_channel: process.env.REPORT_CHANNEL,
-    githubToken: process.env.GITHUB_TOKEN,
+    mongoUrl: process.env.MONGO_URI,
+    debugHook: new WebhookClient({ url: process.env.DEBUG_HOOK }),
+    modHook: new WebhookClient({ url: process.env.MOD_HOOK }),
+    messageHook: new WebhookClient({ url: process.env.MESSAGE_HOOK }),
+    welcomeHook: new WebhookClient({ url: process.env.WELCOME_HOOK }),
+    homeGuild: process.env.HOME_GUILD,
+    botId: process.env.BOT_ID,
+    modRole: process.env.MOD_ROLE || "no role set",
+    privateCategory: process.env.PRIVATE_CATEGORY || "no category set",
+    reportChannel: process.env.REPORT_CHANNEL,
+    githubToken: process.env.GITHUB_TOKEN
   };
 };

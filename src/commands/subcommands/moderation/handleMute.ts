@@ -5,7 +5,7 @@ import { sendModerationDm } from "../../../modules/sendModerationDm";
 import { updateHistory } from "../../../modules/updateHistory";
 import {
   calculateMilliseconds,
-  isValidTimeUnit,
+  isValidTimeUnit
 } from "../../../utils/calculateMilliseconds";
 import { customSubstring } from "../../../utils/customSubstring";
 import { errorHandler } from "../../../utils/errorHandler";
@@ -24,7 +24,7 @@ export const handleMute: Subcommand = {
 
       if (!isValidTimeUnit(durationUnit)) {
         await interaction.editReply({
-          content: `${durationUnit} is not a valid duration unit.`,
+          content: `${durationUnit} is not a valid duration unit.`
         });
         return;
       }
@@ -36,14 +36,14 @@ export const handleMute: Subcommand = {
 
       if (!durationMilliseconds) {
         await interaction.editReply({
-          content: `${duration}${durationUnit} is not a valid duration.`,
+          content: `${duration}${durationUnit} is not a valid duration.`
         });
         return;
       }
 
       if (durationMilliseconds > 2419200000) {
         await interaction.editReply({
-          content: "You cannot mute someone for longer than a month.",
+          content: "You cannot mute someone for longer than a month."
         });
         return;
       }
@@ -84,34 +84,34 @@ export const handleMute: Subcommand = {
       muteEmbed.addFields(
         {
           name: "Reason",
-          value: customSubstring(reason, 1000),
+          value: customSubstring(reason, 1000)
         },
         {
           name: "Duration",
-          value: `${duration} ${durationUnit}`,
+          value: `${duration} ${durationUnit}`
         },
         {
           name: "User Notified?",
-          value: String(sentNotice),
+          value: String(sentNotice)
         }
       );
       muteEmbed.setTimestamp();
       muteEmbed.setAuthor({
         name: target.tag,
-        iconURL: target.displayAvatarURL(),
+        iconURL: target.displayAvatarURL()
       });
       muteEmbed.setFooter({
-        text: `ID: ${target.id}`,
+        text: `ID: ${target.id}`
       });
 
-      await Bot.config.mod_hook.send({ embeds: [muteEmbed] });
+      await Bot.config.modHook.send({ embeds: [muteEmbed] });
 
       await interaction.editReply({
-        content: "They have been muted!",
+        content: "They have been muted!"
       });
     } catch (err) {
       await errorHandler(Bot, err);
       await interaction.editReply("Something went wrong.");
     }
-  },
+  }
 };

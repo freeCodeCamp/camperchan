@@ -1,6 +1,6 @@
 import {
   SlashCommandBuilder,
-  SlashCommandSubcommandsOnlyBuilder,
+  SlashCommandSubcommandsOnlyBuilder
 } from "discord.js";
 
 import { Camperbot } from "./Camperbot";

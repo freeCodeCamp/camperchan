@@ -26,7 +26,7 @@ class History {
 
   public async upsert(options) {
     const exists = await this.findUnique({
-      where: { userId: options.where.userId },
+      where: { userId: options.where.userId }
     });
     if (exists) {
       for (const key of Object.keys(options.update)) {
@@ -44,7 +44,7 @@ class History {
 
   public async update(options) {
     const exists = await this.findUnique({
-      where: { userId: options.where.userId },
+      where: { userId: options.where.userId }
     });
     if (!exists) {
       throw new Error("User not found");
@@ -81,7 +81,7 @@ class Level {
 
   public async upsert(options) {
     const exists = await this.findUnique({
-      where: { userId: options.where.userId },
+      where: { userId: options.where.userId }
     });
     if (exists) {
       for (const key of Object.keys(options.update)) {
@@ -99,7 +99,7 @@ class Level {
 
   public async update(options) {
     const exists = await this.findUnique({
-      where: { userId: options.where.userId },
+      where: { userId: options.where.userId }
     });
     if (!exists) {
       throw new Error("User not found");

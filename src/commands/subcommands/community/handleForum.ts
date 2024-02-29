@@ -20,7 +20,7 @@ export const handleForum: Subcommand = {
           name: `${el.title}`,
           value: `[${el.last_poster_username} replied on ${new Date(
             el.last_posted_at
-          ).toLocaleString()}](https://forum.freecodecamp.org/t/${el.id})`,
+          ).toLocaleString()}](https://forum.freecodecamp.org/t/${el.id})`
         })
       );
       await interaction.editReply({ embeds: [forumEmbed] });
@@ -28,5 +28,5 @@ export const handleForum: Subcommand = {
       await errorHandler(Bot, err);
       await interaction.editReply("Something went wrong.");
     }
-  },
+  }
 };

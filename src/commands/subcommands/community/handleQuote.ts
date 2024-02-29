@@ -21,5 +21,5 @@ export const handleQuote: Subcommand = {
       await errorHandler(Bot, err);
       await interaction.editReply("Something went wrong.");
     }
-  },
+  }
 };

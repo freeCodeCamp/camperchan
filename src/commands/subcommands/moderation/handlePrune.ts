@@ -12,7 +12,7 @@ export const handlePrune: Subcommand = {
       const { channel } = interaction;
       if (!channel || channel.type !== ChannelType.GuildText) {
         await interaction.editReply({
-          content: "Must be done in a text channel.",
+          content: "Must be done in a text channel."
         });
         return;
       }
@@ -26,5 +26,5 @@ export const handlePrune: Subcommand = {
       await errorHandler(Bot, err);
       await interaction.editReply("Something went wrong.");
     }
-  },
+  }
 };

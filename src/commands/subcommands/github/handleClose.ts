@@ -3,7 +3,7 @@ import { PermissionFlagsBits } from "discord.js";
 import {
   IssueClose,
   PullClose,
-  PullComments,
+  PullComments
 } from "../../../config/PullComments";
 import { Subcommand } from "../../../interfaces/Subcommand";
 import { errorHandler } from "../../../utils/errorHandler";
@@ -20,7 +20,7 @@ export const handleClose: Subcommand = {
     [
       PermissionFlagsBits.ModerateMembers,
       PermissionFlagsBits.KickMembers,
-      PermissionFlagsBits.BanMembers,
+      PermissionFlagsBits.BanMembers
     ].some((p) => member.permissions.has(p)),
   execute: async (Bot, interaction) => {
     try {
@@ -34,14 +34,14 @@ export const handleClose: Subcommand = {
         .get({
           owner: "freeCodeCamp",
           repo,
-          issue_number: number,
+          issue_number: number
         })
         .catch(() => null);
 
       if (!data) {
         await interaction.editReply({
           content:
-            "There was an error fetching that issue or pull request. Please try again later.",
+            "There was an error fetching that issue or pull request. Please try again later."
         });
         return;
       }
@@ -49,7 +49,7 @@ export const handleClose: Subcommand = {
         await interaction.editReply({
           content: `The [${
             data.data.pull_request ? "pull request" : "issue"
-          }](<${data.data.html_url}>) is already closed.`,
+          }](<${data.data.html_url}>) is already closed.`
         });
         return;
       }
@@ -58,26 +58,26 @@ export const handleClose: Subcommand = {
         owner: "freeCodeCamp",
         repo,
         issue_number: number,
-        body: commentBody(isPull, comment),
+        body: commentBody(isPull, comment)
       });
       await Bot.octokit.issues.update({
         owner: "freeCodeCamp",
         repo,
         issue_number: number,
-        state: "closed",
+        state: "closed"
       });
       if (isPull && isSpam) {
         await Bot.octokit.issues.addLabels({
           owner: "freeCodeCamp",
           repo,
           issue_number: number,
-          labels: ["spam"],
+          labels: ["spam"]
         });
       }
       await interaction.editReply({
         content: `Successfully closed the [${
           isPull ? "pull request" : "issue"
-        }](<${data.data.html_url}>).`,
+        }](<${data.data.html_url}>).`
       });
     } catch (err) {
       await errorHandler(Bot, err);
@@ -88,5 +88,5 @@ export const handleClose: Subcommand = {
         }`
       );
     }
-  },
+  }
 };

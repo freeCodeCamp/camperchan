@@ -9,7 +9,7 @@ import { handleRole } from "./subcommands/management/handleRole";
 
 const handlers: { [key: string]: Subcommand } = {
   private: handlePrivate,
-  role: handleRole,
+  role: handleRole
 };
 
 export const management: Command = {
@@ -80,5 +80,5 @@ export const management: Command = {
     } catch (err) {
       await errorHandler(bot, err);
     }
-  },
+  }
 };

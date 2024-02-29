@@ -19,7 +19,7 @@ const handlers: { [key: string]: Subcommand } = {
   leaderboard: handleLeaderboard,
   quote: handleQuote,
   rank: handleRank,
-  truism: handleTruism,
+  truism: handleTruism
 };
 
 export const community: Command = {
@@ -88,5 +88,5 @@ export const community: Command = {
     } catch (err) {
       await errorHandler(bot, err);
     }
-  },
+  }
 };

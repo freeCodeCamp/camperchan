@@ -1,7 +1,7 @@
 import { assert } from "chai";
 import {
   ApplicationCommandOptionType,
-  SlashCommandSubcommandBuilder,
+  SlashCommandSubcommandBuilder
 } from "discord.js";
 
 import { github } from "../../src/commands/github";

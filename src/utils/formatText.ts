@@ -82,7 +82,7 @@ export const formatTextToTable = (
   return [
     headersStr,
     rowSeparatorStr,
-    ...(hasInferredHeaders ? dataStr.slice(1) : dataStr),
+    ...(hasInferredHeaders ? dataStr.slice(1) : dataStr)
   ]
     .filter((_) => _)
     .join("\n");

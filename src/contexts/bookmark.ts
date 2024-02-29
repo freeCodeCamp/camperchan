@@ -4,7 +4,7 @@ import {
   ButtonBuilder,
   EmbedBuilder,
   ButtonStyle,
-  ApplicationCommandType,
+  ApplicationCommandType
 } from "discord.js";
 
 import { Context } from "../interfaces/Context";
@@ -13,7 +13,7 @@ import { errorHandler } from "../utils/errorHandler";
 export const bookmark: Context = {
   data: {
     name: "bookmark",
-    type: ApplicationCommandType.Message,
+    type: ApplicationCommandType.Message
   },
   run: async (Bot, interaction): Promise<void> => {
     try {
@@ -32,7 +32,7 @@ export const bookmark: Context = {
       bookmarkEmbed.setTitle(`You saved a message!`);
       bookmarkEmbed.setDescription(`[View the message](${message.url})`);
       bookmarkEmbed.setFooter({
-        text: "Helpful tip: Reply to this message to leave yourself a note on what you saved.",
+        text: "Helpful tip: Reply to this message to leave yourself a note on what you saved."
       });
 
       const deleteButton = new ButtonBuilder()
@@ -41,7 +41,7 @@ export const bookmark: Context = {
         .setStyle(ButtonStyle.Secondary);
 
       const row = new ActionRowBuilder<ButtonBuilder>().addComponents([
-        deleteButton,
+        deleteButton
       ]);
 
       await interaction.user
@@ -60,5 +60,5 @@ export const bookmark: Context = {
       await errorHandler(Bot, err);
       await interaction.editReply("Something went wrong.");
     }
-  },
+  }
 };

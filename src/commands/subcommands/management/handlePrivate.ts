@@ -4,7 +4,7 @@ import {
   ButtonStyle,
   ChannelType,
   GuildChannelCreateOptions,
-  PermissionFlagsBits,
+  PermissionFlagsBits
 } from "discord.js";
 
 import { Subcommand } from "../../../interfaces/Subcommand";
@@ -16,7 +16,7 @@ export const handlePrivate: Subcommand = {
     [
       PermissionFlagsBits.ModerateMembers,
       PermissionFlagsBits.KickMembers,
-      PermissionFlagsBits.BanMembers,
+      PermissionFlagsBits.BanMembers
     ].some((p) => member.permissions.has(p)),
   execute: async (Bot, interaction) => {
     try {
@@ -24,7 +24,7 @@ export const handlePrivate: Subcommand = {
       const { guild } = interaction;
 
       const modRole = guild.roles.cache.find(
-        (role) => role.id === Bot.config.mod_role
+        (role) => role.id === Bot.config.modRole
       );
 
       if (!modRole) {
@@ -49,9 +49,9 @@ export const handlePrivate: Subcommand = {
             allow: [
               PermissionFlagsBits.ViewChannel,
               PermissionFlagsBits.ReadMessageHistory,
-              PermissionFlagsBits.SendMessages,
+              PermissionFlagsBits.SendMessages
             ],
-            deny: [PermissionFlagsBits.CreateInstantInvite],
+            deny: [PermissionFlagsBits.CreateInstantInvite]
           },
           {
             id: guild.id,
@@ -59,28 +59,28 @@ export const handlePrivate: Subcommand = {
               PermissionFlagsBits.ViewChannel,
               PermissionFlagsBits.ReadMessageHistory,
               PermissionFlagsBits.SendMessages,
-              PermissionFlagsBits.CreateInstantInvite,
-            ],
+              PermissionFlagsBits.CreateInstantInvite
+            ]
           },
           {
-            id: Bot.config.bot_id,
+            id: Bot.config.botId,
             allow: [
               PermissionFlagsBits.ViewChannel,
               PermissionFlagsBits.ReadMessageHistory,
-              PermissionFlagsBits.SendMessages,
+              PermissionFlagsBits.SendMessages
             ],
-            deny: [PermissionFlagsBits.CreateInstantInvite],
+            deny: [PermissionFlagsBits.CreateInstantInvite]
           },
           {
             id: modRole,
             allow: [
               PermissionFlagsBits.ViewChannel,
               PermissionFlagsBits.ReadMessageHistory,
-              PermissionFlagsBits.SendMessages,
+              PermissionFlagsBits.SendMessages
             ],
-            deny: [PermissionFlagsBits.CreateInstantInvite],
-          },
-        ],
+            deny: [PermissionFlagsBits.CreateInstantInvite]
+          }
+        ]
       };
 
       const newChannel = await guild.channels.create(channelOpts);
@@ -93,14 +93,14 @@ export const handlePrivate: Subcommand = {
         .setEmoji("❌")
         .setStyle(ButtonStyle.Danger);
       const row = new ActionRowBuilder<ButtonBuilder>().addComponents([
-        closeButton,
+        closeButton
       ]);
 
       await newChannel.send({
         content: `Hey <@!${target.id}>!\n\nA private channel was created. This channel is visible to only you and the moderation team.`,
-        components: [row],
+        components: [row]
       });
-      await Bot.config.mod_hook.send(
+      await Bot.config.modHook.send(
         `Private channel created for ${target.tag}`
       );
       await interaction.editReply("Channel created!");
@@ -108,5 +108,5 @@ export const handlePrivate: Subcommand = {
       await errorHandler(Bot, err);
       await interaction.editReply("Something went wrong!");
     }
-  },
+  }
 };

@@ -11,7 +11,7 @@ export const handleWarn: Subcommand = {
     [
       PermissionFlagsBits.ModerateMembers,
       PermissionFlagsBits.KickMembers,
-      PermissionFlagsBits.BanMembers,
+      PermissionFlagsBits.BanMembers
     ].some((p) => member.permissions.has(p)),
   execute: async (Bot, interaction) => {
     try {
@@ -47,31 +47,31 @@ export const handleWarn: Subcommand = {
       warnEmbed.addFields(
         {
           name: "Reason",
-          value: customSubstring(reason, 1000),
+          value: customSubstring(reason, 1000)
         },
         {
           name: "User Notified?",
-          value: String(sentNotice),
+          value: String(sentNotice)
         }
       );
       warnEmbed.setTimestamp();
       warnEmbed.setAuthor({
         name: target.tag,
-        iconURL: target.displayAvatarURL(),
+        iconURL: target.displayAvatarURL()
       });
       warnEmbed.setFooter({
-        text: `ID: ${target.id}`,
+        text: `ID: ${target.id}`
       });
 
       await interaction.editReply(
         sentNotice ? "They have been warned." : "I could not warn them."
       );
-      await Bot.config.mod_hook.send({
-        embeds: [warnEmbed],
+      await Bot.config.modHook.send({
+        embeds: [warnEmbed]
       });
     } catch (err) {
       await errorHandler(Bot, err);
       await interaction.editReply("Something went wrong.");
     }
-  },
+  }
 };

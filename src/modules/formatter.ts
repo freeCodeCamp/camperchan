@@ -10,7 +10,7 @@ import stripAnsi from "strip-ansi";
  */
 export function formatter(unformattedCode: string, language: string): string {
   const options: Options = {
-    trailingComma: "none",
+    trailingComma: "none"
   };
 
   switch (language) {

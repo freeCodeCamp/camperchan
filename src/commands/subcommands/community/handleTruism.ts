@@ -12,5 +12,5 @@ export const handleTruism: Subcommand = {
     } catch (err) {
       await errorHandler(Bot, err);
     }
-  },
+  }
 };
