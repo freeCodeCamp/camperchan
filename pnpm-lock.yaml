@@ -59,8 +59,8 @@ devDependencies:
     specifier: 10.0.6
     version: 10.0.6
   '@types/node':
-    specifier: 20.11.22
-    version: 20.11.22
+    specifier: 20.11.23
+    version: 20.11.23
   '@types/node-schedule':
     specifier: 2.1.6
     version: 2.1.6
@@ -99,7 +99,7 @@ devDependencies:
     version: 9.0.2(mocha@10.3.0)
   ts-node:
     specifier: 10.9.2
-    version: 10.9.2(@types/node@20.11.22)(typescript@5.3.3)
+    version: 10.9.2(@types/node@20.11.23)(typescript@5.3.3)
   typescript:
     specifier: 5.3.3
     version: 5.3.3
@@ -832,11 +832,11 @@ packages:
   /@types/node-schedule@2.1.6:
     resolution: {integrity: sha512-6AlZSUiNTdaVmH5jXYxX9YgmF1zfOlbjUqw0EllTBmZCnN1R5RR/m/u3No1OiWR05bnQ4jM4/+w4FcGvkAtnKQ==}
     dependencies:
-      '@types/node': 20.11.22
+      '@types/node': 20.11.23
     dev: true
 
-  /@types/node@20.11.22:
-    resolution: {integrity: sha512-/G+IxWxma6V3E+pqK1tSl2Fo1kl41pK1yeCyDsgkF9WlVAme4j5ISYM2zR11bgLFJGLN5sVK40T4RJNuiZbEjA==}
+  /@types/node@20.11.23:
+    resolution: {integrity: sha512-ZUarKKfQuRILSNYt32FuPL20HS7XwNT7/uRwSV8tiHWfyyVwDLYZNF6DZKc2bove++pgfsXn9sUwII/OsQ82cQ==}
     dependencies:
       undici-types: 5.26.5
 
@@ -868,7 +868,7 @@ packages:
   /@types/ws@8.5.9:
     resolution: {integrity: sha512-jbdrY0a8lxfdTp/+r7Z4CkycbOFN8WX+IOchLJr3juT/xzbJ8URyTVSJ/hvNdadTgM1mnedb47n+Y31GsFnQlg==}
     dependencies:
-      '@types/node': 20.11.22
+      '@types/node': 20.11.23
 
   /@typescript-eslint/eslint-plugin@5.62.0(@typescript-eslint/parser@5.62.0)(eslint@8.57.0)(typescript@5.3.3):
     resolution: {integrity: sha512-TiZzBSJja/LbhNPvk6yc0JrX9XqhQ0hdh6M2svYfsHGejaKFIAGd9MQ+ERIMzLGlN/kZoYIgdxFV0PuljTKXag==}
@@ -3572,7 +3572,7 @@ packages:
       tsconfig-paths: 3.15.0
     dev: true
 
-  /ts-node@10.9.2(@types/node@20.11.22)(typescript@5.3.3):
+  /ts-node@10.9.2(@types/node@20.11.23)(typescript@5.3.3):
     resolution: {integrity: sha512-f0FFpIdcHgn8zcPSbf1dRevwt047YMnaiJM3u2w2RewrB+fob/zePZcrOyQoLMMO7aBIddLcQIEK5dYjkLnGrQ==}
     hasBin: true
     peerDependencies:
@@ -3591,7 +3591,7 @@ packages:
       '@tsconfig/node12': 1.0.11
       '@tsconfig/node14': 1.0.3
       '@tsconfig/node16': 1.0.4
-      '@types/node': 20.11.22
+      '@types/node': 20.11.23
       acorn: 8.9.0
       acorn-walk: 8.3.2
       arg: 4.1.3
