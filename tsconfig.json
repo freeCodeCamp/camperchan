@@ -1,14 +1,8 @@
 {
+  "extends": "@nhcarrigan/typescript-config",
   "compilerOptions": {
-    "target": "ES6",
-    "module": "CommonJS",
     "rootDir": "./src",
-    "outDir": "./dist",
-    "strict": true,
-    "esModuleInterop": true,
-    "skipLibCheck": true,
-    "forceConsistentCasingInFileNames": true,
-    "resolveJsonModule": true
+    "outDir": "./dist"
   },
-  "exclude": ["scripts/**", "test/**"]
+  "exclude": ["./test"]
 }
