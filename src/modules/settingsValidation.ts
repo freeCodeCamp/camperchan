@@ -1,11 +1,11 @@
 /**
- * Checks if a string matches a 6 character hdex code, prefixed with `#`.
+ * Checks if a string matches a 6 character hex code.
  *
  * @param {string} colour The colour code to validate.
  * @returns {boolean} If the string is in the correct format.
  */
 export const validateColour = (colour: string): boolean => {
-  return /#[\da-f]{6}/gi.test(colour);
+  return /[\da-f]{6}/gi.test(colour);
 };
 
 /**
