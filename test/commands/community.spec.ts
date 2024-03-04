@@ -72,14 +72,17 @@ suite("community command", () => {
     assert.lengthOf(quote?.options || "hi", 0);
   });
 
-  test("has correct rank", () => {
-    const rank = subcommands.find((sub) => sub.name === "rank");
-    assert.equal(rank?.name, "rank");
-    assert.equal(rank?.description, "See your level in our community.");
+  test("has correct profile", () => {
+    const rank = subcommands.find((sub) => sub.name === "profile");
+    assert.equal(rank?.name, "profile");
+    assert.equal(rank?.description, "See your community profile.");
     assert.lengthOf(rank?.options || "hi", 1);
     const userOption = rank?.options[0].toJSON();
     assert.equal(userOption?.name, "target");
-    assert.equal(userOption?.description, "The user to check the level of.");
+    assert.equal(
+      userOption?.description,
+      "The user who's profile you want to view"
+    );
     assert.equal(userOption?.type, ApplicationCommandOptionType.User);
     assert.isFalse(userOption?.required);
   });

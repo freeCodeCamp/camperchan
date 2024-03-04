@@ -1,8 +1,11 @@
+import { readdir } from "fs/promises";
+import { join } from "path";
+
 import { assert } from "chai";
 
 import { Camperbot } from "../../src/interfaces/Camperbot";
+import { Command } from "../../src/interfaces/Command";
 import { loadCommands } from "../../src/utils/loadCommands";
-import { CommandNames } from "../__mocks__/statics";
 
 suite("loadCommands", () => {
   test("is defined", () => {
@@ -16,13 +19,31 @@ suite("loadCommands", () => {
   });
 
   test("returns the expected command list", async () => {
-    const result = await loadCommands({} as Camperbot);
-    assert.equal(
-      result.length,
-      CommandNames.length,
-      "does not return the expected number of commands"
-    );
-    const names = result.map((el) => el.data.name);
-    assert.deepEqual(names, CommandNames, "does not return the expected list");
+    const bot: { commands: Command[] } = {
+      commands: []
+    };
+    const commandFiles = await readdir(join(process.cwd(), "src", "commands"));
+    const commandNames = commandFiles
+      .filter((f) => f.endsWith(".ts"))
+      .map((file) => file.split(".")[0]);
+    bot.commands = await loadCommands(bot as never);
+    assert.equal(bot.commands.length, commandNames.length);
+    for (const name of commandNames) {
+      assert.exists(
+        bot.commands.find(
+          (command) =>
+            command.data.name
+              .split("-")
+              .reduce(
+                (acc, el, i) =>
+                  i === 0
+                    ? acc + el
+                    : acc +
+                      (el[0].toUpperCase() + el.substring(1).toLowerCase()),
+                ""
+              ) === name
+        )
+      );
+    }
   });
 });

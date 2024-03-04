@@ -25,14 +25,19 @@ model histories {
 }
 
 model levels {
-  id       String   @id @default(auto()) @map("_id") @db.ObjectId
-  v        Int?     @map("__v") @ignore
-  userId   String
-  userTag  String   @default("")
-  points   Int      @default(0)
-  level    Int      @default(0)
-  lastSeen DateTime @default(now())
-  cooldown Int      @default(0)
+  id               String   @id @default(auto()) @map("_id") @db.ObjectId
+  v                Int?     @map("__v") @ignore
+  userId           String
+  userTag          String   @default("")
+  points           Int      @default(0)
+  level            Int      @default(0)
+  lastSeen         DateTime @default(now())
+  cooldown         Int      @default(0)
+  avatar           String   @default("")
+  backgroundColour String   @default("")
+  backgroundImage  String   @default("")
+  colour           String   @default("")
+  learnEmail       String   @default("")
 
   @@unique([userId], map: "userId_1")
 }

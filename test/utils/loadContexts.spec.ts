@@ -1,8 +1,11 @@
+import { readdir } from "fs/promises";
+import { join } from "path";
+
 import { assert } from "chai";
 
 import { Camperbot } from "../../src/interfaces/Camperbot";
+import { Context } from "../../src/interfaces/Context";
 import { loadContexts } from "../../src/utils/loadContexts";
-import { ContextNames } from "../__mocks__/statics";
 
 suite("loadContexts", () => {
   test("is defined", () => {
@@ -16,13 +19,13 @@ suite("loadContexts", () => {
   });
 
   test("returns the expected command list", async () => {
-    const result = await loadContexts({} as Camperbot);
-    assert.equal(
-      result.length,
-      4,
-      "does not return the expected number of commands"
-    );
-    const names = result.map((el) => el.data.name);
-    assert.deepEqual(names, ContextNames, "does not return the expected list");
+    const bot: { contexts: Context[] } = { contexts: [] };
+    const contextFiles = await readdir(join(process.cwd(), "src", "contexts"));
+    const contextNames = contextFiles.map((file) => file.split(".")[0]);
+    bot.contexts = await loadContexts(bot as never);
+    assert.equal(bot.contexts.length, contextNames.length);
+    for (const name of contextNames) {
+      assert.exists(bot.contexts.find((context) => context.data.name === name));
+    }
   });
 });
