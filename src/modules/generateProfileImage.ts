@@ -9,15 +9,75 @@ import { fetchLearnRecord } from "../utils/fetchLearnRecord";
 
 import { generatorMap } from "./generateCertSvg";
 
+const certTypes = {
+  frontEnd: "isFrontEndCert",
+  backEnd: "isBackEndCert",
+  dataVis: "isDataVisCert",
+  respWebDesign: "isRespWebDesignCert",
+  frontEndDevLibs: "isFrontEndLibsCert",
+  dataVis2018: "is2018DataVisCert",
+  jsAlgoDataStruct: "isJsAlgoDataStructCert",
+  apisMicroservices: "isApisMicroservicesCert",
+  infosecQa: "isInfosecQaCert",
+  qaV7: "isQaCertV7",
+  infosecV7: "isInfosecCertV7",
+  sciCompPyV7: "isSciCompPyCertV7",
+  dataAnalysisPyV7: "isDataAnalysisPyCertV7",
+  machineLearningPyV7: "isMachineLearningPyCertV7",
+  fullStack: "is2018FullStackCert",
+  legacyFullStack: "isFullStackCert",
+  relationalDatabaseV8: "isRelationalDatabaseCertV8",
+  collegeAlgebraPyV8: "isCollegeAlgebraPyCertV8",
+  foundationalCSharpV8: "isFoundationalCSharpCertV8",
+  upcomingPythonV8: "isUpcomingPythonCertV8",
+  jsAlgoDataStructV8: "isJsAlgoDataStructCertV8"
+} as const;
+
+const certTypeTitleMap: {
+  [key in keyof Required<
+    Omit<UserRecord, "email" | "isDonating" | "profileUI">
+  >]: string;
+} = {
+  [certTypes.frontEnd]: "Legacy Front End",
+  [certTypes.backEnd]: "Legacy Back End",
+  [certTypes.dataVis]: "Legacy Data Visualization",
+  [certTypes.infosecQa]: "Legacy Information Security and Quality Assurance",
+  [certTypes.fullStack]: "Full Stack",
+  [certTypes.respWebDesign]: "Responsive Web Design",
+  [certTypes.frontEndDevLibs]: "Front End Development Libraries",
+  [certTypes.jsAlgoDataStruct]:
+    "Legacy JavaScript Algorithms and Data Structures",
+  [certTypes.dataVis2018]: "Data Visualization",
+  [certTypes.apisMicroservices]: "Back End Development and APIs",
+  [certTypes.qaV7]: "Quality Assurance",
+  [certTypes.infosecV7]: "Information Security",
+  [certTypes.sciCompPyV7]: "Scientific Computing with Python",
+  [certTypes.dataAnalysisPyV7]: "Data Analysis with Python",
+  [certTypes.machineLearningPyV7]: "Machine Learning with Python",
+  [certTypes.relationalDatabaseV8]: "Relational Database",
+  [certTypes.collegeAlgebraPyV8]: "College Algebra with Python",
+  [certTypes.foundationalCSharpV8]: "Foundational C# with Microsoft",
+  // [certTypes.upcomingPythonV8]: "Upcoming Python",
+  [certTypes.jsAlgoDataStructV8]:
+    "JavaScript Algorithms and Data Structures (Beta)",
+  [certTypes.legacyFullStack]: "Legacy Full Stack"
+};
+
 const getCertificationSection = (
   levelRecord: levels,
   learnRecord: UserRecord | null
-): string => {
+): { html: string; alt: string } => {
   if (!levelRecord.learnEmail) {
-    return `<p>freeCodeCamp.org account has not been linked.</p>`;
+    return {
+      html: `<p>freeCodeCamp.org account has not been linked.</p>`,
+      alt: `<p>freeCodeCamp.org account has not been linked.</p>`
+    };
   }
   if (!learnRecord) {
-    return `<p>Error loading freeCodeCamp.org account.</p>`;
+    return {
+      html: `<p>Error loading freeCodeCamp.org account.</p>`,
+      alt: `<p>Error loading freeCodeCamp.org account.</p>`
+    };
   }
   const { profileUI } = learnRecord;
   if (
@@ -26,7 +86,10 @@ const getCertificationSection = (
     !profileUI.showCerts ||
     !profileUI.showTimeLine
   ) {
-    return `<p>Certifications are set to private.</p>`;
+    return {
+      html: `<p>Certifications are set to private.</p>`,
+      alt: `<p>Certifications are set to private.</p>`
+    };
   }
 
   const shouldMakeSVG = Object.entries(learnRecord).reduce(
@@ -38,10 +101,19 @@ const getCertificationSection = (
     },
     []
   );
+  if (!shouldMakeSVG.length) {
+    return {
+      html: `<p>No certifications earned yet.</p>`,
+      alt: `<p>No certifications earned yet.</p>`
+    };
+  }
   const generatedSVGs = shouldMakeSVG
     .map((key) => generatorMap[key](levelRecord.colour))
     .join("");
-  return generatedSVGs;
+  return {
+    html: generatedSVGs,
+    alt: shouldMakeSVG.map((k) => certTypeTitleMap[k]).join(", ")
+  };
 };
 
 /**
@@ -73,6 +145,8 @@ export const generateProfileImage = async (
       ? await fetchLearnRecord(bot, learnEmail, userId)
       : null;
 
+    const certs = getCertificationSection(record, learn);
+
     const html = `
     <style>
       * {
@@ -91,7 +165,7 @@ export const generateProfileImage = async (
         height: 1080px;
         text-align: center;
         font-family: "Roboto", Courier, monospace;
-        font-size: 100px;
+        font-size: 75px;
         padding: 2.5%;
       }
 
@@ -102,7 +176,7 @@ export const generateProfileImage = async (
       main {
         width: 100%;
         height: 100%;
-        background-color: #${backgroundColour || "0a0a23"}7f;
+        background-color: #${backgroundColour || "0a0a23"}bf;
         color: #${colour || "d0d0d5"};
         padding: 2.5%;
         border-radius: 100px;
@@ -128,19 +202,18 @@ export const generateProfileImage = async (
 
       .certs {
         width: 100%;
-        height: 200px;
+        height: 150px;
         max-height: 200px;
       }
 
       .badges {
         width: 100%;
-        height: 200px;
+        height: 150px;
         max-height: 200px;
       }
 
-      .svg {
+      svg {
         display: inline;
-        width: 100px;
         height: 100px;
       }
     </style>
@@ -155,14 +228,14 @@ export const generateProfileImage = async (
         </div>
         <h2>Certifications</h2>
         <div class="certs">
-          ${getCertificationSection(record, learn)}
+          ${certs.html}
         </div>
         <h2>Badges</h2>
         <p>Coming soon!</p>
       </main>
     </body>
     `;
-    const alt = `User ${userTag} is at level ${level} with ${points.toLocaleString("en-GB")} experience points.`;
+    const alt = `${userTag} is at level ${level} with ${points.toLocaleString("en-GB")} experience points. Certifications: ${certs.alt} - Badges: "Coming soon!"`;
 
     const image = await nodeHtmlToImage({
       html,
@@ -242,7 +315,7 @@ export const generateLeaderboardImage = async (
     <body>
       ${levels.map(
         (l) =>
-          `<div class="row" style="background-color: #${l.backgroundColour || "0a0a23"}7f;color: #${l.colour || "d0d0d5"};padding: 2.5%;border-radius: 100px;">
+          `<div class="row" style="background-color: #${l.backgroundColour || "0a0a23"}bf;color: #${l.colour || "d0d0d5"};padding: 2.5%;border-radius: 100px;">
             <img style="border-radius: 50%;" src=${l.avatar || "https://cdn.freecodecamp.org/platform/universal/fcc_puck_500.jpg"}></img>
             <div style="text-align: left;padding-left:100px;">
               <h1>#${l.index}. ${l.userTag}</h1>
@@ -255,9 +328,9 @@ export const generateLeaderboardImage = async (
     const alt = levels
       .map(
         (l) =>
-          `User ${l.userTag} is rank ${l.index} at ${l.level} with ${l.points.toLocaleString("en-GB")} experience points.`
+          `${l.userTag} is rank ${l.index} at ${l.level} with ${l.points.toLocaleString("en-GB")} experience points.`
       )
-      .join("\n");
+      .join(", ");
 
     const image = await nodeHtmlToImage({
       html,
