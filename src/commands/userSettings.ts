@@ -30,6 +30,13 @@ export const userSettings: Command = {
       option
         .setName("colour")
         .setDescription("The colour for the text on your profile card.")
+    )
+    .addStringOption((option) =>
+      option
+        .setName("email")
+        .setDescription(
+          "The email associated with your freeCodeCamp.org account."
+        )
     ),
   run: async (bot, interaction) => {
     try {
@@ -40,7 +47,8 @@ export const userSettings: Command = {
         avatar: interaction.options.getString("avatar"),
         backgroundColour: interaction.options.getString("background-colour"),
         backgroundImage: interaction.options.getString("background-image"),
-        colour: interaction.options.getString("colour")
+        colour: interaction.options.getString("colour"),
+        learnEmail: interaction.options.getString("email")
       };
       if (opts.avatar) {
         const isValid = await validateImage(opts.avatar);
