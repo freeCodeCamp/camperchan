@@ -109,7 +109,7 @@ const getCertificationSection = (
     };
   }
   const generatedSVGs = shouldMakeSVG
-    .map((key) => generatorMap[key](levelRecord.colour))
+    .map((key) => generatorMap[key](levelRecord.colour ?? "d0d0d5"))
     .join("");
   return {
     html: generatedSVGs,
