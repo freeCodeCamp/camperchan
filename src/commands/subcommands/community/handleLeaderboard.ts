@@ -24,7 +24,7 @@ export const handleLeaderboard: Subcommand = {
 
       const mapped = levels.map((user, index) => ({
         ...user,
-        index
+        index: index + 1
       }));
 
       let page = 1;
