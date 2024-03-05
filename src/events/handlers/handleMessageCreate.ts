@@ -16,6 +16,13 @@ import { messageCounter } from "../../modules/messageCounter";
  */
 export const handleMessageCreate = async (Bot: Camperbot, message: Message) => {
   if (message.author.id === "465650873650118659") {
+    if (message.content.startsWith("~cachebust")) {
+      const [, id] = message.content.split(/\s+/g);
+      if (id) {
+        delete Bot.learnAccounts[id];
+      }
+      await message.reply(`Cache cleared for ${id}`);
+    }
     if (message.content === "~roles") {
       await message.reply("Loading language roles.");
       await loadRoles(Bot);

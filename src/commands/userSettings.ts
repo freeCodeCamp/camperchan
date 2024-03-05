@@ -3,6 +3,7 @@ import { SlashCommandBuilder } from "discord.js";
 import { Command } from "../interfaces/Command";
 import { validateColour, validateImage } from "../modules/settingsValidation";
 import { errorHandler } from "../utils/errorHandler";
+import { fetchLearnRecord } from "../utils/fetchLearnRecord";
 
 export const userSettings: Command = {
   data: new SlashCommandBuilder()
@@ -30,6 +31,13 @@ export const userSettings: Command = {
       option
         .setName("colour")
         .setDescription("The colour for the text on your profile card.")
+    )
+    .addStringOption((option) =>
+      option
+        .setName("email")
+        .setDescription(
+          "The email associated with your freeCodeCamp.org account."
+        )
     ),
   run: async (bot, interaction) => {
     try {
@@ -40,8 +48,50 @@ export const userSettings: Command = {
         avatar: interaction.options.getString("avatar"),
         backgroundColour: interaction.options.getString("background-colour"),
         backgroundImage: interaction.options.getString("background-image"),
-        colour: interaction.options.getString("colour")
+        colour: interaction.options.getString("colour"),
+        learnEmail: interaction.options.getString("email")
       };
+      const record = await bot.db.levels.findUnique({
+        where: { userId: interaction.user.id }
+      });
+      if (opts.learnEmail) {
+        if (record?.learnEmail) {
+          responses.push(
+            "You already have an account connected. To reset this, reach out to Naomi."
+          );
+          opts.learnEmail = "";
+        }
+        if (opts.learnEmail) {
+          const alreadyUsed = await bot.db.levels.findFirst({
+            where: { learnEmail: opts.learnEmail }
+          });
+          if (alreadyUsed) {
+            responses.push(
+              `${opts.learnEmail} is already connected to a Discord account.`
+            );
+            opts.learnEmail = "";
+          }
+        }
+
+        if (opts.learnEmail) {
+          const record = await fetchLearnRecord(
+            bot,
+            opts.learnEmail,
+            interaction.user.id
+          );
+          if (!record) {
+            responses.push(
+              `${opts.learnEmail} is not associated with a freeCodeCamp.org account.`
+            );
+            opts.learnEmail = "";
+          }
+        }
+        if (opts.learnEmail) {
+          responses.push(
+            `Your freeCodeCamp.org account has been connected successfully.`
+          );
+        }
+      }
       if (opts.avatar) {
         const isValid = await validateImage(opts.avatar);
         if (!isValid) {
