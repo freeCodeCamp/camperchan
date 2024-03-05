@@ -51,6 +51,7 @@ export const userSettings: Command = {
         colour: interaction.options.getString("colour"),
         learnEmail: interaction.options.getString("email")
       };
+      const badges: string[] = [];
       const record = await bot.db.levels.findUnique({
         where: { userId: interaction.user.id }
       });
@@ -90,6 +91,7 @@ export const userSettings: Command = {
           responses.push(
             `Your freeCodeCamp.org account has been connected successfully.`
           );
+          badges.push("Linked Account");
         }
       }
       if (opts.avatar) {
@@ -146,12 +148,16 @@ export const userSettings: Command = {
           userId: interaction.user.id
         },
         update: {
-          ...query
+          ...query,
+          badges: {
+            push: badges
+          }
         },
         create: {
           userId: interaction.user.id,
           userTag: interaction.user.username,
-          ...query
+          ...query,
+          badges
         }
       });
 

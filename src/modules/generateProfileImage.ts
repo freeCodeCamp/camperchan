@@ -2,6 +2,7 @@ import { levels } from "@prisma/client";
 import { AttachmentBuilder } from "discord.js";
 import nodeHtmlToImage from "node-html-to-image";
 
+import { Badges } from "../config/Badges";
 import { Camperbot } from "../interfaces/Camperbot";
 import { UserRecord } from "../interfaces/UserRecord";
 import { errorHandler } from "../utils/errorHandler";
@@ -70,13 +71,13 @@ const getCertificationSection = (
   if (!levelRecord.learnEmail) {
     return {
       html: `<p>freeCodeCamp.org account has not been linked.</p>`,
-      alt: `<p>freeCodeCamp.org account has not been linked.</p>`
+      alt: `freeCodeCamp.org account has not been linked.`
     };
   }
   if (!learnRecord) {
     return {
       html: `<p>Error loading freeCodeCamp.org account.</p>`,
-      alt: `<p>Error loading freeCodeCamp.org account.</p>`
+      alt: `Error loading freeCodeCamp.org account.`
     };
   }
   const { profileUI } = learnRecord;
@@ -88,7 +89,7 @@ const getCertificationSection = (
   ) {
     return {
       html: `<p>Certifications are set to private.</p>`,
-      alt: `<p>Certifications are set to private.</p>`
+      alt: `Certifications are set to private.`
     };
   }
 
@@ -104,7 +105,7 @@ const getCertificationSection = (
   if (!shouldMakeSVG.length) {
     return {
       html: `<p>No certifications earned yet.</p>`,
-      alt: `<p>No certifications earned yet.</p>`
+      alt: `No certifications earned yet.`
     };
   }
   const generatedSVGs = shouldMakeSVG
@@ -113,6 +114,31 @@ const getCertificationSection = (
   return {
     html: generatedSVGs,
     alt: shouldMakeSVG.map((k) => certTypeTitleMap[k]).join(", ")
+  };
+};
+
+const getBadgesSection = (record: levels): { html: string; alt: string } => {
+  if (!record.badges.length) {
+    return {
+      html: "<p>No badges earned yet.</p>",
+      alt: "No badges earned yet."
+    };
+  }
+  const processed = record.badges.reduce(
+    (acc: { html: string[]; alt: string[] }, el) => {
+      const isValid = Badges.find((badge) => el === badge.name);
+      if (isValid) {
+        acc.html.push(`<img class="badge" src=${isValid.image}></src>`);
+        acc.alt.push(isValid.name);
+      }
+      return acc;
+    },
+    { html: [], alt: [] }
+  );
+  const { html, alt } = processed;
+  return {
+    html: html.join(""),
+    alt: alt.join(", ")
   };
 };
 
@@ -146,6 +172,7 @@ export const generateProfileImage = async (
       : null;
 
     const certs = getCertificationSection(record, learn);
+    const badges = getBadgesSection(record);
 
     const html = `
     <style>
@@ -182,7 +209,7 @@ export const generateProfileImage = async (
         border-radius: 100px;
       }
 
-      img {
+      .avatar {
         width: 250px;
         height: 250px;
         border-radius: 50%;
@@ -216,11 +243,17 @@ export const generateProfileImage = async (
         display: inline;
         height: 100px;
       }
+
+      .badge {
+        height: 100px;
+        width: 100px;
+        display: inline;
+      }
     </style>
     <body>
       <main>
         <div class="header">
-          <img src=${avatar || "https://cdn.freecodecamp.org/platform/universal/fcc_puck_500.jpg"}></img>
+          <img class="avatar" src=${avatar || "https://cdn.freecodecamp.org/platform/universal/fcc_puck_500.jpg"}></img>
           <div>
             <h1>${userTag}</h1>
             <p>Level ${level} (${points.toLocaleString("en-GB")}xp)</p>
@@ -231,11 +264,13 @@ export const generateProfileImage = async (
           ${certs.html}
         </div>
         <h2>Badges</h2>
-        <p>Coming soon!</p>
+        <div class="badges">
+          ${badges.html}
+        </div>
       </main>
     </body>
     `;
-    const alt = `${userTag} is at level ${level} with ${points.toLocaleString("en-GB")} experience points. Certifications: ${certs.alt} - Badges: "Coming soon!"`;
+    const alt = `${userTag} is at level ${level} with ${points.toLocaleString("en-GB")} experience points. Certifications: ${certs.alt} - Badges: ${badges.alt}`;
 
     const image = await nodeHtmlToImage({
       html,

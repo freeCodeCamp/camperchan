@@ -38,6 +38,7 @@ model levels {
   backgroundImage  String   @default("")
   colour           String   @default("")
   learnEmail       String   @default("")
+  badges           String[] @default([])
 
   @@unique([userId], map: "userId_1")
 }
