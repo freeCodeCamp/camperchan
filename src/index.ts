@@ -27,6 +27,7 @@ import { registerCommands } from "./utils/registerCommands";
   Bot.quotes = await loadQuotes(Bot);
   Bot.privateLogs = {};
   Bot.learnAccounts = {};
+  Bot.profileCalls = {};
 
   await Bot.login(Bot.config.token);
 })();

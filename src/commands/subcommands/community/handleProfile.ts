@@ -9,6 +9,17 @@ export const handleProfile: Subcommand = {
       await interaction.deferReply();
       const { user } = interaction;
 
+      const lastCall = Bot.profileCalls[user.id];
+
+      if (lastCall && lastCall < Date.now() + 1000 * 60 * 60) {
+        await interaction.editReply({
+          content: `You are calling this command too often. Please try again <t:${Math.floor((lastCall + 1000 * 60 * 60) / 1000)}:R>`
+        });
+        return;
+      }
+
+      delete Bot.profileCalls[user.id];
+
       const target = interaction.options.getUser("target")?.id || user.id;
 
       const record = await Bot.db.levels.findUnique({
@@ -34,6 +45,9 @@ export const handleProfile: Subcommand = {
       }
 
       await interaction.editReply({ files: [file] });
+      if (!Bot.profileCalls[user.id]) {
+        Bot.profileCalls[user.id] = Date.now();
+      }
     } catch (err) {
       await errorHandler(Bot, err);
     }
