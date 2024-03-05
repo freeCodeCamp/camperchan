@@ -27,6 +27,7 @@
     "dotenv": "16.4.5",
     "highlight.js": "11.9.0",
     "mongodb": "6.4.0",
+    "node-html-to-image": "4.0.0",
     "node-schedule": "2.1.1",
     "string-similarity": "4.0.4",
     "strip-ansi": "6.0.1",
@@ -51,8 +52,8 @@
     "prettier": "3.2.5",
     "prisma": "5.10.2",
     "rimraf": "5.0.5",
-    "ts-node": "10.9.2",
     "ts-mocha": "9.0.2",
+    "ts-node": "10.9.2",
     "typescript": "5.3.3"
   }
 }

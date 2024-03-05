@@ -1,4 +1,5 @@
 import { Subcommand } from "../../../interfaces/Subcommand";
+import { generateProfileImage } from "../../../modules/generateProfileImage";
 import { errorHandler } from "../../../utils/errorHandler";
 
 export const handleProfile: Subcommand = {
@@ -23,7 +24,16 @@ export const handleProfile: Subcommand = {
         return;
       }
 
-      await interaction.editReply({ content: JSON.stringify(record, null, 2) });
+      const file = await generateProfileImage(Bot, record);
+
+      if (!file) {
+        await interaction.editReply({
+          content: "There was an error generating your profile. :c"
+        });
+        return;
+      }
+
+      await interaction.editReply({ files: [file] });
     } catch (err) {
       await errorHandler(Bot, err);
     }
