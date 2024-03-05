@@ -7,8 +7,8 @@ import {
 } from "discord.js";
 
 import { Subcommand } from "../../../interfaces/Subcommand";
+import { generateLeaderboardImage } from "../../../modules/generateProfileImage";
 import { errorHandler } from "../../../utils/errorHandler";
-import { formatTextToTable } from "../../../utils/formatText";
 
 export const handleLeaderboard: Subcommand = {
   permissionValidator: () => true,
@@ -22,26 +22,10 @@ export const handleLeaderboard: Subcommand = {
         }
       });
 
-      const mappedWithId = levels.map((user, index) => [
-        index + 1,
-        user.userTag,
-        user.level,
-        user.points,
-        user.userId
-      ]);
-
-      const mapped = levels.map((user, index) => [
-        index + 1,
-        user.userTag,
-        user.level,
-        user.points
-      ]);
-
-      const userData = mappedWithId.find((el) => el[4] === interaction.user.id);
-
-      const userRankString = userData
-        ? `You are rank ${userData[0]} with ${userData[3]} experience at level ${userData[2]}`
-        : "You do not have a rank yet!";
+      const mapped = levels.map((user, index) => ({
+        ...user,
+        index
+      }));
 
       let page = 1;
       const lastPage = Math.ceil(mapped.length / 10);
@@ -56,11 +40,34 @@ export const handleLeaderboard: Subcommand = {
         .setLabel("▶")
         .setStyle(ButtonStyle.Primary);
 
+      if (page <= 1) {
+        pageBack.setDisabled(true);
+      } else {
+        pageBack.setDisabled(false);
+      }
+
+      if (page >= lastPage) {
+        pageForward.setDisabled(true);
+      } else {
+        pageForward.setDisabled(false);
+      }
+
+      const attachment = await generateLeaderboardImage(
+        Bot,
+        mapped.slice(page * 10 - 10, page * 10)
+      );
+
+      if (!attachment) {
+        await interaction.editReply({
+          content: "Failed to load leaderboard image.",
+          files: [],
+          components: []
+        });
+        return;
+      }
+
       const sent = (await interaction.editReply({
-        content: `${userRankString}\n\n\`\`\`\n${formatTextToTable(
-          mapped.slice(page * 10 - 10, page * 10),
-          { headers: ["Rank", "User", "Level", "XP"] }
-        )}\n\`\`\``,
+        files: [attachment],
         components: [
           new ActionRowBuilder<ButtonBuilder>().addComponents(
             pageBack,
@@ -96,11 +103,22 @@ export const handleLeaderboard: Subcommand = {
           pageForward.setDisabled(false);
         }
 
+        const attachment = await generateLeaderboardImage(
+          Bot,
+          mapped.slice(page * 10 - 10, page * 10)
+        );
+
+        if (!attachment) {
+          await interaction.editReply({
+            content: "Failed to load leaderboard image.",
+            files: [],
+            components: []
+          });
+          return;
+        }
+
         await interaction.editReply({
-          content: `${userRankString}\n\n\`\`\`\n${formatTextToTable(
-            mapped.slice(page * 10 - 10, page * 10),
-            { headers: ["Rank", "User", "Level", "XP"] }
-          )}\n\`\`\``,
+          files: [attachment],
           components: [
             new ActionRowBuilder<ButtonBuilder>().addComponents(
               pageBack,

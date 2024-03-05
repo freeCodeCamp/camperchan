@@ -8,8 +8,8 @@ import { handleCodeOfConduct } from "./subcommands/community/handleCodeOfConduct
 import { handleContribute } from "./subcommands/community/handleContribute";
 import { handleForum } from "./subcommands/community/handleForum";
 import { handleLeaderboard } from "./subcommands/community/handleLeaderboard";
+import { handleProfile } from "./subcommands/community/handleProfile";
 import { handleQuote } from "./subcommands/community/handleQuote";
-import { handleRank } from "./subcommands/community/handleRank";
 import { handleTruism } from "./subcommands/community/handleTruism";
 
 const handlers: { [key: string]: Subcommand } = {
@@ -18,7 +18,7 @@ const handlers: { [key: string]: Subcommand } = {
   forum: handleForum,
   leaderboard: handleLeaderboard,
   quote: handleQuote,
-  rank: handleRank,
+  profile: handleProfile,
   truism: handleTruism
 };
 
@@ -58,12 +58,12 @@ export const community: Command = {
     )
     .addSubcommand(
       new SlashCommandSubcommandBuilder()
-        .setName("rank")
-        .setDescription("See your level in our community.")
+        .setName("profile")
+        .setDescription("See your community profile.")
         .addUserOption((option) =>
           option
             .setName("target")
-            .setDescription("The user to check the level of.")
+            .setDescription("The user who's profile you want to view")
         )
     )
     .addSubcommand(
