@@ -12,6 +12,7 @@ import {
 import { Command } from "./Command";
 import { Context } from "./Context";
 import { QuoteList } from "./Quotes";
+import { UserRecord } from "./UserRecord";
 
 export interface Camperbot extends Client {
   config: {
@@ -37,4 +38,7 @@ export interface Camperbot extends Client {
   homeGuild: Guild;
   reportChannel: TextBasedChannel;
   privateCategory: CategoryChannel;
+  learnAccounts: {
+    [userId: string]: UserRecord & { cacheTTL: Date };
+  };
 }

@@ -54,7 +54,11 @@ export const supporter: Command = {
         });
         return;
       }
-      const learnRecord = await fetchLearnRecord(bot, email);
+      const learnRecord = await fetchLearnRecord(
+        bot,
+        email,
+        interaction.user.id
+      );
       if (!learnRecord) {
         await interaction.editReply({
           content: `There does not appear to be a learn account associated with ${email}. If you believe this is an error, please contact Naomi.`

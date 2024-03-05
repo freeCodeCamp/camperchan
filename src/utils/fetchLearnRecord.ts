@@ -11,13 +11,21 @@ import { logHandler } from "./logHandler";
  *
  * @param {Camperbot} bot The bot's Discord instance.
  * @param {string} email The email to query.
+ * @param {string} userId The ID of the Discord user.
  * @returns {UserRecord | null} The resulting record, or null if error/404.
  */
 export const fetchLearnRecord = async (
   bot: Camperbot,
-  email: string
+  email: string,
+  userId: string
 ): Promise<UserRecord | null> => {
   try {
+    const cached = bot.learnAccounts[userId];
+    if (cached && cached.cacheTTL.getTime() < Date.now()) {
+      // Arbitrary key validation to ensure cached value is a record, and not just a ttl object.
+      return "isDonating" in cached ? cached : null;
+    }
+    delete bot.learnAccounts[userId];
     const {
       PROD_URI,
       PROD_REPLICA,
@@ -61,6 +69,15 @@ export const fetchLearnRecord = async (
       await errorHandler(bot, err);
       return null;
     })) as UserRecord | null;
+    const cacheTTL = new Date(Date.now() + 1000 * 60 * 60 * 24);
+    if (!bot.learnAccounts[userId]) {
+      bot.learnAccounts[userId] = record
+        ? { ...record, cacheTTL }
+        : {
+            email,
+            cacheTTL
+          };
+    }
     return record;
   } catch (err) {
     await errorHandler(bot, err);
