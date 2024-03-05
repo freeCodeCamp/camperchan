@@ -3,7 +3,46 @@ import { AttachmentBuilder } from "discord.js";
 import nodeHtmlToImage from "node-html-to-image";
 
 import { Camperbot } from "../interfaces/Camperbot";
+import { UserRecord } from "../interfaces/UserRecord";
 import { errorHandler } from "../utils/errorHandler";
+import { fetchLearnRecord } from "../utils/fetchLearnRecord";
+
+import { generatorMap } from "./generateCertSvg";
+
+const getCertificationSection = (
+  levelRecord: levels,
+  learnRecord: UserRecord | null
+): string => {
+  if (!levelRecord.learnEmail) {
+    return `<p>freeCodeCamp.org account has not been linked.</p>`;
+  }
+  if (!learnRecord) {
+    return `<p>Error loading freeCodeCamp.org account.</p>`;
+  }
+  const { profileUI } = learnRecord;
+  if (
+    !profileUI ||
+    profileUI.isLocked ||
+    !profileUI.showCerts ||
+    !profileUI.showTimeLine
+  ) {
+    return `<p>Certifications are set to private.</p>`;
+  }
+
+  const shouldMakeSVG = Object.entries(learnRecord).reduce(
+    (acc: (keyof typeof generatorMap)[], [key, val]) => {
+      if (key in generatorMap && val) {
+        acc.push(key as never);
+      }
+      return acc;
+    },
+    []
+  );
+  const generatedSVGs = shouldMakeSVG
+    .map((key) => generatorMap[key](levelRecord.colour))
+    .join("");
+  return generatedSVGs;
+};
 
 /**
  * Creates an image from the user's profile settings, converts it into a Discord
@@ -23,10 +62,16 @@ export const generateProfileImage = async (
       backgroundColour,
       backgroundImage,
       colour,
+      userId,
       userTag,
       level,
-      points
+      points,
+      learnEmail
     } = record;
+
+    const learn = learnEmail
+      ? await fetchLearnRecord(bot, learnEmail, userId)
+      : null;
 
     const html = `
     <style>
@@ -80,6 +125,24 @@ export const generateProfileImage = async (
         justify-items: center;
         align-items: center;
       }
+
+      .certs {
+        width: 100%;
+        height: 200px;
+        max-height: 200px;
+      }
+
+      .badges {
+        width: 100%;
+        height: 200px;
+        max-height: 200px;
+      }
+
+      .svg {
+        display: inline;
+        width: 100px;
+        height: 100px;
+      }
     </style>
     <body>
       <main>
@@ -91,7 +154,9 @@ export const generateProfileImage = async (
           </div>
         </div>
         <h2>Certifications</h2>
-        <p>Coming soon!</p>
+        <div class="certs">
+          ${getCertificationSection(record, learn)}
+        </div>
         <h2>Badges</h2>
         <p>Coming soon!</p>
       </main>

@@ -3,6 +3,18 @@
  */
 export interface UserRecord {
   email: string;
+  profileUI?: {
+    isLocked: boolean;
+    showAbout: boolean;
+    showCerts: boolean;
+    showDonation: boolean;
+    showHeatMap: boolean;
+    showLocation: boolean;
+    showName: boolean;
+    showPoints: boolean;
+    showPortfolio: boolean;
+    showTimeLine: boolean;
+  };
   isDonating?: boolean;
   isRespWebDesignCert?: boolean;
   is2018DataVisCert?: boolean;
