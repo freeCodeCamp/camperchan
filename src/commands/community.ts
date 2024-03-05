@@ -60,11 +60,6 @@ export const community: Command = {
       new SlashCommandSubcommandBuilder()
         .setName("profile")
         .setDescription("See your community profile.")
-        .addUserOption((option) =>
-          option
-            .setName("target")
-            .setDescription("The user who's profile you want to view")
-        )
     )
     .addSubcommand(
       new SlashCommandSubcommandBuilder()

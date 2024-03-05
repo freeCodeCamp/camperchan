@@ -41,7 +41,4 @@ export interface Camperbot extends Client {
   learnAccounts: {
     [userId: string]: UserRecord & { cacheTTL: Date };
   };
-  profileCalls: {
-    [userId: string]: number;
-  };
 }

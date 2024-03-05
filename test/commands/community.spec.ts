@@ -76,15 +76,7 @@ suite("community command", () => {
     const rank = subcommands.find((sub) => sub.name === "profile");
     assert.equal(rank?.name, "profile");
     assert.equal(rank?.description, "See your community profile.");
-    assert.lengthOf(rank?.options || "hi", 1);
-    const userOption = rank?.options[0].toJSON();
-    assert.equal(userOption?.name, "target");
-    assert.equal(
-      userOption?.description,
-      "The user who's profile you want to view"
-    );
-    assert.equal(userOption?.type, ApplicationCommandOptionType.User);
-    assert.isFalse(userOption?.required);
+    assert.lengthOf(rank?.options || "hi", 0);
   });
 
   test("has correct truism", () => {
