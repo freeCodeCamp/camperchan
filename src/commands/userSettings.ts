@@ -21,7 +21,7 @@ export const userSettings: Command = {
       option
         .setName("background-colour")
         .setDescription(
-          "The semi-transparent background color for your profile card must be a hex value."
+          "The semi-transparent background color for your profile card must be a 6-digit hex value."
         )
     )
     .addStringOption((option) =>
@@ -35,7 +35,7 @@ export const userSettings: Command = {
       option
         .setName("colour")
         .setDescription(
-          "The color for the text on your profile card must be a hex value."
+          "The color for the text on your profile card must be a 6-digit hex value."
         )
     )
     .addStringOption((option) =>
