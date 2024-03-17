@@ -4,7 +4,7 @@ export const Tags: Tag[] = [
   {
     name: "Please don't post pictures of code.",
     message:
-      "Pictures of code are hard to read and cannot be copied into a local IDE for debugging. Please send your actual code or a link to your repository, instead of a picture."
+      "Photos/screenshots of an error can be helpful, but it also helps to provide the complete code. Posting the code helps us help you better!\nYou can use a [discord code block](<https://gist.github.com/matthewzring/9f7bbfd102003963f9be7dbcf7d40e51#code-blocks>), [GitHub Gist](<https://gist.github.com/>), [GitHub repository](<https://docs.github.com/en/repositories/creating-and-managing-repositories/creating-a-new-repository>), or [PasteBin](<https://pastebin.com/>)."
   },
   {
     name: "For large blocks of code, use a PasteBin or Gist.",
