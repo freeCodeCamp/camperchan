@@ -13,24 +13,30 @@ export const userSettings: Command = {
     .addStringOption((option) =>
       option
         .setName("avatar")
-        .setDescription("The avatar to appear on your profile card.")
+        .setDescription(
+          "The avatar to appear on your profile card must be a URL that points to an image."
+        )
     )
     .addStringOption((option) =>
       option
         .setName("background-colour")
         .setDescription(
-          "The semi-transparent background colour for your profile card."
+          "The semi-transparent background color for your profile card must be a hex value."
         )
     )
     .addStringOption((option) =>
       option
         .setName("background-image")
-        .setDescription("The background image for your profile card.")
+        .setDescription(
+          "The background image for your profile card must be a URL that points to an image."
+        )
     )
     .addStringOption((option) =>
       option
         .setName("colour")
-        .setDescription("The colour for the text on your profile card.")
+        .setDescription(
+          "The color for the text on your profile card must be a hex value."
+        )
     )
     .addStringOption((option) =>
       option
