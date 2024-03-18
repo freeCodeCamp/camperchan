@@ -25,7 +25,7 @@ Next, head over to [MongoDB Atlas](https://www.mongodb.com/cloud/atlas) and eith
 
 The bot uses two Discord webhooks, one for debug logging and one for moderation action logs. For local testing, you can use the same webhook URL for both. Right-click on a channel in your server, select `Edit Channel`, and pick the `Integrations` tab on the sidebar. Click the `Create Webhook` button, give it a name, and copy the URL. Paste that as `DEBUG_HOOK` and `MOD_HOOK` in your `.env` file.
 
-If you haven't already enabled Developer Mode in your Discord client, You can do this by opening your user/app setting and selecting `Advanced`,  then toggling `Developer Mode` on.
+If you haven't already enabled Developer Mode in your Discord client, you can do this by opening your user/app setting and selecting `Advanced`,  then toggling `Developer Mode` on.
 
 Right-click on your Discord server icon (the one in which you'll be running the bot) and select `Copy ID`. This goes in your `.env` file as `HOME_GUILD`.
 
