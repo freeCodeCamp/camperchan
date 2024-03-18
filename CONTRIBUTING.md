@@ -25,6 +25,8 @@ Next, head over to [MongoDB Atlas](https://www.mongodb.com/cloud/atlas) and eith
 
 The bot uses two Discord webhooks, one for debug logging and one for moderation action logs. For local testing, you can use the same webhook URL for both. Right-click on a channel in your server, select `Edit Channel`, and pick the `Integrations` tab on the sidebar. Click the `Create Webhook` button, give it a name, and copy the URL. Paste that as `DEBUG_HOOK` and `MOD_HOOK` in your `.env` file.
 
+If you haven't already enabled Developer Mode in your Discord client, You can do this by opening your user/app setting and selecting `Advanced`,  then toggling `Developer Mode` on.
+
 Right-click on your Discord server icon (the one in which you'll be running the bot) and select `Copy ID`. This goes in your `.env` file as `HOME_GUILD`.
 
 > **Note:**
@@ -37,13 +39,13 @@ Finally, for the private conversation system, you need to specify a moderation r
 Install the dependencies:
 
 ```bash
-npm ci
+pnpm i --frozen-lockfile
 ```
 
 Build the code:
 
 ```bash
-npm run build
+pnpm run build
 ```
 
 ## Inviting the Bot
@@ -70,7 +72,7 @@ Discord marks specific gateway intents as "privileged". Back on your application
 Finally, everything should be set up to run the bot. Start it with:
 
 ```bash
-npm start
+pnpm start
 ```
 
 You should see the bot come online, and a message sent to your debug webhook letting you know the bot is ready.
@@ -80,7 +82,7 @@ You should see the bot come online, and a message sent to your debug webhook let
 We are happy to accept contributions to this project. Please ensure that all code contributions follow our standard:
 
 ```bash
-npm run lint
+pnpm run lint
 ```
 
 If you have any issues or questions, feel free to [ask us in Discord](https://discord.gg/KVUmVXA).
