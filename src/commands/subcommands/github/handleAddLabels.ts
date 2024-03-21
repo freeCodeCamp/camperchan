@@ -18,38 +18,36 @@ export const handleAddLabels: Subcommand = {
       const labels = interaction.options.getString("labels", true);
       const labelNames = labels.split(",").map((l) => l.trim());
 
-      const response = await Bot.octokit.request(
-        "GET /repos/{owner}/{repo}/labels",
-        {
-          owner: "freeCodeCamp",
-          repo: repo
-        }
-      );
+      const response = await Bot.octokit.rest.issues.listLabelsForRepo({
+        owner: "freeCodeCamp",
+        repo
+      });
 
       const presentLabels = response.data.map((x) => x.name.trim());
 
       if (
-        labelNames.every((requestedLabel) =>
+        !labelNames.every((requestedLabel) =>
           presentLabels.includes(requestedLabel)
         )
       ) {
-        await Bot.octokit.issues.addLabels({
-          owner: "freeCodeCamp",
-          issue_number: number,
-          repo,
-          labels: labelNames
-        });
-
-        await interaction.editReply({
-          content: `[Issue labels](<https://github.com/freeCodeCamp/${repo}/issues/${number}>) have been added: ${labelNames.join(
-            ", "
-          )}`
-        });
-      } else {
         await interaction.editReply({
           content: `${labelNames.join(", ")} were not found in the [Issue Labels List](<https://github.com/freeCodeCamp/${repo}/labels>) and will not be added to the issue.`
         });
+        return;
       }
+
+      await Bot.octokit.issues.addLabels({
+        owner: "freeCodeCamp",
+        issue_number: number,
+        repo,
+        labels: labelNames
+      });
+
+      await interaction.editReply({
+        content: `[Issue labels](<https://github.com/freeCodeCamp/${repo}/issues/${number}>) have been added: ${labelNames.join(
+          ", "
+        )}`
+      });
     } catch (err) {
       await errorHandler(Bot, err);
       await interaction.editReply(
