@@ -18,6 +18,24 @@ export const handleAddLabels: Subcommand = {
       const labels = interaction.options.getString("labels", true);
       const labelNames = labels.split(",").map((l) => l.trim());
 
+      const response = await Bot.octokit.rest.issues.listLabelsForRepo({
+        owner: "freeCodeCamp",
+        repo
+      });
+
+      const presentLabels = response.data.map((x) => x.name.trim());
+
+      if (
+        !labelNames.every((requestedLabel) =>
+          presentLabels.includes(requestedLabel)
+        )
+      ) {
+        await interaction.editReply({
+          content: `${labelNames.join(", ")} were not found in the [Issue Labels List](<https://github.com/freeCodeCamp/${repo}/labels>) and will not be added to the issue.`
+        });
+        return;
+      }
+
       await Bot.octokit.issues.addLabels({
         owner: "freeCodeCamp",
         issue_number: number,
