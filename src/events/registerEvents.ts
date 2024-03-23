@@ -1,3 +1,5 @@
+import { Events } from "discord.js";
+
 import { Camperbot } from "../interfaces/Camperbot";
 import { errorHandler } from "../utils/errorHandler";
 
@@ -17,30 +19,36 @@ import { handleThreadCreate } from "./handlers/handleThreadCreate";
  */
 export const registerEvents = async (Bot: Camperbot) => {
   try {
-    Bot.on("ready", async () => await handleReady(Bot));
-    Bot.on("messageCreate", async (msg) => await handleMessageCreate(Bot, msg));
+    Bot.on(Events.ClientReady, async () => await handleReady(Bot));
     Bot.on(
-      "messageUpdate",
+      Events.MessageCreate,
+      async (msg) => await handleMessageCreate(Bot, msg)
+    );
+    Bot.on(
+      Events.MessageUpdate,
       async (oldMsg, newMsg) => await handleMessageEdit(Bot, oldMsg, newMsg)
     );
-    Bot.on("messageDelete", async (msg) => await handleMessageDelete(Bot, msg));
     Bot.on(
-      "interactionCreate",
+      Events.MessageDelete,
+      async (msg) => await handleMessageDelete(Bot, msg)
+    );
+    Bot.on(
+      Events.InteractionCreate,
       async (interaction) => await handleInteractionCreate(Bot, interaction)
     );
     Bot.on(
-      "threadCreate",
+      Events.ThreadCreate,
       async (thread) => await handleThreadCreate(Bot, thread)
     );
     Bot.on(
-      "guildMemberAdd",
+      Events.GuildMemberAdd,
       async (member) => await handleMemberAdd(Bot, member)
     );
     Bot.on(
-      "guildMemberRemove",
+      Events.GuildMemberRemove,
       async (member) => await handleMemberRemove(Bot, member)
     );
-    Bot.on("error", async (err) => {
+    Bot.on(Events.Error, async (err) => {
       await errorHandler(Bot, err);
     });
   } catch (err) {
