@@ -2,6 +2,7 @@ import { EmbedBuilder } from "discord.js";
 
 import { Camperbot } from "../interfaces/Camperbot";
 
+import { customSubstring } from "./customSubstring";
 import { logHandler } from "./logHandler";
 
 /**
@@ -19,11 +20,13 @@ export const errorHandler = async (
   const error = err as Error;
   logHandler.log("error", error.message);
   const errorEmbed = new EmbedBuilder();
-  errorEmbed.setTitle(`Error occurred in ${context}!`);
-  errorEmbed.setDescription(`${error.message}`);
-  errorEmbed.addFields({
-    name: "Stack Trace:",
-    value: `\`\`\`\n${error.stack}\n\`\`\``
-  });
+  errorEmbed.setTitle(`Error occurred in ${customSubstring(context, 200)}!`);
+  errorEmbed.setDescription(`${customSubstring(error.message, 2000)}`);
+  errorEmbed.addFields([
+    {
+      name: "Stack Trace:",
+      value: `\`\`\`\n${customSubstring(error.stack ?? "", 1000)}\n\`\`\``
+    }
+  ]);
   await Bot.config.debugHook.send({ embeds: [errorEmbed] });
 };
