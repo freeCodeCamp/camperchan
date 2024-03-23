@@ -29,6 +29,7 @@ suite("generateConfig", () => {
     process.env.WELCOME_HOOK =
       "https://discord.com/api/webhooks/11111111111111111/AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA";
     process.env.GITHUB_TOKEN = "meow";
+    process.env.GHOST_TOKEN = "meow";
     const result = generateConfig();
     assert.equal(result.token, "Naomi");
     assert.equal(result.mongoUrl, "Was");
@@ -43,5 +44,6 @@ suite("generateConfig", () => {
     assert.equal(result.modHook.url, process.env.MOD_HOOK);
     assert.equal(result.welcomeHook.url, process.env.WELCOME_HOOK);
     assert.equal(result.githubToken, process.env.GITHUB_TOKEN);
+    assert.equal(result.ghostKey, process.env.GHOST_KEY);
   });
 });
