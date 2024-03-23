@@ -15,7 +15,7 @@ export const bookmark: Context = {
     name: "bookmark",
     type: ApplicationCommandType.Message
   },
-  run: async (Bot, interaction): Promise<void> => {
+  run: async (CamperChan, interaction): Promise<void> => {
     try {
       await interaction.deferReply({ ephemeral: true });
 
@@ -57,7 +57,7 @@ export const bookmark: Context = {
           );
         });
     } catch (err) {
-      await errorHandler(Bot, "bookmark context command", err);
+      await errorHandler(CamperChan, "bookmark context command", err);
       await interaction.editReply("Something went wrong.");
     }
   }

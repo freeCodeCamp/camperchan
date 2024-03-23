@@ -10,7 +10,7 @@ export const handleSyncLabels: Subcommand = {
       PermissionFlagsBits.KickMembers,
       PermissionFlagsBits.BanMembers
     ].some((p) => member.permissions.has(p)),
-  execute: async (Bot, interaction) => {
+  execute: async (CamperChan, interaction) => {
     try {
       await interaction.deferReply();
       const repo = interaction.options.getString("repository", true);
@@ -18,7 +18,7 @@ export const handleSyncLabels: Subcommand = {
       const labels = interaction.options.getString("labels", true);
       const labelNames = labels.split(",").map((l) => l.trim());
 
-      await Bot.octokit.issues.setLabels({
+      await CamperChan.octokit.issues.setLabels({
         owner: "freeCodeCamp",
         issue_number: number,
         repo,
@@ -31,7 +31,7 @@ export const handleSyncLabels: Subcommand = {
         )}`
       });
     } catch (err) {
-      await errorHandler(Bot, "sync labels subcommand", err);
+      await errorHandler(CamperChan, "sync labels subcommand", err);
       await interaction.editReply(
         `Something went wrong: ${
           (err as Error).message ??

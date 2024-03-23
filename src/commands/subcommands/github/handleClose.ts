@@ -22,7 +22,7 @@ export const handleClose: Subcommand = {
       PermissionFlagsBits.KickMembers,
       PermissionFlagsBits.BanMembers
     ].some((p) => member.permissions.has(p)),
-  execute: async (Bot, interaction) => {
+  execute: async (CamperChan, interaction) => {
     try {
       await interaction.deferReply();
       const repo = interaction.options.getString("repository", true);
@@ -30,7 +30,7 @@ export const handleClose: Subcommand = {
       const comment = interaction.options.getString("comment") ?? null;
       const isSpam = interaction.options.getBoolean("spam") ?? false;
 
-      const data = await Bot.octokit.issues
+      const data = await CamperChan.octokit.issues
         .get({
           owner: "freeCodeCamp",
           repo,
@@ -54,20 +54,20 @@ export const handleClose: Subcommand = {
         return;
       }
       const isPull = !!data.data.pull_request;
-      await Bot.octokit.issues.createComment({
+      await CamperChan.octokit.issues.createComment({
         owner: "freeCodeCamp",
         repo,
         issue_number: number,
         body: commentBody(isPull, comment)
       });
-      await Bot.octokit.issues.update({
+      await CamperChan.octokit.issues.update({
         owner: "freeCodeCamp",
         repo,
         issue_number: number,
         state: "closed"
       });
       if (isPull && isSpam) {
-        await Bot.octokit.issues.addLabels({
+        await CamperChan.octokit.issues.addLabels({
           owner: "freeCodeCamp",
           repo,
           issue_number: number,
@@ -80,7 +80,7 @@ export const handleClose: Subcommand = {
         }](<${data.data.html_url}>).`
       });
     } catch (err) {
-      await errorHandler(Bot, "close subcommand", err);
+      await errorHandler(CamperChan, "close subcommand", err);
       await interaction.editReply(
         `Something went wrong: ${
           (err as Error).message ??

@@ -8,7 +8,7 @@ export interface Context {
     type: 2 | 3;
   };
   run: (
-    Bot: ExtendedClient,
+    CamperChan: ExtendedClient,
     interaction: ContextMenuCommandInteraction
   ) => Promise<void>;
 }

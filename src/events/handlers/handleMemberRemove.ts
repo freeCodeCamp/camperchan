@@ -6,11 +6,11 @@ import { errorHandler } from "../../utils/errorHandler";
 /**
  * Logs a message to the debug hook when someone leaves the server.
  *
- * @param {ExtendedClient} Bot The bot's Discord instance.
+ * @param {ExtendedClient} CamperChan The CamperChan's Discord instance.
  * @param {GuildMember | PartialGuildMember} member The member that left the server.
  */
 export const handleMemberRemove = async (
-  Bot: ExtendedClient,
+  CamperChan: ExtendedClient,
   member: GuildMember | PartialGuildMember
 ) => {
   try {
@@ -38,12 +38,12 @@ export const handleMemberRemove = async (
     embed.setFooter({
       text: `ID: ${member.id}`
     });
-    await Bot.config.welcomeHook.send({
+    await CamperChan.config.welcomeHook.send({
       embeds: [embed],
       username: member.user.username,
       avatarURL: member.user.displayAvatarURL()
     });
   } catch (err) {
-    await errorHandler(Bot, "member remove event", err);
+    await errorHandler(CamperChan, "member remove event", err);
   }
 };

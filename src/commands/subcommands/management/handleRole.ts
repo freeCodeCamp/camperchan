@@ -12,7 +12,7 @@ import { errorHandler } from "../../../utils/errorHandler";
 export const handleRole: Subcommand = {
   permissionValidator: (member) =>
     member.permissions.has(PermissionFlagsBits.ManageGuild),
-  execute: async (Bot, interaction) => {
+  execute: async (CamperChan, interaction) => {
     try {
       await interaction.deferReply();
 
@@ -54,7 +54,7 @@ export const handleRole: Subcommand = {
         components
       });
     } catch (err) {
-      await errorHandler(Bot, "role subcommand", err);
+      await errorHandler(CamperChan, "role subcommand", err);
       await interaction.editReply("Something went wrong.");
     }
   }

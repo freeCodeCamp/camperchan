@@ -13,7 +13,7 @@ export const handleWarn: Subcommand = {
       PermissionFlagsBits.KickMembers,
       PermissionFlagsBits.BanMembers
     ].some((p) => member.permissions.has(p)),
-  execute: async (Bot, interaction) => {
+  execute: async (CamperChan, interaction) => {
     try {
       await interaction.deferReply();
       const { guild, member } = interaction;
@@ -26,20 +26,20 @@ export const handleWarn: Subcommand = {
         return;
       }
 
-      if (target.id === Bot.user?.id) {
-        await interaction.editReply("You cannot warn the bot.");
+      if (target.id === CamperChan.user?.id) {
+        await interaction.editReply("You cannot warn the CamperChan.");
         return;
       }
 
       const sentNotice = await sendModerationDm(
-        Bot,
+        CamperChan,
         "warn",
         target,
         guild.name,
         reason
       );
 
-      await updateHistory(Bot, "warn", target.id);
+      await updateHistory(CamperChan, "warn", target.id);
 
       const warnEmbed = new EmbedBuilder();
       warnEmbed.setTitle("A user has been warned.");
@@ -66,11 +66,11 @@ export const handleWarn: Subcommand = {
       await interaction.editReply(
         sentNotice ? "They have been warned." : "I could not warn them."
       );
-      await Bot.config.modHook.send({
+      await CamperChan.config.modHook.send({
         embeds: [warnEmbed]
       });
     } catch (err) {
-      await errorHandler(Bot, "warn subcommand", err);
+      await errorHandler(CamperChan, "warn subcommand", err);
       await interaction.editReply("Something went wrong.");
     }
   }

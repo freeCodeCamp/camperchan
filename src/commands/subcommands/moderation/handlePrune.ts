@@ -6,7 +6,7 @@ import { errorHandler } from "../../../utils/errorHandler";
 export const handlePrune: Subcommand = {
   permissionValidator: (member) =>
     [PermissionFlagsBits.ManageMessages].some((p) => member.permissions.has(p)),
-  execute: async (Bot, interaction) => {
+  execute: async (CamperChan, interaction) => {
     try {
       await interaction.deferReply({ ephemeral: true });
       const { channel } = interaction;
@@ -23,7 +23,7 @@ export const handlePrune: Subcommand = {
       }
       await interaction.editReply({ content: `Deleted ${count} messages.` });
     } catch (err) {
-      await errorHandler(Bot, "prune subcommand", err);
+      await errorHandler(CamperChan, "prune subcommand", err);
       await interaction.editReply("Something went wrong.");
     }
   }

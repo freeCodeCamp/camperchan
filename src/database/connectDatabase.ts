@@ -7,14 +7,14 @@ import { errorHandler } from "../utils/errorHandler";
  * Handles connecting to the database and attaching the database to
  * ExtendedClient.
  *
- * @param {ExtendedClient} Bot The bot's Discord instance.
+ * @param {ExtendedClient} CamperChan The CamperChan's Discord instance.
  */
-export const connectDatabase = async (Bot: ExtendedClient) => {
+export const connectDatabase = async (CamperChan: ExtendedClient) => {
   try {
-    Bot.db = new PrismaClient();
-    await Bot.db.$connect();
-    await Bot.config.debugHook.send("Database Connected");
+    CamperChan.db = new PrismaClient();
+    await CamperChan.db.$connect();
+    await CamperChan.config.debugHook.send("Database Connected");
   } catch (err) {
-    await errorHandler(Bot, "database connection", err);
+    await errorHandler(CamperChan, "database connection", err);
   }
 };

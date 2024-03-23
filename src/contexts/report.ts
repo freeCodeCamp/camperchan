@@ -18,7 +18,7 @@ export const report: Context = {
     name: "report",
     type: ApplicationCommandType.Message
   },
-  run: async (Bot, interaction) => {
+  run: async (CamperChan, interaction) => {
     try {
       const guild = interaction.guild;
       if (!guild) {
@@ -38,7 +38,7 @@ export const report: Context = {
         return;
       }
 
-      const reportChannel = Bot.reportChannel;
+      const reportChannel = CamperChan.reportChannel;
 
       const author = message.author;
 
@@ -94,7 +94,7 @@ export const report: Context = {
         .addComponents(modalRow);
       await interaction.showModal(modal);
     } catch (err) {
-      await errorHandler(Bot, "report context command", err);
+      await errorHandler(CamperChan, "report context command", err);
     }
   }
 };

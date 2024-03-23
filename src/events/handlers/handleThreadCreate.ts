@@ -4,13 +4,13 @@ import { ExtendedClient } from "../../interfaces/ExtendedClient";
 import { errorHandler } from "../../utils/errorHandler";
 
 /**
- * Has the bot join a thread when it is created.
+ * Has the CamperChan join a thread when it is created.
  *
- * @param {ExtendedClient} Bot The bot's Discord instance.
+ * @param {ExtendedClient} CamperChan The CamperChan's Discord instance.
  * @param {ThreadChannel} thread The thread that was created.
  */
 export const handleThreadCreate = async (
-  Bot: ExtendedClient,
+  CamperChan: ExtendedClient,
   thread: ThreadChannel
 ) => {
   try {
@@ -24,8 +24,8 @@ export const handleThreadCreate = async (
       { name: "Channel:", value: `<#${thread.parentId}>`, inline: true }
     ]);
 
-    await Bot.config.messageHook.send({ embeds: [embed] });
+    await CamperChan.config.messageHook.send({ embeds: [embed] });
   } catch (err) {
-    await errorHandler(Bot, "thread create event", err);
+    await errorHandler(CamperChan, "thread create event", err);
   }
 };

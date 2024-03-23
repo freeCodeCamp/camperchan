@@ -4,15 +4,17 @@ import { errorHandler } from "../utils/errorHandler";
 /**
  * Sends the reminder for the 100 days of code.
  *
- * @param {ExtendedClient} bot The bot's Discord instance.
+ * @param {ExtendedClient} CamperChan The CamperChan's Discord instance.
  */
-export const send100DaysOfCode = async (bot: ExtendedClient) => {
+export const send100DaysOfCode = async (CamperChan: ExtendedClient) => {
   try {
     const channel =
-      bot.homeGuild.channels.cache.get("697124514982527086") ||
-      (await bot.homeGuild.channels.fetch("697124514982527086"));
+      CamperChan.homeGuild.channels.cache.get("697124514982527086") ||
+      (await CamperChan.homeGuild.channels.fetch("697124514982527086"));
     if (!channel || !("send" in channel)) {
-      await bot.config.debugHook.send("Cannot find 100 days of code channel.");
+      await CamperChan.config.debugHook.send(
+        "Cannot find 100 days of code channel."
+      );
       return;
     }
 
@@ -29,6 +31,6 @@ Heya <@&1189043630489473074> friends! This is your daily reminder to post your p
 To opt in/out of these notifications, visit <id:customize>.`
     });
   } catch (err) {
-    await errorHandler(bot, "send 100 days of code module", err);
+    await errorHandler(CamperChan, "send 100 days of code module", err);
   }
 };

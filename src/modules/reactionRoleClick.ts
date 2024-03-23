@@ -6,11 +6,11 @@ import { errorHandler } from "../utils/errorHandler";
 /**
  * Handles the logic when a button created by the `role` command is clicked.
  *
- * @param {ExtendedClient} Bot ExtendedClient's discord instance.
+ * @param {ExtendedClient} CamperChan ExtendedClient's discord instance.
  * @param {ButtonInteraction} interaction The interaction payload from Discord.
  */
 export const reactionRoleClick = async (
-  Bot: ExtendedClient,
+  CamperChan: ExtendedClient,
   interaction: ButtonInteraction
 ) => {
   try {
@@ -18,7 +18,7 @@ export const reactionRoleClick = async (
     await interaction.deferReply({ ephemeral: true });
     const { guild, customId, member } = interaction;
 
-    // The third condition is a type-guard, essentially. Our bot receives interactions
+    // The third condition is a type-guard, essentially. Our CamperChan receives interactions
     // over the gateway, but bots can alternatively receive interactions via HTTP requests.
     // The type-defs are different for these, so we're excluding the HTTP request types.
     if (!guild || !member || Array.isArray(member.roles)) {
@@ -48,7 +48,7 @@ export const reactionRoleClick = async (
     await member.roles.add(role);
     await interaction.editReply(`Added the ${role.name} role.`);
   } catch (err) {
-    await errorHandler(Bot, "reaction role click module", err);
+    await errorHandler(CamperChan, "reaction role click module", err);
     await interaction.editReply("Something went wrong.");
   }
 };

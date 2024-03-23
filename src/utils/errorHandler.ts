@@ -6,14 +6,14 @@ import { customSubstring } from "./customSubstring";
 import { logHandler } from "./logHandler";
 
 /**
- * Generates an embed and sends it to the Bot's debug hook.
+ * Generates an embed and sends it to the CamperChan's debug hook.
  *
- * @param {ExtendedClient} Bot The bot's discord instance.
+ * @param {ExtendedClient} CamperChan The CamperChan's discord instance.
  * @param {string} context A description of where the error occurred.
  * @param {Error} err The error to be logged.
  */
 export const errorHandler = async (
-  Bot: ExtendedClient,
+  CamperChan: ExtendedClient,
   context: string,
   err: unknown
 ) => {
@@ -28,5 +28,5 @@ export const errorHandler = async (
       value: `\`\`\`\n${customSubstring(error.stack ?? "", 1000)}\n\`\`\``
     }
   ]);
-  await Bot.config.debugHook.send({ embeds: [errorEmbed] });
+  await CamperChan.config.debugHook.send({ embeds: [errorEmbed] });
 };

@@ -13,7 +13,7 @@ import { errorHandler } from "../../../utils/errorHandler";
 export const handleMute: Subcommand = {
   permissionValidator: (member) =>
     member.permissions.has(PermissionFlagsBits.ModerateMembers),
-  execute: async (Bot, interaction) => {
+  execute: async (CamperChan, interaction) => {
     try {
       await interaction.deferReply();
       const { guild, member } = interaction;
@@ -52,8 +52,8 @@ export const handleMute: Subcommand = {
         await interaction.editReply("You cannot mute yourself.");
         return;
       }
-      if (target.id === Bot.user?.id) {
-        await interaction.editReply("You cannot mute the bot.");
+      if (target.id === CamperChan.user?.id) {
+        await interaction.editReply("You cannot mute the CamperChan.");
         return;
       }
 
@@ -67,7 +67,7 @@ export const handleMute: Subcommand = {
       }
 
       const sentNotice = await sendModerationDm(
-        Bot,
+        CamperChan,
         "mute",
         target,
         guild.name,
@@ -76,7 +76,7 @@ export const handleMute: Subcommand = {
 
       await targetMember.timeout(durationMilliseconds, reason);
 
-      await updateHistory(Bot, "mute", target.id);
+      await updateHistory(CamperChan, "mute", target.id);
 
       const muteEmbed = new EmbedBuilder();
       muteEmbed.setTitle("A user has been muted!");
@@ -104,13 +104,13 @@ export const handleMute: Subcommand = {
         text: `ID: ${target.id}`
       });
 
-      await Bot.config.modHook.send({ embeds: [muteEmbed] });
+      await CamperChan.config.modHook.send({ embeds: [muteEmbed] });
 
       await interaction.editReply({
         content: "They have been muted!"
       });
     } catch (err) {
-      await errorHandler(Bot, "mute subcommand", err);
+      await errorHandler(CamperChan, "mute subcommand", err);
       await interaction.editReply("Something went wrong.");
     }
   }

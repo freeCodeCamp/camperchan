@@ -7,10 +7,13 @@ import { errorHandler } from "../utils/errorHandler";
 /**
  * Processes level data for a user.
  *
- * @param {ExtendedClient} Bot The bot's Discord instance.
+ * @param {ExtendedClient} CamperChan The CamperChan's Discord instance.
  * @param {Message} message The message payload from Discord.
  */
-export const levelListener = async (Bot: ExtendedClient, message: Message) => {
+export const levelListener = async (
+  CamperChan: ExtendedClient,
+  message: Message
+) => {
   try {
     const { author, content } = message;
 
@@ -20,7 +23,7 @@ export const levelListener = async (Bot: ExtendedClient, message: Message) => {
 
     const bonus = Math.floor(content.length / 10);
     const pointsEarned = Math.floor(Math.random() * (20 + bonus)) + 5;
-    const user = await Bot.db.levels.upsert({
+    const user = await CamperChan.db.levels.upsert({
       where: {
         userId: author.id
       },
@@ -50,7 +53,7 @@ export const levelListener = async (Bot: ExtendedClient, message: Message) => {
       levelUp = true;
     }
 
-    await Bot.db.levels.update({
+    await CamperChan.db.levels.update({
       where: {
         userId: author.id
       },
@@ -69,6 +72,6 @@ export const levelListener = async (Bot: ExtendedClient, message: Message) => {
       });
     }
   } catch (err) {
-    await errorHandler(Bot, "level listener module", err);
+    await errorHandler(CamperChan, "level listener module", err);
   }
 };

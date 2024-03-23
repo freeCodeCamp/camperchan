@@ -18,7 +18,7 @@ export const translator: Command = {
         .setRequired(true)
         .setAutocomplete(true)
     ),
-  run: async (bot, interaction) => {
+  run: async (CamperChan, interaction) => {
     try {
       await interaction.deferReply({ ephemeral: true });
 
@@ -26,7 +26,7 @@ export const translator: Command = {
         .getString("language", true)
         .toLowerCase();
       const isValidLang = Languages.find((l) => l.toLowerCase() === lang);
-      const isValidRole = bot.homeGuild.roles.cache.find(
+      const isValidRole = CamperChan.homeGuild.roles.cache.find(
         (r) => r.name.toLowerCase() === lang
       );
       if (!isValidLang) {
@@ -51,7 +51,7 @@ export const translator: Command = {
       await interaction.member.roles.add(isValidRole.id);
       await interaction.editReply(`You are now in the ${lang} group.`);
     } catch (err) {
-      await errorHandler(bot, "translator command", err);
+      await errorHandler(CamperChan, "translator command", err);
     }
   }
 };

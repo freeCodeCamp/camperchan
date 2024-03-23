@@ -10,5 +10,8 @@ export interface Command {
   data:
     | SlashCommandSubcommandsOnlyBuilder
     | Omit<SlashCommandBuilder, "addSubcommand" | "addSubcommandGroup">;
-  run: (Bot: ExtendedClient, interaction: GuildCommandInteraction) => Promise<void>;
+  run: (
+    CamperChan: ExtendedClient,
+    interaction: GuildCommandInteraction
+  ) => Promise<void>;
 }

@@ -3,8 +3,8 @@ import { join } from "path";
 
 import { assert } from "chai";
 
-import { ExtendedClient } from "../../src/interfaces/ExtendedClient";
 import { Command } from "../../src/interfaces/Command";
+import { ExtendedClient } from "../../src/interfaces/ExtendedClient";
 import { loadCommands } from "../../src/utils/loadCommands";
 
 suite("loadCommands", () => {

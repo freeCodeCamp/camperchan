@@ -6,12 +6,15 @@ import { errorHandler } from "../utils/errorHandler";
 /**
  * Tracks message counts in the database. To be used in our contributor reports.
  *
- * @param {ExtendedClient} bot The bot's Discord instance.
+ * @param {ExtendedClient} CamperChan The CamperChan's Discord instance.
  * @param {Message} message The message payload from Discord.
  */
-export const messageCounter = async (bot: ExtendedClient, message: Message) => {
+export const messageCounter = async (
+  CamperChan: ExtendedClient,
+  message: Message
+) => {
   try {
-    await bot.db.messages.upsert({
+    await CamperChan.db.messages.upsert({
       where: {
         userId: message.author.id
       },
@@ -28,6 +31,6 @@ export const messageCounter = async (bot: ExtendedClient, message: Message) => {
       }
     });
   } catch (err) {
-    await errorHandler(bot, "message counter module", err);
+    await errorHandler(CamperChan, "message counter module", err);
   }
 };

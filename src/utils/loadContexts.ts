@@ -1,8 +1,8 @@
 import { readdir } from "fs/promises";
 import { join } from "path";
 
-import { ExtendedClient } from "../interfaces/ExtendedClient";
 import { Context } from "../interfaces/Context";
+import { ExtendedClient } from "../interfaces/ExtendedClient";
 
 import { errorHandler } from "./errorHandler";
 import { logHandler } from "./logHandler";
@@ -11,10 +11,12 @@ import { logHandler } from "./logHandler";
  * Reads the `/contexts` directory and dynamically imports the files,
  * then pushes the imported data to an array.
  *
- * @param {ExtendedClient} Bot Bot's Discord instance.
+ * @param {ExtendedClient} CamperChan CamperChan's Discord instance.
  * @returns {Context[]} Array of Context objects representing the imported commands.
  */
-export const loadContexts = async (Bot: ExtendedClient): Promise<Context[]> => {
+export const loadContexts = async (
+  CamperChan: ExtendedClient
+): Promise<Context[]> => {
   try {
     const result: Context[] = [];
     const files = await readdir(
@@ -32,7 +34,7 @@ export const loadContexts = async (Bot: ExtendedClient): Promise<Context[]> => {
     }
     return result;
   } catch (err) {
-    await errorHandler(Bot, "load contexts module", err);
+    await errorHandler(CamperChan, "load contexts module", err);
     return [];
   }
 };

@@ -6,12 +6,12 @@ import { errorHandler } from "../../utils/errorHandler";
 /**
  * Processes the voice state update event from Discord.
  *
- * @param {ExtendedClient} bot The bot's Discord instance.
+ * @param {ExtendedClient} CamperChan The CamperChan's Discord instance.
  * @param {VoiceState} oldState The previous voice payload from Discord.
  * @param {VoiceState} newState The updated voice payload from Discord.
  */
 export const handleVoiceStateUpdate = async (
-  bot: ExtendedClient,
+  CamperChan: ExtendedClient,
   oldState: VoiceState,
   newState: VoiceState
 ) => {
@@ -19,12 +19,12 @@ export const handleVoiceStateUpdate = async (
     if (
       !oldState.channelId &&
       newState.channelId &&
-      newState.channelId === bot.event?.channelId &&
-      !bot.event.userIds.includes(newState.id)
+      newState.channelId === CamperChan.event?.channelId &&
+      !CamperChan.event.userIds.includes(newState.id)
     ) {
-      bot.event.userIds.push(newState.id);
+      CamperChan.event.userIds.push(newState.id);
     }
   } catch (err) {
-    await errorHandler(bot, "voice state update event", err);
+    await errorHandler(CamperChan, "voice state update event", err);
   }
 };

@@ -8,7 +8,7 @@ import { errorHandler } from "../../../utils/errorHandler";
 export const handleUnban: Subcommand = {
   permissionValidator: (member) =>
     member.permissions.has(PermissionFlagsBits.BanMembers),
-  execute: async (Bot, interaction) => {
+  execute: async (CamperChan, interaction) => {
     try {
       await interaction.deferReply();
       const { guild, member } = interaction;
@@ -19,8 +19,8 @@ export const handleUnban: Subcommand = {
         await interaction.editReply("You cannot unban yourself.");
         return;
       }
-      if (target.id === Bot.user?.id) {
-        await interaction.editReply("You cannot unban the bot.");
+      if (target.id === CamperChan.user?.id) {
+        await interaction.editReply("You cannot unban the CamperChan.");
         return;
       }
 
@@ -33,7 +33,7 @@ export const handleUnban: Subcommand = {
 
       await guild.bans.remove(target.id);
 
-      await updateHistory(Bot, "unban", target.id);
+      await updateHistory(CamperChan, "unban", target.id);
 
       const banLogEmbed = new EmbedBuilder();
       banLogEmbed.setTitle("Member unban.");
@@ -55,12 +55,12 @@ export const handleUnban: Subcommand = {
         text: `ID: ${target.id}`
       });
 
-      await Bot.config.modHook.send({ embeds: [banLogEmbed] });
+      await CamperChan.config.modHook.send({ embeds: [banLogEmbed] });
       await interaction.editReply({
         content: "They have been unbanned."
       });
     } catch (err) {
-      await errorHandler(Bot, "unban subcommand", err);
+      await errorHandler(CamperChan, "unban subcommand", err);
       await interaction.editReply("Something went wrong.");
     }
   }

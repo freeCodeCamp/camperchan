@@ -6,10 +6,10 @@ import { errorHandler } from "./errorHandler";
 /**
  * Fetches quote data from the freeCodeCamp repository.
  *
- * @param {ExtendedClient} Bot The bot's Discord instance.
+ * @param {ExtendedClient} CamperChan The CamperChan's Discord instance.
  * @returns {QuoteList} The quote data.
  */
-export const loadQuotes = async (Bot: ExtendedClient) => {
+export const loadQuotes = async (CamperChan: ExtendedClient) => {
   try {
     const quoteFetch = await fetch(
       "https://raw.githubusercontent.com/freeCodeCamp/freeCodeCamp/main/client/i18n/locales/english/motivation.json"
@@ -17,7 +17,7 @@ export const loadQuotes = async (Bot: ExtendedClient) => {
     const quoteData = (await quoteFetch.json()) as QuoteList;
     return quoteData;
   } catch (err) {
-    await errorHandler(Bot, "load quotes module", err);
+    await errorHandler(CamperChan, "load quotes module", err);
     return {
       compliments: ["No data found!"],
       motivationalQuotes: [

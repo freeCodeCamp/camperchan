@@ -6,7 +6,7 @@ import { GuildCommandInteraction } from "./GuildCommandInteraction";
 export interface Subcommand {
   permissionValidator: (member: GuildMember) => boolean;
   execute: (
-    bot: ExtendedClient,
+    CamperChan: ExtendedClient,
     interaction: GuildCommandInteraction
   ) => Promise<void>;
 }

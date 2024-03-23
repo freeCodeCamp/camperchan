@@ -11,7 +11,7 @@ export const handleComment: Subcommand = {
       PermissionFlagsBits.KickMembers,
       PermissionFlagsBits.BanMembers
     ].some((p) => member.permissions.has(p)),
-  execute: async (Bot, interaction) => {
+  execute: async (CamperChan, interaction) => {
     try {
       await interaction.deferReply();
       const repo = interaction.options.getString("repository", true);
@@ -26,7 +26,7 @@ export const handleComment: Subcommand = {
         return;
       }
 
-      const comment = await Bot.octokit.issues
+      const comment = await CamperChan.octokit.issues
         .createComment({
           owner: "freeCodeCamp",
           repo,
@@ -46,7 +46,7 @@ export const handleComment: Subcommand = {
         content: `Successfully added a [comment](<${comment.data.html_url}>)`
       });
     } catch (err) {
-      await errorHandler(Bot, "comment subcommand", err);
+      await errorHandler(CamperChan, "comment subcommand", err);
       await interaction.editReply(
         `Something went wrong: ${
           (err as Error).message ??

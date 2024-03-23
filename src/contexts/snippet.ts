@@ -16,7 +16,7 @@ export const snippet: Context = {
     name: "snippet",
     type: 3
   },
-  run: async (bot, interaction) => {
+  run: async (CamperChan, interaction) => {
     try {
       await interaction.deferReply({ ephemeral: true });
       if (
@@ -89,7 +89,7 @@ export const snippet: Context = {
           .catch(() => null);
       });
     } catch (err) {
-      await errorHandler(bot, "snippet context command", err);
+      await errorHandler(CamperChan, "snippet context command", err);
     }
   }
 };

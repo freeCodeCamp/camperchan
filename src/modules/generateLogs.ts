@@ -10,16 +10,16 @@ import { errorHandler } from "../utils/errorHandler";
  * To run when a private channel is closed. Finds the channel log file,
  * creates a message attachement with the logs, and deletes the file.
  *
- * @param {ExtendedClient} Bot The bot's Discord instance.
+ * @param {ExtendedClient} CamperChan The CamperChan's Discord instance.
  * @param {string} channelId The channel ID of the private channel.
  * @returns {Promise<AttachmentBuilder>} The log file as a Discord attachment.
  */
 export const generateLogs = async (
-  Bot: ExtendedClient,
+  CamperChan: ExtendedClient,
   channelId: string
 ): Promise<AttachmentBuilder> => {
   try {
-    delete Bot.privateLogs[channelId];
+    delete CamperChan.privateLogs[channelId];
 
     const logs = await readFile(
       join(process.cwd(), "logs", `${channelId}.txt`),
@@ -34,7 +34,7 @@ export const generateLogs = async (
 
     return attachment;
   } catch (err) {
-    await errorHandler(Bot, "generate logs module", err);
+    await errorHandler(CamperChan, "generate logs module", err);
     return new AttachmentBuilder(
       Buffer.from("An error occurred fetching these logs.", "utf-8"),
       { name: "log.txt" }
