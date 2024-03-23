@@ -25,6 +25,6 @@ export const handleVoiceStateUpdate = async (
       bot.event.userIds.push(newState.id);
     }
   } catch (err) {
-    await errorHandler(bot, err);
+    await errorHandler(bot, "voice state update event", err);
   }
 };

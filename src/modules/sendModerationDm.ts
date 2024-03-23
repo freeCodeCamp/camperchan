@@ -46,7 +46,7 @@ export const sendModerationDm = async (
       .catch(() => false);
     return sent;
   } catch (err) {
-    await errorHandler(Bot, err);
+    await errorHandler(Bot, "send moderation dm module", err);
     return false;
   }
 };

@@ -169,7 +169,7 @@ export const userSettings: Command = {
 
       await interaction.editReply({ content: responses.join("\n") });
     } catch (err) {
-      await errorHandler(bot, err);
+      await errorHandler(bot, "user settings command", err);
     }
   }
 };

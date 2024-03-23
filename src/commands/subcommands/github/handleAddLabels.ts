@@ -49,7 +49,7 @@ export const handleAddLabels: Subcommand = {
         )}`
       });
     } catch (err) {
-      await errorHandler(Bot, err);
+      await errorHandler(Bot, "add labels subcommand", err);
       await interaction.editReply(
         `Something went wrong: ${
           (err as Error).message ??

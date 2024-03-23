@@ -34,7 +34,7 @@ export const handleContribute: Subcommand = {
       );
       await interaction.editReply({ embeds: [modEmbed] });
     } catch (err) {
-      await errorHandler(Bot, err);
+      await errorHandler(Bot, "contribute subcommand", err);
       await interaction.editReply("Something went wrong.");
     }
   }

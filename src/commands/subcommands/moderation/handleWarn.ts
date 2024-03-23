@@ -70,7 +70,7 @@ export const handleWarn: Subcommand = {
         embeds: [warnEmbed]
       });
     } catch (err) {
-      await errorHandler(Bot, err);
+      await errorHandler(Bot, "warn subcommand", err);
       await interaction.editReply("Something went wrong.");
     }
   }

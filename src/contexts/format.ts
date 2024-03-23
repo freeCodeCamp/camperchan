@@ -16,7 +16,7 @@ export const format: Context = {
       const formatted = await addFormatting(message);
       await interaction.editReply(formatted);
     } catch (err) {
-      await errorHandler(Bot, err);
+      await errorHandler(Bot, "format context command", err);
       await interaction.editReply("Something went wrong.");
     }
   }

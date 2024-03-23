@@ -62,6 +62,6 @@ export const handleGuildScheduledEvents = async (
       delete bot.event;
     }
   } catch (err) {
-    await errorHandler(bot, err);
+    await errorHandler(bot, "guild scheduled events event", err);
   }
 };

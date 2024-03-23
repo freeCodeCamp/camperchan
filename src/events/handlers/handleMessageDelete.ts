@@ -63,6 +63,6 @@ export const handleMessageDelete = async (
       );
     }
   } catch (err) {
-    await errorHandler(Bot, err);
+    await errorHandler(Bot, "message delete event", err);
   }
 };

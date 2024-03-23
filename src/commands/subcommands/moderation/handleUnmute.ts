@@ -74,7 +74,7 @@ export const handleUnmute: Subcommand = {
         content: "That user has been unmuted."
       });
     } catch (err) {
-      await errorHandler(Bot, err);
+      await errorHandler(Bot, "unmute subcommand", err);
       await interaction.editReply("Something went wrong!");
     }
   }

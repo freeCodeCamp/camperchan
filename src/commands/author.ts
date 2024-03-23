@@ -81,7 +81,7 @@ export const author: Command = {
           "Congrats! You now have the authors role, with access to special channels."
       });
     } catch (err) {
-      await errorHandler(bot, err);
+      await errorHandler(bot, "author command", err);
     }
   }
 };

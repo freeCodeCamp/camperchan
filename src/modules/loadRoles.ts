@@ -35,6 +35,6 @@ export const loadRoles = async (bot: Camperbot) => {
       content: "Language roles loaded~!"
     });
   } catch (err) {
-    await errorHandler(bot, err);
+    await errorHandler(bot, "load roles module", err);
   }
 };

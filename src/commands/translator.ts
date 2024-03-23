@@ -51,7 +51,7 @@ export const translator: Command = {
       await interaction.member.roles.add(isValidRole.id);
       await interaction.editReply(`You are now in the ${lang} group.`);
     } catch (err) {
-      await errorHandler(bot, err);
+      await errorHandler(bot, "translator command", err);
     }
   }
 };

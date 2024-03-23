@@ -36,7 +36,7 @@ export const loadCommands = async (Bot: Camperbot): Promise<Command[]> => {
     }
     return result;
   } catch (err) {
-    await errorHandler(Bot, err);
+    await errorHandler(Bot, "load commands module", err);
     return [];
   }
 };

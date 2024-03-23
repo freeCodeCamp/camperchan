@@ -26,6 +26,6 @@ export const handleThreadCreate = async (
 
     await Bot.config.messageHook.send({ embeds: [embed] });
   } catch (err) {
-    await errorHandler(Bot, err);
+    await errorHandler(Bot, "thread create event", err);
   }
 };

@@ -28,6 +28,6 @@ export const messageCounter = async (bot: Camperbot, message: Message) => {
       }
     });
   } catch (err) {
-    await errorHandler(bot, err);
+    await errorHandler(bot, "message counter module", err);
   }
 };

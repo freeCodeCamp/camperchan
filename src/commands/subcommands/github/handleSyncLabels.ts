@@ -31,7 +31,7 @@ export const handleSyncLabels: Subcommand = {
         )}`
       });
     } catch (err) {
-      await errorHandler(Bot, err);
+      await errorHandler(Bot, "sync labels subcommand", err);
       await interaction.editReply(
         `Something went wrong: ${
           (err as Error).message ??

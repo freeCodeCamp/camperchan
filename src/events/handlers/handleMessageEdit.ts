@@ -68,6 +68,6 @@ export const handleMessageEdit = async (
 
     await Bot.config.messageHook.send({ embeds: [updateEmbed] });
   } catch (err) {
-    await errorHandler(Bot, err);
+    await errorHandler(Bot, "message edit event", err);
   }
 };

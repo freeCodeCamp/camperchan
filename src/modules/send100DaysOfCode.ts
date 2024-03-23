@@ -29,6 +29,6 @@ Heya <@&1189043630489473074> friends! This is your daily reminder to post your p
 To opt in/out of these notifications, visit <id:customize>.`
     });
   } catch (err) {
-    await errorHandler(bot, err);
+    await errorHandler(bot, "send 100 days of code module", err);
   }
 };

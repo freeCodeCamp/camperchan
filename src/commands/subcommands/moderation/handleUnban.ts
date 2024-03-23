@@ -60,7 +60,7 @@ export const handleUnban: Subcommand = {
         content: "They have been unbanned."
       });
     } catch (err) {
-      await errorHandler(Bot, err);
+      await errorHandler(Bot, "unban subcommand", err);
       await interaction.editReply("Something went wrong.");
     }
   }

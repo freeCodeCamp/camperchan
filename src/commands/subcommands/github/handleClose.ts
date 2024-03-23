@@ -80,7 +80,7 @@ export const handleClose: Subcommand = {
         }](<${data.data.html_url}>).`
       });
     } catch (err) {
-      await errorHandler(Bot, err);
+      await errorHandler(Bot, "close subcommand", err);
       await interaction.editReply(
         `Something went wrong: ${
           (err as Error).message ??

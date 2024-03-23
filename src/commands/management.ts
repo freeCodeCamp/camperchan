@@ -78,7 +78,7 @@ export const management: Command = {
       }
       await handler.execute(bot, interaction);
     } catch (err) {
-      await errorHandler(bot, err);
+      await errorHandler(bot, "management command", err);
     }
   }
 };

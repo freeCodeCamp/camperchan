@@ -54,7 +54,7 @@ export const handleRole: Subcommand = {
         components
       });
     } catch (err) {
-      await errorHandler(Bot, err);
+      await errorHandler(Bot, "role subcommand", err);
       await interaction.editReply("Something went wrong.");
     }
   }

@@ -48,7 +48,7 @@ export const reactionRoleClick = async (
     await member.roles.add(role);
     await interaction.editReply(`Added the ${role.name} role.`);
   } catch (err) {
-    await errorHandler(Bot, err);
+    await errorHandler(Bot, "reaction role click module", err);
     await interaction.editReply("Something went wrong.");
   }
 };

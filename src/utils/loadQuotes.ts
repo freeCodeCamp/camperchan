@@ -17,7 +17,7 @@ export const loadQuotes = async (Bot: Camperbot) => {
     const quoteData = (await quoteFetch.json()) as QuoteList;
     return quoteData;
   } catch (err) {
-    await errorHandler(Bot, err);
+    await errorHandler(Bot, "load quotes module", err);
     return {
       compliments: ["No data found!"],
       motivationalQuotes: [

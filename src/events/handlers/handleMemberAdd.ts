@@ -33,6 +33,6 @@ export const handleMemberAdd = async (
       avatarURL: member.user.displayAvatarURL()
     });
   } catch (err) {
-    await errorHandler(Bot, err);
+    await errorHandler(Bot, "member add event", err);
   }
 };

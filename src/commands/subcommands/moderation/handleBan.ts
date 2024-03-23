@@ -78,7 +78,7 @@ export const handleBan: Subcommand = {
         content: "They have been banned."
       });
     } catch (err) {
-      await errorHandler(Bot, err);
+      await errorHandler(Bot, "ban subcommand", err);
       await interaction.editReply("Something went wrong.");
     }
   }

@@ -155,7 +155,7 @@ export const github: Command = {
       }
       await handler.execute(bot, interaction);
     } catch (err) {
-      await errorHandler(bot, err);
+      await errorHandler(bot, "github command", err);
     }
   }
 };

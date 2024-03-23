@@ -198,7 +198,7 @@ export const moderation: Command = {
       }
       await handler.execute(bot, interaction);
     } catch (err) {
-      await errorHandler(bot, err);
+      await errorHandler(bot, "moderation command", err);
     }
   }
 };

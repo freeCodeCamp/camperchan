@@ -57,7 +57,7 @@ export const bookmark: Context = {
           );
         });
     } catch (err) {
-      await errorHandler(Bot, err);
+      await errorHandler(Bot, "bookmark context command", err);
       await interaction.editReply("Something went wrong.");
     }
   }

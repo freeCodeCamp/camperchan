@@ -110,7 +110,7 @@ export const handleMute: Subcommand = {
         content: "They have been muted!"
       });
     } catch (err) {
-      await errorHandler(Bot, err);
+      await errorHandler(Bot, "mute subcommand", err);
       await interaction.editReply("Something went wrong.");
     }
   }

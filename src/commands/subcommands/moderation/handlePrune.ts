@@ -23,7 +23,7 @@ export const handlePrune: Subcommand = {
       }
       await interaction.editReply({ content: `Deleted ${count} messages.` });
     } catch (err) {
-      await errorHandler(Bot, err);
+      await errorHandler(Bot, "prune subcommand", err);
       await interaction.editReply("Something went wrong.");
     }
   }

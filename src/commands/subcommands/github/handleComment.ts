@@ -46,7 +46,7 @@ export const handleComment: Subcommand = {
         content: `Successfully added a [comment](<${comment.data.html_url}>)`
       });
     } catch (err) {
-      await errorHandler(Bot, err);
+      await errorHandler(Bot, "comment subcommand", err);
       await interaction.editReply(
         `Something went wrong: ${
           (err as Error).message ??

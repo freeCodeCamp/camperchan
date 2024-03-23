@@ -14,7 +14,9 @@ import { errorHandler } from "../../utils/errorHandler";
 export const handleReady = async (Bot: Camperbot) => {
   try {
     await Bot.config.debugHook.send("Bot Ready!");
-    const homeGuild = await Bot.guilds.fetch(Bot.config.homeGuild);
+    const homeGuild = await Bot.guilds
+      .fetch(Bot.config.homeGuild)
+      .catch(() => null);
     if (!homeGuild) {
       await Bot.config.debugHook.send("The home guild could not be loaded.");
       return;
@@ -22,9 +24,9 @@ export const handleReady = async (Bot: Camperbot) => {
     if (!Bot.homeGuild) {
       Bot.homeGuild = homeGuild;
     }
-    const reportChannel = await homeGuild.channels.fetch(
-      Bot.config.reportChannel
-    );
+    const reportChannel = await homeGuild.channels
+      .fetch(Bot.config.reportChannel)
+      .catch(() => null);
     if (!reportChannel) {
       await Bot.config.debugHook.send(
         "The report channel could not be loaded."
@@ -38,9 +40,9 @@ export const handleReady = async (Bot: Camperbot) => {
     if (!Bot.reportChannel) {
       Bot.reportChannel = reportChannel;
     }
-    const privateCategory = await homeGuild.channels.fetch(
-      Bot.config.privateCategory
-    );
+    const privateCategory = await homeGuild.channels
+      .fetch(Bot.config.privateCategory)
+      .catch(() => null);
     if (!privateCategory) {
       await Bot.config.debugHook.send(
         "The private category could not be loaded."
@@ -64,6 +66,6 @@ export const handleReady = async (Bot: Camperbot) => {
       await send100DaysOfCode(Bot);
     });
   } catch (err) {
-    await errorHandler(Bot, err);
+    await errorHandler(Bot, "client ready event", err);
   }
 };

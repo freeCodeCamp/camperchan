@@ -66,7 +66,7 @@ export const fetchLearnRecord = async (
     const db = client.db(PROD_DB);
     const collection = db.collection(PROD_COLLECTION);
     const record = (await collection.findOne({ email }).catch(async (err) => {
-      await errorHandler(bot, err);
+      await errorHandler(bot, "fetch learn record db query", err);
       return null;
     })) as UserRecord | null;
     const cacheTTL = new Date(Date.now() + 1000 * 60 * 60 * 24);
@@ -80,7 +80,7 @@ export const fetchLearnRecord = async (
     }
     return record;
   } catch (err) {
-    await errorHandler(bot, err);
+    await errorHandler(bot, "fetch learn record module", err);
     return null;
   }
 };

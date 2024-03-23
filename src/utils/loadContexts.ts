@@ -32,7 +32,7 @@ export const loadContexts = async (Bot: Camperbot): Promise<Context[]> => {
     }
     return result;
   } catch (err) {
-    await errorHandler(Bot, err);
+    await errorHandler(Bot, "load contexts module", err);
     return [];
   }
 };

@@ -73,7 +73,7 @@ export const handleKick: Subcommand = {
       await Bot.config.modHook.send({ embeds: [kickLogEmbed] });
       await interaction.editReply({ content: "They have been kicked." });
     } catch (err) {
-      await errorHandler(Bot, err);
+      await errorHandler(Bot, "kick subcommand", err);
       await interaction.editReply("Something went wrong.");
     }
   }

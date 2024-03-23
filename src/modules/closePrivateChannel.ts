@@ -50,7 +50,7 @@ export const closePrivateChannel = async (
     await Bot.config.modHook.send({ embeds: [logEmbed], files: [logFile] });
     await channel.delete();
   } catch (err) {
-    await errorHandler(Bot, err);
+    await errorHandler(Bot, "close private channel module", err);
     await interaction.editReply("Something went wrong!");
   }
 };

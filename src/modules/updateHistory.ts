@@ -36,6 +36,6 @@ export const updateHistory = async (
       }
     });
   } catch (err) {
-    await errorHandler(Bot, err);
+    await errorHandler(Bot, "update history module", err);
   }
 };
