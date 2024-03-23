@@ -1,4 +1,5 @@
 import {
+  AttachmentBuilder,
   GuildScheduledEvent,
   GuildScheduledEventStatus,
   PartialGuildScheduledEvent
@@ -43,12 +44,20 @@ export const handleGuildScheduledEvents = async (
     ) {
       bot.event.end = Date.now();
       const duration = Math.round(
-        (bot.event.end - bot.event.start) * 1000 * 60
+        (bot.event.end - bot.event.start) / (1000 * 60)
       );
       const userCount = bot.event.userIds.length;
       const naomi = await newEvent.guild?.members.fetch("465650873650118659");
       await naomi?.send({
-        content: `Name: ${newEvent.name}\nStart: ${new Date(bot.event.start)}\nDuration: ${duration} minutes\nParticipants: ${userCount}\n---\n${bot.event.userIds.join("\n")}`
+        files: [
+          new AttachmentBuilder(
+            Buffer.from(
+              `Name: ${newEvent.name}\nStart: ${new Date(bot.event.start)}\nDuration: ${duration} minutes\nParticipants: ${userCount}\n---\n${bot.event.userIds.join("\n")}`,
+              "utf-8"
+            ),
+            { name: `event-${newEvent.id}.txt` }
+          )
+        ]
       });
       delete bot.event;
     }
