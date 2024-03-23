@@ -10,12 +10,12 @@ export const handleHistory: Subcommand = {
       PermissionFlagsBits.KickMembers,
       PermissionFlagsBits.BanMembers
     ].some((p) => member.permissions.has(p)),
-  execute: async (Bot, interaction) => {
+  execute: async (CamperChan, interaction) => {
     try {
       await interaction.deferReply();
       const target = interaction.options.getUser("target", true);
 
-      const targetRecord = await Bot.db.histories.findUnique({
+      const targetRecord = await CamperChan.db.histories.findUnique({
         where: {
           userId: target.id
         }
@@ -69,7 +69,7 @@ export const handleHistory: Subcommand = {
         embeds: [embed]
       });
     } catch (err) {
-      await errorHandler(Bot, "history subcommand", err);
+      await errorHandler(CamperChan, "history subcommand", err);
       await interaction.editReply("Something went wrong.");
     }
   }

@@ -1,6 +1,6 @@
 import { Events } from "discord.js";
 
-import { Camperbot } from "../interfaces/Camperbot";
+import { ExtendedClient } from "../interfaces/ExtendedClient";
 import { errorHandler } from "../utils/errorHandler";
 
 import { handleGuildScheduledEvents } from "./handlers/handleGuildScheduledEvents";
@@ -15,56 +15,64 @@ import { handleThreadCreate } from "./handlers/handleThreadCreate";
 import { handleVoiceStateUpdate } from "./handlers/handleVoiceStateUpdate";
 
 /**
- * Attaches the event listeners to the bot's instance.
+ * Attaches the event listeners to the CamperChan's instance.
  *
- * @param {Camperbot} Bot The bot's Discord instance.
+ * @param {ExtendedClient} CamperChan The CamperChan's Discord instance.
  */
-export const registerEvents = async (Bot: Camperbot) => {
+export const registerEvents = async (CamperChan: ExtendedClient) => {
   try {
-    Bot.on(Events.ClientReady, async () => await handleReady(Bot));
-    Bot.on(
+    CamperChan.on(
+      Events.ClientReady,
+      async () => await handleReady(CamperChan)
+    );
+    CamperChan.on(
       Events.MessageCreate,
-      async (msg) => await handleMessageCreate(Bot, msg)
+      async (msg) => await handleMessageCreate(CamperChan, msg)
     );
-    Bot.on(
+    CamperChan.on(
       Events.MessageUpdate,
-      async (oldMsg, newMsg) => await handleMessageEdit(Bot, oldMsg, newMsg)
+      async (oldMsg, newMsg) =>
+        await handleMessageEdit(CamperChan, oldMsg, newMsg)
     );
-    Bot.on(
+    CamperChan.on(
       Events.MessageDelete,
-      async (msg) => await handleMessageDelete(Bot, msg)
+      async (msg) => await handleMessageDelete(CamperChan, msg)
     );
-    Bot.on(
+    CamperChan.on(
       Events.InteractionCreate,
-      async (interaction) => await handleInteractionCreate(Bot, interaction)
+      async (interaction) =>
+        await handleInteractionCreate(CamperChan, interaction)
     );
-    Bot.on(
+    CamperChan.on(
       Events.ThreadCreate,
-      async (thread) => await handleThreadCreate(Bot, thread)
+      async (thread) => await handleThreadCreate(CamperChan, thread)
     );
-    Bot.on(
+    CamperChan.on(
       Events.GuildMemberAdd,
-      async (member) => await handleMemberAdd(Bot, member)
+      async (member) => await handleMemberAdd(CamperChan, member)
     );
-    Bot.on(
+    CamperChan.on(
       Events.GuildMemberRemove,
-      async (member) => await handleMemberRemove(Bot, member)
+      async (member) => await handleMemberRemove(CamperChan, member)
     );
-    Bot.on(Events.Error, async (err) => {
-      await errorHandler(Bot, "client error event", err);
+    CamperChan.on(Events.Error, async (err) => {
+      await errorHandler(CamperChan, "client error event", err);
     });
-    Bot.on(
+    CamperChan.on(
       Events.VoiceStateUpdate,
       async (oldState, newState) =>
-        await handleVoiceStateUpdate(Bot, oldState, newState)
+        await handleVoiceStateUpdate(CamperChan, oldState, newState)
     );
-    Bot.on(Events.GuildScheduledEventUpdate, async (oldEvent, newEvent) => {
-      if (!oldEvent || !newEvent) {
-        return;
+    CamperChan.on(
+      Events.GuildScheduledEventUpdate,
+      async (oldEvent, newEvent) => {
+        if (!oldEvent || !newEvent) {
+          return;
+        }
+        await handleGuildScheduledEvents(CamperChan, oldEvent, newEvent);
       }
-      await handleGuildScheduledEvents(Bot, oldEvent, newEvent);
-    });
+    );
   } catch (err) {
-    await errorHandler(Bot, "register events", err);
+    await errorHandler(CamperChan, "register events", err);
   }
 };

@@ -1,5 +1,5 @@
 /**
- * Only tracks the properties that Camperbot actually needs.
+ * Only tracks the properties that ExtendedClient actually needs.
  */
 export interface UserRecord {
   email: string;

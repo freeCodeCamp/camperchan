@@ -5,7 +5,7 @@ import {
   Routes
 } from "discord.js";
 
-import { Camperbot } from "../interfaces/Camperbot";
+import { ExtendedClient } from "../interfaces/ExtendedClient";
 
 import { errorHandler } from "./errorHandler";
 import { logHandler } from "./logHandler";
@@ -15,32 +15,39 @@ import { logHandler } from "./logHandler";
  * and builds an array of all command data. Then, posts the data to the Discord endpoint
  * for registering commands.
  *
- * @param {Camperbot} Bot Bot's Discord instance.
+ * @param {ExtendedClient} CamperChan CamperChan's Discord instance.
  * @param {REST} restClass The REST class to use for registering commands.
  * @returns {boolean} True if the commands were registered, false on error.
  */
 export const registerCommands = async (
-  Bot: Camperbot,
+  CamperChan: ExtendedClient,
   restClass = REST
 ): Promise<REST | null> => {
   try {
-    const rest = new restClass({ version: "10" }).setToken(Bot.config.token);
+    const rest = new restClass({ version: "10" }).setToken(
+      CamperChan.config.token
+    );
 
     const commandData: (
       | RESTPostAPIApplicationCommandsJSONBody
       | RESTPostAPIChatInputApplicationCommandsJSONBody
     )[] = [];
 
-    Bot.commands.forEach((command) => commandData.push(command.data.toJSON()));
-    Bot.contexts.forEach((context) => commandData.push(context.data));
+    CamperChan.commands.forEach((command) =>
+      commandData.push(command.data.toJSON())
+    );
+    CamperChan.contexts.forEach((context) => commandData.push(context.data));
     logHandler.log("debug", "registering to home guild only");
     await rest.put(
-      Routes.applicationGuildCommands(Bot.config.botId, Bot.config.homeGuild),
+      Routes.applicationGuildCommands(
+        CamperChan.config.botId,
+        CamperChan.config.homeGuild
+      ),
       { body: commandData }
     );
     return rest;
   } catch (err) {
-    await errorHandler(Bot, "register commands module", err);
+    await errorHandler(CamperChan, "register commands module", err);
     return null;
   }
 };

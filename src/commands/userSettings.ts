@@ -45,7 +45,7 @@ export const userSettings: Command = {
           "The email associated with your freeCodeCamp.org account."
         )
     ),
-  run: async (bot, interaction) => {
+  run: async (CamperChan, interaction) => {
     try {
       await interaction.deferReply({ ephemeral: true });
 
@@ -58,7 +58,7 @@ export const userSettings: Command = {
         learnEmail: interaction.options.getString("email")
       };
       const badges: string[] = [];
-      const record = await bot.db.levels.findUnique({
+      const record = await CamperChan.db.levels.findUnique({
         where: { userId: interaction.user.id }
       });
       if (opts.learnEmail) {
@@ -69,7 +69,7 @@ export const userSettings: Command = {
           opts.learnEmail = "";
         }
         if (opts.learnEmail) {
-          const alreadyUsed = await bot.db.levels.findFirst({
+          const alreadyUsed = await CamperChan.db.levels.findFirst({
             where: { learnEmail: opts.learnEmail }
           });
           if (alreadyUsed) {
@@ -82,7 +82,7 @@ export const userSettings: Command = {
 
         if (opts.learnEmail) {
           const record = await fetchLearnRecord(
-            bot,
+            CamperChan,
             opts.learnEmail,
             interaction.user.id
           );
@@ -149,7 +149,7 @@ export const userSettings: Command = {
         {} as Record<keyof typeof opts, string>
       );
 
-      await bot.db.levels.upsert({
+      await CamperChan.db.levels.upsert({
         where: {
           userId: interaction.user.id
         },
@@ -169,7 +169,7 @@ export const userSettings: Command = {
 
       await interaction.editReply({ content: responses.join("\n") });
     } catch (err) {
-      await errorHandler(bot, "user settings command", err);
+      await errorHandler(CamperChan, "user settings command", err);
     }
   }
 };

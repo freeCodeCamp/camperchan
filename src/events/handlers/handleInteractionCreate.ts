@@ -2,7 +2,7 @@ import { Interaction, Message } from "discord.js";
 import { compareTwoStrings } from "string-similarity";
 
 import { Languages } from "../../config/Languages";
-import { Camperbot } from "../../interfaces/Camperbot";
+import { ExtendedClient } from "../../interfaces/ExtendedClient";
 import { closePrivateChannel } from "../../modules/closePrivateChannel";
 import { reactionRoleClick } from "../../modules/reactionRoleClick";
 import { isGuildCommandInteraction } from "../../utils/typeGuards";
@@ -10,15 +10,15 @@ import { isGuildCommandInteraction } from "../../utils/typeGuards";
 /**
  * Handles the interaction events from Discord.
  *
- * @param {Camperbot} Bot The bot's Discord instance.
+ * @param {ExtendedClient} CamperChan The CamperChan's Discord instance.
  * @param {Interaction} interaction The interaction payload from Discord.
  */
 export const handleInteractionCreate = async (
-  Bot: Camperbot,
+  CamperChan: ExtendedClient,
   interaction: Interaction
 ) => {
   if (interaction.isChatInputCommand()) {
-    const target = Bot.commands.find(
+    const target = CamperChan.commands.find(
       (command) => command.data.name === interaction.commandName
     );
     if (!target) {
@@ -33,11 +33,11 @@ export const handleInteractionCreate = async (
       );
       return;
     }
-    await target.run(Bot, interaction);
+    await target.run(CamperChan, interaction);
   }
 
   if (interaction.isContextMenuCommand()) {
-    const target = Bot.contexts.find(
+    const target = CamperChan.contexts.find(
       (context) => context.data.name === interaction.commandName
     );
     if (!target) {
@@ -46,7 +46,7 @@ export const handleInteractionCreate = async (
       );
       return;
     }
-    await target.run(Bot, interaction);
+    await target.run(CamperChan, interaction);
     return;
   }
 
@@ -55,10 +55,10 @@ export const handleInteractionCreate = async (
       await (interaction.message as Message).delete();
     }
     if (interaction.customId === "close-channel") {
-      await closePrivateChannel(Bot, interaction);
+      await closePrivateChannel(CamperChan, interaction);
     }
     if (interaction.customId.startsWith("rr-")) {
-      await reactionRoleClick(Bot, interaction);
+      await reactionRoleClick(CamperChan, interaction);
     }
     if (interaction.customId === "acknowledge") {
       await interaction.deferUpdate();
@@ -91,7 +91,7 @@ export const handleInteractionCreate = async (
         });
         return;
       }
-      const reportChannel = Bot.reportChannel;
+      const reportChannel = CamperChan.reportChannel;
       const message = await reportChannel.messages.fetch(messageId);
       const embed = message.embeds[0];
       const reason = interaction.fields.getTextInputValue("reason");

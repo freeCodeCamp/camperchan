@@ -14,7 +14,7 @@ import { Context } from "./Context";
 import { QuoteList } from "./Quotes";
 import { UserRecord } from "./UserRecord";
 
-export interface Camperbot extends Client {
+export interface ExtendedClient extends Client {
   config: {
     token: string;
     mongoUrl: string;

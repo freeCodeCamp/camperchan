@@ -1,71 +1,75 @@
 import { ChannelType } from "discord.js";
 import { scheduleJob } from "node-schedule";
 
-import { Camperbot } from "../../interfaces/Camperbot";
+import { ExtendedClient } from "../../interfaces/ExtendedClient";
 import { loadRoles } from "../../modules/loadRoles";
 import { send100DaysOfCode } from "../../modules/send100DaysOfCode";
 import { errorHandler } from "../../utils/errorHandler";
 
 /**
- * Logs a message to the debug hook when the bot is online.
+ * Logs a message to the debug hook when the CamperChan is online.
  *
- * @param {Camperbot} Bot The bot's Discord instance.
+ * @param {ExtendedClient} CamperChan The CamperChan's Discord instance.
  */
-export const handleReady = async (Bot: Camperbot) => {
+export const handleReady = async (CamperChan: ExtendedClient) => {
   try {
-    await Bot.config.debugHook.send("Bot Ready!");
-    const homeGuild = await Bot.guilds
-      .fetch(Bot.config.homeGuild)
+    await CamperChan.config.debugHook.send("CamperChan Ready!");
+    const homeGuild = await CamperChan.guilds
+      .fetch(CamperChan.config.homeGuild)
       .catch(() => null);
     if (!homeGuild) {
-      await Bot.config.debugHook.send("The home guild could not be loaded.");
+      await CamperChan.config.debugHook.send(
+        "The home guild could not be loaded."
+      );
       return;
     }
-    if (!Bot.homeGuild) {
-      Bot.homeGuild = homeGuild;
+    if (!CamperChan.homeGuild) {
+      CamperChan.homeGuild = homeGuild;
     }
     const reportChannel = await homeGuild.channels
-      .fetch(Bot.config.reportChannel)
+      .fetch(CamperChan.config.reportChannel)
       .catch(() => null);
     if (!reportChannel) {
-      await Bot.config.debugHook.send(
+      await CamperChan.config.debugHook.send(
         "The report channel could not be loaded."
       );
       return;
     }
     if (!reportChannel.isTextBased()) {
-      await Bot.config.debugHook.send("The report channel is not text based.");
+      await CamperChan.config.debugHook.send(
+        "The report channel is not text based."
+      );
       return;
     }
-    if (!Bot.reportChannel) {
-      Bot.reportChannel = reportChannel;
+    if (!CamperChan.reportChannel) {
+      CamperChan.reportChannel = reportChannel;
     }
     const privateCategory = await homeGuild.channels
-      .fetch(Bot.config.privateCategory)
+      .fetch(CamperChan.config.privateCategory)
       .catch(() => null);
     if (!privateCategory) {
-      await Bot.config.debugHook.send(
+      await CamperChan.config.debugHook.send(
         "The private category could not be loaded."
       );
       return;
     }
     if (privateCategory.type !== ChannelType.GuildCategory) {
-      await Bot.config.debugHook.send(
+      await CamperChan.config.debugHook.send(
         "The private category is not a category."
       );
       return;
     }
-    if (!Bot.privateCategory) {
-      Bot.privateCategory = privateCategory;
+    if (!CamperChan.privateCategory) {
+      CamperChan.privateCategory = privateCategory;
     }
-    await Bot.config.debugHook.send("All channels loaded.");
+    await CamperChan.config.debugHook.send("All channels loaded.");
 
-    await loadRoles(Bot);
+    await loadRoles(CamperChan);
 
     scheduleJob("0 9 * * *", async () => {
-      await send100DaysOfCode(Bot);
+      await send100DaysOfCode(CamperChan);
     });
   } catch (err) {
-    await errorHandler(Bot, "client ready event", err);
+    await errorHandler(CamperChan, "client ready event", err);
   }
 };

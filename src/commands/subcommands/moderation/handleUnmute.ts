@@ -9,7 +9,7 @@ import { errorHandler } from "../../../utils/errorHandler";
 export const handleUnmute: Subcommand = {
   permissionValidator: (member) =>
     member.permissions.has(PermissionFlagsBits.ModerateMembers),
-  execute: async (Bot, interaction) => {
+  execute: async (CamperChan, interaction) => {
     try {
       await interaction.deferReply();
       const { guild, member } = interaction;
@@ -20,8 +20,8 @@ export const handleUnmute: Subcommand = {
         await interaction.editReply("You cannot unmute yourself.");
         return;
       }
-      if (target.id === Bot.user?.id) {
-        await interaction.editReply("You cannot unmute the bot.");
+      if (target.id === CamperChan.user?.id) {
+        await interaction.editReply("You cannot unmute the CamperChan.");
         return;
       }
 
@@ -36,10 +36,10 @@ export const handleUnmute: Subcommand = {
 
       await targetMember.timeout(null, reason);
 
-      await updateHistory(Bot, "unmute", target.id);
+      await updateHistory(CamperChan, "unmute", target.id);
 
       const sentNotice = await sendModerationDm(
-        Bot,
+        CamperChan,
         "unmute",
         target,
         guild.name,
@@ -68,13 +68,13 @@ export const handleUnmute: Subcommand = {
         text: `ID: ${target.id}`
       });
 
-      await Bot.config.modHook.send({ embeds: [muteEmbed] });
+      await CamperChan.config.modHook.send({ embeds: [muteEmbed] });
 
       await interaction.editReply({
         content: "That user has been unmuted."
       });
     } catch (err) {
-      await errorHandler(Bot, "unmute subcommand", err);
+      await errorHandler(CamperChan, "unmute subcommand", err);
       await interaction.editReply("Something went wrong!");
     }
   }

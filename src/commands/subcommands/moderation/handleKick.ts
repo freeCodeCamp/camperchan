@@ -9,7 +9,7 @@ import { errorHandler } from "../../../utils/errorHandler";
 export const handleKick: Subcommand = {
   permissionValidator: (member) =>
     member.permissions.has(PermissionFlagsBits.KickMembers),
-  execute: async (Bot, interaction) => {
+  execute: async (CamperChan, interaction) => {
     try {
       await interaction.deferReply();
       const { guild, member } = interaction;
@@ -20,8 +20,8 @@ export const handleKick: Subcommand = {
         await interaction.editReply("You cannot kick yourself.");
         return;
       }
-      if (target.id === Bot.user?.id) {
-        await interaction.editReply("You cannot kick the bot.");
+      if (target.id === CamperChan.user?.id) {
+        await interaction.editReply("You cannot kick the CamperChan.");
         return;
       }
 
@@ -35,7 +35,7 @@ export const handleKick: Subcommand = {
       }
 
       const sentNotice = await sendModerationDm(
-        Bot,
+        CamperChan,
         "kick",
         target,
         guild.name,
@@ -44,7 +44,7 @@ export const handleKick: Subcommand = {
 
       await targetMember.kick(customSubstring(reason, 1000));
 
-      await updateHistory(Bot, "kick", target.id);
+      await updateHistory(CamperChan, "kick", target.id);
 
       const kickLogEmbed = new EmbedBuilder();
       kickLogEmbed.setTitle("Member kicked.");
@@ -70,10 +70,10 @@ export const handleKick: Subcommand = {
         text: `ID: ${target.id}`
       });
 
-      await Bot.config.modHook.send({ embeds: [kickLogEmbed] });
+      await CamperChan.config.modHook.send({ embeds: [kickLogEmbed] });
       await interaction.editReply({ content: "They have been kicked." });
     } catch (err) {
-      await errorHandler(Bot, "kick subcommand", err);
+      await errorHandler(CamperChan, "kick subcommand", err);
       await interaction.editReply("Something went wrong.");
     }
   }

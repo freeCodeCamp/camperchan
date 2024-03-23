@@ -3,8 +3,8 @@ import { join } from "path";
 
 import { assert } from "chai";
 
-import { Camperbot } from "../../src/interfaces/Camperbot";
 import { Command } from "../../src/interfaces/Command";
+import { ExtendedClient } from "../../src/interfaces/ExtendedClient";
 import { loadCommands } from "../../src/utils/loadCommands";
 
 suite("loadCommands", () => {
@@ -14,7 +14,7 @@ suite("loadCommands", () => {
   });
 
   test("returns array of commands", async () => {
-    const result = await loadCommands({} as Camperbot);
+    const result = await loadCommands({} as ExtendedClient);
     assert.isArray(result, "loadCommands did not return an array");
   });
 

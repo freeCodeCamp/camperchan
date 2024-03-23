@@ -6,7 +6,7 @@ import { errorHandler } from "../../../utils/errorHandler";
 
 export const handleForum: Subcommand = {
   permissionValidator: () => true,
-  execute: async (Bot, interaction) => {
+  execute: async (CamperChan, interaction) => {
     try {
       await interaction.deferReply();
       const data = await fetch("https://forum.freecodecamp.org/latest.json");
@@ -25,7 +25,7 @@ export const handleForum: Subcommand = {
       );
       await interaction.editReply({ embeds: [forumEmbed] });
     } catch (err) {
-      await errorHandler(Bot, "forum subcommand", err);
+      await errorHandler(CamperChan, "forum subcommand", err);
       await interaction.editReply("Something went wrong.");
     }
   }

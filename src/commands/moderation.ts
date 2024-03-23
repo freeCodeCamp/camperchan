@@ -185,7 +185,7 @@ export const moderation: Command = {
             .setRequired(true)
         )
     ),
-  run: async (bot, interaction) => {
+  run: async (CamperChan, interaction) => {
     try {
       const handler = handlers[interaction.options.getSubcommand(true)];
       if (!handler) {
@@ -196,9 +196,9 @@ export const moderation: Command = {
         await interaction.reply("You do not have permission to do this.");
         return;
       }
-      await handler.execute(bot, interaction);
+      await handler.execute(CamperChan, interaction);
     } catch (err) {
-      await errorHandler(bot, "moderation command", err);
+      await errorHandler(CamperChan, "moderation command", err);
     }
   }
 };

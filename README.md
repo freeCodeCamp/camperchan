@@ -1,4 +1,4 @@
-# Discord Bot
+# CamperChan
 
 A bot that facilitates moderation and community management for the freeCodeCamp Discord communities.
 

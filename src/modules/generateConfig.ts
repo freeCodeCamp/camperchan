@@ -1,13 +1,13 @@
 import { WebhookClient } from "discord.js";
 
-import { Camperbot } from "../interfaces/Camperbot";
+import { ExtendedClient } from "../interfaces/ExtendedClient";
 
 /**
- * Bootstraps the config from the ENV into the Bot's instance.
+ * Bootstraps the config from the ENV into the CamperChan's instance.
  *
- * @returns {Camperbot["config"]} The bot's config.
+ * @returns {ExtendedClient["config"]} The CamperChan's config.
  */
-export const generateConfig = (): Camperbot["config"] => {
+export const generateConfig = (): ExtendedClient["config"] => {
   if (
     !process.env.TOKEN ||
     !process.env.MONGO_URI ||

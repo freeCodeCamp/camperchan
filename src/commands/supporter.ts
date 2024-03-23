@@ -19,7 +19,7 @@ export const supporter: Command = {
         .setDescription("The email tied to your freeCodeCamp account.")
         .setRequired(true)
     ),
-  run: async (bot, interaction) => {
+  run: async (CamperChan, interaction) => {
     try {
       await interaction.deferReply({ ephemeral: true });
       const email = interaction.options.getString("email", true);
@@ -30,7 +30,7 @@ export const supporter: Command = {
         });
         return;
       }
-      const existsByUserId = await bot.db.supporters.findUnique({
+      const existsByUserId = await CamperChan.db.supporters.findUnique({
         where: {
           userId: member.id
         }
@@ -42,7 +42,7 @@ export const supporter: Command = {
         });
         return;
       }
-      const existsByEmail = await bot.db.supporters.findUnique({
+      const existsByEmail = await CamperChan.db.supporters.findUnique({
         where: {
           email
         }
@@ -55,7 +55,7 @@ export const supporter: Command = {
         return;
       }
       const learnRecord = await fetchLearnRecord(
-        bot,
+        CamperChan,
         email,
         interaction.user.id
       );
@@ -72,14 +72,14 @@ export const supporter: Command = {
         });
         return;
       }
-      await bot.db.supporters.create({
+      await CamperChan.db.supporters.create({
         data: {
           userId: member.id,
           email
         }
       });
       await member.roles.add(SupporterRoleId).catch(async () => {
-        await bot.config.debugHook.send(
+        await CamperChan.config.debugHook.send(
           `Failed to assign Supporter role to ${member.id}. Please assign manually.`
         );
       });
@@ -94,13 +94,13 @@ export const supporter: Command = {
       const isCTAMember = donorCTA2023.split("\n").includes(email);
       if (isCTAMember) {
         await member.roles.add("1186748788665225336").catch(async () => {
-          await bot.config.debugHook.send(
+          await CamperChan.config.debugHook.send(
             `Failed to assign CTA role to ${member.id}. Please assign manually.`
           );
         });
       }
     } catch (err) {
-      await errorHandler(bot, "supporter command", err);
+      await errorHandler(CamperChan, "supporter command", err);
     }
   }
 };

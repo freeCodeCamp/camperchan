@@ -18,13 +18,13 @@ export const handlePrivate: Subcommand = {
       PermissionFlagsBits.KickMembers,
       PermissionFlagsBits.BanMembers
     ].some((p) => member.permissions.has(p)),
-  execute: async (Bot, interaction) => {
+  execute: async (CamperChan, interaction) => {
     try {
       await interaction.deferReply();
       const { guild } = interaction;
 
       const modRole = guild.roles.cache.find(
-        (role) => role.id === Bot.config.modRole
+        (role) => role.id === CamperChan.config.modRole
       );
 
       if (!modRole) {
@@ -34,7 +34,7 @@ export const handlePrivate: Subcommand = {
 
       const target = interaction.options.getUser("target", true);
 
-      const category = Bot.privateCategory;
+      const category = CamperChan.privateCategory;
 
       // Create channel
       const channelName = `private-${target.username}`;
@@ -63,7 +63,7 @@ export const handlePrivate: Subcommand = {
             ]
           },
           {
-            id: Bot.config.botId,
+            id: CamperChan.config.botId,
             allow: [
               PermissionFlagsBits.ViewChannel,
               PermissionFlagsBits.ReadMessageHistory,
@@ -85,7 +85,7 @@ export const handlePrivate: Subcommand = {
 
       const newChannel = await guild.channels.create(channelOpts);
 
-      await createLogFile(Bot, newChannel.id);
+      await createLogFile(CamperChan, newChannel.id);
 
       const closeButton = new ButtonBuilder()
         .setCustomId("close-channel")
@@ -100,12 +100,12 @@ export const handlePrivate: Subcommand = {
         content: `Hey <@!${target.id}>!\n\nA private channel was created. This channel is visible to only you and the moderation team.`,
         components: [row]
       });
-      await Bot.config.modHook.send(
+      await CamperChan.config.modHook.send(
         `Private channel created for ${target.tag}`
       );
       await interaction.editReply("Channel created!");
     } catch (err) {
-      await errorHandler(Bot, "private subcommand", err);
+      await errorHandler(CamperChan, "private subcommand", err);
       await interaction.editReply("Something went wrong!");
     }
   }

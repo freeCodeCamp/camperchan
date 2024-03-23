@@ -4,14 +4,14 @@ import { errorHandler } from "../../../utils/errorHandler";
 
 export const handleProfile: Subcommand = {
   permissionValidator: () => true,
-  execute: async (Bot, interaction) => {
+  execute: async (CamperChan, interaction) => {
     try {
       await interaction.deferReply();
       const { user } = interaction;
 
       const target = user.id;
 
-      const record = await Bot.db.levels.findUnique({
+      const record = await CamperChan.db.levels.findUnique({
         where: {
           userId: target
         }
@@ -24,7 +24,7 @@ export const handleProfile: Subcommand = {
         return;
       }
 
-      const file = await generateProfileImage(Bot, record);
+      const file = await generateProfileImage(CamperChan, record);
 
       if (!file) {
         await interaction.editReply({
@@ -35,7 +35,7 @@ export const handleProfile: Subcommand = {
 
       await interaction.editReply({ files: [file] });
     } catch (err) {
-      await errorHandler(Bot, "profile subcommand", err);
+      await errorHandler(CamperChan, "profile subcommand", err);
     }
   }
 };

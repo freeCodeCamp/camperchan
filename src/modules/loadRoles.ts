@@ -1,16 +1,16 @@
 import { Languages } from "../config/Languages";
-import { Camperbot } from "../interfaces/Camperbot";
+import { ExtendedClient } from "../interfaces/ExtendedClient";
 import { errorHandler } from "../utils/errorHandler";
 
 /**
  * Loads the cached roles and validates that all langagues
  * in the config have a role.
  *
- * @param {Camperbot} bot The bot's Discord instance.
+ * @param {ExtendedClient} CamperChan The CamperChan's Discord instance.
  */
-export const loadRoles = async (bot: Camperbot) => {
+export const loadRoles = async (CamperChan: ExtendedClient) => {
   try {
-    const roles = await bot.homeGuild.roles.fetch(undefined, {
+    const roles = await CamperChan.homeGuild.roles.fetch(undefined, {
       cache: true,
       force: true
     });
@@ -24,17 +24,17 @@ export const loadRoles = async (bot: Camperbot) => {
       }
     }
     if (missingRoles.length) {
-      await bot.config.debugHook.send({
+      await CamperChan.config.debugHook.send({
         content: `WARNING!!!!!! The following languages do not have a matching role.\n${missingRoles.join(
           ", "
         )}`
       });
       return;
     }
-    await bot.config.debugHook.send({
+    await CamperChan.config.debugHook.send({
       content: "Language roles loaded~!"
     });
   } catch (err) {
-    await errorHandler(bot, "load roles module", err);
+    await errorHandler(CamperChan, "load roles module", err);
   }
 };

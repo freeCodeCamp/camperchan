@@ -5,7 +5,7 @@ import { errorHandler } from "../../../utils/errorHandler";
 
 export const handleCodeOfConduct: Subcommand = {
   permissionValidator: () => true,
-  execute: async (Bot, interaction) => {
+  execute: async (CamperChan, interaction) => {
     try {
       await interaction.deferReply();
       const codeEmbed = new EmbedBuilder()
@@ -36,7 +36,7 @@ export const handleCodeOfConduct: Subcommand = {
         .setURL("https://freecodecamp.org/news/code-of-conduct");
       await interaction.editReply({ embeds: [codeEmbed] });
     } catch (err) {
-      await errorHandler(Bot, "code of conduct subcommand", err);
+      await errorHandler(CamperChan, "code of conduct subcommand", err);
       await interaction.editReply("Something went wrong.");
     }
   }

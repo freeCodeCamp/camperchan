@@ -142,7 +142,7 @@ export const github: Command = {
             .setRequired(true)
         )
     ),
-  run: async (bot, interaction) => {
+  run: async (CamperChan, interaction) => {
     try {
       const handler = handlers[interaction.options.getSubcommand(true)];
       if (!handler) {
@@ -153,9 +153,9 @@ export const github: Command = {
         await interaction.reply("You do not have permission to do this.");
         return;
       }
-      await handler.execute(bot, interaction);
+      await handler.execute(CamperChan, interaction);
     } catch (err) {
-      await errorHandler(bot, "github command", err);
+      await errorHandler(CamperChan, "github command", err);
     }
   }
 };

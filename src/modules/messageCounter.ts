@@ -1,17 +1,20 @@
 import { Message } from "discord.js";
 
-import { Camperbot } from "../interfaces/Camperbot";
+import { ExtendedClient } from "../interfaces/ExtendedClient";
 import { errorHandler } from "../utils/errorHandler";
 
 /**
  * Tracks message counts in the database. To be used in our contributor reports.
  *
- * @param {Camperbot} bot The bot's Discord instance.
+ * @param {ExtendedClient} CamperChan The CamperChan's Discord instance.
  * @param {Message} message The message payload from Discord.
  */
-export const messageCounter = async (bot: Camperbot, message: Message) => {
+export const messageCounter = async (
+  CamperChan: ExtendedClient,
+  message: Message
+) => {
   try {
-    await bot.db.messages.upsert({
+    await CamperChan.db.messages.upsert({
       where: {
         userId: message.author.id
       },
@@ -28,6 +31,6 @@ export const messageCounter = async (bot: Camperbot, message: Message) => {
       }
     });
   } catch (err) {
-    await errorHandler(bot, "message counter module", err);
+    await errorHandler(CamperChan, "message counter module", err);
   }
 };

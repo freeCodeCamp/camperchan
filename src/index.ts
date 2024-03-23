@@ -4,7 +4,7 @@ import { Client } from "discord.js";
 import { IntentOptions } from "./config/IntentOptions";
 import { connectDatabase } from "./database/connectDatabase";
 import { registerEvents } from "./events/registerEvents";
-import { Camperbot } from "./interfaces/Camperbot";
+import { ExtendedClient } from "./interfaces/ExtendedClient";
 import { generateConfig } from "./modules/generateConfig";
 import { loadCommands } from "./utils/loadCommands";
 import { loadContexts } from "./utils/loadContexts";
@@ -12,21 +12,21 @@ import { loadQuotes } from "./utils/loadQuotes";
 import { registerCommands } from "./utils/registerCommands";
 
 (async () => {
-  const Bot = new Client({
+  const CamperChan = new Client({
     intents: IntentOptions
-  }) as Camperbot;
-  Bot.config = generateConfig();
-  Bot.octokit = new Octokit({
-    auth: Bot.config.githubToken
+  }) as ExtendedClient;
+  CamperChan.config = generateConfig();
+  CamperChan.octokit = new Octokit({
+    auth: CamperChan.config.githubToken
   });
-  await connectDatabase(Bot);
-  await registerEvents(Bot);
-  Bot.commands = await loadCommands(Bot);
-  Bot.contexts = await loadContexts(Bot);
-  await registerCommands(Bot);
-  Bot.quotes = await loadQuotes(Bot);
-  Bot.privateLogs = {};
-  Bot.learnAccounts = {};
+  await connectDatabase(CamperChan);
+  await registerEvents(CamperChan);
+  CamperChan.commands = await loadCommands(CamperChan);
+  CamperChan.contexts = await loadContexts(CamperChan);
+  await registerCommands(CamperChan);
+  CamperChan.quotes = await loadQuotes(CamperChan);
+  CamperChan.privateLogs = {};
+  CamperChan.learnAccounts = {};
 
-  await Bot.login(Bot.config.token);
+  await CamperChan.login(CamperChan.config.token);
 })();

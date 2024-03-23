@@ -5,7 +5,7 @@ import {
   PermissionFlagsBits
 } from "discord.js";
 
-import { Camperbot } from "../interfaces/Camperbot";
+import { ExtendedClient } from "../interfaces/ExtendedClient";
 import { errorHandler } from "../utils/errorHandler";
 
 import { generateLogs } from "./generateLogs";
@@ -14,11 +14,11 @@ import { generateLogs } from "./generateLogs";
  * Handles the logic to close a private channel, generating the logs and sending them to
  * the moderation hook.
  *
- * @param {Camperbot} Bot The bot's discord instance.
+ * @param {ExtendedClient} CamperChan The CamperChan's discord instance.
  * @param {ButtonInteraction} interaction The interaction payload from Discord.
  */
 export const closePrivateChannel = async (
-  Bot: Camperbot,
+  CamperChan: ExtendedClient,
   interaction: ButtonInteraction
 ) => {
   try {
@@ -46,11 +46,14 @@ export const closePrivateChannel = async (
       name: "User",
       value: channel.name.split("-").slice(1).join("-") || "Unknown"
     });
-    const logFile = await generateLogs(Bot, channel.id);
-    await Bot.config.modHook.send({ embeds: [logEmbed], files: [logFile] });
+    const logFile = await generateLogs(CamperChan, channel.id);
+    await CamperChan.config.modHook.send({
+      embeds: [logEmbed],
+      files: [logFile]
+    });
     await channel.delete();
   } catch (err) {
-    await errorHandler(Bot, "close private channel module", err);
+    await errorHandler(CamperChan, "close private channel module", err);
     await interaction.editReply("Something went wrong!");
   }
 };

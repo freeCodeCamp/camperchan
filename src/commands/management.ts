@@ -65,7 +65,7 @@ export const management: Command = {
           option.setName("role5").setDescription("Role to create a button for.")
         )
     ),
-  run: async (bot, interaction) => {
+  run: async (CamperChan, interaction) => {
     try {
       const handler = handlers[interaction.options.getSubcommand(true)];
       if (!handler) {
@@ -76,9 +76,9 @@ export const management: Command = {
         await interaction.reply("You do not have permission to do this.");
         return;
       }
-      await handler.execute(bot, interaction);
+      await handler.execute(CamperChan, interaction);
     } catch (err) {
-      await errorHandler(bot, "management command", err);
+      await errorHandler(CamperChan, "management command", err);
     }
   }
 };

@@ -9,7 +9,7 @@ import { errorHandler } from "../../../utils/errorHandler";
 export const handleBan: Subcommand = {
   permissionValidator: (member) =>
     member.permissions.has(PermissionFlagsBits.BanMembers),
-  execute: async (Bot, interaction) => {
+  execute: async (CamperChan, interaction) => {
     try {
       await interaction.deferReply();
       const { guild, member } = interaction;
@@ -20,8 +20,8 @@ export const handleBan: Subcommand = {
         await interaction.editReply("You cannot ban yourself.");
         return;
       }
-      if (target.id === Bot.user?.id) {
-        await interaction.editReply("You cannot ban the bot.");
+      if (target.id === CamperChan.user?.id) {
+        await interaction.editReply("You cannot ban the CamperChan.");
         return;
       }
 
@@ -35,7 +35,7 @@ export const handleBan: Subcommand = {
       }
 
       const sentNotice = await sendModerationDm(
-        Bot,
+        CamperChan,
         "ban",
         target,
         guild.name,
@@ -47,7 +47,7 @@ export const handleBan: Subcommand = {
         deleteMessageDays: 1
       });
 
-      await updateHistory(Bot, "ban", target.id);
+      await updateHistory(CamperChan, "ban", target.id);
 
       const banLogEmbed = new EmbedBuilder();
       banLogEmbed.setTitle("Member banned.");
@@ -73,12 +73,12 @@ export const handleBan: Subcommand = {
         text: `ID: ${target.id}`
       });
 
-      await Bot.config.modHook.send({ embeds: [banLogEmbed] });
+      await CamperChan.config.modHook.send({ embeds: [banLogEmbed] });
       await interaction.editReply({
         content: "They have been banned."
       });
     } catch (err) {
-      await errorHandler(Bot, "ban subcommand", err);
+      await errorHandler(CamperChan, "ban subcommand", err);
       await interaction.editReply("Something went wrong.");
     }
   }

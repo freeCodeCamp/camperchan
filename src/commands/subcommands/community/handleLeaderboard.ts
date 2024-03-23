@@ -12,11 +12,11 @@ import { errorHandler } from "../../../utils/errorHandler";
 
 export const handleLeaderboard: Subcommand = {
   permissionValidator: () => true,
-  execute: async (Bot, interaction) => {
+  execute: async (CamperChan, interaction) => {
     try {
       await interaction.deferReply();
 
-      const levels = await Bot.db.levels.findMany({
+      const levels = await CamperChan.db.levels.findMany({
         orderBy: {
           points: "desc"
         }
@@ -53,7 +53,7 @@ export const handleLeaderboard: Subcommand = {
       }
 
       const attachment = await generateLeaderboardImage(
-        Bot,
+        CamperChan,
         mapped.slice(page * 10 - 10, page * 10)
       );
 
@@ -104,7 +104,7 @@ export const handleLeaderboard: Subcommand = {
         }
 
         const attachment = await generateLeaderboardImage(
-          Bot,
+          CamperChan,
           mapped.slice(page * 10 - 10, page * 10)
         );
 
@@ -141,7 +141,7 @@ export const handleLeaderboard: Subcommand = {
         });
       });
     } catch (err) {
-      await errorHandler(Bot, "leaderboard subcommand", err);
+      await errorHandler(CamperChan, "leaderboard subcommand", err);
       await interaction.editReply({
         content: "Something went wrong! Please try again later."
       });

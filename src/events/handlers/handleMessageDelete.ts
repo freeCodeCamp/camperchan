@@ -1,17 +1,17 @@
 import { Message, EmbedBuilder, PartialMessage } from "discord.js";
 
-import { Camperbot } from "../../interfaces/Camperbot";
+import { ExtendedClient } from "../../interfaces/ExtendedClient";
 import { customSubstring } from "../../utils/customSubstring";
 import { errorHandler } from "../../utils/errorHandler";
 
 /**
  * Handles the message delete event in Discord.
  *
- * @param {Camperbot} Bot The bot's Discord instance.
+ * @param {ExtendedClient} CamperChan The CamperChan's Discord instance.
  * @param {Message} message The message payload from Discord.
  */
 export const handleMessageDelete = async (
-  Bot: Camperbot,
+  CamperChan: ExtendedClient,
   message: Message | PartialMessage
 ) => {
   try {
@@ -55,14 +55,15 @@ export const handleMessageDelete = async (
       deleteEmbed.setImage(attached.proxyURL);
     }
 
-    await Bot.config.messageHook.send({ embeds: [deleteEmbed] });
+    await CamperChan.config.messageHook.send({ embeds: [deleteEmbed] });
 
     if (embeds.length) {
       embeds.forEach(
-        async (embed) => await Bot.config.messageHook.send({ embeds: [embed] })
+        async (embed) =>
+          await CamperChan.config.messageHook.send({ embeds: [embed] })
       );
     }
   } catch (err) {
-    await errorHandler(Bot, "message delete event", err);
+    await errorHandler(CamperChan, "message delete event", err);
   }
 };

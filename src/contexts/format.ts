@@ -9,14 +9,14 @@ export const format: Context = {
     name: "format",
     type: ApplicationCommandType.Message
   },
-  run: async (Bot, interaction) => {
+  run: async (CamperChan, interaction) => {
     try {
       await interaction.deferReply();
       const message = interaction.options.getMessage("message") as Message;
       const formatted = await addFormatting(message);
       await interaction.editReply(formatted);
     } catch (err) {
-      await errorHandler(Bot, "format context command", err);
+      await errorHandler(CamperChan, "format context command", err);
       await interaction.editReply("Something went wrong.");
     }
   }

@@ -1,21 +1,21 @@
-import { Camperbot } from "../interfaces/Camperbot";
+import { ExtendedClient } from "../interfaces/ExtendedClient";
 import { ModerationActions } from "../interfaces/ModerationActions";
 import { errorHandler } from "../utils/errorHandler";
 
 /**
  * Saves a count of the user's moderation actions.
  *
- * @param {Camperbot} Bot Bot's Discord instance.
+ * @param {ExtendedClient} CamperChan CamperChan's Discord instance.
  * @param {ModerationActions} action The action taken against the user.
  * @param {string} userId The ID of the user being moderated.
  */
 export const updateHistory = async (
-  Bot: Camperbot,
+  CamperChan: ExtendedClient,
   action: ModerationActions,
   userId: string
 ) => {
   try {
-    await Bot.db.histories.upsert({
+    await CamperChan.db.histories.upsert({
       where: {
         userId
       },
@@ -36,6 +36,6 @@ export const updateHistory = async (
       }
     });
   } catch (err) {
-    await errorHandler(Bot, "update history module", err);
+    await errorHandler(CamperChan, "update history module", err);
   }
 };

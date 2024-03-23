@@ -5,11 +5,11 @@ import { errorHandler } from "../../../utils/errorHandler";
 
 export const handleQuote: Subcommand = {
   permissionValidator: () => true,
-  execute: async (Bot, interaction) => {
+  execute: async (CamperChan, interaction) => {
     try {
       await interaction.deferReply();
-      const quotes = Bot.quotes.motivationalQuotes;
-      const compliments = Bot.quotes.compliments;
+      const quotes = CamperChan.quotes.motivationalQuotes;
+      const compliments = CamperChan.quotes.compliments;
       const randomComp = Math.floor(Math.random() * compliments.length);
       const randomQuote = Math.floor(Math.random() * quotes.length);
       const quoteEmbed = new EmbedBuilder()
@@ -20,7 +20,7 @@ export const handleQuote: Subcommand = {
         .setFooter({ text: quotes[randomQuote]?.author ?? "Naomi Carrigan" });
       await interaction.editReply({ embeds: [quoteEmbed] });
     } catch (err) {
-      await errorHandler(Bot, "quote subcommand", err);
+      await errorHandler(CamperChan, "quote subcommand", err);
       await interaction.editReply("Something went wrong.");
     }
   }

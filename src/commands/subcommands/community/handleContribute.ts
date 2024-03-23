@@ -5,7 +5,7 @@ import { errorHandler } from "../../../utils/errorHandler";
 
 export const handleContribute: Subcommand = {
   permissionValidator: () => true,
-  execute: async (Bot, interaction) => {
+  execute: async (CamperChan, interaction) => {
     try {
       await interaction.deferReply();
       const modEmbed = new EmbedBuilder().setTitle("Helpful Links!").addFields(
@@ -34,7 +34,7 @@ export const handleContribute: Subcommand = {
       );
       await interaction.editReply({ embeds: [modEmbed] });
     } catch (err) {
-      await errorHandler(Bot, "contribute subcommand", err);
+      await errorHandler(CamperChan, "contribute subcommand", err);
       await interaction.editReply("Something went wrong.");
     }
   }
