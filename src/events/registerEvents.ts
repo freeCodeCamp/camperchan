@@ -3,6 +3,7 @@ import { Events } from "discord.js";
 import { Camperbot } from "../interfaces/Camperbot";
 import { errorHandler } from "../utils/errorHandler";
 
+import { handleGuildScheduledEvents } from "./handlers/handleGuildScheduledEvents";
 import { handleInteractionCreate } from "./handlers/handleInteractionCreate";
 import { handleMemberAdd } from "./handlers/handleMemberAdd";
 import { handleMemberRemove } from "./handlers/handleMemberRemove";
@@ -50,6 +51,12 @@ export const registerEvents = async (Bot: Camperbot) => {
     );
     Bot.on(Events.Error, async (err) => {
       await errorHandler(Bot, err);
+    });
+    Bot.on(Events.GuildScheduledEventUpdate, async (oldEvent, newEvent) => {
+      if (!oldEvent || !newEvent) {
+        return;
+      }
+      await handleGuildScheduledEvents(Bot, oldEvent, newEvent);
     });
   } catch (err) {
     await errorHandler(Bot, err);
