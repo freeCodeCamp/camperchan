@@ -36,7 +36,7 @@ export const handleCodeOfConduct: Subcommand = {
         .setURL("https://freecodecamp.org/news/code-of-conduct");
       await interaction.editReply({ embeds: [codeEmbed] });
     } catch (err) {
-      await errorHandler(Bot, err);
+      await errorHandler(Bot, "code of conduct subcommand", err);
       await interaction.editReply("Something went wrong.");
     }
   }

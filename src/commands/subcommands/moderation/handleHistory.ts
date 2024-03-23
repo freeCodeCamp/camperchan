@@ -69,7 +69,7 @@ export const handleHistory: Subcommand = {
         embeds: [embed]
       });
     } catch (err) {
-      await errorHandler(Bot, err);
+      await errorHandler(Bot, "history subcommand", err);
       await interaction.editReply("Something went wrong.");
     }
   }

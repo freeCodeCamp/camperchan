@@ -35,7 +35,7 @@ export const handleProfile: Subcommand = {
 
       await interaction.editReply({ files: [file] });
     } catch (err) {
-      await errorHandler(Bot, err);
+      await errorHandler(Bot, "profile subcommand", err);
     }
   }
 };

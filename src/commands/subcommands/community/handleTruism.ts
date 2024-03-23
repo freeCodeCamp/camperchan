@@ -12,7 +12,7 @@ export const handleTruism: Subcommand = {
         "Code will always break when you think it shouldn't.";
       await interaction.editReply(truism);
     } catch (err) {
-      await errorHandler(Bot, err);
+      await errorHandler(Bot, "truism subcommand", err);
     }
   }
 };

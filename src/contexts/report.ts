@@ -94,7 +94,7 @@ export const report: Context = {
         .addComponents(modalRow);
       await interaction.showModal(modal);
     } catch (err) {
-      await errorHandler(Bot, err);
+      await errorHandler(Bot, "report context command", err);
     }
   }
 };

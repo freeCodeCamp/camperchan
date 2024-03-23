@@ -105,7 +105,7 @@ export const handlePrivate: Subcommand = {
       );
       await interaction.editReply("Channel created!");
     } catch (err) {
-      await errorHandler(Bot, err);
+      await errorHandler(Bot, "private subcommand", err);
       await interaction.editReply("Something went wrong!");
     }
   }

@@ -40,7 +40,7 @@ export const registerCommands = async (
     );
     return rest;
   } catch (err) {
-    await errorHandler(Bot, err);
+    await errorHandler(Bot, "register commands module", err);
     return null;
   }
 };

@@ -51,7 +51,7 @@ export const registerEvents = async (Bot: Camperbot) => {
       async (member) => await handleMemberRemove(Bot, member)
     );
     Bot.on(Events.Error, async (err) => {
-      await errorHandler(Bot, err);
+      await errorHandler(Bot, "client error event", err);
     });
     Bot.on(
       Events.VoiceStateUpdate,
@@ -65,6 +65,6 @@ export const registerEvents = async (Bot: Camperbot) => {
       await handleGuildScheduledEvents(Bot, oldEvent, newEvent);
     });
   } catch (err) {
-    await errorHandler(Bot, err);
+    await errorHandler(Bot, "register events", err);
   }
 };

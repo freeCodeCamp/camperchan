@@ -44,6 +44,6 @@ export const handleMemberRemove = async (
       avatarURL: member.user.displayAvatarURL()
     });
   } catch (err) {
-    await errorHandler(Bot, err);
+    await errorHandler(Bot, "member remove event", err);
   }
 };

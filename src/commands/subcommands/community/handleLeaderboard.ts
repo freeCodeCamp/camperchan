@@ -141,7 +141,7 @@ export const handleLeaderboard: Subcommand = {
         });
       });
     } catch (err) {
-      await errorHandler(Bot, err);
+      await errorHandler(Bot, "leaderboard subcommand", err);
       await interaction.editReply({
         content: "Something went wrong! Please try again later."
       });

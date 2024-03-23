@@ -64,6 +64,6 @@ export const handleReady = async (Bot: Camperbot) => {
       await send100DaysOfCode(Bot);
     });
   } catch (err) {
-    await errorHandler(Bot, err);
+    await errorHandler(Bot, "client ready event", err);
   }
 };

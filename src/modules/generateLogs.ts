@@ -34,7 +34,7 @@ export const generateLogs = async (
 
     return attachment;
   } catch (err) {
-    await errorHandler(Bot, err);
+    await errorHandler(Bot, "generate logs module", err);
     return new AttachmentBuilder(
       Buffer.from("An error occurred fetching these logs.", "utf-8"),
       { name: "log.txt" }

@@ -89,7 +89,7 @@ export const snippet: Context = {
           .catch(() => null);
       });
     } catch (err) {
-      await errorHandler(bot, err);
+      await errorHandler(bot, "snippet context command", err);
     }
   }
 };

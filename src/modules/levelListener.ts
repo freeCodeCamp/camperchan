@@ -69,6 +69,6 @@ export const levelListener = async (Bot: Camperbot, message: Message) => {
       });
     }
   } catch (err) {
-    await errorHandler(Bot, err);
+    await errorHandler(Bot, "level listener module", err);
   }
 };

@@ -81,7 +81,7 @@ export const community: Command = {
       }
       await handler.execute(bot, interaction);
     } catch (err) {
-      await errorHandler(bot, err);
+      await errorHandler(bot, "community command", err);
     }
   }
 };

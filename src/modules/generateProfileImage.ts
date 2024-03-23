@@ -289,7 +289,7 @@ export const generateProfileImage = async (
 
     return attachment;
   } catch (err) {
-    await errorHandler(bot, err);
+    await errorHandler(bot, "generate profile image module", err);
     return null;
   }
 };
@@ -384,7 +384,7 @@ export const generateLeaderboardImage = async (
 
     return attachment;
   } catch (err) {
-    await errorHandler(bot, err);
+    await errorHandler(bot, "generate leaderboard image module", err);
     return null;
   }
 };

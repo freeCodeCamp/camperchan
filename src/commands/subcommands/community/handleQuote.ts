@@ -20,7 +20,7 @@ export const handleQuote: Subcommand = {
         .setFooter({ text: quotes[randomQuote]?.author ?? "Naomi Carrigan" });
       await interaction.editReply({ embeds: [quoteEmbed] });
     } catch (err) {
-      await errorHandler(Bot, err);
+      await errorHandler(Bot, "quote subcommand", err);
       await interaction.editReply("Something went wrong.");
     }
   }

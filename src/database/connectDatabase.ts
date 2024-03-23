@@ -15,6 +15,6 @@ export const connectDatabase = async (Bot: Camperbot) => {
     await Bot.db.$connect();
     await Bot.config.debugHook.send("Database Connected");
   } catch (err) {
-    await errorHandler(Bot, err);
+    await errorHandler(Bot, "database connection", err);
   }
 };

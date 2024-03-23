@@ -78,7 +78,11 @@ export const supporter: Command = {
           email
         }
       });
-      await member.roles.add(SupporterRoleId);
+      await member.roles.add(SupporterRoleId).catch(async () => {
+        await bot.config.debugHook.send(
+          `Failed to assign Supporter role to ${member.id}. Please assign manually.`
+        );
+      });
       await interaction.editReply({
         content:
           "Congrats! You now have the supporter role, with access to special channels."
@@ -89,10 +93,14 @@ export const supporter: Command = {
       );
       const isCTAMember = donorCTA2023.split("\n").includes(email);
       if (isCTAMember) {
-        await member.roles.add("1186748788665225336");
+        await member.roles.add("1186748788665225336").catch(async () => {
+          await bot.config.debugHook.send(
+            `Failed to assign CTA role to ${member.id}. Please assign manually.`
+          );
+        });
       }
     } catch (err) {
-      await errorHandler(bot, err);
+      await errorHandler(bot, "supporter command", err);
     }
   }
 };

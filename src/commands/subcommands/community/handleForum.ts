@@ -25,7 +25,7 @@ export const handleForum: Subcommand = {
       );
       await interaction.editReply({ embeds: [forumEmbed] });
     } catch (err) {
-      await errorHandler(Bot, err);
+      await errorHandler(Bot, "forum subcommand", err);
       await interaction.editReply("Something went wrong.");
     }
   }
