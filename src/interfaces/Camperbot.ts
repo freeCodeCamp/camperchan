@@ -42,4 +42,10 @@ export interface Camperbot extends Client {
   learnAccounts: {
     [userId: string]: UserRecord & { cacheTTL: Date };
   };
+  event?: {
+    channelId: string;
+    userIds: string[];
+    start: number;
+    end: number;
+  };
 }
