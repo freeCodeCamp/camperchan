@@ -3,7 +3,7 @@ import { join } from "path";
 
 import { assert } from "chai";
 
-import { Camperbot } from "../../src/interfaces/Camperbot";
+import { ExtendedClient } from "../../src/interfaces/ExtendedClient";
 import { createLogFile } from "../../src/modules/createLogFile";
 
 suite("createLogFile", () => {
@@ -13,7 +13,7 @@ suite("createLogFile", () => {
   });
 
   test("returns the expected data structure", async () => {
-    const mockBot = { privateLogs: {} } as Camperbot;
+    const mockBot = { privateLogs: {} } as ExtendedClient;
     await createLogFile(mockBot, "Naomi");
     assert.property(mockBot.privateLogs, "Naomi", "Naomi is not defined");
     assert.equal(mockBot.privateLogs.Naomi, "Naomi", "Naomi is not Naomi");

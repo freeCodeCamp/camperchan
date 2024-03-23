@@ -2,7 +2,7 @@ import { Interaction, Message } from "discord.js";
 import { compareTwoStrings } from "string-similarity";
 
 import { Languages } from "../../config/Languages";
-import { Camperbot } from "../../interfaces/Camperbot";
+import { ExtendedClient } from "../../interfaces/ExtendedClient";
 import { closePrivateChannel } from "../../modules/closePrivateChannel";
 import { reactionRoleClick } from "../../modules/reactionRoleClick";
 import { isGuildCommandInteraction } from "../../utils/typeGuards";
@@ -10,11 +10,11 @@ import { isGuildCommandInteraction } from "../../utils/typeGuards";
 /**
  * Handles the interaction events from Discord.
  *
- * @param {Camperbot} Bot The bot's Discord instance.
+ * @param {ExtendedClient} Bot The bot's Discord instance.
  * @param {Interaction} interaction The interaction payload from Discord.
  */
 export const handleInteractionCreate = async (
-  Bot: Camperbot,
+  Bot: ExtendedClient,
   interaction: Interaction
 ) => {
   if (interaction.isChatInputCommand()) {

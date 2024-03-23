@@ -1,17 +1,17 @@
 import { VoiceState } from "discord.js";
 
-import { Camperbot } from "../../interfaces/Camperbot";
+import { ExtendedClient } from "../../interfaces/ExtendedClient";
 import { errorHandler } from "../../utils/errorHandler";
 
 /**
  * Processes the voice state update event from Discord.
  *
- * @param {Camperbot} bot The bot's Discord instance.
+ * @param {ExtendedClient} bot The bot's Discord instance.
  * @param {VoiceState} oldState The previous voice payload from Discord.
  * @param {VoiceState} newState The updated voice payload from Discord.
  */
 export const handleVoiceStateUpdate = async (
-  bot: Camperbot,
+  bot: ExtendedClient,
   oldState: VoiceState,
   newState: VoiceState
 ) => {

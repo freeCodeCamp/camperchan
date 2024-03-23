@@ -5,7 +5,7 @@ import {
   PermissionFlagsBits
 } from "discord.js";
 
-import { Camperbot } from "../interfaces/Camperbot";
+import { ExtendedClient } from "../interfaces/ExtendedClient";
 import { errorHandler } from "../utils/errorHandler";
 
 import { generateLogs } from "./generateLogs";
@@ -14,11 +14,11 @@ import { generateLogs } from "./generateLogs";
  * Handles the logic to close a private channel, generating the logs and sending them to
  * the moderation hook.
  *
- * @param {Camperbot} Bot The bot's discord instance.
+ * @param {ExtendedClient} Bot The bot's discord instance.
  * @param {ButtonInteraction} interaction The interaction payload from Discord.
  */
 export const closePrivateChannel = async (
-  Bot: Camperbot,
+  Bot: ExtendedClient,
   interaction: ButtonInteraction
 ) => {
   try {

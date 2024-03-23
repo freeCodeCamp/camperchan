@@ -1,15 +1,15 @@
 import { PrismaClient } from "@prisma/client";
 
-import { Camperbot } from "../interfaces/Camperbot";
+import { ExtendedClient } from "../interfaces/ExtendedClient";
 import { errorHandler } from "../utils/errorHandler";
 
 /**
  * Handles connecting to the database and attaching the database to
- * Camperbot.
+ * ExtendedClient.
  *
- * @param {Camperbot} Bot The bot's Discord instance.
+ * @param {ExtendedClient} Bot The bot's Discord instance.
  */
-export const connectDatabase = async (Bot: Camperbot) => {
+export const connectDatabase = async (Bot: ExtendedClient) => {
   try {
     Bot.db = new PrismaClient();
     await Bot.db.$connect();

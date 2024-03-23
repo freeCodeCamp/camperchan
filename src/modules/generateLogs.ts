@@ -3,19 +3,19 @@ import { join } from "path";
 
 import { AttachmentBuilder } from "discord.js";
 
-import { Camperbot } from "../interfaces/Camperbot";
+import { ExtendedClient } from "../interfaces/ExtendedClient";
 import { errorHandler } from "../utils/errorHandler";
 
 /**
  * To run when a private channel is closed. Finds the channel log file,
  * creates a message attachement with the logs, and deletes the file.
  *
- * @param {Camperbot} Bot The bot's Discord instance.
+ * @param {ExtendedClient} Bot The bot's Discord instance.
  * @param {string} channelId The channel ID of the private channel.
  * @returns {Promise<AttachmentBuilder>} The log file as a Discord attachment.
  */
 export const generateLogs = async (
-  Bot: Camperbot,
+  Bot: ExtendedClient,
   channelId: string
 ): Promise<AttachmentBuilder> => {
   try {

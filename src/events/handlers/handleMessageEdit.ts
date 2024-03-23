@@ -1,6 +1,6 @@
 import { Message, EmbedBuilder, PartialMessage } from "discord.js";
 
-import { Camperbot } from "../../interfaces/Camperbot";
+import { ExtendedClient } from "../../interfaces/ExtendedClient";
 import { customSubstring } from "../../utils/customSubstring";
 import { errorHandler } from "../../utils/errorHandler";
 import { generateDiff } from "../../utils/generateDiff";
@@ -8,12 +8,12 @@ import { generateDiff } from "../../utils/generateDiff";
 /**
  * Handles the message edit event from Discord.
  *
- * @param {Camperbot} Bot The bot's Discord instance.
+ * @param {ExtendedClient} Bot The bot's Discord instance.
  * @param {Message} oldMessage The old message data.
  * @param {Message} newMessage The new message data.
  */
 export const handleMessageEdit = async (
-  Bot: Camperbot,
+  Bot: ExtendedClient,
   oldMessage: Message | PartialMessage,
   newMessage: Message | PartialMessage
 ) => {

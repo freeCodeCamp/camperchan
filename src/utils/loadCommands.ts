@@ -1,7 +1,7 @@
 import { readdir, stat } from "fs/promises";
 import { join } from "path";
 
-import { Camperbot } from "../interfaces/Camperbot";
+import { ExtendedClient } from "../interfaces/ExtendedClient";
 import { Command } from "../interfaces/Command";
 
 import { errorHandler } from "./errorHandler";
@@ -11,10 +11,10 @@ import { logHandler } from "./logHandler";
  * Reads the `/commands` directory and dynamically imports the files,
  * then pushes the imported data to an array.
  *
- * @param {Camperbot} Bot Bot's Discord instance.
+ * @param {ExtendedClient} Bot Bot's Discord instance.
  * @returns {Command[]} Array of Command objects representing the imported commands.
  */
-export const loadCommands = async (Bot: Camperbot): Promise<Command[]> => {
+export const loadCommands = async (Bot: ExtendedClient): Promise<Command[]> => {
   try {
     const result: Command[] = [];
     const files = await readdir(

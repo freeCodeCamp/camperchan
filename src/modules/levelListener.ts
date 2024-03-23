@@ -1,16 +1,16 @@
 import { Message } from "discord.js";
 
 import levelScale from "../config/levelScale";
-import { Camperbot } from "../interfaces/Camperbot";
+import { ExtendedClient } from "../interfaces/ExtendedClient";
 import { errorHandler } from "../utils/errorHandler";
 
 /**
  * Processes level data for a user.
  *
- * @param {Camperbot} Bot The bot's Discord instance.
+ * @param {ExtendedClient} Bot The bot's Discord instance.
  * @param {Message} message The message payload from Discord.
  */
-export const levelListener = async (Bot: Camperbot, message: Message) => {
+export const levelListener = async (Bot: ExtendedClient, message: Message) => {
   try {
     const { author, content } = message;
 

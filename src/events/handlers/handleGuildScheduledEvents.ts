@@ -5,19 +5,19 @@ import {
   PartialGuildScheduledEvent
 } from "discord.js";
 
-import { Camperbot } from "../../interfaces/Camperbot";
+import { ExtendedClient } from "../../interfaces/ExtendedClient";
 import { errorHandler } from "../../utils/errorHandler";
 
 /**
  * Tracks the guild event update, caching event participation and sending result to
  * Naomi on event end.
  *
- * @param {Camperbot} bot The bot's Discord instance.
+ * @param {ExtendedClient} bot The bot's Discord instance.
  * @param {GuildScheduledEvent} oldEvent The original event payload from Discord.
  * @param {GuildScheduledEvent} newEvent The updated event payload from Discord.
  */
 export const handleGuildScheduledEvents = async (
-  bot: Camperbot,
+  bot: ExtendedClient,
   oldEvent:
     | GuildScheduledEvent<GuildScheduledEventStatus>
     | PartialGuildScheduledEvent,

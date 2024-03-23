@@ -1,6 +1,6 @@
 import { Events } from "discord.js";
 
-import { Camperbot } from "../interfaces/Camperbot";
+import { ExtendedClient } from "../interfaces/ExtendedClient";
 import { errorHandler } from "../utils/errorHandler";
 
 import { handleGuildScheduledEvents } from "./handlers/handleGuildScheduledEvents";
@@ -17,9 +17,9 @@ import { handleVoiceStateUpdate } from "./handlers/handleVoiceStateUpdate";
 /**
  * Attaches the event listeners to the bot's instance.
  *
- * @param {Camperbot} Bot The bot's Discord instance.
+ * @param {ExtendedClient} Bot The bot's Discord instance.
  */
-export const registerEvents = async (Bot: Camperbot) => {
+export const registerEvents = async (Bot: ExtendedClient) => {
   try {
     Bot.on(Events.ClientReady, async () => await handleReady(Bot));
     Bot.on(

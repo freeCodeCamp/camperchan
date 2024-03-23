@@ -1,6 +1,6 @@
 import { MongoClient } from "mongodb";
 
-import { Camperbot } from "../interfaces/Camperbot";
+import { ExtendedClient } from "../interfaces/ExtendedClient";
 import { UserRecord } from "../interfaces/UserRecord";
 
 import { errorHandler } from "./errorHandler";
@@ -9,13 +9,13 @@ import { logHandler } from "./logHandler";
 /**
  * Fetches the user's /learn record from the production database.
  *
- * @param {Camperbot} bot The bot's Discord instance.
+ * @param {ExtendedClient} bot The bot's Discord instance.
  * @param {string} email The email to query.
  * @param {string} userId The ID of the Discord user.
  * @returns {UserRecord | null} The resulting record, or null if error/404.
  */
 export const fetchLearnRecord = async (
-  bot: Camperbot,
+  bot: ExtendedClient,
   email: string,
   userId: string
 ): Promise<UserRecord | null> => {

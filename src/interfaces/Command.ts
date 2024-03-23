@@ -3,12 +3,12 @@ import {
   SlashCommandSubcommandsOnlyBuilder
 } from "discord.js";
 
-import { Camperbot } from "./Camperbot";
+import { ExtendedClient } from "./ExtendedClient";
 import { GuildCommandInteraction } from "./GuildCommandInteraction";
 
 export interface Command {
   data:
     | SlashCommandSubcommandsOnlyBuilder
     | Omit<SlashCommandBuilder, "addSubcommand" | "addSubcommandGroup">;
-  run: (Bot: Camperbot, interaction: GuildCommandInteraction) => Promise<void>;
+  run: (Bot: ExtendedClient, interaction: GuildCommandInteraction) => Promise<void>;
 }

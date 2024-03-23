@@ -1,17 +1,17 @@
 import { Message, EmbedBuilder, PartialMessage } from "discord.js";
 
-import { Camperbot } from "../../interfaces/Camperbot";
+import { ExtendedClient } from "../../interfaces/ExtendedClient";
 import { customSubstring } from "../../utils/customSubstring";
 import { errorHandler } from "../../utils/errorHandler";
 
 /**
  * Handles the message delete event in Discord.
  *
- * @param {Camperbot} Bot The bot's Discord instance.
+ * @param {ExtendedClient} Bot The bot's Discord instance.
  * @param {Message} message The message payload from Discord.
  */
 export const handleMessageDelete = async (
-  Bot: Camperbot,
+  Bot: ExtendedClient,
   message: Message | PartialMessage
 ) => {
   try {

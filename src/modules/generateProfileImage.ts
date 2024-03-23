@@ -3,7 +3,7 @@ import { AttachmentBuilder } from "discord.js";
 import nodeHtmlToImage from "node-html-to-image";
 
 import { Badges } from "../config/Badges";
-import { Camperbot } from "../interfaces/Camperbot";
+import { ExtendedClient } from "../interfaces/ExtendedClient";
 import { UserRecord } from "../interfaces/UserRecord";
 import { errorHandler } from "../utils/errorHandler";
 import { fetchLearnRecord } from "../utils/fetchLearnRecord";
@@ -146,12 +146,12 @@ const getBadgesSection = (record: levels): { html: string; alt: string } => {
  * Creates an image from the user's profile settings, converts it into a Discord
  * attachment, and returns it.
  *
- * @param {Camperbot} bot The bot's Discord instance.
+ * @param {ExtendedClient} bot The bot's Discord instance.
  * @param {levels} record The user's record from the database.
  * @returns {AttachmentBuilder} The attachment, or null on error.
  */
 export const generateProfileImage = async (
-  bot: Camperbot,
+  bot: ExtendedClient,
   record: levels
 ): Promise<AttachmentBuilder | null> => {
   try {
@@ -297,12 +297,12 @@ export const generateProfileImage = async (
 /**
  * Generates the image for the leaderboard.
  *
- * @param {Camperbot} bot The bot's Discord instance.
+ * @param {ExtendedClient} bot The bot's Discord instance.
  * @param {levels} levels The user's record from the database.
  * @returns {AttachmentBuilder} The attachment, or null on error.
  */
 export const generateLeaderboardImage = async (
-  bot: Camperbot,
+  bot: ExtendedClient,
   levels: (levels & { index: number })[]
 ): Promise<AttachmentBuilder | null> => {
   try {

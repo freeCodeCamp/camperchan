@@ -1,14 +1,14 @@
 import { Languages } from "../config/Languages";
-import { Camperbot } from "../interfaces/Camperbot";
+import { ExtendedClient } from "../interfaces/ExtendedClient";
 import { errorHandler } from "../utils/errorHandler";
 
 /**
  * Loads the cached roles and validates that all langagues
  * in the config have a role.
  *
- * @param {Camperbot} bot The bot's Discord instance.
+ * @param {ExtendedClient} bot The bot's Discord instance.
  */
-export const loadRoles = async (bot: Camperbot) => {
+export const loadRoles = async (bot: ExtendedClient) => {
   try {
     const roles = await bot.homeGuild.roles.fetch(undefined, {
       cache: true,

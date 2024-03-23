@@ -1,16 +1,16 @@
 import { EmbedBuilder, GuildMember, PartialGuildMember } from "discord.js";
 
-import { Camperbot } from "../../interfaces/Camperbot";
+import { ExtendedClient } from "../../interfaces/ExtendedClient";
 import { errorHandler } from "../../utils/errorHandler";
 
 /**
  * Logs a message to the debug hook when someone leaves the server.
  *
- * @param {Camperbot} Bot The bot's Discord instance.
+ * @param {ExtendedClient} Bot The bot's Discord instance.
  * @param {GuildMember | PartialGuildMember} member The member that left the server.
  */
 export const handleMemberRemove = async (
-  Bot: Camperbot,
+  Bot: ExtendedClient,
   member: GuildMember | PartialGuildMember
 ) => {
   try {

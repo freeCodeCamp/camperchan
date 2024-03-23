@@ -1,7 +1,7 @@
 import { ChannelType } from "discord.js";
 import { scheduleJob } from "node-schedule";
 
-import { Camperbot } from "../../interfaces/Camperbot";
+import { ExtendedClient } from "../../interfaces/ExtendedClient";
 import { loadRoles } from "../../modules/loadRoles";
 import { send100DaysOfCode } from "../../modules/send100DaysOfCode";
 import { errorHandler } from "../../utils/errorHandler";
@@ -9,9 +9,9 @@ import { errorHandler } from "../../utils/errorHandler";
 /**
  * Logs a message to the debug hook when the bot is online.
  *
- * @param {Camperbot} Bot The bot's Discord instance.
+ * @param {ExtendedClient} Bot The bot's Discord instance.
  */
-export const handleReady = async (Bot: Camperbot) => {
+export const handleReady = async (Bot: ExtendedClient) => {
   try {
     await Bot.config.debugHook.send("Bot Ready!");
     const homeGuild = await Bot.guilds

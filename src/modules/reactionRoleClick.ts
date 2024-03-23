@@ -1,16 +1,16 @@
 import { ButtonInteraction } from "discord.js";
 
-import { Camperbot } from "../interfaces/Camperbot";
+import { ExtendedClient } from "../interfaces/ExtendedClient";
 import { errorHandler } from "../utils/errorHandler";
 
 /**
  * Handles the logic when a button created by the `role` command is clicked.
  *
- * @param {Camperbot} Bot Camperbot's discord instance.
+ * @param {ExtendedClient} Bot ExtendedClient's discord instance.
  * @param {ButtonInteraction} interaction The interaction payload from Discord.
  */
 export const reactionRoleClick = async (
-  Bot: Camperbot,
+  Bot: ExtendedClient,
   interaction: ButtonInteraction
 ) => {
   try {

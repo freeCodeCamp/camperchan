@@ -1,6 +1,6 @@
 import { EmbedBuilder, User } from "discord.js";
 
-import { Camperbot } from "../interfaces/Camperbot";
+import { ExtendedClient } from "../interfaces/ExtendedClient";
 import { ModerationActions } from "../interfaces/ModerationActions";
 import { customSubstring } from "../utils/customSubstring";
 import { errorHandler } from "../utils/errorHandler";
@@ -8,7 +8,7 @@ import { errorHandler } from "../utils/errorHandler";
 /**
  * Generates a moderation embed notice and sends it to the user.
  *
- * @param {Camperbot} Bot Bot's Discord instance.
+ * @param {ExtendedClient} Bot Bot's Discord instance.
  * @param {ModerationActions} action The moderation action taken.
  * @param {User} user The Discord user being moderated.
  * @param {string} guildName The name of the guild the moderation occurred in.
@@ -16,7 +16,7 @@ import { errorHandler } from "../utils/errorHandler";
  * @returns {boolean} True if the message was sent, false otherwise.
  */
 export const sendModerationDm = async (
-  Bot: Camperbot,
+  Bot: ExtendedClient,
   action: ModerationActions,
   user: User,
   guildName: string,

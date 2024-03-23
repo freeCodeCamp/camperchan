@@ -3,7 +3,7 @@ import { join } from "path";
 
 import { AttachmentBuilder, ChannelType, Message } from "discord.js";
 
-import { Camperbot } from "../../interfaces/Camperbot";
+import { ExtendedClient } from "../../interfaces/ExtendedClient";
 import { levelListener } from "../../modules/levelListener";
 import { loadRoles } from "../../modules/loadRoles";
 import { messageCounter } from "../../modules/messageCounter";
@@ -11,10 +11,10 @@ import { messageCounter } from "../../modules/messageCounter";
 /**
  * Handles the message create events.
  *
- * @param {Camperbot} Bot The bot's Discord instance.
+ * @param {ExtendedClient} Bot The bot's Discord instance.
  * @param {Message} message The message payload from Discord.
  */
-export const handleMessageCreate = async (Bot: Camperbot, message: Message) => {
+export const handleMessageCreate = async (Bot: ExtendedClient, message: Message) => {
   if (message.author.id === "465650873650118659") {
     if (message.content.startsWith("~cachebust")) {
       const [, id] = message.content.split(/\s+/g);

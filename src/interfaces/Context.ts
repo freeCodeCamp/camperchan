@@ -1,6 +1,6 @@
 import { ContextMenuCommandInteraction } from "discord.js";
 
-import { Camperbot } from "./Camperbot";
+import { ExtendedClient } from "./ExtendedClient";
 
 export interface Context {
   data: {
@@ -8,7 +8,7 @@ export interface Context {
     type: 2 | 3;
   };
   run: (
-    Bot: Camperbot,
+    Bot: ExtendedClient,
     interaction: ContextMenuCommandInteraction
   ) => Promise<void>;
 }

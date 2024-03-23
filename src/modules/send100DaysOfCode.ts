@@ -1,12 +1,12 @@
-import { Camperbot } from "../interfaces/Camperbot";
+import { ExtendedClient } from "../interfaces/ExtendedClient";
 import { errorHandler } from "../utils/errorHandler";
 
 /**
  * Sends the reminder for the 100 days of code.
  *
- * @param {Camperbot} bot The bot's Discord instance.
+ * @param {ExtendedClient} bot The bot's Discord instance.
  */
-export const send100DaysOfCode = async (bot: Camperbot) => {
+export const send100DaysOfCode = async (bot: ExtendedClient) => {
   try {
     const channel =
       bot.homeGuild.channels.cache.get("697124514982527086") ||

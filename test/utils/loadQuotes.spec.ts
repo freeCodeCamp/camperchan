@@ -1,6 +1,6 @@
 import { assert } from "chai";
 
-import { Camperbot } from "../../src/interfaces/Camperbot";
+import { ExtendedClient } from "../../src/interfaces/ExtendedClient";
 import { loadQuotes } from "../../src/utils/loadQuotes";
 
 suite("loadQuotes", () => {
@@ -10,7 +10,7 @@ suite("loadQuotes", () => {
   });
 
   test("returns the expected data structure", async () => {
-    const quotes = await loadQuotes({} as Camperbot);
+    const quotes = await loadQuotes({} as ExtendedClient);
     assert.property(quotes, "motivationalQuotes", "quotes is not defined");
     assert.isArray(quotes.motivationalQuotes, "quotes is not an array");
     assert.property(

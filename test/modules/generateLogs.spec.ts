@@ -3,11 +3,11 @@ import { join } from "path";
 
 import { assert } from "chai";
 
-import { Camperbot } from "../../src/interfaces/Camperbot";
+import { ExtendedClient } from "../../src/interfaces/ExtendedClient";
 import { createLogFile } from "../../src/modules/createLogFile";
 import { generateLogs } from "../../src/modules/generateLogs";
 
-const mockBot = { privateLogs: {} } as Camperbot;
+const mockBot = { privateLogs: {} } as ExtendedClient;
 
 suite("generateLogs", () => {
   test("is defined", () => {

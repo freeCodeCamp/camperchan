@@ -5,7 +5,7 @@ import {
   Routes
 } from "discord.js";
 
-import { Camperbot } from "../interfaces/Camperbot";
+import { ExtendedClient } from "../interfaces/ExtendedClient";
 
 import { errorHandler } from "./errorHandler";
 import { logHandler } from "./logHandler";
@@ -15,12 +15,12 @@ import { logHandler } from "./logHandler";
  * and builds an array of all command data. Then, posts the data to the Discord endpoint
  * for registering commands.
  *
- * @param {Camperbot} Bot Bot's Discord instance.
+ * @param {ExtendedClient} Bot Bot's Discord instance.
  * @param {REST} restClass The REST class to use for registering commands.
  * @returns {boolean} True if the commands were registered, false on error.
  */
 export const registerCommands = async (
-  Bot: Camperbot,
+  Bot: ExtendedClient,
   restClass = REST
 ): Promise<REST | null> => {
   try {
