@@ -12,6 +12,7 @@ import { handleMessageDelete } from "./handlers/handleMessageDelete";
 import { handleMessageEdit } from "./handlers/handleMessageEdit";
 import { handleReady } from "./handlers/handleReady";
 import { handleThreadCreate } from "./handlers/handleThreadCreate";
+import { handleVoiceStateUpdate } from "./handlers/handleVoiceStateUpdate";
 
 /**
  * Attaches the event listeners to the bot's instance.
@@ -52,6 +53,11 @@ export const registerEvents = async (Bot: Camperbot) => {
     Bot.on(Events.Error, async (err) => {
       await errorHandler(Bot, err);
     });
+    Bot.on(
+      Events.VoiceStateUpdate,
+      async (oldState, newState) =>
+        await handleVoiceStateUpdate(Bot, oldState, newState)
+    );
     Bot.on(Events.GuildScheduledEventUpdate, async (oldEvent, newEvent) => {
       if (!oldEvent || !newEvent) {
         return;
