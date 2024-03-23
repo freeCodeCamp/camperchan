@@ -29,7 +29,7 @@ suite("generateConfig", () => {
     process.env.WELCOME_HOOK =
       "https://discord.com/api/webhooks/11111111111111111/AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA";
     process.env.GITHUB_TOKEN = "meow";
-    process.env.GHOST_TOKEN = "meow";
+    process.env.GHOST_KEY = "meow";
     const result = generateConfig();
     assert.equal(result.token, "Naomi");
     assert.equal(result.mongoUrl, "Was");
