@@ -3,7 +3,7 @@ import { join } from "path";
 
 import { SlashCommandBuilder } from "discord.js";
 
-import { SupporterRoleId } from "../config/Supporter";
+import { SupporterRoleId } from "../config/Roles";
 import { Command } from "../interfaces/Command";
 import { errorHandler } from "../utils/errorHandler";
 import { fetchLearnRecord } from "../utils/fetchLearnRecord";

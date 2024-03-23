@@ -18,7 +18,8 @@ export const generateConfig = (): Camperbot["config"] => {
     !process.env.BOT_ID ||
     !process.env.REPORT_CHANNEL ||
     !process.env.WELCOME_HOOK ||
-    !process.env.GITHUB_TOKEN
+    !process.env.GITHUB_TOKEN ||
+    !process.env.GHOST_KEY
   ) {
     throw new Error("Missing required config variables");
   }
@@ -34,6 +35,7 @@ export const generateConfig = (): Camperbot["config"] => {
     modRole: process.env.MOD_ROLE || "no role set",
     privateCategory: process.env.PRIVATE_CATEGORY || "no category set",
     reportChannel: process.env.REPORT_CHANNEL,
-    githubToken: process.env.GITHUB_TOKEN
+    githubToken: process.env.GITHUB_TOKEN,
+    ghostKey: process.env.GHOST_KEY
   };
 };
