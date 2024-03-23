@@ -57,3 +57,9 @@ model supporters {
   userId String @unique
   email  String @unique
 }
+
+model authors {
+  id     String @id @default(auto()) @map("_id") @db.ObjectId
+  userId String @unique
+  email  String @unique
+}

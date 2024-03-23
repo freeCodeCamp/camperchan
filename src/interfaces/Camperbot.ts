@@ -28,6 +28,7 @@ export interface Camperbot extends Client {
     privateCategory: Snowflake;
     reportChannel: Snowflake;
     githubToken: string;
+    ghostKey: string;
   };
   octokit: Octokit;
   quotes: QuoteList;
