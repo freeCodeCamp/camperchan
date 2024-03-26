@@ -86,8 +86,8 @@ devDependencies:
     specifier: 8.57.0
     version: 8.57.0
   mocha:
-    specifier: 10.3.0
-    version: 10.3.0
+    specifier: 10.4.0
+    version: 10.4.0
   nyc:
     specifier: 15.1.0
     version: 15.1.0
@@ -102,7 +102,7 @@ devDependencies:
     version: 5.0.5
   ts-mocha:
     specifier: 9.0.2
-    version: 9.0.2(mocha@10.3.0)
+    version: 9.0.2(mocha@10.4.0)
   ts-node:
     specifier: 10.9.2
     version: 10.9.2(@types/node@20.11.30)(typescript@5.4.3)
@@ -3191,8 +3191,8 @@ packages:
       minimist: 1.2.8
     dev: true
 
-  /mocha@10.3.0:
-    resolution: {integrity: sha512-uF2XJs+7xSLsrmIvn37i/wnc91nw7XjOQB8ccyx5aEgdnohr7n+rEiZP23WkCYHjilR6+EboEnbq/ZQDz4LSbg==}
+  /mocha@10.4.0:
+    resolution: {integrity: sha512-eqhGB8JKapEYcC4ytX/xrzKforgEc3j1pGlAXVy3eRwrtAy5/nIfT1SvgGzfN0XZZxeLq0aQWkOUAmqIJiv+bA==}
     engines: {node: '>= 14.0.0'}
     hasBin: true
     dependencies:
@@ -4172,14 +4172,14 @@ packages:
   /ts-mixer@6.0.3:
     resolution: {integrity: sha512-k43M7uCG1AkTyxgnmI5MPwKoUvS/bRvLvUb7+Pgpdlmok8AoqmUaZxUUw8zKM5B1lqZrt41GjYgnvAi0fppqgQ==}
 
-  /ts-mocha@9.0.2(mocha@10.3.0):
+  /ts-mocha@9.0.2(mocha@10.4.0):
     resolution: {integrity: sha512-WyQjvnzwrrubl0JT7EC1yWmNpcsU3fOuBFfdps30zbmFBgKniSaSOyZMZx+Wq7kytUs5CY+pEbSYEbGfIKnXTw==}
     engines: {node: '>= 6.X.X'}
     hasBin: true
     peerDependencies:
       mocha: ^3.X.X || ^4.X.X || ^5.X.X || ^6.X.X || ^7.X.X || ^8.X.X || ^9.X.X
     dependencies:
-      mocha: 10.3.0
+      mocha: 10.4.0
       ts-node: 7.0.1
     optionalDependencies:
       tsconfig-paths: 3.15.0
