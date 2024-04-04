@@ -68,8 +68,8 @@ devDependencies:
     specifier: 20.12.4
     version: 20.12.4
   '@types/node-schedule':
-    specifier: 2.1.6
-    version: 2.1.6
+    specifier: 2.1.7
+    version: 2.1.7
   '@types/prettier':
     specifier: 2.7.3
     version: 2.7.3
@@ -872,8 +872,8 @@ packages:
     resolution: {integrity: sha512-dJvrYWxP/UcXm36Qn36fxhUKu8A/xMRXVT2cliFF1Z7UA9liG5Psj3ezNSZw+5puH2czDXRLcXQxf8JbJt0ejg==}
     dev: true
 
-  /@types/node-schedule@2.1.6:
-    resolution: {integrity: sha512-6AlZSUiNTdaVmH5jXYxX9YgmF1zfOlbjUqw0EllTBmZCnN1R5RR/m/u3No1OiWR05bnQ4jM4/+w4FcGvkAtnKQ==}
+  /@types/node-schedule@2.1.7:
+    resolution: {integrity: sha512-G7Z3R9H7r3TowoH6D2pkzUHPhcJrDF4Jz1JOQ80AX0K2DWTHoN9VC94XzFAPNMdbW9TBzMZ3LjpFi7RYdbxtXA==}
     dependencies:
       '@types/node': 20.12.4
     dev: true
