@@ -55,6 +55,6 @@
     "rimraf": "5.0.5",
     "ts-mocha": "9.0.2",
     "ts-node": "10.9.2",
-    "typescript": "5.4.3"
+    "typescript": "5.4.4"
   }
 }
