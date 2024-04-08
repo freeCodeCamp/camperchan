@@ -55,6 +55,11 @@ export const PullComments: { key: string; message: string }[] = [
     key: "Failing CI",
     message:
       "We would love to be able to merge your changes but it looks like there is an error with the CI build. ⚠️\n\nOnce you resolve these issues, we will be able to review your PR and merge it. 😊\n\n---\n\nFeel free to reference the [contributing guidelines](https://contribute.freecodecamp.org/#/how-to-work-on-coding-challenges.md#testing-challenges) for instructions on running the CI build locally. ✅"
+  },
+  {
+    key: "Exercise PR Made Against Boilerplate Repo",
+    message:
+      "Hi there,\n\nIt looks like this PR was supposed to be made on your own fork instead of the original boilerplate repository.\n\nThis is a standard message notifying you that we've reviewed your pull request and have decided not to merge it. Join our [chat room](https://discord.gg/PRyKn3Vbay) or our [forum](https://forum.freecodecamp.org/) if you have any questions or need help with the coding challenges.\n\nHappy coding.",
   }
 ];
 
