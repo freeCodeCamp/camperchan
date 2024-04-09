@@ -59,7 +59,7 @@ export const PullComments: { key: string; message: string }[] = [
   {
     key: "Exercise PR Made Against Boilerplate Repo",
     message:
-      "Hi there,\n\nIt looks like this PR was supposed to be made on your own fork instead of the original boilerplate repository.\n\nThis is a standard message notifying you that we've reviewed your pull request and have decided not to merge it. Join our [chat room](https://discord.gg/PRyKn3Vbay) or our [forum](https://forum.freecodecamp.org/) if you have any questions or need help with the coding challenges.\n\nHappy coding."
+      "Hi there,\n\nIt looks like this PR was supposed to be made on your own fork instead of the original boilerplate repository.\n\nAs such, this isn't a PR we can merge to our repository. Feel free to join our [chat room](https://discord.gg/PRyKn3Vbay) or our [forum](https://forum.freecodecamp.org/) if you have any questions or need help with the coding challenges.\n\nHappy coding."
   }
 ];
 
