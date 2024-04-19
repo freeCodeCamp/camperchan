@@ -59,8 +59,8 @@ devDependencies:
     specifier: 4.3.14
     version: 4.3.14
   '@types/diff':
-    specifier: 5.0.9
-    version: 5.0.9
+    specifier: 5.2.0
+    version: 5.2.0
   '@types/mocha':
     specifier: 10.0.6
     version: 10.0.6
@@ -855,8 +855,8 @@ packages:
     resolution: {integrity: sha512-Wj71sXE4Q4AkGdG9Tvq1u/fquNz9EdG4LIJMwVVII7ashjD/8cf8fyIfJAjRr6YcsXnSE8cOGQPq1gqeR8z+3w==}
     dev: true
 
-  /@types/diff@5.0.9:
-    resolution: {integrity: sha512-RWVEhh/zGXpAVF/ZChwNnv7r4rvqzJ7lYNSmZSVTxjV0PBLf6Qu7RNg+SUtkpzxmiNkjCx0Xn2tPp7FIkshJwQ==}
+  /@types/diff@5.2.0:
+    resolution: {integrity: sha512-pjJH+02ukgJRW0mViDUA1cdC+wzSgRu0e4cPuogPLAw0i66y62iMP0ZlXoJAmoXrKRZnF3pMDwyKZsgNVlMX4A==}
     dev: true
 
   /@types/json-schema@7.0.12:
