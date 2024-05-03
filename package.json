@@ -27,7 +27,7 @@
     "discord.js": "14.14.1",
     "dotenv": "16.4.5",
     "highlight.js": "11.9.0",
-    "mongodb": "6.5.0",
+    "mongodb": "6.6.0",
     "node-html-to-image": "4.0.0",
     "node-schedule": "2.1.1",
     "string-similarity": "4.0.4",
