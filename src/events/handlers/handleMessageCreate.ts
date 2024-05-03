@@ -1,7 +1,12 @@
 import { readFile, writeFile } from "fs/promises";
 import { join } from "path";
 
-import { AttachmentBuilder, ChannelType, Message } from "discord.js";
+import {
+  AttachmentBuilder,
+  ChannelType,
+  Message,
+  PermissionFlagsBits
+} from "discord.js";
 
 import { ExtendedClient } from "../../interfaces/ExtendedClient";
 import { levelListener } from "../../modules/levelListener";
@@ -48,6 +53,27 @@ export const handleMessageCreate = async (
       });
     }
   }
+
+  if (
+    // Safe to make optional here, as member should only be null for a DM.
+    !message.member?.permissions.has(PermissionFlagsBits.ManageMessages) &&
+    message.attachments.size &&
+    message.attachments.some(
+      (file) =>
+        // If the file doesn't have a type, lets ignore it
+        // we don't want false positives
+        file.contentType &&
+        !file.contentType.startsWith("image/") &&
+        !file.contentType.startsWith("video/")
+    )
+  ) {
+    await message.delete();
+    await message.channel.send({
+      content: `Hey <@!${message.author.id}>, it looks like you tried uploading something that wasn't an image or video. Please do not upload other files, to ensure the safety of our users.`
+    });
+    return;
+  }
+
   await messageCounter(CamperChan, message);
   await levelListener(CamperChan, message);
 
