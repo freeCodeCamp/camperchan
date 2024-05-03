@@ -55,10 +55,14 @@ export const handleMessageCreate = async (
   }
 
   if (
-    !message.member.permissions.has(PermissionFlagsBits.ManageMessages) &&
-    message.attachments &&
+    // Safe to make optional here, as member should only be null for a DM.
+    !message.member?.permissions.has(PermissionFlagsBits.ManageMessages) &&
+    message.attachments.size &&
     message.attachments.some(
       (file) =>
+        // If the file doesn't have a type, lets ignore it
+        // we don't want false positives
+        file.contentType &&
         !file.contentType.startsWith("image/") &&
         !file.contentType.startsWith("video/")
     )
