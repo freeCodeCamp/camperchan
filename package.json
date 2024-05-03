@@ -20,7 +20,7 @@
   },
   "license": "MIT",
   "dependencies": {
-    "@octokit/rest": "20.1.0",
+    "@octokit/rest": "20.1.1",
     "@prisma/client": "5.13.0",
     "@tryghost/admin-api": "1.13.12",
     "diff": "5.2.0",
