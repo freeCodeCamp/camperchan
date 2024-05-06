@@ -39,7 +39,7 @@
     "@nhcarrigan/prettier-config": "3.2.0",
     "@nhcarrigan/typescript-config": "3.0.0",
     "@types/chai": "4.3.16",
-    "@types/diff": "5.2.0",
+    "@types/diff": "5.2.1",
     "@types/mocha": "10.0.6",
     "@types/node": "20.12.10",
     "@types/node-schedule": "2.1.7",
