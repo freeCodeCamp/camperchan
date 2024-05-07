@@ -27,8 +27,8 @@ dependencies:
     specifier: 11.9.0
     version: 11.9.0
   mongodb:
-    specifier: 6.6.0
-    version: 6.6.0
+    specifier: 6.6.1
+    version: 6.6.1
   node-html-to-image:
     specifier: 4.0.0
     version: 4.0.0
@@ -3235,8 +3235,8 @@ packages:
       whatwg-url: 13.0.0
     dev: false
 
-  /mongodb@6.6.0:
-    resolution: {integrity: sha512-LoR0hel6y1i7pubPOzbflccdc89RDOapIGqwce4aenOfhhLKOqiQ2F4yQHP+Hqa7TuPhpVqDVjixbvUSx7R0rQ==}
+  /mongodb@6.6.1:
+    resolution: {integrity: sha512-FvA9ocQzRzzvhin1HHLrZDEm0gWvnksbiciYrU/0GmET/t/DdDiMJroA7rfDrHM3AInwGVYw2fwAU2oNYUyUEw==}
     engines: {node: '>=16.20.1'}
     peerDependencies:
       '@aws-sdk/credential-providers': ^3.188.0
