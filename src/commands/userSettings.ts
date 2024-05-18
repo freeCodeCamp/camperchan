@@ -48,7 +48,7 @@ export const userSettings: Command = {
     .addBooleanOption((option) =>
       option
         .setName("level-alerts")
-        .setDescription("Set if you notified every time you gain a level")
+        .setDescription("Set if you are notified every time you gain a level")
     ),
   run: async (CamperChan, interaction) => {
     try {
