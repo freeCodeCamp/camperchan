@@ -44,6 +44,11 @@ export const userSettings: Command = {
         .setDescription(
           "The email associated with your freeCodeCamp.org account."
         )
+    )
+    .addBooleanOption((option) =>
+      option
+        .setName("level-alerts")
+        .setDescription("Set if you notified every time you gain a level")
     ),
   run: async (CamperChan, interaction) => {
     try {
@@ -55,7 +60,8 @@ export const userSettings: Command = {
         backgroundColour: interaction.options.getString("background-colour"),
         backgroundImage: interaction.options.getString("background-image"),
         colour: interaction.options.getString("colour"),
-        learnEmail: interaction.options.getString("email")
+        learnEmail: interaction.options.getString("email"),
+        levelAlerts: interaction.options.getBoolean("level-alerts")
       };
       const badges: string[] = [];
       const record = await CamperChan.db.levels.findUnique({

@@ -39,7 +39,7 @@ model levels {
   colour           String   @default("")
   learnEmail       String   @default("")
   badges           String[] @default([])
-
+  levelAlerts      Boolean  @default(true)
   @@unique([userId], map: "userId_1")
 }
 
