@@ -34,7 +34,8 @@ export const levelListener = async (
         points: 0,
         level: 0,
         lastSeen: new Date(Date.now()),
-        cooldown: 0
+        cooldown: 0,
+        levelAlerts: true
       }
     });
 
@@ -62,11 +63,12 @@ export const levelListener = async (
         level: user.level,
         lastSeen: user.lastSeen,
         userTag: user.userTag,
-        cooldown: user.cooldown
+        cooldown: user.cooldown,
+        levelAlerts: user.levelAlerts
       }
     });
 
-    if (levelUp) {
+    if (levelUp && user.levelAlerts) {
       await message.reply({
         content: `Congrats~! You are now level ${user.level}!!!`
       });

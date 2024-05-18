@@ -143,16 +143,8 @@ export const userSettings: Command = {
         }
       }
 
-      const query = (
-        Object.entries(opts) as [keyof typeof opts, string][]
-      ).reduce(
-        (acc, [key, val]) => {
-          if (val) {
-            acc[key] = val;
-          }
-          return acc;
-        },
-        {} as Record<keyof typeof opts, string>
+      const query = Object.fromEntries(
+        Object.entries(opts).filter(([, val]) => val !== null)
       );
 
       await CamperChan.db.levels.upsert({
