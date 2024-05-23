@@ -11,7 +11,7 @@ export const PullComments: { key: string; message: string }[] = [
   },
   {
     key: "Merge Conflicts",
-    message: `We would love to be able to merge your changes, but it looks like you have some merge conflicts. ⚠️\n\nOnce you resolve these conflicts, we will be able to review you rPR and merge it. 😊\n\n---\n\nIf you're not familiar with the merge conflict process, feel free to look over GitHub's guide on ["Resolving a merge conflict"](https://help.github.com/articles/resolving-a-merge-conflict-on-github/). 🔍️\n\nAlso, it's good practice on GitHub to write a brief description of your changes when creating a PR. 📝`
+    message: `We would love to be able to merge your changes, but it looks like you have some merge conflicts. ⚠️\n\nOnce you resolve these conflicts, we will be able to review your PR and merge it. 😊\n\n---\n\nIf you're not familiar with the merge conflict process, feel free to look over GitHub's guide on ["Resolving a merge conflict"](https://help.github.com/articles/resolving-a-merge-conflict-on-github/). 🔍️\n\nAlso, it's good practice on GitHub to write a brief description of your changes when creating a PR. 📝`
   },
   {
     key: "Duplicate PR",
