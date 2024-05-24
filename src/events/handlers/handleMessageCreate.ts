@@ -23,6 +23,9 @@ export const handleMessageCreate = async (
   CamperChan: ExtendedClient,
   message: Message
 ) => {
+  if (message.author.bot || message.system) {
+    return;
+  }
   if (message.author.id === "465650873650118659") {
     if (message.content.startsWith("~cachebust")) {
       const [, id] = message.content.split(/\s+/g);
