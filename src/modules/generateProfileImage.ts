@@ -319,7 +319,7 @@ export const generateLeaderboardImage = async (
       }
       body { 
         background: transparent;
-        height: 4100px;
+        height: 4300px;
         width: 2510px;
       }
 
