@@ -70,7 +70,7 @@ export const levelListener = async (
 
     if (levelUp && user.levelAlerts) {
       await message.reply({
-        content: `Congrats~! You are now level ${user.level}!!!`
+        content: `Congrats~! You are now level ${user.level}!!!\nDon't want these messages anymore? You can turn them off in your </user-settings:1214364031012442163>`
       });
     }
   } catch (err) {

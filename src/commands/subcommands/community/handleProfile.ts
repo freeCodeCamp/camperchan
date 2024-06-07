@@ -33,7 +33,10 @@ export const handleProfile: Subcommand = {
         return;
       }
 
-      await interaction.editReply({ files: [file] });
+      await interaction.editReply({
+        content: `You can edit your profile card in your </user-settings:1214364031012442163>~!`,
+        files: [file]
+      });
     } catch (err) {
       await errorHandler(CamperChan, "profile subcommand", err);
     }

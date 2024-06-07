@@ -67,6 +67,7 @@ export const handleLeaderboard: Subcommand = {
       }
 
       const sent = (await interaction.editReply({
+        content: `You can edit your leaderboard card in your </user-settings:1214364031012442163>~!`,
         files: [attachment],
         components: [
           new ActionRowBuilder<ButtonBuilder>().addComponents(
