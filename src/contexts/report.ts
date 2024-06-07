@@ -20,6 +20,14 @@ export const report: Context = {
   },
   run: async (CamperChan, interaction) => {
     try {
+      if (!interaction.isMessageContextMenuCommand()) {
+        await interaction.reply({
+          content:
+            "This command is improperly configured. Please contact Naomi.",
+          ephemeral: true
+        });
+        return;
+      }
       const guild = interaction.guild;
       if (!guild) {
         await interaction.reply({
