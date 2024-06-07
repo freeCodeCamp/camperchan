@@ -11,6 +11,14 @@ export const format: Context = {
   },
   run: async (CamperChan, interaction) => {
     try {
+      if (!interaction.isMessageContextMenuCommand()) {
+        await interaction.reply({
+          content:
+            "This command is improperly configured. Please contact Naomi.",
+          ephemeral: true
+        });
+        return;
+      }
       await interaction.deferReply();
       const message = interaction.options.getMessage("message") as Message;
       const formatted = await addFormatting(message);
