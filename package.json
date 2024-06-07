@@ -24,7 +24,7 @@
     "@prisma/client": "5.15.0",
     "@tryghost/admin-api": "1.13.12",
     "diff": "5.2.0",
-    "discord.js": "14.14.1",
+    "discord.js": "14.15.3",
     "dotenv": "16.4.5",
     "highlight.js": "11.9.0",
     "mongodb": "6.7.0",
