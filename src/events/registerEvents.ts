@@ -1,4 +1,4 @@
-import { Events } from "discord.js";
+import { ActivityFlagsBitField, Events } from "discord.js";
 
 import { ExtendedClient } from "../interfaces/ExtendedClient";
 import { errorHandler } from "../utils/errorHandler";
@@ -13,6 +13,8 @@ import { handleMessageEdit } from "./handlers/handleMessageEdit";
 import { handleReady } from "./handlers/handleReady";
 import { handleThreadCreate } from "./handlers/handleThreadCreate";
 import { handleVoiceStateUpdate } from "./handlers/handleVoiceStateUpdate";
+
+const restrictedActivities = ["880218394199220334"];
 
 /**
  * Attaches the event listeners to the CamperChan's instance.
@@ -72,6 +74,20 @@ export const registerEvents = async (CamperChan: ExtendedClient) => {
         await handleGuildScheduledEvents(CamperChan, oldEvent, newEvent);
       }
     );
+    CamperChan.on(Events.PresenceUpdate, async (_old, newPresence) => {
+      const embeddedActivity = newPresence.activities.find((a) =>
+        a.flags.has(ActivityFlagsBitField.Flags.Embedded)
+      );
+      if (
+        !embeddedActivity ||
+        !embeddedActivity.applicationId ||
+        !restrictedActivities.includes(embeddedActivity.applicationId) ||
+        !newPresence.member
+      ) {
+        return;
+      }
+      await newPresence.member.voice.disconnect();
+    });
   } catch (err) {
     await errorHandler(CamperChan, "register events", err);
   }
