@@ -21,7 +21,7 @@
   "license": "MIT",
   "dependencies": {
     "@octokit/rest": "20.1.1",
-    "@prisma/client": "5.15.0",
+    "@prisma/client": "5.15.1",
     "@tryghost/admin-api": "1.13.12",
     "diff": "5.2.0",
     "discord.js": "14.15.3",
@@ -51,7 +51,7 @@
     "mocha": "10.4.0",
     "nyc": "15.1.0",
     "prettier": "3.2.5",
-    "prisma": "5.15.0",
+    "prisma": "5.15.1",
     "rimraf": "5.0.7",
     "ts-mocha": "9.0.2",
     "ts-node": "10.9.2",
