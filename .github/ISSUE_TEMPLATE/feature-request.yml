@@ -1,69 +1,28 @@
-name: New Feature - Request a new feature for Discord Community Bot
-description: Suggest an idea for CamperChan to improve the Discord Community Bot.
-labels: ['type: feature request', 'status: waiting triage']
-
+name: New Feature - Request a new feature for CamperChan
+description: Suggest an idea for CamperChan to improve the Discord Community.
+labels: ["type: feature request", "status: waiting triage"]
 body:
-  - type: input
-    id: title
-    attributes:
-      label: Title
-      description: Short and Descriptive Title
-      placeholder: Add a title for your feature request
-    validations:
-      required: true
-
   - type: textarea
-    id: problem_description
     attributes:
       label: Is your feature request related to a problem? Please describe.
       description: A clear and concise description of what the problem is. Ex. I'm always frustrated when [...]
-      placeholder: Describe the problem
-
+    validations:
+      required: true
   - type: textarea
-    id: feature_description
     attributes:
-      label: Description
-      description: A clear and concise description of what the feature is. Include the problem it solves or the enhancement it provides.
-      placeholder: Describe the feature
-
+      label: Describe the solution you'd like
+      description: A clear and concise description of what you want to happen.
+    validations:
+      required: true
   - type: textarea
-    id: motivation
     attributes:
-      label: Motivation
-      description: Explain why this feature is needed. Describe the context and the specific use cases that it will address. Highlight any benefits to users or improvements to the project.
-      placeholder: Explain the motivation
-
+      label: Describe alternatives you've considered
+      description: A clear and concise description of any alternative solutions or features you've considered.
+    validations:
+      required: true
   - type: textarea
-    id: proposed_solution
     attributes:
-      label: Proposed Solution
-      description: Describe how the feature should work. Include details on the implementation, behavior, and any specific changes needed. If possible, provide code snippets or pseudocode to illustrate your proposal.
-      placeholder: Describe the proposed solution
-
-  - type: textarea
-    id: alternatives_considered
-    attributes:
-      label: Alternatives Considered
-      description: List any alternative solutions or features that were considered and explain why they were not chosen.
-      placeholder: Describe the alternatives
-
-  - type: textarea
-    id: additional_context
-    attributes:
-      label: Additional Context
-      description: Provide any additional information, context, or screenshots that may help in understanding the feature request. This could include links to related issues, references, or discussions.
-      placeholder: Add any additional context
-
-  - type: checkboxes
-    id: checklist
-    attributes:
-      label: Checklist
-      options:
-        - label: I have searched the existing issues and pull requests for duplicates.
-          required: true
-        - label: I have provided a detailed description and motivation for the feature.
-          required: true
-        - label: I have included any relevant context or screenshots.
-          required: true
-        - label: I am willing to implement this feature and submit a pull request if the feature request is approved.
-          required: false
+      label: Additional context
+      description: Add any other context or screenshots about the feature request here.
+    validations:
+      required: false
