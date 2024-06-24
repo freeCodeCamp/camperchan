@@ -48,7 +48,7 @@
     "chai": "4.4.1",
     "discordjs-testing": "0.2.0",
     "eslint": "8.57.0",
-    "mocha": "10.4.0",
+    "mocha": "10.5.0",
     "nyc": "15.1.0",
     "prettier": "3.2.5",
     "prisma": "5.15.1",
