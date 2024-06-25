@@ -12,6 +12,12 @@
       "rules": {
         "camelcase": ["error", { "allow": ["issue_number"] }]
       }
+    },
+    {
+      "files": ["src/contexts/translate.ts"],
+      "rules": {
+        "camelcase": ["error", { "allow": ["api_key"] }]
+      }
     }
   ]
 }
