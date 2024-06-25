@@ -3,6 +3,7 @@ import { GuildMember } from "discord.js";
 import { Context } from "../interfaces/Context";
 import { errorHandler } from "../utils/errorHandler";
 import { isModerator } from "../utils/isModerator";
+import { logHandler } from "../utils/logHandler";
 
 export const translate: Context = {
   data: {
@@ -49,6 +50,20 @@ export const translate: Context = {
         return;
       }
 
+      console.log(`Making request to ${url} with ${key}.`);
+      console.log(
+        JSON.stringify(
+          {
+            q: message.content,
+            source: "auto",
+            target: "en",
+            api_key: key
+          },
+          null,
+          2
+        )
+      );
+
       const req = await fetch(url, {
         method: "POST",
         body: JSON.stringify({
@@ -56,12 +71,20 @@ export const translate: Context = {
           source: "auto",
           target: "en",
           api_key: key
-        })
-      }).catch(
-        async (err) =>
-          await errorHandler(CamperChan, "translation api request", err)
-      );
+        }),
+        headers: {
+          "Content-Type": "application/json"
+        }
+      }).catch((err) => {
+        logHandler.error(err);
+        return null;
+      });
       if (!req || !req.ok) {
+        if (req) {
+          const text = await req.text();
+          logHandler.debug(text);
+        }
+        logHandler.debug(req?.status ?? "No status found");
         await interaction.editReply({
           content: "Failed to query the translation API. Please let Naomi know."
         });
@@ -73,7 +96,7 @@ export const translate: Context = {
       };
 
       await interaction.editReply({
-        content: `*Detected ${res.detectedLanguage.language} with ${res.detectedLanguage.confidence}:\n\n${res.translatedText}`
+        content: `*Detected ${res.detectedLanguage.language} with ${res.detectedLanguage.confidence}% confidence*:\n\n${res.translatedText}`
       });
     } catch (err) {
       await errorHandler(CamperChan, "snippet context command", err);
