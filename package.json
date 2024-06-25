@@ -41,7 +41,7 @@
     "@types/chai": "4.3.16",
     "@types/diff": "5.2.1",
     "@types/mocha": "10.0.7",
-    "@types/node": "20.14.8",
+    "@types/node": "20.14.9",
     "@types/node-schedule": "2.1.7",
     "@types/prettier": "2.7.3",
     "@types/string-similarity": "4.0.2",
