@@ -18,7 +18,7 @@
   },
   "license": "MIT",
   "dependencies": {
-    "@octokit/rest": "20.1.1",
+    "@octokit/rest": "21.0.0",
     "@prisma/client": "5.16.0",
     "@tryghost/admin-api": "1.13.12",
     "diff": "5.2.0",
@@ -29,13 +29,13 @@
     "node-html-to-image": "4.0.0",
     "node-schedule": "2.1.1",
     "string-similarity": "4.0.4",
-    "strip-ansi": "6.0.1",
+    "strip-ansi": "7.1.0",
     "winston": "3.13.0"
   },
   "devDependencies": {
     "@nhcarrigan/eslint-config": "3.3.3",
     "@nhcarrigan/prettier-config": "3.2.0",
-    "@nhcarrigan/typescript-config": "3.0.0",
+    "@nhcarrigan/typescript-config": "4.0.0",
     "@types/diff": "5.2.1",
     "@types/node": "20.14.9",
     "@types/node-schedule": "2.1.7",
@@ -44,7 +44,7 @@
     "@vitest/coverage-istanbul": "1.6.0",
     "discordjs-testing": "0.2.0",
     "eslint": "8.57.0",
-    "prettier": "3.2.5",
+    "prettier": "3.3.2",
     "prisma": "5.16.0",
     "rimraf": "5.0.7",
     "typescript": "5.5.2",
