@@ -1,10 +1,10 @@
 import { MongoClient } from "mongodb";
 
-import { ExtendedClient } from "../interfaces/ExtendedClient";
-import { UserRecord } from "../interfaces/UserRecord";
+import { ExtendedClient } from "../interfaces/ExtendedClient.js";
+import { UserRecord } from "../interfaces/UserRecord.js";
 
-import { errorHandler } from "./errorHandler";
-import { logHandler } from "./logHandler";
+import { errorHandler } from "./errorHandler.js";
+import { logHandler } from "./logHandler.js";
 
 /**
  * Fetches the user's /learn record from the production database.

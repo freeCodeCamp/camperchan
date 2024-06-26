@@ -1,6 +1,6 @@
 import { describe, assert, test } from "vitest";
 
-import { formatTextToTable } from "../../src/utils/formatText";
+import { formatTextToTable } from "../../src/utils/formatText.js";
 
 describe("formatTextToTable", () => {
   test("is defined", () => {

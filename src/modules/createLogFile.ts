@@ -1,8 +1,8 @@
 import { writeFile } from "fs/promises";
 import { join } from "path";
 
-import { ExtendedClient } from "../interfaces/ExtendedClient";
-import { errorHandler } from "../utils/errorHandler";
+import { ExtendedClient } from "../interfaces/ExtendedClient.js";
+import { errorHandler } from "../utils/errorHandler.js";
 
 /**
  * Creates the initial ticket log file.

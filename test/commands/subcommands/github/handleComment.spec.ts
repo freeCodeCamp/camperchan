@@ -1,7 +1,7 @@
 import { PermissionFlagsBits } from "discord.js";
 import { describe, assert, test } from "vitest";
 
-import { handleComment } from "../../../../src/commands/subcommands/github/handleComment";
+import { handleComment } from "../../../../src/commands/subcommands/github/handleComment.js";
 
 describe("comment command", () => {
   test("does not allow non-moderators permission", () => {

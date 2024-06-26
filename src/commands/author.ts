@@ -1,9 +1,9 @@
 import GhostAdminApi from "@tryghost/admin-api";
 import { SlashCommandBuilder } from "discord.js";
 
-import { AuthorRoleId } from "../config/Roles";
-import { Command } from "../interfaces/Command";
-import { errorHandler } from "../utils/errorHandler";
+import { AuthorRoleId } from "../config/Roles.js";
+import { Command } from "../interfaces/Command.js";
+import { errorHandler } from "../utils/errorHandler.js";
 
 export const author: Command = {
   data: new SlashCommandBuilder()

@@ -1,9 +1,9 @@
 import { EmbedBuilder, User } from "discord.js";
 
-import { ExtendedClient } from "../interfaces/ExtendedClient";
-import { ModerationActions } from "../interfaces/ModerationActions";
-import { customSubstring } from "../utils/customSubstring";
-import { errorHandler } from "../utils/errorHandler";
+import { ExtendedClient } from "../interfaces/ExtendedClient.js";
+import { ModerationActions } from "../interfaces/ModerationActions.js";
+import { customSubstring } from "../utils/customSubstring.js";
+import { errorHandler } from "../utils/errorHandler.js";
 
 /**
  * Generates a moderation embed notice and sends it to the user.

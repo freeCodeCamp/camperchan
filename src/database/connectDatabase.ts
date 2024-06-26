@@ -1,7 +1,7 @@
 import { PrismaClient } from "@prisma/client";
 
-import { ExtendedClient } from "../interfaces/ExtendedClient";
-import { errorHandler } from "../utils/errorHandler";
+import { ExtendedClient } from "../interfaces/ExtendedClient.js";
+import { errorHandler } from "../utils/errorHandler.js";
 
 /**
  * Handles connecting to the database and attaching the database to

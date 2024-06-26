@@ -1,8 +1,8 @@
 import { Message, EmbedBuilder, PartialMessage } from "discord.js";
 
-import { ExtendedClient } from "../../interfaces/ExtendedClient";
-import { customSubstring } from "../../utils/customSubstring";
-import { errorHandler } from "../../utils/errorHandler";
+import { ExtendedClient } from "../../interfaces/ExtendedClient.js";
+import { customSubstring } from "../../utils/customSubstring.js";
+import { errorHandler } from "../../utils/errorHandler.js";
 
 /**
  * Handles the message delete event in Discord.

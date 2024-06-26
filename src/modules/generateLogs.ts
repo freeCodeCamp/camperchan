@@ -3,8 +3,8 @@ import { join } from "path";
 
 import { AttachmentBuilder } from "discord.js";
 
-import { ExtendedClient } from "../interfaces/ExtendedClient";
-import { errorHandler } from "../utils/errorHandler";
+import { ExtendedClient } from "../interfaces/ExtendedClient.js";
+import { errorHandler } from "../utils/errorHandler.js";
 
 /**
  * To run when a private channel is closed. Finds the channel log file,

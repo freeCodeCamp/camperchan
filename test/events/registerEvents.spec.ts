@@ -1,6 +1,6 @@
 import { describe, assert, test } from "vitest";
 
-import { registerEvents } from "../../src/events/registerEvents";
+import { registerEvents } from "../../src/events/registerEvents.js";
 
 const bot = {
   events: {},

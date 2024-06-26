@@ -1,14 +1,14 @@
 import { EmbedBuilder, PermissionFlagsBits } from "discord.js";
 
-import { Subcommand } from "../../../interfaces/Subcommand";
-import { sendModerationDm } from "../../../modules/sendModerationDm";
-import { updateHistory } from "../../../modules/updateHistory";
+import { Subcommand } from "../../../interfaces/Subcommand.js";
+import { sendModerationDm } from "../../../modules/sendModerationDm.js";
+import { updateHistory } from "../../../modules/updateHistory.js";
 import {
   calculateMilliseconds,
   isValidTimeUnit
-} from "../../../utils/calculateMilliseconds";
-import { customSubstring } from "../../../utils/customSubstring";
-import { errorHandler } from "../../../utils/errorHandler";
+} from "../../../utils/calculateMilliseconds.js";
+import { customSubstring } from "../../../utils/customSubstring.js";
+import { errorHandler } from "../../../utils/errorHandler.js";
 
 export const handleMute: Subcommand = {
   permissionValidator: (member) =>

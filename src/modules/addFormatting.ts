@@ -1,9 +1,9 @@
 import { Message } from "discord.js";
 import hljs from "highlight.js";
 
-import { formatCodeBlock } from "./formatCodeblock";
-import { formatter } from "./formatter";
-import { isSupportedByPrettier } from "./isSupportedByPrettier";
+import { formatCodeBlock } from "./formatCodeblock.js";
+import { formatter } from "./formatter.js";
+import { isSupportedByPrettier } from "./isSupportedByPrettier.js";
 
 /**
  * Inserts any unformatted code to a code block, enables syntax highlighting and formats it.

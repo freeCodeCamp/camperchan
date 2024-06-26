@@ -4,7 +4,7 @@ import {
 } from "discord.js";
 import { describe, assert, test } from "vitest";
 
-import { github } from "../../src/commands/github";
+import { github } from "../../src/commands/github.js";
 
 describe("github command", () => {
   const subcommands = github.data.options.filter(

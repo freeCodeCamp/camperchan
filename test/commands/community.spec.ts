@@ -4,7 +4,7 @@ import {
 } from "discord.js";
 import { describe, assert, test } from "vitest";
 
-import { community } from "../../src/commands/community";
+import { community } from "../../src/commands/community.js";
 
 describe("community command", () => {
   const subcommands = community.data.options.filter(

@@ -1,6 +1,6 @@
 import { describe, assert, test } from "vitest";
 
-import { generateProfileImage } from "../../src/modules/generateProfileImage";
+import { generateProfileImage } from "../../src/modules/generateProfileImage.js";
 
 describe("generateProfileImage", () => {
   test("is defined", () => {

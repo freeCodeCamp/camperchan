@@ -1,8 +1,8 @@
 import { PermissionFlagsBits } from "discord.js";
 
-import { PullComments } from "../../../config/PullComments";
-import { Subcommand } from "../../../interfaces/Subcommand";
-import { errorHandler } from "../../../utils/errorHandler";
+import { PullComments } from "../../../config/PullComments.js";
+import { Subcommand } from "../../../interfaces/Subcommand.js";
+import { errorHandler } from "../../../utils/errorHandler.js";
 
 export const handleComment: Subcommand = {
   permissionValidator: (member) =>

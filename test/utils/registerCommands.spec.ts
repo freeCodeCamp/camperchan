@@ -1,8 +1,8 @@
 import { MockRest } from "discordjs-testing";
 import { describe, assert, test } from "vitest";
 
-import { loadCommands } from "../../src/utils/loadCommands";
-import { registerCommands } from "../../src/utils/registerCommands";
+import { loadCommands } from "../../src/utils/loadCommands.js";
+import { registerCommands } from "../../src/utils/registerCommands.js";
 
 describe("registerCommands", () => {
   test("throws when bot is not authenticated", async () => {

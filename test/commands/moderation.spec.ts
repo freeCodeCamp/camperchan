@@ -4,7 +4,7 @@ import {
 } from "discord.js";
 import { describe, assert, test } from "vitest";
 
-import { moderation } from "../../src/commands/moderation";
+import { moderation } from "../../src/commands/moderation.js";
 
 describe("moderation command", () => {
   const subcommands = moderation.data.options.filter(

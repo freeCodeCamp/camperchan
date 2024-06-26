@@ -1,7 +1,7 @@
 import { PermissionFlagsBits } from "discord.js";
 import { describe, assert, test } from "vitest";
 
-import { handleUnmute } from "../../../../src/commands/subcommands/moderation/handleUnmute";
+import { handleUnmute } from "../../../../src/commands/subcommands/moderation/handleUnmute.js";
 
 describe("unmute handler", () => {
   test("does not allow non-moderators permission", () => {

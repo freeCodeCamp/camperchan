@@ -1,11 +1,11 @@
 import { Interaction, Message } from "discord.js";
 import { compareTwoStrings } from "string-similarity";
 
-import { Languages } from "../../config/Languages";
-import { ExtendedClient } from "../../interfaces/ExtendedClient";
-import { closePrivateChannel } from "../../modules/closePrivateChannel";
-import { reactionRoleClick } from "../../modules/reactionRoleClick";
-import { isGuildCommandInteraction } from "../../utils/typeGuards";
+import { Languages } from "../../config/Languages.js";
+import { ExtendedClient } from "../../interfaces/ExtendedClient.js";
+import { closePrivateChannel } from "../../modules/closePrivateChannel.js";
+import { reactionRoleClick } from "../../modules/reactionRoleClick.js";
+import { isGuildCommandInteraction } from "../../utils/typeGuards.js";
 
 /**
  * Handles the interaction events from Discord.

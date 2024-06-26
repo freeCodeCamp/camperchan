@@ -4,9 +4,9 @@ import {
   IssueClose,
   PullClose,
   PullComments
-} from "../../../config/PullComments";
-import { Subcommand } from "../../../interfaces/Subcommand";
-import { errorHandler } from "../../../utils/errorHandler";
+} from "../../../config/PullComments.js";
+import { Subcommand } from "../../../interfaces/Subcommand.js";
+import { errorHandler } from "../../../utils/errorHandler.js";
 
 const commentBody = (isPull: boolean, comment: string | null) => {
   return (

@@ -1,8 +1,8 @@
 import { EmbedBuilder } from "discord.js";
 
-import { ForumData } from "../../../interfaces/Forum";
-import { Subcommand } from "../../../interfaces/Subcommand";
-import { errorHandler } from "../../../utils/errorHandler";
+import { ForumData } from "../../../interfaces/Forum.js";
+import { Subcommand } from "../../../interfaces/Subcommand.js";
+import { errorHandler } from "../../../utils/errorHandler.js";
 
 export const handleForum: Subcommand = {
   permissionValidator: () => true,

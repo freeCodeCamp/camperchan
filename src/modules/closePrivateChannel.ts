@@ -5,10 +5,10 @@ import {
   PermissionFlagsBits
 } from "discord.js";
 
-import { ExtendedClient } from "../interfaces/ExtendedClient";
-import { errorHandler } from "../utils/errorHandler";
+import { ExtendedClient } from "../interfaces/ExtendedClient.js";
+import { errorHandler } from "../utils/errorHandler.js";
 
-import { generateLogs } from "./generateLogs";
+import { generateLogs } from "./generateLogs.js";
 
 /**
  * Handles the logic to close a private channel, generating the logs and sending them to

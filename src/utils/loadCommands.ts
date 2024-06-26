@@ -1,11 +1,11 @@
 import { readdir, stat } from "fs/promises";
 import { join } from "path";
 
-import { Command } from "../interfaces/Command";
-import { ExtendedClient } from "../interfaces/ExtendedClient";
+import { Command } from "../interfaces/Command.js";
+import { ExtendedClient } from "../interfaces/ExtendedClient.js";
 
-import { errorHandler } from "./errorHandler";
-import { logHandler } from "./logHandler";
+import { errorHandler } from "./errorHandler.js";
+import { logHandler } from "./logHandler.js";
 
 /**
  * Reads the `/commands` directory and dynamically imports the files,

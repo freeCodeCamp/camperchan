@@ -5,8 +5,8 @@ import {
   PartialGuildScheduledEvent
 } from "discord.js";
 
-import { ExtendedClient } from "../../interfaces/ExtendedClient";
-import { errorHandler } from "../../utils/errorHandler";
+import { ExtendedClient } from "../../interfaces/ExtendedClient.js";
+import { errorHandler } from "../../utils/errorHandler.js";
 
 /**
  * Tracks the guild event update, caching event participation and sending result to

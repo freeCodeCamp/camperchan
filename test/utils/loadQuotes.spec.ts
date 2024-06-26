@@ -1,7 +1,7 @@
 import { describe, assert, test } from "vitest";
 
-import { ExtendedClient } from "../../src/interfaces/ExtendedClient";
-import { loadQuotes } from "../../src/utils/loadQuotes";
+import { ExtendedClient } from "../../src/interfaces/ExtendedClient.js";
+import { loadQuotes } from "../../src/utils/loadQuotes.js";
 
 describe("loadQuotes", () => {
   test("is defined", () => {

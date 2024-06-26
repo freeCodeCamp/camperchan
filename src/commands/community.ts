@@ -1,16 +1,16 @@
 import { SlashCommandBuilder, SlashCommandSubcommandBuilder } from "discord.js";
 
-import { Command } from "../interfaces/Command";
-import { Subcommand } from "../interfaces/Subcommand";
-import { errorHandler } from "../utils/errorHandler";
+import { Command } from "../interfaces/Command.js";
+import { Subcommand } from "../interfaces/Subcommand.js";
+import { errorHandler } from "../utils/errorHandler.js";
 
-import { handleCodeOfConduct } from "./subcommands/community/handleCodeOfConduct";
-import { handleContribute } from "./subcommands/community/handleContribute";
-import { handleForum } from "./subcommands/community/handleForum";
-import { handleLeaderboard } from "./subcommands/community/handleLeaderboard";
-import { handleProfile } from "./subcommands/community/handleProfile";
-import { handleQuote } from "./subcommands/community/handleQuote";
-import { handleTruism } from "./subcommands/community/handleTruism";
+import { handleCodeOfConduct } from "./subcommands/community/handleCodeOfConduct.js";
+import { handleContribute } from "./subcommands/community/handleContribute.js";
+import { handleForum } from "./subcommands/community/handleForum.js";
+import { handleLeaderboard } from "./subcommands/community/handleLeaderboard.js";
+import { handleProfile } from "./subcommands/community/handleProfile.js";
+import { handleQuote } from "./subcommands/community/handleQuote.js";
+import { handleTruism } from "./subcommands/community/handleTruism.js";
 
 const handlers: { [key: string]: Subcommand } = {
   "code-of-conduct": handleCodeOfConduct,

@@ -1,6 +1,6 @@
 import { describe, assert, test } from "vitest";
 
-import { generateDiff } from "../../src/utils/generateDiff";
+import { generateDiff } from "../../src/utils/generateDiff.js";
 
 describe("generateDiff", () => {
   test("is defined", () => {

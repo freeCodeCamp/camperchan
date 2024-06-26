@@ -3,10 +3,10 @@ import { join } from "path";
 
 import { SlashCommandBuilder } from "discord.js";
 
-import { SupporterRoleId } from "../config/Roles";
-import { Command } from "../interfaces/Command";
-import { errorHandler } from "../utils/errorHandler";
-import { fetchLearnRecord } from "../utils/fetchLearnRecord";
+import { SupporterRoleId } from "../config/Roles.js";
+import { Command } from "../interfaces/Command.js";
+import { errorHandler } from "../utils/errorHandler.js";
+import { fetchLearnRecord } from "../utils/fetchLearnRecord.js";
 
 export const supporter: Command = {
   data: new SlashCommandBuilder()

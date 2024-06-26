@@ -1,9 +1,9 @@
 import { EmbedBuilder, PermissionFlagsBits } from "discord.js";
 
-import { Subcommand } from "../../../interfaces/Subcommand";
-import { updateHistory } from "../../../modules/updateHistory";
-import { customSubstring } from "../../../utils/customSubstring";
-import { errorHandler } from "../../../utils/errorHandler";
+import { Subcommand } from "../../../interfaces/Subcommand.js";
+import { updateHistory } from "../../../modules/updateHistory.js";
+import { customSubstring } from "../../../utils/customSubstring.js";
+import { errorHandler } from "../../../utils/errorHandler.js";
 
 export const handleUnban: Subcommand = {
   permissionValidator: (member) =>

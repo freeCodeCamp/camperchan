@@ -1,6 +1,6 @@
 import { WebhookClient } from "discord.js";
 
-import { ExtendedClient } from "../interfaces/ExtendedClient";
+import { ExtendedClient } from "../interfaces/ExtendedClient.js";
 
 /**
  * Bootstraps the config from the ENV into the CamperChan's instance.

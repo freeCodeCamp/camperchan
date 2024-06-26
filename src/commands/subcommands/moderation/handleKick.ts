@@ -1,10 +1,10 @@
 import { EmbedBuilder, PermissionFlagsBits } from "discord.js";
 
-import { Subcommand } from "../../../interfaces/Subcommand";
-import { sendModerationDm } from "../../../modules/sendModerationDm";
-import { updateHistory } from "../../../modules/updateHistory";
-import { customSubstring } from "../../../utils/customSubstring";
-import { errorHandler } from "../../../utils/errorHandler";
+import { Subcommand } from "../../../interfaces/Subcommand.js";
+import { sendModerationDm } from "../../../modules/sendModerationDm.js";
+import { updateHistory } from "../../../modules/updateHistory.js";
+import { customSubstring } from "../../../utils/customSubstring.js";
+import { errorHandler } from "../../../utils/errorHandler.js";
 
 export const handleKick: Subcommand = {
   permissionValidator: (member) =>

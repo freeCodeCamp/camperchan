@@ -1,10 +1,10 @@
 import { ChannelType } from "discord.js";
 import { scheduleJob } from "node-schedule";
 
-import { ExtendedClient } from "../../interfaces/ExtendedClient";
-import { loadRoles } from "../../modules/loadRoles";
-import { send100DaysOfCode } from "../../modules/send100DaysOfCode";
-import { errorHandler } from "../../utils/errorHandler";
+import { ExtendedClient } from "../../interfaces/ExtendedClient.js";
+import { loadRoles } from "../../modules/loadRoles.js";
+import { send100DaysOfCode } from "../../modules/send100DaysOfCode.js";
+import { errorHandler } from "../../utils/errorHandler.js";
 
 /**
  * Logs a message to the debug hook when the CamperChan is online.

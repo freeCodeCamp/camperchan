@@ -1,7 +1,7 @@
-import { ExtendedClient } from "../interfaces/ExtendedClient";
-import { QuoteList } from "../interfaces/Quotes";
+import { ExtendedClient } from "../interfaces/ExtendedClient.js";
+import { QuoteList } from "../interfaces/Quotes.js";
 
-import { errorHandler } from "./errorHandler";
+import { errorHandler } from "./errorHandler.js";
 
 /**
  * Fetches quote data from the freeCodeCamp repository.

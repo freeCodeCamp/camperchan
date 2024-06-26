@@ -1,7 +1,7 @@
 import { PermissionFlagsBits } from "discord.js";
 import { describe, assert, test } from "vitest";
 
-import { handleWarn } from "../../../../src/commands/subcommands/moderation/handleWarn";
+import { handleWarn } from "../../../../src/commands/subcommands/moderation/handleWarn.js";
 
 describe("warn handler", () => {
   test("does not allow non-moderators permission", () => {

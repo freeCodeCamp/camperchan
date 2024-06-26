@@ -3,8 +3,8 @@ import {
   SlashCommandSubcommandsOnlyBuilder
 } from "discord.js";
 
-import { ExtendedClient } from "./ExtendedClient";
-import { GuildCommandInteraction } from "./GuildCommandInteraction";
+import { ExtendedClient } from "./ExtendedClient.js";
+import { GuildCommandInteraction } from "./GuildCommandInteraction.js";
 
 export interface Command {
   data: SlashCommandSubcommandsOnlyBuilder | SlashCommandOptionsOnlyBuilder;

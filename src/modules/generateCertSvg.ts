@@ -1,4 +1,4 @@
-import { UserRecord } from "../interfaces/UserRecord";
+import { UserRecord } from "../interfaces/UserRecord.js";
 
 export const generatorMap: {
   [key in keyof Required<

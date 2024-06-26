@@ -10,8 +10,8 @@ import {
   ModalBuilder
 } from "discord.js";
 
-import { Context } from "../interfaces/Context";
-import { errorHandler } from "../utils/errorHandler";
+import { Context } from "../interfaces/Context.js";
+import { errorHandler } from "../utils/errorHandler.js";
 
 export const report: Context = {
   data: {

@@ -1,4 +1,4 @@
-import { Tag } from "../interfaces/Tag";
+import { Tag } from "../interfaces/Tag.js";
 
 export const Tags: Tag[] = [
   {

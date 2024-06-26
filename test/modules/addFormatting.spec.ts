@@ -1,7 +1,7 @@
 import { Message } from "discord.js";
 import { describe, assert, test } from "vitest";
 
-import { addFormatting } from "../../src/modules/addFormatting";
+import { addFormatting } from "../../src/modules/addFormatting.js";
 
 const typeCoerce = (obj: unknown) => obj as Message;
 

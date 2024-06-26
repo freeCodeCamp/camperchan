@@ -1,7 +1,7 @@
 import { PermissionFlagsBits } from "discord.js";
 import { describe, assert, test } from "vitest";
 
-import { handleClose } from "../../../../src/commands/subcommands/github/handleClose";
+import { handleClose } from "../../../../src/commands/subcommands/github/handleClose.js";
 
 describe("close handler", () => {
   test("does not allow non-moderators permission", () => {

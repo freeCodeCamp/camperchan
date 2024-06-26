@@ -1,8 +1,8 @@
 import { ApplicationCommandType, Message } from "discord.js";
 
-import { Context } from "../interfaces/Context";
-import { addFormatting } from "../modules/addFormatting";
-import { errorHandler } from "../utils/errorHandler";
+import { Context } from "../interfaces/Context.js";
+import { addFormatting } from "../modules/addFormatting.js";
+import { errorHandler } from "../utils/errorHandler.js";
 
 export const format: Context = {
   data: {

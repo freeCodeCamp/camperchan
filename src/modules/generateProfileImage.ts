@@ -2,13 +2,13 @@ import { levels } from "@prisma/client";
 import { AttachmentBuilder } from "discord.js";
 import nodeHtmlToImage from "node-html-to-image";
 
-import { Badges } from "../config/Badges";
-import { ExtendedClient } from "../interfaces/ExtendedClient";
-import { UserRecord } from "../interfaces/UserRecord";
-import { errorHandler } from "../utils/errorHandler";
-import { fetchLearnRecord } from "../utils/fetchLearnRecord";
+import { Badges } from "../config/Badges.js";
+import { ExtendedClient } from "../interfaces/ExtendedClient.js";
+import { UserRecord } from "../interfaces/UserRecord.js";
+import { errorHandler } from "../utils/errorHandler.js";
+import { fetchLearnRecord } from "../utils/fetchLearnRecord.js";
 
-import { generatorMap } from "./generateCertSvg";
+import { generatorMap } from "./generateCertSvg.js";
 
 const certTypes = {
   frontEnd: "isFrontEndCert",

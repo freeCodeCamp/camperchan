@@ -1,6 +1,6 @@
-import { Languages } from "../config/Languages";
-import { ExtendedClient } from "../interfaces/ExtendedClient";
-import { errorHandler } from "../utils/errorHandler";
+import { Languages } from "../config/Languages.js";
+import { ExtendedClient } from "../interfaces/ExtendedClient.js";
+import { errorHandler } from "../utils/errorHandler.js";
 
 /**
  * Loads the cached roles and validates that all langagues

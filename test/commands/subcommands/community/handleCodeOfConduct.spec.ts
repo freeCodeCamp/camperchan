@@ -8,7 +8,7 @@ import {
 } from "discordjs-testing";
 import { describe, assert, test } from "vitest";
 
-import { handleCodeOfConduct } from "../../../../src/commands/subcommands/community/handleCodeOfConduct";
+import { handleCodeOfConduct } from "../../../../src/commands/subcommands/community/handleCodeOfConduct.js";
 
 const guild = new MockGuild({
   name: "Test Guild"

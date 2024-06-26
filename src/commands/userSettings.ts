@@ -1,9 +1,12 @@
 import { SlashCommandBuilder } from "discord.js";
 
-import { Command } from "../interfaces/Command";
-import { validateColour, validateImage } from "../modules/settingsValidation";
-import { errorHandler } from "../utils/errorHandler";
-import { fetchLearnRecord } from "../utils/fetchLearnRecord";
+import { Command } from "../interfaces/Command.js";
+import {
+  validateColour,
+  validateImage
+} from "../modules/settingsValidation.js";
+import { errorHandler } from "../utils/errorHandler.js";
+import { fetchLearnRecord } from "../utils/fetchLearnRecord.js";
 
 export const userSettings: Command = {
   data: new SlashCommandBuilder()

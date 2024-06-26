@@ -1,6 +1,6 @@
 import { ChatInputCommandInteraction } from "discord.js";
 
-import { GuildCommandInteraction } from "../interfaces/GuildCommandInteraction";
+import { GuildCommandInteraction } from "../interfaces/GuildCommandInteraction.js";
 
 /**
  * Confirms that an interaction occurred in a guild and has

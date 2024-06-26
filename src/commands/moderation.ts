@@ -1,17 +1,17 @@
 import { SlashCommandBuilder, SlashCommandSubcommandBuilder } from "discord.js";
 
-import { Command } from "../interfaces/Command";
-import { Subcommand } from "../interfaces/Subcommand";
-import { errorHandler } from "../utils/errorHandler";
+import { Command } from "../interfaces/Command.js";
+import { Subcommand } from "../interfaces/Subcommand.js";
+import { errorHandler } from "../utils/errorHandler.js";
 
-import { handleBan } from "./subcommands/moderation/handleBan";
-import { handleHistory } from "./subcommands/moderation/handleHistory";
-import { handleKick } from "./subcommands/moderation/handleKick";
-import { handleMute } from "./subcommands/moderation/handleMute";
-import { handlePrune } from "./subcommands/moderation/handlePrune";
-import { handleUnban } from "./subcommands/moderation/handleUnban";
-import { handleUnmute } from "./subcommands/moderation/handleUnmute";
-import { handleWarn } from "./subcommands/moderation/handleWarn";
+import { handleBan } from "./subcommands/moderation/handleBan.js";
+import { handleHistory } from "./subcommands/moderation/handleHistory.js";
+import { handleKick } from "./subcommands/moderation/handleKick.js";
+import { handleMute } from "./subcommands/moderation/handleMute.js";
+import { handlePrune } from "./subcommands/moderation/handlePrune.js";
+import { handleUnban } from "./subcommands/moderation/handleUnban.js";
+import { handleUnmute } from "./subcommands/moderation/handleUnmute.js";
+import { handleWarn } from "./subcommands/moderation/handleWarn.js";
 
 const handlers: { [key: string]: Subcommand } = {
   ban: handleBan,

@@ -1,8 +1,8 @@
 import { Message } from "discord.js";
 
-import levelScale from "../config/levelScale";
-import { ExtendedClient } from "../interfaces/ExtendedClient";
-import { errorHandler } from "../utils/errorHandler";
+import levelScale from "../config/levelScale.js";
+import { ExtendedClient } from "../interfaces/ExtendedClient.js";
+import { errorHandler } from "../utils/errorHandler.js";
 
 /**
  * Processes level data for a user.

@@ -1,7 +1,7 @@
 import { PermissionFlagsBits } from "discord.js";
 import { describe, assert, test } from "vitest";
 
-import { handleSyncLabels } from "../../../../src/commands/subcommands/github/handleSyncLabels";
+import { handleSyncLabels } from "../../../../src/commands/subcommands/github/handleSyncLabels.js";
 
 describe("sync labels handler", () => {
   test("does not allow non-moderators permission", () => {

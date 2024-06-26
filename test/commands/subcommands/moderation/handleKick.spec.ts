@@ -1,7 +1,7 @@
 import { PermissionFlagsBits } from "discord.js";
 import { describe, assert, test } from "vitest";
 
-import { handleKick } from "../../../../src/commands/subcommands/moderation/handleKick";
+import { handleKick } from "../../../../src/commands/subcommands/moderation/handleKick.js";
 
 describe("kick handler", () => {
   test("does not allow non-moderators permission", () => {

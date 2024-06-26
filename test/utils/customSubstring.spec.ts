@@ -1,6 +1,6 @@
 import { describe, assert, test } from "vitest";
 
-import { customSubstring } from "../../src/utils/customSubstring";
+import { customSubstring } from "../../src/utils/customSubstring.js";
 
 describe("customSubstring", () => {
   test("is defined", () => {

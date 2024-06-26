@@ -1,6 +1,6 @@
 import { describe, assert, test } from "vitest";
 
-import { isSupportedByPrettier } from "../../src/modules/isSupportedByPrettier";
+import { isSupportedByPrettier } from "../../src/modules/isSupportedByPrettier.js";
 
 describe("isSupportedByPrettier", () => {
   test("is defined", () => {

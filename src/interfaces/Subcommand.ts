@@ -1,7 +1,7 @@
 import { GuildMember } from "discord.js";
 
-import { ExtendedClient } from "./ExtendedClient";
-import { GuildCommandInteraction } from "./GuildCommandInteraction";
+import { ExtendedClient } from "./ExtendedClient.js";
+import { GuildCommandInteraction } from "./GuildCommandInteraction.js";
 
 export interface Subcommand {
   permissionValidator: (member: GuildMember) => boolean;

@@ -1,8 +1,8 @@
 import { SlashCommandBuilder } from "discord.js";
 
-import { Languages } from "../config/Languages";
-import { Command } from "../interfaces/Command";
-import { errorHandler } from "../utils/errorHandler";
+import { Languages } from "../config/Languages.js";
+import { Command } from "../interfaces/Command.js";
+import { errorHandler } from "../utils/errorHandler.js";
 
 export const translator: Command = {
   data: new SlashCommandBuilder()

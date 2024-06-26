@@ -3,9 +3,9 @@ import { join } from "path";
 
 import { describe, assert, test } from "vitest";
 
-import { ExtendedClient } from "../../src/interfaces/ExtendedClient";
-import { createLogFile } from "../../src/modules/createLogFile";
-import { generateLogs } from "../../src/modules/generateLogs";
+import { ExtendedClient } from "../../src/interfaces/ExtendedClient.js";
+import { createLogFile } from "../../src/modules/createLogFile.js";
+import { generateLogs } from "../../src/modules/generateLogs.js";
 
 const mockBot = { privateLogs: {} } as ExtendedClient;
 

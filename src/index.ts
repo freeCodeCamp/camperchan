@@ -1,15 +1,15 @@
 import { Octokit } from "@octokit/rest";
 import { Client } from "discord.js";
 
-import { IntentOptions } from "./config/IntentOptions";
-import { connectDatabase } from "./database/connectDatabase";
-import { registerEvents } from "./events/registerEvents";
-import { ExtendedClient } from "./interfaces/ExtendedClient";
-import { generateConfig } from "./modules/generateConfig";
-import { loadCommands } from "./utils/loadCommands";
-import { loadContexts } from "./utils/loadContexts";
-import { loadQuotes } from "./utils/loadQuotes";
-import { registerCommands } from "./utils/registerCommands";
+import { IntentOptions } from "./config/IntentOptions.js";
+import { connectDatabase } from "./database/connectDatabase.js";
+import { registerEvents } from "./events/registerEvents.js";
+import { ExtendedClient } from "./interfaces/ExtendedClient.js";
+import { generateConfig } from "./modules/generateConfig.js";
+import { loadCommands } from "./utils/loadCommands.js";
+import { loadContexts } from "./utils/loadContexts.js";
+import { loadQuotes } from "./utils/loadQuotes.js";
+import { registerCommands } from "./utils/registerCommands.js";
 
 (async () => {
   const CamperChan = new Client({
