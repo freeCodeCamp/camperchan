@@ -8,10 +8,8 @@
     "clean": "rimraf dist",
     "lint": "eslint src test --max-warnings 0 && prettier src test --check",
     "start": "node -r dotenv/config dist/index.js",
-    "pretest": "rimraf ./.nyc_output && ts-node test/validateCoverage.ts",
-    "test": "nyc --check-coverage vitest run --coverage",
+    "test": "vitest run --coverage",
     "test:nocov": "MOCHA=true vitest run",
-    "posttest": "ts-node test/validateCoverage.ts --post-coverage",
     "db:deploy": "prisma db push"
   },
   "engines": {
@@ -43,9 +41,9 @@
     "@types/node-schedule": "2.1.7",
     "@types/prettier": "2.7.3",
     "@types/string-similarity": "4.0.2",
+    "@vitest/coverage-istanbul": "1.6.0",
     "discordjs-testing": "0.2.0",
     "eslint": "8.57.0",
-    "nyc": "15.1.0",
     "prettier": "3.2.5",
     "prisma": "5.16.0",
     "rimraf": "5.0.7",
