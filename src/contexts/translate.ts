@@ -50,20 +50,6 @@ export const translate: Context = {
         return;
       }
 
-      console.log(`Making request to ${url} with ${key}.`);
-      console.log(
-        JSON.stringify(
-          {
-            q: message.content,
-            source: "auto",
-            target: "en",
-            api_key: key
-          },
-          null,
-          2
-        )
-      );
-
       const req = await fetch(url, {
         method: "POST",
         body: JSON.stringify({
@@ -80,11 +66,6 @@ export const translate: Context = {
         return null;
       });
       if (!req || !req.ok) {
-        if (req) {
-          const text = await req.text();
-          logHandler.debug(text);
-        }
-        logHandler.debug(req?.status ?? "No status found");
         await interaction.editReply({
           content: "Failed to query the translation API. Please let Naomi know."
         });
