@@ -1,5 +1,5 @@
-import { describe, assert, test } from "vitest";
 import { Message } from "discord.js";
+import { describe, assert, test } from "vitest";
 
 import { addFormatting } from "../../src/modules/addFormatting";
 

@@ -1,5 +1,5 @@
-import { describe, assert, test } from "vitest";
 import { PermissionFlagsBits } from "discord.js";
+import { describe, assert, test } from "vitest";
 
 import { handleAddLabels } from "../../../../src/commands/subcommands/github/handleAddLabels";
 

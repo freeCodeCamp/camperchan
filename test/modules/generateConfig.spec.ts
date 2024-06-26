@@ -1,5 +1,5 @@
-import { describe, assert, test } from "vitest";
 import { WebhookClient } from "discord.js";
+import { describe, assert, test } from "vitest";
 
 import { generateConfig } from "../../src/modules/generateConfig";
 

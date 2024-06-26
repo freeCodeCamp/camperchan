@@ -1,5 +1,5 @@
-import { describe, assert, test } from "vitest";
 import { ApplicationCommandType } from "discord.js";
+import { describe, assert, test } from "vitest";
 
 import { translate } from "../../src/contexts/translate";
 

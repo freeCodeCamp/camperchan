@@ -1,5 +1,5 @@
-import { describe, assert, test } from "vitest";
 import { PermissionFlagsBits } from "discord.js";
+import { describe, assert, test } from "vitest";
 
 import { handleWarn } from "../../../../src/commands/subcommands/moderation/handleWarn";
 

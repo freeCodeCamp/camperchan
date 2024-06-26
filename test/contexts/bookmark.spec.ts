@@ -1,5 +1,5 @@
-import { describe, assert, test } from "vitest";
 import { ApplicationCommandType } from "discord.js";
+import { describe, assert, test } from "vitest";
 
 import { bookmark } from "../../src/contexts/bookmark";
 

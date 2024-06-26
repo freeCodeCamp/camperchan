@@ -1,8 +1,8 @@
-import { describe, assert, test } from "vitest";
 import {
   ApplicationCommandOptionType,
   SlashCommandSubcommandBuilder
 } from "discord.js";
+import { describe, assert, test } from "vitest";
 
 import { community } from "../../src/commands/community";
 

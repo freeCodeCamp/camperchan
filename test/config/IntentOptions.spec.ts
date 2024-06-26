@@ -1,5 +1,5 @@
-import { describe, assert, test } from "vitest";
 import { GatewayIntentBits } from "discord.js";
+import { describe, assert, test } from "vitest";
 
 import { IntentOptions } from "../../src/config/IntentOptions";
 

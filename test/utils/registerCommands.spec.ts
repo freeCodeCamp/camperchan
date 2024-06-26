@@ -1,5 +1,5 @@
-import { describe, assert, test } from "vitest";
 import { MockRest } from "discordjs-testing";
+import { describe, assert, test } from "vitest";
 
 import { loadCommands } from "../../src/utils/loadCommands";
 import { registerCommands } from "../../src/utils/registerCommands";

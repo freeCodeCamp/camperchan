@@ -1,4 +1,3 @@
-import { describe, assert, test } from "vitest";
 import { ChannelType, EmbedBuilder } from "discord.js";
 import {
   MockChannel,
@@ -7,6 +6,7 @@ import {
   MockMember,
   MockUser
 } from "discordjs-testing";
+import { describe, assert, test } from "vitest";
 
 import { handleContribute } from "../../../../src/commands/subcommands/community/handleContribute";
 
