@@ -1,9 +1,9 @@
 import { GuildMember } from "discord.js";
 
-import { Context } from "../interfaces/Context";
-import { errorHandler } from "../utils/errorHandler";
-import { isModerator } from "../utils/isModerator";
-import { logHandler } from "../utils/logHandler";
+import { Context } from "../interfaces/Context.js";
+import { errorHandler } from "../utils/errorHandler.js";
+import { isModerator } from "../utils/isModerator.js";
+import { logHandler } from "../utils/logHandler.js";
 
 export const translate: Context = {
   data: {

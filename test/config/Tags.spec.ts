@@ -1,6 +1,6 @@
 import { describe, assert, test } from "vitest";
 
-import { Tags } from "../../src/config/Tags";
+import { Tags } from "../../src/config/Tags.js";
 
 describe("Tags", () => {
   test("quantity", () => {

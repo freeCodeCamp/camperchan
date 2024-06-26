@@ -1,6 +1,6 @@
 import { describe, assert, test } from "vitest";
 
-import { Languages } from "../../src/config/Languages";
+import { Languages } from "../../src/config/Languages.js";
 
 describe("Languages Config", () => {
   test("should be unique", () => {

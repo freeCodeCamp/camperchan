@@ -4,7 +4,7 @@ import {
 } from "discord.js";
 import { describe, assert, test } from "vitest";
 
-import { management } from "../../src/commands/management";
+import { management } from "../../src/commands/management.js";
 
 describe("management command", () => {
   const subcommands = management.data.options.filter(

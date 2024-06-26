@@ -7,9 +7,9 @@ import {
   PermissionFlagsBits
 } from "discord.js";
 
-import { Subcommand } from "../../../interfaces/Subcommand";
-import { createLogFile } from "../../../modules/createLogFile";
-import { errorHandler } from "../../../utils/errorHandler";
+import { Subcommand } from "../../../interfaces/Subcommand.js";
+import { createLogFile } from "../../../modules/createLogFile.js";
+import { errorHandler } from "../../../utils/errorHandler.js";
 
 export const handlePrivate: Subcommand = {
   permissionValidator: (member) =>

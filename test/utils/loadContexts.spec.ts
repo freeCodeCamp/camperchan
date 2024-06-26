@@ -3,9 +3,9 @@ import { join } from "path";
 
 import { describe, assert, test } from "vitest";
 
-import { Context } from "../../src/interfaces/Context";
-import { ExtendedClient } from "../../src/interfaces/ExtendedClient";
-import { loadContexts } from "../../src/utils/loadContexts";
+import { Context } from "../../src/interfaces/Context.js";
+import { ExtendedClient } from "../../src/interfaces/ExtendedClient.js";
+import { loadContexts } from "../../src/utils/loadContexts.js";
 
 describe("loadContexts", () => {
   test("is defined", () => {

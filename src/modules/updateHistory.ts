@@ -1,6 +1,6 @@
-import { ExtendedClient } from "../interfaces/ExtendedClient";
-import { ModerationActions } from "../interfaces/ModerationActions";
-import { errorHandler } from "../utils/errorHandler";
+import { ExtendedClient } from "../interfaces/ExtendedClient.js";
+import { ModerationActions } from "../interfaces/ModerationActions.js";
+import { errorHandler } from "../utils/errorHandler.js";
 
 /**
  * Saves a count of the user's moderation actions.

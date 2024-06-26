@@ -1,6 +1,6 @@
-import { Truisms } from "../../../config/Truisms";
-import { Subcommand } from "../../../interfaces/Subcommand";
-import { errorHandler } from "../../../utils/errorHandler";
+import { Truisms } from "../../../config/Truisms.js";
+import { Subcommand } from "../../../interfaces/Subcommand.js";
+import { errorHandler } from "../../../utils/errorHandler.js";
 
 export const handleTruism: Subcommand = {
   permissionValidator: () => true,

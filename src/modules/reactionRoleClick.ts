@@ -1,7 +1,7 @@
 import { ButtonInteraction } from "discord.js";
 
-import { ExtendedClient } from "../interfaces/ExtendedClient";
-import { errorHandler } from "../utils/errorHandler";
+import { ExtendedClient } from "../interfaces/ExtendedClient.js";
+import { errorHandler } from "../utils/errorHandler.js";
 
 /**
  * Handles the logic when a button created by the `role` command is clicked.

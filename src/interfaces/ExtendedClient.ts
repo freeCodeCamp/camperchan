@@ -9,10 +9,10 @@ import {
   WebhookClient
 } from "discord.js";
 
-import { Command } from "./Command";
-import { Context } from "./Context";
-import { QuoteList } from "./Quotes";
-import { UserRecord } from "./UserRecord";
+import { Command } from "./Command.js";
+import { Context } from "./Context.js";
+import { QuoteList } from "./Quotes.js";
+import { UserRecord } from "./UserRecord.js";
 
 export interface ExtendedClient extends Client {
   config: {

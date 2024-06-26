@@ -1,6 +1,6 @@
 import { describe, assert, test } from "vitest";
 
-import { AuthorRoleId, SupporterRoleId } from "../../src/config/Roles";
+import { AuthorRoleId, SupporterRoleId } from "../../src/config/Roles.js";
 
 describe("roles config", () => {
   test("supporter role should be id", () => {

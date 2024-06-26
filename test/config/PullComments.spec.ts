@@ -1,6 +1,6 @@
 import { describe, assert, test } from "vitest";
 
-import { PullComments } from "../../src/config/PullComments";
+import { PullComments } from "../../src/config/PullComments.js";
 
 describe("PullComments", () => {
   test("All keys should be under 100 characters (Discord limitation)", () => {

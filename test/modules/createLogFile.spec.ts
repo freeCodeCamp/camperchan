@@ -3,8 +3,8 @@ import { join } from "path";
 
 import { describe, assert, test } from "vitest";
 
-import { ExtendedClient } from "../../src/interfaces/ExtendedClient";
-import { createLogFile } from "../../src/modules/createLogFile";
+import { ExtendedClient } from "../../src/interfaces/ExtendedClient.js";
+import { createLogFile } from "../../src/modules/createLogFile.js";
 
 describe("createLogFile", () => {
   test("is defined", () => {

@@ -1,7 +1,7 @@
 import { PermissionFlagsBits } from "discord.js";
 import { describe, assert, test } from "vitest";
 
-import { handlePrivate } from "../../../../src/commands/subcommands/management/handlePrivate";
+import { handlePrivate } from "../../../../src/commands/subcommands/management/handlePrivate.js";
 
 describe("handlePrivate command", () => {
   test("does not allow non-moderators permission", () => {

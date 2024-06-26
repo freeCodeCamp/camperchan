@@ -1,9 +1,9 @@
 import { Message, EmbedBuilder, PartialMessage } from "discord.js";
 
-import { ExtendedClient } from "../../interfaces/ExtendedClient";
-import { customSubstring } from "../../utils/customSubstring";
-import { errorHandler } from "../../utils/errorHandler";
-import { generateDiff } from "../../utils/generateDiff";
+import { ExtendedClient } from "../../interfaces/ExtendedClient.js";
+import { customSubstring } from "../../utils/customSubstring.js";
+import { errorHandler } from "../../utils/errorHandler.js";
+import { generateDiff } from "../../utils/generateDiff.js";
 
 /**
  * Handles the message edit event from Discord.

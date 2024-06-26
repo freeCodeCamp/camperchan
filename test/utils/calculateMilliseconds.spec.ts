@@ -3,7 +3,7 @@ import { describe, assert, test } from "vitest";
 import {
   calculateMilliseconds,
   isValidTimeUnit
-} from "../../src/utils/calculateMilliseconds";
+} from "../../src/utils/calculateMilliseconds.js";
 
 describe("calculateMilliseconds", () => {
   test("10 seconds equals 10,000 milliseconds", () => {

@@ -1,18 +1,18 @@
 import { ActivityFlagsBitField, Events } from "discord.js";
 
-import { ExtendedClient } from "../interfaces/ExtendedClient";
-import { errorHandler } from "../utils/errorHandler";
+import { ExtendedClient } from "../interfaces/ExtendedClient.js";
+import { errorHandler } from "../utils/errorHandler.js";
 
-import { handleGuildScheduledEvents } from "./handlers/handleGuildScheduledEvents";
-import { handleInteractionCreate } from "./handlers/handleInteractionCreate";
-import { handleMemberAdd } from "./handlers/handleMemberAdd";
-import { handleMemberRemove } from "./handlers/handleMemberRemove";
-import { handleMessageCreate } from "./handlers/handleMessageCreate";
-import { handleMessageDelete } from "./handlers/handleMessageDelete";
-import { handleMessageEdit } from "./handlers/handleMessageEdit";
-import { handleReady } from "./handlers/handleReady";
-import { handleThreadCreate } from "./handlers/handleThreadCreate";
-import { handleVoiceStateUpdate } from "./handlers/handleVoiceStateUpdate";
+import { handleGuildScheduledEvents } from "./handlers/handleGuildScheduledEvents.js";
+import { handleInteractionCreate } from "./handlers/handleInteractionCreate.js";
+import { handleMemberAdd } from "./handlers/handleMemberAdd.js";
+import { handleMemberRemove } from "./handlers/handleMemberRemove.js";
+import { handleMessageCreate } from "./handlers/handleMessageCreate.js";
+import { handleMessageDelete } from "./handlers/handleMessageDelete.js";
+import { handleMessageEdit } from "./handlers/handleMessageEdit.js";
+import { handleReady } from "./handlers/handleReady.js";
+import { handleThreadCreate } from "./handlers/handleThreadCreate.js";
+import { handleVoiceStateUpdate } from "./handlers/handleVoiceStateUpdate.js";
 
 const restrictedActivities = ["880218394199220334"];
 

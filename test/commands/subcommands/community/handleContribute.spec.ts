@@ -8,7 +8,7 @@ import {
 } from "discordjs-testing";
 import { describe, assert, test } from "vitest";
 
-import { handleContribute } from "../../../../src/commands/subcommands/community/handleContribute";
+import { handleContribute } from "../../../../src/commands/subcommands/community/handleContribute.js";
 
 const guild = new MockGuild({
   name: "Test Guild"

@@ -1,6 +1,6 @@
 import { describe, assert, test } from "vitest";
 
-import { closePrivateChannel } from "../../src/modules/closePrivateChannel";
+import { closePrivateChannel } from "../../src/modules/closePrivateChannel.js";
 
 describe("closePrivateChannel", () => {
   test("is defined", () => {

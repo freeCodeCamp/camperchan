@@ -1,7 +1,7 @@
 import { PermissionFlagsBits } from "discord.js";
 import { describe, assert, test } from "vitest";
 
-import { handleRole } from "../../../../src/commands/subcommands/management/handleRole";
+import { handleRole } from "../../../../src/commands/subcommands/management/handleRole.js";
 
 describe("handleRole command", () => {
   test("does not allow non-moderators permission", () => {

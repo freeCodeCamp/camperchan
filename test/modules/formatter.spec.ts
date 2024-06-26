@@ -1,6 +1,6 @@
 import { describe, assert, test } from "vitest";
 
-import { formatter } from "../../src/modules/formatter";
+import { formatter } from "../../src/modules/formatter.js";
 
 describe("formatter", () => {
   test("is defined", () => {

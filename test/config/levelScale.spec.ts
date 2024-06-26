@@ -1,6 +1,6 @@
 import { describe, assert, test } from "vitest";
 
-import levelScale from "../../src/config/levelScale";
+import levelScale from "../../src/config/levelScale.js";
 
 describe("levelScale", () => {
   test("level scale should return the correct values", () => {

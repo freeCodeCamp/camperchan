@@ -1,7 +1,7 @@
 import { PermissionFlagsBits } from "discord.js";
 import { describe, assert, test } from "vitest";
 
-import { handlePrune } from "../../../../src/commands/subcommands/moderation/handlePrune";
+import { handlePrune } from "../../../../src/commands/subcommands/moderation/handlePrune.js";
 
 describe("prune handler", () => {
   test("does not allow non-moderators permission", () => {

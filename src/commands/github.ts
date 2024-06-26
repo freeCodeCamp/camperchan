@@ -1,14 +1,14 @@
 import { SlashCommandBuilder, SlashCommandSubcommandBuilder } from "discord.js";
 
-import { PullComments } from "../config/PullComments";
-import { Command } from "../interfaces/Command";
-import { Subcommand } from "../interfaces/Subcommand";
-import { errorHandler } from "../utils/errorHandler";
+import { PullComments } from "../config/PullComments.js";
+import { Command } from "../interfaces/Command.js";
+import { Subcommand } from "../interfaces/Subcommand.js";
+import { errorHandler } from "../utils/errorHandler.js";
 
-import { handleAddLabels } from "./subcommands/github/handleAddLabels";
-import { handleClose } from "./subcommands/github/handleClose";
-import { handleComment } from "./subcommands/github/handleComment";
-import { handleSyncLabels } from "./subcommands/github/handleSyncLabels";
+import { handleAddLabels } from "./subcommands/github/handleAddLabels.js";
+import { handleClose } from "./subcommands/github/handleClose.js";
+import { handleComment } from "./subcommands/github/handleComment.js";
+import { handleSyncLabels } from "./subcommands/github/handleSyncLabels.js";
 
 const handlers: { [key: string]: Subcommand } = {
   close: handleClose,

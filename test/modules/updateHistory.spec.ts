@@ -1,7 +1,7 @@
 import { describe, assert, test } from "vitest";
 
-import { updateHistory } from "../../src/modules/updateHistory";
-import { Database } from "../__mocks__/Database.mock";
+import { updateHistory } from "../../src/modules/updateHistory.js";
+import { Database } from "../__mocks__/Database.mock.js";
 
 const db = new Database();
 

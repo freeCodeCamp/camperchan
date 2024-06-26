@@ -1,7 +1,7 @@
 import { ApplicationCommandType } from "discord.js";
 import { describe, assert, test } from "vitest";
 
-import { translate } from "../../src/contexts/translate";
+import { translate } from "../../src/contexts/translate.js";
 
 describe("translate context", () => {
   test("translate context should be a context object.", () => {

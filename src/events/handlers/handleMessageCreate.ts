@@ -8,10 +8,10 @@ import {
   PermissionFlagsBits
 } from "discord.js";
 
-import { ExtendedClient } from "../../interfaces/ExtendedClient";
-import { levelListener } from "../../modules/levelListener";
-import { loadRoles } from "../../modules/loadRoles";
-import { messageCounter } from "../../modules/messageCounter";
+import { ExtendedClient } from "../../interfaces/ExtendedClient.js";
+import { levelListener } from "../../modules/levelListener.js";
+import { loadRoles } from "../../modules/loadRoles.js";
+import { messageCounter } from "../../modules/messageCounter.js";
 
 /**
  * Handles the message create events.

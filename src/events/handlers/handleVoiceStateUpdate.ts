@@ -1,7 +1,7 @@
 import { VoiceState } from "discord.js";
 
-import { ExtendedClient } from "../../interfaces/ExtendedClient";
-import { errorHandler } from "../../utils/errorHandler";
+import { ExtendedClient } from "../../interfaces/ExtendedClient.js";
+import { errorHandler } from "../../utils/errorHandler.js";
 
 /**
  * Processes the voice state update event from Discord.

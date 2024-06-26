@@ -1,6 +1,6 @@
 import { ContextMenuCommandInteraction } from "discord.js";
 
-import { ExtendedClient } from "./ExtendedClient";
+import { ExtendedClient } from "./ExtendedClient.js";
 
 export interface Context {
   data: {

@@ -1,7 +1,7 @@
 import { PermissionFlagsBits } from "discord.js";
 import { describe, assert, test } from "vitest";
 
-import { handleBan } from "../../../../src/commands/subcommands/moderation/handleBan";
+import { handleBan } from "../../../../src/commands/subcommands/moderation/handleBan.js";
 
 describe("ban handler", () => {
   test("does not allow non-moderators permission", () => {

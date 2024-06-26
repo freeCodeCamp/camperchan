@@ -1,7 +1,7 @@
 import { EmbedBuilder, GuildMember, PartialGuildMember } from "discord.js";
 
-import { ExtendedClient } from "../../interfaces/ExtendedClient";
-import { errorHandler } from "../../utils/errorHandler";
+import { ExtendedClient } from "../../interfaces/ExtendedClient.js";
+import { errorHandler } from "../../utils/errorHandler.js";
 
 /**
  * Logs a message to the debug hook when someone leaves the server.

@@ -1,6 +1,6 @@
 import { describe, assert, test } from "vitest";
 
-import { Badges } from "../../src/config/Badges";
+import { Badges } from "../../src/config/Badges.js";
 
 describe("Badges Config", () => {
   test("should be unique", () => {

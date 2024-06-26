@@ -1,11 +1,11 @@
 import { SlashCommandBuilder, SlashCommandSubcommandBuilder } from "discord.js";
 
-import { Command } from "../interfaces/Command";
-import { Subcommand } from "../interfaces/Subcommand";
-import { errorHandler } from "../utils/errorHandler";
+import { Command } from "../interfaces/Command.js";
+import { Subcommand } from "../interfaces/Subcommand.js";
+import { errorHandler } from "../utils/errorHandler.js";
 
-import { handlePrivate } from "./subcommands/management/handlePrivate";
-import { handleRole } from "./subcommands/management/handleRole";
+import { handlePrivate } from "./subcommands/management/handlePrivate.js";
+import { handleRole } from "./subcommands/management/handleRole.js";
 
 const handlers: { [key: string]: Subcommand } = {
   private: handlePrivate,

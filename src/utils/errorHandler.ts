@@ -1,9 +1,9 @@
 import { EmbedBuilder } from "discord.js";
 
-import { ExtendedClient } from "../interfaces/ExtendedClient";
+import { ExtendedClient } from "../interfaces/ExtendedClient.js";
 
-import { customSubstring } from "./customSubstring";
-import { logHandler } from "./logHandler";
+import { customSubstring } from "./customSubstring.js";
+import { logHandler } from "./logHandler.js";
 
 /**
  * Generates an embed and sends it to the CamperChan's debug hook.

@@ -6,10 +6,10 @@ import {
   StringSelectMenuBuilder
 } from "discord.js";
 
-import { Tags } from "../config/Tags";
-import { Context } from "../interfaces/Context";
-import { errorHandler } from "../utils/errorHandler";
-import { isModerator } from "../utils/isModerator";
+import { Tags } from "../config/Tags.js";
+import { Context } from "../interfaces/Context.js";
+import { errorHandler } from "../utils/errorHandler.js";
+import { isModerator } from "../utils/isModerator.js";
 
 export const snippet: Context = {
   data: {

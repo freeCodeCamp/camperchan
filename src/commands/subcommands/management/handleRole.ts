@@ -6,8 +6,8 @@ import {
   Role
 } from "discord.js";
 
-import { Subcommand } from "../../../interfaces/Subcommand";
-import { errorHandler } from "../../../utils/errorHandler";
+import { Subcommand } from "../../../interfaces/Subcommand.js";
+import { errorHandler } from "../../../utils/errorHandler.js";
 
 export const handleRole: Subcommand = {
   permissionValidator: (member) =>

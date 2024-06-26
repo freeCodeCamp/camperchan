@@ -5,10 +5,10 @@ import {
   Routes
 } from "discord.js";
 
-import { ExtendedClient } from "../interfaces/ExtendedClient";
+import { ExtendedClient } from "../interfaces/ExtendedClient.js";
 
-import { errorHandler } from "./errorHandler";
-import { logHandler } from "./logHandler";
+import { errorHandler } from "./errorHandler.js";
+import { logHandler } from "./logHandler.js";
 
 /**
  * Takes both the commands and contexts, parses the `data` properties as needed,

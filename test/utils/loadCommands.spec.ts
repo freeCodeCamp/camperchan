@@ -3,9 +3,9 @@ import { join } from "path";
 
 import { describe, assert, test } from "vitest";
 
-import { Command } from "../../src/interfaces/Command";
-import { ExtendedClient } from "../../src/interfaces/ExtendedClient";
-import { loadCommands } from "../../src/utils/loadCommands";
+import { Command } from "../../src/interfaces/Command.js";
+import { ExtendedClient } from "../../src/interfaces/ExtendedClient.js";
+import { loadCommands } from "../../src/utils/loadCommands.js";
 
 describe("loadCommands", () => {
   test("is defined", () => {

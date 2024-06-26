@@ -1,7 +1,7 @@
 import { GuildMember, PermissionFlagsBits } from "discord.js";
 import { describe, assert, test } from "vitest";
 
-import { isModerator } from "../../src/utils/isModerator";
+import { isModerator } from "../../src/utils/isModerator.js";
 
 const typeCoerce = (obj: unknown) => obj as GuildMember;
 

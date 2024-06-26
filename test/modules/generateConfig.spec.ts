@@ -1,7 +1,7 @@
 import { WebhookClient } from "discord.js";
 import { describe, assert, test } from "vitest";
 
-import { generateConfig } from "../../src/modules/generateConfig";
+import { generateConfig } from "../../src/modules/generateConfig.js";
 
 describe("generateConfig", () => {
   test("is defined", () => {

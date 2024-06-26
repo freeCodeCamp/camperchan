@@ -1,7 +1,7 @@
 import { Message } from "discord.js";
 
-import { ExtendedClient } from "../interfaces/ExtendedClient";
-import { errorHandler } from "../utils/errorHandler";
+import { ExtendedClient } from "../interfaces/ExtendedClient.js";
+import { errorHandler } from "../utils/errorHandler.js";
 
 /**
  * Tracks message counts in the database. To be used in our contributor reports.

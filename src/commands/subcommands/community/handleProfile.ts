@@ -1,6 +1,6 @@
-import { Subcommand } from "../../../interfaces/Subcommand";
-import { generateProfileImage } from "../../../modules/generateProfileImage";
-import { errorHandler } from "../../../utils/errorHandler";
+import { Subcommand } from "../../../interfaces/Subcommand.js";
+import { generateProfileImage } from "../../../modules/generateProfileImage.js";
+import { errorHandler } from "../../../utils/errorHandler.js";
 
 export const handleProfile: Subcommand = {
   permissionValidator: () => true,

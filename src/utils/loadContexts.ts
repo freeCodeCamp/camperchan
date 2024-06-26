@@ -1,11 +1,11 @@
 import { readdir } from "fs/promises";
 import { join } from "path";
 
-import { Context } from "../interfaces/Context";
-import { ExtendedClient } from "../interfaces/ExtendedClient";
+import { Context } from "../interfaces/Context.js";
+import { ExtendedClient } from "../interfaces/ExtendedClient.js";
 
-import { errorHandler } from "./errorHandler";
-import { logHandler } from "./logHandler";
+import { errorHandler } from "./errorHandler.js";
+import { logHandler } from "./logHandler.js";
 
 /**
  * Reads the `/contexts` directory and dynamically imports the files,

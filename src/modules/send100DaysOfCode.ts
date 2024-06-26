@@ -1,5 +1,5 @@
-import { ExtendedClient } from "../interfaces/ExtendedClient";
-import { errorHandler } from "../utils/errorHandler";
+import { ExtendedClient } from "../interfaces/ExtendedClient.js";
+import { errorHandler } from "../utils/errorHandler.js";
 
 /**
  * Sends the reminder for the 100 days of code.
