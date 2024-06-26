@@ -1,9 +1,9 @@
-import { assert } from "chai";
 import { PermissionFlagsBits } from "discord.js";
+import { describe, assert, test } from "vitest";
 
 import { handleAddLabels } from "../../../../src/commands/subcommands/github/handleAddLabels";
 
-suite("add labels handler", () => {
+describe("add labels handler", () => {
   test("does not allow non-moderators permission", () => {
     assert.isFalse(
       handleAddLabels.permissionValidator({

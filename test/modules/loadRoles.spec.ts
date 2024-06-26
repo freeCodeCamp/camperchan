@@ -1,8 +1,8 @@
-import { assert } from "chai";
+import { describe, assert, test } from "vitest";
 
 import { loadRoles } from "../../src/modules/loadRoles";
 
-suite("load roles module", () => {
+describe("load roles module", () => {
   test("is defined", () => {
     assert.isDefined(loadRoles);
   });

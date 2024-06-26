@@ -1,8 +1,8 @@
-import { assert } from "chai";
+import { describe, assert, test } from "vitest";
 
 import { generateDiff } from "../../src/utils/generateDiff";
 
-suite("generateDiff", () => {
+describe("generateDiff", () => {
   test("is defined", () => {
     assert.isDefined(generateDiff, "generateDiff is not defined");
     assert.isFunction(generateDiff, "generateDiff is not a function");

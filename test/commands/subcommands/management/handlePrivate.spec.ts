@@ -1,9 +1,9 @@
-import { assert } from "chai";
 import { PermissionFlagsBits } from "discord.js";
+import { describe, assert, test } from "vitest";
 
 import { handlePrivate } from "../../../../src/commands/subcommands/management/handlePrivate";
 
-suite("handlePrivate command", () => {
+describe("handlePrivate command", () => {
   test("does not allow non-moderators permission", () => {
     assert.isFalse(
       handlePrivate.permissionValidator({

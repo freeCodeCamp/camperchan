@@ -1,9 +1,9 @@
-import { assert } from "chai";
 import { PermissionFlagsBits } from "discord.js";
+import { describe, assert, test } from "vitest";
 
 import { handleSyncLabels } from "../../../../src/commands/subcommands/github/handleSyncLabels";
 
-suite("sync labels handler", () => {
+describe("sync labels handler", () => {
   test("does not allow non-moderators permission", () => {
     assert.isFalse(
       handleSyncLabels.permissionValidator({

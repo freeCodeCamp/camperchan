@@ -1,9 +1,9 @@
-import { assert } from "chai";
 import { PermissionFlagsBits } from "discord.js";
+import { describe, assert, test } from "vitest";
 
 import { handleKick } from "../../../../src/commands/subcommands/moderation/handleKick";
 
-suite("kick handler", () => {
+describe("kick handler", () => {
   test("does not allow non-moderators permission", () => {
     assert.isFalse(
       handleKick.permissionValidator({

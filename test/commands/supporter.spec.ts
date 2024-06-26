@@ -1,8 +1,8 @@
-import { assert } from "chai";
+import { describe, assert, test } from "vitest";
 
 import { supporter } from "../../src/commands/supporter";
 
-suite("supporter command", () => {
+describe("supporter command", () => {
   test("is defined", () => {
     assert.isDefined(supporter);
   });

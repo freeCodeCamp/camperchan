@@ -1,8 +1,8 @@
-import { assert } from "chai";
+import { describe, assert, test } from "vitest";
 
 import { generateProfileImage } from "../../src/modules/generateProfileImage";
 
-suite("generateProfileImage", () => {
+describe("generateProfileImage", () => {
   test("is defined", () => {
     assert.isDefined(
       generateProfileImage,

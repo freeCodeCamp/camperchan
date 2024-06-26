@@ -1,9 +1,9 @@
-import { assert } from "chai";
 import { WebhookClient } from "discord.js";
+import { describe, assert, test } from "vitest";
 
 import { generateConfig } from "../../src/modules/generateConfig";
 
-suite("generateConfig", () => {
+describe("generateConfig", () => {
   test("is defined", () => {
     assert.isDefined(generateConfig, "generateConfig is not defined");
     assert.isFunction(generateConfig, "generateConfig is not a function");

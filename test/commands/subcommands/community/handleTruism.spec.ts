@@ -1,8 +1,8 @@
-import { assert } from "chai";
+import { describe, assert, test } from "vitest";
 
 import { handleTruism } from "../../../../src/commands/subcommands/community/handleTruism";
 
-suite("truism handler", () => {
+describe("truism handler", () => {
   test("truism command is defined", () => {
     assert.isDefined(handleTruism);
   });

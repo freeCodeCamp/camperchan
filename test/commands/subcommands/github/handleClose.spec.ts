@@ -1,9 +1,9 @@
-import { assert } from "chai";
 import { PermissionFlagsBits } from "discord.js";
+import { describe, assert, test } from "vitest";
 
 import { handleClose } from "../../../../src/commands/subcommands/github/handleClose";
 
-suite("close handler", () => {
+describe("close handler", () => {
   test("does not allow non-moderators permission", () => {
     assert.isFalse(
       handleClose.permissionValidator({

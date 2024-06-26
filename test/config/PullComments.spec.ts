@@ -1,8 +1,8 @@
-import { assert } from "chai";
+import { describe, assert, test } from "vitest";
 
 import { PullComments } from "../../src/config/PullComments";
 
-suite("PullComments", () => {
+describe("PullComments", () => {
   test("All keys should be under 100 characters (Discord limitation)", () => {
     for (const obj of PullComments) {
       assert.isBelow(

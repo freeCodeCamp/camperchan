@@ -1,12 +1,12 @@
-import { assert } from "chai";
 import {
   ApplicationCommandOptionType,
   SlashCommandSubcommandBuilder
 } from "discord.js";
+import { describe, assert, test } from "vitest";
 
 import { moderation } from "../../src/commands/moderation";
 
-suite("moderation command", () => {
+describe("moderation command", () => {
   const subcommands = moderation.data.options.filter(
     (opt) => opt.toJSON().type === ApplicationCommandOptionType.Subcommand
   ) as SlashCommandSubcommandBuilder[];

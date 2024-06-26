@@ -1,12 +1,12 @@
-import { assert } from "chai";
 import {
   ApplicationCommandOptionType,
   SlashCommandSubcommandBuilder
 } from "discord.js";
+import { describe, assert, test } from "vitest";
 
 import { github } from "../../src/commands/github";
 
-suite("github command", () => {
+describe("github command", () => {
   const subcommands = github.data.options.filter(
     (opt) => opt.toJSON().type === ApplicationCommandOptionType.Subcommand
   ) as SlashCommandSubcommandBuilder[];

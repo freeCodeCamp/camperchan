@@ -1,10 +1,10 @@
-import { assert } from "chai";
 import { MockRest } from "discordjs-testing";
+import { describe, assert, test } from "vitest";
 
 import { loadCommands } from "../../src/utils/loadCommands";
 import { registerCommands } from "../../src/utils/registerCommands";
 
-suite("registerCommands", () => {
+describe("registerCommands", () => {
   test("throws when bot is not authenticated", async () => {
     let threw = false;
     await registerCommands({} as never).catch(() => (threw = true));

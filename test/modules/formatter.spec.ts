@@ -1,8 +1,8 @@
-import { assert } from "chai";
+import { describe, assert, test } from "vitest";
 
 import { formatter } from "../../src/modules/formatter";
 
-suite("formatter", () => {
+describe("formatter", () => {
   test("is defined", () => {
     assert.isDefined(formatter, "formatter is not defined");
     assert.isFunction(formatter, "formatter is not a function");

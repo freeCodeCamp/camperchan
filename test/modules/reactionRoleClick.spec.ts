@@ -1,8 +1,8 @@
-import { assert } from "chai";
+import { describe, assert, test } from "vitest";
 
 import { reactionRoleClick } from "../../src/modules/reactionRoleClick";
 
-suite("reactionRoleClick", () => {
+describe("reactionRoleClick", () => {
   test("reactionRoleClick is a function", () => {
     assert.isFunction(reactionRoleClick);
   });

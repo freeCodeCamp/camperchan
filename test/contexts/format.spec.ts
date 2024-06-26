@@ -1,9 +1,9 @@
-import { assert } from "chai";
 import { ApplicationCommandType } from "discord.js";
+import { describe, assert, test } from "vitest";
 
 import { format } from "../../src/contexts/format";
 
-suite("format context", () => {
+describe("format context", () => {
   test("format context should be a context object.", () => {
     assert.isDefined(format.data);
     assert.isObject(format.data);

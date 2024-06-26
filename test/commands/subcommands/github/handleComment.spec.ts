@@ -1,9 +1,9 @@
-import { assert } from "chai";
 import { PermissionFlagsBits } from "discord.js";
+import { describe, assert, test } from "vitest";
 
 import { handleComment } from "../../../../src/commands/subcommands/github/handleComment";
 
-suite("comment command", () => {
+describe("comment command", () => {
   test("does not allow non-moderators permission", () => {
     assert.isFalse(
       handleComment.permissionValidator({

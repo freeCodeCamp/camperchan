@@ -1,8 +1,8 @@
-import { assert } from "chai";
+import { describe, assert, test } from "vitest";
 
 import { userSettings } from "../../src/commands/userSettings";
 
-suite("user settings command", () => {
+describe("user settings command", () => {
   test("exists", () => {
     assert.exists(userSettings);
   });

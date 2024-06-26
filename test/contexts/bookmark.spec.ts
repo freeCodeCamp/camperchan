@@ -1,9 +1,9 @@
-import { assert } from "chai";
 import { ApplicationCommandType } from "discord.js";
+import { describe, assert, test } from "vitest";
 
 import { bookmark } from "../../src/contexts/bookmark";
 
-suite("bookmark context", () => {
+describe("bookmark context", () => {
   test("bookmark context should be a context object.", () => {
     assert.isDefined(bookmark.data);
     assert.isObject(bookmark.data);

@@ -1,9 +1,9 @@
-import { assert } from "chai";
 import { PermissionFlagsBits } from "discord.js";
+import { describe, assert, test } from "vitest";
 
 import { handleHistory } from "../../../../src/commands/subcommands/moderation/handleHistory";
 
-suite("history handler", () => {
+describe("history handler", () => {
   test("does not allow non-moderators permission", () => {
     assert.isFalse(
       handleHistory.permissionValidator({

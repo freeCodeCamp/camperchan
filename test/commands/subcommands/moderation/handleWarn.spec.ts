@@ -1,9 +1,9 @@
-import { assert } from "chai";
 import { PermissionFlagsBits } from "discord.js";
+import { describe, assert, test } from "vitest";
 
 import { handleWarn } from "../../../../src/commands/subcommands/moderation/handleWarn";
 
-suite("warn handler", () => {
+describe("warn handler", () => {
   test("does not allow non-moderators permission", () => {
     assert.isFalse(
       handleWarn.permissionValidator({

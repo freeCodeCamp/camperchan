@@ -1,8 +1,8 @@
-import { assert } from "chai";
+import { describe, assert, test } from "vitest";
 
 import { generatorMap } from "../../src/modules/generateCertSvg";
 
-suite("generateCertSvg", () => {
+describe("generateCertSvg", () => {
   test("has generator map object", () => {
     assert.isObject(generatorMap);
   });

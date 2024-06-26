@@ -1,11 +1,11 @@
-import { assert } from "chai";
 import { Message } from "discord.js";
+import { describe, assert, test } from "vitest";
 
 import { addFormatting } from "../../src/modules/addFormatting";
 
 const typeCoerce = (obj: unknown) => obj as Message;
 
-suite("addFormatting", () => {
+describe("addFormatting", () => {
   test("is defined", () => {
     assert.isDefined(addFormatting, "addFormatting is not defined");
     assert.isFunction(addFormatting, "addFormatting is not a function");

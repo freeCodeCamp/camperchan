@@ -1,8 +1,8 @@
-import { assert } from "chai";
+import { describe, assert, test } from "vitest";
 
 import { author } from "../../src/commands/author";
 
-suite("author command", () => {
+describe("author command", () => {
   test("is defined", () => {
     assert.isDefined(author);
   });

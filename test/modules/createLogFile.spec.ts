@@ -1,12 +1,12 @@
 import { stat, unlink } from "fs/promises";
 import { join } from "path";
 
-import { assert } from "chai";
+import { describe, assert, test } from "vitest";
 
 import { ExtendedClient } from "../../src/interfaces/ExtendedClient";
 import { createLogFile } from "../../src/modules/createLogFile";
 
-suite("createLogFile", () => {
+describe("createLogFile", () => {
   test("is defined", () => {
     assert.isDefined(createLogFile, "createLogFile is not defined");
     assert.isFunction(createLogFile, "createLogFile is not a function");

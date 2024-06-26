@@ -1,8 +1,8 @@
-import { assert } from "chai";
+import { describe, assert, test } from "vitest";
 
 import { Tags } from "../../src/config/Tags";
 
-suite("Tags", () => {
+describe("Tags", () => {
   test("quantity", () => {
     assert.isAtMost(Tags.length, 25, "Cannot have more than 25 tags.");
   });

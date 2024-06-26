@@ -1,9 +1,9 @@
-import { assert } from "chai";
 import { PermissionFlagsBits } from "discord.js";
+import { describe, assert, test } from "vitest";
 
 import { handlePrune } from "../../../../src/commands/subcommands/moderation/handlePrune";
 
-suite("prune handler", () => {
+describe("prune handler", () => {
   test("does not allow non-moderators permission", () => {
     assert.isFalse(
       handlePrune.permissionValidator({

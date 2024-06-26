@@ -1,4 +1,3 @@
-import { assert } from "chai";
 import { ChannelType, EmbedBuilder } from "discord.js";
 import {
   MockChannel,
@@ -7,6 +6,7 @@ import {
   MockMember,
   MockUser
 } from "discordjs-testing";
+import { describe, assert, test } from "vitest";
 
 import { handleCodeOfConduct } from "../../../../src/commands/subcommands/community/handleCodeOfConduct";
 
@@ -37,7 +37,7 @@ const channel = new MockChannel({
   type: ChannelType.GuildText
 });
 
-suite("codeOfConduct Handler", () => {
+describe("codeOfConduct Handler", () => {
   test("should send an embed with the code of conduct", async () => {
     const command = new MockChatInputCommandInteraction({
       commandName: "community",
