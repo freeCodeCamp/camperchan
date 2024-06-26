@@ -35,7 +35,7 @@
     "winston": "3.13.0"
   },
   "devDependencies": {
-    "@nhcarrigan/eslint-config": "3.2.0",
+    "@nhcarrigan/eslint-config": "3.3.3",
     "@nhcarrigan/prettier-config": "3.2.0",
     "@nhcarrigan/typescript-config": "3.0.0",
     "@types/chai": "4.3.16",
