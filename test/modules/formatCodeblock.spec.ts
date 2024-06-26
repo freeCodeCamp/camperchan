@@ -1,8 +1,8 @@
-import { assert } from "chai";
+import { describe, assert, test } from "vitest";
 
 import { formatCodeBlock } from "../../src/modules/formatCodeblock";
 
-suite("formatCodeBlock", () => {
+describe("formatCodeBlock", () => {
   test("is defined", () => {
     assert.isDefined(formatCodeBlock, "formatCodeBlock is not defined");
     assert.isFunction(formatCodeBlock, "formatCodeBlock is not a function");

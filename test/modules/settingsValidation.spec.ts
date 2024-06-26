@@ -1,11 +1,11 @@
-import { assert } from "chai";
+import { describe, assert, test } from "vitest";
 
 import {
   validateColour,
   validateImage
 } from "../../src/modules/settingsValidation";
 
-suite("settings validation", () => {
+describe("settings validation", () => {
   test("validateColour", () => {
     assert.exists(validateColour);
   });

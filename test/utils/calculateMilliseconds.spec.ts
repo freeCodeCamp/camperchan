@@ -1,11 +1,11 @@
-import { assert } from "chai";
+import { describe, assert, test } from "vitest";
 
 import {
   calculateMilliseconds,
   isValidTimeUnit
 } from "../../src/utils/calculateMilliseconds";
 
-suite("calculateMilliseconds", () => {
+describe("calculateMilliseconds", () => {
   test("10 seconds equals 10,000 milliseconds", () => {
     assert.equal(calculateMilliseconds(10, "seconds"), 10000);
   });
@@ -32,7 +32,7 @@ suite("calculateMilliseconds", () => {
   });
 });
 
-suite("isValidTimeUnit", () => {
+describe("isValidTimeUnit", () => {
   test("should return true for valid time units", () => {
     assert.isTrue(isValidTimeUnit("seconds"));
   });

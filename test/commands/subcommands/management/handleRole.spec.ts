@@ -1,9 +1,9 @@
-import { assert } from "chai";
+import { describe, assert, test } from "vitest";
 import { PermissionFlagsBits } from "discord.js";
 
 import { handleRole } from "../../../../src/commands/subcommands/management/handleRole";
 
-suite("handleRole command", () => {
+describe("handleRole command", () => {
   test("does not allow non-moderators permission", () => {
     assert.isFalse(
       handleRole.permissionValidator({

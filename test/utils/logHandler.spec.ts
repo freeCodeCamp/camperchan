@@ -1,8 +1,8 @@
-import { assert } from "chai";
+import { describe, assert, test } from "vitest";
 
 import { logHandler } from "../../src/utils/logHandler";
 
-suite("logHandler", () => {
+describe("logHandler", () => {
   test("is defined", () => {
     assert.isDefined(logHandler, "logHandler is not defined");
     assert.isObject(logHandler, "logHandler is not an object");

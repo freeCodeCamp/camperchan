@@ -1,8 +1,8 @@
-import { assert } from "chai";
+import { describe, assert, test } from "vitest";
 
 import { handleMessageCreate } from "../../../src/events/handlers/handleMessageCreate";
 
-suite("handleMessageCreate", () => {
+describe("handleMessageCreate", () => {
   test("handleMessageCreate is a function", () => {
     assert.isFunction(handleMessageCreate);
   });

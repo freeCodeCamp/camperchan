@@ -1,7 +1,7 @@
 import { stat } from "fs/promises";
 import { join } from "path";
 
-import { assert } from "chai";
+import { describe, assert, test } from "vitest";
 
 import { ExtendedClient } from "../../src/interfaces/ExtendedClient";
 import { createLogFile } from "../../src/modules/createLogFile";
@@ -9,7 +9,7 @@ import { generateLogs } from "../../src/modules/generateLogs";
 
 const mockBot = { privateLogs: {} } as ExtendedClient;
 
-suite("generateLogs", () => {
+describe("generateLogs", () => {
   test("is defined", () => {
     assert.isDefined(generateLogs, "generateLogs is not defined");
     assert.isFunction(generateLogs, "generateLogs is not a function");

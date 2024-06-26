@@ -1,8 +1,8 @@
-import { assert } from "chai";
+import { describe, assert, test } from "vitest";
 
 import { customSubstring } from "../../src/utils/customSubstring";
 
-suite("customSubstring", () => {
+describe("customSubstring", () => {
   test("is defined", () => {
     assert.isDefined(customSubstring, "customSubstring is not defined");
     assert.isFunction(customSubstring, "customSubstring is not a function");

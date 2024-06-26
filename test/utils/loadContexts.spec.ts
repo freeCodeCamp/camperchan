@@ -1,13 +1,13 @@
 import { readdir } from "fs/promises";
 import { join } from "path";
 
-import { assert } from "chai";
+import { describe, assert, test } from "vitest";
 
 import { Context } from "../../src/interfaces/Context";
 import { ExtendedClient } from "../../src/interfaces/ExtendedClient";
 import { loadContexts } from "../../src/utils/loadContexts";
 
-suite("loadContexts", () => {
+describe("loadContexts", () => {
   test("is defined", () => {
     assert.isDefined(loadContexts, "loadContexts is not defined");
     assert.isFunction(loadContexts, "loadContexts is not a function");

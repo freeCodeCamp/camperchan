@@ -1,8 +1,8 @@
-import { assert } from "chai";
+import { describe, assert, test } from "vitest";
 
 import { AuthorRoleId, SupporterRoleId } from "../../src/config/Roles";
 
-suite("roles config", () => {
+describe("roles config", () => {
   test("supporter role should be id", () => {
     assert.match(SupporterRoleId, /^\d{16,19}$/);
   });

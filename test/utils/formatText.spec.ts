@@ -1,8 +1,8 @@
-import { assert } from "chai";
+import { describe, assert, test } from "vitest";
 
 import { formatTextToTable } from "../../src/utils/formatText";
 
-suite("formatTextToTable", () => {
+describe("formatTextToTable", () => {
   test("is defined", () => {
     assert.isDefined(formatTextToTable, "formatTextToTable is not defined!");
     assert.isFunction(

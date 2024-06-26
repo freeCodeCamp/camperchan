@@ -1,8 +1,8 @@
-import { assert } from "chai";
+import { describe, assert, test } from "vitest";
 
 import { isSupportedByPrettier } from "../../src/modules/isSupportedByPrettier";
 
-suite("isSupportedByPrettier", () => {
+describe("isSupportedByPrettier", () => {
   test("is defined", () => {
     assert.isDefined(
       isSupportedByPrettier,

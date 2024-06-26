@@ -1,4 +1,4 @@
-import { assert } from "chai";
+import { describe, assert, test } from "vitest";
 import { GuildMember, PermissionFlagsBits } from "discord.js";
 
 import { isModerator } from "../../src/utils/isModerator";
@@ -25,7 +25,7 @@ const moderateMembersSet = typeCoerce({
   ])
 });
 
-suite("isModerator", () => {
+describe("isModerator", () => {
   test("is defined", () => {
     assert.isDefined(isModerator, "isModerator is not defined");
     assert.isFunction(isModerator, "isModerator is not a function");

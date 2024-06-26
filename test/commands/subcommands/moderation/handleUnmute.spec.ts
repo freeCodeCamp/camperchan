@@ -1,9 +1,9 @@
-import { assert } from "chai";
+import { describe, assert, test } from "vitest";
 import { PermissionFlagsBits } from "discord.js";
 
 import { handleUnmute } from "../../../../src/commands/subcommands/moderation/handleUnmute";
 
-suite("unmute handler", () => {
+describe("unmute handler", () => {
   test("does not allow non-moderators permission", () => {
     assert.isFalse(
       handleUnmute.permissionValidator({

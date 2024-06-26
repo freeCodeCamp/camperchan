@@ -1,9 +1,9 @@
-import { assert } from "chai";
+import { describe, assert, test } from "vitest";
 import { PermissionFlagsBits } from "discord.js";
 
 import { handleUnban } from "../../../../src/commands/subcommands/moderation/handleUnban";
 
-suite("unban handler", () => {
+describe("unban handler", () => {
   test("does not allow non-moderators permission", () => {
     assert.isFalse(
       handleUnban.permissionValidator({

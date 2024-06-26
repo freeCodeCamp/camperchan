@@ -1,8 +1,8 @@
-import { assert } from "chai";
+import { describe, assert, test } from "vitest";
 
 import { snippet } from "../../src/contexts/snippet";
 
-suite("snippet context", () => {
+describe("snippet context", () => {
   test("is defined", () => {
     assert.isDefined(snippet);
   });

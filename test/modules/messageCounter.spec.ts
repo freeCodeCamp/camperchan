@@ -1,8 +1,8 @@
-import { assert } from "chai";
+import { describe, assert, test } from "vitest";
 
 import { messageCounter } from "../../src/modules/messageCounter";
 
-suite("message counter module", () => {
+describe("message counter module", () => {
   test("is defined", () => {
     assert.isDefined(messageCounter);
   });

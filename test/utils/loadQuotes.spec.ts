@@ -1,9 +1,9 @@
-import { assert } from "chai";
+import { describe, assert, test } from "vitest";
 
 import { ExtendedClient } from "../../src/interfaces/ExtendedClient";
 import { loadQuotes } from "../../src/utils/loadQuotes";
 
-suite("loadQuotes", () => {
+describe("loadQuotes", () => {
   test("is defined", () => {
     assert.isDefined(loadQuotes, "loadQuotes is not defined");
     assert.isFunction(loadQuotes, "loadQuotes is not a function");

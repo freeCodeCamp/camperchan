@@ -1,8 +1,8 @@
-import { assert } from "chai";
+import { describe, assert, test } from "vitest";
 
 import { translator } from "../../src/commands/translator";
 
-suite("translator command", () => {
+describe("translator command", () => {
   test("is defined", () => {
     assert.isDefined(translator);
   });

@@ -1,4 +1,4 @@
-import { assert } from "chai";
+import { describe, assert, test } from "vitest";
 
 import { registerEvents } from "../../src/events/registerEvents";
 
@@ -9,7 +9,7 @@ const bot = {
   }
 };
 
-suite("registerEvents", () => {
+describe("registerEvents", () => {
   test("registerEvents is a function", () => {
     assert.isFunction(registerEvents);
   });

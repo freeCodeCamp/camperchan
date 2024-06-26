@@ -1,8 +1,8 @@
-import { assert } from "chai";
+import { describe, assert, test } from "vitest";
 
 import { isGuildCommandInteraction } from "../../src/utils/typeGuards";
 
-suite("isGuildCommand", () => {
+describe("isGuildCommand", () => {
   const interaction = {};
   test("should return false when guild is missing", () => {
     assert.isFalse(isGuildCommandInteraction(interaction as never));

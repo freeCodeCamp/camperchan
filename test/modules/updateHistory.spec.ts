@@ -1,11 +1,11 @@
-import { assert } from "chai";
+import { describe, assert, test } from "vitest";
 
 import { updateHistory } from "../../src/modules/updateHistory";
 import { Database } from "../__mocks__/Database.mock";
 
 const db = new Database();
 
-suite("updateHistory", () => {
+describe("updateHistory", () => {
   test("updateHistory is a function", () => {
     assert.isFunction(updateHistory);
   });

@@ -1,9 +1,9 @@
-import { assert } from "chai";
+import { describe, assert, test } from "vitest";
 import { ApplicationCommandType } from "discord.js";
 
 import { translate } from "../../src/contexts/translate";
 
-suite("translate context", () => {
+describe("translate context", () => {
   test("translate context should be a context object.", () => {
     assert.isDefined(translate.data);
     assert.isObject(translate.data);

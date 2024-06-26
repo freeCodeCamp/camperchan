@@ -1,8 +1,8 @@
-import { assert } from "chai";
+import { describe, assert, test } from "vitest";
 
 import { handleForum } from "../../../../src/commands/subcommands/community/handleForum";
 
-suite("forum handler", () => {
+describe("forum handler", () => {
   test("is defined", () => {
     assert.isDefined(handleForum);
   });

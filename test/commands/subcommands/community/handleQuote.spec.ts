@@ -1,8 +1,8 @@
-import { assert } from "chai";
+import { describe, assert, test } from "vitest";
 
 import { handleQuote } from "../../../../src/commands/subcommands/community/handleQuote";
 
-suite("quote handler", () => {
+describe("quote handler", () => {
   test("is defined", () => {
     assert.isDefined(handleQuote);
   });

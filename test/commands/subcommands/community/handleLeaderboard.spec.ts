@@ -1,8 +1,8 @@
-import { assert } from "chai";
+import { describe, assert, test } from "vitest";
 
 import { handleLeaderboard } from "../../../../src/commands/subcommands/community/handleLeaderboard";
 
-suite("leaderboard handler", () => {
+describe("leaderboard handler", () => {
   test("is defined", () => {
     assert.isDefined(handleLeaderboard);
   });

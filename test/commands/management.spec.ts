@@ -1,4 +1,4 @@
-import { assert } from "chai";
+import { describe, assert, test } from "vitest";
 import {
   ApplicationCommandOptionType,
   SlashCommandSubcommandBuilder
@@ -6,7 +6,7 @@ import {
 
 import { management } from "../../src/commands/management";
 
-suite("management command", () => {
+describe("management command", () => {
   const subcommands = management.data.options.filter(
     (opt) => opt.toJSON().type === ApplicationCommandOptionType.Subcommand
   ) as SlashCommandSubcommandBuilder[];
