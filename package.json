@@ -6,9 +6,10 @@
   "scripts": {
     "prebuild": "npm run clean && prisma generate",
     "build": "tsc",
-    "clean": "rimraf dist",
+    "clean": "rimraf prod",
+    "dev": "op run --env-file='./dev.env' -- tsx watch src/index.ts",
     "lint": "eslint src test --max-warnings 0 && prettier src test --check",
-    "start": "node -r dotenv/config dist/index.js",
+    "start": "op run --env-file='./prod.env' -- node prod/index.js",
     "test": "vitest run --coverage",
     "test:nocov": "MOCHA=true vitest run",
     "db:deploy": "prisma db push"
@@ -48,6 +49,7 @@
     "prettier": "3.3.2",
     "prisma": "5.16.1",
     "rimraf": "5.0.8",
+    "tsx": "4.16.2",
     "typescript": "5.5.3",
     "vitest": "1.6.0"
   }

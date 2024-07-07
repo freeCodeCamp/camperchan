@@ -20,7 +20,7 @@ export const loadCommands = async (
   try {
     const result: Command[] = [];
     const files = await readdir(
-      join(process.cwd() + "/dist/commands"),
+      join(process.cwd(), "prod", "commands"),
       "utf-8"
     );
     for (const file of files) {
@@ -33,7 +33,7 @@ export const loadCommands = async (
         logHandler.error(`Cannot find name from ${file}.`);
         continue;
       }
-      const mod = await import(join(process.cwd() + `/dist/commands/${file}`));
+      const mod = await import(join(process.cwd(), "prod", "commands", "file"));
       result.push(mod[name] as Command);
     }
     return result;

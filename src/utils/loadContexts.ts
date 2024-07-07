@@ -20,7 +20,7 @@ export const loadContexts = async (
   try {
     const result: Context[] = [];
     const files = await readdir(
-      join(process.cwd() + "/dist/contexts"),
+      join(process.cwd(), "prod", "contexts"),
       "utf-8"
     );
     for (const file of files) {
@@ -29,7 +29,7 @@ export const loadContexts = async (
         logHandler.error(`Cannot find name from ${file}.`);
         continue;
       }
-      const mod = await import(join(process.cwd() + `/dist/contexts/${file}`));
+      const mod = await import(join(process.cwd(), "prod", "contexts", file));
       result.push(mod[name] as Context);
     }
     return result;
