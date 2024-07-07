@@ -6,9 +6,9 @@ import {
   ChannelType
 } from "discord.js";
 
-import { openTicketMessage } from "../../config/TicketMessage";
-import { ExtendedClient } from "../../interfaces/ExtendedClient";
-import { errorHandler } from "../../utils/errorHandler";
+import { openTicketMessage } from "../../config/TicketMessage.js";
+import { ExtendedClient } from "../../interfaces/ExtendedClient.js";
+import { errorHandler } from "../../utils/errorHandler.js";
 
 /**
  * Checks if a user has an open ticket. If not, creates a new ticket for them.

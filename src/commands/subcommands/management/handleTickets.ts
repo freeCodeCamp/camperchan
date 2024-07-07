@@ -6,9 +6,9 @@ import {
   PermissionFlagsBits
 } from "discord.js";
 
-import { TicketMessage } from "../../../config/TicketMessage";
-import { Subcommand } from "../../../interfaces/Subcommand";
-import { errorHandler } from "../../../utils/errorHandler";
+import { TicketMessage } from "../../../config/TicketMessage.js";
+import { Subcommand } from "../../../interfaces/Subcommand.js";
+import { errorHandler } from "../../../utils/errorHandler.js";
 
 export const handleTickets: Subcommand = {
   permissionValidator: (member) =>

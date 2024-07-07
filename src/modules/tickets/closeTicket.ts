@@ -1,8 +1,8 @@
 import { ButtonInteraction } from "discord.js";
 
-import { closeTicketMessage } from "../../config/TicketMessage";
-import { ExtendedClient } from "../../interfaces/ExtendedClient";
-import { errorHandler } from "../../utils/errorHandler";
+import { closeTicketMessage } from "../../config/TicketMessage.js";
+import { ExtendedClient } from "../../interfaces/ExtendedClient.js";
+import { errorHandler } from "../../utils/errorHandler.js";
 
 /**
  * Closes a ticket, removing the user.
