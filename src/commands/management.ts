@@ -1,4 +1,8 @@
-import { SlashCommandBuilder, SlashCommandSubcommandBuilder } from "discord.js";
+import {
+  ChannelType,
+  SlashCommandBuilder,
+  SlashCommandSubcommandBuilder
+} from "discord.js";
 
 import { Command } from "../interfaces/Command.js";
 import { Subcommand } from "../interfaces/Subcommand.js";
@@ -63,6 +67,17 @@ export const management: Command = {
         )
         .addRoleOption((option) =>
           option.setName("role5").setDescription("Role to create a button for.")
+        )
+    )
+    .addSubcommand(
+      new SlashCommandSubcommandBuilder()
+        .setName("tickets")
+        .setDescription("Create a ticket post in the specified channel")
+        .addChannelOption((o) =>
+          o
+            .setName("channel")
+            .setDescription("The channel to create the ticket post in.")
+            .addChannelTypes(ChannelType.GuildText)
         )
     ),
   run: async (CamperChan, interaction) => {

@@ -5,6 +5,8 @@ import { Languages } from "../../config/Languages.js";
 import { ExtendedClient } from "../../interfaces/ExtendedClient.js";
 import { closePrivateChannel } from "../../modules/closePrivateChannel.js";
 import { reactionRoleClick } from "../../modules/reactionRoleClick.js";
+import { closeTicket } from "../../modules/tickets/closeTicket.js";
+import { openTicket } from "../../modules/tickets/openTicket.js";
 import { isGuildCommandInteraction } from "../../utils/typeGuards.js";
 
 /**
@@ -51,6 +53,19 @@ export const handleInteractionCreate = async (
   }
 
   if (interaction.isButton()) {
+    if (interaction.customId === "thread-open") {
+      if (!interaction.inCachedGuild()) {
+        throw new Error("uncached interaction????");
+      }
+      await openTicket(CamperChan, interaction);
+    }
+    if (interaction.customId === "thread-close") {
+      if (!interaction.inCachedGuild()) {
+        throw new Error("uncached interaction????");
+      }
+      await closeTicket(CamperChan, interaction);
+    }
+
     if (interaction.customId === "delete-bookmark") {
       await (interaction.message as Message).delete();
     }
