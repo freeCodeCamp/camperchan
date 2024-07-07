@@ -10,10 +10,12 @@ import { errorHandler } from "../utils/errorHandler.js";
 
 import { handlePrivate } from "./subcommands/management/handlePrivate.js";
 import { handleRole } from "./subcommands/management/handleRole.js";
+import { handleTickets } from "./subcommands/management/handleTickets.js";
 
 const handlers: { [key: string]: Subcommand } = {
   private: handlePrivate,
-  role: handleRole
+  role: handleRole,
+  tickets: handleTickets
 };
 
 export const management: Command = {
