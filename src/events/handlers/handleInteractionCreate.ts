@@ -53,13 +53,13 @@ export const handleInteractionCreate = async (
   }
 
   if (interaction.isButton()) {
-    if (interaction.customId === "thread-open") {
+    if (interaction.customId === "ticket-open") {
       if (!interaction.inCachedGuild()) {
         throw new Error("uncached interaction????");
       }
       await openTicket(CamperChan, interaction);
     }
-    if (interaction.customId === "thread-close") {
+    if (interaction.customId === "ticket-close") {
       if (!interaction.inCachedGuild()) {
         throw new Error("uncached interaction????");
       }
