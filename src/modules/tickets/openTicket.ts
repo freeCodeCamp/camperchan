@@ -37,6 +37,7 @@ export const openTicket = async (
       await interaction.editReply({
         content: "You already have a ticket open."
       });
+      return;
     }
 
     const button = new ButtonBuilder()
