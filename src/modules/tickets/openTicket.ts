@@ -34,9 +34,8 @@ export const openTicket = async (
         (t) => t.name.includes(interaction.user.id) && !t.archived && !t.locked
       )
     ) {
-      await interaction.reply({
-        content: "You already have a ticket open.",
-        ephemeral: true
+      await interaction.editReply({
+        content: "You already have a ticket open."
       });
     }
 
@@ -53,10 +52,14 @@ export const openTicket = async (
       reason: "Moderation ticket"
     });
     await thread.send({ content: openTicketMessage, components: [row] });
+    await thread.send({
+      content: "Ticket opened by: " + interaction.user.displayName
+    });
     const ping = await thread.send({
       content: `${interaction.user.toString()} <@&692818623458443316>`
     });
     await ping.delete();
+    await interaction.editReply({ content: "Your ticket is opened!" });
   } catch (err) {
     await errorHandler(bot, "open ticket", err);
   }
