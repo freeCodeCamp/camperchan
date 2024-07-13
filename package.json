@@ -20,7 +20,6 @@
   },
   "license": "MIT",
   "dependencies": {
-    "@octokit/rest": "21.0.0",
     "@prisma/client": "5.16.1",
     "@tryghost/admin-api": "1.13.12",
     "diff": "5.2.0",
@@ -30,6 +29,7 @@
     "mongodb": "6.8.0",
     "node-html-to-image": "4.0.0",
     "node-schedule": "2.1.1",
+    "octokit": "4.0.2",
     "string-similarity": "4.0.4",
     "strip-ansi": "7.1.0",
     "winston": "3.13.0"

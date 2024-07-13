@@ -1,4 +1,3 @@
-import { Octokit } from "@octokit/rest";
 import { PrismaClient } from "@prisma/client";
 import {
   CategoryChannel,
@@ -8,6 +7,7 @@ import {
   TextBasedChannel,
   WebhookClient
 } from "discord.js";
+import { Octokit } from "octokit";
 
 import { Command } from "./Command.js";
 import { Context } from "./Context.js";
@@ -27,7 +27,9 @@ export interface ExtendedClient extends Client {
     modRole: Snowflake;
     privateCategory: Snowflake;
     reportChannel: Snowflake;
+    githubAppId: number;
     githubToken: string;
+    githubInstallationId: number;
     ghostKey: string;
   };
   octokit: Octokit;

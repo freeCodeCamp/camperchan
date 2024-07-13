@@ -18,7 +18,9 @@ export const generateConfig = (): ExtendedClient["config"] => {
     !process.env.BOT_ID ||
     !process.env.REPORT_CHANNEL ||
     !process.env.WELCOME_HOOK ||
+    !process.env.GITHUB_APP_ID ||
     !process.env.GITHUB_TOKEN ||
+    !process.env.GITHUB_INSTALLATION_ID ||
     !process.env.GHOST_KEY
   ) {
     throw new Error("Missing required config variables");
@@ -35,7 +37,9 @@ export const generateConfig = (): ExtendedClient["config"] => {
     modRole: process.env.MOD_ROLE || "no role set",
     privateCategory: process.env.PRIVATE_CATEGORY || "no category set",
     reportChannel: process.env.REPORT_CHANNEL,
+    githubAppId: parseInt(process.env.GITHUB_APP_ID, 10),
     githubToken: process.env.GITHUB_TOKEN,
+    githubInstallationId: parseInt(process.env.GITHUB_INSTALLATION_ID, 10),
     ghostKey: process.env.GHOST_KEY
   };
 };
