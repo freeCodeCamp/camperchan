@@ -18,7 +18,7 @@ export const handleSyncLabels: Subcommand = {
       const labels = interaction.options.getString("labels", true);
       const labelNames = labels.split(",").map((l) => l.trim());
 
-      await CamperChan.octokit.issues.setLabels({
+      await CamperChan.octokit.rest.issues.setLabels({
         owner: "freeCodeCamp",
         issue_number: number,
         repo,

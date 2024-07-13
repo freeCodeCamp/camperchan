@@ -7,7 +7,7 @@ import {
   TextBasedChannel,
   WebhookClient
 } from "discord.js";
-import { Octokit } from "octokit";
+import { App } from "octokit";
 
 import { Command } from "./Command.js";
 import { Context } from "./Context.js";
@@ -32,7 +32,7 @@ export interface ExtendedClient extends Client {
     githubInstallationId: number;
     ghostKey: string;
   };
-  octokit: Octokit;
+  octokit: App["octokit"];
   quotes: QuoteList;
   commands: Command[];
   contexts: Context[];

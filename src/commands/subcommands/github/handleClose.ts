@@ -30,7 +30,7 @@ export const handleClose: Subcommand = {
       const comment = interaction.options.getString("comment") ?? null;
       const isSpam = interaction.options.getBoolean("spam") ?? false;
 
-      const data = await CamperChan.octokit.issues
+      const data = await CamperChan.octokit.rest.issues
         .get({
           owner: "freeCodeCamp",
           repo,
@@ -54,20 +54,20 @@ export const handleClose: Subcommand = {
         return;
       }
       const isPull = !!data.data.pull_request;
-      await CamperChan.octokit.issues.createComment({
+      await CamperChan.octokit.rest.issues.createComment({
         owner: "freeCodeCamp",
         repo,
         issue_number: number,
         body: commentBody(isPull, comment)
       });
-      await CamperChan.octokit.issues.update({
+      await CamperChan.octokit.rest.issues.update({
         owner: "freeCodeCamp",
         repo,
         issue_number: number,
         state: "closed"
       });
       if (isPull && isSpam) {
-        await CamperChan.octokit.issues.addLabels({
+        await CamperChan.octokit.rest.issues.addLabels({
           owner: "freeCodeCamp",
           repo,
           issue_number: number,

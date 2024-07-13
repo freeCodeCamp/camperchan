@@ -26,7 +26,7 @@ export const handleComment: Subcommand = {
         return;
       }
 
-      const comment = await CamperChan.octokit.issues
+      const comment = await CamperChan.octokit.rest.issues
         .createComment({
           owner: "freeCodeCamp",
           repo,
