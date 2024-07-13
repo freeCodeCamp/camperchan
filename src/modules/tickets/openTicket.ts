@@ -53,12 +53,8 @@ export const openTicket = async (
     });
     await thread.send({ content: openTicketMessage, components: [row] });
     await thread.send({
-      content: "Ticket opened by: " + interaction.user.displayName
+      content: `Ticket opened by: ${interaction.user.toString()}\n/cc <@&692818623458443316>`
     });
-    const ping = await thread.send({
-      content: `${interaction.user.toString()} <@&692818623458443316>`
-    });
-    await ping.delete();
     await interaction.editReply({ content: "Your ticket is opened!" });
   } catch (err) {
     await errorHandler(bot, "open ticket", err);
