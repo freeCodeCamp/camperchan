@@ -24,7 +24,7 @@ Otherwise, please respond to this thread explaining your need for opening a tick
 
 export const closeTicketMessage = `# Ticket Closed
 
-This ticket has been closed and locked. The member has been removed, and this thread is private.
+This ticket has been closed and locked. The member has been removed from the thread, and this thread is private so they cannot add themselves back.
 
 Staff are welcome to discuss further here. The thread is preserved for logging.
 
