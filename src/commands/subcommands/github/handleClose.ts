@@ -30,13 +30,11 @@ export const handleClose: Subcommand = {
       const comment = interaction.options.getString("comment") ?? null;
       const isSpam = interaction.options.getBoolean("spam") ?? false;
 
-      const data = await CamperChan.octokit.rest.issues
-        .get({
-          owner: "freeCodeCamp",
-          repo,
-          issue_number: number
-        })
-        .catch(() => null);
+      const data = await CamperChan.octokit.rest.issues.get({
+        owner: "freeCodeCamp",
+        repo,
+        issue_number: number
+      });
 
       if (!data) {
         await interaction.editReply({
