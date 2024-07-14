@@ -36,7 +36,7 @@ export const handleAddLabels: Subcommand = {
         return;
       }
 
-      await CamperChan.octokit.issues.addLabels({
+      await CamperChan.octokit.rest.issues.addLabels({
         owner: "freeCodeCamp",
         issue_number: number,
         repo,

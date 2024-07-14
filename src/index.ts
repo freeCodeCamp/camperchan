@@ -1,5 +1,5 @@
-import { Octokit } from "@octokit/rest";
 import { Client } from "discord.js";
+import { App } from "octokit";
 
 import { IntentOptions } from "./config/IntentOptions.js";
 import { connectDatabase } from "./database/connectDatabase.js";
@@ -16,9 +16,13 @@ import { registerCommands } from "./utils/registerCommands.js";
     intents: IntentOptions
   }) as ExtendedClient;
   CamperChan.config = generateConfig();
-  CamperChan.octokit = new Octokit({
-    auth: CamperChan.config.githubToken
+  const app = new App({
+    appId: CamperChan.config.githubAppId,
+    privateKey: CamperChan.config.githubToken
   });
+  CamperChan.octokit = await app.getInstallationOctokit(
+    CamperChan.config.githubInstallationId
+  );
   await connectDatabase(CamperChan);
   await registerEvents(CamperChan);
   CamperChan.commands = await loadCommands(CamperChan);

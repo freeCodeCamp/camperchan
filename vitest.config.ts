@@ -7,6 +7,7 @@ export default defineConfig({
       reporter: ["text", "html"],
       all: true,
       allowExternal: true,
+      extension: ".ts",
       thresholds: {
         lines: 22
       }

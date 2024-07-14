@@ -26,22 +26,13 @@ export const handleComment: Subcommand = {
         return;
       }
 
-      const comment = await CamperChan.octokit.issues
-        .createComment({
-          owner: "freeCodeCamp",
-          repo,
-          issue_number: pull,
-          body: message
-        })
-        .catch(() => null);
+      const comment = await CamperChan.octokit.rest.issues.createComment({
+        owner: "freeCodeCamp",
+        repo,
+        issue_number: pull,
+        body: message
+      });
 
-      if (!comment) {
-        await interaction.editReply({
-          content:
-            "There was an error creating the comment. Please try again later."
-        });
-        return;
-      }
       await interaction.editReply({
         content: `Successfully added a [comment](<${comment.data.html_url}>)`
       });
