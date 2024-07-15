@@ -49,7 +49,7 @@ export const openTicket = async (
 
     const thread = await interaction.channel.threads.create({
       type: ChannelType.PrivateThread,
-      name: `ticket-${interaction.user.id}`,
+      name: `${interaction.user.displayName}-${interaction.user.id}`,
       reason: "Moderation ticket"
     });
     await thread.send({ content: openTicketMessage, components: [row] });
