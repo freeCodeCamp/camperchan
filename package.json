@@ -39,7 +39,7 @@
     "@nhcarrigan/prettier-config": "3.2.0",
     "@nhcarrigan/typescript-config": "4.0.0",
     "@types/diff": "5.2.1",
-    "@types/node": "20.14.11",
+    "@types/node": "20.14.12",
     "@types/node-schedule": "2.1.7",
     "@types/prettier": "2.7.3",
     "@types/string-similarity": "4.0.2",
