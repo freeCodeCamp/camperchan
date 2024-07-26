@@ -1,3 +1,4 @@
+import { Translator } from "deepl-node";
 import { Client } from "discord.js";
 import { App } from "octokit";
 
@@ -31,6 +32,7 @@ import { registerCommands } from "./utils/registerCommands.js";
   CamperChan.quotes = await loadQuotes(CamperChan);
   CamperChan.privateLogs = {};
   CamperChan.learnAccounts = {};
+  CamperChan.translator = new Translator(process.env.TRANS_KEY ?? "");
 
   await CamperChan.login(CamperChan.config.token);
 })();

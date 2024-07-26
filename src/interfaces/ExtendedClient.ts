@@ -14,6 +14,8 @@ import { Context } from "./Context.js";
 import { QuoteList } from "./Quotes.js";
 import { UserRecord } from "./UserRecord.js";
 
+import type { Translator } from "deepl-node";
+
 export interface ExtendedClient extends Client {
   config: {
     token: string;
@@ -50,4 +52,5 @@ export interface ExtendedClient extends Client {
     start: number;
     end: number;
   };
+  translator: Translator;
 }
