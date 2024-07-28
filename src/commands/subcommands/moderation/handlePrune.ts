@@ -1,30 +1,34 @@
 import { ChannelType, PermissionFlagsBits } from "discord.js";
-
-import { Subcommand } from "../../../interfaces/Subcommand.js";
 import { errorHandler } from "../../../utils/errorHandler.js";
+import type { Subcommand } from "../../../interfaces/subcommand.js";
 
 export const handlePrune: Subcommand = {
-  permissionValidator: (member) =>
-    [PermissionFlagsBits.ManageMessages].some((p) => member.permissions.has(p)),
-  execute: async (CamperChan, interaction) => {
+  execute: async(camperChan, interaction) => {
     try {
       await interaction.deferReply({ ephemeral: true });
-      const { channel } = interaction;
+      const { channel, options } = interaction;
       if (!channel || channel.type !== ChannelType.GuildText) {
         await interaction.editReply({
-          content: "Must be done in a text channel."
+          content: "Must be done in a text channel.",
         });
         return;
       }
-      const count = interaction.options.getInteger("count", true);
+      const count = options.getInteger("count", true);
       const messages = await channel.messages.fetch({ limit: count });
-      for (const msg of messages.values()) {
-        await msg.delete().catch(() => null);
-      }
-      await interaction.editReply({ content: `Deleted ${count} messages.` });
-    } catch (err) {
-      await errorHandler(CamperChan, "prune subcommand", err);
+      await Promise.all(messages.mapValues(async(value) => {
+        return await value.delete().catch(() => {
+          return null;
+        });
+      }));
+      await interaction.editReply({ content: `Deleted ${String(count)} messages.` });
+    } catch (error) {
+      await errorHandler(camperChan, "prune subcommand", error);
       await interaction.editReply("Something went wrong.");
     }
-  }
+  },
+  permissionValidator: (member) => {
+    return [ PermissionFlagsBits.ManageMessages ].some((p) => {
+      return member.permissions.has(p);
+    });
+  },
 };

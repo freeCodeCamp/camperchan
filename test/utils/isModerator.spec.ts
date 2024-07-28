@@ -1,28 +1,31 @@
-import { GuildMember, PermissionFlagsBits } from "discord.js";
+import { type GuildMember, PermissionFlagsBits } from "discord.js";
 import { describe, assert, test } from "vitest";
-
 import { isModerator } from "../../src/utils/isModerator.js";
 
-const typeCoerce = (obj: unknown) => obj as GuildMember;
+const typeCoerce = (object: unknown): GuildMember => {
+  return object as GuildMember;
+};
 
 const basePermissions = [
   PermissionFlagsBits.ViewChannel,
-  PermissionFlagsBits.SendMessages
+  PermissionFlagsBits.SendMessages,
 ];
 const kickMembersSet = typeCoerce({
-  permissions: new Set([PermissionFlagsBits.KickMembers, ...basePermissions])
+  permissions: new Set([ PermissionFlagsBits.KickMembers, ...basePermissions ]),
 });
 const banMembersSet = typeCoerce({
-  permissions: new Set([PermissionFlagsBits.BanMembers, ...basePermissions])
+  permissions: new Set([ PermissionFlagsBits.BanMembers, ...basePermissions ]),
 });
 const manageMessagesSet = typeCoerce({
-  permissions: new Set([PermissionFlagsBits.ManageMessages, ...basePermissions])
+  permissions: new Set(
+    [ PermissionFlagsBits.ManageMessages, ...basePermissions ],
+  ),
 });
 const moderateMembersSet = typeCoerce({
   permissions: new Set([
     PermissionFlagsBits.ModerateMembers,
-    ...basePermissions
-  ])
+    ...basePermissions,
+  ]),
 });
 
 describe("isModerator", () => {
@@ -37,13 +40,13 @@ describe("isModerator", () => {
     assert.isTrue(isModerator(manageMessagesSet), "isModerator returned false");
     assert.isTrue(
       isModerator(moderateMembersSet),
-      "isModerator returned false"
+      "isModerator returned false",
     );
   });
 
   test("returns false when not moderator", () => {
     assert.isFalse(
-      isModerator(typeCoerce({ permissions: new Set(basePermissions) }))
+      isModerator(typeCoerce({ permissions: new Set(basePermissions) })),
     );
   });
 });

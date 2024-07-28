@@ -1,38 +1,34 @@
-import { EmbedBuilder, GuildMember, PartialGuildMember } from "discord.js";
-
-import { ExtendedClient } from "../../interfaces/ExtendedClient.js";
+import { EmbedBuilder, type GuildMember, type PartialGuildMember }
+  from "discord.js";
 import { errorHandler } from "../../utils/errorHandler.js";
+import type { ExtendedClient } from "../../interfaces/extendedClient.js";
 
 /**
  * Logs a message to the debug hook when someone joins the server.
- *
- * @param {ExtendedClient} CamperChan The CamperChan's Discord instance.
- * @param {GuildMember | PartialGuildMember} member The member that joined the server.
+ * @param camperChan - The camperChan's Discord instance.
+ * @param member - The member that joined the server.
  */
-export const handleMemberAdd = async (
-  CamperChan: ExtendedClient,
-  member: GuildMember | PartialGuildMember
-) => {
+export const handleMemberAdd = async(
+  camperChan: ExtendedClient,
+  member: GuildMember | PartialGuildMember,
+): Promise<void> => {
   try {
-    if (!member.user) {
-      return;
-    }
     const embed = new EmbedBuilder();
     embed.setTitle("Member Joined");
     embed.setDescription(`<@!${member.id}> has joined the server~!`);
     embed.setAuthor({
-      name: member.user.tag,
-      iconURL: member.user.displayAvatarURL()
+      iconURL: member.user.displayAvatarURL(),
+      name:    member.user.tag,
     });
     embed.setFooter({
-      text: `ID: ${member.id}`
+      text: `ID: ${member.id}`,
     });
-    await CamperChan.config.welcomeHook.send({
-      embeds: [embed],
-      username: member.user.username,
-      avatarURL: member.user.displayAvatarURL()
+    await camperChan.config.welcomeHook.send({
+      avatarURL: member.user.displayAvatarURL(),
+      embeds:    [ embed ],
+      username:  member.user.username,
     });
-  } catch (err) {
-    await errorHandler(CamperChan, "member add event", err);
+  } catch (error) {
+    await errorHandler(camperChan, "member add event", error);
   }
 };

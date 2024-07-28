@@ -8,85 +8,99 @@ type UnformattedData = Array<Array<unknown>>;
 /**
  * Format options that can be passed.
  */
-type FormatOptions = {
+interface FormatOptions {
+
   /**
    * This can be used to provide a list of headers,
    * rather than passing them in as the first row of
    * unformatted text.
    */
-  headers?: string[];
+  headers?: Array<string>;
+
   /**
    * The column delimiter character(s), defaults to `|`.
    * This character(s) is automatically padded with spaces
    * on either side automatically.
    */
   columnDelimiter?: string;
+
   /**
    * The row delimiter character(s), defaults to `-`.
    * Only used between the header, and the rows of data.
    */
   rowDelimiter?: string;
-};
+}
+
 /**
  * Formats text into a table object.
- *
- * @param {UnformattedData} data The unformatted data we will display.
- * @param {FormatOptions} options Optional options that can be passed to slightly
+ * @param data - The unformatted data we will display.
+ * @param options - Optional options that can be passed to slightly
  * configure the formatting.
- * @returns {string} The formatted text.
+ * @returns The formatted text.
  */
 export const formatTextToTable = (
   data: UnformattedData,
-  options?: FormatOptions
+  options?: FormatOptions,
 ): string => {
-  // alias for simplicity
+  // Alias for simplicity
   const rows = data;
-  const toStr = (val: unknown) => "" + val;
-  const headers = options?.headers || (data[0] || []).map(toStr) || [];
+  const headers = options?.headers ?? (data.at(0) ?? []).map(String);
   const hasInferredHeaders = !options?.headers;
-  const columnDelimiter = options?.columnDelimiter || "|";
-  const rowDelimiter = options?.rowDelimiter || "-";
+  const columnDelimiter = options?.columnDelimiter ?? "|";
+  const rowDelimiter = options?.rowDelimiter ?? "-";
 
-  const baseColumnWidths = headers.map((header) => toStr(header).length);
-  const columnWidths = rows.reduce((acc: number[], row) => {
-    row.forEach((column, index) => {
-      const currentColumnLength = toStr(column).length;
-      const curr = acc[index];
-      if (curr && currentColumnLength > curr) {
-        acc[index] = currentColumnLength;
+  const baseColumnWidths = headers.map((header) => {
+    return String(header).length;
+  });
+  // eslint-disable-next-line unicorn/no-array-reduce
+  const columnWidths = rows.reduce((accumulator: Array<number>, row) => {
+    for (const [ index, column ] of row.entries()) {
+      const currentColumnLength = String(column).length;
+      const current = accumulator[index];
+      if (current !== undefined && currentColumnLength > current) {
+        accumulator[index] = currentColumnLength;
       }
-    });
-    return acc;
-  }, baseColumnWidths) as number[];
+    }
+    return accumulator;
+  }, baseColumnWidths);
 
-  const rowSeparatorStr = columnWidths.length
+  const rowSeparatorString = columnWidths.length > 0
     ? new Array(
-        // **note** we add an extra one for the space separation applied
-        // to each column.
-        columnWidths.reduce(
-          (acc, num) => acc + num + 2 + columnDelimiter.length
-        )
-      )
-        .fill(rowDelimiter)
-        .join("")
+
+      /*
+       * **Note** we add an extra one for the space separation applied
+       * To each column.
+       */
+      columnWidths.reduce(
+        (accumulator, number) => {
+          return accumulator + number + 2 + columnDelimiter.length;
+        },
+      ),
+    ).
+      fill(rowDelimiter).
+      join("")
     : "";
 
-  const dataStr = rows.map((row) =>
-    row
-      .map((column, index) =>
-        toStr(column).padEnd(columnWidths[index] ?? 0, " ")
-      )
-      .join(` ${columnDelimiter} `)
-  );
-  const headersStr = headers
-    .map((header, index) => header.padEnd(columnWidths[index] ?? 0))
-    .join(` ${columnDelimiter} `);
+  const dataString = rows.map((row) => {
+    return row.
+      map((column, index) => {
+        return String(column).padEnd(columnWidths[index] ?? 0, " ");
+      }).
+      join(` ${columnDelimiter} `);
+  });
+  const headersString = headers.
+    map((header, index) => {
+      return header.padEnd(columnWidths[index] ?? 0);
+    }).
+    join(` ${columnDelimiter} `);
 
   return [
-    headersStr,
-    rowSeparatorStr,
-    ...(hasInferredHeaders ? dataStr.slice(1) : dataStr)
-  ]
-    .filter((_) => _)
-    .join("\n");
+    headersString,
+    rowSeparatorString,
+    ...hasInferredHeaders
+      ? dataString.slice(1)
+      : dataString,
+  ].
+    filter(Boolean).
+    join("\n");
 };

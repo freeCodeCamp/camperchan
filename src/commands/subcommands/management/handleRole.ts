@@ -3,16 +3,13 @@ import {
   ButtonBuilder,
   ButtonStyle,
   PermissionFlagsBits,
-  Role
+  Role,
 } from "discord.js";
-
-import { Subcommand } from "../../../interfaces/Subcommand.js";
 import { errorHandler } from "../../../utils/errorHandler.js";
+import type { Subcommand } from "../../../interfaces/subcommand.js";
 
 export const handleRole: Subcommand = {
-  permissionValidator: (member) =>
-    member.permissions.has(PermissionFlagsBits.ManageGuild),
-  execute: async (CamperChan, interaction) => {
+  execute: async(camperChan, interaction) => {
     try {
       await interaction.deferReply();
 
@@ -27,35 +24,40 @@ export const handleRole: Subcommand = {
         interaction.options.getRole("role2"),
         interaction.options.getRole("role3"),
         interaction.options.getRole("role4"),
-        interaction.options.getRole("role5")
-      ].filter((el) => el) as Role[];
+        interaction.options.getRole("role5"),
+      ].filter((opt) => {
+        return opt instanceof Role;
+      });
 
-      const dividedRoles: Role[][] = [];
-      while (roleArray.length) {
+      const dividedRoles: Array<Array<Role>> = [];
+      while (roleArray.length > 0) {
         dividedRoles.push(roleArray.splice(0, 5));
       }
 
-      const components: ActionRowBuilder<ButtonBuilder>[] = [];
+      const components: Array<ActionRowBuilder<ButtonBuilder>> = [];
       for (const roleBlock of dividedRoles) {
-        const buttons = roleBlock.map((el) =>
-          new ButtonBuilder()
-            .setLabel(el.name)
-            .setCustomId(`rr-${el.id}`)
-            .setStyle(ButtonStyle.Secondary)
-        );
+        const buttons = roleBlock.map((element) => {
+          return new ButtonBuilder().
+            setLabel(element.name).
+            setCustomId(`rr-${element.id}`).
+            setStyle(ButtonStyle.Secondary);
+        });
         const row = new ActionRowBuilder<ButtonBuilder>().addComponents(
-          buttons
+          buttons,
         );
         components.push(row);
       }
       await interaction.editReply({ content: "I've created the role post!" });
       await channel.send({
-        content: title,
-        components
+        components: components,
+        content:    title,
       });
-    } catch (err) {
-      await errorHandler(CamperChan, "role subcommand", err);
+    } catch (error) {
+      await errorHandler(camperChan, "role subcommand", error);
       await interaction.editReply("Something went wrong.");
     }
-  }
+  },
+  permissionValidator: (member) => {
+    return member.permissions.has(PermissionFlagsBits.ManageGuild);
+  },
 };

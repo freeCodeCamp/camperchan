@@ -1,29 +1,22 @@
 import { EmbedBuilder, PermissionFlagsBits } from "discord.js";
-
-import { Subcommand } from "../../../interfaces/Subcommand.js";
 import { errorHandler } from "../../../utils/errorHandler.js";
+import type { Subcommand } from "../../../interfaces/subcommand.js";
 
 export const handleHistory: Subcommand = {
-  permissionValidator: (member) =>
-    [
-      PermissionFlagsBits.ModerateMembers,
-      PermissionFlagsBits.KickMembers,
-      PermissionFlagsBits.BanMembers
-    ].some((p) => member.permissions.has(p)),
-  execute: async (CamperChan, interaction) => {
+  execute: async(camperChan, interaction) => {
     try {
       await interaction.deferReply();
       const target = interaction.options.getUser("target", true);
 
-      const targetRecord = await CamperChan.db.histories.findUnique({
+      const targetRecord = await camperChan.db.histories.findUnique({
         where: {
-          userId: target.id
-        }
+          userId: target.id,
+        },
       });
 
       if (!targetRecord) {
         await interaction.editReply({
-          content: "That user is absolutely squeaky clean!"
+          content: "That user is absolutely squeaky clean!",
         });
         return;
       }
@@ -34,43 +27,52 @@ export const handleHistory: Subcommand = {
       embed.setThumbnail(target.displayAvatarURL());
       embed.addFields(
         {
-          name: "Bans",
-          value: String(targetRecord.bans || 0),
-          inline: true
+          inline: true,
+          name:   "Bans",
+          value:  String(targetRecord.bans),
         },
         {
-          name: "Kicks",
-          value: String(targetRecord.kicks || 0),
-          inline: true
+          inline: true,
+          name:   "Kicks",
+          value:  String(targetRecord.kicks),
         },
         {
-          name: "Mutes",
-          value: String(targetRecord.mutes || 0),
-          inline: true
+          inline: true,
+          name:   "Mutes",
+          value:  String(targetRecord.mutes),
         },
         {
-          name: "Warnings",
-          value: String(targetRecord.warns || 0),
-          inline: true
+          inline: true,
+          name:   "Warnings",
+          value:  String(targetRecord.warns),
         },
         {
-          name: "Unmutes",
-          value: String(targetRecord.unmutes || 0),
-          inline: true
+          inline: true,
+          name:   "Unmutes",
+          value:  String(targetRecord.unmutes),
         },
         {
-          name: "Unbans",
-          value: String(targetRecord.unbans || 0),
-          inline: true
-        }
+          inline: true,
+          name:   "Unbans",
+          value:  String(targetRecord.unbans),
+        },
       );
 
       await interaction.editReply({
-        embeds: [embed]
+        embeds: [ embed ],
       });
-    } catch (err) {
-      await errorHandler(CamperChan, "history subcommand", err);
+    } catch (error) {
+      await errorHandler(camperChan, "history subcommand", error);
       await interaction.editReply("Something went wrong.");
     }
-  }
+  },
+  permissionValidator: (member) => {
+    return [
+      PermissionFlagsBits.ModerateMembers,
+      PermissionFlagsBits.KickMembers,
+      PermissionFlagsBits.BanMembers,
+    ].some((p) => {
+      return member.permissions.has(p);
+    });
+  },
 };

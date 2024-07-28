@@ -2,16 +2,22 @@ import { diffSentences } from "diff";
 
 /**
  * Module to generate a diff string from two strings.
- *
- * @param {string} old The old string.
- * @param {string} new_ The new string.
- * @returns {string} The diff string, formatted.
+ * @param old - The old string.
+ * @param updated - The new string.
+ * @returns The diff string, formatted.
  */
-export const generateDiff = (old: string, new_: string): string => {
-  return diffSentences(old, new_)
-    .map((el) =>
-      el.added ? `+ ${el.value}` : el.removed ? `- ${el.value}` : ""
-    )
-    .filter((el) => el)
-    .join("\n");
+export const generateDiff = (old: string, updated: string): string => {
+  return diffSentences(old, updated).
+    map((element) => {
+      if (element.added === true) {
+        return `+ ${element.value}`;
+      }
+      if (element.removed === true) {
+        return `- ${element.value}`;
+      }
+      return "";
+    }).
+    filter(Boolean).
+    join("\n");
 };
+

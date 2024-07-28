@@ -1,43 +1,49 @@
 import { PermissionFlagsBits } from "discord.js";
-
-import { Subcommand } from "../../../interfaces/Subcommand.js";
 import { errorHandler } from "../../../utils/errorHandler.js";
+import type { Subcommand } from "../../../interfaces/subcommand.js";
 
 export const handleSyncLabels: Subcommand = {
-  permissionValidator: (member) =>
-    [
-      PermissionFlagsBits.ModerateMembers,
-      PermissionFlagsBits.KickMembers,
-      PermissionFlagsBits.BanMembers
-    ].some((p) => member.permissions.has(p)),
-  execute: async (CamperChan, interaction) => {
+  execute: async(camperChan, interaction) => {
     try {
       await interaction.deferReply();
       const repo = interaction.options.getString("repository", true);
       const number = interaction.options.getInteger("number", true);
       const labels = interaction.options.getString("labels", true);
-      const labelNames = labels.split(",").map((l) => l.trim());
+      const labelNames = labels.split(",").map((l) => {
+        return l.trim();
+      });
 
-      await CamperChan.octokit.rest.issues.setLabels({
-        owner: "freeCodeCamp",
+      await camperChan.octokit.rest.issues.setLabels({
+        // eslint-disable-next-line @typescript-eslint/naming-convention
         issue_number: number,
-        repo,
-        labels: labelNames
+        labels:       labelNames,
+        owner:        "freeCodeCamp",
+        repo:         repo,
       });
 
       await interaction.editReply({
-        content: `[Issue labels](<https://github.com/freeCodeCamp/${repo}/issues/${number}>) have been synced to: ${labelNames.join(
-          ", "
-        )}`
+        content: `[Issue labels](<https://github.com/freeCodeCamp/${repo}/issues/${String(number)}>) have been synced to: ${labelNames.join(
+          ", ",
+        )}`,
       });
-    } catch (err) {
-      await errorHandler(CamperChan, "sync labels subcommand", err);
+    } catch (error) {
+      await errorHandler(camperChan, "sync labels subcommand", error);
       await interaction.editReply(
         `Something went wrong: ${
-          (err as Error).message ??
-          "Unable to parse error. Please check the logs."
-        }`
+          error instanceof Error
+            ? error.message
+            : "Unable to parse error. Please check the logs."
+        }`,
       );
     }
-  }
+  },
+  permissionValidator: (member) => {
+    return [
+      PermissionFlagsBits.ModerateMembers,
+      PermissionFlagsBits.KickMembers,
+      PermissionFlagsBits.BanMembers,
+    ].some((p) => {
+      return member.permissions.has(p);
+    });
+  },
 };

@@ -1,106 +1,104 @@
-import { readFile } from "fs/promises";
-import { join } from "path";
-
+import { readFile } from "node:fs/promises";
+import { join } from "node:path";
 import { SlashCommandBuilder } from "discord.js";
-
-import { SupporterRoleId } from "../config/Roles.js";
-import { Command } from "../interfaces/Command.js";
+import { supporterRoleId } from "../config/roles.js";
 import { errorHandler } from "../utils/errorHandler.js";
 import { fetchLearnRecord } from "../utils/fetchLearnRecord.js";
+import type { Command } from "../interfaces/command.js";
 
 export const supporter: Command = {
-  data: new SlashCommandBuilder()
-    .setName("supporter")
-    .setDescription("Claim the supporter role.")
-    .setDMPermission(false)
-    .addStringOption((option) =>
-      option
-        .setName("email")
-        .setDescription("The email tied to your freeCodeCamp account.")
-        .setRequired(true)
-    ),
-  run: async (CamperChan, interaction) => {
+  data: new SlashCommandBuilder().
+    setName("supporter").
+    setDescription("Claim the supporter role.").
+    setDMPermission(false).
+    addStringOption((option) => {
+      return option.
+        setName("email").
+        setDescription("The email tied to your freeCodeCamp account.").
+        setRequired(true);
+    }),
+  run: async(camperChan, interaction) => {
     try {
       await interaction.deferReply({ ephemeral: true });
       const email = interaction.options.getString("email", true);
-      const { member } = interaction;
-      if (member.roles.cache.has(SupporterRoleId)) {
+      const { member, user } = interaction;
+      if (member.roles.cache.has(supporterRoleId)) {
         await interaction.editReply({
-          content: "You have already claimed the supporter role."
+          content: "You have already claimed the supporter role.",
         });
         return;
       }
-      const existsByUserId = await CamperChan.db.supporters.findUnique({
+      const existsByUserId = await camperChan.db.supporters.findUnique({
         where: {
-          userId: member.id
-        }
+          userId: member.id,
+        },
       });
       if (existsByUserId) {
         await interaction.editReply({
           content:
-            "A supporter record already exists on your Discord account. If you believe this is an error, please contact Naomi."
+            `A supporter record already exists on your Discord account. If you believe this is an error, please contact Naomi.`,
         });
         return;
       }
-      const existsByEmail = await CamperChan.db.supporters.findUnique({
+      const existsByEmail = await camperChan.db.supporters.findUnique({
         where: {
-          email
-        }
+          email,
+        },
       });
       if (existsByEmail) {
         await interaction.editReply({
           content:
-            "A supporter record already exists on your email. If you believe this is an error, please contact Naomi."
+            `A supporter record already exists on your email. If you believe this is an error, please contact Naomi.`,
         });
         return;
       }
       const learnRecord = await fetchLearnRecord(
-        CamperChan,
+        camperChan,
         email,
-        interaction.user.id
+        user.id,
       );
       if (!learnRecord) {
         await interaction.editReply({
-          content: `There does not appear to be a learn account associated with ${email}. If you believe this is an error, please contact Naomi.`
+          content: `There does not appear to be a learn account associated with ${email}. If you believe this is an error, please contact Naomi.`,
         });
         return;
       }
-      if (!learnRecord.isDonating) {
+      if (learnRecord.isDonating !== true) {
         await interaction.editReply({
           content:
-            "You do not appear to be actively supporting freeCodeCamp at this time. If you believe this is an error, please contact Naomi."
+            `You do not appear to be actively supporting freeCodeCamp at this time. If you believe this is an error, please contact Naomi.`,
         });
         return;
       }
-      await CamperChan.db.supporters.create({
+      await camperChan.db.supporters.create({
         data: {
+          email:  email,
           userId: member.id,
-          email
-        }
+        },
       });
-      await member.roles.add(SupporterRoleId).catch(async () => {
-        await CamperChan.config.debugHook.send(
-          `Failed to assign Supporter role to ${member.id}. Please assign manually.`
+      await member.roles.add(supporterRoleId).catch(async() => {
+        await camperChan.config.debugHook.send(
+          `Failed to assign Supporter role to ${member.id}. Please assign manually.`,
         );
       });
       await interaction.editReply({
         content:
-          "Congrats! You now have the supporter role, with access to special channels."
+          `Congrats! You now have the supporter role, with access to special channels.`,
       });
       const donorCTA2023 = await readFile(
         join(process.cwd(), process.env.EMAIL_LIST ?? "Naomi messed up."),
-        "utf-8"
+        "utf-8",
       );
       const isCTAMember = donorCTA2023.split("\n").includes(email);
       if (isCTAMember) {
-        await member.roles.add("1186748788665225336").catch(async () => {
-          await CamperChan.config.debugHook.send(
-            `Failed to assign CTA role to ${member.id}. Please assign manually.`
+        await member.roles.add("1186748788665225336").catch(async() => {
+          await camperChan.config.debugHook.send(
+            `Failed to assign CTA role to ${member.id}. Please assign manually.`,
           );
         });
       }
-    } catch (err) {
-      await errorHandler(CamperChan, "supporter command", err);
+    } catch (error) {
+      await errorHandler(camperChan, "supporter command", error);
     }
-  }
+  },
 };

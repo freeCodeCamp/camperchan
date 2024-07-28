@@ -1,26 +1,23 @@
 import {
-  ButtonInteraction,
+  type ButtonInteraction,
   ChannelType,
   EmbedBuilder,
-  PermissionFlagsBits
+  PermissionFlagsBits,
 } from "discord.js";
-
-import { ExtendedClient } from "../interfaces/ExtendedClient.js";
 import { errorHandler } from "../utils/errorHandler.js";
-
 import { generateLogs } from "./generateLogs.js";
+import type { ExtendedClient } from "../interfaces/extendedClient.js";
 
 /**
  * Handles the logic to close a private channel, generating the logs and sending them to
  * the moderation hook.
- *
- * @param {ExtendedClient} CamperChan The CamperChan's discord instance.
- * @param {ButtonInteraction} interaction The interaction payload from Discord.
+ * @param camperChan - The camperChan's discord instance.
+ * @param interaction - The interaction payload from Discord.
  */
-export const closePrivateChannel = async (
-  CamperChan: ExtendedClient,
-  interaction: ButtonInteraction
-) => {
+export const closePrivateChannel = async(
+  camperChan: ExtendedClient,
+  interaction: ButtonInteraction,
+): Promise<void> => {
   try {
     await interaction.deferReply();
     const { channel, member } = interaction;
@@ -30,11 +27,11 @@ export const closePrivateChannel = async (
     }
 
     if (
-      typeof member.permissions === "string" ||
-      !member.permissions.has(PermissionFlagsBits.ModerateMembers)
+      typeof member.permissions === "string"
+      || !member.permissions.has(PermissionFlagsBits.ModerateMembers)
     ) {
       await interaction.editReply(
-        "Only moderators may close a private channel."
+        "Only moderators may close a private channel.",
       );
       return;
     }
@@ -43,17 +40,18 @@ export const closePrivateChannel = async (
     logEmbed.setTitle("Private Channel Closed");
     logEmbed.setDescription(`Channel closed by ${member.user.username}`);
     logEmbed.addFields({
-      name: "User",
-      value: channel.name.split("-").slice(1).join("-") || "Unknown"
+      name:  "User",
+      value: channel.name.split("-").slice(1).
+        join("-"),
     });
-    const logFile = await generateLogs(CamperChan, channel.id);
-    await CamperChan.config.modHook.send({
-      embeds: [logEmbed],
-      files: [logFile]
+    const logFile = await generateLogs(camperChan, channel.id);
+    await camperChan.config.modHook.send({
+      embeds: [ logEmbed ],
+      files:  [ logFile ],
     });
     await channel.delete();
-  } catch (err) {
-    await errorHandler(CamperChan, "close private channel module", err);
+  } catch (error) {
+    await errorHandler(camperChan, "close private channel module", error);
     await interaction.editReply("Something went wrong!");
   }
 };

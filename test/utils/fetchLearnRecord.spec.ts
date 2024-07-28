@@ -1,5 +1,4 @@
 import { describe, assert, test } from "vitest";
-
 import { fetchLearnRecord } from "../../src/utils/fetchLearnRecord.js";
 
 describe("fetchLearnRecord", () => {

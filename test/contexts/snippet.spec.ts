@@ -1,5 +1,4 @@
 import { describe, assert, test } from "vitest";
-
 import { snippet } from "../../src/contexts/snippet.js";
 
 describe("snippet context", () => {

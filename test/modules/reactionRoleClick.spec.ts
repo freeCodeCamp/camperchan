@@ -1,5 +1,4 @@
 import { describe, assert, test } from "vitest";
-
 import { reactionRoleClick } from "../../src/modules/reactionRoleClick.js";
 
 describe("reactionRoleClick", () => {

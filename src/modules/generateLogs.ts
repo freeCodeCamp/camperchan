@@ -1,43 +1,43 @@
-import { readFile, unlink } from "fs/promises";
-import { join } from "path";
-
+import { readFile, unlink } from "node:fs/promises";
+import { join } from "node:path";
 import { AttachmentBuilder } from "discord.js";
-
-import { ExtendedClient } from "../interfaces/ExtendedClient.js";
 import { errorHandler } from "../utils/errorHandler.js";
+import type { ExtendedClient } from "../interfaces/extendedClient.js";
 
 /**
  * To run when a private channel is closed. Finds the channel log file,
  * creates a message attachement with the logs, and deletes the file.
- *
- * @param {ExtendedClient} CamperChan The CamperChan's Discord instance.
- * @param {string} channelId The channel ID of the private channel.
- * @returns {Promise<AttachmentBuilder>} The log file as a Discord attachment.
+ * @param camperChan - The camperChan's Discord instance.
+ * @param channelId - The channel ID of the private channel.
+ * @returns The log file as a Discord attachment.
  */
-export const generateLogs = async (
-  CamperChan: ExtendedClient,
-  channelId: string
+export const generateLogs = async(
+  camperChan: ExtendedClient,
+  channelId: string,
 ): Promise<AttachmentBuilder> => {
   try {
-    delete CamperChan.privateLogs[channelId];
+    // eslint-disable-next-line @typescript-eslint/no-dynamic-delete
+    delete camperChan.privateLogs[channelId];
 
     const logs = await readFile(
       join(process.cwd(), "logs", `${channelId}.txt`),
-      "utf8"
-    ).catch(() => "no logs found...");
+      "utf8",
+    ).catch(() => {
+      return "no logs found...";
+    });
 
     const attachment = new AttachmentBuilder(Buffer.from(logs, "utf-8"), {
-      name: "log.txt"
+      name: "log.txt",
     });
 
     await unlink(join(process.cwd(), "logs", `${channelId}.txt`));
 
     return attachment;
-  } catch (err) {
-    await errorHandler(CamperChan, "generate logs module", err);
+  } catch (error) {
+    await errorHandler(camperChan, "generate logs module", error);
     return new AttachmentBuilder(
       Buffer.from("An error occurred fetching these logs.", "utf-8"),
-      { name: "log.txt" }
+      { name: "log.txt" },
     );
   }
 };

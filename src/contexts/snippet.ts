@@ -1,103 +1,111 @@
 import {
   ActionRowBuilder,
-  ComponentType,
+  type ComponentType,
   GuildMember,
-  Message,
-  StringSelectMenuBuilder
+  StringSelectMenuBuilder,
 } from "discord.js";
-
-import { Tags } from "../config/Tags.js";
-import { Context } from "../interfaces/Context.js";
+import { tags } from "../config/tags.js";
 import { errorHandler } from "../utils/errorHandler.js";
 import { isModerator } from "../utils/isModerator.js";
+import type { Context } from "../interfaces/context.js";
 
 export const snippet: Context = {
   data: {
     name: "snippet",
-    type: 3
+    type: 3,
   },
-  run: async (CamperChan, interaction) => {
+  run: async(camperChan, interaction) => {
     try {
       if (!interaction.isMessageContextMenuCommand()) {
         await interaction.reply({
           content:
             "This command is improperly configured. Please contact Naomi.",
-          ephemeral: true
+          ephemeral: true,
         });
         return;
       }
       await interaction.deferReply({ ephemeral: true });
       if (
-        !interaction.member ||
-        !isModerator(interaction.member as GuildMember)
+        !interaction.member
+        || !(interaction.member instanceof GuildMember)
+        || !isModerator(interaction.member)
       ) {
         await interaction.editReply({
-          content: "Only moderators may use this command."
+          content: "Only moderators may use this command.",
         });
         return;
       }
       const message = interaction.options.getMessage(
         "message",
-        true
-      ) as Message;
+        true,
+      );
 
-      const dropdown = new StringSelectMenuBuilder()
-        .setCustomId("snippets")
-        .addOptions(
-          ...Tags.map(({ name }) => ({
-            label: name,
-            value: name
-          }))
-        )
-        .setMaxValues(1)
-        .setMinValues(1);
+      const dropdown = new StringSelectMenuBuilder().
+        setCustomId("snippets").
+        addOptions(
+          ...tags.map(({ name }) => {
+            return {
+              label: name,
+              value: name,
+            };
+          }),
+        ).
+        setMaxValues(1).
+        setMinValues(1);
       const row = new ActionRowBuilder<StringSelectMenuBuilder>().addComponents(
-        dropdown
+        dropdown,
       );
 
       const response = await interaction.editReply({
-        content: "Which snippet would you like to send?",
-        components: [row]
+        components: [ row ],
+        content:    "Which snippet would you like to send?",
       });
 
-      const collector =
-        response.createMessageComponentCollector<ComponentType.StringSelect>({
-          time: 1000 * 60 * 60
+      const collector
+        = response.createMessageComponentCollector<ComponentType.StringSelect>({
+          time: 1000 * 60 * 60,
         });
 
-      collector.on("collect", async (selection) => {
+      // eslint-disable-next-line @typescript-eslint/no-misused-promises
+      collector.on("collect", async(selection) => {
         await selection.deferUpdate();
-        const name = selection.values[0];
-        const target = Tags.find((t) => t.name === name);
+        const name = selection.values.at(0);
+        const target = tags.find((t) => {
+          return t.name === name;
+        });
         if (!target) {
           await selection.editReply({
-            content: `Cannot find a snippet with the name ${name}.`
+            content: `Cannot find a snippet with the name ${String(name)}.`,
           });
           return;
         }
         await message.reply({
-          content: target.message
+          content: target.message,
         });
         await interaction.editReply({
-          content: "Response sent!",
-          components: []
+          components: [],
+          content:    "Response sent!",
         });
       });
 
-      collector.on("end", async () => {
+      // eslint-disable-next-line @typescript-eslint/no-misused-promises
+      collector.on("end", async() => {
+        await interaction.
+          editReply({
+            components: [],
+          }).
+
         /**
          * Ephemerals can be dismissed by the user.
          * We catch the error here because we don't really
          * care if it fails.
          */
-        await interaction
-          .editReply({
-            components: []
-          })
-          .catch(() => null);
+          catch(() => {
+            return null;
+          });
       });
-    } catch (err) {
-      await errorHandler(CamperChan, "snippet context command", err);
+    } catch (error) {
+      await errorHandler(camperChan, "snippet context command", error);
     }
-  }
+  },
 };

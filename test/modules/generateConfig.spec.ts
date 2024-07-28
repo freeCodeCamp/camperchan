@@ -1,6 +1,5 @@
 import { WebhookClient } from "discord.js";
 import { describe, assert, test } from "vitest";
-
 import { generateConfig } from "../../src/modules/generateConfig.js";
 
 describe("generateConfig", () => {
@@ -20,14 +19,14 @@ describe("generateConfig", () => {
     process.env.HOME_GUILD = "Here";
     process.env.BOT_ID = "To";
     process.env.REPORT_CHANNEL = "Scream";
-    process.env.DEBUG_HOOK =
-      "https://discord.com/api/webhooks/11111111111111111/AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA";
-    process.env.MOD_HOOK =
-      "https://discord.com/api/webhooks/11111111111111111/AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA";
-    process.env.MESSAGE_HOOK =
-      "https://discord.com/api/webhooks/11111111111111111/AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA";
-    process.env.WELCOME_HOOK =
-      "https://discord.com/api/webhooks/11111111111111111/AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA";
+    process.env.DEBUG_HOOK
+      = `https://discord.com/api/webhooks/11111111111111111/AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA`;
+    process.env.MOD_HOOK
+      = `https://discord.com/api/webhooks/11111111111111111/AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA`;
+    process.env.MESSAGE_HOOK
+      = `https://discord.com/api/webhooks/11111111111111111/AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA`;
+    process.env.WELCOME_HOOK
+      = `https://discord.com/api/webhooks/11111111111111111/AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA`;
     process.env.GITHUB_TOKEN = "meow";
     process.env.GHOST_KEY = "meow";
     process.env.GITHUB_APP_ID = "1";
@@ -47,10 +46,11 @@ describe("generateConfig", () => {
     assert.equal(result.welcomeHook.url, process.env.WELCOME_HOOK);
     assert.equal(result.githubToken, process.env.GITHUB_TOKEN);
     assert.equal(result.ghostKey, process.env.GHOST_KEY);
-    assert.equal(result.githubAppId, parseInt(process.env.GITHUB_APP_ID, 10));
+    assert.equal(result.githubAppId,
+      Number.parseInt(process.env.GITHUB_APP_ID, 10));
     assert.equal(
       result.githubInstallationId,
-      parseInt(process.env.GITHUB_INSTALLATION_ID, 10)
+      Number.parseInt(process.env.GITHUB_INSTALLATION_ID, 10),
     );
   });
 });

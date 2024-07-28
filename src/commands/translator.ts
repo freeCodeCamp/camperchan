@@ -1,43 +1,46 @@
 import { SlashCommandBuilder } from "discord.js";
-
-import { Languages } from "../config/Languages.js";
-import { Command } from "../interfaces/Command.js";
+import { languages } from "../config/languages.js";
 import { errorHandler } from "../utils/errorHandler.js";
+import type { Command } from "../interfaces/command.js";
 
 export const translator: Command = {
-  data: new SlashCommandBuilder()
-    .setName("translator")
-    .setDescription("Select a language you are interested in translating.")
-    .setDMPermission(false)
-    .addStringOption((option) =>
-      option
-        .setName("language")
-        .setDescription(
-          "The language you would like to add or remove from your list."
-        )
-        .setRequired(true)
-        .setAutocomplete(true)
-    ),
-  run: async (CamperChan, interaction) => {
+  data: new SlashCommandBuilder().
+    setName("translator").
+    setDescription("Select a language you are interested in translating.").
+    setDMPermission(false).
+    addStringOption((option) => {
+      return option.
+        setName("language").
+        setDescription(
+          "The language you would like to add or remove from your list.",
+        ).
+        setRequired(true).
+        setAutocomplete(true);
+    }),
+  run: async(camperChan, interaction) => {
     try {
       await interaction.deferReply({ ephemeral: true });
 
-      const lang = interaction.options
-        .getString("language", true)
-        .toLowerCase();
-      const isValidLang = Languages.find((l) => l.toLowerCase() === lang);
-      const isValidRole = CamperChan.homeGuild.roles.cache.find(
-        (r) => r.name.toLowerCase() === lang
+      const lang = interaction.options.
+        getString("language", true).
+        toLowerCase();
+      const isValidLang = languages.find((l) => {
+        return l.toLowerCase() === lang;
+      });
+      const isValidRole = camperChan.homeGuild.roles.cache.find(
+        (r) => {
+          return r.name.toLowerCase() === lang;
+        },
       );
-      if (!isValidLang) {
+      if (isValidLang === undefined) {
         await interaction.editReply({
-          content: `${lang} is not one of the languages we are translating at this time.`
+          content: `${lang} is not one of the languages we are translating at this time.`,
         });
         return;
       }
       if (!isValidRole) {
         await interaction.editReply({
-          content: `${lang} does not have a role associated with it. Please notify Naomi.`
+          content: `${lang} does not have a role associated with it. Please notify Naomi.`,
         });
         return;
       }
@@ -50,8 +53,8 @@ export const translator: Command = {
       }
       await interaction.member.roles.add(isValidRole.id);
       await interaction.editReply(`You are now in the ${lang} group.`);
-    } catch (err) {
-      await errorHandler(CamperChan, "translator command", err);
+    } catch (error) {
+      await errorHandler(camperChan, "translator command", error);
     }
-  }
+  },
 };

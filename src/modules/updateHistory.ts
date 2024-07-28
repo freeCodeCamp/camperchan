@@ -1,41 +1,40 @@
-import { ExtendedClient } from "../interfaces/ExtendedClient.js";
-import { ModerationActions } from "../interfaces/ModerationActions.js";
 import { errorHandler } from "../utils/errorHandler.js";
+import type { ExtendedClient } from "../interfaces/extendedClient.js";
+import type { ModerationActions } from "../interfaces/moderationActions.js";
 
 /**
  * Saves a count of the user's moderation actions.
- *
- * @param {ExtendedClient} CamperChan CamperChan's Discord instance.
- * @param {ModerationActions} action The action taken against the user.
- * @param {string} userId The ID of the user being moderated.
+ * @param camperChan - CamperChan's Discord instance.
+ * @param action - The action taken against the user.
+ * @param userId - The ID of the user being moderated.
  */
-export const updateHistory = async (
-  CamperChan: ExtendedClient,
+export const updateHistory = async(
+  camperChan: ExtendedClient,
   action: ModerationActions,
-  userId: string
-) => {
+  userId: string,
+): Promise<void> => {
   try {
-    await CamperChan.db.histories.upsert({
-      where: {
-        userId
+    await camperChan.db.histories.upsert({
+      create: {
+        bans:           0,
+        kicks:          0,
+        mutes:          0,
+        unbans:         0,
+        unmutes:        0,
+        userId:         userId,
+        warns:          0,
+        [`${action}s`]: 1,
       },
       update: {
         [`${action}s`]: {
-          increment: 1
-        }
+          increment: 1,
+        },
       },
-      create: {
+      where: {
         userId,
-        bans: 0,
-        kicks: 0,
-        mutes: 0,
-        unmutes: 0,
-        warns: 0,
-        unbans: 0,
-        [`${action}s`]: 1
-      }
+      },
     });
-  } catch (err) {
-    await errorHandler(CamperChan, "update history module", err);
+  } catch (error) {
+    await errorHandler(camperChan, "update history module", error);
   }
 };

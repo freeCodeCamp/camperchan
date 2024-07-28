@@ -1,22 +1,18 @@
-import { EmbedBuilder, GuildMember, PartialGuildMember } from "discord.js";
-
-import { ExtendedClient } from "../../interfaces/ExtendedClient.js";
+import { EmbedBuilder, type GuildMember, type PartialGuildMember }
+  from "discord.js";
 import { errorHandler } from "../../utils/errorHandler.js";
+import type { ExtendedClient } from "../../interfaces/extendedClient.js";
 
 /**
  * Logs a message to the debug hook when someone leaves the server.
- *
- * @param {ExtendedClient} CamperChan The CamperChan's Discord instance.
- * @param {GuildMember | PartialGuildMember} member The member that left the server.
+ * @param camperChan - The camperChan's Discord instance.
+ * @param member - The member that left the server.
  */
-export const handleMemberRemove = async (
-  CamperChan: ExtendedClient,
-  member: GuildMember | PartialGuildMember
-) => {
+export const handleMemberRemove = async(
+  camperChan: ExtendedClient,
+  member: GuildMember | PartialGuildMember,
+): Promise<void> => {
   try {
-    if (!member.user) {
-      return;
-    }
     const embed = new EmbedBuilder();
     embed.setTitle("Member Left");
     embed.setDescription(`<@!${member.id}> has left the server~!`);
@@ -24,26 +20,28 @@ export const handleMemberRemove = async (
       {
         name: "Roles",
         value:
-          member.roles?.cache
-            .map((role) =>
-              role.id === member.guild.id ? role.name : `<@&${role.id}>`
-            )
-            .join(", ") || "unknown"
-      }
+          member.roles.cache.
+            map((role) => {
+              return role.id === member.guild.id
+                ? role.name
+                : `<@&${role.id}>`;
+            }).
+            join(", "),
+      },
     ]);
     embed.setAuthor({
-      name: member.user.tag,
-      iconURL: member.user.displayAvatarURL()
+      iconURL: member.user.displayAvatarURL(),
+      name:    member.user.tag,
     });
     embed.setFooter({
-      text: `ID: ${member.id}`
+      text: `ID: ${member.id}`,
     });
-    await CamperChan.config.welcomeHook.send({
-      embeds: [embed],
-      username: member.user.username,
-      avatarURL: member.user.displayAvatarURL()
+    await camperChan.config.welcomeHook.send({
+      avatarURL: member.user.displayAvatarURL(),
+      embeds:    [ embed ],
+      username:  member.user.username,
     });
-  } catch (err) {
-    await errorHandler(CamperChan, "member remove event", err);
+  } catch (error) {
+    await errorHandler(camperChan, "member remove event", error);
   }
 };

@@ -1,5 +1,4 @@
 import { describe, assert, test } from "vitest";
-
 import { isGuildCommandInteraction } from "../../src/utils/typeGuards.js";
 
 describe("isGuildCommand", () => {

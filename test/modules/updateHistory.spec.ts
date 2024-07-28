@@ -1,21 +1,20 @@
 import { describe, assert, test } from "vitest";
-
 import { updateHistory } from "../../src/modules/updateHistory.js";
 import { Database } from "../__mocks__/Database.mock.js";
 
-const db = new Database();
+const database = new Database();
 
 describe("updateHistory", () => {
   test("updateHistory is a function", () => {
     assert.isFunction(updateHistory);
   });
 
-  test("should create a new history when user does not exist", async () => {
-    await updateHistory({ db } as never, "ban", "123");
-    const history = await db.histories.findUnique({
+  test("should create a new history when user does not exist", async() => {
+    await updateHistory({ db: database } as never, "ban", "123");
+    const history = await database.histories.findUnique({
       where: {
-        userId: "123"
-      }
+        userId: "123",
+      },
     });
     assert.isObject(history);
     assert.equal(history?.bans, 1);
@@ -26,13 +25,13 @@ describe("updateHistory", () => {
     assert.equal(history?.unbans, 0);
   });
 
-  test("should update an existing history", async () => {
-    await updateHistory({ db } as never, "ban", "123");
-    await updateHistory({ db } as never, "mute", "123");
-    const history = await db.histories.findUnique({
+  test("should update an existing history", async() => {
+    await updateHistory({ db: database } as never, "ban", "123");
+    await updateHistory({ db: database } as never, "mute", "123");
+    const history = await database.histories.findUnique({
       where: {
-        userId: "123"
-      }
+        userId: "123",
+      },
     });
     assert.isObject(history);
     assert.equal(history?.bans, 2);

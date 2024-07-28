@@ -2,43 +2,43 @@ import {
   ActionRowBuilder,
   ButtonBuilder,
   ButtonStyle,
-  ComponentType,
-  Message
+  type ComponentType,
 } from "discord.js";
-
-import { Subcommand } from "../../../interfaces/Subcommand.js";
-import { generateLeaderboardImage } from "../../../modules/generateProfileImage.js";
+import { generateLeaderboardImage }
+  from "../../../modules/generateProfileImage.js";
 import { errorHandler } from "../../../utils/errorHandler.js";
+import type { Subcommand } from "../../../interfaces/subcommand.js";
 
 export const handleLeaderboard: Subcommand = {
-  permissionValidator: () => true,
-  execute: async (CamperChan, interaction) => {
+  execute: async(camperChan, interaction) => {
     try {
       await interaction.deferReply();
 
-      const levels = await CamperChan.db.levels.findMany({
+      const levels = await camperChan.db.levels.findMany({
         orderBy: {
-          points: "desc"
-        }
+          points: "desc",
+        },
       });
 
-      const mapped = levels.map((user, index) => ({
-        ...user,
-        index: index + 1
-      }));
+      const mapped = levels.map((user, index) => {
+        return {
+          ...user,
+          index: index + 1,
+        };
+      });
 
       let page = 1;
       const lastPage = Math.ceil(mapped.length / 10);
 
-      const pageBack = new ButtonBuilder()
-        .setCustomId("prev")
-        .setDisabled(true)
-        .setLabel("◀")
-        .setStyle(ButtonStyle.Primary);
-      const pageForward = new ButtonBuilder()
-        .setCustomId("next")
-        .setLabel("▶")
-        .setStyle(ButtonStyle.Primary);
+      const pageBack = new ButtonBuilder().
+        setCustomId("prev").
+        setDisabled(true).
+        setLabel("◀").
+        setStyle(ButtonStyle.Primary);
+      const pageForward = new ButtonBuilder().
+        setCustomId("next").
+        setLabel("▶").
+        setStyle(ButtonStyle.Primary);
 
       if (page <= 1) {
         pageBack.setDisabled(true);
@@ -52,44 +52,49 @@ export const handleLeaderboard: Subcommand = {
         pageForward.setDisabled(false);
       }
 
+      const itemsForPage = page * 10;
+
       const attachment = await generateLeaderboardImage(
-        CamperChan,
-        mapped.slice(page * 10 - 10, page * 10)
+        camperChan,
+        mapped.slice(itemsForPage - 10, itemsForPage),
       );
 
       if (!attachment) {
         await interaction.editReply({
-          content: "Failed to load leaderboard image.",
-          files: [],
-          components: []
+          components: [],
+          content:    "Failed to load leaderboard image.",
+          files:      [],
         });
         return;
       }
 
-      const sent = (await interaction.editReply({
-        content: `You can edit your leaderboard card in your </user-settings:1214364031012442163>~!`,
-        files: [attachment],
+      const sent = await interaction.editReply({
         components: [
           new ActionRowBuilder<ButtonBuilder>().addComponents(
             pageBack,
-            pageForward
-          )
-        ]
-      })) as Message;
+            pageForward,
+          ),
+        ],
+        content: `You can edit your leaderboard card in your </user-settings:1214364031012442163>~!`,
+        files:   [ attachment ],
+      });
 
-      const clickyClick =
-        sent.createMessageComponentCollector<ComponentType.Button>({
-          time: 300000,
-          filter: (click) => click.user.id === interaction.user.id
+      const clickyClick
+        = sent.createMessageComponentCollector<ComponentType.Button>({
+          filter: (click) => {
+            return click.user.id === interaction.user.id;
+          },
+          time: 300_000,
         });
 
-      clickyClick.on("collect", async (click) => {
+      // eslint-disable-next-line @typescript-eslint/no-misused-promises
+      clickyClick.on("collect", async(click) => {
         await click.deferUpdate();
         if (click.customId === "prev") {
-          page--;
+          page = page - 1;
         }
         if (click.customId === "next") {
-          page++;
+          page = page + 1;
         }
 
         if (page <= 1) {
@@ -104,48 +109,52 @@ export const handleLeaderboard: Subcommand = {
           pageForward.setDisabled(false);
         }
 
-        const attachment = await generateLeaderboardImage(
-          CamperChan,
-          mapped.slice(page * 10 - 10, page * 10)
+        const updatedAttachment = await generateLeaderboardImage(
+          camperChan,
+          mapped.slice(itemsForPage - 10, itemsForPage),
         );
 
-        if (!attachment) {
+        if (!updatedAttachment) {
           await interaction.editReply({
-            content: "Failed to load leaderboard image.",
-            files: [],
-            components: []
+            components: [],
+            content:    "Failed to load leaderboard image.",
+            files:      [],
           });
           return;
         }
 
         await interaction.editReply({
-          files: [attachment],
           components: [
             new ActionRowBuilder<ButtonBuilder>().addComponents(
               pageBack,
-              pageForward
-            )
-          ]
+              pageForward,
+            ),
+          ],
+          files: [ updatedAttachment ],
         });
       });
 
-      clickyClick.on("end", async () => {
+      // eslint-disable-next-line @typescript-eslint/no-misused-promises
+      clickyClick.on("end", async() => {
         pageBack.setDisabled(true);
         pageForward.setDisabled(true);
         await interaction.editReply({
           components: [
             new ActionRowBuilder<ButtonBuilder>().addComponents(
               pageBack,
-              pageForward
-            )
-          ]
+              pageForward,
+            ),
+          ],
         });
       });
-    } catch (err) {
-      await errorHandler(CamperChan, "leaderboard subcommand", err);
+    } catch (error) {
+      await errorHandler(camperChan, "leaderboard subcommand", error);
       await interaction.editReply({
-        content: "Something went wrong! Please try again later."
+        content: "Something went wrong! Please try again later.",
       });
     }
-  }
+  },
+  permissionValidator: () => {
+    return true;
+  },
 };

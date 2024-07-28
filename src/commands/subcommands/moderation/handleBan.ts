@@ -1,85 +1,92 @@
 import { EmbedBuilder, PermissionFlagsBits } from "discord.js";
-
-import { Subcommand } from "../../../interfaces/Subcommand.js";
 import { sendModerationDm } from "../../../modules/sendModerationDm.js";
 import { updateHistory } from "../../../modules/updateHistory.js";
 import { customSubstring } from "../../../utils/customSubstring.js";
 import { errorHandler } from "../../../utils/errorHandler.js";
+import type { Subcommand } from "../../../interfaces/subcommand.js";
 
 export const handleBan: Subcommand = {
-  permissionValidator: (member) =>
-    member.permissions.has(PermissionFlagsBits.BanMembers),
-  execute: async (CamperChan, interaction) => {
+  execute: async(camperChan, interaction) => {
     try {
       await interaction.deferReply();
-      const { guild, member } = interaction;
-      const target = interaction.options.getUser("target", true);
-      const reason = interaction.options.getString("reason", true);
+      const { guild, member, options } = interaction;
+      const target = options.getUser("target", true);
+      const reason = options.getString("reason", true);
 
       if (target.id === member.user.id) {
         await interaction.editReply("You cannot ban yourself.");
         return;
       }
-      if (target.id === CamperChan.user?.id) {
-        await interaction.editReply("You cannot ban the CamperChan.");
+      if (target.id === camperChan.user?.id) {
+        await interaction.editReply("You cannot ban the camperChan.");
         return;
       }
 
-      const targetMember = await guild.members
-        .fetch(target.id)
-        .catch(() => null);
+      const targetMember = await guild.members.
+        fetch(target.id).
+        catch(() => {
+          return null;
+        });
 
-      if (!targetMember || !targetMember.bannable) {
+      if (!targetMember) {
+        await interaction.editReply("I could not find that member.");
+        return;
+      }
+
+      if (!targetMember.bannable) {
         await interaction.editReply("I cannot ban them.");
         return;
       }
 
       const sentNotice = await sendModerationDm(
-        CamperChan,
+        camperChan,
         "ban",
         target,
         guild.name,
-        reason
+        reason,
       );
 
       await targetMember.ban({
-        reason: customSubstring(reason, 1000),
-        deleteMessageDays: 1
+        deleteMessageDays: 1,
+        reason:            customSubstring(reason, 1000),
       });
 
-      await updateHistory(CamperChan, "ban", target.id);
+      await updateHistory(camperChan, "ban", target.id);
 
       const banLogEmbed = new EmbedBuilder();
       banLogEmbed.setTitle("Member banned.");
       banLogEmbed.setDescription(
-        `Member ban was requested by ${member.user.username}`
+        `Member ban was requested by ${member.user.username}`,
       );
       banLogEmbed.addFields([
         {
-          name: "Reason",
-          value: customSubstring(reason, 1000)
+          name:  "Reason",
+          value: customSubstring(reason, 1000),
         },
         {
-          name: "User notified?",
-          value: String(sentNotice)
-        }
+          name:  "User notified?",
+          value: String(sentNotice),
+        },
       ]);
       banLogEmbed.setTimestamp();
       banLogEmbed.setAuthor({
-        name: target.tag,
-        iconURL: target.displayAvatarURL()
+        iconURL: target.displayAvatarURL(),
+        name:    target.tag,
       });
       banLogEmbed.setFooter({
-        text: `ID: ${target.id}`
+        text: `ID: ${target.id}`,
       });
 
-      await CamperChan.config.modHook.send({ embeds: [banLogEmbed] });
+      await camperChan.config.modHook.send({ embeds: [ banLogEmbed ] });
       await interaction.editReply({
-        content: "They have been banned."
+        content: "They have been banned.",
       });
-    } catch (err) {
-      await errorHandler(CamperChan, "ban subcommand", err);
+    } catch (error) {
+      await errorHandler(camperChan, "ban subcommand", error);
       await interaction.editReply("Something went wrong.");
     }
-  }
+  },
+  permissionValidator: (member) => {
+    return member.permissions.has(PermissionFlagsBits.BanMembers);
+  },
 };

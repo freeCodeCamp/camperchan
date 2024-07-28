@@ -1,36 +1,34 @@
-import { Message } from "discord.js";
-
-import { ExtendedClient } from "../interfaces/ExtendedClient.js";
 import { errorHandler } from "../utils/errorHandler.js";
+import type { ExtendedClient } from "../interfaces/extendedClient.js";
+import type { Message } from "discord.js";
 
 /**
  * Tracks message counts in the database. To be used in our contributor reports.
- *
- * @param {ExtendedClient} CamperChan The CamperChan's Discord instance.
- * @param {Message} message The message payload from Discord.
+ * @param camperChan - The camperChan's Discord instance.
+ * @param message - The message payload from Discord.
  */
-export const messageCounter = async (
-  CamperChan: ExtendedClient,
-  message: Message
-) => {
+export const messageCounter = async(
+  camperChan: ExtendedClient,
+  message: Message,
+): Promise<void> => {
   try {
-    await CamperChan.db.messages.upsert({
-      where: {
-        userId: message.author.id
-      },
+    await camperChan.db.messages.upsert({
       create: {
-        userId: message.author.id,
-        userTag: message.author.displayName || message.author.tag,
-        messages: 1
+        messages: 1,
+        userId:   message.author.id,
+        userTag:  message.author.displayName,
       },
       update: {
-        userTag: message.author.displayName || message.author.tag,
         messages: {
-          increment: 1
-        }
-      }
+          increment: 1,
+        },
+        userTag: message.author.displayName,
+      },
+      where: {
+        userId: message.author.id,
+      },
     });
-  } catch (err) {
-    await errorHandler(CamperChan, "message counter module", err);
+  } catch (error) {
+    await errorHandler(camperChan, "message counter module", error);
   }
 };

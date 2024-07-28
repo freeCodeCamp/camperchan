@@ -1,5 +1,4 @@
 import {
-  Message,
   EmbedBuilder,
   ApplicationCommandType,
   ButtonBuilder,
@@ -7,102 +6,93 @@ import {
   ActionRowBuilder,
   TextInputBuilder,
   TextInputStyle,
-  ModalBuilder
+  ModalBuilder,
 } from "discord.js";
-
-import { Context } from "../interfaces/Context.js";
 import { errorHandler } from "../utils/errorHandler.js";
+import type { Context } from "../interfaces/context.js";
 
 export const report: Context = {
   data: {
     name: "report",
-    type: ApplicationCommandType.Message
+    type: ApplicationCommandType.Message,
   },
-  run: async (CamperChan, interaction) => {
+  run: async(camperChan, interaction) => {
     try {
       if (!interaction.isMessageContextMenuCommand()) {
         await interaction.reply({
           content:
             "This command is improperly configured. Please contact Naomi.",
-          ephemeral: true
+          ephemeral: true,
         });
         return;
       }
-      const guild = interaction.guild;
+      const { guild, options, user } = interaction;
       if (!guild) {
         await interaction.reply({
-          content: "You cannot report DM messages!",
-          ephemeral: true
+          content:   "You cannot report DM messages!",
+          ephemeral: true,
         });
         return;
       }
-      const message = interaction.options.getMessage("message") as Message;
+      const message = options.getMessage("message", true);
 
-      if (!message) {
-        await interaction.reply({
-          content: `The message could not be loaded. Please try again. If the issue persists, ping <@!465650873650118659>`,
-          ephemeral: true
-        });
-        return;
-      }
+      const { reportChannel } = camperChan;
 
-      const reportChannel = CamperChan.reportChannel;
+      const { author, url, content, channel } = message;
 
-      const author = message.author;
-
-      const linkButton = new ButtonBuilder()
-        .setStyle(ButtonStyle.Link)
-        .setLabel("Message Link")
-        .setURL(message.url);
-      const acknowledgeButton = new ButtonBuilder()
-        .setStyle(ButtonStyle.Success)
-        .setLabel("Acknowledge")
-        .setCustomId("acknowledge")
-        .setEmoji("✅");
+      const linkButton = new ButtonBuilder().
+        setStyle(ButtonStyle.Link).
+        setLabel("Message Link").
+        setURL(url);
+      const acknowledgeButton = new ButtonBuilder().
+        setStyle(ButtonStyle.Success).
+        setLabel("Acknowledge").
+        setCustomId("acknowledge").
+        setEmoji("✅");
       const row = new ActionRowBuilder<ButtonBuilder>().addComponents([
         linkButton,
-        acknowledgeButton
+        acknowledgeButton,
       ]);
 
       const reportEmbed = new EmbedBuilder();
       reportEmbed.setTitle("A message was flagged for review!");
-      reportEmbed.setDescription(message.content.slice(0, 4000));
+      reportEmbed.setDescription(content.slice(0, 4000));
       reportEmbed.setAuthor({
-        name: author.tag,
-        iconURL: author.displayAvatarURL()
+        iconURL: author.displayAvatarURL(),
+        name:    author.tag,
       });
       reportEmbed.addFields(
-        { name: "Channel", value: `<#${message.channel.id}>`, inline: true },
+        { inline: true, name: "Channel", value: `<#${channel.id}>` },
         {
-          name: "Reported By",
-          value: `<@${interaction.user.id}>`,
-          inline: true
-        }
+          inline: true,
+          name:   "Reported By",
+          value:  `<@${user.id}>`,
+        },
       );
       reportEmbed.setFooter({
-        text: `ID: ${author.id}`
+        text: `ID: ${author.id}`,
       });
 
       const log = await reportChannel.send({
-        embeds: [reportEmbed],
-        components: [row]
+        components: [ row ],
+        embeds:     [ reportEmbed ],
       });
 
-      const reason = new TextInputBuilder()
-        .setLabel("Why are you reporting this message?")
-        .setCustomId("reason")
-        .setStyle(TextInputStyle.Paragraph)
-        .setRequired(true);
+      const reason = new TextInputBuilder().
+        setLabel("Why are you reporting this message?").
+        setCustomId("reason").
+        setStyle(TextInputStyle.Paragraph).
+        setRequired(true);
       const modalRow = new ActionRowBuilder<TextInputBuilder>().addComponents(
-        reason
+        reason,
       );
-      const modal = new ModalBuilder()
-        .setCustomId(`report-${log.id}`)
-        .setTitle("Message Report")
-        .addComponents(modalRow);
+      const modal = new ModalBuilder().
+        setCustomId(`report-${log.id}`).
+        setTitle("Message Report").
+        addComponents(modalRow);
       await interaction.showModal(modal);
-    } catch (err) {
-      await errorHandler(CamperChan, "report context command", err);
+    } catch (error) {
+      await errorHandler(camperChan, "report context command", error);
     }
-  }
+  },
 };

@@ -1,19 +1,17 @@
-import { Message } from "discord.js";
-
-import levelScale from "../config/levelScale.js";
-import { ExtendedClient } from "../interfaces/ExtendedClient.js";
+import { levelScale } from "../config/levelScale.js";
 import { errorHandler } from "../utils/errorHandler.js";
+import type { ExtendedClient } from "../interfaces/extendedClient.js";
+import type { Message } from "discord.js";
 
 /**
  * Processes level data for a user.
- *
- * @param {ExtendedClient} CamperChan The CamperChan's Discord instance.
- * @param {Message} message The message payload from Discord.
+ * @param camperChan - The camperChan's Discord instance.
+ * @param message - The message payload from Discord.
  */
-export const levelListener = async (
-  CamperChan: ExtendedClient,
-  message: Message
-) => {
+export const levelListener = async(
+  camperChan: ExtendedClient,
+  message: Message,
+): Promise<void> => {
   try {
     const { author, content } = message;
 
@@ -23,57 +21,57 @@ export const levelListener = async (
 
     const bonus = Math.floor(content.length / 10);
     const pointsEarned = Math.floor(Math.random() * (20 + bonus)) + 5;
-    const user = await CamperChan.db.levels.upsert({
-      where: {
-        userId: author.id
+    const user = await camperChan.db.levels.upsert({
+      create: {
+        cooldown:    0,
+        lastSeen:    new Date(Date.now()),
+        level:       0,
+        levelAlerts: true,
+        points:      0,
+        userId:      author.id,
+        userTag:     author.tag,
       },
       update: {},
-      create: {
+      where:  {
         userId: author.id,
-        userTag: author.tag,
-        points: 0,
-        level: 0,
-        lastSeen: new Date(Date.now()),
-        cooldown: 0,
-        levelAlerts: true
-      }
+      },
     });
 
-    if (Date.now() - user.cooldown < 60000 || user.level >= 1000) {
+    if (Date.now() - user.cooldown < 60_000 || user.level >= 1000) {
       return;
     }
 
-    user.points += pointsEarned;
+    user.points = user.points + pointsEarned;
     user.lastSeen = new Date(Date.now());
     user.userTag = author.tag;
     user.cooldown = Date.now();
     let levelUp = false;
 
-    while (user.points > (levelScale[user.level + 1] ?? 505000)) {
-      user.level++;
+    while (user.points > (levelScale[user.level + 1] ?? 505_000)) {
+      user.level = user.level + 1;
       levelUp = true;
     }
 
-    await CamperChan.db.levels.update({
-      where: {
-        userId: author.id
-      },
+    await camperChan.db.levels.update({
       data: {
-        points: user.points,
-        level: user.level,
-        lastSeen: user.lastSeen,
-        userTag: user.userTag,
-        cooldown: user.cooldown,
-        levelAlerts: user.levelAlerts
-      }
+        cooldown:    user.cooldown,
+        lastSeen:    user.lastSeen,
+        level:       user.level,
+        levelAlerts: user.levelAlerts,
+        points:      user.points,
+        userTag:     user.userTag,
+      },
+      where: {
+        userId: author.id,
+      },
     });
 
     if (levelUp && user.levelAlerts) {
       await message.reply({
-        content: `Congrats~! You are now level ${user.level}!!!\nDon't want these messages anymore? You can turn them off in your </user-settings:1214364031012442163>`
+        content: `Congrats~! You are now level ${String(user.level)}!!!\nDon't want these messages anymore? You can turn them off in your </user-settings:1214364031012442163>`,
       });
     }
-  } catch (err) {
-    await errorHandler(CamperChan, "level listener module", err);
+  } catch (error) {
+    await errorHandler(camperChan, "level listener module", error);
   }
 };

@@ -2,13 +2,14 @@
  * This config is an automatically-generated scale for mapping experience
  * point values to level values.
  */
-const levelScale: number[] = [];
+const levelScale: Array<number> = [];
 
-let j = 0;
+let points = 0;
 
-for (let i = 0; i <= 1000; i++) {
-  j += i * 100;
-  levelScale[i] = j;
+for (let level = 0; level <= 1000; level = level + 1) {
+  const pointsForLevel = level * 100;
+  points = points + pointsForLevel;
+  levelScale[level] = points;
 }
 
-export default levelScale;
+export { levelScale };

@@ -1,31 +1,31 @@
-import { ExtendedClient } from "../interfaces/ExtendedClient.js";
-import { QuoteList } from "../interfaces/Quotes.js";
-
 import { errorHandler } from "./errorHandler.js";
+import type { ExtendedClient } from "../interfaces/extendedClient.js";
+import type { QuoteList } from "../interfaces/quotes.js";
 
 /**
  * Fetches quote data from the freeCodeCamp repository.
- *
- * @param {ExtendedClient} CamperChan The CamperChan's Discord instance.
- * @returns {QuoteList} The quote data.
+ * @param camperChan - The camperChan's Discord instance.
+ * @returns The quote data.
  */
-export const loadQuotes = async (CamperChan: ExtendedClient) => {
+export const loadQuotes
+= async(camperChan: ExtendedClient): Promise<QuoteList> => {
   try {
     const quoteFetch = await fetch(
-      "https://raw.githubusercontent.com/freeCodeCamp/freeCodeCamp/main/client/i18n/locales/english/motivation.json"
+      `https://raw.githubusercontent.com/freeCodeCamp/freeCodeCamp/main/client/i18n/locales/english/motivation.json`,
     );
+    // eslint-disable-next-line @typescript-eslint/consistent-type-assertions
     const quoteData = (await quoteFetch.json()) as QuoteList;
     return quoteData;
-  } catch (err) {
-    await errorHandler(CamperChan, "load quotes module", err);
+  } catch (error) {
+    await errorHandler(camperChan, "load quotes module", error);
     return {
-      compliments: ["No data found!"],
+      compliments:        [ "No data found!" ],
       motivationalQuotes: [
         {
-          quote: "No data found!",
-          author: "No data found!"
-        }
-      ]
+          author: "No data found!",
+          quote:  "No data found!",
+        },
+      ],
     };
   }
 };

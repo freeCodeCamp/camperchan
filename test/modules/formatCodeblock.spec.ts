@@ -1,5 +1,4 @@
 import { describe, assert, test } from "vitest";
-
 import { formatCodeBlock } from "../../src/modules/formatCodeblock.js";
 
 describe("formatCodeBlock", () => {
