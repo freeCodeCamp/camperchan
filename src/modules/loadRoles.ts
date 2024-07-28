@@ -1,40 +1,41 @@
-import { Languages } from "../config/Languages.js";
-import { ExtendedClient } from "../interfaces/ExtendedClient.js";
+import { languages } from "../config/languages.js";
 import { errorHandler } from "../utils/errorHandler.js";
+import type { ExtendedClient } from "../interfaces/extendedClient.js";
 
 /**
  * Loads the cached roles and validates that all langagues
  * in the config have a role.
- *
- * @param {ExtendedClient} CamperChan The CamperChan's Discord instance.
+ * @param camperChan - The camperChan's Discord instance.
  */
-export const loadRoles = async (CamperChan: ExtendedClient) => {
+export const loadRoles = async(camperChan: ExtendedClient): Promise<void> => {
   try {
-    const roles = await CamperChan.homeGuild.roles.fetch(undefined, {
+    const roles = await camperChan.homeGuild.roles.fetch(undefined, {
       cache: true,
-      force: true
+      force: true,
     });
-    const missingRoles: string[] = [];
-    for (const language of Languages) {
+    const missingRoles: Array<string> = [];
+    for (const language of languages) {
       const role = roles.find(
-        (r) => r.name.toLowerCase() === language.toLowerCase()
+        (r) => {
+          return r.name.toLowerCase() === language.toLowerCase();
+        },
       );
       if (!role) {
         missingRoles.push(language);
       }
     }
-    if (missingRoles.length) {
-      await CamperChan.config.debugHook.send({
+    if (missingRoles.length > 0) {
+      await camperChan.config.debugHook.send({
         content: `WARNING!!!!!! The following languages do not have a matching role.\n${missingRoles.join(
-          ", "
-        )}`
+          ", ",
+        )}`,
       });
       return;
     }
-    await CamperChan.config.debugHook.send({
-      content: "Language roles loaded~!"
+    await camperChan.config.debugHook.send({
+      content: "Language roles loaded~!",
     });
-  } catch (err) {
-    await errorHandler(CamperChan, "load roles module", err);
+  } catch (error) {
+    await errorHandler(camperChan, "load roles module", error);
   }
 };

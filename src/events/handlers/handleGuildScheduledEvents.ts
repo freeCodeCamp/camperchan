@@ -1,67 +1,66 @@
 import {
   AttachmentBuilder,
-  GuildScheduledEvent,
+  type GuildScheduledEvent,
   GuildScheduledEventStatus,
-  PartialGuildScheduledEvent
+  type PartialGuildScheduledEvent,
 } from "discord.js";
-
-import { ExtendedClient } from "../../interfaces/ExtendedClient.js";
 import { errorHandler } from "../../utils/errorHandler.js";
+import type { ExtendedClient } from "../../interfaces/extendedClient.js";
 
 /**
  * Tracks the guild event update, caching event participation and sending result to
  * Naomi on event end.
- *
- * @param {ExtendedClient} CamperChan The CamperChan's Discord instance.
- * @param {GuildScheduledEvent} oldEvent The original event payload from Discord.
- * @param {GuildScheduledEvent} newEvent The updated event payload from Discord.
+ * @param camperChan - The camperChan's Discord instance.
+ * @param oldEvent - The original event payload from Discord.
+ * @param updatedEvent - The updated event payload from Discord.
  */
-export const handleGuildScheduledEvents = async (
-  CamperChan: ExtendedClient,
+export const handleGuildScheduledEvents = async(
+  camperChan: ExtendedClient,
   oldEvent:
-    | GuildScheduledEvent<GuildScheduledEventStatus>
+    | GuildScheduledEvent
     | PartialGuildScheduledEvent,
-  newEvent: GuildScheduledEvent<GuildScheduledEventStatus>
-) => {
+  updatedEvent: GuildScheduledEvent,
+): Promise<void> => {
   try {
     if (
-      oldEvent.status === GuildScheduledEventStatus.Scheduled &&
-      newEvent.status === GuildScheduledEventStatus.Active &&
-      newEvent.channelId
+      oldEvent.status === GuildScheduledEventStatus.Scheduled
+      && updatedEvent.status === GuildScheduledEventStatus.Active
+      && updatedEvent.channelId !== null
     ) {
-      CamperChan.event = {
-        channelId: newEvent.channelId,
-        userIds: [],
-        start: Date.now(),
-        end: 0
+      camperChan.event = {
+        channelId: updatedEvent.channelId,
+        end:       0,
+        start:     Date.now(),
+        userIds:   [],
       };
     }
 
     if (
-      oldEvent.status === GuildScheduledEventStatus.Active &&
-      newEvent.status === GuildScheduledEventStatus.Completed &&
-      CamperChan.event
+      oldEvent.status === GuildScheduledEventStatus.Active
+      && updatedEvent.status === GuildScheduledEventStatus.Completed
+      && camperChan.event
     ) {
-      CamperChan.event.end = Date.now();
+      camperChan.event.end = Date.now();
       const duration = Math.round(
-        (CamperChan.event.end - CamperChan.event.start) / (1000 * 60)
+        (camperChan.event.end - camperChan.event.start) / (1000 * 60),
       );
-      const userCount = CamperChan.event.userIds.length;
-      const naomi = await newEvent.guild?.members.fetch("465650873650118659");
+      const userCount = camperChan.event.userIds.length;
+      const naomi
+      = await updatedEvent.guild?.members.fetch("465650873650118659");
       await naomi?.send({
         files: [
           new AttachmentBuilder(
             Buffer.from(
-              `Name: ${newEvent.name}\nStart: ${new Date(CamperChan.event.start)}\nDuration: ${duration} minutes\nParticipants: ${userCount}\n---\n${CamperChan.event.userIds.join("\n")}`,
-              "utf-8"
+              `Name: ${updatedEvent.name}\nStart: ${new Date(camperChan.event.start).toLocaleDateString()}\nDuration: ${String(duration)} minutes\nParticipants: ${String(userCount)}\n---\n${camperChan.event.userIds.join("\n")}`,
+              "utf-8",
             ),
-            { name: `event-${newEvent.id}.txt` }
-          )
-        ]
+            { name: `event-${updatedEvent.id}.txt` },
+          ),
+        ],
       });
-      delete CamperChan.event;
+      delete camperChan.event;
     }
-  } catch (err) {
-    await errorHandler(CamperChan, "guild scheduled events event", err);
+  } catch (error) {
+    await errorHandler(camperChan, "guild scheduled events event", error);
   }
 };

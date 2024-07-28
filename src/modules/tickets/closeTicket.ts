@@ -1,21 +1,19 @@
-import { ButtonInteraction } from "discord.js";
-
-import { closeTicketMessage } from "../../config/TicketMessage.js";
-import { ExtendedClient } from "../../interfaces/ExtendedClient.js";
+import { closeTicketMessage } from "../../config/ticketMessage.js";
 import { errorHandler } from "../../utils/errorHandler.js";
+import type { ExtendedClient } from "../../interfaces/extendedClient.js";
+import type { ButtonInteraction } from "discord.js";
 
 /**
  * Closes a ticket, removing the user.
- *
- * @param {ExtendedClient} bot The bot's Discord instance.
- * @param {ButtonInteraction} interaction The interaction payload from Discord.
+ * @param bot - The bot's Discord instance.
+ * @param interaction - The interaction payload from Discord.
  */
-export const closeTicket = async (
+export const closeTicket = async(
   bot: ExtendedClient,
-  interaction: ButtonInteraction<"cached">
-) => {
+  interaction: ButtonInteraction<"cached">,
+): Promise<void> => {
   try {
-    if (!interaction.channel || !interaction.channel.isThread()) {
+    if (interaction.channel?.isThread() !== true) {
       throw new Error("How did a ticket not end up in a thread?");
     }
     await interaction.deferReply({ ephemeral: true });
@@ -24,7 +22,7 @@ export const closeTicket = async (
     await interaction.channel.send({ content: closeTicketMessage });
     await interaction.channel.setLocked();
     await interaction.editReply({ content: "Ticket closed!" });
-  } catch (err) {
-    await errorHandler(bot, "open ticket", err);
+  } catch (error) {
+    await errorHandler(bot, "open ticket", error);
   }
 };

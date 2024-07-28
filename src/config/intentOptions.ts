@@ -1,6 +1,6 @@
 import { GatewayIntentBits } from "discord.js";
 
-export const IntentOptions: GatewayIntentBits[] = [
+export const intentOptions: Array<GatewayIntentBits> = [
   GatewayIntentBits.Guilds,
   GatewayIntentBits.GuildMembers,
   GatewayIntentBits.GuildModeration,
@@ -9,5 +9,5 @@ export const IntentOptions: GatewayIntentBits[] = [
   GatewayIntentBits.MessageContent,
   GatewayIntentBits.GuildVoiceStates,
   GatewayIntentBits.GuildScheduledEvents,
-  GatewayIntentBits.GuildPresences
+  GatewayIntentBits.GuildPresences,
 ];

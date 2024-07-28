@@ -1,9 +1,7 @@
 import { ActivityFlagsBitField, Events } from "discord.js";
-
-import { ExtendedClient } from "../interfaces/ExtendedClient.js";
 import { errorHandler } from "../utils/errorHandler.js";
-
-import { handleGuildScheduledEvents } from "./handlers/handleGuildScheduledEvents.js";
+import { handleGuildScheduledEvents }
+  from "./handlers/handleGuildScheduledEvents.js";
 import { handleInteractionCreate } from "./handlers/handleInteractionCreate.js";
 import { handleMemberAdd } from "./handlers/handleMemberAdd.js";
 import { handleMemberRemove } from "./handlers/handleMemberRemove.js";
@@ -13,82 +11,98 @@ import { handleMessageEdit } from "./handlers/handleMessageEdit.js";
 import { handleReady } from "./handlers/handleReady.js";
 import { handleThreadCreate } from "./handlers/handleThreadCreate.js";
 import { handleVoiceStateUpdate } from "./handlers/handleVoiceStateUpdate.js";
+import type { ExtendedClient } from "../interfaces/extendedClient.js";
 
-const restrictedActivities = ["880218394199220334"];
+const restrictedActivities = new Set([ "880218394199220334" ]);
 
 /**
- * Attaches the event listeners to the CamperChan's instance.
- *
- * @param {ExtendedClient} CamperChan The CamperChan's Discord instance.
+ * Attaches the event listeners to the camperChan's instance.
+ * @param camperChan - The camperChan's Discord instance.
  */
-export const registerEvents = async (CamperChan: ExtendedClient) => {
-  try {
-    CamperChan.on(
-      Events.ClientReady,
-      async () => await handleReady(CamperChan)
-    );
-    CamperChan.on(
-      Events.MessageCreate,
-      async (msg) => await handleMessageCreate(CamperChan, msg)
-    );
-    CamperChan.on(
-      Events.MessageUpdate,
-      async (oldMsg, newMsg) =>
-        await handleMessageEdit(CamperChan, oldMsg, newMsg)
-    );
-    CamperChan.on(
-      Events.MessageDelete,
-      async (msg) => await handleMessageDelete(CamperChan, msg)
-    );
-    CamperChan.on(
-      Events.InteractionCreate,
-      async (interaction) =>
-        await handleInteractionCreate(CamperChan, interaction)
-    );
-    CamperChan.on(
-      Events.ThreadCreate,
-      async (thread) => await handleThreadCreate(CamperChan, thread)
-    );
-    CamperChan.on(
-      Events.GuildMemberAdd,
-      async (member) => await handleMemberAdd(CamperChan, member)
-    );
-    CamperChan.on(
-      Events.GuildMemberRemove,
-      async (member) => await handleMemberRemove(CamperChan, member)
-    );
-    CamperChan.on(Events.Error, async (err) => {
-      await errorHandler(CamperChan, "client error event", err);
-    });
-    CamperChan.on(
-      Events.VoiceStateUpdate,
-      async (oldState, newState) =>
-        await handleVoiceStateUpdate(CamperChan, oldState, newState)
-    );
-    CamperChan.on(
-      Events.GuildScheduledEventUpdate,
-      async (oldEvent, newEvent) => {
-        if (!oldEvent || !newEvent) {
-          return;
-        }
-        await handleGuildScheduledEvents(CamperChan, oldEvent, newEvent);
-      }
-    );
-    CamperChan.on(Events.PresenceUpdate, async (_old, newPresence) => {
-      const embeddedActivity = newPresence.activities.find((a) =>
-        a.flags.has(ActivityFlagsBitField.Flags.Embedded)
-      );
-      if (
-        !embeddedActivity ||
-        !embeddedActivity.applicationId ||
-        !restrictedActivities.includes(embeddedActivity.applicationId) ||
-        !newPresence.member
-      ) {
-        return;
-      }
-      await newPresence.member.voice.disconnect();
-    });
-  } catch (err) {
-    await errorHandler(CamperChan, "register events", err);
-  }
-};
+export const registerEvents
+ = async(camperChan: ExtendedClient): Promise<void> => {
+   try {
+     camperChan.on(
+       Events.ClientReady,
+       () => {
+         void handleReady(camperChan);
+       },
+     );
+     camperChan.on(
+       Events.MessageCreate,
+       (message) => {
+         void handleMessageCreate(camperChan, message);
+       },
+     );
+     camperChan.on(
+       Events.MessageUpdate,
+       (oldMessage, updatedMessage) => {
+         void handleMessageEdit(camperChan, oldMessage, updatedMessage);
+       },
+     );
+     camperChan.on(
+       Events.MessageDelete,
+       (message) => {
+         void handleMessageDelete(camperChan, message);
+       },
+     );
+     camperChan.on(
+       Events.InteractionCreate,
+       (interaction) => {
+         void handleInteractionCreate(camperChan, interaction);
+       },
+     );
+     camperChan.on(
+       Events.ThreadCreate,
+       (thread) => {
+         void handleThreadCreate(camperChan, thread);
+       },
+     );
+     camperChan.on(
+       Events.GuildMemberAdd,
+       (member) => {
+         void handleMemberAdd(camperChan, member);
+       },
+     );
+     camperChan.on(
+       Events.GuildMemberRemove,
+       (member) => {
+         void handleMemberRemove(camperChan, member);
+       },
+     );
+     camperChan.on(Events.Error, (error) => {
+       void errorHandler(camperChan, "client error event", error);
+     });
+     camperChan.on(
+       Events.VoiceStateUpdate,
+       (oldState, updatedState) => {
+         void handleVoiceStateUpdate(camperChan, oldState, updatedState);
+       },
+     );
+     camperChan.on(
+       Events.GuildScheduledEventUpdate,
+       (oldEvent, updatedEvent) => {
+         if (!oldEvent) {
+           return;
+         }
+         void handleGuildScheduledEvents(camperChan, oldEvent, updatedEvent);
+       },
+     );
+     camperChan.on(Events.PresenceUpdate, (_old, updatedPresence) => {
+       const embeddedActivity = updatedPresence.activities.find((a) => {
+         return a.flags.has(ActivityFlagsBitField.Flags.Embedded);
+       });
+       if (
+         embeddedActivity?.applicationId === null
+        || embeddedActivity?.applicationId === undefined
+        || !restrictedActivities.has(embeddedActivity.applicationId)
+        || !updatedPresence.member
+       ) {
+         return;
+       }
+       void updatedPresence.member.voice.disconnect();
+     });
+   } catch (error) {
+     await errorHandler(camperChan, "register events", error);
+   }
+ };

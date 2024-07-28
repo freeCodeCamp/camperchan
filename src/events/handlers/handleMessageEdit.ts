@@ -1,73 +1,70 @@
-import { Message, EmbedBuilder, PartialMessage } from "discord.js";
-
-import { ExtendedClient } from "../../interfaces/ExtendedClient.js";
+import { type Message, EmbedBuilder, type PartialMessage } from "discord.js";
 import { customSubstring } from "../../utils/customSubstring.js";
 import { errorHandler } from "../../utils/errorHandler.js";
 import { generateDiff } from "../../utils/generateDiff.js";
+import type { ExtendedClient } from "../../interfaces/extendedClient.js";
 
 /**
  * Handles the message edit event from Discord.
- *
- * @param {ExtendedClient} CamperChan The CamperChan's Discord instance.
- * @param {Message} oldMessage The old message data.
- * @param {Message} newMessage The new message data.
+ * @param camperChan - The camperChan's Discord instance.
+ * @param oldMessage - The old message data.
+ * @param updatedMessage - The new message data.
  */
-export const handleMessageEdit = async (
-  CamperChan: ExtendedClient,
+export const handleMessageEdit = async(
+  camperChan: ExtendedClient,
   oldMessage: Message | PartialMessage,
-  newMessage: Message | PartialMessage
-) => {
+  updatedMessage: Message | PartialMessage,
+): Promise<void> => {
   try {
-    if (!oldMessage) {
-      return;
-    }
-    const { author, content: newContent } = newMessage;
+    const { author, content: updatedContent, channel, url }
+     = updatedMessage;
     const { content: oldContent } = oldMessage;
 
-    // deferred interactions trigger an edit event?
-    if (newMessage.interaction || oldMessage.interaction) {
+    if (author === null || author.bot) {
       return;
     }
 
-    if (oldContent && newContent && oldContent === newContent) {
+    if (oldContent !== null
+      && updatedContent !== null
+      && oldContent === updatedContent) {
       return;
     }
 
-    if (!oldContent && !newContent) {
+    if (oldContent === null && updatedContent === null) {
       return;
     }
 
-    const diffContent =
-      oldContent || newContent
-        ? generateDiff(oldContent || "", newContent || "")
-        : "This message appears to have no content.";
+    const diffContent
+      = (oldContent ?? updatedContent) === null
+        ? "This message appears to have no content."
+        : generateDiff(oldContent ?? "", updatedContent ?? "");
 
     const updateEmbed = new EmbedBuilder();
     updateEmbed.setTitle("Message Updated");
     updateEmbed.setAuthor({
-      name: author?.tag || "unknown",
       iconURL:
-        author?.displayAvatarURL() || "https:/cdn.nhcarrigan.com/profile.png"
+        author.displayAvatarURL(),
+      name: author.tag,
     });
     updateEmbed.setDescription(
-      `\`\`\`diff\n${customSubstring(diffContent, 4000)}\`\`\``
+      `\`\`\`diff\n${customSubstring(diffContent, 4000)}\`\`\``,
     );
     updateEmbed.addFields(
       {
-        name: "Channel",
-        value: `<#${newMessage.channel.id}>`
+        name:  "Channel",
+        value: `<#${channel.id}>`,
       },
       {
-        name: "Message Link",
-        value: newMessage.url
-      }
+        name:  "Message Link",
+        value: url,
+      },
     );
     updateEmbed.setFooter({
-      text: `ID: ${author?.id || "unknown"}`
+      text: `ID: ${author.id}`,
     });
 
-    await CamperChan.config.messageHook.send({ embeds: [updateEmbed] });
-  } catch (err) {
-    await errorHandler(CamperChan, "message edit event", err);
+    await camperChan.config.messageHook.send({ embeds: [ updateEmbed ] });
+  } catch (error) {
+    await errorHandler(camperChan, "message edit event", error);
   }
 };

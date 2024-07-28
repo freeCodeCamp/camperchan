@@ -1,4 +1,4 @@
-export const TicketMessage = `# Ticketing System
+const ticketMessage = `# Ticketing System
 
 This system is designed to allow you to create a private discussion channel with our moderation team. You should only create a ticket to discuss a moderation concern. This system is not to ask for questions about your code - use <#718214639669870683> for that. **Abuse of this system will result in moderation action!**
 
@@ -16,16 +16,18 @@ This system is designed to allow you to create a private discussion channel with
 
 If your needs are aligned with the information above, click the button to open a private ticket with the moderation team~!`;
 
-export const openTicketMessage = `# Thank you for opening a ticket.
+const openTicketMessage = `# Thank you for opening a ticket.
 
 If this is a moderation emergency, e.g. a raid, please ping the moderation role.
 
 Otherwise, please respond to this thread explaining your need for opening a ticket.`;
 
-export const closeTicketMessage = `# Ticket Closed
+const closeTicketMessage = `# Ticket Closed
 
 This ticket has been closed and locked. The member has been removed from the thread, and this thread is private so they cannot add themselves back.
 
 Staff are welcome to discuss further here. The thread is preserved for logging.
 
 Discord will auto-archive it, or if you are done discussing and want it out of the way you may archive it manually.`;
+
+export { ticketMessage, openTicketMessage, closeTicketMessage };

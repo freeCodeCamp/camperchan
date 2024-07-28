@@ -1,16 +1,16 @@
 import { describe, assert, test } from "vitest";
-
-import { generateProfileImage } from "../../src/modules/generateProfileImage.js";
+import { generateProfileImage }
+  from "../../src/modules/generateProfileImage.js";
 
 describe("generateProfileImage", () => {
   test("is defined", () => {
     assert.isDefined(
       generateProfileImage,
-      "generateProfileImage is not defined"
+      "generateProfileImage is not defined",
     );
     assert.isFunction(
       generateProfileImage,
-      "generateProfileImage is not a function"
+      "generateProfileImage is not a function",
     );
   });
 });

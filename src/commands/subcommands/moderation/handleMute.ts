@@ -1,49 +1,46 @@
 import { EmbedBuilder, PermissionFlagsBits } from "discord.js";
-
-import { Subcommand } from "../../../interfaces/Subcommand.js";
 import { sendModerationDm } from "../../../modules/sendModerationDm.js";
 import { updateHistory } from "../../../modules/updateHistory.js";
 import {
   calculateMilliseconds,
-  isValidTimeUnit
+  isValidTimeUnit,
 } from "../../../utils/calculateMilliseconds.js";
 import { customSubstring } from "../../../utils/customSubstring.js";
 import { errorHandler } from "../../../utils/errorHandler.js";
+import type { Subcommand } from "../../../interfaces/subcommand.js";
 
 export const handleMute: Subcommand = {
-  permissionValidator: (member) =>
-    member.permissions.has(PermissionFlagsBits.ModerateMembers),
-  execute: async (CamperChan, interaction) => {
+  execute: async(camperChan, interaction) => {
     try {
       await interaction.deferReply();
-      const { guild, member } = interaction;
-      const target = interaction.options.getUser("target", true);
-      const duration = interaction.options.getInteger("duration", true);
-      const durationUnit = interaction.options.getString("unit", true);
-      const reason = interaction.options.getString("reason", true);
+      const { guild, member, options } = interaction;
+      const target = options.getUser("target", true);
+      const duration = options.getInteger("duration", true);
+      const durationUnit = options.getString("unit", true);
+      const reason = options.getString("reason", true);
 
       if (!isValidTimeUnit(durationUnit)) {
         await interaction.editReply({
-          content: `${durationUnit} is not a valid duration unit.`
+          content: `${durationUnit} is not a valid duration unit.`,
         });
         return;
       }
 
       const durationMilliseconds = calculateMilliseconds(
         duration,
-        durationUnit
+        durationUnit,
       );
 
-      if (!durationMilliseconds) {
+      if (durationMilliseconds === 0) {
         await interaction.editReply({
-          content: `${duration}${durationUnit} is not a valid duration.`
+          content: `${String(duration)}${durationUnit} is not a valid duration.`,
         });
         return;
       }
 
-      if (durationMilliseconds > 2419200000) {
+      if (durationMilliseconds > 2_419_200_000) {
         await interaction.editReply({
-          content: "You cannot mute someone for longer than a month."
+          content: "You cannot mute someone for longer than a month.",
         });
         return;
       }
@@ -52,14 +49,16 @@ export const handleMute: Subcommand = {
         await interaction.editReply("You cannot mute yourself.");
         return;
       }
-      if (target.id === CamperChan.user?.id) {
-        await interaction.editReply("You cannot mute the CamperChan.");
+      if (target.id === camperChan.user?.id) {
+        await interaction.editReply("You cannot mute the camperChan.");
         return;
       }
 
-      const targetMember = await guild.members
-        .fetch(target.id)
-        .catch(() => null);
+      const targetMember = await guild.members.
+        fetch(target.id).
+        catch(() => {
+          return null;
+        });
 
       if (!targetMember) {
         await interaction.editReply("They don't seem to be in this server.");
@@ -67,51 +66,54 @@ export const handleMute: Subcommand = {
       }
 
       const sentNotice = await sendModerationDm(
-        CamperChan,
+        camperChan,
         "mute",
         target,
         guild.name,
-        reason
+        reason,
       );
 
       await targetMember.timeout(durationMilliseconds, reason);
 
-      await updateHistory(CamperChan, "mute", target.id);
+      await updateHistory(camperChan, "mute", target.id);
 
       const muteEmbed = new EmbedBuilder();
       muteEmbed.setTitle("A user has been muted!");
       muteEmbed.setDescription(`They were muted by ${member.user.username}`);
       muteEmbed.addFields(
         {
-          name: "Reason",
-          value: customSubstring(reason, 1000)
+          name:  "Reason",
+          value: customSubstring(reason, 1000),
         },
         {
-          name: "Duration",
-          value: `${duration} ${durationUnit}`
+          name:  "Duration",
+          value: `${String(duration)} ${durationUnit}`,
         },
         {
-          name: "User Notified?",
-          value: String(sentNotice)
-        }
+          name:  "User Notified?",
+          value: String(sentNotice),
+        },
       );
       muteEmbed.setTimestamp();
       muteEmbed.setAuthor({
-        name: target.tag,
-        iconURL: target.displayAvatarURL()
+        iconURL: target.displayAvatarURL(),
+        name:    target.tag,
       });
       muteEmbed.setFooter({
-        text: `ID: ${target.id}`
+        text: `ID: ${target.id}`,
       });
 
-      await CamperChan.config.modHook.send({ embeds: [muteEmbed] });
+      await camperChan.config.modHook.send({ embeds: [ muteEmbed ] });
 
       await interaction.editReply({
-        content: "They have been muted!"
+        content: "They have been muted!",
       });
-    } catch (err) {
-      await errorHandler(CamperChan, "mute subcommand", err);
+    } catch (error) {
+      await errorHandler(camperChan, "mute subcommand", error);
       await interaction.editReply("Something went wrong.");
     }
-  }
+  },
+  permissionValidator: (member) => {
+    return member.permissions.has(PermissionFlagsBits.ModerateMembers);
+  },
 };

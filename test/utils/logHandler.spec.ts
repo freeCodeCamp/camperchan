@@ -1,5 +1,4 @@
 import { describe, assert, test } from "vitest";
-
 import { logHandler } from "../../src/utils/logHandler.js";
 
 describe("logHandler", () => {

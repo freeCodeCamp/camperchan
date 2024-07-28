@@ -1,54 +1,56 @@
-import { Interaction, Message } from "discord.js";
 import { compareTwoStrings } from "string-similarity";
-
-import { Languages } from "../../config/Languages.js";
-import { ExtendedClient } from "../../interfaces/ExtendedClient.js";
+import { languages } from "../../config/languages.js";
 import { closePrivateChannel } from "../../modules/closePrivateChannel.js";
 import { reactionRoleClick } from "../../modules/reactionRoleClick.js";
 import { closeTicket } from "../../modules/tickets/closeTicket.js";
 import { openTicket } from "../../modules/tickets/openTicket.js";
 import { isGuildCommandInteraction } from "../../utils/typeGuards.js";
+import type { ExtendedClient } from "../../interfaces/extendedClient.js";
+import type { Interaction } from "discord.js";
 
 /**
  * Handles the interaction events from Discord.
- *
- * @param {ExtendedClient} CamperChan The CamperChan's Discord instance.
- * @param {Interaction} interaction The interaction payload from Discord.
+ * @param camperChan - The camperChan's Discord instance.
+ * @param interaction - The interaction payload from Discord.
  */
-export const handleInteractionCreate = async (
-  CamperChan: ExtendedClient,
-  interaction: Interaction
-) => {
+export const handleInteractionCreate = async(
+  camperChan: ExtendedClient,
+  interaction: Interaction,
+): Promise<void> => {
   if (interaction.isChatInputCommand()) {
-    const target = CamperChan.commands.find(
-      (command) => command.data.name === interaction.commandName
+    const target = camperChan.commands.find(
+      (command) => {
+        return command.data.name === interaction.commandName;
+      },
     );
     if (!target) {
       await interaction.reply(
-        "That does not appear to be a valid slash command..."
+        "That does not appear to be a valid slash command...",
       );
       return;
     }
     if (!isGuildCommandInteraction(interaction)) {
       await interaction.reply(
-        "This command can only be used in a server, not a DM."
+        "This command can only be used in a server, not a DM.",
       );
       return;
     }
-    await target.run(CamperChan, interaction);
+    await target.run(camperChan, interaction);
   }
 
   if (interaction.isContextMenuCommand()) {
-    const target = CamperChan.contexts.find(
-      (context) => context.data.name === interaction.commandName
+    const target = camperChan.contexts.find(
+      (context) => {
+        return context.data.name === interaction.commandName;
+      },
     );
     if (!target) {
       await interaction.reply(
-        "That does not appear to be a valid context command..."
+        "That does not appear to be a valid context command...",
       );
       return;
     }
-    await target.run(CamperChan, interaction);
+    await target.run(camperChan, interaction);
     return;
   }
 
@@ -57,90 +59,91 @@ export const handleInteractionCreate = async (
       if (!interaction.inCachedGuild()) {
         throw new Error("uncached interaction????");
       }
-      await openTicket(CamperChan, interaction);
+      await openTicket(camperChan, interaction);
     }
     if (interaction.customId === "ticket-close") {
       if (!interaction.inCachedGuild()) {
         throw new Error("uncached interaction????");
       }
-      await closeTicket(CamperChan, interaction);
+      await closeTicket(camperChan, interaction);
     }
 
     if (interaction.customId === "delete-bookmark") {
-      await (interaction.message as Message).delete();
+      await interaction.message.delete();
     }
     if (interaction.customId === "close-channel") {
-      await closePrivateChannel(CamperChan, interaction);
+      await closePrivateChannel(camperChan, interaction);
     }
     if (interaction.customId.startsWith("rr-")) {
-      await reactionRoleClick(CamperChan, interaction);
+      await reactionRoleClick(camperChan, interaction);
     }
     if (interaction.customId === "acknowledge") {
       await interaction.deferUpdate();
-      const embed = (interaction.message as Message).embeds[0];
+      const [ embed ] = interaction.message.embeds;
       await interaction.editReply({
-        embeds: [
+        components: [],
+        embeds:     [
           {
-            title: embed?.title || "lost it oopsie",
-            description: embed?.description || "lost it oopsie",
-            fields: [
-              ...(embed?.fields ?? []),
+            description: embed?.description ?? "lost it oopsie",
+            fields:      [
+              ...embed?.fields ?? [],
               {
-                name: "Acknowledged by",
-                value: `<@!${interaction.user.id}>`
-              }
-            ]
-          }
+                name:  "Acknowledged by",
+                value: `<@!${interaction.user.id}>`,
+              },
+            ],
+            title: embed?.title ?? "lost it oopsie",
+          },
         ],
-        components: []
       });
     }
   }
 
-  if (interaction.isModalSubmit()) {
-    if (interaction.customId.startsWith(`report-`)) {
-      const messageId = interaction.customId.split("-")[1];
-      if (!messageId) {
-        await interaction.reply({
-          content: "Error loading messgae. Please try again."
-        });
-        return;
-      }
-      const reportChannel = CamperChan.reportChannel;
-      const message = await reportChannel.messages.fetch(messageId);
-      const embed = message.embeds[0];
-      const reason = interaction.fields.getTextInputValue("reason");
-      await message.edit({
-        embeds: [
-          {
-            title: embed?.title || "lost it oopsie",
-            description: embed?.description || "lost it oopsie",
-            fields: [
-              ...(embed?.fields ?? []),
-              {
-                name: "Reason",
-                value: reason
-              }
-            ]
-          }
-        ]
-      });
+  if (interaction.isModalSubmit() && interaction.customId.startsWith(`report-`)) {
+    const messageId = interaction.customId.split("-").at(1);
+    if (messageId === undefined) {
       await interaction.reply({
-        content: "Thank you for reporting!",
-        ephemeral: true
+        content: "Error loading messgae. Please try again.",
       });
+      return;
     }
+    const { reportChannel } = camperChan;
+    const message = await reportChannel.messages.fetch(messageId);
+    const [ embed ] = message.embeds;
+    const reason = interaction.fields.getTextInputValue("reason");
+    await message.edit({
+      embeds: [
+        {
+          description: embed?.description ?? "lost it oopsie",
+          fields:      [
+            ...embed?.fields ?? [],
+            {
+              name:  "Reason",
+              value: reason,
+            },
+          ],
+          title: embed?.title ?? "lost it oopsie",
+        },
+      ],
+    });
+    await interaction.reply({
+      content:   "Thank you for reporting!",
+      ephemeral: true,
+    });
   }
 
-  if (interaction.isAutocomplete()) {
-    if (interaction.commandName === "translator") {
-      const input = interaction.options.getString("language", true);
-      const similar = Languages.sort(
-        (a, b) => compareTwoStrings(b, input) - compareTwoStrings(a, input)
-      );
-      await interaction.respond(
-        similar.slice(0, 5).map((el) => ({ name: el, value: el }))
-      );
-    }
+  if (interaction.isAutocomplete()
+  && interaction.commandName === "translator") {
+    const input = interaction.options.getString("language", true);
+    const similar = languages.sort(
+      (a, b) => {
+        return compareTwoStrings(b, input) - compareTwoStrings(a, input);
+      },
+    );
+    await interaction.respond(
+      similar.slice(0, 5).map((element) => {
+        return { name: element, value: element };
+      }),
+    );
   }
 };

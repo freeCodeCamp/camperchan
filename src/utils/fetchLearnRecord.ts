@@ -1,46 +1,46 @@
 import { MongoClient } from "mongodb";
-
-import { ExtendedClient } from "../interfaces/ExtendedClient.js";
-import { UserRecord } from "../interfaces/UserRecord.js";
-
 import { errorHandler } from "./errorHandler.js";
 import { logHandler } from "./logHandler.js";
+import type { ExtendedClient } from "../interfaces/extendedClient.js";
+import type { UserRecord } from "../interfaces/userRecord.js";
 
 /**
  * Fetches the user's /learn record from the production database.
- *
- * @param {ExtendedClient} CamperChan The CamperChan's Discord instance.
- * @param {string} email The email to query.
- * @param {string} userId The ID of the Discord user.
- * @returns {UserRecord | null} The resulting record, or null if error/404.
+ * @param camperChan - The camperChan's Discord instance.
+ * @param email - The email to query.
+ * @param userId - The ID of the Discord user.
+ * @returns The resulting record, or null if error/404.
  */
-export const fetchLearnRecord = async (
-  CamperChan: ExtendedClient,
+export const fetchLearnRecord = async(
+  camperChan: ExtendedClient,
   email: string,
-  userId: string
+  userId: string,
 ): Promise<UserRecord | null> => {
   try {
-    const cached = CamperChan.learnAccounts[userId];
+    const cached = camperChan.learnAccounts[userId];
     if (cached && cached.cacheTTL.getTime() < Date.now()) {
       // Arbitrary key validation to ensure cached value is a record, and not just a ttl object.
-      return "isDonating" in cached ? cached : null;
+      return "isDonating" in cached
+        ? cached
+        : null;
     }
-    delete CamperChan.learnAccounts[userId];
+    // eslint-disable-next-line @typescript-eslint/no-dynamic-delete
+    delete camperChan.learnAccounts[userId];
     const {
-      PROD_URI,
-      PROD_REPLICA,
-      PROD_USER,
-      PROD_PASS,
-      PROD_DB,
-      PROD_COLLECTION
+      PROD_URI: productionUri,
+      PROD_REPLICA: productionReplica,
+      PROD_USER: productionUser,
+      PROD_PASS: productionPassword,
+      PROD_DB: productionDatabase,
+      PROD_COLLECTION: productionCollection,
     } = process.env;
     if (
-      !PROD_URI ||
-      !PROD_REPLICA ||
-      !PROD_USER ||
-      !PROD_PASS ||
-      !PROD_DB ||
-      !PROD_COLLECTION
+      productionUri === undefined
+      || productionReplica === undefined
+      || productionUser === undefined
+      || productionPassword === undefined
+      || productionDatabase === undefined
+      || productionCollection === undefined
     ) {
       const missing = [
         "PROD_URI",
@@ -48,39 +48,43 @@ export const fetchLearnRecord = async (
         "PROD_USER",
         "PROD_PASS",
         "PROD_DB",
-        "PROD_COLLECTION"
-      ].filter((s) => !process.env[s]);
+        "PROD_COLLECTION",
+      ].filter((s) => {
+        return process.env[s] === undefined;
+      });
       logHandler.log(
         "error",
-        `Missing following environment variables. ${missing.join(", ")}`
+        `Missing following environment variables. ${missing.join(", ")}`,
       );
       return null;
     }
-    const client = await MongoClient.connect(PROD_URI, {
-      replicaSet: PROD_REPLICA,
+    const client = await MongoClient.connect(productionUri, {
       auth: {
-        username: PROD_USER,
-        password: PROD_PASS
-      }
+        password: productionPassword,
+        username: productionUser,
+      },
+      replicaSet: productionReplica,
     });
-    const db = client.db(PROD_DB);
-    const collection = db.collection(PROD_COLLECTION);
-    const record = (await collection.findOne({ email }).catch(async (err) => {
-      await errorHandler(CamperChan, "fetch learn record db query", err);
-      return null;
-    })) as UserRecord | null;
-    const cacheTTL = new Date(Date.now() + 1000 * 60 * 60 * 24);
-    if (!CamperChan.learnAccounts[userId]) {
-      CamperChan.learnAccounts[userId] = record
+    const database = client.db(productionDatabase);
+    const collection = database.collection<UserRecord>(productionCollection);
+    const record = await collection.findOne({ email }).
+      catch(async(error: unknown) => {
+        await errorHandler(camperChan, "fetch learn record db query", error);
+        return null;
+      });
+    const oneDay = 1000 * 60 * 60 * 24;
+    const cacheTTL = new Date(Date.now() + oneDay);
+    if (!camperChan.learnAccounts[userId]) {
+      camperChan.learnAccounts[userId] = record
         ? { ...record, cacheTTL }
         : {
-            email,
-            cacheTTL
-          };
+          cacheTTL,
+          email,
+        };
     }
     return record;
-  } catch (err) {
-    await errorHandler(CamperChan, "fetch learn record module", err);
+  } catch (error) {
+    await errorHandler(camperChan, "fetch learn record module", error);
     return null;
   }
 };

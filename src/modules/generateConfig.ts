@@ -1,45 +1,45 @@
 import { WebhookClient } from "discord.js";
-
-import { ExtendedClient } from "../interfaces/ExtendedClient.js";
+import type { ExtendedClient } from "../interfaces/extendedClient.js";
 
 /**
- * Bootstraps the config from the ENV into the CamperChan's instance.
- *
- * @returns {ExtendedClient["config"]} The CamperChan's config.
+ * Bootstraps the config from the ENV into the camperChan's instance.
+ * @returns The camperChan's config.
+ * @throws An error when any configs are missing.
  */
 export const generateConfig = (): ExtendedClient["config"] => {
   if (
-    !process.env.TOKEN ||
-    !process.env.MONGO_URI ||
-    !process.env.DEBUG_HOOK ||
-    !process.env.MOD_HOOK ||
-    !process.env.MESSAGE_HOOK ||
-    !process.env.HOME_GUILD ||
-    !process.env.BOT_ID ||
-    !process.env.REPORT_CHANNEL ||
-    !process.env.WELCOME_HOOK ||
-    !process.env.GITHUB_APP_ID ||
-    !process.env.GITHUB_TOKEN ||
-    !process.env.GITHUB_INSTALLATION_ID ||
-    !process.env.GHOST_KEY
+    process.env.TOKEN === undefined
+    || process.env.MONGO_URI === undefined
+    || process.env.DEBUG_HOOK === undefined
+    || process.env.MOD_HOOK === undefined
+    || process.env.MESSAGE_HOOK === undefined
+    || process.env.HOME_GUILD === undefined
+    || process.env.BOT_ID === undefined
+    || process.env.REPORT_CHANNEL === undefined
+    || process.env.WELCOME_HOOK === undefined
+    || process.env.GITHUB_APP_ID === undefined
+    || process.env.GITHUB_TOKEN === undefined
+    || process.env.GITHUB_INSTALLATION_ID === undefined
+    || process.env.GHOST_KEY === undefined
   ) {
     throw new Error("Missing required config variables");
   }
   return {
-    token: process.env.TOKEN,
-    mongoUrl: process.env.MONGO_URI,
-    debugHook: new WebhookClient({ url: process.env.DEBUG_HOOK }),
-    modHook: new WebhookClient({ url: process.env.MOD_HOOK }),
-    messageHook: new WebhookClient({ url: process.env.MESSAGE_HOOK }),
-    welcomeHook: new WebhookClient({ url: process.env.WELCOME_HOOK }),
-    homeGuild: process.env.HOME_GUILD,
-    botId: process.env.BOT_ID,
-    modRole: process.env.MOD_ROLE || "no role set",
-    privateCategory: process.env.PRIVATE_CATEGORY || "no category set",
-    reportChannel: process.env.REPORT_CHANNEL,
-    githubAppId: parseInt(process.env.GITHUB_APP_ID, 10),
-    githubToken: process.env.GITHUB_TOKEN,
-    githubInstallationId: parseInt(process.env.GITHUB_INSTALLATION_ID, 10),
-    ghostKey: process.env.GHOST_KEY
+    botId:       process.env.BOT_ID,
+    debugHook:   new WebhookClient({ url: process.env.DEBUG_HOOK }),
+    ghostKey:    process.env.GHOST_KEY,
+    githubAppId: Number.parseInt(process.env.GITHUB_APP_ID, 10),
+    githubInstallationId:
+      Number.parseInt(process.env.GITHUB_INSTALLATION_ID, 10),
+    githubToken:     process.env.GITHUB_TOKEN,
+    homeGuild:       process.env.HOME_GUILD,
+    messageHook:     new WebhookClient({ url: process.env.MESSAGE_HOOK }),
+    modHook:         new WebhookClient({ url: process.env.MOD_HOOK }),
+    modRole:         process.env.MOD_ROLE ?? "no role set",
+    mongoUrl:        process.env.MONGO_URI,
+    privateCategory: process.env.PRIVATE_CATEGORY ?? "no category set",
+    reportChannel:   process.env.REPORT_CHANNEL,
+    token:           process.env.TOKEN,
+    welcomeHook:     new WebhookClient({ url: process.env.WELCOME_HOOK }),
   };
 };

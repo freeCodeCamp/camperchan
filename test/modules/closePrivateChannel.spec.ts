@@ -1,5 +1,4 @@
 import { describe, assert, test } from "vitest";
-
 import { closePrivateChannel } from "../../src/modules/closePrivateChannel.js";
 
 describe("closePrivateChannel", () => {
@@ -7,7 +6,7 @@ describe("closePrivateChannel", () => {
     assert.isDefined(closePrivateChannel, "closePrivateChannel is not defined");
     assert.isFunction(
       closePrivateChannel,
-      "closePrivateChannel is not a function"
+      "closePrivateChannel is not a function",
     );
   });
 });

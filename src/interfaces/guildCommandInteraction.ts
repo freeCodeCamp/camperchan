@@ -1,6 +1,7 @@
-import { ChatInputCommandInteraction, Guild, GuildMember } from "discord.js";
+import type { ChatInputCommandInteraction, Guild, GuildMember }
+  from "discord.js";
 
 export interface GuildCommandInteraction extends ChatInputCommandInteraction {
-  guild: Guild;
+  guild:  Guild;
   member: GuildMember;
 }

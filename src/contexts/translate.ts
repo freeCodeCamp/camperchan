@@ -1,24 +1,24 @@
 import {
   ApplicationCommandType,
   ContextMenuCommandBuilder,
-  type GuildMember
+  GuildMember,
 } from "discord.js";
-
-import { Context } from "../interfaces/Context.js";
 import { errorHandler } from "../utils/errorHandler.js";
 import { isModerator } from "../utils/isModerator.js";
+import type { Context } from "../interfaces/context.js";
 
 export const translate: Context = {
-  data: new ContextMenuCommandBuilder()
-    .setName("translate")
-    .setDMPermission(false)
-    .setType(ApplicationCommandType.Message),
-  run: async (bot, interaction) => {
+  data: new ContextMenuCommandBuilder().
+    setName("translate").
+    setDMPermission(false).
+    setType(ApplicationCommandType.Message),
+  run: async(bot, interaction) => {
     try {
       await interaction.deferReply({ ephemeral: true });
-      if (!isModerator(interaction.member as GuildMember)) {
+      if (!(interaction.member instanceof GuildMember)
+         || !isModerator(interaction.member)) {
         await interaction.editReply({
-          content: "Translation is restricted to staff members to save costs."
+          content: "Translation is restricted to staff members to save costs.",
         });
         return;
       }
@@ -32,13 +32,13 @@ export const translate: Context = {
       const translations = await bot.translator.translateText(
         message.content,
         null,
-        "en-GB"
+        "en-GB",
       );
       await interaction.editReply({
-        content: `*Translated from ${translations.detectedSourceLang}*:\n${translations.text}`
+        content: `*Translated from ${translations.detectedSourceLang}*:\n${translations.text}`,
       });
-    } catch (err) {
-      await errorHandler(bot, "translate context", err);
+    } catch (error) {
+      await errorHandler(bot, "translate context", error);
     }
-  }
+  },
 };

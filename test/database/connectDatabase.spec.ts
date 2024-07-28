@@ -1,5 +1,4 @@
 import { describe, assert, test } from "vitest";
-
 import { connectDatabase } from "../../src/database/connectDatabase.js";
 
 describe("connectDatabase", () => {

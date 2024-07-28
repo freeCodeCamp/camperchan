@@ -1,5 +1,4 @@
 import { describe, assert, test } from "vitest";
-
 import { send100DaysOfCode } from "../../src/modules/send100DaysOfCode.js";
 
 describe("send100DaysOfCode", () => {

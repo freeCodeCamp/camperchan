@@ -1,12 +1,11 @@
 import { describe, assert, test } from "vitest";
-
 import { registerEvents } from "../../src/events/registerEvents.js";
 
 const bot = {
   events: {},
-  on: (event: string, callback: () => void) => {
+  on:     (event: string, callback: ()=> void): void => {
     bot.events[event] = callback;
-  }
+  },
 };
 
 describe("registerEvents", () => {
@@ -14,7 +13,7 @@ describe("registerEvents", () => {
     assert.isFunction(registerEvents);
   });
 
-  test("should register all events", async () => {
+  test("should register all events", async() => {
     await registerEvents(bot as never);
     assert.property(bot.events, "ready");
     assert.property(bot.events, "messageCreate");

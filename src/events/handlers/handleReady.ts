@@ -1,75 +1,79 @@
 import { ChannelType } from "discord.js";
 import { scheduleJob } from "node-schedule";
-
-import { ExtendedClient } from "../../interfaces/ExtendedClient.js";
 import { loadRoles } from "../../modules/loadRoles.js";
 import { send100DaysOfCode } from "../../modules/send100DaysOfCode.js";
 import { errorHandler } from "../../utils/errorHandler.js";
+import type { ExtendedClient } from "../../interfaces/extendedClient.js";
 
 /**
- * Logs a message to the debug hook when the CamperChan is online.
- *
- * @param {ExtendedClient} CamperChan The CamperChan's Discord instance.
+ * Logs a message to the debug hook when the camperChan is online.
+ * @param camperChan - The camperChan's Discord instance.
  */
-export const handleReady = async (CamperChan: ExtendedClient) => {
+export const handleReady = async(camperChan: ExtendedClient): Promise<void> => {
   try {
-    await CamperChan.config.debugHook.send("CamperChan Ready!");
-    const homeGuild = await CamperChan.guilds
-      .fetch(CamperChan.config.homeGuild)
-      .catch(() => null);
+    await camperChan.config.debugHook.send("camperChan Ready!");
+    const homeGuild = await camperChan.guilds.
+      fetch(camperChan.config.homeGuild).
+      catch(() => {
+        return null;
+      });
     if (!homeGuild) {
-      await CamperChan.config.debugHook.send(
-        "The home guild could not be loaded."
+      await camperChan.config.debugHook.send(
+        "The home guild could not be loaded.",
       );
       return;
     }
-    if (!CamperChan.homeGuild) {
-      CamperChan.homeGuild = homeGuild;
+    if (camperChan.homeGuild !== homeGuild) {
+      camperChan.homeGuild = homeGuild;
     }
-    const reportChannel = await homeGuild.channels
-      .fetch(CamperChan.config.reportChannel)
-      .catch(() => null);
+    const reportChannel = await homeGuild.channels.
+      fetch(camperChan.config.reportChannel).
+      catch(() => {
+        return null;
+      });
     if (!reportChannel) {
-      await CamperChan.config.debugHook.send(
-        "The report channel could not be loaded."
+      await camperChan.config.debugHook.send(
+        "The report channel could not be loaded.",
       );
       return;
     }
     if (!reportChannel.isTextBased()) {
-      await CamperChan.config.debugHook.send(
-        "The report channel is not text based."
+      await camperChan.config.debugHook.send(
+        "The report channel is not text based.",
       );
       return;
     }
-    if (!CamperChan.reportChannel) {
-      CamperChan.reportChannel = reportChannel;
+    if (camperChan.reportChannel !== reportChannel) {
+      camperChan.reportChannel = reportChannel;
     }
-    const privateCategory = await homeGuild.channels
-      .fetch(CamperChan.config.privateCategory)
-      .catch(() => null);
+    const privateCategory = await homeGuild.channels.
+      fetch(camperChan.config.privateCategory).
+      catch(() => {
+        return null;
+      });
     if (!privateCategory) {
-      await CamperChan.config.debugHook.send(
-        "The private category could not be loaded."
+      await camperChan.config.debugHook.send(
+        "The private category could not be loaded.",
       );
       return;
     }
     if (privateCategory.type !== ChannelType.GuildCategory) {
-      await CamperChan.config.debugHook.send(
-        "The private category is not a category."
+      await camperChan.config.debugHook.send(
+        "The private category is not a category.",
       );
       return;
     }
-    if (!CamperChan.privateCategory) {
-      CamperChan.privateCategory = privateCategory;
+    if (camperChan.privateCategory !== privateCategory) {
+      camperChan.privateCategory = privateCategory;
     }
-    await CamperChan.config.debugHook.send("All channels loaded.");
+    await camperChan.config.debugHook.send("All channels loaded.");
 
-    await loadRoles(CamperChan);
+    await loadRoles(camperChan);
 
-    scheduleJob("0 9 * * *", async () => {
-      await send100DaysOfCode(CamperChan);
+    scheduleJob("0 9 * * *", async() => {
+      await send100DaysOfCode(camperChan);
     });
-  } catch (err) {
-    await errorHandler(CamperChan, "client ready event", err);
+  } catch (error) {
+    await errorHandler(camperChan, "client ready event", error);
   }
 };

@@ -1,5 +1,4 @@
 import { describe, assert, test } from "vitest";
-
 import { generateDiff } from "../../src/utils/generateDiff.js";
 
 describe("generateDiff", () => {
@@ -10,9 +9,9 @@ describe("generateDiff", () => {
 
   test("returns an expected diff string", () => {
     const old = "this is a test";
-    const new_ = "this is a test, but different";
+    const updated = "this is a test, but different";
     const expected = "- this is a test\n+ this is a test, but different";
-    const actual = generateDiff(old, new_);
+    const actual = generateDiff(old, updated);
     assert.equal(actual, expected);
   });
 });

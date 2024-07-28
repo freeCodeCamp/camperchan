@@ -1,6 +1,5 @@
 import { ApplicationCommandType } from "discord.js";
 import { describe, assert, test } from "vitest";
-
 import { report } from "../../src/contexts/report.js";
 
 describe("report context", () => {

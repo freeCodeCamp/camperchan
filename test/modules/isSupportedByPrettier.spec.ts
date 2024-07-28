@@ -1,16 +1,16 @@
 import { describe, assert, test } from "vitest";
-
-import { isSupportedByPrettier } from "../../src/modules/isSupportedByPrettier.js";
+import { isSupportedByPrettier } from
+  "../../src/modules/isSupportedByPrettier.js";
 
 describe("isSupportedByPrettier", () => {
   test("is defined", () => {
     assert.isDefined(
       isSupportedByPrettier,
-      "isSupportedByPrettier is not defined"
+      "isSupportedByPrettier is not defined",
     );
     assert.isFunction(
       isSupportedByPrettier,
-      "isSupportedByPrettier is not a function"
+      "isSupportedByPrettier is not a function",
     );
   });
 

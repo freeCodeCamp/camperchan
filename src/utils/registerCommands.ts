@@ -1,53 +1,51 @@
 import {
   REST,
-  RESTPostAPIApplicationCommandsJSONBody,
-  RESTPostAPIChatInputApplicationCommandsJSONBody,
-  Routes
+  type RESTPostAPIApplicationCommandsJSONBody,
+  type RESTPostAPIChatInputApplicationCommandsJSONBody,
+  Routes,
 } from "discord.js";
-
-import { ExtendedClient } from "../interfaces/ExtendedClient.js";
-
 import { errorHandler } from "./errorHandler.js";
 import { logHandler } from "./logHandler.js";
+import type { ExtendedClient } from "../interfaces/extendedClient.js";
 
 /**
  * Takes both the commands and contexts, parses the `data` properties as needed,
  * and builds an array of all command data. Then, posts the data to the Discord endpoint
  * for registering commands.
- *
- * @param {ExtendedClient} CamperChan CamperChan's Discord instance.
- * @param {REST} restClass The REST class to use for registering commands.
- * @returns {boolean} True if the commands were registered, false on error.
+ * @param camperChan - CamperChan's Discord instance.
+ * @param restClass - The REST class to use for registering commands.
+ * @returns True if the commands were registered, false on error.
  */
-export const registerCommands = async (
-  CamperChan: ExtendedClient,
-  restClass = REST
+export const registerCommands = async(
+  camperChan: ExtendedClient,
+  restClass = REST,
 ): Promise<REST | null> => {
   try {
+    // eslint-disable-next-line new-cap
     const rest = new restClass({ version: "10" }).setToken(
-      CamperChan.config.token
+      camperChan.config.token,
     );
 
-    const commandData: (
-      | RESTPostAPIApplicationCommandsJSONBody
-      | RESTPostAPIChatInputApplicationCommandsJSONBody
-    )[] = [];
+    const commandData: Array< | RESTPostAPIApplicationCommandsJSONBody
+      | RESTPostAPIChatInputApplicationCommandsJSONBody> = [];
 
-    CamperChan.commands.forEach((command) =>
-      commandData.push(command.data.toJSON())
-    );
-    CamperChan.contexts.forEach((context) => commandData.push(context.data));
+    for (const command of camperChan.commands) {
+      commandData.push(command.data.toJSON());
+    }
+    for (const context of camperChan.contexts) {
+      commandData.push(context.data);
+    }
     logHandler.log("debug", "registering to home guild only");
     await rest.put(
       Routes.applicationGuildCommands(
-        CamperChan.config.botId,
-        CamperChan.config.homeGuild
+        camperChan.config.botId,
+        camperChan.config.homeGuild,
       ),
-      { body: commandData }
+      { body: commandData },
     );
     return rest;
-  } catch (err) {
-    await errorHandler(CamperChan, "register commands module", err);
+  } catch (error) {
+    await errorHandler(camperChan, "register commands module", error);
     return null;
   }
 };

@@ -1,8 +1,7 @@
 import { describe, assert, test } from "vitest";
-
 import {
   validateColour,
-  validateImage
+  validateImage,
 } from "../../src/modules/settingsValidation.js";
 
 describe("settings validation", () => {

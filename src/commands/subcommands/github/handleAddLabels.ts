@@ -1,61 +1,69 @@
 import { PermissionFlagsBits } from "discord.js";
-
-import { Subcommand } from "../../../interfaces/Subcommand.js";
 import { errorHandler } from "../../../utils/errorHandler.js";
+import type { Subcommand } from "../../../interfaces/subcommand.js";
 
 export const handleAddLabels: Subcommand = {
-  permissionValidator: (member) =>
-    [
-      PermissionFlagsBits.ModerateMembers,
-      PermissionFlagsBits.KickMembers,
-      PermissionFlagsBits.BanMembers
-    ].some((p) => member.permissions.has(p)),
-  execute: async (CamperChan, interaction) => {
+  execute: async(camperChan, interaction) => {
     try {
       await interaction.deferReply();
       const repo = interaction.options.getString("repository", true);
       const number = interaction.options.getInteger("number", true);
       const labels = interaction.options.getString("labels", true);
-      const labelNames = labels.split(",").map((l) => l.trim());
-
-      const response = await CamperChan.octokit.rest.issues.listLabelsForRepo({
-        owner: "freeCodeCamp",
-        repo
+      const labelNames = labels.split(",").map((l) => {
+        return l.trim();
       });
 
-      const presentLabels = response.data.map((x) => x.name.trim());
+      const response = await camperChan.octokit.rest.issues.listLabelsForRepo({
+        owner: "freeCodeCamp",
+        repo:  repo,
+      });
+
+      const presentLabels = new Set(response.data.map((x) => {
+        return x.name.trim();
+      }));
 
       if (
-        !labelNames.every((requestedLabel) =>
-          presentLabels.includes(requestedLabel)
-        )
+        !labelNames.every((requestedLabel) => {
+          return presentLabels.has(requestedLabel);
+        })
       ) {
         await interaction.editReply({
-          content: `${labelNames.join(", ")} were not found in the [Issue Labels List](<https://github.com/freeCodeCamp/${repo}/labels>) and will not be added to the issue.`
+          content: `${labelNames.join(", ")} were not found in the [Issue Labels List](<https://github.com/freeCodeCamp/${repo}/labels>) and will not be added to the issue.`,
         });
         return;
       }
 
-      await CamperChan.octokit.rest.issues.addLabels({
-        owner: "freeCodeCamp",
+      await camperChan.octokit.rest.issues.addLabels({
+        // eslint-disable-next-line @typescript-eslint/naming-convention
         issue_number: number,
-        repo,
-        labels: labelNames
+        labels:       labelNames,
+        owner:        "freeCodeCamp",
+        repo:         repo,
       });
 
       await interaction.editReply({
-        content: `[Issue labels](<https://github.com/freeCodeCamp/${repo}/issues/${number}>) have been added: ${labelNames.join(
-          ", "
-        )}`
+        content: `[Issue labels](<https://github.com/freeCodeCamp/${repo}/issues/${String(number)}>) have been added: ${labelNames.join(
+          ", ",
+        )}`,
       });
-    } catch (err) {
-      await errorHandler(CamperChan, "add labels subcommand", err);
+    } catch (error) {
+      await errorHandler(camperChan, "add labels subcommand", error);
       await interaction.editReply(
         `Something went wrong: ${
-          (err as Error).message ??
-          "Unable to parse error. Please check the logs."
-        }`
+          error instanceof Error
+            ? error.message
+            : "Unable to parse error. Please check the logs."
+        }`,
       );
     }
-  }
+  },
+  permissionValidator: (member) => {
+    return [
+      PermissionFlagsBits.ModerateMembers,
+      PermissionFlagsBits.KickMembers,
+      PermissionFlagsBits.BanMembers,
+    ].some((p) => {
+      return member.permissions.has(p);
+    });
+  },
 };

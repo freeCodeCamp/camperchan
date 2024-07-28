@@ -1,18 +1,20 @@
-import { Truisms } from "../../../config/Truisms.js";
-import { Subcommand } from "../../../interfaces/Subcommand.js";
+import { truisms } from "../../../config/truisms.js";
 import { errorHandler } from "../../../utils/errorHandler.js";
+import type { Subcommand } from "../../../interfaces/subcommand.js";
 
 export const handleTruism: Subcommand = {
-  permissionValidator: () => true,
-  execute: async (CamperChan, interaction) => {
+  execute: async(camperChan, interaction) => {
     try {
       await interaction.deferReply();
-      const truism =
-        Truisms[Math.floor(Math.random() * Truisms.length)] ??
-        "Code will always break when you think it shouldn't.";
+      const truism
+        = truisms[Math.floor(Math.random() * truisms.length)]
+        ?? "Code will always break when you think it shouldn't.";
       await interaction.editReply(truism);
-    } catch (err) {
-      await errorHandler(CamperChan, "truism subcommand", err);
+    } catch (error) {
+      await errorHandler(camperChan, "truism subcommand", error);
     }
-  }
+  },
+  permissionValidator: () => {
+    return true;
+  },
 };

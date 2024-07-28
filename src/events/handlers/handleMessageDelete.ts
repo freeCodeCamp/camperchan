@@ -1,22 +1,20 @@
-import { Message, EmbedBuilder, PartialMessage } from "discord.js";
-
-import { ExtendedClient } from "../../interfaces/ExtendedClient.js";
+import { type Message, EmbedBuilder, type PartialMessage } from "discord.js";
 import { customSubstring } from "../../utils/customSubstring.js";
 import { errorHandler } from "../../utils/errorHandler.js";
+import type { ExtendedClient } from "../../interfaces/extendedClient.js";
 
 /**
  * Handles the message delete event in Discord.
- *
- * @param {ExtendedClient} CamperChan The CamperChan's Discord instance.
- * @param {Message} message The message payload from Discord.
+ * @param camperChan - The camperChan's Discord instance.
+ * @param message - The message payload from Discord.
  */
-export const handleMessageDelete = async (
-  CamperChan: ExtendedClient,
-  message: Message | PartialMessage
-) => {
+export const handleMessageDelete = async(
+  camperChan: ExtendedClient,
+  message: Message | PartialMessage,
+): Promise<void> => {
   try {
-    const { author, channel, content, guild, embeds, attachments, stickers } =
-      message;
+    const { author, channel, content, guild, embeds, attachments, stickers }
+      = message;
 
     if (!guild) {
       return;
@@ -27,26 +25,27 @@ export const handleMessageDelete = async (
     deleteEmbed.setDescription("Here is my record of that message.");
     deleteEmbed.addFields(
       {
-        name: "Channel",
-        value: `<#${channel.id}>`
+        name:  "Channel",
+        value: `<#${channel.id}>`,
       },
       {
-        name: "Content",
+        name:  "Content",
         value: customSubstring(
-          content + stickers.map((el) => el.name).join(" ") ||
-            "`No content. Embeds or attachments may be coming.`",
-          1000
-        )
-      }
+          (content ?? "no content") + stickers.map((element) => {
+            return element.name;
+          }).join(" "),
+          1000,
+        ),
+      },
     );
 
     if (author) {
       deleteEmbed.setAuthor({
-        name: author.tag,
-        iconURL: author.displayAvatarURL()
+        iconURL: author.displayAvatarURL(),
+        name:    author.tag,
       });
       deleteEmbed.setFooter({
-        text: `ID: ${author.id}`
+        text: `ID: ${author.id}`,
       });
     }
 
@@ -55,15 +54,14 @@ export const handleMessageDelete = async (
       deleteEmbed.setImage(attached.proxyURL);
     }
 
-    await CamperChan.config.messageHook.send({ embeds: [deleteEmbed] });
+    await camperChan.config.messageHook.send({ embeds: [ deleteEmbed ] });
 
-    if (embeds.length) {
-      embeds.forEach(
-        async (embed) =>
-          await CamperChan.config.messageHook.send({ embeds: [embed] })
-      );
+    if (embeds.length > 0) {
+      await Promise.all(embeds.map(async(embed) => {
+        return await camperChan.config.messageHook.send({ embeds: [ embed ] });
+      }));
     }
-  } catch (err) {
-    await errorHandler(CamperChan, "message delete event", err);
+  } catch (error) {
+    await errorHandler(camperChan, "message delete event", error);
   }
 };

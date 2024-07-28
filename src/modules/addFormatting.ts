@@ -1,20 +1,18 @@
-import { Message } from "discord.js";
 import hljs from "highlight.js";
-
 import { formatCodeBlock } from "./formatCodeblock.js";
 import { formatter } from "./formatter.js";
 import { isSupportedByPrettier } from "./isSupportedByPrettier.js";
+import type { Message } from "discord.js";
 
 /**
  * Inserts any unformatted code to a code block, enables syntax highlighting and formats it.
- *
- * @param {Message} message The message payload from Discord.
- * @returns {string} The formatted message content.
+ * @param message - The message payload from Discord.
+ * @returns The formatted message content.
  */
 export async function addFormatting(message: Message): Promise<string> {
   const { content } = message;
 
-  const checkForLanguages = [
+  const checkForlanguages = [
     "HTML",
     "CSS",
     "SCSS",
@@ -25,14 +23,14 @@ export async function addFormatting(message: Message): Promise<string> {
     "Python",
     "Markdown",
     "JSON",
-    "HTTP"
+    "HTTP",
   ];
 
   const languageGuesses = [];
 
   const detectedWithHLJS = hljs.highlightAuto(
-    message.content,
-    checkForLanguages
+    content,
+    checkForlanguages,
   );
 
   languageGuesses.push(detectedWithHLJS.language);
@@ -41,15 +39,16 @@ export async function addFormatting(message: Message): Promise<string> {
   }
 
   if (
-    languageGuesses.includes("HTML") &&
-    (languageGuesses.includes("CSS") || languageGuesses.includes("JavaScript"))
+    languageGuesses.includes("HTML")
+    && (languageGuesses.includes("CSS")
+    || languageGuesses.includes("JavaScript"))
   ) {
     languageGuesses[0] = "XML";
   }
-  const supportedLanguage = isSupportedByPrettier(languageGuesses[0] || "");
-  if (supportedLanguage) {
+  const supportedLanguage = isSupportedByPrettier(languageGuesses.at(0) ?? "");
+  if (supportedLanguage !== false) {
     const formattedCode = await formatter(content, supportedLanguage);
     return formatCodeBlock(supportedLanguage, formattedCode);
   }
-  return formatCodeBlock(languageGuesses[0] || "", content);
+  return formatCodeBlock(languageGuesses.at(0) ?? "", content);
 }

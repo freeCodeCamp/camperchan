@@ -1,18 +1,17 @@
 import { describe, assert, test } from "vitest";
+import { tags } from "../../src/config/tags.js";
 
-import { Tags } from "../../src/config/Tags.js";
-
-describe("Tags", () => {
+describe("tags", () => {
   test("quantity", () => {
-    assert.isAtMost(Tags.length, 25, "Cannot have more than 25 tags.");
+    assert.isAtMost(tags.length, 25, "Cannot have more than 25 tags.");
   });
-  for (const tag of Tags) {
+  for (const tag of tags) {
     test(`${tag.name} should be formatted correctly.`, () => {
       assert.isAtMost(tag.name.length, 100, "Name is too long.");
       assert.isAtMost(
         tag.message.length,
         4000,
-        "Message exceeds Discord limits."
+        "Message exceeds Discord limits.",
       );
     });
   }

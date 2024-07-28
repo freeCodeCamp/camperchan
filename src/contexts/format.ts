@@ -1,31 +1,30 @@
-import { ApplicationCommandType, Message } from "discord.js";
-
-import { Context } from "../interfaces/Context.js";
+import { ApplicationCommandType } from "discord.js";
 import { addFormatting } from "../modules/addFormatting.js";
 import { errorHandler } from "../utils/errorHandler.js";
+import type { Context } from "../interfaces/context.js";
 
 export const format: Context = {
   data: {
     name: "format",
-    type: ApplicationCommandType.Message
+    type: ApplicationCommandType.Message,
   },
-  run: async (CamperChan, interaction) => {
+  run: async(camperChan, interaction) => {
     try {
       if (!interaction.isMessageContextMenuCommand()) {
         await interaction.reply({
           content:
             "This command is improperly configured. Please contact Naomi.",
-          ephemeral: true
+          ephemeral: true,
         });
         return;
       }
       await interaction.deferReply();
-      const message = interaction.options.getMessage("message") as Message;
+      const message = interaction.options.getMessage("message", true);
       const formatted = await addFormatting(message);
       await interaction.editReply(formatted);
-    } catch (err) {
-      await errorHandler(CamperChan, "format context command", err);
+    } catch (error) {
+      await errorHandler(camperChan, "format context command", error);
       await interaction.editReply("Something went wrong.");
     }
-  }
+  },
 };

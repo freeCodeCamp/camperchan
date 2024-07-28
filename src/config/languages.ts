@@ -1,4 +1,4 @@
-export const Languages = [
+export const languages = [
   "Afrikaans",
   "Amharic",
   "Arabic",
@@ -55,5 +55,5 @@ export const Languages = [
   "Uzbek",
   "Vietnamese",
   "Yoruba",
-  "Zulu"
+  "Zulu",
 ];

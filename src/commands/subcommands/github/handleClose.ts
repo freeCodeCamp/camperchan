@@ -1,28 +1,25 @@
 import { PermissionFlagsBits } from "discord.js";
-
 import {
-  IssueClose,
-  PullClose,
-  PullComments
-} from "../../../config/PullComments.js";
-import { Subcommand } from "../../../interfaces/Subcommand.js";
+  issueClose,
+  pullClose,
+  pullComments,
+} from "../../../config/pullComments.js";
 import { errorHandler } from "../../../utils/errorHandler.js";
+import type { Subcommand } from "../../../interfaces/subcommand.js";
 
-const commentBody = (isPull: boolean, comment: string | null) => {
+const commentBody = (isPull: boolean, comment: string | null): string => {
   return (
-    PullComments.find((c) => c.key === comment)?.message ??
-    (isPull ? PullClose : IssueClose)
+    pullComments.find((c) => {
+      return c.key === comment;
+    })?.message
+    ?? (isPull
+      ? pullClose
+      : issueClose)
   );
 };
 
 export const handleClose: Subcommand = {
-  permissionValidator: (member) =>
-    [
-      PermissionFlagsBits.ModerateMembers,
-      PermissionFlagsBits.KickMembers,
-      PermissionFlagsBits.BanMembers
-    ].some((p) => member.permissions.has(p)),
-  execute: async (CamperChan, interaction) => {
+  execute: async(camperChan, interaction) => {
     try {
       await interaction.deferReply();
       const repo = interaction.options.getString("repository", true);
@@ -30,61 +27,72 @@ export const handleClose: Subcommand = {
       const comment = interaction.options.getString("comment") ?? null;
       const isSpam = interaction.options.getBoolean("spam") ?? false;
 
-      const data = await CamperChan.octokit.rest.issues.get({
-        owner: "freeCodeCamp",
-        repo,
-        issue_number: number
+      const data = await camperChan.octokit.rest.issues.get({
+        // eslint-disable-next-line @typescript-eslint/naming-convention
+        issue_number: number,
+        owner:        "freeCodeCamp",
+        repo:         repo,
       });
 
-      if (!data) {
-        await interaction.editReply({
-          content:
-            "There was an error fetching that issue or pull request. Please try again later."
-        });
-        return;
-      }
       if (data.data.state === "closed") {
         await interaction.editReply({
           content: `The [${
-            data.data.pull_request ? "pull request" : "issue"
-          }](<${data.data.html_url}>) is already closed.`
+            data.data.pull_request
+              ? "pull request"
+              : "issue"
+          }](<${data.data.html_url}>) is already closed.`,
         });
         return;
       }
-      const isPull = !!data.data.pull_request;
-      await CamperChan.octokit.rest.issues.createComment({
-        owner: "freeCodeCamp",
-        repo,
+      const isPull = Boolean(data.data.pull_request);
+      await camperChan.octokit.rest.issues.createComment({
+        body:         commentBody(isPull, comment),
+        // eslint-disable-next-line @typescript-eslint/naming-convention
         issue_number: number,
-        body: commentBody(isPull, comment)
+        owner:        "freeCodeCamp",
+        repo:         repo,
       });
-      await CamperChan.octokit.rest.issues.update({
-        owner: "freeCodeCamp",
-        repo,
+      await camperChan.octokit.rest.issues.update({
+        // eslint-disable-next-line @typescript-eslint/naming-convention
         issue_number: number,
-        state: "closed"
+        owner:        "freeCodeCamp",
+        repo:         repo,
+        state:        "closed",
       });
       if (isPull && isSpam) {
-        await CamperChan.octokit.rest.issues.addLabels({
-          owner: "freeCodeCamp",
-          repo,
+        await camperChan.octokit.rest.issues.addLabels({
+          // eslint-disable-next-line @typescript-eslint/naming-convention
           issue_number: number,
-          labels: ["spam"]
+          labels:       [ "spam" ],
+          owner:        "freeCodeCamp",
+          repo:         repo,
         });
       }
       await interaction.editReply({
         content: `Successfully closed the [${
-          isPull ? "pull request" : "issue"
-        }](<${data.data.html_url}>).`
+          isPull
+            ? "pull request"
+            : "issue"
+        }](<${data.data.html_url}>).`,
       });
-    } catch (err) {
-      await errorHandler(CamperChan, "close subcommand", err);
+    } catch (error) {
+      await errorHandler(camperChan, "close subcommand", error);
       await interaction.editReply(
         `Something went wrong: ${
-          (err as Error).message ??
-          "Unable to parse error. Please check the logs."
-        }`
+          error instanceof Error
+            ? error.message
+            : "Unable to parse error. Please check the logs."
+        }`,
       );
     }
-  }
+  },
+  permissionValidator: (member) => {
+    return [
+      PermissionFlagsBits.ModerateMembers,
+      PermissionFlagsBits.KickMembers,
+      PermissionFlagsBits.BanMembers,
+    ].some((p) => {
+      return member.permissions.has(p);
+    });
+  },
 };
