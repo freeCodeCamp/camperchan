@@ -22,6 +22,7 @@ export const closeTicket = async(
     await interaction.channel.send({ content: closeTicketMessage });
     await interaction.channel.setLocked();
     await interaction.editReply({ content: "Ticket closed!" });
+    await interaction.channel.setArchived(true);
   } catch (error) {
     await errorHandler(bot, "open ticket", error);
   }
