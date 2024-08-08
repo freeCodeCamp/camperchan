@@ -35,7 +35,7 @@
     "prettier": "3.3.3",
     "string-similarity": "4.0.4",
     "strip-ansi": "7.1.0",
-    "winston": "3.14.0"
+    "winston": "3.14.1"
   },
   "devDependencies": {
     "@nhcarrigan/eslint-config": "4.0.0",
