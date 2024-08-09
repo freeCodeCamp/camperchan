@@ -3,12 +3,20 @@ import { join } from "node:path";
 import {
   AttachmentBuilder,
   ChannelType,
+  EmbedBuilder,
   type Message,
   PermissionFlagsBits,
 } from "discord.js";
+import { hasKnownPhishingLink }
+  from "../../modules/automod/hasKnownPhishingLink.js";
+import { hasNonApprovedInvite }
+  from "../../modules/automod/hasNonApprovedInvite.js";
 import { levelListener } from "../../modules/levelListener.js";
 import { loadRoles } from "../../modules/loadRoles.js";
 import { messageCounter } from "../../modules/messageCounter.js";
+import { sendModerationDm } from "../../modules/sendModerationDm.js";
+import { updateHistory } from "../../modules/updateHistory.js";
+import { customSubstring } from "../../utils/customSubstring.js";
 import type { ExtendedClient } from "../../interfaces/extendedClient.js";
 
 /**
@@ -20,7 +28,7 @@ export const handleMessageCreate = async(
   camperChan: ExtendedClient,
   message: Message,
 ): Promise<void> => {
-  if (message.author.bot || message.system) {
+  if (message.author.bot || message.system || !message.inGuild()) {
     return;
   }
   if (message.author.id === "465650873650118659") {
@@ -37,7 +45,7 @@ export const handleMessageCreate = async(
       await loadRoles(camperChan);
       await message.reply("Done~!");
     }
-    if (message.content === "~contributors" && message.guild) {
+    if (message.content === "~contributors") {
       await message.reply("Fetching records.");
       const allRecords = await camperChan.db.messages.findMany({});
       const above1000 = allRecords.
@@ -50,7 +58,9 @@ export const handleMessageCreate = async(
         map((r) => {
           return `${r.userTag},${String(r.messages)}`;
         });
-      await message.reply(`Found ${String(above1000.length)} qualifying records.`);
+      await message.reply(
+        `Found ${String(above1000.length)} qualifying records.`,
+      );
       const fileContents = `username,messages\n${above1000.join("\n")}`;
       const file = new AttachmentBuilder(Buffer.from(fileContents, "utf-8"), {
         name: "contributors.csv",
@@ -66,19 +76,67 @@ export const handleMessageCreate = async(
     // Safe to make optional here, as member should only be null for a DM.
     && !message.member.permissions.has(PermissionFlagsBits.ManageMessages)
     && message.attachments.size > 0
-    && message.attachments.some(
-      (file) => {
-        return file.contentType !== null
+    && message.attachments.some((file) => {
+      return (
+        file.contentType !== null
         && !file.contentType.startsWith("image/")
-        && !file.contentType.startsWith("video/");
-      },
-    )
+        && !file.contentType.startsWith("video/")
+      );
+    })
   ) {
     await message.delete();
     await message.channel.send({
       content: `Hey <@!${message.author.id}>, it looks like you tried uploading something that wasn't an image or video. Please do not upload other files, to ensure the safety of our users.`,
     });
     return;
+  }
+
+  const isCompromised
+    = await hasKnownPhishingLink(camperChan, message.content)
+    || await hasNonApprovedInvite(camperChan, message.content);
+
+  if (isCompromised && message.member) {
+    const reason = "Your account appears to be compromised.";
+    const sentNotice = await sendModerationDm(
+      camperChan,
+      "ban",
+      message.author,
+      message.guild.name,
+      reason,
+    );
+
+    await message.member.ban({
+      deleteMessageDays: 1,
+      reason:            customSubstring(reason, 1000),
+    });
+
+    await updateHistory(camperChan, "ban", message.member.id);
+
+    const banLogEmbed = new EmbedBuilder();
+    banLogEmbed.setTitle("Member banned.");
+    banLogEmbed.setDescription(
+      `Member ban was requested by automoderation`,
+    );
+    banLogEmbed.addFields([
+      {
+        name:  "Reason",
+        value: customSubstring(reason, 1000),
+      },
+      {
+        name:  "User notified?",
+        value: String(sentNotice),
+      },
+    ]);
+    banLogEmbed.setTimestamp();
+    banLogEmbed.setAuthor({
+      iconURL: message.author.displayAvatarURL(),
+      name:    message.author.tag,
+    });
+    banLogEmbed.setFooter({
+      text: `ID: ${message.author.id}`,
+    });
+
+    await camperChan.config.modHook.send({ embeds: [ banLogEmbed ] });
   }
 
   await messageCounter(camperChan, message);
