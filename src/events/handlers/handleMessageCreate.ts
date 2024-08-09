@@ -5,6 +5,7 @@ import {
   ChannelType,
   EmbedBuilder,
   type Message,
+  MessageMentions,
   PermissionFlagsBits,
 } from "discord.js";
 import { hasKnownPhishingLink }
@@ -91,9 +92,11 @@ export const handleMessageCreate = async(
     return;
   }
 
+  const inviteWithPing
+    = MessageMentions.EveryonePattern.test(message.content)
+    && await hasNonApprovedInvite(camperChan, message.content);
   const isCompromised
-    = await hasKnownPhishingLink(camperChan, message.content)
-    || await hasNonApprovedInvite(camperChan, message.content);
+    = await hasKnownPhishingLink(camperChan, message.content) || inviteWithPing;
 
   if (isCompromised && message.member) {
     const reason = "Your account appears to be compromised.";
@@ -114,9 +117,7 @@ export const handleMessageCreate = async(
 
     const banLogEmbed = new EmbedBuilder();
     banLogEmbed.setTitle("Member banned.");
-    banLogEmbed.setDescription(
-      `Member ban was requested by automoderation`,
-    );
+    banLogEmbed.setDescription(`Member ban was requested by automoderation`);
     banLogEmbed.addFields([
       {
         name:  "Reason",
