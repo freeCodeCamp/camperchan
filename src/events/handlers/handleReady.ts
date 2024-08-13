@@ -2,6 +2,7 @@ import { ChannelType } from "discord.js";
 import { scheduleJob } from "node-schedule";
 import { loadRoles } from "../../modules/loadRoles.js";
 import { send100DaysOfCode } from "../../modules/send100DaysOfCode.js";
+import { instantiateServer } from "../../server/serve.js";
 import { errorHandler } from "../../utils/errorHandler.js";
 import type { ExtendedClient } from "../../interfaces/extendedClient.js";
 
@@ -9,7 +10,9 @@ import type { ExtendedClient } from "../../interfaces/extendedClient.js";
  * Logs a message to the debug hook when the camperChan is online.
  * @param camperChan - The camperChan's Discord instance.
  */
-export const handleReady = async(camperChan: ExtendedClient): Promise<void> => {
+export const handleReady = async(
+  camperChan: ExtendedClient,
+): Promise<void> => {
   try {
     await camperChan.config.debugHook.send("camperChan Ready!");
     const homeGuild = await camperChan.guilds.
@@ -73,6 +76,7 @@ export const handleReady = async(camperChan: ExtendedClient): Promise<void> => {
     scheduleJob("0 9 * * *", async() => {
       await send100DaysOfCode(camperChan);
     });
+    await instantiateServer(camperChan);
   } catch (error) {
     await errorHandler(camperChan, "client ready event", error);
   }
