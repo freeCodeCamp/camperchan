@@ -18,9 +18,11 @@ export const handleAddLabels: Subcommand = {
         repo:  repo,
       });
 
-      const presentLabels = new Set(response.data.map((x) => {
-        return x.name.trim();
-      }));
+      const presentLabels = new Set(
+        response.data.map((x) => {
+          return x.name.trim();
+        }),
+      );
 
       if (
         !labelNames.every((requestedLabel) => {
@@ -29,6 +31,12 @@ export const handleAddLabels: Subcommand = {
       ) {
         await interaction.editReply({
           content: `${labelNames.join(", ")} were not found in the [Issue Labels List](<https://github.com/freeCodeCamp/${repo}/labels>) and will not be added to the issue.`,
+          embeds:  [
+            {
+              description: [ ...presentLabels.values() ].join(", "),
+              title:       "Labels found",
+            },
+          ],
         });
         return;
       }
