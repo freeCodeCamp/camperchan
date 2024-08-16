@@ -14,8 +14,10 @@ export const handleAddLabels: Subcommand = {
       });
 
       const response = await camperChan.octokit.rest.issues.listLabelsForRepo({
-        owner: "freeCodeCamp",
-        repo:  repo,
+        owner:    "freeCodeCamp",
+        // eslint-disable-next-line @typescript-eslint/naming-convention, camelcase
+        per_page: 100,
+        repo:     repo,
       });
 
       const presentLabels = new Set(
