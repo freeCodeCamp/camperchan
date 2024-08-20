@@ -70,7 +70,7 @@ export const userSettings: Command = {
         where: { userId: interaction.user.id },
       });
       if (options.learnEmail !== null) {
-        if (record?.learnEmail !== undefined) {
+        if (record?.learnEmail !== undefined && record.learnEmail !== "") {
           responses.push(
             `You already have an account connected. To reset this, reach out to Naomi.`,
           );
