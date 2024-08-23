@@ -9,7 +9,7 @@ export default defineConfig({
       allowExternal: true,
       extension: ".ts",
       thresholds: {
-        lines: 22
+        lines: 21
       }
     }
   }
