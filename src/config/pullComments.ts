@@ -26,7 +26,7 @@ const pullComments: Array<{ key: string; message: string }> = [
   {
     key: "Newbie Mistakes",
     message:
-      "Hey there,\n\nThanks for your interest in contributing. We appreciate your efforts, but this PR doesn't follow our guidelines.\n\nPlease join our [Discord](https://discord.gg/KVUmVXA) and ask in our contributing channel to receive guidance on how to get your PR ready for us to review.",
+      "Hey there,\n\nThanks for your interest in contributing. We appreciate your efforts, but this PR doesn't follow [our guidelines](https://contribute.freecodecamp.org/how-to-open-a-pull-request).\n\nDo not worry, you should join our [Discord](https://discord.gg/KVUmVXA) server and ask for help in the `#contributors` channel. That will help other contributors guide you to get your PR ready for a review. \n\nHappy Contributing!",
   },
   {
     key: "Not Triaged",
