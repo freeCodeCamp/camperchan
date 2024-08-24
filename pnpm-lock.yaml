@@ -15,8 +15,8 @@ importers:
         specifier: 1.13.12
         version: 1.13.12
       deepl-node:
-        specifier: 1.13.0
-        version: 1.13.0
+        specifier: 1.13.1
+        version: 1.13.1
       diff:
         specifier: 5.2.0
         version: 5.2.0
@@ -1195,6 +1195,9 @@ packages:
   axios@1.6.8:
     resolution: {integrity: sha512-v/ZHtJDU39mDpyBoFVkETcd/uNdxrWRrg3bKpOKzXFA6Bvqopts6ALSMU3y6ijYxbw2B+wPrIv46egTzJXCLGQ==}
 
+  axios@1.7.5:
+    resolution: {integrity: sha512-fZu86yCo+svH3uqJ/yTdQ0QHpQu5oL+/QE+QPSv6BZSkDAoky9vytxp7u5qk83OJFS3kEBcesWni9WTZAv3tSw==}
+
   b4a@1.6.6:
     resolution: {integrity: sha512-5Tk1HLk6b6ctmjIkAcU/Ujv/1WqiDl0F0JdRCR80VsOcUlHcu7pWeWRlOqQLHfDEsVx9YH/aif5AG4ehoCtTmg==}
 
@@ -1398,8 +1401,8 @@ packages:
   deep-is@0.1.4:
     resolution: {integrity: sha512-oIPzksmTg4/MriiaYGO+okXDT7ztn/w3Eptv/+gSIdMdKsJo0u4CfYNFJPy+4SKMuCqGw2wxnA+URMg3t8a/bQ==}
 
-  deepl-node@1.13.0:
-    resolution: {integrity: sha512-pm8Al5B+/fRHiIKoreoSmv2RlXidF18+CznhtLILiYcj3EbxZpIhxWO8cgXCCsCTrUDMAbScIl8CuH3AqLPpGg==}
+  deepl-node@1.13.1:
+    resolution: {integrity: sha512-J1Y4+FYNxxTyqKiTM83Vub8Fm6/z6ZlV7yFKJ59Oi5dWXjdILQWd8UR4eiNF+pJtTBH5ObRv1cdUrRyUuN5VDg==}
     engines: {node: '>=12.0'}
 
   define-data-property@1.1.1:
@@ -4389,6 +4392,14 @@ snapshots:
     transitivePeerDependencies:
       - debug
 
+  axios@1.7.5:
+    dependencies:
+      follow-redirects: 1.15.6
+      form-data: 4.0.0
+      proxy-from-env: 1.1.0
+    transitivePeerDependencies:
+      - debug
+
   b4a@1.6.6: {}
 
   balanced-match@1.0.2: {}
@@ -4580,10 +4591,10 @@ snapshots:
 
   deep-is@0.1.4: {}
 
-  deepl-node@1.13.0:
+  deepl-node@1.13.1:
     dependencies:
       '@types/node': 20.14.14
-      axios: 1.6.8
+      axios: 1.7.5
       form-data: 3.0.1
       loglevel: 1.9.1
     transitivePeerDependencies:
