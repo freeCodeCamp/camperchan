@@ -45,13 +45,13 @@
     "@types/node": "20.16.5",
     "@types/node-schedule": "2.1.7",
     "@types/string-similarity": "4.0.2",
-    "@vitest/coverage-istanbul": "2.1.0",
+    "@vitest/coverage-istanbul": "2.1.1",
     "discordjs-testing": "0.2.0",
     "eslint": "9.10.0",
     "prisma": "5.19.1",
     "rimraf": "6.0.1",
     "tsx": "4.19.1",
     "typescript": "5.6.2",
-    "vitest": "2.1.0"
+    "vitest": "2.1.1"
   }
 }
