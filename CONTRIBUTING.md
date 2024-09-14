@@ -8,6 +8,8 @@ If you have not done so already, fork this repository to your account and clone 
 
 > [!CAUTION]
 > This project uses [1Password's CLI](https://developer.1password.com/docs/cli/use-cases#secrets) to manage environment variables. If you do not use 1password, or do not have the CLI set up, these instructions may not work for you.
+>
+> If you aren't sure how to structure your secret references, take a look at `dev.env`.
 
 You'll need to head over to the [Discord Developer Portal](https://discord.dev) and create your application.
 
@@ -88,5 +90,8 @@ We are happy to accept contributions to this project. Please ensure that all cod
 ```bash
 pnpm run lint
 ```
+
+> [!WARNING]
+> If you try to use `npm` to run the lint script, unexpected errors may occur. This is due to the way our external configs are linked in the `node_modules` directory.
 
 If you have any issues or questions, feel free to [ask us in Discord](https://discord.gg/KVUmVXA).
