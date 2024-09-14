@@ -94,4 +94,15 @@ pnpm run lint
 > [!WARNING]
 > If you try to use `npm` to run the lint script, unexpected errors may occur. This is due to the way our external configs are linked in the `node_modules` directory.
 
+Additionally, all existing test cases should pass:
+
+```bash
+pnpm run test
+```
+
+If you are adding new features, you should add corresponding tests. Every file in `src` must have a corresponding `.spec.ts` file in `test`, or the suite will not run.
+
+> [!IMPORTANT]
+> The coverage value in `vitest.config.js` should NOT be reduced except in situations where added code cannot be tested with the current limitations of the mock package.
+
 If you have any issues or questions, feel free to [ask us in Discord](https://discord.gg/KVUmVXA).
