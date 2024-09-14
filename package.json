@@ -4,6 +4,7 @@
   "private": true,
   "type": "module",
   "scripts": {
+    "preinstall": "npx only-allow pnpm",
     "prebuild": "npm run clean && prisma generate",
     "build": "tsc",
     "clean": "rimraf prod",
