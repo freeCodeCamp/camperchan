@@ -26,14 +26,7 @@ export const report: Context = {
         });
         return;
       }
-      const { guild, options, user } = interaction;
-      if (!guild) {
-        await interaction.reply({
-          content:   "You cannot report DM messages!",
-          ephemeral: true,
-        });
-        return;
-      }
+      const { options, user } = interaction;
       const message = options.getMessage("message", true);
 
       const { reportChannel } = camperChan;

@@ -8,6 +8,6 @@ export interface Context {
   };
   run: (
     camperChan: ExtendedClient,
-    interaction: ContextMenuCommandInteraction
+    interaction: ContextMenuCommandInteraction<"cached">
   )=> Promise<void>;
 }

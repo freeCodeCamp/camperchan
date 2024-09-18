@@ -5,7 +5,6 @@ import { closePrivateChannel } from "../../modules/closePrivateChannel.js";
 import { reactionRoleClick } from "../../modules/reactionRoleClick.js";
 import { closeTicket } from "../../modules/tickets/closeTicket.js";
 import { openTicket } from "../../modules/tickets/openTicket.js";
-import { isGuildCommandInteraction } from "../../utils/typeGuards.js";
 import type { ExtendedClient } from "../../interfaces/extendedClient.js";
 
 /**
@@ -18,6 +17,13 @@ export const handleInteractionCreate = async(
   interaction: Interaction,
 ): Promise<void> => {
   if (interaction.isChatInputCommand()) {
+    if (!interaction.inCachedGuild()) {
+      await interaction.reply({
+        content:   "This command can only be used in a server, not a DM.",
+        ephemeral: true,
+      });
+      return;
+    }
     const target = camperChan.commands.find((command) => {
       return command.data.name === interaction.commandName;
     });
@@ -27,16 +33,17 @@ export const handleInteractionCreate = async(
       );
       return;
     }
-    if (!isGuildCommandInteraction(interaction)) {
-      await interaction.reply(
-        "This command can only be used in a server, not a DM.",
-      );
-      return;
-    }
     await target.run(camperChan, interaction);
   }
 
   if (interaction.isContextMenuCommand()) {
+    if (!interaction.inCachedGuild()) {
+      await interaction.reply({
+        content:   "This command can only be used in a server, not a DM.",
+        ephemeral: true,
+      });
+      return;
+    }
     const target = camperChan.contexts.find((context) => {
       return context.data.name === interaction.commandName;
     });

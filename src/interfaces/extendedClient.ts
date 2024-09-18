@@ -8,8 +8,8 @@ import type {
   CategoryChannel,
   Client,
   Guild,
+  GuildTextBasedChannel,
   Snowflake,
-  TextBasedChannel,
   WebhookClient,
 } from "discord.js";
 import type { App } from "octokit";
@@ -39,7 +39,7 @@ export interface ExtendedClient extends Client {
   privateLogs:     Record<string, string>;
   db:              PrismaClient;
   homeGuild:       Guild;
-  reportChannel:   TextBasedChannel;
+  reportChannel:   GuildTextBasedChannel;
   privateCategory: CategoryChannel;
   learnAccounts:   Record<string, UserRecord & { cacheTTL: Date }>;
   event?: {
