@@ -26,7 +26,7 @@
     "@tryghost/admin-api": "1.13.12",
     "deepl-node": "1.14.0",
     "diff": "5.2.0",
-    "discord.js": "14.15.3",
+    "discord.js": "14.16.2",
     "dotenv": "16.4.5",
     "fastify": "4.28.1",
     "highlight.js": "11.10.0",

@@ -15,7 +15,6 @@ describe("moderation command", () => {
   test("has correct data", () => {
     assert.strictEqual(moderation.data.name, "moderation");
     assert.strictEqual(moderation.data.description, "Moderation commands.");
-    assert.isFalse(moderation.data.dm_permission);
     assert.lengthOf(subcommands, 8);
   });
 

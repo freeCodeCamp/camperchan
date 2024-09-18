@@ -1,5 +1,6 @@
 import {
   ChannelType,
+  InteractionContextType,
   SlashCommandBuilder,
   SlashCommandSubcommandBuilder,
 } from "discord.js";
@@ -20,7 +21,7 @@ export const management: Command = {
   data: new SlashCommandBuilder().
     setName("management").
     setDescription("Commands related to server management.").
-    setDMPermission(false).
+    setContexts(InteractionContextType.Guild).
     addSubcommand(
       new SlashCommandSubcommandBuilder().
         setName("private").

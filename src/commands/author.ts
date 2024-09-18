@@ -1,6 +1,6 @@
 // eslint-disable-next-line @typescript-eslint/naming-convention
 import GhostAdminApi from "@tryghost/admin-api";
-import { SlashCommandBuilder } from "discord.js";
+import { InteractionContextType, SlashCommandBuilder } from "discord.js";
 import { authorRoleId } from "../config/roles.js";
 import { errorHandler } from "../utils/errorHandler.js";
 import type { Command } from "../interfaces/command.js";
@@ -9,7 +9,7 @@ export const author: Command = {
   data: new SlashCommandBuilder().
     setName("author").
     setDescription("Claim the author role.").
-    setDMPermission(false).
+    setContexts(InteractionContextType.Guild).
     addStringOption((option) => {
       return option.
         setName("email").

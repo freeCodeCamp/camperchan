@@ -1,6 +1,6 @@
 import { readFile } from "node:fs/promises";
 import { join } from "node:path";
-import { SlashCommandBuilder } from "discord.js";
+import { InteractionContextType, SlashCommandBuilder } from "discord.js";
 import { supporterRoleId } from "../config/roles.js";
 import { errorHandler } from "../utils/errorHandler.js";
 import { fetchLearnRecord } from "../utils/fetchLearnRecord.js";
@@ -10,7 +10,7 @@ export const supporter: Command = {
   data: new SlashCommandBuilder().
     setName("supporter").
     setDescription("Claim the supporter role.").
-    setDMPermission(false).
+    setContexts(InteractionContextType.Guild).
     addStringOption((option) => {
       return option.
         setName("email").

@@ -18,7 +18,6 @@ describe("community command", () => {
       community.data.description,
       "Commands related to our community.",
     );
-    assert.isFalse(community.data.dm_permission);
     assert.lengthOf(subcommands, 7);
   });
 

@@ -1,4 +1,4 @@
-import { SlashCommandBuilder } from "discord.js";
+import { InteractionContextType, SlashCommandBuilder } from "discord.js";
 import { errorHandler } from "../utils/errorHandler.js";
 import type { Command } from "../interfaces/command.js";
 
@@ -6,7 +6,7 @@ export const report: Command = {
   data: new SlashCommandBuilder().
     setName("report").
     setDescription("Report inappropriate conduct in your voice channel.").
-    setDMPermission(false).
+    setContexts(InteractionContextType.Guild).
     addUserOption((o) => {
       return o.
         setName("user").

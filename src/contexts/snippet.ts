@@ -1,7 +1,6 @@
 import {
   ActionRowBuilder,
   type ComponentType,
-  GuildMember,
   StringSelectMenuBuilder,
 } from "discord.js";
 import { tags } from "../config/tags.js";
@@ -26,9 +25,7 @@ export const snippet: Context = {
       }
       await interaction.deferReply({ ephemeral: true });
       if (
-        !interaction.member
-        || !(interaction.member instanceof GuildMember)
-        || !isModerator(interaction.member)
+        !isModerator(interaction.member)
       ) {
         await interaction.editReply({
           content: "Only moderators may use this command.",

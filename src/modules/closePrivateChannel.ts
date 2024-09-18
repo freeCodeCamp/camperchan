@@ -21,7 +21,12 @@ export const closePrivateChannel = async(
   try {
     await interaction.deferReply();
     const { channel, member } = interaction;
-    if (!channel || !member || channel.type === ChannelType.DM) {
+    if (
+      !channel
+      || !member
+      || channel.type === ChannelType.DM
+      || channel.type === ChannelType.GroupDM
+    ) {
       await interaction.editReply("Cannot find your member object.");
       return;
     }

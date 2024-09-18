@@ -1,4 +1,6 @@
-import { SlashCommandBuilder, SlashCommandSubcommandBuilder } from "discord.js";
+import { InteractionContextType,
+  SlashCommandBuilder,
+  SlashCommandSubcommandBuilder } from "discord.js";
 import { errorHandler } from "../utils/errorHandler.js";
 import { handleCodeOfConduct }
   from "./subcommands/community/handleCodeOfConduct.js";
@@ -27,7 +29,7 @@ export const community: Command = {
   data: new SlashCommandBuilder().
     setName("community").
     setDescription("Commands related to our community.").
-    setDMPermission(false).
+    setContexts(InteractionContextType.Guild).
     addSubcommand(
       new SlashCommandSubcommandBuilder().
         setName("code-of-conduct").

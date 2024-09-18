@@ -2,6 +2,7 @@ import {
   ApplicationCommandType,
   ContextMenuCommandBuilder,
   GuildMember,
+  InteractionContextType,
 } from "discord.js";
 import { errorHandler } from "../utils/errorHandler.js";
 import { isModerator } from "../utils/isModerator.js";
@@ -10,7 +11,7 @@ import type { Context } from "../interfaces/context.js";
 export const translate: Context = {
   data: new ContextMenuCommandBuilder().
     setName("translate").
-    setDMPermission(false).
+    setContexts(InteractionContextType.Guild).
     setType(ApplicationCommandType.Message),
   run: async(bot, interaction) => {
     try {
