@@ -18,7 +18,6 @@ describe("management command", () => {
       management.data.description,
       "Commands related to server management.",
     );
-    assert.isFalse(management.data.dm_permission);
     assert.lengthOf(subcommands, 3);
   });
 

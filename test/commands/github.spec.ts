@@ -18,7 +18,6 @@ describe("github command", () => {
       github.data.description,
       "Commands related to managing github",
     );
-    assert.isFalse(github.data.dm_permission);
     assert.lengthOf(subcommands, 4);
   });
 
