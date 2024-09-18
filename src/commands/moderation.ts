@@ -1,4 +1,6 @@
-import { SlashCommandBuilder, SlashCommandSubcommandBuilder } from "discord.js";
+import { InteractionContextType,
+  SlashCommandBuilder,
+  SlashCommandSubcommandBuilder } from "discord.js";
 import { errorHandler } from "../utils/errorHandler.js";
 import { handleBan } from "./subcommands/moderation/handleBan.js";
 import { handleHistory } from "./subcommands/moderation/handleHistory.js";
@@ -26,7 +28,7 @@ export const moderation: Command = {
   data: new SlashCommandBuilder().
     setName("moderation").
     setDescription("Moderation commands.").
-    setDMPermission(false).
+    setContexts(InteractionContextType.Guild).
     addSubcommand(
       new SlashCommandSubcommandBuilder().
         setName("ban").

@@ -1,4 +1,6 @@
-import { SlashCommandBuilder, SlashCommandSubcommandBuilder } from "discord.js";
+import { InteractionContextType,
+  SlashCommandBuilder,
+  SlashCommandSubcommandBuilder } from "discord.js";
 import { pullComments } from "../config/pullComments.js";
 import { errorHandler } from "../utils/errorHandler.js";
 import { handleAddLabels } from "./subcommands/github/handleAddLabels.js";
@@ -21,7 +23,7 @@ export const github: Command = {
   data: new SlashCommandBuilder().
     setName("github").
     setDescription("Commands related to managing github").
-    setDMPermission(false).
+    setContexts(InteractionContextType.Guild).
     addSubcommand(
       new SlashCommandSubcommandBuilder().
         setName("close").

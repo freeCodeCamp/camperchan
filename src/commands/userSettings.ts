@@ -1,4 +1,4 @@
-import { SlashCommandBuilder } from "discord.js";
+import { InteractionContextType, SlashCommandBuilder } from "discord.js";
 import {
   validateColour,
   validateImage,
@@ -11,7 +11,7 @@ export const userSettings: Command = {
   data: new SlashCommandBuilder().
     setName("user-settings").
     setDescription("Settings for your camperChan profile").
-    setDMPermission(false).
+    setContexts(InteractionContextType.Guild).
     addStringOption((option) => {
       return option.
         setName("avatar").

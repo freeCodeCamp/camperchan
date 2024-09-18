@@ -1,4 +1,4 @@
-import { SlashCommandBuilder } from "discord.js";
+import { InteractionContextType, SlashCommandBuilder } from "discord.js";
 import { languages } from "../config/languages.js";
 import { errorHandler } from "../utils/errorHandler.js";
 import type { Command } from "../interfaces/command.js";
@@ -7,7 +7,7 @@ export const translator: Command = {
   data: new SlashCommandBuilder().
     setName("translator").
     setDescription("Select a language you are interested in translating.").
-    setDMPermission(false).
+    setContexts(InteractionContextType.Guild).
     addStringOption((option) => {
       return option.
         setName("language").
