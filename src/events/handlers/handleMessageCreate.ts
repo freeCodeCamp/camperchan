@@ -96,9 +96,14 @@ export const handleMessageCreate = async(
     = MessageMentions.EveryonePattern.test(message.content)
     && await hasNonApprovedInvite(camperChan, message.content);
   const isCompromised
-    = await hasKnownPhishingLink(camperChan, message.content) || inviteWithPing;
+    = await hasKnownPhishingLink(camperChan, message.content)
+    || inviteWithPing
+    // This channel is the "honeypot" channel. Regular members should never post in here.
+    || message.channel.id === "1286391728919810150";
 
-  if (isCompromised && message.member) {
+  const isBannable = Boolean(message.member?.bannable);
+
+  if (isCompromised && isBannable) {
     const reason = "Your account appears to be compromised.";
     const sentNotice = await sendModerationDm(
       camperChan,
@@ -108,12 +113,12 @@ export const handleMessageCreate = async(
       reason,
     );
 
-    await message.member.ban({
+    await message.member?.ban({
       deleteMessageDays: 1,
       reason:            customSubstring(reason, 1000),
     });
 
-    await updateHistory(camperChan, "ban", message.member.id);
+    await updateHistory(camperChan, "ban", message.member?.id ?? "");
 
     const banLogEmbed = new EmbedBuilder();
     banLogEmbed.setTitle("Member banned.");
