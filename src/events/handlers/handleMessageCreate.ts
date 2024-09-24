@@ -12,6 +12,8 @@ import { hasKnownPhishingLink }
   from "../../modules/automod/hasKnownPhishingLink.js";
 import { hasNonApprovedInvite }
   from "../../modules/automod/hasNonApprovedInvite.js";
+import { checkHacktoberfestMessage }
+  from "../../modules/checkHacktoberfestMessage.js";
 import { levelListener } from "../../modules/levelListener.js";
 import { loadRoles } from "../../modules/loadRoles.js";
 import { messageCounter } from "../../modules/messageCounter.js";
@@ -70,6 +72,11 @@ export const handleMessageCreate = async(
         files: [ file ],
       });
     }
+  }
+
+  if (message.channel.id === "1288261106921504913") {
+    await checkHacktoberfestMessage(camperChan, message);
+    return;
   }
 
   if (
