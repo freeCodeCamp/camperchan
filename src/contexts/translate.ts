@@ -1,5 +1,4 @@
 import {
-  ApplicationCommandType,
   ContextMenuCommandBuilder,
   GuildMember,
   InteractionContextType,
@@ -12,7 +11,7 @@ export const translate: Context = {
   data: new ContextMenuCommandBuilder().
     setName("translate").
     setContexts(InteractionContextType.Guild).
-    setType(ApplicationCommandType.Message),
+    setType(3),
   run: async(bot, interaction) => {
     try {
       await interaction.deferReply({ ephemeral: true });
