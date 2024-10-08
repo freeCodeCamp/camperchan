@@ -64,8 +64,8 @@ importers:
         specifier: 4.0.0
         version: 4.0.0(typescript@5.6.2)
       '@types/diff':
-        specifier: 5.2.2
-        version: 5.2.2
+        specifier: 5.2.3
+        version: 5.2.3
       '@types/node':
         specifier: 20.16.10
         version: 20.16.10
@@ -924,8 +924,8 @@ packages:
   '@types/aws-lambda@8.10.141':
     resolution: {integrity: sha512-SMWlRBukG9KV8ZNjwemp2AzDibp/czIAeKKTw09nCPbWxVskIxactCJCGOp4y6I1hCMY7T7UGfySvBLXNeUbEw==}
 
-  '@types/diff@5.2.2':
-    resolution: {integrity: sha512-qVqLpd49rmJA2nZzLVsmfS/aiiBpfVE95dHhPVwG0NmSBAt+riPxnj53wq2oBq5m4Q2RF1IWFEUpnZTgrQZfEQ==}
+  '@types/diff@5.2.3':
+    resolution: {integrity: sha512-K0Oqlrq3kQMaO2RhfrNQX5trmt+XLyom88zS0u84nnIcLvFnRUMRRHmrGny5GSM+kNO9IZLARsdQHDzkhAgmrQ==}
 
   '@types/eslint@8.56.11':
     resolution: {integrity: sha512-sVBpJMf7UPo/wGecYOpk2aQya2VUGeHhe38WG7/mN5FufNSubf5VT9Uh9Uyp8/eLJpu1/tuhJ/qTo4mhSB4V4Q==}
@@ -4055,7 +4055,7 @@ snapshots:
 
   '@types/aws-lambda@8.10.141': {}
 
-  '@types/diff@5.2.2': {}
+  '@types/diff@5.2.3': {}
 
   '@types/eslint@8.56.11':
     dependencies:
