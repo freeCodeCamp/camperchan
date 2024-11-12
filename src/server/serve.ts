@@ -77,6 +77,34 @@ export const instantiateServer = async(
       // It's valid, so send an ok response immediately
       await response.status(200).send("OK~!");
 
+      if (event === "pull_request") {
+        // eslint-disable-next-line @typescript-eslint/naming-convention, @typescript-eslint/consistent-type-assertions
+        const { action, pull_request, label } = request.body as {
+          action:       string;
+          // eslint-disable-next-line @typescript-eslint/naming-convention
+          pull_request: { title: string; html_url: string; number: number };
+          label?:       { name: string };
+        };
+        if (label?.name !== "DO NOT MERGE"
+          || ![ "labeled", "unlabeled" ].includes(action)) {
+          return;
+        }
+        await camperChan.octokit.rest.pulls.createReview({
+          body: action === "labeled"
+            // eslint-disable-next-line stylistic/max-len
+            ? "This PR has been marked as DO NOT MERGE. When you are ready to merge it, remove the label and I'll unblock the PR."
+            // eslint-disable-next-line stylistic/max-len
+            : "This PR has been unmarked as DO NOT MERGE. You may now merge this PR.",
+          event: action === "labeled"
+            ? "REQUEST_CHANGES"
+            : "APPROVE",
+          owner:       "nhcarrigan",
+          // eslint-disable-next-line @typescript-eslint/naming-convention
+          pull_number: pull_request.number,
+          repo:        "camperchan",
+        });
+      }
+
       if (event === "issues") {
         // eslint-disable-next-line @typescript-eslint/consistent-type-assertions
         const { action, issue, label } = request.body as {
