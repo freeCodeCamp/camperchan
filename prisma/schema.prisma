@@ -61,5 +61,5 @@ model supporters {
 model authors {
   id     String @id @default(auto()) @map("_id") @db.ObjectId
   userId String @unique
-  email  String @unique
+  hashnodeUsername  String @unique
 }

@@ -1,9 +1,9 @@
-// eslint-disable-next-line @typescript-eslint/naming-convention
-import GhostAdminApi from "@tryghost/admin-api";
 import { InteractionContextType, SlashCommandBuilder } from "discord.js";
+import { gql, request } from "graphql-request";
 import { authorRoleId } from "../config/roles.js";
 import { errorHandler } from "../utils/errorHandler.js";
 import type { Command } from "../interfaces/command.js";
+import type { HashnodeUser } from "../interfaces/hashnode.js";
 
 export const author: Command = {
   data: new SlashCommandBuilder().
@@ -12,14 +12,14 @@ export const author: Command = {
     setContexts(InteractionContextType.Guild).
     addStringOption((option) => {
       return option.
-        setName("email").
-        setDescription("The email tied to your freeCodeCamp NEWS account.").
+        setName("username").
+        setDescription("Your Hashnode username.").
         setRequired(true);
     }),
   run: async(camperChan, interaction) => {
     try {
       await interaction.deferReply({ ephemeral: true });
-      const email = interaction.options.getString("email", true);
+      const username = interaction.options.getString("username", true);
       const { member } = interaction;
       if (member.roles.cache.has(authorRoleId)) {
         await interaction.editReply({
@@ -39,39 +39,59 @@ export const author: Command = {
         });
         return;
       }
-      const existsByEmail = await camperChan.db.authors.findUnique({
+      const existsByUsername = await camperChan.db.authors.findUnique({
         where: {
-          email,
+          hashnodeUsername: username,
         },
       });
-      if (existsByEmail) {
+      if (existsByUsername) {
         await interaction.editReply({
           content:
-            `An author record already exists on your email. If you believe this is an error, please contact Naomi.`,
+            `An author record already exists on your Hashnode account. If you believe this is an error, please contact Naomi.`,
         });
         return;
       }
-      const api = new GhostAdminApi({
-        key:     camperChan.config.ghostKey,
-        url:     "https://freecodecamp.org/news",
-        version: "v3",
-      });
-      const user = await api.users.
-        browse({ filter: `email:'${email}'` }).
-        catch(() => {
-          return null;
-        });
 
-      if (!user || user.length !== 1) {
+      const ourId = "65dc2b7cbb4eb0cd565b4463";
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-call
+      const query = gql`
+        query getMember {
+          user(username: "Koded001") {
+            publications(first: 50) {
+              edges {
+                node {
+                  id
+                }
+              }
+            }
+          }
+        }
+      `;
+      const data
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-call, @typescript-eslint/consistent-type-assertions
+      = await request("https://api.hashnode.com", query) as HashnodeUser;
+
+      if (!data.user) {
         await interaction.editReply({
-          content: `There does not appear to be a news account associated with ${email}. This has been flagged internally for Naomi to investigate.`,
+          content: `There does not appear to be a Hashnode account associated with ${username}.`,
+        });
+        return;
+      }
+      const publications = data.user.publications.edges;
+      const isFreeCodeCamp = publications.some((pub) => {
+        return pub.node.id === ourId;
+      });
+      if (!isFreeCodeCamp) {
+        await interaction.editReply({
+          content:
+            `It appears that you are not a member of the freeCodeCamp publication.`,
         });
         return;
       }
       await camperChan.db.authors.create({
         data: {
-          email:  email,
-          userId: member.id,
+          hashnodeUsername: username,
+          userId:           member.id,
         },
       });
       await member.roles.add(authorRoleId).catch(async() => {
