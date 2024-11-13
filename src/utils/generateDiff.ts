@@ -9,10 +9,10 @@ import { diffSentences } from "diff";
 export const generateDiff = (old: string, updated: string): string => {
   return diffSentences(old, updated).
     map((element) => {
-      if (element.added === true) {
+      if (element.added) {
         return `+ ${element.value}`;
       }
-      if (element.removed === true) {
+      if (element.removed) {
         return `- ${element.value}`;
       }
       return "";
