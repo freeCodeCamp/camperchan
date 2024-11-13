@@ -69,7 +69,7 @@ export const author: Command = {
       `;
       const data
       // eslint-disable-next-line @typescript-eslint/no-unsafe-call, @typescript-eslint/consistent-type-assertions
-      = await request("https://api.hashnode.com", query) as HashnodeUser;
+      = await request("https://gql.hashnode.com", query) as HashnodeUser;
 
       if (!data.user) {
         await interaction.editReply({
