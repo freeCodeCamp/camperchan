@@ -20,7 +20,7 @@ export const author: Command = {
     try {
       await interaction.deferReply({ ephemeral: true });
       const username = interaction.options.getString("username", true);
-      const { member } = interaction;
+      const { member, user } = interaction;
       if (member.roles.cache.has(authorRoleId)) {
         await interaction.editReply({
           content: "You have already claimed the author role.",
@@ -84,7 +84,7 @@ export const author: Command = {
       if (!isFreeCodeCamp) {
         await interaction.editReply({
           content:
-            `It appears that you are not a member of the freeCodeCamp publication.`,
+            `It appears that you are not a member of the freeCodeCamp publication. Please join the publication and try again.`,
         });
         return;
       }
@@ -96,7 +96,7 @@ export const author: Command = {
       });
       await member.roles.add(authorRoleId).catch(async() => {
         await camperChan.config.debugHook.send(
-          `Failed to give author role to ${interaction.user.id}. Please grant manually.`,
+          `Failed to give author role to ${user.id}. Please grant manually.`,
         );
       });
       await interaction.editReply({
