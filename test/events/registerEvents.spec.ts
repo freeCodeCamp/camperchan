@@ -1,5 +1,7 @@
-import { describe, assert, test } from "vitest";
+import { describe, assert, test, vi } from "vitest";
 import { registerEvents } from "../../src/events/registerEvents.js";
+
+vi.mock("discord.js");
 
 const bot = {
   events: {},
