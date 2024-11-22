@@ -31,7 +31,7 @@
     "fastify": "5.1.0",
     "graphql-request": "7.1.2",
     "highlight.js": "11.10.0",
-    "mongodb": "6.10.0",
+    "mongodb": "6.11.0",
     "node-html-to-image": "5.0.0",
     "node-schedule": "2.1.1",
     "octokit": "4.0.2",
