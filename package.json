@@ -27,7 +27,7 @@
     "deepl-node": "1.15.0",
     "diff": "7.0.0",
     "discord.js": "14.16.3",
-    "dotenv": "16.4.6",
+    "dotenv": "16.4.7",
     "fastify": "5.1.0",
     "graphql-request": "7.1.2",
     "highlight.js": "11.10.0",
