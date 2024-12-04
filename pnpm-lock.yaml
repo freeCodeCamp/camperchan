@@ -48,8 +48,8 @@ importers:
         specifier: 4.0.2
         version: 4.0.2
       prettier:
-        specifier: 3.4.1
-        version: 3.4.1
+        specifier: 3.4.2
+        version: 3.4.2
       string-similarity:
         specifier: 4.0.4
         version: 4.0.4
@@ -62,7 +62,7 @@ importers:
     devDependencies:
       '@nhcarrigan/eslint-config':
         specifier: 4.0.0
-        version: 4.0.0(@types/eslint@8.56.11)(eslint@9.14.0)(prettier@3.4.1)(typescript@5.7.2)
+        version: 4.0.0(@types/eslint@8.56.11)(eslint@9.14.0)(prettier@3.4.2)(typescript@5.7.2)
       '@nhcarrigan/typescript-config':
         specifier: 4.0.0
         version: 4.0.0(typescript@5.7.2)
@@ -2617,8 +2617,8 @@ packages:
     resolution: {integrity: sha512-GbK2cP9nraSSUF9N2XwUwqfzlAFlMNYYl+ShE/V+H8a9uNl/oUqB1w2EL54Jh0OlyRSd8RfWYJ3coVS4TROP2w==}
     engines: {node: '>=6.0.0'}
 
-  prettier@3.4.1:
-    resolution: {integrity: sha512-G+YdqtITVZmOJje6QkXQWzl3fSfMxFwm1tjTyo9exhkmWSqC4Yhd1+lug++IlR2mvRVAxEDDWYkQdeSztajqgg==}
+  prettier@3.4.2:
+    resolution: {integrity: sha512-e9MewbtFo+Fevyuxn/4rrcDAaq0IYxPGLvObpQjiZBMAzB9IGmzlnG9RZy3FFas+eBMu2vA0CszMeduow5dIuQ==}
     engines: {node: '>=14'}
     hasBin: true
 
@@ -3739,7 +3739,7 @@ snapshots:
     dependencies:
       sparse-bitfield: 3.0.3
 
-  '@nhcarrigan/eslint-config@4.0.0(@types/eslint@8.56.11)(eslint@9.14.0)(prettier@3.4.1)(typescript@5.7.2)':
+  '@nhcarrigan/eslint-config@4.0.0(@types/eslint@8.56.11)(eslint@9.14.0)(prettier@3.4.2)(typescript@5.7.2)':
     dependencies:
       '@eslint/compat': 1.1.1
       '@eslint/eslintrc': 3.1.0
@@ -3753,7 +3753,7 @@ snapshots:
       eslint-plugin-import: 2.29.1(@typescript-eslint/parser@8.0.0-alpha.62(eslint@9.14.0)(typescript@5.7.2))(eslint@9.14.0)
       eslint-plugin-jsdoc: 48.8.3(eslint@9.14.0)
       eslint-plugin-no-only-tests: 3.1.0
-      eslint-plugin-prettier: 5.2.1(@types/eslint@8.56.11)(eslint-config-prettier@9.1.0(eslint@9.14.0))(eslint@9.14.0)(prettier@3.4.1)
+      eslint-plugin-prettier: 5.2.1(@types/eslint@8.56.11)(eslint-config-prettier@9.1.0(eslint@9.14.0))(eslint@9.14.0)(prettier@3.4.2)
       eslint-plugin-sort-keys-fix: 1.1.2
       eslint-plugin-unicorn: 55.0.0(eslint@9.14.0)
       globals: 15.8.0
@@ -4977,10 +4977,10 @@ snapshots:
 
   eslint-plugin-no-only-tests@3.1.0: {}
 
-  eslint-plugin-prettier@5.2.1(@types/eslint@8.56.11)(eslint-config-prettier@9.1.0(eslint@9.14.0))(eslint@9.14.0)(prettier@3.4.1):
+  eslint-plugin-prettier@5.2.1(@types/eslint@8.56.11)(eslint-config-prettier@9.1.0(eslint@9.14.0))(eslint@9.14.0)(prettier@3.4.2):
     dependencies:
       eslint: 9.14.0
-      prettier: 3.4.1
+      prettier: 3.4.2
       prettier-linter-helpers: 1.0.0
       synckit: 0.9.1
     optionalDependencies:
@@ -6013,7 +6013,7 @@ snapshots:
     dependencies:
       fast-diff: 1.3.0
 
-  prettier@3.4.1: {}
+  prettier@3.4.2: {}
 
   prisma@5.22.0:
     dependencies:
