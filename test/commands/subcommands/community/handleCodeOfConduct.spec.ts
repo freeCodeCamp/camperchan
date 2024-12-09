@@ -7,25 +7,25 @@ import {
   MockMember,
   MockUser,
 } from "discordjs-testing";
-import { describe, assert, test } from "vitest";
+import { describe, assert, it } from "vitest";
 import { handleCodeOfConduct } from "../../../../src/commands/subcommands/community/handleCodeOfConduct.js";
 
 const guild = new MockGuild({
-  name: "Test Guild",
+  name: "it Guild",
 });
 const bot = new MockUser({
-  avatar:        "test",
+  avatar:        "it",
   bot:           true,
   discriminator: 1234,
   system:        false,
-  username:      "Test Bot",
+  username:      "it Bot",
 });
 const user = new MockUser({
-  avatar:        "test",
+  avatar:        "it",
   bot:           false,
   discriminator: 1234,
   system:        false,
-  username:      "Test User",
+  username:      "it User",
 });
 const member = new MockMember({
   guild,
@@ -33,12 +33,12 @@ const member = new MockMember({
 });
 const channel = new MockChannel({
   guild: guild,
-  name:  "test-channel",
+  name:  "it-channel",
   type:  ChannelType.GuildText,
 });
 
 describe("codeOfConduct Handler", () => {
-  test("should send an embed with the code of conduct", async() => {
+  it("should send an embed with the code of conduct", async() => {
     const command = new MockChatInputCommandInteraction({
       bot:            bot,
       channel:        channel,

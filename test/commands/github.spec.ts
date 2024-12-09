@@ -2,7 +2,7 @@ import {
   ApplicationCommandOptionType,
   type SlashCommandSubcommandBuilder,
 } from "discord.js";
-import { describe, assert, test } from "vitest";
+import { describe, assert, it } from "vitest";
 import { github } from "../../src/commands/github.js";
 
 describe("github command", () => {
@@ -12,7 +12,7 @@ describe("github command", () => {
     },
   ) as Array<SlashCommandSubcommandBuilder>;
 
-  test("has correct data", () => {
+  it("has correct data", () => {
     assert.strictEqual(github.data.name, "github");
     assert.strictEqual(
       github.data.description,
@@ -21,7 +21,7 @@ describe("github command", () => {
     assert.lengthOf(subcommands, 4);
   });
 
-  test("has correct close", () => {
+  it("has correct close", () => {
     const close = subcommands.find((sub) => {
       return sub.name === "close";
     });
@@ -74,7 +74,7 @@ describe("github command", () => {
     );
   });
 
-  test("has correct comment", () => {
+  it("has correct comment", () => {
     const comment = subcommands.find((sub) => {
       return sub.name === "comment";
     });
@@ -117,7 +117,7 @@ describe("github command", () => {
     );
   });
 
-  test("has correct add labels", () => {
+  it("has correct add labels", () => {
     const command = subcommands.find((sub) => {
       return sub.name === "add-labels";
     });
@@ -160,7 +160,7 @@ describe("github command", () => {
     );
   });
 
-  test("has correct sync labels", () => {
+  it("has correct sync labels", () => {
     const command = subcommands.find((sub) => {
       return sub.name === "sync-labels";
     });

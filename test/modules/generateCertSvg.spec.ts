@@ -1,8 +1,8 @@
-import { describe, assert, test } from "vitest";
+import { describe, assert, it } from "vitest";
 import { generatorMap } from "../../src/modules/generateCertSvg.js";
 
 describe("generateCertSvg", () => {
-  test("has generator map object", () => {
+  it("has generator map object", () => {
     assert.isObject(generatorMap);
   });
 });

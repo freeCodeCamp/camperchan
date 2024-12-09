@@ -2,7 +2,7 @@ import {
   ApplicationCommandOptionType,
   type SlashCommandSubcommandBuilder,
 } from "discord.js";
-import { describe, assert, test } from "vitest";
+import { describe, assert, it } from "vitest";
 import { moderation } from "../../src/commands/moderation.js";
 
 describe("moderation command", () => {
@@ -12,13 +12,13 @@ describe("moderation command", () => {
     },
   ) as Array<SlashCommandSubcommandBuilder>;
 
-  test("has correct data", () => {
+  it("has correct data", () => {
     assert.strictEqual(moderation.data.name, "moderation");
     assert.strictEqual(moderation.data.description, "Moderation commands.");
     assert.lengthOf(subcommands, 8);
   });
 
-  test("has correct ban", () => {
+  it("has correct ban", () => {
     const ban = subcommands.find((sub) => {
       return sub.name === "ban";
     });
@@ -44,7 +44,7 @@ describe("moderation command", () => {
     );
   });
 
-  test("has correct history", () => {
+  it("has correct history", () => {
     const history = subcommands.find((sub) => {
       return sub.name === "history";
     });
@@ -66,7 +66,7 @@ describe("moderation command", () => {
     );
   });
 
-  test("has correct kick", () => {
+  it("has correct kick", () => {
     const kick = subcommands.find((sub) => {
       return sub.name === "kick";
     });
@@ -92,7 +92,7 @@ describe("moderation command", () => {
     );
   });
 
-  test("has correct mute", () => {
+  it("has correct mute", () => {
     const mute = subcommands.find((sub) => {
       return sub.name === "mute";
     });
@@ -138,7 +138,7 @@ describe("moderation command", () => {
     );
   });
 
-  test("has correct prune", () => {
+  it("has correct prune", () => {
     const prune = subcommands.find((sub) => {
       return sub.name === "prune";
     });
@@ -160,7 +160,7 @@ describe("moderation command", () => {
     );
   });
 
-  test("has correct unban", () => {
+  it("has correct unban", () => {
     const unban = subcommands.find((sub) => {
       return sub.name === "unban";
     });
@@ -186,7 +186,7 @@ describe("moderation command", () => {
     );
   });
 
-  test("has correct unmute", () => {
+  it("has correct unmute", () => {
     const unmute = subcommands.find((sub) => {
       return sub.name === "unmute";
     });
@@ -212,7 +212,7 @@ describe("moderation command", () => {
     );
   });
 
-  test("has correct warn", () => {
+  it("has correct warn", () => {
     const warn = subcommands.find((sub) => {
       return sub.name === "warn";
     });

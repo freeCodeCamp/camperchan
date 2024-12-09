@@ -1,5 +1,5 @@
 import { type GuildMember, PermissionFlagsBits } from "discord.js";
-import { describe, assert, test } from "vitest";
+import { describe, assert, it } from "vitest";
 import { isModerator } from "../../src/utils/isModerator.js";
 
 const typeCoerce = (object: unknown): GuildMember => {
@@ -29,12 +29,12 @@ const moderateMembersSet = typeCoerce({
 });
 
 describe("isModerator", () => {
-  test("is defined", () => {
+  it("is defined", () => {
     assert.isDefined(isModerator, "isModerator is not defined");
     assert.isFunction(isModerator, "isModerator is not a function");
   });
 
-  test("returns true when moderator", () => {
+  it("returns true when moderator", () => {
     assert.isTrue(isModerator(kickMembersSet), "isModerator returned false");
     assert.isTrue(isModerator(banMembersSet), "isModerator returned false");
     assert.isTrue(isModerator(manageMessagesSet), "isModerator returned false");
@@ -44,7 +44,7 @@ describe("isModerator", () => {
     );
   });
 
-  test("returns false when not moderator", () => {
+  it("returns false when not moderator", () => {
     assert.isFalse(
       isModerator(typeCoerce({ permissions: new Set(basePermissions) })),
     );

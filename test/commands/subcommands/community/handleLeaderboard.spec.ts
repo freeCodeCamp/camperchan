@@ -1,9 +1,9 @@
-import { describe, assert, test } from "vitest";
+import { describe, assert, it } from "vitest";
 import { handleLeaderboard }
   from "../../../../src/commands/subcommands/community/handleLeaderboard.js";
 
 describe("leaderboard handler", () => {
-  test("is defined", () => {
+  it("is defined", () => {
     assert.isDefined(handleLeaderboard);
   });
 });

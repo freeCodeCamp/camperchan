@@ -1,8 +1,8 @@
-import { describe, assert, test } from "vitest";
+import { describe, assert, it } from "vitest";
 import { reactionRoleClick } from "../../src/modules/reactionRoleClick.js";
 
 describe("reactionRoleClick", () => {
-  test("reactionRoleClick is a function", () => {
+  it("reactionRoleClick is a function", () => {
     assert.isFunction(reactionRoleClick);
   });
 });

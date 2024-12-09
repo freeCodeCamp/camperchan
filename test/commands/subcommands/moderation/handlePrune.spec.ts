@@ -1,10 +1,10 @@
 import { PermissionFlagsBits } from "discord.js";
-import { describe, assert, test } from "vitest";
+import { describe, assert, it } from "vitest";
 import { handlePrune }
   from "../../../../src/commands/subcommands/moderation/handlePrune.js";
 
 describe("prune handler", () => {
-  test("does not allow non-moderators permission", () => {
+  it("does not allow non-moderators permission", () => {
     assert.isFalse(
       handlePrune.permissionValidator({
         permissions: new Set([ PermissionFlagsBits.SendMessages ]),
@@ -12,7 +12,7 @@ describe("prune handler", () => {
     );
   });
 
-  test("allows manage messages permission", () => {
+  it("allows manage messages permission", () => {
     assert.isTrue(
       handlePrune.permissionValidator({
         permissions: new Set([ PermissionFlagsBits.ManageMessages ]),
@@ -20,7 +20,7 @@ describe("prune handler", () => {
     );
   });
 
-  test("does not allow moderate members permission", () => {
+  it("does not allow moderate members permission", () => {
     assert.isFalse(
       handlePrune.permissionValidator({
         permissions: new Set([ PermissionFlagsBits.ModerateMembers ]),
@@ -28,7 +28,7 @@ describe("prune handler", () => {
     );
   });
 
-  test("does not allow kick members permission", () => {
+  it("does not allow kick members permission", () => {
     assert.isFalse(
       handlePrune.permissionValidator({
         permissions: new Set([ PermissionFlagsBits.KickMembers ]),
@@ -36,7 +36,7 @@ describe("prune handler", () => {
     );
   });
 
-  test("does not allow ban members permission", () => {
+  it("does not allow ban members permission", () => {
     assert.isFalse(
       handlePrune.permissionValidator({
         permissions: new Set([ PermissionFlagsBits.BanMembers ]),

@@ -1,8 +1,8 @@
-import { describe, assert, test } from "vitest";
+import { describe, assert, it } from "vitest";
 import { messageCounter } from "../../src/modules/messageCounter.js";
 
 describe("message counter module", () => {
-  test("is defined", () => {
+  it("is defined", () => {
     assert.isDefined(messageCounter);
   });
 });

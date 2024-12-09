@@ -1,10 +1,10 @@
 import { PermissionFlagsBits } from "discord.js";
-import { describe, assert, test } from "vitest";
+import { describe, assert, it } from "vitest";
 import { handleBan }
   from "../../../../src/commands/subcommands/moderation/handleBan.js";
 
 describe("ban handler", () => {
-  test("does not allow non-moderators permission", () => {
+  it("does not allow non-moderators permission", () => {
     assert.isFalse(
       handleBan.permissionValidator({
         permissions: new Set([ PermissionFlagsBits.SendMessages ]),
@@ -12,7 +12,7 @@ describe("ban handler", () => {
     );
   });
 
-  test("does not allow moderate members permission", () => {
+  it("does not allow moderate members permission", () => {
     assert.isFalse(
       handleBan.permissionValidator({
         permissions: new Set([ PermissionFlagsBits.ModerateMembers ]),
@@ -20,7 +20,7 @@ describe("ban handler", () => {
     );
   });
 
-  test("does not allow kick members permission", () => {
+  it("does not allow kick members permission", () => {
     assert.isFalse(
       handleBan.permissionValidator({
         permissions: new Set([ PermissionFlagsBits.KickMembers ]),
@@ -28,7 +28,7 @@ describe("ban handler", () => {
     );
   });
 
-  test("allows ban members permission", () => {
+  it("allows ban members permission", () => {
     assert.isTrue(
       handleBan.permissionValidator({
         permissions: new Set([ PermissionFlagsBits.BanMembers ]),

@@ -1,16 +1,16 @@
 import { stat, unlink } from "node:fs/promises";
 import { join } from "node:path";
-import { describe, assert, test } from "vitest";
+import { describe, assert, it } from "vitest";
 import { createLogFile } from "../../src/modules/createLogFile.js";
 import type { ExtendedClient } from "../../src/interfaces/extendedClient.js";
 
 describe("createLogFile", () => {
-  test("is defined", () => {
+  it("is defined", () => {
     assert.isDefined(createLogFile, "createLogFile is not defined");
     assert.isFunction(createLogFile, "createLogFile is not a function");
   });
 
-  test("returns the expected data structure", async() => {
+  it("returns the expected data structure", async() => {
     const mockBot = { privateLogs: {} } as ExtendedClient;
     await createLogFile(mockBot, "Naomi");
     assert.property(mockBot.privateLogs, "Naomi", "Naomi is not defined");

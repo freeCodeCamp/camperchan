@@ -1,10 +1,10 @@
 import { PermissionFlagsBits } from "discord.js";
-import { describe, assert, test } from "vitest";
+import { describe, assert, it } from "vitest";
 import { handleSyncLabels }
   from "../../../../src/commands/subcommands/github/handleSyncLabels.js";
 
 describe("sync labels handler", () => {
-  test("does not allow non-moderators permission", () => {
+  it("does not allow non-moderators permission", () => {
     assert.isFalse(
       handleSyncLabels.permissionValidator({
         permissions: new Set([ PermissionFlagsBits.SendMessages ]),
@@ -12,7 +12,7 @@ describe("sync labels handler", () => {
     );
   });
 
-  test("allows moderate members permission", () => {
+  it("allows moderate members permission", () => {
     assert.isTrue(
       handleSyncLabels.permissionValidator({
         permissions: new Set([ PermissionFlagsBits.ModerateMembers ]),
@@ -20,7 +20,7 @@ describe("sync labels handler", () => {
     );
   });
 
-  test("allows kick members permission", () => {
+  it("allows kick members permission", () => {
     assert.isTrue(
       handleSyncLabels.permissionValidator({
         permissions: new Set([ PermissionFlagsBits.KickMembers ]),
@@ -28,7 +28,7 @@ describe("sync labels handler", () => {
     );
   });
 
-  test("allows ban members permission", () => {
+  it("allows ban members permission", () => {
     assert.isTrue(
       handleSyncLabels.permissionValidator({
         permissions: new Set([ PermissionFlagsBits.BanMembers ]),

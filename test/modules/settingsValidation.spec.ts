@@ -1,15 +1,15 @@
-import { describe, assert, test } from "vitest";
+import { describe, assert, it } from "vitest";
 import {
   validateColour,
   validateImage,
 } from "../../src/modules/settingsValidation.js";
 
 describe("settings validation", () => {
-  test("validateColour", () => {
+  it("validateColour", () => {
     assert.exists(validateColour);
   });
 
-  test("validateImage", () => {
+  it("validateImage", () => {
     assert.exists(validateImage);
   });
 });

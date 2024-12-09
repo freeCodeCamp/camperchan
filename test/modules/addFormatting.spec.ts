@@ -1,4 +1,4 @@
-import { describe, assert, test } from "vitest";
+import { describe, assert, it } from "vitest";
 import { addFormatting } from "../../src/modules/addFormatting.js";
 import type { Message } from "discord.js";
 
@@ -7,42 +7,42 @@ const typeCoerce = (object: unknown): Message => {
 };
 
 describe("addFormatting", () => {
-  test("is defined", () => {
+  it("is defined", () => {
     assert.isDefined(addFormatting, "addFormatting is not defined");
     assert.isFunction(addFormatting, "addFormatting is not a function");
   });
 
-  test("should format HTML", async() => {
+  it("should format HTML", async() => {
     const content = "<p>Hello</p>";
     const output = await addFormatting(typeCoerce({ content }));
     assert.equal(output, "```XML\n<p>Hello</p>\n```");
   });
 
-  test("should format CSS", async() => {
+  it("should format CSS", async() => {
     const content = "body { color: red }";
     const output = await addFormatting(typeCoerce({ content }));
     assert.equal(output, "```css\nbody {\n  color: red;\n}\n```");
   });
 
-  test("should format SCSS", async() => {
+  it("should format SCSS", async() => {
     const content = "body { color: red }";
     const output = await addFormatting(typeCoerce({ content }));
     assert.equal(output, "```css\nbody {\n  color: red;\n}\n```");
   });
 
-  test("should format JS", async() => {
+  it("should format JS", async() => {
     const content = "const foo = 'bar';";
     const output = await addFormatting(typeCoerce({ content }));
     assert.equal(output, `\`\`\`js\nconst foo = "bar";\n\`\`\``);
   });
 
-  test("should format TS", async() => {
+  it("should format TS", async() => {
     const content = "const foo: string = 'bar';";
     const output = await addFormatting(typeCoerce({ content }));
     assert.equal(output, "```TypeScript\nconst foo: string = 'bar';\n```");
   });
 
-  test("should format JSX", async() => {
+  it("should format JSX", async() => {
     const content = `let jsxElement=(<div className="App"><h1 className="Naomi">Welcome To freeCodeCamp</h1><p>Hello World</p></div>);`;
     const output = await addFormatting(typeCoerce({ content }));
     assert.equal(
@@ -51,7 +51,7 @@ describe("addFormatting", () => {
     );
   });
 
-  test("should format PHP", async() => {
+  it("should format PHP", async() => {
     const content = `<?php echo "Hello World"; ?>`;
     const output = await addFormatting(typeCoerce({ content }));
     assert.equal(output, `\`\`\`PHP\n<?php echo "Hello World"; ?>\n\`\`\``);
@@ -59,14 +59,14 @@ describe("addFormatting", () => {
 
   /*
    * TODO: Python is currently throwing a CSS sytnax error?
-   *   test("should format Python", async () => {
+   *   it("should format Python", async () => {
    *     const content = `for i in range(10):\n  print(i)`;
    *     const output = await addFormatting(typeCoerce({ content }));
    *     assert.equal(output, `\`\`\`Python\nprint("Hello World")\n\`\`\``);
    *   });
    */
 
-  test("should format Markdown", async() => {
+  it("should format Markdown", async() => {
     const content = `# Hello World\n\n## Subheading\n\n- List Item`;
     const output = await addFormatting(typeCoerce({ content }));
     assert.equal(
@@ -75,13 +75,13 @@ describe("addFormatting", () => {
     );
   });
 
-  test("should format JSON", async() => {
+  it("should format JSON", async() => {
     const content = `{"name": "Naomi"}`;
     const output = await addFormatting(typeCoerce({ content }));
     assert.equal(output, `\`\`\`json\n{ "name": "Naomi" }\n\`\`\``);
   });
 
-  test("should format HTTP", async() => {
+  it("should format HTTP", async() => {
     const content = `GET / HTTP/1.1\nHost: example.com\n\n`;
     const output = await addFormatting(typeCoerce({ content }));
     assert.equal(

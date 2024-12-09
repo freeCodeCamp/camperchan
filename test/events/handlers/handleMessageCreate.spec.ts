@@ -1,9 +1,9 @@
-import { describe, assert, test } from "vitest";
+import { describe, assert, it } from "vitest";
 import { handleMessageCreate }
   from "../../../src/events/handlers/handleMessageCreate.js";
 
 describe("handleMessageCreate", () => {
-  test("handleMessageCreate is a function", () => {
+  it("handleMessageCreate is a function", () => {
     assert.isFunction(handleMessageCreate);
   });
 });

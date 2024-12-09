@@ -1,22 +1,22 @@
 import { readdir } from "node:fs/promises";
 import { join } from "node:path";
-import { describe, assert, test } from "vitest";
+import { describe, assert, it } from "vitest";
 import { loadCommands } from "../../src/utils/loadCommands.js";
 import type { Command } from "../../src/interfaces/command.js";
 import type { ExtendedClient } from "../../src/interfaces/extendedClient.js";
 
 describe("loadCommands", () => {
-  test("is defined", () => {
+  it("is defined", () => {
     assert.isDefined(loadCommands, "loadCommands is not defined");
     assert.isFunction(loadCommands, "loadCommands is not a function");
   });
 
-  test("returns array of commands", async() => {
+  it("returns array of commands", async() => {
     const result = await loadCommands({} as ExtendedClient);
     assert.isArray(result, "loadCommands did not return an array");
   });
 
-  test("returns the expected command list", async() => {
+  it("returns the expected command list", async() => {
     const bot: { commands: Array<Command> } = {
       commands: [],
     };
