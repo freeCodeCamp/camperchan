@@ -2,7 +2,7 @@ import {
   ApplicationCommandOptionType,
   type SlashCommandSubcommandBuilder,
 } from "discord.js";
-import { describe, assert, test } from "vitest";
+import { describe, assert, it } from "vitest";
 import { community } from "../../src/commands/community.js";
 
 describe("community command", () => {
@@ -12,7 +12,7 @@ describe("community command", () => {
     },
   ) as Array<SlashCommandSubcommandBuilder>;
 
-  test("has correct data", () => {
+  it("has correct data", () => {
     assert.strictEqual(community.data.name, "community");
     assert.strictEqual(
       community.data.description,
@@ -21,7 +21,7 @@ describe("community command", () => {
     assert.lengthOf(subcommands, 7);
   });
 
-  test("has correct code of conduct", () => {
+  it("has correct code of conduct", () => {
     const codeOfConduct = subcommands.find(
       (sub) => {
         return sub.name === "code-of-conduct";
@@ -36,7 +36,7 @@ describe("community command", () => {
     assert.lengthOf(codeOfConduct?.options || "hi", 0);
   });
 
-  test("has correct contribute", () => {
+  it("has correct contribute", () => {
     const contribute = subcommands.find((sub) => {
       return sub.name === "contribute";
     });
@@ -49,7 +49,7 @@ describe("community command", () => {
     assert.lengthOf(contribute?.options || "hi", 0);
   });
 
-  test("has correct forum", () => {
+  it("has correct forum", () => {
     const forum = subcommands.find((sub) => {
       return sub.name === "forum";
     });
@@ -62,7 +62,7 @@ describe("community command", () => {
     assert.lengthOf(forum?.options || "hi", 0);
   });
 
-  test("has correct leaderboard", () => {
+  it("has correct leaderboard", () => {
     const leaderboard = subcommands.find((sub) => {
       return sub.name === "leaderboard";
     });
@@ -72,7 +72,7 @@ describe("community command", () => {
     assert.lengthOf(leaderboard?.options || "hi", 0);
   });
 
-  test("has correct quote", () => {
+  it("has correct quote", () => {
     const quote = subcommands.find((sub) => {
       return sub.name === "quote";
     });
@@ -82,7 +82,7 @@ describe("community command", () => {
     assert.lengthOf(quote?.options || "hi", 0);
   });
 
-  test("has correct profile", () => {
+  it("has correct profile", () => {
     const rank = subcommands.find((sub) => {
       return sub.name === "profile";
     });
@@ -91,7 +91,7 @@ describe("community command", () => {
     assert.lengthOf(rank?.options || "hi", 0);
   });
 
-  test("has correct truism", () => {
+  it("has correct truism", () => {
     const truism = subcommands.find((sub) => {
       return sub.name === "truism";
     });

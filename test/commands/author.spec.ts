@@ -1,8 +1,8 @@
-import { describe, assert, test } from "vitest";
+import { describe, assert, it } from "vitest";
 import { author } from "../../src/commands/author.js";
 
 describe("author command", () => {
-  test("is defined", () => {
+  it("is defined", () => {
     assert.isDefined(author);
   });
 });

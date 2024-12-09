@@ -1,9 +1,9 @@
-import { describe, assert, test } from "vitest";
+import { describe, assert, it } from "vitest";
 import { handleForum }
   from "../../../../src/commands/subcommands/community/handleForum.js";
 
 describe("forum handler", () => {
-  test("is defined", () => {
+  it("is defined", () => {
     assert.isDefined(handleForum);
   });
 });

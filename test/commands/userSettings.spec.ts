@@ -1,8 +1,8 @@
-import { describe, assert, test } from "vitest";
+import { describe, assert, it } from "vitest";
 import { userSettings } from "../../src/commands/userSettings.js";
 
 describe("user settings command", () => {
-  test("exists", () => {
+  it("exists", () => {
     assert.exists(userSettings);
   });
 });

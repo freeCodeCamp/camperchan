@@ -2,7 +2,7 @@ import {
   ApplicationCommandOptionType,
   type SlashCommandSubcommandBuilder,
 } from "discord.js";
-import { describe, assert, test } from "vitest";
+import { describe, assert, it } from "vitest";
 import { management } from "../../src/commands/management.js";
 
 describe("management command", () => {
@@ -12,7 +12,7 @@ describe("management command", () => {
     },
   ) as Array<SlashCommandSubcommandBuilder>;
 
-  test("has correct data", () => {
+  it("has correct data", () => {
     assert.strictEqual(management.data.name, "management");
     assert.strictEqual(
       management.data.description,
@@ -21,7 +21,7 @@ describe("management command", () => {
     assert.lengthOf(subcommands, 3);
   });
 
-  test("has correct private", () => {
+  it("has correct private", () => {
     const privateC = subcommands.find((sub) => {
       return sub.name === "private";
     });
@@ -42,7 +42,7 @@ describe("management command", () => {
     );
   });
 
-  test("has correct role", () => {
+  it("has correct role", () => {
     const role = subcommands.find((sub) => {
       return sub.name === "role";
     });
