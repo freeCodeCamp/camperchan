@@ -17,8 +17,8 @@
     "db:deploy": "prisma db push"
   },
   "engines": {
-    "node": "20",
-    "pnpm": "9"
+    "node": ">=22",
+    "pnpm": ">=9"
   },
   "license": "MIT",
   "dependencies": {
