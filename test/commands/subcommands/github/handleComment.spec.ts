@@ -1,10 +1,10 @@
 import { PermissionFlagsBits } from "discord.js";
-import { describe, assert, test } from "vitest";
+import { describe, assert, it } from "vitest";
 import { handleComment }
   from "../../../../src/commands/subcommands/github/handleComment.js";
 
 describe("comment command", () => {
-  test("does not allow non-moderators permission", () => {
+  it("does not allow non-moderators permission", () => {
     assert.isFalse(
       handleComment.permissionValidator({
         permissions: new Set([ PermissionFlagsBits.SendMessages ]),
@@ -12,7 +12,7 @@ describe("comment command", () => {
     );
   });
 
-  test("allows moderate members permission", () => {
+  it("allows moderate members permission", () => {
     assert.isTrue(
       handleComment.permissionValidator({
         permissions: new Set([ PermissionFlagsBits.ModerateMembers ]),
@@ -20,7 +20,7 @@ describe("comment command", () => {
     );
   });
 
-  test("allows kick members permission", () => {
+  it("allows kick members permission", () => {
     assert.isTrue(
       handleComment.permissionValidator({
         permissions: new Set([ PermissionFlagsBits.KickMembers ]),
@@ -28,7 +28,7 @@ describe("comment command", () => {
     );
   });
 
-  test("allows ban members permission", () => {
+  it("allows ban members permission", () => {
     assert.isTrue(
       handleComment.permissionValidator({
         permissions: new Set([ PermissionFlagsBits.BanMembers ]),

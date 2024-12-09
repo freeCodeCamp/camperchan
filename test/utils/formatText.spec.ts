@@ -1,31 +1,31 @@
-import { describe, assert, test } from "vitest";
+import { describe, assert, it } from "vitest";
 import { formatTextToTable } from "../../src/utils/formatText.js";
 
 describe("formatTextToTable", () => {
-  test("is defined", () => {
+  it("is defined", () => {
     assert.isDefined(formatTextToTable, "formatTextToTable is not defined!");
     assert.isFunction(
       formatTextToTable,
       "formatTextToTable is not a function!",
     );
   });
-  test("given empty array returns empty string", () => {
-    return assert.deepEqual(
+  it("given empty array returns empty string", () => {
+    assert.deepEqual(
       formatTextToTable([]),
       "",
       "function did not return empty string",
     );
   });
-  test("given 2d empty array, returns empty string", () => {
-    return assert.deepEqual(
+  it("given 2d empty array, returns empty string", () => {
+    assert.deepEqual(
       formatTextToTable([ [] ]),
       "",
       "function did not return empty string",
     );
   });
-  test("given 2d empty array, with separate defined headers, returns headers",
+  it("given 2d empty array, with separate defined headers, returns headers",
     () => {
-      return assert.deepEqual(
+      assert.deepEqual(
         formatTextToTable([], {
           headers: [ "one", "two" ],
         }),
@@ -33,9 +33,9 @@ describe("formatTextToTable", () => {
         "did not return headers",
       );
     });
-  test(`given 2d empty array, with separate defined headers and a custom column delimiter, returns headers`,
+  it(`given 2d empty array, with separate defined headers and a custom column delimiter, returns headers`,
     () => {
-      return assert.deepEqual(
+      assert.deepEqual(
         formatTextToTable([], {
           columnDelimiter: "l",
           headers:         [ "one", "two" ],
@@ -44,9 +44,9 @@ describe("formatTextToTable", () => {
         "did not return headers",
       );
     });
-  test(`given 2d array, with separate defined headers and a custom column delimiter, returns table`,
+  it(`given 2d array, with separate defined headers and a custom column delimiter, returns table`,
     () => {
-      return assert.deepEqual(
+      assert.deepEqual(
         formatTextToTable(
           [
             [ "chicken", "egg" ],
@@ -61,9 +61,9 @@ describe("formatTextToTable", () => {
         "did not return headers",
       );
     });
-  test(`given 2d empty array, with empty separate defined headers, returns empty string`,
+  it(`given 2d empty array, with empty separate defined headers, returns empty string`,
     () => {
-      return assert.deepEqual(
+      assert.deepEqual(
         formatTextToTable([ [] ], {
           headers: [],
         }),
@@ -71,9 +71,9 @@ describe("formatTextToTable", () => {
         "did not return empty string",
       );
     });
-  test(`given 2d array with data with headers and custom row delimiter, display table `,
+  it(`given 2d array with data with headers and custom row delimiter, display table`,
     () => {
-      return assert.deepEqual(
+      assert.deepEqual(
         formatTextToTable(
           [
             [ "brad", "100" ],
@@ -88,8 +88,8 @@ describe("formatTextToTable", () => {
         "did not return table",
       );
     });
-  test("given 2d array with data with long headers, display table", () => {
-    return assert.deepEqual(
+  it("given 2d array with data with long headers, display table", () => {
+    assert.deepEqual(
       formatTextToTable(
         [
           [ "brad", "100" ],

@@ -1,8 +1,8 @@
-import { describe, assert, test } from "vitest";
+import { describe, assert, it } from "vitest";
 import { pullComments } from "../../src/config/pullComments.js";
 
 describe("pullComments", () => {
-  test("All keys should be under 100 characters (Discord limitation)", () => {
+  it("all keys should be under 100 characters (Discord limitation)", () => {
     for (const object of pullComments) {
       assert.isBelow(
         object.key.length,

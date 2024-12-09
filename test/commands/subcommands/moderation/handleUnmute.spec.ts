@@ -1,10 +1,10 @@
 import { PermissionFlagsBits } from "discord.js";
-import { describe, assert, test } from "vitest";
+import { describe, assert, it } from "vitest";
 import { handleUnmute }
   from "../../../../src/commands/subcommands/moderation/handleUnmute.js";
 
 describe("unmute handler", () => {
-  test("does not allow non-moderators permission", () => {
+  it("does not allow non-moderators permission", () => {
     assert.isFalse(
       handleUnmute.permissionValidator({
         permissions: new Set([ PermissionFlagsBits.SendMessages ]),
@@ -12,7 +12,7 @@ describe("unmute handler", () => {
     );
   });
 
-  test("allows moderate members permission", () => {
+  it("allows moderate members permission", () => {
     assert.isTrue(
       handleUnmute.permissionValidator({
         permissions: new Set([ PermissionFlagsBits.ModerateMembers ]),
@@ -20,7 +20,7 @@ describe("unmute handler", () => {
     );
   });
 
-  test("does not allow kick members permission", () => {
+  it("does not allow kick members permission", () => {
     assert.isFalse(
       handleUnmute.permissionValidator({
         permissions: new Set([ PermissionFlagsBits.KickMembers ]),
@@ -28,7 +28,7 @@ describe("unmute handler", () => {
     );
   });
 
-  test("does not allow ban members permission", () => {
+  it("does not allow ban members permission", () => {
     assert.isFalse(
       handleUnmute.permissionValidator({
         permissions: new Set([ PermissionFlagsBits.BanMembers ]),

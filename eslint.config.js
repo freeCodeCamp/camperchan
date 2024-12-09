@@ -34,7 +34,10 @@ export default [
   {
     files: ["test/**/*.spec.ts"],
     rules: {
-      "@typescript-eslint/consistent-type-assertions": "off"
+      "@typescript-eslint/consistent-type-assertions": "off",
+      "max-nested-callbacks": "off",
+      // TODO: migrate the tests and turn these on...
+      "vitest/prefer-expect-assertions": "off",
     }
   }
 ];

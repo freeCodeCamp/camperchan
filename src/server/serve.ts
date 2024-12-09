@@ -7,7 +7,6 @@
 import { createHmac, timingSafeEqual } from "node:crypto";
 import { readFile } from "node:fs/promises";
 import { WebhookClient } from "discord.js";
-// eslint-disable-next-line import/default, import/no-named-as-default, import/no-named-as-default-member
 import fastify from "fastify";
 import { errorHandler } from "../utils/errorHandler.js";
 import type { ExtendedClient } from "../interfaces/extendedClient.js";

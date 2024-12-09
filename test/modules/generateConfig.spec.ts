@@ -1,19 +1,19 @@
 import { WebhookClient } from "discord.js";
-import { describe, assert, test } from "vitest";
+import { describe, assert, it } from "vitest";
 import { generateConfig } from "../../src/modules/generateConfig.js";
 
 describe("generateConfig", () => {
-  test("is defined", () => {
+  it("is defined", () => {
     assert.isDefined(generateConfig, "generateConfig is not defined");
     assert.isFunction(generateConfig, "generateConfig is not a function");
   });
 
-  test("should throw an error on missing environment", () => {
+  it("should throw an error on missing environment", () => {
     delete process.env.TOKEN;
     assert.throw(generateConfig, "Missing required config variables");
   });
 
-  test("should return expected object on valid environment", () => {
+  it("should return expected object on valid environment", () => {
     process.env.TOKEN = "Naomi";
     process.env.MONGO_URI = "Was";
     process.env.HOME_GUILD = "Here";

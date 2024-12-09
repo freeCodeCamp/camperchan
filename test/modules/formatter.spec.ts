@@ -1,13 +1,13 @@
-import { describe, assert, test } from "vitest";
+import { describe, assert, it } from "vitest";
 import { formatter } from "../../src/modules/formatter.js";
 
 describe("formatter", () => {
-  test("is defined", () => {
+  it("is defined", () => {
     assert.isDefined(formatter, "formatter is not defined");
     assert.isFunction(formatter, "formatter is not a function");
   });
 
-  test("should format HTML", async() => {
+  it("should format HTML", async() => {
     const content
       = `<div><p>Hello world this is a very long string from Naomi to force a line break.</p></div>`;
     const output = await formatter(content, "html");
@@ -17,31 +17,31 @@ describe("formatter", () => {
     );
   });
 
-  test("should format CSS", async() => {
+  it("should format CSS", async() => {
     const content = "body { color: red }";
     const output = await formatter(content, "css");
     assert.equal(output, "body {\n  color: red;\n}\n");
   });
 
-  test("should format SCSS", async() => {
+  it("should format SCSS", async() => {
     const content = "@mixin center {margin: 0}";
     const output = await formatter(content, "css");
     assert.equal(output, "@mixin center {\n  margin: 0;\n}\n");
   });
 
-  test("should format JS", async() => {
+  it("should format JS", async() => {
     const content = "const foo = 'bar';";
     const output = await formatter(content, "js");
     assert.equal(output, `const foo = "bar";\n`);
   });
 
-  test("should format TS", async() => {
+  it("should format TS", async() => {
     const content = "const foo: string = 'bar';";
     const output = await formatter(content, "ts");
     assert.equal(output, `const foo: string = "bar";\n`);
   });
 
-  test("should format JSX", async() => {
+  it("should format JSX", async() => {
     const content = `let jsxElement=(<div className="App"><h1 className="Naomi">Welcome To freeCodeCamp</h1><p>Hello World</p></div>);`;
     const output = await formatter(content, "js");
     assert.equal(
@@ -50,19 +50,19 @@ describe("formatter", () => {
     );
   });
 
-  test("should format Markdown", async() => {
+  it("should format Markdown", async() => {
     const content = `# Hello World\n\n## Subheading\n\n- List Item`;
     const output = await formatter(content, "markdown");
     assert.equal(output, `# Hello World\n\n## Subheading\n\n- List Item\n`);
   });
 
-  test("should format JSON", async() => {
+  it("should format JSON", async() => {
     const content = `{"name": "Naomi"}`;
     const output = await formatter(content, "json");
     assert.equal(output, `{ "name": "Naomi" }\n`);
   });
 
-  test("should format YAML", async() => {
+  it("should format YAML", async() => {
     const content = `name: Naomi\nuse:\n - Naomi`;
     const output = await formatter(content, "yaml");
     assert.equal(output, `name: Naomi\nuse:\n  - Naomi\n`);

@@ -1,4 +1,4 @@
-import { describe, assert, test, vi } from "vitest";
+import { describe, assert, it, vi } from "vitest";
 import { registerEvents } from "../../src/events/registerEvents.js";
 
 vi.mock("discord.js");
@@ -11,11 +11,11 @@ const bot = {
 };
 
 describe("registerEvents", () => {
-  test("registerEvents is a function", () => {
+  it("registerEvents is a function", () => {
     assert.isFunction(registerEvents);
   });
 
-  test("should register all events", async() => {
+  it("should register all events", async() => {
     await registerEvents(bot as never);
     assert.property(bot.events, "ready");
     assert.property(bot.events, "messageCreate");

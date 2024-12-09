@@ -1,10 +1,10 @@
 import { PermissionFlagsBits } from "discord.js";
-import { describe, assert, test } from "vitest";
+import { describe, assert, it } from "vitest";
 import { handleRole }
   from "../../../../src/commands/subcommands/management/handleRole.js";
 
 describe("handleRole command", () => {
-  test("does not allow non-moderators permission", () => {
+  it("does not allow non-moderators permission", () => {
     assert.isFalse(
       handleRole.permissionValidator({
         permissions: new Set([ PermissionFlagsBits.SendMessages ]),
@@ -12,7 +12,7 @@ describe("handleRole command", () => {
     );
   });
 
-  test("does not allow moderate members permission", () => {
+  it("does not allow moderate members permission", () => {
     assert.isFalse(
       handleRole.permissionValidator({
         permissions: new Set([ PermissionFlagsBits.ModerateMembers ]),
@@ -20,7 +20,7 @@ describe("handleRole command", () => {
     );
   });
 
-  test("does not allow kick members permission", () => {
+  it("does not allow kick members permission", () => {
     assert.isFalse(
       handleRole.permissionValidator({
         permissions: new Set([ PermissionFlagsBits.KickMembers ]),
@@ -28,7 +28,7 @@ describe("handleRole command", () => {
     );
   });
 
-  test("does not allow ban members permission", () => {
+  it("does not allow ban members permission", () => {
     assert.isFalse(
       handleRole.permissionValidator({
         permissions: new Set([ PermissionFlagsBits.BanMembers ]),
@@ -36,7 +36,7 @@ describe("handleRole command", () => {
     );
   });
 
-  test("allows manage server permission", () => {
+  it("allows manage server permission", () => {
     assert.isTrue(
       handleRole.permissionValidator({
         permissions: new Set([ PermissionFlagsBits.ManageGuild ]),

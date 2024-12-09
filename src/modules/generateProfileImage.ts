@@ -194,8 +194,8 @@ const generateProfileImage = async(
       }
       body { 
         background: url(${backgroundImage === ""
-    ? `https://cdn.freecodecamp.org/platform/universal/fcc_meta_1920X1080-indigo.png"`
-    : backgroundImage}) no-repeat center center fixed;
+          ? `https://cdn.freecodecamp.org/platform/universal/fcc_meta_1920X1080-indigo.png"`
+          : backgroundImage}) no-repeat center center fixed;
         background-size: cover;
         width: 1920px;
         height: 1080px;
@@ -213,11 +213,11 @@ const generateProfileImage = async(
         width: 100%;
         height: 100%;
         background-color: #${backgroundColour === ""
-    ? "0a0a23"
-    : backgroundColour}bf;
+          ? "0a0a23"
+          : backgroundColour}bf;
         color: #${colour === ""
-    ? "d0d0d5"
-    : colour};
+          ? "d0d0d5"
+          : colour};
         padding: 2.5%;
         border-radius: 100px;
       }
@@ -267,8 +267,8 @@ const generateProfileImage = async(
       <main>
         <div class="header">
           <img class="avatar" src=${avatar === ""
-    ? "https://cdn.freecodecamp.org/platform/universal/fcc_puck_500.jpg"
-    : avatar}></img>
+            ? "https://cdn.freecodecamp.org/platform/universal/fcc_puck_500.jpg"
+            : avatar}></img>
           <div>
             <h1>${userTag}</h1>
             <p>Level ${String(level)} (${points.toLocaleString("en-GB")}xp)</p>
@@ -363,22 +363,23 @@ const generateLeaderboardImage = async(
     </style>
     <body>
       ${levels.map(
-    (l) => {
-      return `<div class="row" style="background-color: #${l.backgroundColour === ""
-        ? "0a0a23"
-        : l.backgroundColour}bf;color: #${l.colour === ""
-        ? "d0d0d5"
-        : l.colour};padding: 2.5%;border-radius: 100px;">
+        (l) => {
+          return `<div class="row" style="background-color: #${l.backgroundColour === ""
+            ? "0a0a23"
+            : l.backgroundColour}bf;color: #${l.colour === ""
+            ? "d0d0d5"
+            : l.colour};padding: 2.5%;border-radius: 100px;">
             <img style="border-radius: 50%;" src=${l.avatar === ""
-    ? "https://cdn.freecodecamp.org/platform/universal/fcc_puck_500.jpg"
-    : l.avatar}></img>
+              // eslint-disable-next-line stylistic/max-len
+              ? "https://cdn.freecodecamp.org/platform/universal/fcc_puck_500.jpg"
+              : l.avatar}></img>
             <div style="text-align: left;padding-left:100px;">
               <h1>#${String(l.index)}. ${l.userTag}</h1>
               <p>Level ${String(l.level)} (${String(l.points)}xp)</p>
             </div>
           </div>`;
-    },
-  ).join(", ")}
+        },
+      ).join(", ")}
     </body>
     `;
     const alt = levels.

@@ -1,9 +1,9 @@
 import { GatewayIntentBits } from "discord.js";
-import { describe, assert, test } from "vitest";
+import { describe, assert, it } from "vitest";
 import { intentOptions } from "../../src/config/intentOptions.js";
 
 describe("intentOptions", () => {
-  test("All necessary intents should be declared.", () => {
+  it("all necessary intents should be declared.", () => {
     assert.include(intentOptions, GatewayIntentBits.Guilds);
     assert.include(intentOptions, GatewayIntentBits.GuildMembers);
     assert.include(intentOptions, GatewayIntentBits.GuildModeration);

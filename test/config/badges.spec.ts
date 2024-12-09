@@ -1,9 +1,9 @@
-import { describe, assert, test } from "vitest";
+import { describe, assert, it } from "vitest";
 import { badges } from
   "../../src/config/badges.js";
 
 describe("badges Config", () => {
-  test("should be unique", () => {
+  it("should be unique", () => {
     const set = new Set(badges.map((b) => {
       return b.name;
     }));

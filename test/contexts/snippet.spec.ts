@@ -1,8 +1,8 @@
-import { describe, assert, test } from "vitest";
+import { describe, assert, it } from "vitest";
 import { snippet } from "../../src/contexts/snippet.js";
 
 describe("snippet context", () => {
-  test("is defined", () => {
+  it("is defined", () => {
     assert.isDefined(snippet);
   });
 });

@@ -1,8 +1,8 @@
-import { describe, assert, test } from "vitest";
+import { describe, assert, it } from "vitest";
 import { levelScale } from "../../src/config/levelScale.js";
 
 describe("levelScale", () => {
-  test("level scale should return the correct values", () => {
+  it("level scale should return the correct values", () => {
     assert.equal(levelScale[0], 0);
     assert.equal(levelScale[1], 100);
     assert.equal(levelScale[2], 300);

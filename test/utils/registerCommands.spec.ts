@@ -1,19 +1,19 @@
 import { MockRest } from "discordjs-testing";
-import { describe, assert, test } from "vitest";
+import { describe, assert, it } from "vitest";
 import { loadCommands } from "../../src/utils/loadCommands.js";
 import { registerCommands } from "../../src/utils/registerCommands.js";
 import type { Command } from "../../src/interfaces/command.js";
 import type { Context } from "../../src/interfaces/context.js";
 
 describe("registerCommands", () => {
-  test("throws when bot is not authenticated", async() => {
+  it("throws when bot is not authenticated", async() => {
     let threw = false;
     await registerCommands({} as never).catch(() => {
       threw = true;
     });
     assert.isTrue(threw);
   });
-  test("registers the command payload", async() => {
+  it("registers the command payload", async() => {
     const bot: {
       commands: Array<Command>;
       config:   { botId: string; homeGuild: string; token: string };
