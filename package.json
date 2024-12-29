@@ -34,7 +34,7 @@
     "mongodb": "6.12.0",
     "node-html-to-image": "4.0.0",
     "node-schedule": "2.1.1",
-    "octokit": "4.0.2",
+    "octokit": "4.0.3",
     "prettier": "3.4.2",
     "string-similarity": "4.0.4",
     "strip-ansi": "7.1.0",
