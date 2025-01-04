@@ -1,4 +1,4 @@
-import { describe, assert, it, vi } from "vitest";
+import { describe, expect, it, vi, expect } from "vitest";
 import { registerEvents } from "../../src/events/registerEvents.js";
 
 vi.mock("discord.js");
@@ -12,7 +12,7 @@ const bot = {
 
 describe("registerEvents", () => {
   it("registerEvents is a function", () => {
-    assert.isFunction(registerEvents);
+    expect(registerEvents).toBeTypeOf("function");
   });
 
   it("should register all events", async() => {

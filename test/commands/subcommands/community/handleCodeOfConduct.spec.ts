@@ -7,7 +7,7 @@ import {
   MockMember,
   MockUser,
 } from "discordjs-testing";
-import { describe, assert, it } from "vitest";
+import { describe, expect, it } from "vitest";
 import { handleCodeOfConduct } from "../../../../src/commands/subcommands/community/handleCodeOfConduct.js";
 
 const guild = new MockGuild({

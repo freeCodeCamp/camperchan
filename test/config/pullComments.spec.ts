@@ -1,4 +1,4 @@
-import { describe, assert, it } from "vitest";
+import { describe, expect, it } from "vitest";
 import { pullComments } from "../../src/config/pullComments.js";
 
 describe("pullComments", () => {

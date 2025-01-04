@@ -1,5 +1,5 @@
 import { type GuildMember, PermissionFlagsBits } from "discord.js";
-import { describe, assert, it } from "vitest";
+import { describe, expect, it } from "vitest";
 import { isModerator } from "../../src/utils/isModerator.js";
 
 const typeCoerce = (object: unknown): GuildMember => {
@@ -30,14 +30,14 @@ const moderateMembersSet = typeCoerce({
 
 describe("isModerator", () => {
   it("is defined", () => {
-    assert.isDefined(isModerator, "isModerator is not defined");
-    assert.isFunction(isModerator, "isModerator is not a function");
+    expect(isModerator, "isModerator is not defined").toBeDefined();
+    expect(isModerator, "isModerator is not a function").toBeTypeOf("function");
   });
 
   it("returns true when moderator", () => {
-    assert.isTrue(isModerator(kickMembersSet), "isModerator returned false");
-    assert.isTrue(isModerator(banMembersSet), "isModerator returned false");
-    assert.isTrue(isModerator(manageMessagesSet), "isModerator returned false");
+    expect(isModerator(kickMembersSet), "isModerator returned false").toBeTruthy();
+    expect(isModerator(banMembersSet), "isModerator returned false").toBeTruthy();
+    expect(isModerator(manageMessagesSet), "isModerator returned false").toBeTruthy();
     assert.isTrue(
       isModerator(moderateMembersSet),
       "isModerator returned false",

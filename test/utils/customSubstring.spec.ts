@@ -1,10 +1,10 @@
-import { describe, assert, it } from "vitest";
+import { describe, expect, it } from "vitest";
 import { customSubstring } from "../../src/utils/customSubstring.js";
 
 describe("customSubstring", () => {
   it("is defined", () => {
-    assert.isDefined(customSubstring, "customSubstring is not defined");
-    assert.isFunction(customSubstring, "customSubstring is not a function");
+    expect(customSubstring,"customSubstring is not defined").toBeDefined();
+    expect(customSubstring, "customSubstring is not a function").toBeTypeOf("function");
   });
 
   it("returns original string when shorter", () => {

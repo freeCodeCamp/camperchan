@@ -1,11 +1,11 @@
 import { WebhookClient } from "discord.js";
-import { describe, assert, it } from "vitest";
+import { describe, expect, it } from "vitest";
 import { generateConfig } from "../../src/modules/generateConfig.js";
 
 describe("generateConfig", () => {
   it("is defined", () => {
-    assert.isDefined(generateConfig, "generateConfig is not defined");
-    assert.isFunction(generateConfig, "generateConfig is not a function");
+    expect(generateConfig, "generateConfig is not defined").toBeDefined();
+    expect(generateConfig, "generateConfig is not a function").toBeTypeOf("function");
   });
 
   it("should throw an error on missing environment", () => {

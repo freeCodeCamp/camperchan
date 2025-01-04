@@ -1,10 +1,10 @@
-import { describe, assert, it } from "vitest";
+import { describe, expect, it } from "vitest";
 import { formatter } from "../../src/modules/formatter.js";
 
 describe("formatter", () => {
   it("is defined", () => {
-    assert.isDefined(formatter, "formatter is not defined");
-    assert.isFunction(formatter, "formatter is not a function");
+    expect(formatter,"formatter is not defined").toBeDefined();
+    expect(formatter, "formatter is not a function").toBeTypeOf("function");
   });
 
   it("should format HTML", async() => {

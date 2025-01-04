@@ -1,5 +1,5 @@
 import { GatewayIntentBits } from "discord.js";
-import { describe, assert, it } from "vitest";
+import { describe, expect, it } from "vitest";
 import { intentOptions } from "../../src/config/intentOptions.js";
 
 describe("intentOptions", () => {

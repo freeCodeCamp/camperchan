@@ -1,10 +1,10 @@
-import { describe, assert, it } from "vitest";
+import { describe, expect, it } from "vitest";
 import { formatCodeBlock } from "../../src/modules/formatCodeblock.js";
 
 describe("formatCodeBlock", () => {
   it("is defined", () => {
-    assert.isDefined(formatCodeBlock, "formatCodeBlock is not defined");
-    assert.isFunction(formatCodeBlock, "formatCodeBlock is not a function");
+    expect(formatCodeBlock, "formatCodeBlock is not defined").toBeDefined();
+    expect(formatCodeBlock, "formatCodeBlock is not a function").toBeTypeOf("function");
   });
 
   it("formats string as expected", () => {

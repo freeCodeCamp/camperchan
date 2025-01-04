@@ -1,4 +1,4 @@
-import { describe, assert, it } from "vitest";
+import { describe, expect, it } from "vitest";
 import { languages } from "../../src/config/languages.js";
 
 describe("languages Config", () => {

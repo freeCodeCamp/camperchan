@@ -1,14 +1,14 @@
 import { readdir } from "node:fs/promises";
 import { join } from "node:path";
-import { describe, assert, it } from "vitest";
+import { describe, expect, it } from "vitest";
 import { loadCommands } from "../../src/utils/loadCommands.js";
 import type { Command } from "../../src/interfaces/command.js";
 import type { ExtendedClient } from "../../src/interfaces/extendedClient.js";
 
 describe("loadCommands", () => {
   it("is defined", () => {
-    assert.isDefined(loadCommands, "loadCommands is not defined");
-    assert.isFunction(loadCommands, "loadCommands is not a function");
+    expect(loadCommands,"loadCommands is not defined").toBeDefined();
+    expect(loadCommands, "loadCommands is not a function").toBeTypeOf("function");
   });
 
   it("returns array of commands", async() => {

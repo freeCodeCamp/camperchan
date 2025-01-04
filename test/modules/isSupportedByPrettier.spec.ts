@@ -1,4 +1,4 @@
-import { describe, assert, it } from "vitest";
+import { describe, expect, it } from "vitest";
 import { isSupportedByPrettier } from
   "../../src/modules/isSupportedByPrettier.js";
 
@@ -8,14 +8,11 @@ describe("isSupportedByPrettier", () => {
       isSupportedByPrettier,
       "isSupportedByPrettier is not defined",
     );
-    assert.isFunction(
-      isSupportedByPrettier,
-      "isSupportedByPrettier is not a function",
-    );
+    expect(isSupportedByPrettier, "isSupportedByPrettier is not a function").toBeTypeOf("function");
   });
 
   it("returns false on empty language name", () => {
-    assert.isFalse(isSupportedByPrettier(""));
+    expect(isSupportedByPrettier("")).toBeFalsy();
   });
 
   it("returns expected language names for supported langs", () => {
@@ -30,8 +27,8 @@ describe("isSupportedByPrettier", () => {
   });
 
   it("returns false for unsupported languages", () => {
-    assert.isFalse(isSupportedByPrettier("Python"));
-    assert.isFalse(isSupportedByPrettier("Ruby"));
-    assert.isFalse(isSupportedByPrettier("C++"));
+    expect(isSupportedByPrettier("Python")).toBeFalsy();
+    expect(isSupportedByPrettier("Ruby")).toBeFalsy();
+    expect(isSupportedByPrettier("C++")).toBeFalsy();
   });
 });

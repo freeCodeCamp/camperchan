@@ -6,7 +6,7 @@ import {
   MockMember,
   MockUser,
 } from "discordjs-testing";
-import { describe, assert, it } from "vitest";
+import { describe, expect, it } from "vitest";
 import { handleContribute }
   from "../../../../src/commands/subcommands/community/handleContribute.js";
 

@@ -1,5 +1,5 @@
 import { PermissionFlagsBits } from "discord.js";
-import { describe, assert, it } from "vitest";
+import { describe, expect, it } from "vitest";
 import { handleHistory }
   from "../../../../src/commands/subcommands/moderation/handleHistory.js";
 

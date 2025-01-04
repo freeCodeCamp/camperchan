@@ -2,7 +2,7 @@ import {
   ApplicationCommandOptionType,
   type SlashCommandSubcommandBuilder,
 } from "discord.js";
-import { describe, assert, it } from "vitest";
+import { describe, expect, it } from "vitest";
 import { github } from "../../src/commands/github.js";
 
 describe("github command", () => {
@@ -18,7 +18,7 @@ describe("github command", () => {
       github.data.description,
       "Commands related to managing github",
     );
-    assert.lengthOf(subcommands, 4);
+    expect(subcommands).toHaveLength(4);
   });
 
   it("has correct close", () => {
@@ -31,13 +31,13 @@ describe("github command", () => {
       close?.description,
       "Close an issue or pull request under the freeCodeCamp organisation.",
     );
-    assert.lengthOf(close?.options || "hi", 4);
+    expect(close?.options || "hi").toHaveLength(4);
     assert.strictEqual(close?.options?.[0].name, "repository");
     assert.strictEqual(
       close?.options?.[0].description,
       `The name of the repository, under freeCodeCamp's GitHub org, to comment on`,
     );
-    assert.isTrue(close?.options?.[0].required);
+    expect(close?.options?.[0].required).toBeTruthy();
     assert.strictEqual(
       close?.options?.[0].type,
       ApplicationCommandOptionType.String,
@@ -47,7 +47,7 @@ describe("github command", () => {
       close?.options?.[1].description,
       "The number of the issue or pull to close.",
     );
-    assert.isTrue(close?.options?.[1].required);
+    expect(close?.options?.[1].required).toBeTruthy();
     assert.strictEqual(
       close?.options?.[1].type,
       ApplicationCommandOptionType.Integer,
@@ -57,7 +57,7 @@ describe("github command", () => {
       close?.options?.[2].description,
       `The comment to leave when closing. Defaults to the standard close message.`,
     );
-    assert.isFalse(close?.options?.[2].required);
+    expect(close?.options?.[2].required).toBeFalsy();
     assert.strictEqual(
       close?.options?.[2].type,
       ApplicationCommandOptionType.String,
@@ -67,7 +67,7 @@ describe("github command", () => {
       close?.options?.[3].description,
       "Label the PR as spam for Hacktoberfest?",
     );
-    assert.isFalse(close?.options?.[3].required);
+    expect(close?.options?.[3].required).toBeFalsy();
     assert.strictEqual(
       close?.options?.[3].type,
       ApplicationCommandOptionType.Boolean,
@@ -84,13 +84,13 @@ describe("github command", () => {
       comment?.description,
       `Adds a friendly comment to an issue or pull request. Scoped to the freeCodeCamp organisation.`,
     );
-    assert.lengthOf(comment?.options || "hi", 3);
+    expect(comment?.options || "hi").toHaveLength(3);
     assert.strictEqual(comment?.options?.[0].name, "repository");
     assert.strictEqual(
       comment?.options?.[0].description,
       `The name of the repository, under freeCodeCamp's GitHub org, to comment on`,
     );
-    assert.isTrue(comment?.options?.[0].required);
+    expect(comment?.options?.[0].required).toBeTruthy();
     assert.strictEqual(
       comment?.options?.[0].type,
       ApplicationCommandOptionType.String,
@@ -100,7 +100,7 @@ describe("github command", () => {
       comment?.options?.[1].description,
       "The number of the pull request to comment on.",
     );
-    assert.isTrue(comment?.options?.[1].required);
+    expect(comment?.options?.[1].required).toBeTruthy();
     assert.strictEqual(
       comment?.options?.[1].type,
       ApplicationCommandOptionType.Integer,
@@ -110,7 +110,7 @@ describe("github command", () => {
       comment?.options?.[2].description,
       "The message to post.",
     );
-    assert.isTrue(comment?.options?.[2].required);
+    expect(comment?.options?.[2].required).toBeTruthy();
     assert.strictEqual(
       comment?.options?.[2].type,
       ApplicationCommandOptionType.String,
@@ -127,13 +127,13 @@ describe("github command", () => {
       command?.description,
       `Specify a list of labels to add to an issue/PR. Existing labels will not be removed.`,
     );
-    assert.lengthOf(command?.options || "hi", 3);
+    expect(command?.options || "hi").toHaveLength(3);
     assert.strictEqual(command?.options?.[0].name, "repository");
     assert.strictEqual(
       command?.options?.[0].description,
       "The name of the repository, under freeCodeCamp's GitHub org, to label",
     );
-    assert.isTrue(command?.options?.[0].required);
+    expect(command?.options?.[0].required).toBeTruthy();
     assert.strictEqual(
       command?.options?.[0].type,
       ApplicationCommandOptionType.String,
@@ -143,7 +143,7 @@ describe("github command", () => {
       command?.options?.[1].description,
       "The number of the pull request to label.",
     );
-    assert.isTrue(command?.options?.[1].required);
+    expect(command?.options?.[1].required).toBeTruthy();
     assert.strictEqual(
       command?.options?.[1].type,
       ApplicationCommandOptionType.Integer,
@@ -153,7 +153,7 @@ describe("github command", () => {
       command?.options?.[2].description,
       "The comma separated list of labels to add",
     );
-    assert.isTrue(command?.options?.[2].required);
+    expect(command?.options?.[2].required).toBeTruthy();
     assert.strictEqual(
       command?.options?.[2].type,
       ApplicationCommandOptionType.String,
@@ -170,13 +170,13 @@ describe("github command", () => {
       command?.description,
       `Specify the exact list of labels an issue/PR should have. Labels not on the list will be removed.`,
     );
-    assert.lengthOf(command?.options || "hi", 3);
+    expect(command?.options || "hi").toHaveLength(3);
     assert.strictEqual(command?.options?.[0].name, "repository");
     assert.strictEqual(
       command?.options?.[0].description,
       "The name of the repository, under freeCodeCamp's GitHub org, to label",
     );
-    assert.isTrue(command?.options?.[0].required);
+    expect(command?.options?.[0].required).toBeTruthy();
     assert.strictEqual(
       command?.options?.[0].type,
       ApplicationCommandOptionType.String,
@@ -186,7 +186,7 @@ describe("github command", () => {
       command?.options?.[1].description,
       "The number of the pull request to label.",
     );
-    assert.isTrue(command?.options?.[1].required);
+    expect(command?.options?.[1].required).toBeTruthy();
     assert.strictEqual(
       command?.options?.[1].type,
       ApplicationCommandOptionType.Integer,
@@ -196,7 +196,7 @@ describe("github command", () => {
       command?.options?.[2].description,
       "The comma separated list of labels to sync",
     );
-    assert.isTrue(command?.options?.[2].required);
+    expect(command?.options?.[2].required).toBeTruthy();
     assert.strictEqual(
       command?.options?.[2].type,
       ApplicationCommandOptionType.String,

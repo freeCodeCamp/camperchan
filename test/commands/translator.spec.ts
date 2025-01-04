@@ -1,8 +1,8 @@
-import { describe, assert, it } from "vitest";
+import { describe, expect, it } from "vitest";
 import { translator } from "../../src/commands/translator.js";
 
 describe("translator command", () => {
   it("is defined", () => {
-    assert.isDefined(translator);
+    expect(translator).toBeDefined();
   });
 });

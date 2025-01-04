@@ -1,13 +1,10 @@
-import { describe, assert, it } from "vitest";
+import { describe, it, expect } from "vitest";
 import { formatTextToTable } from "../../src/utils/formatText.js";
 
 describe("formatTextToTable", () => {
   it("is defined", () => {
-    assert.isDefined(formatTextToTable, "formatTextToTable is not defined!");
-    assert.isFunction(
-      formatTextToTable,
-      "formatTextToTable is not a function!",
-    );
+    expect(formatTextToTable, "formatTextToTable is not defined!").toBeDefined();
+    expect(formatTextToTable, "formatTextToTable is not a function!").toBeTypeOf("function");
   });
   it("given empty array returns empty string", () => {
     assert.deepEqual(

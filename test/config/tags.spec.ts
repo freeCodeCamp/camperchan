@@ -1,4 +1,4 @@
-import { describe, assert, it } from "vitest";
+import { describe, expect, it } from "vitest";
 import { tags } from "../../src/config/tags.js";
 
 describe("tags", () => {

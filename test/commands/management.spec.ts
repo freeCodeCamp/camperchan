@@ -2,7 +2,7 @@ import {
   ApplicationCommandOptionType,
   type SlashCommandSubcommandBuilder,
 } from "discord.js";
-import { describe, assert, it } from "vitest";
+import { describe, expect, it } from "vitest";
 import { management } from "../../src/commands/management.js";
 
 describe("management command", () => {
@@ -18,7 +18,7 @@ describe("management command", () => {
       management.data.description,
       "Commands related to server management.",
     );
-    assert.lengthOf(subcommands, 3);
+    expect(subcommands).toHaveLength(3);
   });
 
   it("has correct private", () => {
@@ -29,13 +29,13 @@ describe("management command", () => {
       privateC?.description,
       "Creates a private discussion channel with a user.",
     );
-    assert.lengthOf(privateC?.options || "hi", 1);
+    expect(privateC?.options || "hi").toHaveLength(1);
     assert.strictEqual(privateC?.options[0].name, "target");
     assert.strictEqual(
       privateC?.options[0].description,
       "The user to create a private channel with.",
     );
-    assert.isTrue(privateC?.options[0].required);
+    expect(privateC?.options[0].required).toBeTruthy();
     assert.strictEqual(
       privateC?.options[0].type,
       ApplicationCommandOptionType.User,
@@ -50,19 +50,19 @@ describe("management command", () => {
       role?.description,
       "Creates a post with buttons for self-assignable roles.",
     );
-    assert.lengthOf(role?.options || "hi", 7);
+    expect(role?.options || "hi").toHaveLength(7);
     assert.strictEqual(role?.options[0].name, "channel");
     assert.strictEqual(
       role?.options[0].description,
       "Channel to create the post in.",
     );
-    assert.isTrue(role?.options[0].required);
+    expect(role?.options[0].required).toBeTruthy();
     assert.strictEqual(role?.options[1].name, "header");
     assert.strictEqual(
       role?.options[1].description,
       "Text to include at the top of the post.",
     );
-    assert.isTrue(role?.options[1].required);
+    expect(role?.options[1].required).toBeTruthy();
     assert.strictEqual(
       role?.options[1].type,
       ApplicationCommandOptionType.String,
@@ -72,7 +72,7 @@ describe("management command", () => {
       role?.options[2].description,
       "Role to create a button for.",
     );
-    assert.isTrue(role?.options[2].required);
+    expect(role?.options[2].required).toBeTruthy();
     assert.strictEqual(
       role?.options[2].type,
       ApplicationCommandOptionType.Role,
@@ -82,7 +82,7 @@ describe("management command", () => {
       role?.options[3].description,
       "Role to create a button for.",
     );
-    assert.isFalse(role?.options[3].required);
+    expect(role?.options[3].required).toBeFalsy();
     assert.strictEqual(
       role?.options[3].type,
       ApplicationCommandOptionType.Role,
@@ -92,7 +92,7 @@ describe("management command", () => {
       role?.options[4].description,
       "Role to create a button for.",
     );
-    assert.isFalse(role?.options[4].required);
+    expect(role?.options[4].required).toBeFalsy();
     assert.strictEqual(
       role?.options[4].type,
       ApplicationCommandOptionType.Role,
@@ -102,7 +102,7 @@ describe("management command", () => {
       role?.options[5].description,
       "Role to create a button for.",
     );
-    assert.isFalse(role?.options[5].required);
+    expect(role?.options[5].required).toBeFalsy();
     assert.strictEqual(
       role?.options[5].type,
       ApplicationCommandOptionType.Role,
@@ -112,7 +112,7 @@ describe("management command", () => {
       role?.options[6].description,
       "Role to create a button for.",
     );
-    assert.isFalse(role?.options[6].required);
+    expect(role?.options[6].required).toBeFalsy();
     assert.strictEqual(
       role?.options[6].type,
       ApplicationCommandOptionType.Role,

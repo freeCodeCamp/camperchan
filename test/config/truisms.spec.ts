@@ -1,4 +1,4 @@
-import { describe, assert, it } from "vitest";
+import { describe, expect, it } from "vitest";
 import { truisms } from "../../src/config/truisms.js";
 
 describe("truisms", () => {

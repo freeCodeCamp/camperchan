@@ -1,4 +1,4 @@
-import { describe, assert, it } from "vitest";
+import { describe, expect, it } from "vitest";
 import { authorRoleId, supporterRoleId } from "../../src/config/roles.js";
 
 describe("roles config", () => {

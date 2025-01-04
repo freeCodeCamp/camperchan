@@ -1,10 +1,10 @@
-import { describe, assert, it } from "vitest";
+import { describe, expect, it } from "vitest";
 import { generateDiff } from "../../src/utils/generateDiff.js";
 
 describe("generateDiff", () => {
   it("is defined", () => {
-    assert.isDefined(generateDiff, "generateDiff is not defined");
-    assert.isFunction(generateDiff, "generateDiff is not a function");
+    expect(generateDiff,"generateDiff is not defined").toBeDefined();
+    expect(generateDiff, "generateDiff is not a function").toBeTypeOf("function");
   });
 
   it("returns an expected diff string", () => {

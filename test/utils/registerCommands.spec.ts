@@ -1,5 +1,5 @@
 import { MockRest } from "discordjs-testing";
-import { describe, assert, it } from "vitest";
+import { describe, expect, it } from "vitest";
 import { loadCommands } from "../../src/utils/loadCommands.js";
 import { registerCommands } from "../../src/utils/registerCommands.js";
 import type { Command } from "../../src/interfaces/command.js";
@@ -11,7 +11,7 @@ describe("registerCommands", () => {
     await registerCommands({} as never).catch(() => {
       threw = true;
     });
-    assert.isTrue(threw);
+    expect(threw).toBeTruthy();
   });
   it("registers the command payload", async() => {
     const bot: {
@@ -29,7 +29,7 @@ describe("registerCommands", () => {
       MockRest as never,
     )) as never as MockRest;
     assert.isNotNull(result);
-    assert.lengthOf(result.requests, 1);
+    expect(result.requests).toHaveLength(1);
     const request = result.requests[0];
     assert.strictEqual(request.method, "PUT");
     assert.strictEqual(

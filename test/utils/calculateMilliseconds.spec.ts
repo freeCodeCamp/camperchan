@@ -1,4 +1,4 @@
-import { describe, assert, it } from "vitest";
+import { describe, expect, it } from "vitest";
 import {
   calculateMilliseconds,
   isValidTimeUnit,
@@ -33,10 +33,10 @@ describe("calculateMilliseconds", () => {
 
 describe("isValidTimeUnit", () => {
   it("should return true for valid time units", () => {
-    assert.isTrue(isValidTimeUnit("seconds"));
+    expect(isValidTimeUnit("seconds")).toBeTruthy();
   });
 
   it("should return false for invalid time units", () => {
-    assert.isFalse(isValidTimeUnit("invalid"));
+    expect(isValidTimeUnit("invalid")).toBeFalsy();
   });
 });

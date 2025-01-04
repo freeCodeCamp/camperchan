@@ -1,4 +1,4 @@
-import { describe, assert, it } from "vitest";
+import { describe, expect, it } from "vitest";
 import { addFormatting } from "../../src/modules/addFormatting.js";
 import type { Message } from "discord.js";
 
@@ -8,8 +8,8 @@ const typeCoerce = (object: unknown): Message => {
 
 describe("addFormatting", () => {
   it("is defined", () => {
-    assert.isDefined(addFormatting, "addFormatting is not defined");
-    assert.isFunction(addFormatting, "addFormatting is not a function");
+    expect(addFormatting, "addFormatting is not defined").toBeDefined();
+    expect(addFormatting, "addFormatting is not a function").toBeTypeOf("function");
   });
 
   it("should format HTML", async() => {
@@ -58,7 +58,7 @@ describe("addFormatting", () => {
   });
 
   /*
-   * TODO: Python is currently throwing a CSS sytnax error?
+   * TODO: Python is currently throwing a CSS syntax error?
    *   it("should format Python", async () => {
    *     const content = `for i in range(10):\n  print(i)`;
    *     const output = await addFormatting(typeCoerce({ content }));

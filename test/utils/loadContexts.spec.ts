@@ -1,14 +1,14 @@
 import { readdir } from "node:fs/promises";
 import { join } from "node:path";
-import { describe, assert, it } from "vitest";
+import { describe, expect, it } from "vitest";
 import { loadContexts } from "../../src/utils/loadContexts.js";
 import type { Context } from "../../src/interfaces/context.js";
 import type { ExtendedClient } from "../../src/interfaces/extendedClient.js";
 
 describe("loadContexts", () => {
   it("is defined", () => {
-    assert.isDefined(loadContexts, "loadContexts is not defined");
-    assert.isFunction(loadContexts, "loadContexts is not a function");
+    expect(loadContexts,"loadContexts is not defined").toBeDefined();
+    expect(loadContexts, "loadContexts is not a function").toBeTypeOf("function");
   });
 
   it("returns array of commands", async() => {
