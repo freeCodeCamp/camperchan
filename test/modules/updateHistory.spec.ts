@@ -17,12 +17,12 @@ describe("updateHistory", () => {
       },
     });
     expect(history).toBeTypeOf("object");
-    assert.equal(history?.bans, 1);
-    assert.equal(history?.kicks, 0);
-    assert.equal(history?.mutes, 0);
-    assert.equal(history?.unmutes, 0);
-    assert.equal(history?.warns, 0);
-    assert.equal(history?.unbans, 0);
+    expect(history?.bans).toBe(1);
+    expect(history?.kicks).toBe(0);
+    expect(history?.mutes).toBe(0);
+    expect(history?.unmutes).toBe(0);
+    expect(history?.warns).toBe(0);
+    expect(history?.unbans).toBe(0);
   });
 
   it("should update an existing history", async() => {
@@ -34,11 +34,11 @@ describe("updateHistory", () => {
       },
     });
     expect(history).toBeTypeOf("object");
-    assert.equal(history?.bans, 2);
-    assert.equal(history?.kicks, 0);
-    assert.equal(history?.mutes, 1);
-    assert.equal(history?.unmutes, 0);
-    assert.equal(history?.warns, 0);
-    assert.equal(history?.unbans, 0);
+    expect(history?.bans).toBe(2);
+    expect(history?.kicks).toBe(0);
+    expect(history?.mutes).toBe(1);
+    expect(history?.unmutes).toBe(0);
+    expect(history?.warns).toBe(0);
+    expect(history?.unbans).toBe(0);
   });
 });

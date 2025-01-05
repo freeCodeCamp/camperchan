@@ -10,7 +10,7 @@ describe("report context", () => {
     expect(report.run).toBeTypeOf("function");
   });
   it("report context should be formatted correctly.", () => {
-    assert.equal(report.data.name, "report");
-    assert.equal(report.data.type, ApplicationCommandType.Message);
+    expect(report.data.name).toBe("report");
+    expect(report.data.type).toBe(ApplicationCommandType.Message);
   });
 });

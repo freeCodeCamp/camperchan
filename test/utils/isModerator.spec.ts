@@ -45,8 +45,6 @@ describe("isModerator", () => {
   });
 
   it("returns false when not moderator", () => {
-    assert.isFalse(
-      isModerator(typeCoerce({ permissions: new Set(basePermissions) })),
-    );
+    expect(isModerator(typeCoerce({ permissions: new Set(basePermissions) }))).toBeFalsy();
   });
 });

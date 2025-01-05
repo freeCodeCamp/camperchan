@@ -16,14 +16,14 @@ describe("isSupportedByPrettier", () => {
   });
 
   it("returns expected language names for supported langs", () => {
-    assert.equal(isSupportedByPrettier("HTML"), "html");
-    assert.equal(isSupportedByPrettier("CSS"), "css");
-    assert.equal(isSupportedByPrettier("SCSS"), "css");
-    assert.equal(isSupportedByPrettier("JavaScript"), "js");
-    assert.equal(isSupportedByPrettier("JS"), "js");
-    assert.equal(isSupportedByPrettier("JSON"), "json");
-    assert.equal(isSupportedByPrettier("MarkDown"), "markdown");
-    assert.equal(isSupportedByPrettier("YAML"), "yaml");
+    expect(isSupportedByPrettier("HTML")).toBe("html");
+    expect(isSupportedByPrettier("CSS")).toBe("css");
+    expect(isSupportedByPrettier("SCSS")).toBe("css");
+    expect(isSupportedByPrettier("JavaScript")).toBe("js");
+    expect(isSupportedByPrettier("JS")).toBe("js");
+    expect(isSupportedByPrettier("JSON")).toBe("json");
+    expect(isSupportedByPrettier("MarkDown")).toBe("markdown");
+    expect(isSupportedByPrettier("YAML")).toBe("yaml");
   });
 
   it("returns false for unsupported languages", () => {

@@ -23,7 +23,7 @@ describe("loadContexts", () => {
       return file.split(".")[0];
     });
     bot.contexts = await loadContexts(bot as never);
-    assert.equal(bot.contexts.length, contextNames.length);
+    expect(bot.contexts.length).toBe(contextNames.length);
     for (const name of contextNames) {
       assert.exists(bot.contexts.find((context) => {
         return context.data.name === name;

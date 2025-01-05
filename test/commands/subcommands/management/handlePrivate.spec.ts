@@ -5,34 +5,26 @@ import { handlePrivate }
 
 describe("handlePrivate command", () => {
   it("does not allow non-moderators permission", () => {
-    assert.isFalse(
-      handlePrivate.permissionValidator({
+    expect(handlePrivate.permissionValidator({
         permissions: new Set([ PermissionFlagsBits.SendMessages ]),
-      } as never),
-    );
+      } as never)).toBeFalsy();
   });
 
   it("allows moderate members permission", () => {
-    assert.isTrue(
-      handlePrivate.permissionValidator({
+    expect(handlePrivate.permissionValidator({
         permissions: new Set([ PermissionFlagsBits.ModerateMembers ]),
-      } as never),
-    );
+      } as never)).toBeTruthy();
   });
 
   it("allows kick members permission", () => {
-    assert.isTrue(
-      handlePrivate.permissionValidator({
+    expect(handlePrivate.permissionValidator({
         permissions: new Set([ PermissionFlagsBits.KickMembers ]),
-      } as never),
-    );
+      } as never)).toBeTruthy();
   });
 
   it("allows ban members permission", () => {
-    assert.isTrue(
-      handlePrivate.permissionValidator({
+    expect(handlePrivate.permissionValidator({
         permissions: new Set([ PermissionFlagsBits.BanMembers ]),
-      } as never),
-    );
+      } as never)).toBeTruthy();
   });
 });

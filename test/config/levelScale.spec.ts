@@ -3,10 +3,10 @@ import { levelScale } from "../../src/config/levelScale.js";
 
 describe("levelScale", () => {
   it("level scale should return the correct values", () => {
-    assert.equal(levelScale[0], 0);
-    assert.equal(levelScale[1], 100);
-    assert.equal(levelScale[2], 300);
-    assert.equal(levelScale[50], 127_500);
-    assert.equal(levelScale[100], 505_000);
+    expect(levelScale[0]).toBe(0);
+    expect(levelScale[1]).toBe(100);
+    expect(levelScale[2]).toBe(300);
+    expect(levelScale[50]).toBe(127_500);
+    expect(levelScale[100]).toBe(505_000);
   });
 });

@@ -14,7 +14,7 @@ describe("createLogFile", () => {
     const mockBot = { privateLogs: {} } as ExtendedClient;
     await createLogFile(mockBot, "Naomi");
     expect(mockBot.privateLogs, "Naomi is not defined").toHaveProperty("Naomi");
-    assert.equal(mockBot.privateLogs.Naomi, "Naomi", "Naomi is not Naomi");
+    expect(mockBot.privateLogs.Naomi, "Naomi is not Naomi").toBe("Naomi");
     const logPath = join(process.cwd(), "logs", "Naomi.txt");
     const status = await stat(logPath);
     expect(status.isFile(), "Naomi.txt is not a file").toBeTruthy();

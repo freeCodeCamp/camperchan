@@ -7,6 +7,6 @@ describe("badges Config", () => {
     const set = new Set(badges.map((b) => {
       return b.name;
     }));
-    assert.equal(set.size, badges.length);
+    expect(set.size).toBe(badges.length);
   });
 });

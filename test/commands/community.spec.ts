@@ -28,11 +28,8 @@ describe("community command", () => {
       },
     );
     assert.exists(codeOfConduct);
-    assert.equal(codeOfConduct?.name, "code-of-conduct");
-    assert.equal(
-      codeOfConduct?.description,
-      "Returns information on freeCodeCamp's Code of Conduct.",
-    );
+    expect(codeOfConduct?.name).toBe("code-of-conduct");
+    expect(codeOfConduct?.description).toBe("Returns information on freeCodeCamp's Code of Conduct.");
     expect(codeOfConduct?.options || "hi").toHaveLength(0);
   });
 
@@ -41,11 +38,8 @@ describe("community command", () => {
       return sub.name === "contribute";
     });
     assert.exists(contribute);
-    assert.equal(contribute?.name, "contribute");
-    assert.equal(
-      contribute?.description,
-      "Returns helpful links for folks interested in contributing.",
-    );
+    expect(contribute?.name).toBe("contribute");
+    expect(contribute?.description).toBe("Returns helpful links for folks interested in contributing.");
     expect(contribute?.options || "hi").toHaveLength(0);
   });
 
@@ -54,11 +48,8 @@ describe("community command", () => {
       return sub.name === "forum";
     });
     assert.exists(forum);
-    assert.equal(forum?.name, "forum");
-    assert.equal(
-      forum?.description,
-      "Returns the latest activity on the forum.",
-    );
+    expect(forum?.name).toBe("forum");
+    expect(forum?.description).toBe("Returns the latest activity on the forum.");
     expect(forum?.options || "hi").toHaveLength(0);
   });
 
@@ -67,8 +58,8 @@ describe("community command", () => {
       return sub.name === "leaderboard";
     });
     assert.exists(leaderboard);
-    assert.equal(leaderboard?.name, "leaderboard");
-    assert.equal(leaderboard?.description, "View the server leaderboard.");
+    expect(leaderboard?.name).toBe("leaderboard");
+    expect(leaderboard?.description).toBe("View the server leaderboard.");
     expect(leaderboard?.options || "hi").toHaveLength(0);
   });
 
@@ -77,8 +68,8 @@ describe("community command", () => {
       return sub.name === "quote";
     });
     assert.exists(quote);
-    assert.equal(quote?.name, "quote");
-    assert.equal(quote?.description, "Returns a motivational quote.");
+    expect(quote?.name).toBe("quote");
+    expect(quote?.description).toBe("Returns a motivational quote.");
     expect(quote?.options || "hi").toHaveLength(0);
   });
 
@@ -86,8 +77,8 @@ describe("community command", () => {
     const rank = subcommands.find((sub) => {
       return sub.name === "profile";
     });
-    assert.equal(rank?.name, "profile");
-    assert.equal(rank?.description, "See your community profile.");
+    expect(rank?.name).toBe("profile");
+    expect(rank?.description).toBe("See your community profile.");
     expect(rank?.options || "hi").toHaveLength(0);
   });
 
@@ -95,11 +86,8 @@ describe("community command", () => {
     const truism = subcommands.find((sub) => {
       return sub.name === "truism";
     });
-    assert.equal(truism?.name, "truism");
-    assert.equal(
-      truism?.description,
-      "Provides a random difficult-to-swallow truth about coding.",
-    );
+    expect(truism?.name).toBe("truism");
+    expect(truism?.description).toBe("Provides a random difficult-to-swallow truth about coding.");
     expect(truism?.options || "hi").toHaveLength(0);
   });
 });

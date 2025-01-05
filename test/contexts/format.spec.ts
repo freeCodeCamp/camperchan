@@ -10,7 +10,7 @@ describe("format context", () => {
     expect(format.run).toBeTypeOf("function");
   });
   it("format context should be formatted correctly.", () => {
-    assert.equal(format.data.name, "format");
-    assert.equal(format.data.type, ApplicationCommandType.Message);
+    expect(format.data.name).toBe("format");
+    expect(format.data.type).toBe(ApplicationCommandType.Message);
   });
 });

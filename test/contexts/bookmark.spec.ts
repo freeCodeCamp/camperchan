@@ -10,7 +10,7 @@ describe("bookmark context", () => {
     expect(bookmark.run).toBeTypeOf("function");
   });
   it("bookmark context should be formatted correctly.", () => {
-    assert.equal(bookmark.data.name, "bookmark");
-    assert.equal(bookmark.data.type, ApplicationCommandType.Message);
+    expect(bookmark.data.name).toBe("bookmark");
+    expect(bookmark.data.type).toBe(ApplicationCommandType.Message);
   });
 });

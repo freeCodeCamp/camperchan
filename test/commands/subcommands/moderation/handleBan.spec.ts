@@ -5,34 +5,26 @@ import { handleBan }
 
 describe("ban handler", () => {
   it("does not allow non-moderators permission", () => {
-    assert.isFalse(
-      handleBan.permissionValidator({
+    expect(handleBan.permissionValidator({
         permissions: new Set([ PermissionFlagsBits.SendMessages ]),
-      } as never),
-    );
+      } as never)).toBeFalsy();
   });
 
   it("does not allow moderate members permission", () => {
-    assert.isFalse(
-      handleBan.permissionValidator({
+    expect(handleBan.permissionValidator({
         permissions: new Set([ PermissionFlagsBits.ModerateMembers ]),
-      } as never),
-    );
+      } as never)).toBeFalsy();
   });
 
   it("does not allow kick members permission", () => {
-    assert.isFalse(
-      handleBan.permissionValidator({
+    expect(handleBan.permissionValidator({
         permissions: new Set([ PermissionFlagsBits.KickMembers ]),
-      } as never),
-    );
+      } as never)).toBeFalsy();
   });
 
   it("allows ban members permission", () => {
-    assert.isTrue(
-      handleBan.permissionValidator({
+    expect(handleBan.permissionValidator({
         permissions: new Set([ PermissionFlagsBits.BanMembers ]),
-      } as never),
-    );
+      } as never)).toBeTruthy();
   });
 });

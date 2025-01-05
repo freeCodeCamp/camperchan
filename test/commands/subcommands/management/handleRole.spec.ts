@@ -5,42 +5,32 @@ import { handleRole }
 
 describe("handleRole command", () => {
   it("does not allow non-moderators permission", () => {
-    assert.isFalse(
-      handleRole.permissionValidator({
+    expect(handleRole.permissionValidator({
         permissions: new Set([ PermissionFlagsBits.SendMessages ]),
-      } as never),
-    );
+      } as never)).toBeFalsy();
   });
 
   it("does not allow moderate members permission", () => {
-    assert.isFalse(
-      handleRole.permissionValidator({
+    expect(handleRole.permissionValidator({
         permissions: new Set([ PermissionFlagsBits.ModerateMembers ]),
-      } as never),
-    );
+      } as never)).toBeFalsy();
   });
 
   it("does not allow kick members permission", () => {
-    assert.isFalse(
-      handleRole.permissionValidator({
+    expect(handleRole.permissionValidator({
         permissions: new Set([ PermissionFlagsBits.KickMembers ]),
-      } as never),
-    );
+      } as never)).toBeFalsy();
   });
 
   it("does not allow ban members permission", () => {
-    assert.isFalse(
-      handleRole.permissionValidator({
+    expect(handleRole.permissionValidator({
         permissions: new Set([ PermissionFlagsBits.BanMembers ]),
-      } as never),
-    );
+      } as never)).toBeFalsy();
   });
 
   it("allows manage server permission", () => {
-    assert.isTrue(
-      handleRole.permissionValidator({
+    expect(handleRole.permissionValidator({
         permissions: new Set([ PermissionFlagsBits.ManageGuild ]),
-      } as never),
-    );
+      } as never)).toBeTruthy();
   });
 });

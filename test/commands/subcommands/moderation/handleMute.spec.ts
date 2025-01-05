@@ -5,34 +5,26 @@ import { handleMute }
 
 describe("mute handler", () => {
   it("does not allow non-moderators permission", () => {
-    assert.isFalse(
-      handleMute.permissionValidator({
+    expect(handleMute.permissionValidator({
         permissions: new Set([ PermissionFlagsBits.SendMessages ]),
-      } as never),
-    );
+      } as never)).toBeFalsy();
   });
 
   it("allows moderate members permission", () => {
-    assert.isTrue(
-      handleMute.permissionValidator({
+    expect(handleMute.permissionValidator({
         permissions: new Set([ PermissionFlagsBits.ModerateMembers ]),
-      } as never),
-    );
+      } as never)).toBeTruthy();
   });
 
   it("does not allow kick members permission", () => {
-    assert.isFalse(
-      handleMute.permissionValidator({
+    expect(handleMute.permissionValidator({
         permissions: new Set([ PermissionFlagsBits.KickMembers ]),
-      } as never),
-    );
+      } as never)).toBeFalsy();
   });
 
   it("does not allow ban members permission", () => {
-    assert.isFalse(
-      handleMute.permissionValidator({
+    expect(handleMute.permissionValidator({
         permissions: new Set([ PermissionFlagsBits.BanMembers ]),
-      } as never),
-    );
+      } as never)).toBeFalsy();
   });
 });

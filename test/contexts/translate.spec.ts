@@ -10,7 +10,7 @@ describe("translate context", () => {
     expect(translate.run).toBeTypeOf("function");
   });
   it("translate context should be formatted correctly.", () => {
-    assert.equal(translate.data.name, "translate");
-    assert.equal(translate.data.type, ApplicationCommandType.Message);
+    expect(translate.data.name).toBe("translate");
+    expect(translate.data.type).toBe(ApplicationCommandType.Message);
   });
 });

@@ -12,6 +12,6 @@ describe("generateDiff", () => {
     const updated = "this is a it, but different";
     const expected = "- this is a it\n+ this is a it, but different";
     const actual = generateDiff(old, updated);
-    assert.equal(actual, expected);
+    expect(actual).toBe(expected);
   });
 });

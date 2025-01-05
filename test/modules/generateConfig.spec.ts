@@ -32,25 +32,23 @@ describe("generateConfig", () => {
     process.env.GITHUB_APP_ID = "1";
     process.env.GITHUB_INSTALLATION_ID = "7";
     const result = generateConfig();
-    assert.equal(result.token, process.env.TOKEN);
-    assert.equal(result.mongoUrl, process.env.MONGO_URI);
-    assert.equal(result.homeGuild, process.env.HOME_GUILD);
-    assert.equal(result.botId, process.env.BOT_ID);
-    assert.equal(result.reportChannel, process.env.REPORT_CHANNEL);
-    assert.instanceOf(result.debugHook, WebhookClient);
-    assert.instanceOf(result.modHook, WebhookClient);
-    assert.instanceOf(result.messageHook, WebhookClient);
-    assert.instanceOf(result.welcomeHook, WebhookClient);
-    assert.equal(result.debugHook.url, process.env.DEBUG_HOOK);
-    assert.equal(result.modHook.url, process.env.MOD_HOOK);
-    assert.equal(result.welcomeHook.url, process.env.WELCOME_HOOK);
-    assert.equal(result.githubToken, process.env.GITHUB_TOKEN);
-    assert.equal(result.ghostKey, process.env.GHOST_KEY);
+    expect(result.token).toBe(process.env.TOKEN);
+    expect(result.mongoUrl).toBe(process.env.MONGO_URI);
+    expect(result.homeGuild).toBe(process.env.HOME_GUILD);
+    expect(result.botId).toBe(process.env.BOT_ID);
+    expect(result.reportChannel).toBe(process.env.REPORT_CHANNEL);
+    expect(result.debugHook).toBeInstanceOf(WebhookClient);
+    expect(result.modHook).toBeInstanceOf(WebhookClient);
+    expect(result.messageHook).toBeInstanceOf(WebhookClient);
+    expect(result.welcomeHook).toBeInstanceOf(WebhookClient);
+    expect(result.debugHook.url).toBe(process.env.DEBUG_HOOK);
+    expect(result.modHook.url).toBe(process.env.MOD_HOOK);
+    expect(result.welcomeHook.url).toBe(process.env.WELCOME_HOOK);
+    expect(result.githubToken).toBe(process.env.GITHUB_TOKEN);
+    expect(result.ghostKey).toBe(process.env.GHOST_KEY);
     assert.equal(result.githubAppId,
       Number.parseInt(process.env.GITHUB_APP_ID, 10));
-    assert.equal(
-      result.githubInstallationId,
-      Number.parseInt(process.env.GITHUB_INSTALLATION_ID, 10),
+    expect(result.githubInstallationId).toBe(Number.parseInt(process.env.GITHUB_INSTALLATION_ID, 10),
     );
   });
 });

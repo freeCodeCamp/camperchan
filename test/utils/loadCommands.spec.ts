@@ -7,7 +7,7 @@ import type { ExtendedClient } from "../../src/interfaces/extendedClient.js";
 
 describe("loadCommands", () => {
   it("is defined", () => {
-    expect(loadCommands,"loadCommands is not defined").toBeDefined();
+    expect(loadCommands, "loadCommands is not defined").toBeDefined();
     expect(loadCommands, "loadCommands is not a function").toBeTypeOf("function");
   });
 
@@ -29,7 +29,7 @@ describe("loadCommands", () => {
         return file.split(".")[0];
       });
     bot.commands = await loadCommands(bot as never);
-    assert.equal(bot.commands.length, commandNames.length);
+    expect(bot.commands).toHaveLength(commandNames.length);
     for (const name of commandNames) {
       assert.exists(
         bot.commands.find(
