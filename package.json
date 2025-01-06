@@ -41,7 +41,7 @@
     "winston": "3.17.0"
   },
   "devDependencies": {
-    "@nhcarrigan/eslint-config": "5.0.0",
+    "@nhcarrigan/eslint-config": "5.1.0",
     "@nhcarrigan/typescript-config": "4.0.0",
     "@types/diff": "6.0.0",
     "@types/node": "22.10.5",
