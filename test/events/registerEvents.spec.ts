@@ -1,4 +1,4 @@
-import { describe, assert, it, vi } from "vitest";
+import { describe, expect, it, vi } from "vitest";
 import { registerEvents } from "../../src/events/registerEvents.js";
 
 vi.mock("discord.js");
@@ -12,18 +12,18 @@ const bot = {
 
 describe("registerEvents", () => {
   it("registerEvents is a function", () => {
-    assert.isFunction(registerEvents);
+    expect(registerEvents).toBeTypeOf("function");
   });
 
   it("should register all events", async() => {
     await registerEvents(bot as never);
-    assert.property(bot.events, "ready");
-    assert.property(bot.events, "messageCreate");
-    assert.property(bot.events, "messageUpdate");
-    assert.property(bot.events, "messageDelete");
-    assert.property(bot.events, "interactionCreate");
-    assert.property(bot.events, "threadCreate");
-    assert.property(bot.events, "guildMemberAdd");
-    assert.property(bot.events, "guildMemberRemove");
+    expect(bot.events).toHaveProperty("ready");
+    expect(bot.events).toHaveProperty("messageCreate");
+    expect(bot.events).toHaveProperty("messageUpdate");
+    expect(bot.events).toHaveProperty("messageDelete");
+    expect(bot.events).toHaveProperty("interactionCreate");
+    expect(bot.events).toHaveProperty("threadCreate");
+    expect(bot.events).toHaveProperty("guildMemberAdd");
+    expect(bot.events).toHaveProperty("guildMemberRemove");
   });
 });

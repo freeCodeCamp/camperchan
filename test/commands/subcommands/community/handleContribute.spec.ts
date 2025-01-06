@@ -6,7 +6,7 @@ import {
   MockMember,
   MockUser,
 } from "discordjs-testing";
-import { describe, assert, it } from "vitest";
+import { describe, expect, it } from "vitest";
 import { handleContribute }
   from "../../../../src/commands/subcommands/community/handleContribute.js";
 
@@ -49,28 +49,19 @@ describe("contribute Handler", () => {
       user:           user,
     });
     await handleContribute.execute({} as never, command as never);
-    assert.equal(command.replies.length, 1);
+    expect(command.replies).toHaveLength(1);
     const embed = command.replies?.[0]?.embeds?.[0] as EmbedBuilder;
-    assert.equal(embed.data.title, "Helpful Links!");
+    expect(embed.data.title).toBe("Helpful Links!");
     const [ first, second, third, fourth, fifth ] = embed.data.fields || [];
-    assert.equal(first.name, "Code of Conduct");
-    assert.equal(first.value, "https://freecodecamp.org/news/code-of-conduct");
-    assert.equal(second.name, "Moderator Handbook");
-    assert.equal(
-      second.value,
-      "https://contribute.freecodecamp.org/#/flight-manuals/moderator-handbook",
-    );
-    assert.equal(third.name, "Contributing Guidelines");
-    assert.equal(third.value, "https://contribute.freecodecamp.org/");
-    assert.equal(fourth.name, "News Contributing");
-    assert.equal(
-      fourth.value,
-      "https://www.freecodecamp.org/news/developer-news-style-guide/",
-    );
-    assert.equal(fifth.name, "Pull Request Reviews");
-    assert.equal(
-      fifth.value,
-      `[PRs Ready for Review](https://github.com/freeCodeCamp/freeCodeCamp/pulls?q=is%3Aopen+is%3Apr+-label%3A%22status%3A+blocked%22+-label%3A%22status%3A+merge+conflict%22+status%3Asuccess+draft%3Afalse)`,
-    );
+    expect(first.name).toBe("Code of Conduct");
+    expect(first.value).toBe("https://freecodecamp.org/news/code-of-conduct");
+    expect(second.name).toBe("Moderator Handbook");
+    expect(second.value).toBe("https://contribute.freecodecamp.org/#/flight-manuals/moderator-handbook");
+    expect(third.name).toBe("Contributing Guidelines");
+    expect(third.value).toBe("https://contribute.freecodecamp.org/");
+    expect(fourth.name).toBe("News Contributing");
+    expect(fourth.value).toBe("https://www.freecodecamp.org/news/developer-news-style-guide/");
+    expect(fifth.name).toBe("Pull Request Reviews");
+    expect(fifth.value).toBe(`[PRs Ready for Review](https://github.com/freeCodeCamp/freeCodeCamp/pulls?q=is%3Aopen+is%3Apr+-label%3A%22status%3A+blocked%22+-label%3A%22status%3A+merge+conflict%22+status%3Asuccess+draft%3Afalse)`);
   });
 });

@@ -1,38 +1,30 @@
 import { PermissionFlagsBits } from "discord.js";
-import { describe, assert, it } from "vitest";
+import { describe, expect, it } from "vitest";
 import { handleSyncLabels }
   from "../../../../src/commands/subcommands/github/handleSyncLabels.js";
 
 describe("sync labels handler", () => {
   it("does not allow non-moderators permission", () => {
-    assert.isFalse(
-      handleSyncLabels.permissionValidator({
-        permissions: new Set([ PermissionFlagsBits.SendMessages ]),
-      } as never),
-    );
+    expect(handleSyncLabels.permissionValidator({
+      permissions: new Set([ PermissionFlagsBits.SendMessages ]),
+    } as never)).toBeFalsy();
   });
 
   it("allows moderate members permission", () => {
-    assert.isTrue(
-      handleSyncLabels.permissionValidator({
-        permissions: new Set([ PermissionFlagsBits.ModerateMembers ]),
-      } as never),
-    );
+    expect(handleSyncLabels.permissionValidator({
+      permissions: new Set([ PermissionFlagsBits.ModerateMembers ]),
+    } as never)).toBeTruthy();
   });
 
   it("allows kick members permission", () => {
-    assert.isTrue(
-      handleSyncLabels.permissionValidator({
-        permissions: new Set([ PermissionFlagsBits.KickMembers ]),
-      } as never),
-    );
+    expect(handleSyncLabels.permissionValidator({
+      permissions: new Set([ PermissionFlagsBits.KickMembers ]),
+    } as never)).toBeTruthy();
   });
 
   it("allows ban members permission", () => {
-    assert.isTrue(
-      handleSyncLabels.permissionValidator({
-        permissions: new Set([ PermissionFlagsBits.BanMembers ]),
-      } as never),
-    );
+    expect(handleSyncLabels.permissionValidator({
+      permissions: new Set([ PermissionFlagsBits.BanMembers ]),
+    } as never)).toBeTruthy();
   });
 });

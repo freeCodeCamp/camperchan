@@ -1,38 +1,30 @@
 import { PermissionFlagsBits } from "discord.js";
-import { describe, assert, it } from "vitest";
+import { describe, expect, it } from "vitest";
 import { handleClose }
   from "../../../../src/commands/subcommands/github/handleClose.js";
 
 describe("close handler", () => {
   it("does not allow non-moderators permission", () => {
-    assert.isFalse(
-      handleClose.permissionValidator({
-        permissions: new Set([ PermissionFlagsBits.SendMessages ]),
-      } as never),
-    );
+    expect(handleClose.permissionValidator({
+      permissions: new Set([ PermissionFlagsBits.SendMessages ]),
+    } as never)).toBeFalsy();
   });
 
   it("allows moderate members permission", () => {
-    assert.isTrue(
-      handleClose.permissionValidator({
-        permissions: new Set([ PermissionFlagsBits.ModerateMembers ]),
-      } as never),
-    );
+    expect(handleClose.permissionValidator({
+      permissions: new Set([ PermissionFlagsBits.ModerateMembers ]),
+    } as never)).toBeTruthy();
   });
 
   it("allows kick members permission", () => {
-    assert.isTrue(
-      handleClose.permissionValidator({
-        permissions: new Set([ PermissionFlagsBits.KickMembers ]),
-      } as never),
-    );
+    expect(handleClose.permissionValidator({
+      permissions: new Set([ PermissionFlagsBits.KickMembers ]),
+    } as never)).toBeTruthy();
   });
 
   it("allows ban members permission", () => {
-    assert.isTrue(
-      handleClose.permissionValidator({
-        permissions: new Set([ PermissionFlagsBits.BanMembers ]),
-      } as never),
-    );
+    expect(handleClose.permissionValidator({
+      permissions: new Set([ PermissionFlagsBits.BanMembers ]),
+    } as never)).toBeTruthy();
   });
 });

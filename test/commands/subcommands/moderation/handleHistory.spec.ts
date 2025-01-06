@@ -1,38 +1,30 @@
 import { PermissionFlagsBits } from "discord.js";
-import { describe, assert, it } from "vitest";
+import { describe, expect, it } from "vitest";
 import { handleHistory }
   from "../../../../src/commands/subcommands/moderation/handleHistory.js";
 
 describe("history handler", () => {
   it("does not allow non-moderators permission", () => {
-    assert.isFalse(
-      handleHistory.permissionValidator({
-        permissions: new Set([ PermissionFlagsBits.SendMessages ]),
-      } as never),
-    );
+    expect(handleHistory.permissionValidator({
+      permissions: new Set([ PermissionFlagsBits.SendMessages ]),
+    } as never)).toBeFalsy();
   });
 
   it("allows moderate members permission", () => {
-    assert.isTrue(
-      handleHistory.permissionValidator({
-        permissions: new Set([ PermissionFlagsBits.ModerateMembers ]),
-      } as never),
-    );
+    expect(handleHistory.permissionValidator({
+      permissions: new Set([ PermissionFlagsBits.ModerateMembers ]),
+    } as never)).toBeTruthy();
   });
 
   it("allows kick members permission", () => {
-    assert.isTrue(
-      handleHistory.permissionValidator({
-        permissions: new Set([ PermissionFlagsBits.KickMembers ]),
-      } as never),
-    );
+    expect(handleHistory.permissionValidator({
+      permissions: new Set([ PermissionFlagsBits.KickMembers ]),
+    } as never)).toBeTruthy();
   });
 
   it("allows ban members permission", () => {
-    assert.isTrue(
-      handleHistory.permissionValidator({
-        permissions: new Set([ PermissionFlagsBits.BanMembers ]),
-      } as never),
-    );
+    expect(handleHistory.permissionValidator({
+      permissions: new Set([ PermissionFlagsBits.BanMembers ]),
+    } as never)).toBeTruthy();
   });
 });

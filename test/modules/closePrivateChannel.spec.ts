@@ -1,12 +1,9 @@
-import { describe, assert, it } from "vitest";
+import { describe, expect, it } from "vitest";
 import { closePrivateChannel } from "../../src/modules/closePrivateChannel.js";
 
 describe("closePrivateChannel", () => {
   it("is defined", () => {
-    assert.isDefined(closePrivateChannel, "closePrivateChannel is not defined");
-    assert.isFunction(
-      closePrivateChannel,
-      "closePrivateChannel is not a function",
-    );
+    expect(closePrivateChannel, "closePrivateChannel is not defined").toBeDefined();
+    expect(closePrivateChannel, "closePrivateChannel is not a function").toBeTypeOf("function");
   });
 });

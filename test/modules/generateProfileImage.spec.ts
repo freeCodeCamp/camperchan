@@ -1,16 +1,13 @@
-import { describe, assert, it } from "vitest";
+import { describe, expect, it } from "vitest";
 import { generateProfileImage }
   from "../../src/modules/generateProfileImage.js";
 
 describe("generateProfileImage", () => {
   it("is defined", () => {
-    assert.isDefined(
+    expect(
       generateProfileImage,
       "generateProfileImage is not defined",
-    );
-    assert.isFunction(
-      generateProfileImage,
-      "generateProfileImage is not a function",
-    );
+    ).toBeDefined();
+    expect(generateProfileImage, "generateProfileImage is not a function").toBeTypeOf("function");
   });
 });

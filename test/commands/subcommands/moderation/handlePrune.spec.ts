@@ -1,46 +1,36 @@
 import { PermissionFlagsBits } from "discord.js";
-import { describe, assert, it } from "vitest";
+import { describe, expect, it } from "vitest";
 import { handlePrune }
   from "../../../../src/commands/subcommands/moderation/handlePrune.js";
 
 describe("prune handler", () => {
   it("does not allow non-moderators permission", () => {
-    assert.isFalse(
-      handlePrune.permissionValidator({
-        permissions: new Set([ PermissionFlagsBits.SendMessages ]),
-      } as never),
-    );
+    expect(handlePrune.permissionValidator({
+      permissions: new Set([ PermissionFlagsBits.SendMessages ]),
+    } as never)).toBeFalsy();
   });
 
   it("allows manage messages permission", () => {
-    assert.isTrue(
-      handlePrune.permissionValidator({
-        permissions: new Set([ PermissionFlagsBits.ManageMessages ]),
-      } as never),
-    );
+    expect(handlePrune.permissionValidator({
+      permissions: new Set([ PermissionFlagsBits.ManageMessages ]),
+    } as never)).toBeTruthy();
   });
 
   it("does not allow moderate members permission", () => {
-    assert.isFalse(
-      handlePrune.permissionValidator({
-        permissions: new Set([ PermissionFlagsBits.ModerateMembers ]),
-      } as never),
-    );
+    expect(handlePrune.permissionValidator({
+      permissions: new Set([ PermissionFlagsBits.ModerateMembers ]),
+    } as never)).toBeFalsy();
   });
 
   it("does not allow kick members permission", () => {
-    assert.isFalse(
-      handlePrune.permissionValidator({
-        permissions: new Set([ PermissionFlagsBits.KickMembers ]),
-      } as never),
-    );
+    expect(handlePrune.permissionValidator({
+      permissions: new Set([ PermissionFlagsBits.KickMembers ]),
+    } as never)).toBeFalsy();
   });
 
   it("does not allow ban members permission", () => {
-    assert.isFalse(
-      handlePrune.permissionValidator({
-        permissions: new Set([ PermissionFlagsBits.BanMembers ]),
-      } as never),
-    );
+    expect(handlePrune.permissionValidator({
+      permissions: new Set([ PermissionFlagsBits.BanMembers ]),
+    } as never)).toBeFalsy();
   });
 });

@@ -2,7 +2,7 @@ import {
   ApplicationCommandOptionType,
   type SlashCommandSubcommandBuilder,
 } from "discord.js";
-import { describe, assert, it } from "vitest";
+import { describe, expect, it } from "vitest";
 import { moderation } from "../../src/commands/moderation.js";
 
 describe("moderation command", () => {
@@ -13,228 +13,153 @@ describe("moderation command", () => {
   ) as Array<SlashCommandSubcommandBuilder>;
 
   it("has correct data", () => {
-    assert.strictEqual(moderation.data.name, "moderation");
-    assert.strictEqual(moderation.data.description, "Moderation commands.");
-    assert.lengthOf(subcommands, 8);
+    expect(moderation.data.name).toBe("moderation");
+    expect(moderation.data.description).toBe("Moderation commands.");
+    expect(subcommands).toHaveLength(8);
   });
 
   it("has correct ban", () => {
     const ban = subcommands.find((sub) => {
       return sub.name === "ban";
     });
-    assert.exists(ban);
-    assert.strictEqual(ban?.description, "Bans a user from the server.");
-    assert.lengthOf(ban?.options || "hello", 2);
-    assert.strictEqual(ban?.options?.[0].name, "target");
-    assert.strictEqual(ban?.options?.[0].description, "The user to ban.");
-    assert.isTrue(ban?.options?.[0].required);
-    assert.strictEqual(
-      ban?.options?.[0].type,
-      ApplicationCommandOptionType.User,
-    );
-    assert.strictEqual(ban?.options?.[1].name, "reason");
-    assert.strictEqual(
-      ban?.options?.[1].description,
-      "The reason for banning the user.",
-    );
-    assert.isTrue(ban?.options?.[1].required);
-    assert.strictEqual(
-      ban?.options?.[1].type,
-      ApplicationCommandOptionType.String,
-    );
+
+    expect(ban).toBeDefined();
+    expect(ban).not.toBeNull();
+    expect(ban?.description).toBe("Bans a user from the server.");
+    expect(ban?.options || "hello").toHaveLength(2);
+    expect(ban?.options?.[0].name).toBe("target");
+    expect(ban?.options?.[0].description).toBe("The user to ban.");
+    expect(ban?.options?.[0].required).toBeTruthy();
+    expect(ban?.options?.[0].type).toBe(ApplicationCommandOptionType.User);
+    expect(ban?.options?.[1].name).toBe("reason");
+    expect(ban?.options?.[1].description).toBe("The reason for banning the user.");
+    expect(ban?.options?.[1].required).toBeTruthy();
+    expect(ban?.options?.[1].type).toBe(ApplicationCommandOptionType.String);
   });
 
   it("has correct history", () => {
     const history = subcommands.find((sub) => {
       return sub.name === "history";
     });
-    assert.exists(history);
-    assert.strictEqual(
-      history?.description,
-      "Views the moderation history of a user.",
-    );
-    assert.lengthOf(history?.options || "hello", 1);
-    assert.strictEqual(history?.options?.[0].name, "target");
-    assert.strictEqual(
-      history?.options?.[0].description,
-      "The user to view the moderation history of.",
-    );
-    assert.isTrue(history?.options?.[0].required);
-    assert.strictEqual(
-      history?.options?.[0].type,
-      ApplicationCommandOptionType.User,
-    );
+    expect(history).toBeDefined();
+    expect(history).not.toBeNull();
+    expect(history?.description).toBe("Views the moderation history of a user.");
+    expect(history?.options || "hello").toHaveLength(1);
+    expect(history?.options?.[0].name).toBe("target");
+    expect(history?.options?.[0].description).toBe("The user to view the moderation history of.");
+    expect(history?.options?.[0].required).toBeTruthy();
+    expect(history?.options?.[0].type).toBe(ApplicationCommandOptionType.User);
   });
 
   it("has correct kick", () => {
     const kick = subcommands.find((sub) => {
       return sub.name === "kick";
     });
-    assert.exists(kick);
-    assert.strictEqual(kick?.description, "Kicks a user from the server.");
-    assert.lengthOf(kick?.options || "hello", 2);
-    assert.strictEqual(kick?.options?.[0].name, "target");
-    assert.strictEqual(kick?.options?.[0].description, "The user to kick.");
-    assert.isTrue(kick?.options?.[0].required);
-    assert.strictEqual(
-      kick?.options?.[0].type,
-      ApplicationCommandOptionType.User,
-    );
-    assert.strictEqual(kick?.options?.[1].name, "reason");
-    assert.strictEqual(
-      kick?.options?.[1].description,
-      "The reason for kicking the user.",
-    );
-    assert.isTrue(kick?.options?.[1].required);
-    assert.strictEqual(
-      kick?.options?.[1].type,
-      ApplicationCommandOptionType.String,
-    );
+    expect(kick).toBeDefined();
+    expect(kick).not.toBeNull();
+    expect(kick?.description).toBe("Kicks a user from the server.");
+    expect(kick?.options || "hello").toHaveLength(2);
+    expect(kick?.options?.[0].name).toBe("target");
+    expect(kick?.options?.[0].description).toBe("The user to kick.");
+    expect(kick?.options?.[0].required).toBeTruthy();
+    expect(kick?.options?.[0].type).toBe(ApplicationCommandOptionType.User);
+    expect(kick?.options?.[1].name).toBe("reason");
+    expect(kick?.options?.[1].description).toBe("The reason for kicking the user.");
+    expect(kick?.options?.[1].required).toBeTruthy();
+    expect(kick?.options?.[1].type).toBe(ApplicationCommandOptionType.String);
   });
 
   it("has correct mute", () => {
     const mute = subcommands.find((sub) => {
       return sub.name === "mute";
     });
-    assert.exists(mute);
-    assert.strictEqual(mute?.description, "Mutes a user.");
-    assert.lengthOf(mute?.options || "hello", 4);
-    assert.strictEqual(mute?.options?.[0].name, "target");
-    assert.strictEqual(mute?.options?.[0].description, "The user to mute.");
-    assert.isTrue(mute?.options?.[0].required);
-    assert.strictEqual(
-      mute?.options?.[0].type,
-      ApplicationCommandOptionType.User,
-    );
-    assert.strictEqual(mute?.options?.[1].name, "duration");
-    assert.strictEqual(
-      mute?.options?.[1].description,
-      "The length of time to mute the user.",
-    );
-    assert.isTrue(mute?.options?.[1].required);
-    assert.strictEqual(
-      mute?.options?.[1].type,
-      ApplicationCommandOptionType.Integer,
-    );
-    assert.strictEqual(mute?.options?.[2].name, "unit");
-    assert.strictEqual(
-      mute?.options?.[2].description,
-      "The unit of time for the duration.",
-    );
-    assert.isTrue(mute?.options?.[2].required);
-    assert.strictEqual(
-      mute?.options?.[2].type,
-      ApplicationCommandOptionType.String,
-    );
-    assert.strictEqual(mute?.options?.[3].name, "reason");
-    assert.strictEqual(
-      mute?.options?.[3].description,
-      "The reason for muting the user.",
-    );
-    assert.isTrue(mute?.options?.[3].required);
-    assert.strictEqual(
-      mute?.options?.[3].type,
-      ApplicationCommandOptionType.String,
-    );
+    expect(mute).toBeDefined();
+    expect(mute).not.toBeNull();
+    expect(mute?.description).toBe("Mutes a user.");
+    expect(mute?.options || "hello").toHaveLength(4);
+    expect(mute?.options?.[0].name).toBe("target");
+    expect(mute?.options?.[0].description).toBe("The user to mute.");
+    expect(mute?.options?.[0].required).toBeTruthy();
+    expect(mute?.options?.[0].type).toBe(ApplicationCommandOptionType.User);
+    expect(mute?.options?.[1].name).toBe("duration");
+    expect(mute?.options?.[1].description).toBe("The length of time to mute the user.");
+    expect(mute?.options?.[1].required).toBeTruthy();
+    expect(mute?.options?.[1].type).toBe(ApplicationCommandOptionType.Integer);
+    expect(mute?.options?.[2].name).toBe("unit");
+    expect(mute?.options?.[2].description).toBe("The unit of time for the duration.");
+    expect(mute?.options?.[2].required).toBeTruthy();
+    expect(mute?.options?.[2].type).toBe(ApplicationCommandOptionType.String);
+    expect(mute?.options?.[3].name).toBe("reason");
+    expect(mute?.options?.[3].description).toBe("The reason for muting the user.");
+    expect(mute?.options?.[3].required).toBeTruthy();
+    expect(mute?.options?.[3].type).toBe(ApplicationCommandOptionType.String);
   });
 
   it("has correct prune", () => {
     const prune = subcommands.find((sub) => {
       return sub.name === "prune";
     });
-    assert.exists(prune);
-    assert.strictEqual(
-      prune?.description,
-      "Prunes messages from THIS channel.",
-    );
-    assert.lengthOf(prune?.options || "hello", 1);
-    assert.strictEqual(prune?.options?.[0].name, "count");
-    assert.strictEqual(
-      prune?.options?.[0].description,
-      "Number of messages to delete. Maximum of 100.",
-    );
-    assert.isTrue(prune?.options?.[0].required);
-    assert.strictEqual(
-      prune?.options?.[0].type,
-      ApplicationCommandOptionType.Integer,
-    );
+    expect(prune).toBeDefined();
+    expect(prune).not.toBeNull();
+    expect(prune?.description).toBe("Prunes messages from THIS channel.");
+    expect(prune?.options || "hello").toHaveLength(1);
+    expect(prune?.options?.[0].name).toBe("count");
+    expect(prune?.options?.[0].description).toBe("Number of messages to delete. Maximum of 100.");
+    expect(prune?.options?.[0].required).toBeTruthy();
+    expect(prune?.options?.[0].type).toBe(ApplicationCommandOptionType.Integer);
   });
 
   it("has correct unban", () => {
     const unban = subcommands.find((sub) => {
       return sub.name === "unban";
     });
-    assert.exists(unban);
-    assert.strictEqual(unban?.description, "Removes a user's ban.");
-    assert.lengthOf(unban?.options || "hello", 2);
-    assert.strictEqual(unban?.options?.[0].name, "target");
-    assert.strictEqual(unban?.options?.[0].description, "The user to unban.");
-    assert.isTrue(unban?.options?.[0].required);
-    assert.strictEqual(
-      unban?.options?.[0].type,
-      ApplicationCommandOptionType.User,
-    );
-    assert.strictEqual(unban?.options?.[1].name, "reason");
-    assert.strictEqual(
-      unban?.options?.[1].description,
-      "The reason for unbanning the user.",
-    );
-    assert.isTrue(unban?.options?.[1].required);
-    assert.strictEqual(
-      unban?.options?.[1].type,
-      ApplicationCommandOptionType.String,
-    );
+    expect(unban).toBeDefined();
+    expect(unban).not.toBeNull();
+    expect(unban?.description).toBe("Removes a user's ban.");
+    expect(unban?.options || "hello").toHaveLength(2);
+    expect(unban?.options?.[0].name).toBe("target");
+    expect(unban?.options?.[0].description).toBe("The user to unban.");
+    expect(unban?.options?.[0].required).toBeTruthy();
+    expect(unban?.options?.[0].type).toBe(ApplicationCommandOptionType.User);
+    expect(unban?.options?.[1].name).toBe("reason");
+    expect(unban?.options?.[1].description).toBe("The reason for unbanning the user.");
+    expect(unban?.options?.[1].required).toBeTruthy();
+    expect(unban?.options?.[1].type).toBe(ApplicationCommandOptionType.String);
   });
 
   it("has correct unmute", () => {
     const unmute = subcommands.find((sub) => {
       return sub.name === "unmute";
     });
-    assert.exists(unmute);
-    assert.strictEqual(unmute?.description, "Unmutes a user.");
-    assert.lengthOf(unmute?.options || "hello", 2);
-    assert.strictEqual(unmute?.options?.[0].name, "target");
-    assert.strictEqual(unmute?.options?.[0].description, "The user to unmute.");
-    assert.isTrue(unmute?.options?.[0].required);
-    assert.strictEqual(
-      unmute?.options?.[0].type,
-      ApplicationCommandOptionType.User,
-    );
-    assert.strictEqual(unmute?.options?.[1].name, "reason");
-    assert.strictEqual(
-      unmute?.options?.[1].description,
-      "The reason for unmuting the user.",
-    );
-    assert.isTrue(unmute?.options?.[1].required);
-    assert.strictEqual(
-      unmute?.options?.[1].type,
-      ApplicationCommandOptionType.String,
-    );
+    expect(unmute).toBeDefined();
+    expect(unmute).not.toBeNull();
+    expect(unmute?.description).toBe("Unmutes a user.");
+    expect(unmute?.options || "hello").toHaveLength(2);
+    expect(unmute?.options?.[0].name).toBe("target");
+    expect(unmute?.options?.[0].description).toBe("The user to unmute.");
+    expect(unmute?.options?.[0].required).toBeTruthy();
+    expect(unmute?.options?.[0].type).toBe(ApplicationCommandOptionType.User);
+    expect(unmute?.options?.[1].name).toBe("reason");
+    expect(unmute?.options?.[1].description).toBe("The reason for unmuting the user.");
+    expect(unmute?.options?.[1].required).toBeTruthy();
+    expect(unmute?.options?.[1].type).toBe(ApplicationCommandOptionType.String);
   });
 
   it("has correct warn", () => {
     const warn = subcommands.find((sub) => {
       return sub.name === "warn";
     });
-    assert.exists(warn);
-    assert.strictEqual(warn?.description, "Issues a warning to a user.");
-    assert.lengthOf(warn?.options || "hello", 2);
-    assert.strictEqual(warn?.options?.[0].name, "target");
-    assert.strictEqual(warn?.options?.[0].description, "The user to warn.");
-    assert.isTrue(warn?.options?.[0].required);
-    assert.strictEqual(
-      warn?.options?.[0].type,
-      ApplicationCommandOptionType.User,
-    );
-    assert.strictEqual(warn?.options?.[1].name, "reason");
-    assert.strictEqual(
-      warn?.options?.[1].description,
-      "The reason for issuing this warning.",
-    );
-    assert.isTrue(warn?.options?.[1].required);
-    assert.strictEqual(
-      warn?.options?.[1].type,
-      ApplicationCommandOptionType.String,
-    );
+    expect(warn).toBeDefined();
+    expect(warn).not.toBeNull();
+    expect(warn?.description).toBe("Issues a warning to a user.");
+    expect(warn?.options || "hello").toHaveLength(2);
+    expect(warn?.options?.[0].name).toBe("target");
+    expect(warn?.options?.[0].description).toBe("The user to warn.");
+    expect(warn?.options?.[0].required).toBeTruthy();
+    expect(warn?.options?.[0].type).toBe(ApplicationCommandOptionType.User);
+    expect(warn?.options?.[1].name).toBe("reason");
+    expect(warn?.options?.[1].description).toBe("The reason for issuing this warning.");
+    expect(warn?.options?.[1].required).toBeTruthy();
+    expect(warn?.options?.[1].type).toBe(ApplicationCommandOptionType.String);
   });
 });

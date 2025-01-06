@@ -1,9 +1,9 @@
-import { describe, assert, it } from "vitest";
+import { describe, expect, it } from "vitest";
 import { fetchLearnRecord } from "../../src/utils/fetchLearnRecord.js";
 
 describe("fetchLearnRecord", () => {
   it("is defined", () => {
-    assert.isDefined(fetchLearnRecord, "fetchLearnRecord is not defined");
-    assert.isFunction(fetchLearnRecord, "fetchLearnRecord is not a function");
+    expect(fetchLearnRecord, "fetchLearnRecord is not defined").toBeDefined();
+    expect(fetchLearnRecord, "fetchLearnRecord is not a function").toBeTypeOf("function");
   });
 });

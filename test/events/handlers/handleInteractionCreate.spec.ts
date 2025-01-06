@@ -1,9 +1,9 @@
-import { describe, assert, it } from "vitest";
+import { describe, expect, it } from "vitest";
 import { handleInteractionCreate }
   from "../../../src/events/handlers/handleInteractionCreate.js";
 
 describe("handleInteractionCreate", () => {
   it("handleInteractionCreate is a function", () => {
-    assert.isFunction(handleInteractionCreate);
+    expect(handleInteractionCreate).toBeTypeOf("function");
   });
 });

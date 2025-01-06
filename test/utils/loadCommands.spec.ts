@@ -1,19 +1,19 @@
 import { readdir } from "node:fs/promises";
 import { join } from "node:path";
-import { describe, assert, it } from "vitest";
+import { describe, expect, it } from "vitest";
 import { loadCommands } from "../../src/utils/loadCommands.js";
 import type { Command } from "../../src/interfaces/command.js";
 import type { ExtendedClient } from "../../src/interfaces/extendedClient.js";
 
 describe("loadCommands", () => {
   it("is defined", () => {
-    assert.isDefined(loadCommands, "loadCommands is not defined");
-    assert.isFunction(loadCommands, "loadCommands is not a function");
+    expect(loadCommands, "loadCommands is not defined").toBeDefined();
+    expect(loadCommands, "loadCommands is not a function").toBeTypeOf("function");
   });
 
   it("returns array of commands", async() => {
     const result = await loadCommands({} as ExtendedClient);
-    assert.isArray(result, "loadCommands did not return an array");
+    expect(result, "loadCommands did not return an array").toBeInstanceOf(Array);
   });
 
   it("returns the expected command list", async() => {
@@ -29,9 +29,9 @@ describe("loadCommands", () => {
         return file.split(".")[0];
       });
     bot.commands = await loadCommands(bot as never);
-    assert.equal(bot.commands.length, commandNames.length);
+    expect(bot.commands).toHaveLength(commandNames.length);
     for (const name of commandNames) {
-      assert.exists(
+      expect(
         bot.commands.find(
           (command) => {
             return command.data.name.
@@ -49,7 +49,23 @@ describe("loadCommands", () => {
               ) === name;
           },
         ),
-      );
+      ).toBeDefined();
+      expect(
+        bot.commands.find((command) => {
+          return (
+            command.data.name.
+              split("-").
+            // eslint-disable-next-line unicorn/no-array-reduce
+              reduce((accumulator, element, index) => {
+                return index === 0
+                  ? accumulator + element
+                  : accumulator
+                       + (element[0].toUpperCase()
+                         + element.slice(1).toLowerCase());
+              }, "") === name
+          );
+        }),
+      ).not.toBeNull();
     }
   });
 });

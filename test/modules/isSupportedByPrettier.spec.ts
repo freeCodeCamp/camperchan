@@ -1,37 +1,34 @@
-import { describe, assert, it } from "vitest";
+import { describe, expect, it } from "vitest";
 import { isSupportedByPrettier } from
   "../../src/modules/isSupportedByPrettier.js";
 
 describe("isSupportedByPrettier", () => {
   it("is defined", () => {
-    assert.isDefined(
+    expect(
       isSupportedByPrettier,
       "isSupportedByPrettier is not defined",
-    );
-    assert.isFunction(
-      isSupportedByPrettier,
-      "isSupportedByPrettier is not a function",
-    );
+    ).toBeDefined();
+    expect(isSupportedByPrettier, "isSupportedByPrettier is not a function").toBeTypeOf("function");
   });
 
   it("returns false on empty language name", () => {
-    assert.isFalse(isSupportedByPrettier(""));
+    expect(isSupportedByPrettier("")).toBeFalsy();
   });
 
   it("returns expected language names for supported langs", () => {
-    assert.equal(isSupportedByPrettier("HTML"), "html");
-    assert.equal(isSupportedByPrettier("CSS"), "css");
-    assert.equal(isSupportedByPrettier("SCSS"), "css");
-    assert.equal(isSupportedByPrettier("JavaScript"), "js");
-    assert.equal(isSupportedByPrettier("JS"), "js");
-    assert.equal(isSupportedByPrettier("JSON"), "json");
-    assert.equal(isSupportedByPrettier("MarkDown"), "markdown");
-    assert.equal(isSupportedByPrettier("YAML"), "yaml");
+    expect(isSupportedByPrettier("HTML")).toBe("html");
+    expect(isSupportedByPrettier("CSS")).toBe("css");
+    expect(isSupportedByPrettier("SCSS")).toBe("css");
+    expect(isSupportedByPrettier("JavaScript")).toBe("js");
+    expect(isSupportedByPrettier("JS")).toBe("js");
+    expect(isSupportedByPrettier("JSON")).toBe("json");
+    expect(isSupportedByPrettier("MarkDown")).toBe("markdown");
+    expect(isSupportedByPrettier("YAML")).toBe("yaml");
   });
 
   it("returns false for unsupported languages", () => {
-    assert.isFalse(isSupportedByPrettier("Python"));
-    assert.isFalse(isSupportedByPrettier("Ruby"));
-    assert.isFalse(isSupportedByPrettier("C++"));
+    expect(isSupportedByPrettier("Python")).toBeFalsy();
+    expect(isSupportedByPrettier("Ruby")).toBeFalsy();
+    expect(isSupportedByPrettier("C++")).toBeFalsy();
   });
 });

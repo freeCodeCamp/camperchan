@@ -1,4 +1,4 @@
-import { describe, assert, it } from "vitest";
+import { describe, expect, it } from "vitest";
 import { updateHistory } from "../../src/modules/updateHistory.js";
 import { Database } from "../__mocks__/Database.mock.js";
 
@@ -6,7 +6,7 @@ const database = new Database();
 
 describe("updateHistory", () => {
   it("updateHistory is a function", () => {
-    assert.isFunction(updateHistory);
+    expect(updateHistory).toBeTypeOf("function");
   });
 
   it("should create a new history when user does not exist", async() => {
@@ -16,13 +16,13 @@ describe("updateHistory", () => {
         userId: "123",
       },
     });
-    assert.isObject(history);
-    assert.equal(history?.bans, 1);
-    assert.equal(history?.kicks, 0);
-    assert.equal(history?.mutes, 0);
-    assert.equal(history?.unmutes, 0);
-    assert.equal(history?.warns, 0);
-    assert.equal(history?.unbans, 0);
+    expect(history).toBeTypeOf("object");
+    expect(history?.bans).toBe(1);
+    expect(history?.kicks).toBe(0);
+    expect(history?.mutes).toBe(0);
+    expect(history?.unmutes).toBe(0);
+    expect(history?.warns).toBe(0);
+    expect(history?.unbans).toBe(0);
   });
 
   it("should update an existing history", async() => {
@@ -33,12 +33,12 @@ describe("updateHistory", () => {
         userId: "123",
       },
     });
-    assert.isObject(history);
-    assert.equal(history?.bans, 2);
-    assert.equal(history?.kicks, 0);
-    assert.equal(history?.mutes, 1);
-    assert.equal(history?.unmutes, 0);
-    assert.equal(history?.warns, 0);
-    assert.equal(history?.unbans, 0);
+    expect(history).toBeTypeOf("object");
+    expect(history?.bans).toBe(2);
+    expect(history?.kicks).toBe(0);
+    expect(history?.mutes).toBe(1);
+    expect(history?.unmutes).toBe(0);
+    expect(history?.warns).toBe(0);
+    expect(history?.unbans).toBe(0);
   });
 });

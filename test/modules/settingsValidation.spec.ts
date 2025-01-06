@@ -1,4 +1,4 @@
-import { describe, assert, it } from "vitest";
+import { describe, expect, it } from "vitest";
 import {
   validateColour,
   validateImage,
@@ -6,10 +6,12 @@ import {
 
 describe("settings validation", () => {
   it("validateColour", () => {
-    assert.exists(validateColour);
+    expect(validateColour).toBeDefined();
+    expect(validateColour).not.toBeNull();
   });
 
   it("validateImage", () => {
-    assert.exists(validateImage);
+    expect(validateImage).toBeDefined();
+    expect(validateImage).not.toBeNull();
   });
 });
