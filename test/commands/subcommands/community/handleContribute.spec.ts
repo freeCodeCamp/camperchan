@@ -56,17 +56,12 @@ describe("contribute Handler", () => {
     expect(first.name).toBe("Code of Conduct");
     expect(first.value).toBe("https://freecodecamp.org/news/code-of-conduct");
     expect(second.name).toBe("Moderator Handbook");
-    expect(second.value).toBe("https://contribute.freecodecamp.org/#/flight-manuals/moderator-handbook",
-    );
+    expect(second.value).toBe("https://contribute.freecodecamp.org/#/flight-manuals/moderator-handbook");
     expect(third.name).toBe("Contributing Guidelines");
     expect(third.value).toBe("https://contribute.freecodecamp.org/");
     expect(fourth.name).toBe("News Contributing");
-    expect(fourth.value).toBe("https://www.freecodecamp.org/news/developer-news-style-guide/",
-    );
+    expect(fourth.value).toBe("https://www.freecodecamp.org/news/developer-news-style-guide/");
     expect(fifth.name).toBe("Pull Request Reviews");
-    assert.equal(
-      fifth.value,
-      `[PRs Ready for Review](https://github.com/freeCodeCamp/freeCodeCamp/pulls?q=is%3Aopen+is%3Apr+-label%3A%22status%3A+blocked%22+-label%3A%22status%3A+merge+conflict%22+status%3Asuccess+draft%3Afalse)`,
-    );
+    expect(fifth.value).toBe(`[PRs Ready for Review](https://github.com/freeCodeCamp/freeCodeCamp/pulls?q=is%3Aopen+is%3Apr+-label%3A%22status%3A+blocked%22+-label%3A%22status%3A+merge+conflict%22+status%3Asuccess+draft%3Afalse)`);
   });
 });

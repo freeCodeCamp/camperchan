@@ -4,25 +4,17 @@ import type { ExtendedClient } from "../../src/interfaces/extendedClient.js";
 
 describe("loadQuotes", () => {
   it("is defined", () => {
-    expect(loadQuotes,"loadQuotes is not defined").toBeDefined();
+    expect(loadQuotes, "loadQuotes is not defined").toBeDefined();
     expect(loadQuotes, "loadQuotes is not a function").toBeTypeOf("function");
   });
 
   it("returns the expected data structure", async() => {
     const quotes = await loadQuotes({} as ExtendedClient);
     expect(quotes, "quotes is not defined").toHaveProperty("motivationalQuotes");
-    assert.isArray(quotes.motivationalQuotes, "quotes is not an array");
-    assert.property(
-      quotes.motivationalQuotes[0],
-      "quote",
-      "quotes are not in correct structure",
-    );
-    assert.property(
-      quotes.motivationalQuotes[0],
-      "author",
-      "quotes are not in correct structure",
-    );
+    expect(quotes.motivationalQuotes, "quotes is not an array").toBeInstanceOf(Array);
+    expect(quotes.motivationalQuotes[0], "quotes are not in correct structure").toHaveProperty("quote");
+    expect(quotes.motivationalQuotes[0], "quotes are not in correct structure").toHaveProperty("author");
     expect(quotes, "compliments is not defined").toHaveProperty("compliments");
-    assert.isArray(quotes.compliments, "compliments is not an array");
+    expect(quotes.compliments, "compliments is not an array").toBeInstanceOf(Array);
   });
 });

@@ -51,7 +51,7 @@ describe("addFormatting", () => {
   it("should format PHP", async() => {
     const content = `<?php echo "Hello World"; ?>`;
     const output = await addFormatting(typeCoerce({ content }));
-    expect(output).toBe( `\`\`\`PHP\n<?php echo "Hello World"; ?>\n\`\`\``);
+    expect(output).toBe(`\`\`\`PHP\n<?php echo "Hello World"; ?>\n\`\`\``);
   });
 
   /*
@@ -66,8 +66,7 @@ describe("addFormatting", () => {
   it("should format Markdown", async() => {
     const content = `# Hello World\n\n## Subheading\n\n- List Item`;
     const output = await addFormatting(typeCoerce({ content }));
-    expect(output).toBe(`\`\`\`markdown\n# Hello World\n\n## Subheading\n\n- List Item\n\`\`\``,
-    );
+    expect(output).toBe(`\`\`\`markdown\n# Hello World\n\n## Subheading\n\n- List Item\n\`\`\``);
   });
 
   it("should format JSON", async() => {
@@ -79,7 +78,6 @@ describe("addFormatting", () => {
   it("should format HTTP", async() => {
     const content = `GET / HTTP/1.1\nHost: example.com\n\n`;
     const output = await addFormatting(typeCoerce({ content }));
-    expect(output).toBe(`\`\`\`HTTP\nGET / HTTP/1.1\nHost: example.com\n\n\`\`\``,
-    );
+    expect(output).toBe(`\`\`\`HTTP\nGET / HTTP/1.1\nHost: example.com\n\n\`\`\``);
   });
 });

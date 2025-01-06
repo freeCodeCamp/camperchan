@@ -23,6 +23,6 @@ describe("generateLogs", () => {
     const status = await stat(logPath).catch(() => {
       return null;
     });
-   expect(status, "Log file was not deleted.").toBeNull();
+    expect(status, "Log file was not deleted.").toBeNull();
   });
 });

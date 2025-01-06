@@ -4,10 +4,10 @@ import { isSupportedByPrettier } from
 
 describe("isSupportedByPrettier", () => {
   it("is defined", () => {
-    assert.isDefined(
+    expect(
       isSupportedByPrettier,
       "isSupportedByPrettier is not defined",
-    );
+    ).toBeDefined();
     expect(isSupportedByPrettier, "isSupportedByPrettier is not a function").toBeTypeOf("function");
   });
 

@@ -13,11 +13,8 @@ describe("community command", () => {
   ) as Array<SlashCommandSubcommandBuilder>;
 
   it("has correct data", () => {
-    assert.strictEqual(community.data.name, "community");
-    assert.strictEqual(
-      community.data.description,
-      "Commands related to our community.",
-    );
+    expect(community.data.name).toBe("community");
+    expect(community.data.description).toBe("Commands related to our community.");
     expect(subcommands).toHaveLength(7);
   });
 
@@ -27,7 +24,8 @@ describe("community command", () => {
         return sub.name === "code-of-conduct";
       },
     );
-    assert.exists(codeOfConduct);
+    expect(codeOfConduct).toBeDefined();
+    expect(codeOfConduct).not.toBeNull();
     expect(codeOfConduct?.name).toBe("code-of-conduct");
     expect(codeOfConduct?.description).toBe("Returns information on freeCodeCamp's Code of Conduct.");
     expect(codeOfConduct?.options || "hi").toHaveLength(0);
@@ -37,7 +35,8 @@ describe("community command", () => {
     const contribute = subcommands.find((sub) => {
       return sub.name === "contribute";
     });
-    assert.exists(contribute);
+    expect(contribute).toBeDefined();
+    expect(contribute).not.toBeNull();
     expect(contribute?.name).toBe("contribute");
     expect(contribute?.description).toBe("Returns helpful links for folks interested in contributing.");
     expect(contribute?.options || "hi").toHaveLength(0);
@@ -47,7 +46,8 @@ describe("community command", () => {
     const forum = subcommands.find((sub) => {
       return sub.name === "forum";
     });
-    assert.exists(forum);
+    expect(forum).toBeDefined();
+    expect(forum).not.toBeNull();
     expect(forum?.name).toBe("forum");
     expect(forum?.description).toBe("Returns the latest activity on the forum.");
     expect(forum?.options || "hi").toHaveLength(0);
@@ -57,7 +57,8 @@ describe("community command", () => {
     const leaderboard = subcommands.find((sub) => {
       return sub.name === "leaderboard";
     });
-    assert.exists(leaderboard);
+    expect(leaderboard).toBeDefined();
+    expect(leaderboard).not.toBeNull();
     expect(leaderboard?.name).toBe("leaderboard");
     expect(leaderboard?.description).toBe("View the server leaderboard.");
     expect(leaderboard?.options || "hi").toHaveLength(0);
@@ -67,7 +68,8 @@ describe("community command", () => {
     const quote = subcommands.find((sub) => {
       return sub.name === "quote";
     });
-    assert.exists(quote);
+    expect(quote).toBeDefined();
+    expect(quote).not.toBeNull();
     expect(quote?.name).toBe("quote");
     expect(quote?.description).toBe("Returns a motivational quote.");
     expect(quote?.options || "hi").toHaveLength(0);

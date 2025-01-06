@@ -10,7 +10,7 @@ describe("generateConfig", () => {
 
   it("should throw an error on missing environment", () => {
     delete process.env.TOKEN;
-    assert.throw(generateConfig, "Missing required config variables");
+    expect(generateConfig).toThrow("Missing required config variables");
   });
 
   it("should return expected object on valid environment", () => {
@@ -46,9 +46,7 @@ describe("generateConfig", () => {
     expect(result.welcomeHook.url).toBe(process.env.WELCOME_HOOK);
     expect(result.githubToken).toBe(process.env.GITHUB_TOKEN);
     expect(result.ghostKey).toBe(process.env.GHOST_KEY);
-    assert.equal(result.githubAppId,
-      Number.parseInt(process.env.GITHUB_APP_ID, 10));
-    expect(result.githubInstallationId).toBe(Number.parseInt(process.env.GITHUB_INSTALLATION_ID, 10),
-    );
+    expect(result.githubAppId).toBe(Number.parseInt(process.env.GITHUB_APP_ID, 10));
+    expect(result.githubInstallationId).toBe(Number.parseInt(process.env.GITHUB_INSTALLATION_ID, 10));
   });
 });

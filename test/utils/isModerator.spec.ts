@@ -38,10 +38,7 @@ describe("isModerator", () => {
     expect(isModerator(kickMembersSet), "isModerator returned false").toBeTruthy();
     expect(isModerator(banMembersSet), "isModerator returned false").toBeTruthy();
     expect(isModerator(manageMessagesSet), "isModerator returned false").toBeTruthy();
-    assert.isTrue(
-      isModerator(moderateMembersSet),
-      "isModerator returned false",
-    );
+    expect(isModerator(moderateMembersSet), "isModerator returned false").toBeTruthy();
   });
 
   it("returns false when not moderator", () => {

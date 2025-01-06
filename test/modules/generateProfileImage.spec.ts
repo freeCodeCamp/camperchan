@@ -4,10 +4,10 @@ import { generateProfileImage }
 
 describe("generateProfileImage", () => {
   it("is defined", () => {
-    assert.isDefined(
+    expect(
       generateProfileImage,
       "generateProfileImage is not defined",
-    );
+    ).toBeDefined();
     expect(generateProfileImage, "generateProfileImage is not a function").toBeTypeOf("function");
   });
 });

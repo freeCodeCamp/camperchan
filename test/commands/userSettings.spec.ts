@@ -3,6 +3,7 @@ import { userSettings } from "../../src/commands/userSettings.js";
 
 describe("user settings command", () => {
   it("exists", () => {
-    assert.exists(userSettings);
+    expect(userSettings).toBeDefined();
+    expect(userSettings).not.toBeNull();
   });
 });

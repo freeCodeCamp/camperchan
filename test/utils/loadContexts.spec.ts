@@ -7,13 +7,13 @@ import type { ExtendedClient } from "../../src/interfaces/extendedClient.js";
 
 describe("loadContexts", () => {
   it("is defined", () => {
-    expect(loadContexts,"loadContexts is not defined").toBeDefined();
+    expect(loadContexts, "loadContexts is not defined").toBeDefined();
     expect(loadContexts, "loadContexts is not a function").toBeTypeOf("function");
   });
 
   it("returns array of commands", async() => {
     const result = await loadContexts({} as ExtendedClient);
-    assert.isArray(result, "loadContexts did not return an array");
+    expect(result, "loadContexts did not return an array").toBeInstanceOf(Array);
   });
 
   it("returns the expected command list", async() => {
@@ -23,11 +23,16 @@ describe("loadContexts", () => {
       return file.split(".")[0];
     });
     bot.contexts = await loadContexts(bot as never);
-    expect(bot.contexts.length).toBe(contextNames.length);
+    expect(bot.contexts).toHaveLength(contextNames.length);
     for (const name of contextNames) {
-      assert.exists(bot.contexts.find((context) => {
+      expect(bot.contexts.find((context) => {
         return context.data.name === name;
-      }));
+      })).toBeDefined();
+      expect(
+        bot.contexts.find((context) => {
+          return context.data.name === name;
+        }),
+      ).not.toBeNull();
     }
   });
 });

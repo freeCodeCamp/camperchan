@@ -6,8 +6,8 @@ import { handleWarn }
 describe("warn handler", () => {
   it("does not allow non-moderators permission", () => {
     expect(handleWarn.permissionValidator({
-        permissions: new Set([ PermissionFlagsBits.SendMessages ]),
-      } as never)).toBeFalsy();
+      permissions: new Set([ PermissionFlagsBits.SendMessages ]),
+    } as never)).toBeFalsy();
   });
 
   it("allows moderate members permission", () => {

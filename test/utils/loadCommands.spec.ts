@@ -13,7 +13,7 @@ describe("loadCommands", () => {
 
   it("returns array of commands", async() => {
     const result = await loadCommands({} as ExtendedClient);
-    assert.isArray(result, "loadCommands did not return an array");
+    expect(result, "loadCommands did not return an array").toBeInstanceOf(Array);
   });
 
   it("returns the expected command list", async() => {
@@ -31,7 +31,7 @@ describe("loadCommands", () => {
     bot.commands = await loadCommands(bot as never);
     expect(bot.commands).toHaveLength(commandNames.length);
     for (const name of commandNames) {
-      assert.exists(
+      expect(
         bot.commands.find(
           (command) => {
             return command.data.name.
@@ -49,7 +49,23 @@ describe("loadCommands", () => {
               ) === name;
           },
         ),
-      );
+      ).toBeDefined();
+      expect(
+        bot.commands.find((command) => {
+          return (
+            command.data.name.
+              split("-").
+            // eslint-disable-next-line unicorn/no-array-reduce
+              reduce((accumulator, element, index) => {
+                return index === 0
+                  ? accumulator + element
+                  : accumulator
+                       + (element[0].toUpperCase()
+                         + element.slice(1).toLowerCase());
+              }, "") === name
+          );
+        }),
+      ).not.toBeNull();
     }
   });
 });

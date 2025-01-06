@@ -3,7 +3,7 @@ import { generateDiff } from "../../src/utils/generateDiff.js";
 
 describe("generateDiff", () => {
   it("is defined", () => {
-    expect(generateDiff,"generateDiff is not defined").toBeDefined();
+    expect(generateDiff, "generateDiff is not defined").toBeDefined();
     expect(generateDiff, "generateDiff is not a function").toBeTypeOf("function");
   });
 
