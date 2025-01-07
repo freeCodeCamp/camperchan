@@ -14,7 +14,7 @@ export const handleSyncLabels: Subcommand = {
       });
 
       await camperChan.octokit.rest.issues.setLabels({
-        // eslint-disable-next-line @typescript-eslint/naming-convention
+        // eslint-disable-next-line @typescript-eslint/naming-convention -- Github API name.
         issue_number: number,
         labels:       labelNames,
         owner:        "freeCodeCamp",

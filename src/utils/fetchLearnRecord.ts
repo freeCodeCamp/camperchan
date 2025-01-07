@@ -24,7 +24,7 @@ export const fetchLearnRecord = async(
         ? cached
         : null;
     }
-    // eslint-disable-next-line @typescript-eslint/no-dynamic-delete
+    // eslint-disable-next-line @typescript-eslint/no-dynamic-delete -- Dynamic delete is required here.
     delete camperChan.learnAccounts[userId];
     const {
       PROD_URI: productionUri,

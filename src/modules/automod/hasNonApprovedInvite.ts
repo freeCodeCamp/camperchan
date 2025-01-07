@@ -22,43 +22,44 @@ export const hasNonApprovedInvite = async(
 ): Promise<boolean> => {
   try {
     const inviteRegex
-      // eslint-disable-next-line stylistic/max-len
+      // eslint-disable-next-line stylistic/max-len -- This regex is too long to be split.
       = /(?:https?:\/\/)?discord(?:(?:app)?\.com\/invite|\.gg)\/?(?<slug>[\dA-Za-z]+)(?:\?event=\d*)?\/?/g;
 
     const invitesInMessage = content.
       replaceAll(/\s/g, "").
       matchAll(inviteRegex);
 
-    for (const invite of invitesInMessage) {
-      const slug = invite.groups?.slug;
-      if (slug === undefined) {
-        continue;
-      }
-      // eslint-disable-next-line no-await-in-loop
-      const request = await fetch(
-        `https://discord.com/api/v10/invites/${slug}`,
-        {
-          headers: {
-            accept: "application/json",
+    const invites = await Promise.all(
+      [ ...invitesInMessage ].map(async(invite) => {
+        const slug = invite.groups?.slug;
+        if (slug === undefined) {
+          return false;
+        }
+        const request = await fetch(
+          `https://discord.com/api/v10/invites/${slug}`,
+          {
+            headers: {
+              accept: "application/json",
+            },
+            method: "GET",
           },
-          method: "GET",
-        },
-      ).catch(() => {
-        return null;
-      });
-      const { guild_id: guildId }
-        // eslint-disable-next-line no-await-in-loop, @typescript-eslint/consistent-type-assertions, @typescript-eslint/naming-convention
-        = (await request?.json()) as { guild_id: string | undefined };
-      if (guildId === undefined) {
-        continue;
-      }
-      const isApproved = approvedInviteIds.has(guildId);
-      if (!isApproved) {
-        return true;
-      }
-    }
-
-    return false;
+        ).catch(() => {
+          return null;
+        });
+        const { guild_id: guildId }
+          // eslint-disable-next-line @typescript-eslint/consistent-type-assertions, @typescript-eslint/naming-convention -- .json() doesn't accept a generic.
+          = (await request?.json()) as { guild_id: string | undefined };
+        if (guildId === undefined) {
+          return false;
+        }
+        const isApproved = approvedInviteIds.has(guildId);
+        if (!isApproved) {
+          return true;
+        }
+        return false;
+      }),
+    );
+    return invites.some(Boolean);
   } catch (error) {
     await errorHandler(bot, "invite listener", error);
     return false;

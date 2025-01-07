@@ -7,21 +7,24 @@ import type { ModerationActions } from "../interfaces/moderationActions.js";
 /**
  * Generates a moderation embed notice and sends it to the user.
  * @param camperChan - CamperChan's Discord instance.
- * @param action - The moderation action taken.
- * @param user - The Discord user being moderated.
- * @param guildName - The name of the guild the moderation occurred in.
- * @param reason - The reason for the moderation action.
+ * @param parameters - The parameters for the moderation action.
+ * @param parameters.action - The moderation action taken.
+ * @param parameters.user - The Discord user being moderated.
+ * @param parameters.guildName - The name of the guild the moderation occurred in.
+ * @param parameters.reason - The reason for the moderation action.
  * @returns True if the message was sent, false otherwise.
  */
 export const sendModerationDm = async(
   camperChan: ExtendedClient,
-  action: ModerationActions,
-  user: User,
-  guildName: string,
-  reason: string,
-// eslint-disable-next-line @typescript-eslint/max-params
+  parameters: {
+    action:    ModerationActions;
+    user:      User;
+    guildName: string;
+    reason:    string;
+  },
 ): Promise<boolean> => {
   try {
+    const { action, user, guildName, reason } = parameters;
     const embed = new EmbedBuilder();
     embed.setTitle(`${action} Notification!`);
     embed.setDescription(
@@ -33,9 +36,8 @@ export const sendModerationDm = async(
 
     if (action === "ban") {
       embed.addFields({
-        name: "Appeals",
-        value:
-          `You can use [this google form](https://docs.google.com/forms/d/e/1FAIpQLSdhJjpK8dPlktQMEatUwmXworqZF9ig14oiwmiZzd0skz5ekQ/viewform) to appeal your ban after you have [read our code of conduct](https://www.freecodecamp.org/news/code-of-conduct).`,
+        name:  "Appeals",
+        value: `You can use [this google form](https://docs.google.com/forms/d/e/1FAIpQLSdhJjpK8dPlktQMEatUwmXworqZF9ig14oiwmiZzd0skz5ekQ/viewform) to appeal your ban after you have [read our code of conduct](https://www.freecodecamp.org/news/code-of-conduct).`,
       });
     }
 

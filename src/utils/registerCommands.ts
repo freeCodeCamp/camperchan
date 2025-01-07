@@ -1,5 +1,6 @@
 import {
   REST,
+  type RESTOptions,
   type RESTPostAPIApplicationCommandsJSONBody,
   type RESTPostAPIChatInputApplicationCommandsJSONBody,
   Routes,
@@ -18,10 +19,10 @@ import type { ExtendedClient } from "../interfaces/extendedClient.js";
  */
 export const registerCommands = async(
   camperChan: ExtendedClient,
-  restClass = REST,
+  restClass: new (options: Partial<RESTOptions>)=> REST = REST,
 ): Promise<REST | null> => {
   try {
-    // eslint-disable-next-line new-cap
+    // eslint-disable-next-line new-cap -- This is a class constructor.
     const rest = new restClass({ version: "10" }).setToken(
       camperChan.config.token,
     );

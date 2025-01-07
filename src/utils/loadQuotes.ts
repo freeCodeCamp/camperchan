@@ -13,7 +13,7 @@ export const loadQuotes
     const quoteFetch = await fetch(
       `https://raw.githubusercontent.com/freeCodeCamp/freeCodeCamp/main/client/i18n/locales/english/motivation.json`,
     );
-    // eslint-disable-next-line @typescript-eslint/consistent-type-assertions
+    // eslint-disable-next-line @typescript-eslint/consistent-type-assertions -- It kills me that .json() doesn't take a generic.
     const quoteData = (await quoteFetch.json()) as QuoteList;
     return quoteData;
   } catch (error) {

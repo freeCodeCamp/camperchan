@@ -1,4 +1,4 @@
-/* eslint-disable stylistic/max-len */
+/* eslint-disable stylistic/max-len -- These are config strings, so it's okay to not enforce length here. */
 const pullComments: Array<{ key: string; message: string }> = [
   {
     key: "Don't Ping Maintainers",

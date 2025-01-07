@@ -36,7 +36,7 @@ describe("loadCommands", () => {
           (command) => {
             return command.data.name.
               split("-").
-              // eslint-disable-next-line unicorn/no-array-reduce
+              // eslint-disable-next-line unicorn/no-array-reduce -- Testy testy, won't refactor probably.
               reduce(
                 (accumulator, element, index) => {
                   return index === 0

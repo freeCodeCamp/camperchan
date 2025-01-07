@@ -38,7 +38,7 @@ export const handleMessageCreate = async(
     if (message.content.startsWith("~cachebust")) {
       const [ , id ] = message.content.split(/\s+/g);
       if (id !== undefined) {
-        // eslint-disable-next-line @typescript-eslint/no-dynamic-delete
+        // eslint-disable-next-line @typescript-eslint/no-dynamic-delete -- Dynamic delete is required here.
         delete camperChan.learnAccounts[id];
       }
       await message.reply(`Cache cleared for ${String(id)}`);
@@ -114,10 +114,12 @@ export const handleMessageCreate = async(
     const reason = "Your account appears to be compromised.";
     const sentNotice = await sendModerationDm(
       camperChan,
-      "ban",
-      message.author,
-      message.guild.name,
-      reason,
+      {
+        action:    "ban",
+        guildName: message.guild.name,
+        reason:    customSubstring(reason, 1000),
+        user:      message.author,
+      },
     );
 
     await message.member?.ban({

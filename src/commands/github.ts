@@ -11,11 +11,11 @@ import type { Command } from "../interfaces/command.js";
 import type { Subcommand } from "../interfaces/subcommand.js";
 
 const handlers: Record<string, Subcommand> = {
-  // eslint-disable-next-line @typescript-eslint/naming-convention
+  // eslint-disable-next-line @typescript-eslint/naming-convention -- Discord command names can't use uppercase characters.
   "add-labels":  handleAddLabels,
   "close":       handleClose,
   "comment":     handleComment,
-  // eslint-disable-next-line @typescript-eslint/naming-convention
+  // eslint-disable-next-line @typescript-eslint/naming-convention -- Discord command names can't use uppercase characters.
   "sync-labels": handleSyncLabels,
 };
 

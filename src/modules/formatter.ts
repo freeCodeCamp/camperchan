@@ -1,6 +1,27 @@
 import { format, type Options } from "prettier";
 import stripAnsi from "strip-ansi";
 
+const errorIsPrettierError = (
+  error: unknown,
+): error is {
+  loc:       { start: { line: number; column: number } };
+  codeFrame: string;
+} => {
+  return (
+    typeof error === "object"
+    && error !== null
+    && "loc" in error
+    && typeof error.loc === "object"
+    && error.loc !== null
+    && "start" in error.loc
+    && typeof error.loc.start === "object"
+    && error.loc.start !== null
+    && "line" in error.loc.start
+    && "column" in error.loc.start
+    && "codeFrame" in error
+  );
+};
+
 /**
  * Formats user's unformatted code received from user's message.
  * @param unformattedCode - The unformatted code received from the user's message.
@@ -50,13 +71,15 @@ export async function formatter(
    * the message, if sent to Discord, can't be displayed. That's why we use `stripAnsi`
    * in the next line to remove any ANSI provided by Prettier's parser
    */
-  const formattedCode = await format(unformattedCode, options).
-    // eslint-disable-next-line @typescript-eslint/use-unknown-in-catch-callback-variable
-    catch((error) => {
+  const formattedCode = await format(unformattedCode, options).catch(
+    (error: unknown) => {
+      if (!errorIsPrettierError(error)) {
+        throw error;
+      }
       return stripAnsi(
-        // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
         `SyntaxError: Unexpected token (${String(error.loc.start.line)}:${String(error.loc.start.column)})\n\n${String(error.codeFrame)}`,
       );
-    });
+    },
+  );
   return formattedCode;
 }

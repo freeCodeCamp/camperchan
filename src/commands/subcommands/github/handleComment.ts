@@ -23,7 +23,7 @@ export const handleComment: Subcommand = {
 
       const comment = await camperChan.octokit.rest.issues.createComment({
         body:         message,
-        // eslint-disable-next-line @typescript-eslint/naming-convention
+        // eslint-disable-next-line @typescript-eslint/naming-convention -- Github API name.
         issue_number: pull,
         owner:        "freeCodeCamp",
         repo:         repo,
