@@ -16,7 +16,7 @@ export const generateLogs = async(
   channelId: string,
 ): Promise<AttachmentBuilder> => {
   try {
-    // eslint-disable-next-line @typescript-eslint/no-dynamic-delete
+    // eslint-disable-next-line @typescript-eslint/no-dynamic-delete -- Dynamic delete is required here.
     delete camperChan.privateLogs[channelId];
 
     const logs = await readFile(

@@ -12,7 +12,7 @@ export const handleThreadCreate = async(
   thread: ThreadChannel,
 ): Promise<void> => {
   try {
-    // eslint-disable-next-line unicorn/require-array-join-separator
+    // eslint-disable-next-line unicorn/require-array-join-separator -- This is a Discord.js method, not an <Array>.join().
     await thread.join();
 
     const embed = new EmbedBuilder();

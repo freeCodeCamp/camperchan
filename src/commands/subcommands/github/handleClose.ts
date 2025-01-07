@@ -28,7 +28,7 @@ export const handleClose: Subcommand = {
       const isSpam = interaction.options.getBoolean("spam") ?? false;
 
       const data = await camperChan.octokit.rest.issues.get({
-        // eslint-disable-next-line @typescript-eslint/naming-convention
+        // eslint-disable-next-line @typescript-eslint/naming-convention -- Github API name.
         issue_number: number,
         owner:        "freeCodeCamp",
         repo:         repo,
@@ -47,13 +47,13 @@ export const handleClose: Subcommand = {
       const isPull = Boolean(data.data.pull_request);
       await camperChan.octokit.rest.issues.createComment({
         body:         commentBody(isPull, comment),
-        // eslint-disable-next-line @typescript-eslint/naming-convention
+        // eslint-disable-next-line @typescript-eslint/naming-convention -- Github API name.
         issue_number: number,
         owner:        "freeCodeCamp",
         repo:         repo,
       });
       await camperChan.octokit.rest.issues.update({
-        // eslint-disable-next-line @typescript-eslint/naming-convention
+        // eslint-disable-next-line @typescript-eslint/naming-convention -- Github API name.
         issue_number: number,
         owner:        "freeCodeCamp",
         repo:         repo,
@@ -61,7 +61,7 @@ export const handleClose: Subcommand = {
       });
       if (isPull && isSpam) {
         await camperChan.octokit.rest.issues.addLabels({
-          // eslint-disable-next-line @typescript-eslint/naming-convention
+          // eslint-disable-next-line @typescript-eslint/naming-convention -- Github API name.
           issue_number: number,
           labels:       [ "spam" ],
           owner:        "freeCodeCamp",

@@ -11,7 +11,7 @@ import { loadQuotes } from "./utils/loadQuotes.js";
 import { registerCommands } from "./utils/registerCommands.js";
 import type { ExtendedClient } from "./interfaces/extendedClient.js";
 
-// eslint-disable-next-line @typescript-eslint/consistent-type-assertions
+// eslint-disable-next-line @typescript-eslint/consistent-type-assertions -- The assertion here allows us to extend the Client interface.
 const camperChan = new Client({
   intents: intentOptions,
 }) as ExtendedClient;

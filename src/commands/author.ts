@@ -53,7 +53,6 @@ export const author: Command = {
       }
 
       const ourId = "65dc2b7cbb4eb0cd565b4463";
-      // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-call
       const query = gql`
         query getMember {
           user(username: "Koded001") {
@@ -68,8 +67,7 @@ export const author: Command = {
         }
       `;
       const data
-      // eslint-disable-next-line @typescript-eslint/no-unsafe-call, @typescript-eslint/consistent-type-assertions
-      = await request("https://gql.hashnode.com", query) as HashnodeUser;
+      = await request<HashnodeUser>("https://gql.hashnode.com", query);
 
       if (!data.user) {
         await interaction.editReply({

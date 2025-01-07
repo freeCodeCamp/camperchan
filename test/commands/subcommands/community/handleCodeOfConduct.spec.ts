@@ -1,4 +1,3 @@
-/* eslint-disable stylistic/max-len */
 import { ChannelType, type EmbedBuilder } from "discord.js";
 import {
   MockChannel,
@@ -8,7 +7,8 @@ import {
   MockUser,
 } from "discordjs-testing";
 import { describe, assert, it } from "vitest";
-import { handleCodeOfConduct } from "../../../../src/commands/subcommands/community/handleCodeOfConduct.js";
+import { handleCodeOfConduct }
+  from "../../../../src/commands/subcommands/community/handleCodeOfConduct.js";
 
 const guild = new MockGuild({
   name: "it Guild",
@@ -54,22 +54,26 @@ describe("codeOfConduct Handler", () => {
     assert.equal(embed.data.title, "freeCodeCamp Code of Conduct");
     assert.equal(
       embed.data.description,
+      // eslint-disable-next-line stylistic/max-len -- It's a long string.
       "These are the basic rules for interacting with the FreeCodeCamp community on any platform, including this Discord server. You can read the full document on the [FreeCodeCamp article](https://freecodecamp.org/news/code-of-conduct)",
     );
     const [ first, second, third ] = embed.data.fields || [];
     assert.equal(first.name, "No harassment");
     assert.equal(
       first.value,
+      // eslint-disable-next-line stylistic/max-len -- It's a long string.
       "Harassment includes sexual language and imagery, deliberate intimidation, stalking, name-calling, unwelcome attention, libel, and any malicious hacking or social engineering. freeCodeCamp should be a harassment-free experience for everyone, regardless of gender, gender identity and expression, age, sexual orientation, disability, physical appearance, body size, race, national origin, or religion (or lack thereof).",
     );
     assert.equal(second.name, "No trolling");
     assert.equal(
       second.value,
+      // eslint-disable-next-line stylistic/max-len -- It's a long string.
       "Trolling includes posting inflammatory comments to provoke an emotional response or disrupt discussions.",
     );
     assert.equal(third.name, "No spamming");
     assert.equal(
       third.value,
+      // eslint-disable-next-line stylistic/max-len -- It's a long string.
       "Spamming includes posting off-topic messages to disrupt discussions, promoting a product, soliciting donations, advertising a job / internship / gig, or flooding discussions with files or text.",
     );
     assert.equal(

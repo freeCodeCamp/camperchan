@@ -39,10 +39,12 @@ export const handleUnmute: Subcommand = {
 
       const sentNotice = await sendModerationDm(
         camperChan,
-        "unmute",
-        target,
-        guild.name,
-        reason,
+        {
+          action:    "unmute",
+          guildName: guild.name,
+          reason:    customSubstring(reason, 1000),
+          user:      target,
+        },
       );
 
       const muteEmbed = new EmbedBuilder();

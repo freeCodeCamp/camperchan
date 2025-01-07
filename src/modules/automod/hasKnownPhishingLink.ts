@@ -27,48 +27,50 @@ export const hasKnownPhishingLink = async(
 
     const linksInMessage = content.matchAll(linkRegex);
 
-    for (const link of linksInMessage) {
-      const rawDomain = link.groups?.domain;
-      if (rawDomain === undefined) {
-        continue;
-      }
-      const domain = encodeURI(rawDomain);
-      const walshyRequest
-      // eslint-disable-next-line no-await-in-loop
+    const linkResults = await Promise.all(
+      [ ...linksInMessage ].map(async(link) => {
+        const rawDomain = link.groups?.domain;
+        if (rawDomain === undefined) {
+          return false;
+        }
+        const domain = encodeURI(rawDomain);
+        const walshyRequest
+
       = await fetch("https://bad-domains.walshy.dev/check", {
         body:    JSON.stringify({ domain }),
         headers: {
-          // eslint-disable-next-line @typescript-eslint/naming-convention
+          // eslint-disable-next-line @typescript-eslint/naming-convention -- Header name requires dash.
           "X-Identity": "Rythm Moderation - built by naomi_lgbt",
           "accept":     "application/json",
         },
         method: "POST",
       });
-      const walshyResponse
-      // eslint-disable-next-line @typescript-eslint/consistent-type-assertions, no-await-in-loop
+        const walshyResponse
+      // eslint-disable-next-line @typescript-eslint/consistent-type-assertions -- .json() doesn't accept a generic.
       = (await walshyRequest.json()) as { badDomain: boolean };
-      if (walshyResponse.badDomain) {
-        return true;
-      }
-      // eslint-disable-next-line no-await-in-loop
-      const yachtsRequest = await fetch(
-        `https://phish.sinking.yachts/v2/check/${domain}`,
-        {
-          headers: {
-          // eslint-disable-next-line @typescript-eslint/naming-convention
-            "X-Identity": "Rythm Moderation - built by naomi_lgbt",
-            "accept":     "application/json",
+        if (walshyResponse.badDomain) {
+          return true;
+        }
+
+        const yachtsRequest = await fetch(
+          `https://phish.sinking.yachts/v2/check/${domain}`,
+          {
+            headers: {
+              // eslint-disable-next-line @typescript-eslint/naming-convention -- Header name requires dash.
+              "X-Identity": "Rythm Moderation - built by naomi_lgbt",
+              "accept":     "application/json",
+            },
           },
-        },
-      );
-      // eslint-disable-next-line @typescript-eslint/consistent-type-assertions, no-await-in-loop
-      const yachtsResult = (await yachtsRequest.json()) as boolean;
-      if (yachtsResult) {
-        return true;
-      }
-      return false;
-    }
-    return false;
+        );
+        // eslint-disable-next-line @typescript-eslint/consistent-type-assertions -- .json() doesn't accept a generic.
+        const yachtsResult = (await yachtsRequest.json()) as boolean;
+        if (yachtsResult) {
+          return true;
+        }
+        return false;
+      }),
+    );
+    return linkResults.includes(true);
   } catch (error) {
     await errorHandler(bot, "phishing listener", error);
     return false;

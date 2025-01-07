@@ -40,10 +40,12 @@ export const handleKick: Subcommand = {
 
       const sentNotice = await sendModerationDm(
         camperChan,
-        "kick",
-        target,
-        guild.name,
-        reason,
+        {
+          action:    "kick",
+          guildName: guild.name,
+          reason:    customSubstring(reason, 1000),
+          user:      target,
+        },
       );
 
       await targetMember.kick(customSubstring(reason, 1000));

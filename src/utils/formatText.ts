@@ -52,7 +52,7 @@ export const formatTextToTable = (
   const baseColumnWidths = headers.map((header) => {
     return String(header).length;
   });
-  // eslint-disable-next-line unicorn/no-array-reduce
+  // eslint-disable-next-line unicorn/no-array-reduce -- I'll fix this at some point.
   const columnWidths = rows.reduce((accumulator: Array<number>, row) => {
     for (const [ index, column ] of row.entries()) {
       const currentColumnLength = String(column).length;

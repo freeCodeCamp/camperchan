@@ -1,4 +1,4 @@
-/* eslint-disable @typescript-eslint/naming-convention */
+/* eslint-disable @typescript-eslint/naming-convention -- Many of the Discourse properties use snake case. */
 interface ForumData {
   users: Array<{
     id:              number;

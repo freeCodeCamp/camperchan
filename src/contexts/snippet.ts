@@ -1,12 +1,58 @@
 import {
   ActionRowBuilder,
   type ComponentType,
+  type ContextMenuCommandInteraction,
+  type Message,
   StringSelectMenuBuilder,
+  type StringSelectMenuInteraction,
 } from "discord.js";
 import { tags } from "../config/tags.js";
 import { errorHandler } from "../utils/errorHandler.js";
 import { isModerator } from "../utils/isModerator.js";
 import type { Context } from "../interfaces/context.js";
+
+const handleClickEnd = async(
+  interaction: ContextMenuCommandInteraction,
+): Promise<void> => {
+  await interaction.
+    editReply({
+      components: [],
+    }).
+
+  /**
+   * Ephemerals can be dismissed by the user.
+   * We catch the error here because we don't really
+   * care if it fails.
+   */
+    catch(() => {
+      return null;
+    });
+};
+
+const handleClick = async(
+  selection: StringSelectMenuInteraction,
+  interaction: ContextMenuCommandInteraction,
+  message: Message,
+): Promise<void> => {
+  await selection.deferUpdate();
+  const name = selection.values.at(0);
+  const target = tags.find((t) => {
+    return t.name === name;
+  });
+  if (!target) {
+    await selection.editReply({
+      content: `Cannot find a snippet with the name ${String(name)}.`,
+    });
+    return;
+  }
+  await message.reply({
+    content: target.message,
+  });
+  await interaction.editReply({
+    components: [],
+    content:    "Response sent!",
+  });
+};
 
 export const snippet: Context = {
   data: {
@@ -24,18 +70,13 @@ export const snippet: Context = {
         return;
       }
       await interaction.deferReply({ ephemeral: true });
-      if (
-        !isModerator(interaction.member)
-      ) {
+      if (!isModerator(interaction.member)) {
         await interaction.editReply({
           content: "Only moderators may use this command.",
         });
         return;
       }
-      const message = interaction.options.getMessage(
-        "message",
-        true,
-      );
+      const message = interaction.options.getMessage("message", true);
 
       const dropdown = new StringSelectMenuBuilder().
         setCustomId("snippets").
@@ -63,43 +104,12 @@ export const snippet: Context = {
           time: 1000 * 60 * 60,
         });
 
-      // eslint-disable-next-line @typescript-eslint/no-misused-promises
-      collector.on("collect", async(selection) => {
-        await selection.deferUpdate();
-        const name = selection.values.at(0);
-        const target = tags.find((t) => {
-          return t.name === name;
-        });
-        if (!target) {
-          await selection.editReply({
-            content: `Cannot find a snippet with the name ${String(name)}.`,
-          });
-          return;
-        }
-        await message.reply({
-          content: target.message,
-        });
-        await interaction.editReply({
-          components: [],
-          content:    "Response sent!",
-        });
+      collector.on("collect", (click) => {
+        void handleClick(click, interaction, message);
       });
 
-      // eslint-disable-next-line @typescript-eslint/no-misused-promises
-      collector.on("end", async() => {
-        await interaction.
-          editReply({
-            components: [],
-          }).
-
-        /**
-         * Ephemerals can be dismissed by the user.
-         * We catch the error here because we don't really
-         * care if it fails.
-         */
-          catch(() => {
-            return null;
-          });
+      collector.on("end", () => {
+        void handleClickEnd(interaction);
       });
     } catch (error) {
       await errorHandler(camperChan, "snippet context command", error);

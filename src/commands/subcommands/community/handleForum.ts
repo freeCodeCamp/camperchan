@@ -8,7 +8,7 @@ export const handleForum: Subcommand = {
     try {
       await interaction.deferReply();
       const data = await fetch("https://forum.freecodecamp.org/latest.json");
-      // eslint-disable-next-line @typescript-eslint/consistent-type-assertions
+      // eslint-disable-next-line @typescript-eslint/consistent-type-assertions -- It kills me that .json() doesn't take a generic.
       const parsed = (await data.json()) as ForumData;
       const topics = parsed.topic_list.topics.slice(0, 5);
       const forumEmbed = new EmbedBuilder().

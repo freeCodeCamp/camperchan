@@ -15,7 +15,7 @@ import type { Command } from "../interfaces/command.js";
 import type { Subcommand } from "../interfaces/subcommand.js";
 
 const handlers: Record<string, Subcommand> = {
-  // eslint-disable-next-line @typescript-eslint/naming-convention
+  // eslint-disable-next-line @typescript-eslint/naming-convention -- Discord command names can't use uppercase characters.
   "code-of-conduct": handleCodeOfConduct,
   "contribute":      handleContribute,
   "forum":           handleForum,

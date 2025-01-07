@@ -67,10 +67,12 @@ export const handleMute: Subcommand = {
 
       const sentNotice = await sendModerationDm(
         camperChan,
-        "mute",
-        target,
-        guild.name,
-        reason,
+        {
+          action:    "mute",
+          guildName: guild.name,
+          reason:    customSubstring(reason, 1000),
+          user:      target,
+        },
       );
 
       await targetMember.timeout(durationMilliseconds, reason);

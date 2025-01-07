@@ -1,4 +1,4 @@
-/* eslint-disable max-lines */
+/* eslint-disable max-lines -- Need to make this modules at some point. */
 import { AttachmentBuilder } from "discord.js";
 import nodeHtmlToImage from "node-html-to-image";
 import { badges } from "../config/badges.js";
@@ -93,11 +93,11 @@ const getCertificationSection = (
     };
   }
 
-  // eslint-disable-next-line unicorn/no-array-reduce
+  // eslint-disable-next-line unicorn/no-array-reduce -- I'll rewrite this someday.
   const shouldMakeSVG = Object.entries(learnRecord).reduce(
     (accumulator: Array<keyof typeof generatorMap>, [ key, value ]) => {
       if (key in generatorMap && value === true) {
-        // eslint-disable-next-line @typescript-eslint/consistent-type-assertions
+        // eslint-disable-next-line @typescript-eslint/consistent-type-assertions -- I know what I'm doing.
         accumulator.push(key as keyof typeof generatorMap);
       }
       return accumulator;
@@ -130,7 +130,7 @@ const getbadgesSection = (record: levels): { html: string; alt: string } => {
       html: "<p>No badges earned yet.</p>",
     };
   }
-  // eslint-disable-next-line unicorn/no-array-reduce
+  // eslint-disable-next-line unicorn/no-array-reduce -- I'll rewrite this someday.
   const processed = record.badges.reduce(
     (accumulator: { html: Array<string>; alt: Array<string> }, element) => {
       const isValid = badges.find((badge) => {
@@ -370,7 +370,7 @@ const generateLeaderboardImage = async(
             ? "d0d0d5"
             : l.colour};padding: 2.5%;border-radius: 100px;">
             <img style="border-radius: 50%;" src=${l.avatar === ""
-              // eslint-disable-next-line stylistic/max-len
+              // eslint-disable-next-line stylistic/max-len -- It's a string. Not going to get shorter.
               ? "https://cdn.freecodecamp.org/platform/universal/fcc_puck_500.jpg"
               : l.avatar}></img>
             <div style="text-align: left;padding-left:100px;">

@@ -26,10 +26,12 @@ export const handleWarn: Subcommand = {
 
       const sentNotice = await sendModerationDm(
         camperChan,
-        "warn",
-        target,
-        guild.name,
-        reason,
+        {
+          action:    "warn",
+          guildName: guild.name,
+          reason:    customSubstring(reason, 1000),
+          user:      target,
+        },
       );
 
       await updateHistory(camperChan, "warn", target.id);

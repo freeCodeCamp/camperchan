@@ -40,10 +40,12 @@ export const handleBan: Subcommand = {
 
       const sentNotice = await sendModerationDm(
         camperChan,
-        "ban",
-        target,
-        guild.name,
-        reason,
+        {
+          action:    "ban",
+          guildName: guild.name,
+          reason:    customSubstring(reason, 1000),
+          user:      target,
+        },
       );
 
       await targetMember.ban({

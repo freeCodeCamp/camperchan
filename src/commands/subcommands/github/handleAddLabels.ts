@@ -15,7 +15,7 @@ export const handleAddLabels: Subcommand = {
 
       const response = await camperChan.octokit.rest.issues.listLabelsForRepo({
         owner:    "freeCodeCamp",
-        // eslint-disable-next-line @typescript-eslint/naming-convention, camelcase
+        // eslint-disable-next-line @typescript-eslint/naming-convention, camelcase -- Github API name.
         per_page: 100,
         repo:     repo,
       });
@@ -44,7 +44,7 @@ export const handleAddLabels: Subcommand = {
       }
 
       await camperChan.octokit.rest.issues.addLabels({
-        // eslint-disable-next-line @typescript-eslint/naming-convention
+        // eslint-disable-next-line @typescript-eslint/naming-convention -- Github API name.
         issue_number: number,
         labels:       labelNames,
         owner:        "freeCodeCamp",
