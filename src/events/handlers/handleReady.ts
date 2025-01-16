@@ -74,6 +74,7 @@ export const handleReady = async(
 
     await loadRoles(camperChan);
 
+    await fetchRss(camperChan);
     setInterval(() => {
       void fetchRss(camperChan);
       // Every 30 minutes.
