@@ -1,3 +1,4 @@
+/* eslint-disable max-lines -- refactor later */
 import { ChannelType, EmbedBuilder } from "discord.js";
 import { UUID } from "mongodb";
 // eslint-disable-next-line @typescript-eslint/naming-convention -- Importing a class.
@@ -6,26 +7,34 @@ import { youtubeIds } from "../config/youtubeIds.js";
 import { errorHandler } from "../utils/errorHandler.js";
 import type { ExtendedClient } from "../interfaces/extendedClient.js";
 import type { ForumData } from "../interfaces/forum.js";
-import type { BlueskyRss, NewsRss, RedditRss, TwitchJson, YoutubeRss }
-  from "../interfaces/rss.js";
+import type {
+  BlueskyRss,
+  NewsRss,
+  RedditRss,
+  TwitchJson,
+  YoutubeRss,
+} from "../interfaces/rss.js";
 import type { Prisma } from "@prisma/client";
 
-const fetchBsky = async(bot: ExtendedClient, latest?: string):
-Promise<{ latestId: string | null; embeds: Array<EmbedBuilder> }> => {
+const fetchBsky = async(
+  bot: ExtendedClient,
+  latest?: string,
+): Promise<{ latestId: string | null; embeds: Array<EmbedBuilder> }> => {
   try {
     const parser = new Parser<BlueskyRss, BlueskyRss["items"]>();
-    const { items }
-    = await parser.parseURL(
+    const { items } = await parser.parseURL(
       "https://bsky.app/profile/did:plc:wvd2adsms7gniik5ggqowjah/rss",
     );
     const latestIndex = items.findIndex((item) => {
       return item.guid === latest;
     });
-    const latestPosts = latest !== undefined && latestIndex === -1
-      ? items.slice(0, 5)
-      : items.slice(0, Math.min(latestIndex, 5));
+    const latestPosts
+      = latest !== undefined && latestIndex === -1
+        ? items.slice(0, 5)
+        : items.slice(0, Math.min(latestIndex, 5));
     const embeds = latestPosts.map((post) => {
-      return new EmbedBuilder().setTitle("freeCodeCamp posted on Bluesky!").
+      return new EmbedBuilder().
+        setTitle("freeCodeCamp posted on Bluesky!").
         setDescription(post.content).
         setURL(post.link);
     });
@@ -37,22 +46,25 @@ Promise<{ latestId: string | null; embeds: Array<EmbedBuilder> }> => {
   }
 };
 
-const fetchReddit = async(bot: ExtendedClient, latest?: string):
-Promise<{ latestId: string | null; embeds: Array<EmbedBuilder> }> => {
+const fetchReddit = async(
+  bot: ExtendedClient,
+  latest?: string,
+): Promise<{ latestId: string | null; embeds: Array<EmbedBuilder> }> => {
   try {
     const parser = new Parser<RedditRss, RedditRss["items"]>();
-    const { items }
-    = await parser.parseURL(
+    const { items } = await parser.parseURL(
       "https://reddit.com/r/freeCodeCamp.rss",
     );
     const latestIndex = items.findIndex((item) => {
       return item.id === latest;
     });
-    const latestPosts = latest !== undefined && latestIndex === -1
-      ? items.slice(0, 5)
-      : items.slice(0, Math.min(latestIndex, 5));
+    const latestPosts
+      = latest !== undefined && latestIndex === -1
+        ? items.slice(0, 5)
+        : items.slice(0, Math.min(latestIndex, 5));
     const embeds = latestPosts.map((post) => {
-      return new EmbedBuilder().setTitle("New Reddit post!").
+      return new EmbedBuilder().
+        setTitle("New Reddit post!").
         setDescription(post.title).
         setURL(post.link);
     });
@@ -64,22 +76,25 @@ Promise<{ latestId: string | null; embeds: Array<EmbedBuilder> }> => {
   }
 };
 
-const fetchNews = async(bot: ExtendedClient, latest?: string):
-Promise<{ latestId: string | null; embeds: Array<EmbedBuilder> }> => {
+const fetchNews = async(
+  bot: ExtendedClient,
+  latest?: string,
+): Promise<{ latestId: string | null; embeds: Array<EmbedBuilder> }> => {
   try {
     const parser = new Parser<NewsRss, NewsRss["items"]>();
-    const { items }
-    = await parser.parseURL(
+    const { items } = await parser.parseURL(
       "https://www.freecodecamp.org/news/rss",
     );
     const latestIndex = items.findIndex((item) => {
       return item.guid === latest;
     });
-    const latestPosts = latest !== undefined && latestIndex === -1
-      ? items.slice(0, 5)
-      : items.slice(0, Math.min(latestIndex, 5));
+    const latestPosts
+      = latest !== undefined && latestIndex === -1
+        ? items.slice(0, 5)
+        : items.slice(0, Math.min(latestIndex, 5));
     const embeds = latestPosts.map((post) => {
-      return new EmbedBuilder().setTitle("New article!").
+      return new EmbedBuilder().
+        setTitle("New article!").
         setDescription(post.contentSnippet).
         setURL(post.link);
     });
@@ -91,22 +106,24 @@ Promise<{ latestId: string | null; embeds: Array<EmbedBuilder> }> => {
   }
 };
 
-const fetchYoutube = async(bot: ExtendedClient, url: string, latest?: string):
-Promise<{ latestId: string | null; embeds: Array<EmbedBuilder> }> => {
+const fetchYoutube = async(
+  bot: ExtendedClient,
+  url: string,
+  latest?: string,
+): Promise<{ latestId: string | null; embeds: Array<EmbedBuilder> }> => {
   try {
     const parser = new Parser<YoutubeRss, YoutubeRss["items"]>();
-    const { items }
-    = await parser.parseURL(
-      url,
-    );
+    const { items } = await parser.parseURL(url);
     const latestIndex = items.findIndex((item) => {
       return item.id === latest;
     });
-    const latestPosts = latest !== undefined && latestIndex === -1
-      ? items.slice(0, 5)
-      : items.slice(0, Math.min(latestIndex, 5));
+    const latestPosts
+      = latest !== undefined && latestIndex === -1
+        ? items.slice(0, 5)
+        : items.slice(0, Math.min(latestIndex, 5));
     const embeds = latestPosts.map((post) => {
-      return new EmbedBuilder().setTitle("New video!").
+      return new EmbedBuilder().
+        setTitle("New video!").
         setDescription(post.title).
         setURL(post.link);
     });
@@ -118,24 +135,30 @@ Promise<{ latestId: string | null; embeds: Array<EmbedBuilder> }> => {
   }
 };
 
-const fetchForum = async(bot: ExtendedClient, latest?: string):
-Promise<{ latestId: string | null; embeds: Array<EmbedBuilder> }> => {
+const fetchForum = async(
+  bot: ExtendedClient,
+  latest?: string,
+): Promise<{ latestId: string | null; embeds: Array<EmbedBuilder> }> => {
   try {
     const request = await fetch("https://forum.freecodecamp.org/latest.json");
     // eslint-disable-next-line @typescript-eslint/consistent-type-assertions -- Necessary as .json() does not accept a generic.
-    const result = await request.json() as ForumData;
+    const result = (await request.json()) as ForumData;
 
     const latestIndex = result.topic_list.topics.findIndex((topic) => {
       return topic.id.toString() === latest;
     });
-    const latestPosts = latest !== undefined && latestIndex === -1
-      ? result.topic_list.topics.slice(0, 5)
-      : result.topic_list.topics.slice(0, Math.min(latestIndex, 5));
+    const latestPosts
+      = latest !== undefined && latestIndex === -1
+        ? result.topic_list.topics.slice(0, 5)
+        : result.topic_list.topics.slice(0, Math.min(latestIndex, 5));
 
     const embeds = latestPosts.map((post) => {
-      return new EmbedBuilder().setTitle("New forum post!").
+      return new EmbedBuilder().
+        setTitle("New forum post!").
         setDescription(post.title).
-        setURL(`https://forum.freecodecamp.org/t/${post.slug}/${post.id.toString()}`);
+        setURL(
+          `https://forum.freecodecamp.org/t/${post.slug}/${post.id.toString()}`,
+        );
     });
     const latestId = result.topic_list.topics[0]?.id.toString() ?? null;
     return { embeds, latestId };
@@ -145,73 +168,77 @@ Promise<{ latestId: string | null; embeds: Array<EmbedBuilder> }> => {
   }
 };
 
-const fetchTwitch = async(bot: ExtendedClient):
-Promise<Array<EmbedBuilder>> => {
+const fetchTwitch = async(
+  bot: ExtendedClient,
+): Promise<Array<EmbedBuilder>> => {
   try {
-    if (process.env.TWITCH_CLIENT_ID === undefined
-      || process.env.TWITCH_CLIENT_SECRET === undefined) {
+    if (
+      process.env.TWITCH_CLIENT_ID === undefined
+      || process.env.TWITCH_CLIENT_SECRET === undefined
+    ) {
       throw new Error("Twitch client ID or secret not set");
     }
-    const channelIds: Array<string> = [
-      "freecodecamp",
-      "freecodecampes",
-    ];
-    const tokenRequest = await fetch(
-      "https://id.twitch.tv/oauth2/token",
-      {
-        body: new URLSearchParams({
-          // eslint-disable-next-line @typescript-eslint/naming-convention -- These are Twitch's property names.
-          client_id:     process.env.TWITCH_CLIENT_ID,
-          // eslint-disable-next-line @typescript-eslint/naming-convention -- These are Twitch's property names.
-          client_secret: process.env.TWITCH_CLIENT_SECRET,
-          // eslint-disable-next-line @typescript-eslint/naming-convention -- These are Twitch's property names.
-          grant_type:    "client_credentials",
-        }),
-        headers: {
-          // eslint-disable-next-line @typescript-eslint/naming-convention -- This is a standard header.
-          "Content-Type": "application/x-www-form-urlencoded",
-          "accept":       "application/json",
-        },
-        method: "POST",
+    const channelIds: Array<string> = [ "freecodecamp", "freecodecampes" ];
+    const tokenRequest = await fetch("https://id.twitch.tv/oauth2/token", {
+      body: new URLSearchParams({
+        // eslint-disable-next-line @typescript-eslint/naming-convention -- These are Twitch's property names.
+        client_id:     process.env.TWITCH_CLIENT_ID,
+        // eslint-disable-next-line @typescript-eslint/naming-convention -- These are Twitch's property names.
+        client_secret: process.env.TWITCH_CLIENT_SECRET,
+        // eslint-disable-next-line @typescript-eslint/naming-convention -- These are Twitch's property names.
+        grant_type:    "client_credentials",
+      }),
+      headers: {
+        // eslint-disable-next-line @typescript-eslint/naming-convention -- This is a standard header.
+        "Content-Type": "application/x-www-form-urlencoded",
+        "accept":       "application/json",
       },
-    );
+      method: "POST",
+    });
     const { access_token: token }
-    // eslint-disable-next-line @typescript-eslint/consistent-type-assertions -- Necessary as .json() does not accept a generic.
-    = await tokenRequest.json() as {
-      // eslint-disable-next-line @typescript-eslint/naming-convention -- These are Twitch's property names.
-      access_token?: string; token_type?: string; expires_in?: number;
-    };
+      // eslint-disable-next-line @typescript-eslint/consistent-type-assertions -- Necessary as .json() does not accept a generic.
+      = (await tokenRequest.json()) as {
+        // eslint-disable-next-line @typescript-eslint/naming-convention -- These are Twitch's property names.
+        access_token?: string;
+        // eslint-disable-next-line @typescript-eslint/naming-convention -- These are Twitch's property names.
+        token_type?:   string;
+        // eslint-disable-next-line @typescript-eslint/naming-convention -- These are Twitch's property names.
+        expires_in?:   number;
+      };
     if (token === undefined) {
       throw new Error("Twitch token not received");
     }
-    const embeds = await Promise.all(channelIds.map(async(channelId) => {
-      const headers = new Headers();
-      headers.append("Authorization", `Bearer ${token}`);
-      headers.append("Client-ID", process.env.TWITCH_CLIENT_ID ?? "");
-      const request = await fetch(
-        `https://api.twitch.tv/helix/streams?user_id=${channelId}`,
-        {
-          headers: headers,
-          method:  "GET",
-        },
-      );
-      // eslint-disable-next-line @typescript-eslint/consistent-type-assertions -- Necessary as .json() does not accept a generic.
-      const response = await request.json() as TwitchJson;
-      if (response.data.length === 0) {
-        return null;
-      }
-      const [ current ] = response.data;
-      if (!current) {
-        return null;
-      }
-      if (current.id === bot.twitchCache[channelId]) {
-        return null;
-      }
-      bot.twitchCache[channelId] = current.id;
-      return new EmbedBuilder().setTitle(`${channelId} is live!`).
-        setDescription(current.title).
-        setURL(`https://twitch.tv/${current.user_name}`);
-    }));
+    const embeds = await Promise.all(
+      channelIds.map(async(channelId) => {
+        const headers = new Headers();
+        headers.append("Authorization", `Bearer ${token}`);
+        headers.append("Client-ID", process.env.TWITCH_CLIENT_ID ?? "");
+        const request = await fetch(
+          `https://api.twitch.tv/helix/streams?user_id=${channelId}`,
+          {
+            headers: headers,
+            method:  "GET",
+          },
+        );
+        // eslint-disable-next-line @typescript-eslint/consistent-type-assertions -- Necessary as .json() does not accept a generic.
+        const response = (await request.json()) as TwitchJson;
+        if (response.data.length === 0) {
+          return null;
+        }
+        const [ current ] = response.data;
+        if (!current) {
+          return null;
+        }
+        if (current.id === bot.twitchCache[channelId]) {
+          return null;
+        }
+        bot.twitchCache[channelId] = current.id;
+        return new EmbedBuilder().
+          setTitle(`${channelId} is live!`).
+          setDescription(current.title).
+          setURL(`https://twitch.tv/${current.user_name}`);
+      }),
+    );
     return embeds.filter((embed): embed is EmbedBuilder => {
       return embed !== null;
     });
@@ -233,42 +260,42 @@ export const fetchRss = async(bot: ExtendedClient): Promise<void> => {
       throw new Error("Socials channel not found or not text based");
     }
     const latestPosts = await bot.db.rss.findFirst();
-    const { embeds: bskyEmbeds, latestId: bskyLatestId }
-    = await fetchBsky(bot, latestPosts?.blueskyId);
+    const { embeds: bskyEmbeds, latestId: bskyLatestId } = await fetchBsky(
+      bot,
+      latestPosts?.blueskyId,
+    );
     if (bskyEmbeds.length > 0) {
       await channel.send({ embeds: bskyEmbeds });
     }
     const { embeds: redditEmbeds, latestId: redditLatestId }
-    = await fetchReddit(bot, latestPosts?.redditId);
-    if (redditEmbeds.length > 0) {
-      await channel.send({ embeds: redditEmbeds });
-    }
-    const { embeds: newsEmbeds, latestId: newsLatestId }
-    = await fetchNews(bot, latestPosts?.hashnodeId);
-    if (newsEmbeds.length > 0) {
-      await channel.send({ embeds: newsEmbeds });
-    }
-    const { embeds: enYoutubeEmbeds, latestId: enYoutubeLatestId } = await fetchYoutube(bot, `https://www.youtube.com/feeds/videos.xml?channel_id=${youtubeIds.english}`, latestPosts?.youtubeId);
-    if (enYoutubeEmbeds.length > 0) {
-      await channel.send({ embeds: enYoutubeEmbeds });
-    }
-    const { embeds: esYoutubeEmbeds, latestId: esYoutubeLatestId } = await fetchYoutube(bot, `https://www.youtube.com/feeds/videos.xml?channel_id=${youtubeIds.espanol}`, latestPosts?.youtubeId);
-    if (esYoutubeEmbeds.length > 0) {
-      await channel.send({ embeds: esYoutubeEmbeds });
-    }
-    const { embeds: ptYoutubeEmbeds, latestId: ptYoutubeLatestId } = await fetchYoutube(bot, `https://www.youtube.com/feeds/videos.xml?channel_id=${youtubeIds.portugues}`, latestPosts?.youtubeId);
-    if (ptYoutubeEmbeds.length > 0) {
-      await channel.send({ embeds: ptYoutubeEmbeds });
-    }
-    const { embeds: forumEmbeds, latestId: forumLatestId }
-    = await fetchForum(bot, latestPosts?.forumId);
-    if (forumEmbeds.length > 0) {
-      await channel.send({ embeds: forumEmbeds });
-    }
+      = await fetchReddit(bot, latestPosts?.redditId);
+    const { embeds: newsEmbeds, latestId: newsLatestId } = await fetchNews(
+      bot,
+      latestPosts?.hashnodeId,
+    );
+    const { embeds: enYoutubeEmbeds, latestId: enYoutubeLatestId }
+      = await fetchYoutube(
+        bot,
+        `https://www.youtube.com/feeds/videos.xml?channel_id=${youtubeIds.english}`,
+        latestPosts?.youtubeId,
+      );
+    const { embeds: esYoutubeEmbeds, latestId: esYoutubeLatestId }
+      = await fetchYoutube(
+        bot,
+        `https://www.youtube.com/feeds/videos.xml?channel_id=${youtubeIds.espanol}`,
+        latestPosts?.youtubeId,
+      );
+    const { embeds: ptYoutubeEmbeds, latestId: ptYoutubeLatestId }
+      = await fetchYoutube(
+        bot,
+        `https://www.youtube.com/feeds/videos.xml?channel_id=${youtubeIds.portugues}`,
+        latestPosts?.youtubeId,
+      );
+    const { embeds: forumEmbeds, latestId: forumLatestId } = await fetchForum(
+      bot,
+      latestPosts?.forumId,
+    );
     const twitchEmbeds = await fetchTwitch(bot);
-    if (twitchEmbeds.length > 0) {
-      await channel.send({ embeds: twitchEmbeds });
-    }
 
     const query: Prisma.rssUpsertArgs["update"] = {};
 
@@ -309,6 +336,23 @@ export const fetchRss = async(bot: ExtendedClient): Promise<void> => {
         id: latestPosts?.id ?? new UUID().toString(),
       },
     });
+
+    const allEmbeds = [
+      ...redditEmbeds,
+      ...newsEmbeds,
+      ...enYoutubeEmbeds,
+      ...esYoutubeEmbeds,
+      ...ptYoutubeEmbeds,
+      ...forumEmbeds,
+      ...twitchEmbeds,
+    ];
+    await Promise.allSettled(
+      allEmbeds.map(async(embed) => {
+        await channel.send({ embeds: [ embed ] }).catch((error: unknown) => {
+          return void errorHandler(bot, "send rss embed", error);
+        });
+      }),
+    );
   } catch (error) {
     await errorHandler(bot, "fetch rss module", error);
   }
