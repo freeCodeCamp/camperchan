@@ -1,6 +1,6 @@
 /* eslint-disable max-lines -- refactor later */
 import { ChannelType, EmbedBuilder } from "discord.js";
-import { ObjectId, UUID } from "mongodb";
+import { ObjectId } from "mongodb";
 // eslint-disable-next-line @typescript-eslint/naming-convention -- Importing a class.
 import Parser from "rss-parser";
 import { youtubeIds } from "../config/youtubeIds.js";
