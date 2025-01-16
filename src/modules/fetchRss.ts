@@ -1,6 +1,6 @@
 /* eslint-disable max-lines -- refactor later */
 import { ChannelType, EmbedBuilder } from "discord.js";
-import { UUID } from "mongodb";
+import { ObjectId, UUID } from "mongodb";
 // eslint-disable-next-line @typescript-eslint/naming-convention -- Importing a class.
 import Parser from "rss-parser";
 import { youtubeIds } from "../config/youtubeIds.js";
@@ -331,7 +331,7 @@ export const fetchRss = async(bot: ExtendedClient): Promise<void> => {
       },
       update: query,
       where:  {
-        id: latestPosts?.id ?? new UUID().toString(),
+        id: latestPosts?.id ?? new ObjectId().toString(),
       },
     });
 
