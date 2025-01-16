@@ -6,7 +6,7 @@
 
 import { createHmac, timingSafeEqual } from "node:crypto";
 import { readFile } from "node:fs/promises";
-import { ChannelType, WebhookClient } from "discord.js";
+import { ChannelType } from "discord.js";
 import fastify from "fastify";
 import { errorHandler } from "../utils/errorHandler.js";
 import type { ExtendedClient } from "../interfaces/extendedClient.js";
