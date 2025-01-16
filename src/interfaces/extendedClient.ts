@@ -48,5 +48,6 @@ export interface ExtendedClient extends Client {
     start:     number;
     end:       number;
   };
-  translator: Translator;
+  translator:  Translator;
+  twitchCache: Record<string, string>;
 }

@@ -63,3 +63,14 @@ model authors {
   userId String @unique
   hashnodeUsername  String @unique
 }
+
+model rss {
+  id     String @id @default(auto()) @map("_id") @db.ObjectId
+  blueskyId String @unique
+  redditId String @unique
+  forumId String @unique
+  hashnodeId String @unique
+  youtubeId String @unique
+  esYoutubeId String @unique
+  ptYoutubeId String @unique
+}
