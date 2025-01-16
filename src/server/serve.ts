@@ -6,14 +6,10 @@
 
 import { createHmac, timingSafeEqual } from "node:crypto";
 import { readFile } from "node:fs/promises";
-import { WebhookClient } from "discord.js";
+import { ChannelType } from "discord.js";
 import fastify from "fastify";
 import { errorHandler } from "../utils/errorHandler.js";
 import type { ExtendedClient } from "../interfaces/extendedClient.js";
-
-const contributorHook = new WebhookClient({
-  url: process.env.CONTRIBUTOR_HOOK ?? "",
-});
 
 /**
  * Mounts a fastify server to allow for data analytics.
@@ -106,6 +102,13 @@ export const instantiateServer = async(
       }
 
       if (event === "issues") {
+        const channel = await camperChan.channels.fetch("1267979916964794530");
+        if (channel === null || channel.type !== ChannelType.GuildText) {
+          await errorHandler(
+            camperChan, "fetch channel", new Error("Channel not found"),
+          );
+          return;
+        }
         // eslint-disable-next-line @typescript-eslint/consistent-type-assertions -- I'll make a type guard at some point.
         const { action, issue, label } = request.body as {
           action: string;
@@ -115,12 +118,12 @@ export const instantiateServer = async(
         };
         if (action === "labeled") {
           if (label.name === "help wanted") {
-            await contributorHook.send({
+            await channel.send({
               content: `[#${issue.number.toString()} ${issue.title}](${issue.html_url}) is open for contribution!`,
             });
           }
           if (label.name === "first timers only") {
-            await contributorHook.send({
+            await channel.send({
               content: `[#${issue.number.toString()} ${issue.title}](${issue.html_url}) is available for first-time contributors!`,
             });
           }

@@ -1,5 +1,6 @@
 import { ChannelType } from "discord.js";
 import { scheduleJob } from "node-schedule";
+import { fetchRss } from "../../modules/fetchRss.js";
 import { loadRoles } from "../../modules/loadRoles.js";
 import { send100DaysOfCode } from "../../modules/send100DaysOfCode.js";
 import { instantiateServer } from "../../server/serve.js";
@@ -72,6 +73,12 @@ export const handleReady = async(
     await camperChan.config.debugHook.send("All channels loaded.");
 
     await loadRoles(camperChan);
+
+    await fetchRss(camperChan);
+    setInterval(() => {
+      void fetchRss(camperChan);
+      // Every 30 minutes.
+    }, 1000 * 60 * 30);
 
     scheduleJob("0 9 * * *", async() => {
       await send100DaysOfCode(camperChan);

@@ -32,5 +32,6 @@ camperChan.quotes = await loadQuotes(camperChan);
 camperChan.privateLogs = {};
 camperChan.learnAccounts = {};
 camperChan.translator = new Translator(process.env.TRANS_KEY ?? "");
+camperChan.twitchCache = {};
 
 await camperChan.login(camperChan.config.token);
