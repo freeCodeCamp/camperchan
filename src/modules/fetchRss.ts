@@ -30,9 +30,9 @@ const fetchBsky = async(
       return item.guid === latest;
     });
     const latestPosts
-      = latest !== undefined && latestIndex === -1
-        ? items.slice(0, 5)
-        : items.slice(0, Math.min(latestIndex, 5));
+      = latest !== undefined && latestIndex > -1
+        ? items.slice(0, Math.min(latestIndex, 5))
+        : items.slice(0, 5);
     const embeds = latestPosts.map((post) => {
       return new EmbedBuilder().
         setTitle("freeCodeCamp posted on Bluesky!").
@@ -60,9 +60,9 @@ const fetchReddit = async(
       return item.id === latest;
     });
     const latestPosts
-      = latest !== undefined && latestIndex === -1
-        ? items.slice(0, 5)
-        : items.slice(0, Math.min(latestIndex, 5));
+      = latest !== undefined && latestIndex > -1
+        ? items.slice(0, Math.min(latestIndex, 5))
+        : items.slice(0, 5);
     const embeds = latestPosts.map((post) => {
       return new EmbedBuilder().
         setTitle("New Reddit post!").
@@ -90,9 +90,9 @@ const fetchNews = async(
       return item.guid === latest;
     });
     const latestPosts
-      = latest !== undefined && latestIndex === -1
-        ? items.slice(0, 5)
-        : items.slice(0, Math.min(latestIndex, 5));
+      = latest !== undefined && latestIndex > -1
+        ? items.slice(0, Math.min(latestIndex, 5))
+        : items.slice(0, 5);
     const embeds = latestPosts.map((post) => {
       return new EmbedBuilder().
         setTitle("New article!").
@@ -119,9 +119,9 @@ const fetchYoutube = async(
       return item.id === latest;
     });
     const latestPosts
-      = latest !== undefined && latestIndex === -1
-        ? items.slice(0, 5)
-        : items.slice(0, Math.min(latestIndex, 5));
+      = latest !== undefined && latestIndex > -1
+        ? items.slice(0, Math.min(latestIndex, 5))
+        : items.slice(0, 5);
     const embeds = latestPosts.map((post) => {
       return new EmbedBuilder().
         setTitle("New video!").
@@ -149,9 +149,9 @@ const fetchForum = async(
       return topic.id.toString() === latest;
     });
     const latestPosts
-      = latest !== undefined && latestIndex === -1
-        ? result.topic_list.topics.slice(0, 5)
-        : result.topic_list.topics.slice(0, Math.min(latestIndex, 5));
+      = latest !== undefined && latestIndex > -1
+        ? result.topic_list.topics.slice(0, Math.min(latestIndex, 5))
+        : result.topic_list.topics.slice(0, 5);
 
     const embeds = latestPosts.map((post) => {
       return new EmbedBuilder().
