@@ -4,6 +4,7 @@ import { UUID } from "mongodb";
 // eslint-disable-next-line @typescript-eslint/naming-convention -- Importing a class.
 import Parser from "rss-parser";
 import { youtubeIds } from "../config/youtubeIds.js";
+import { customSubstring } from "../utils/customSubstring.js";
 import { errorHandler } from "../utils/errorHandler.js";
 import type { ExtendedClient } from "../interfaces/extendedClient.js";
 import type { ForumData } from "../interfaces/forum.js";
@@ -35,7 +36,7 @@ const fetchBsky = async(
     const embeds = latestPosts.map((post) => {
       return new EmbedBuilder().
         setTitle("freeCodeCamp posted on Bluesky!").
-        setDescription(post.content).
+        setDescription(customSubstring(post.content, 4096)).
         setURL(post.link);
     });
     const latestId = items[0]?.guid ?? null;
@@ -65,7 +66,7 @@ const fetchReddit = async(
     const embeds = latestPosts.map((post) => {
       return new EmbedBuilder().
         setTitle("New Reddit post!").
-        setDescription(post.title).
+        setDescription(customSubstring(post.title, 4096)).
         setURL(post.link);
     });
     const latestId = items[0]?.id ?? null;
@@ -95,7 +96,7 @@ const fetchNews = async(
     const embeds = latestPosts.map((post) => {
       return new EmbedBuilder().
         setTitle("New article!").
-        setDescription(post.contentSnippet).
+        setDescription(customSubstring(post.contentSnippet, 4096)).
         setURL(post.link);
     });
     const latestId = items[0]?.guid ?? null;
@@ -124,7 +125,7 @@ const fetchYoutube = async(
     const embeds = latestPosts.map((post) => {
       return new EmbedBuilder().
         setTitle("New video!").
-        setDescription(post.title).
+        setDescription(customSubstring(post.title, 4096)).
         setURL(post.link);
     });
     const latestId = items[0]?.id ?? null;
@@ -155,7 +156,7 @@ const fetchForum = async(
     const embeds = latestPosts.map((post) => {
       return new EmbedBuilder().
         setTitle("New forum post!").
-        setDescription(post.title).
+        setDescription(customSubstring(post.title, 4096)).
         setURL(
           `https://forum.freecodecamp.org/t/${post.slug}/${post.id.toString()}`,
         );
@@ -235,7 +236,7 @@ const fetchTwitch = async(
         bot.twitchCache[channelId] = current.id;
         return new EmbedBuilder().
           setTitle(`${channelId} is live!`).
-          setDescription(current.title).
+          setDescription(customSubstring(current.title, 4096)).
           setURL(`https://twitch.tv/${current.user_name}`);
       }),
     );
@@ -264,9 +265,6 @@ export const fetchRss = async(bot: ExtendedClient): Promise<void> => {
       bot,
       latestPosts?.blueskyId,
     );
-    if (bskyEmbeds.length > 0) {
-      await channel.send({ embeds: bskyEmbeds });
-    }
     const { embeds: redditEmbeds, latestId: redditLatestId }
       = await fetchReddit(bot, latestPosts?.redditId);
     const { embeds: newsEmbeds, latestId: newsLatestId } = await fetchNews(
@@ -338,6 +336,7 @@ export const fetchRss = async(bot: ExtendedClient): Promise<void> => {
     });
 
     const allEmbeds = [
+      ...bskyEmbeds,
       ...redditEmbeds,
       ...newsEmbeds,
       ...enYoutubeEmbeds,
