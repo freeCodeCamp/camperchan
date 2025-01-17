@@ -281,13 +281,13 @@ export const fetchRss = async(bot: ExtendedClient): Promise<void> => {
       = await fetchYoutube(
         bot,
         `https://www.youtube.com/feeds/videos.xml?channel_id=${youtubeIds.espanol}`,
-        latestPosts?.youtubeId,
+        latestPosts?.esYoutubeId,
       );
     const { embeds: ptYoutubeEmbeds, latestId: ptYoutubeLatestId }
       = await fetchYoutube(
         bot,
         `https://www.youtube.com/feeds/videos.xml?channel_id=${youtubeIds.portugues}`,
-        latestPosts?.youtubeId,
+        latestPosts?.ptYoutubeId,
       );
     const { embeds: forumEmbeds, latestId: forumLatestId } = await fetchForum(
       bot,
