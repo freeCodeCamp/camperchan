@@ -15,8 +15,8 @@ importers:
         specifier: 1.13.12
         version: 1.13.12
       deepl-node:
-        specifier: 1.16.0
-        version: 1.16.0
+        specifier: 1.17.0
+        version: 1.17.0
       diff:
         specifier: 7.0.0
         version: 7.0.0
@@ -1144,6 +1144,10 @@ packages:
     engines: {node: '>=0.4.0'}
     hasBin: true
 
+  adm-zip@0.5.16:
+    resolution: {integrity: sha512-TGw5yVi4saajsSEgz25grObGHEUaDrniwvA2qwSC060KfqGPdglhvPMA2lPIoxs3PQIItj2iag35fONcQqgUaQ==}
+    engines: {node: '>=12.0'}
+
   agent-base@7.1.0:
     resolution: {integrity: sha512-o/zjMZRhJxny7OyEF+Op8X+efiELC7k7yOjMzgfzVqOzXqkBkWI79YoTdOtsuWd5BWhAGAuOY/Xa6xpiaWXiNg==}
     engines: {node: '>= 14'}
@@ -1476,8 +1480,8 @@ packages:
   deep-is@0.1.4:
     resolution: {integrity: sha512-oIPzksmTg4/MriiaYGO+okXDT7ztn/w3Eptv/+gSIdMdKsJo0u4CfYNFJPy+4SKMuCqGw2wxnA+URMg3t8a/bQ==}
 
-  deepl-node@1.16.0:
-    resolution: {integrity: sha512-sYrh8UngVHKBrgffLPl+ng065mlC+Ep3LBdSN3xqDBd4KdBZzgvdxHiHd9Pm9xQCI5pwyuCHyq0cDUW1T3vQUg==}
+  deepl-node@1.17.0:
+    resolution: {integrity: sha512-YUD9OgdN8q0TJMF2UuT0qfVHHPXGpMydcemRdFTcowRmD3Uw2YFXGeL53UMCffvpMhzuve3AEUz+fAGr49RSBg==}
     engines: {node: '>=12.0'}
 
   define-data-property@1.1.4:
@@ -3271,6 +3275,10 @@ packages:
   util-deprecate@1.0.2:
     resolution: {integrity: sha512-EPD5q1uXyFxJpCrLnCc1nHnq3gOa6DZBocAIiI2TaSCA7VCJ1UJDMagCzIkXNsUYfD1daK//LTEQ8xiIbrHtcw==}
 
+  uuid@8.3.2:
+    resolution: {integrity: sha512-+NYs2QeMWy+GWFOEm9xnn6HCDp0l7QBD7ml8zLUmJ+93Q5NF0NocErnwkTkXVFNiX3/fpC6afS8Dhb/gz7R7eg==}
+    hasBin: true
+
   validate-npm-package-license@3.0.4:
     resolution: {integrity: sha512-DpKm2Ui/xN7/HQKCtpZxoRWBhZ9Z0kqtygG8XCgNQ8ZlDnxuQmWhj566j8fN4Cu3/JmbhsDo7fcAJq4s9h27Ew==}
 
@@ -4509,6 +4517,8 @@ snapshots:
 
   acorn@8.14.0: {}
 
+  adm-zip@0.5.16: {}
+
   agent-base@7.1.0:
     dependencies:
       debug: 4.3.7
@@ -4870,12 +4880,15 @@ snapshots:
 
   deep-is@0.1.4: {}
 
-  deepl-node@1.16.0:
+  deepl-node@1.17.0:
     dependencies:
       '@types/node': 22.13.5
+      adm-zip: 0.5.16
       axios: 1.7.5
+      dotenv: 16.4.7
       form-data: 3.0.1
       loglevel: 1.9.1
+      uuid: 8.3.2
     transitivePeerDependencies:
       - debug
 
@@ -6993,6 +7006,8 @@ snapshots:
       punycode: 2.3.0
 
   util-deprecate@1.0.2: {}
+
+  uuid@8.3.2: {}
 
   validate-npm-package-license@3.0.4:
     dependencies:
