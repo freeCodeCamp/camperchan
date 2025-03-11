@@ -15,8 +15,8 @@ importers:
         specifier: 1.13.12
         version: 1.13.12
       deepl-node:
-        specifier: 1.17.2
-        version: 1.17.2
+        specifier: 1.17.3
+        version: 1.17.3
       diff:
         specifier: 7.0.0
         version: 7.0.0
@@ -1487,8 +1487,8 @@ packages:
   deep-is@0.1.4:
     resolution: {integrity: sha512-oIPzksmTg4/MriiaYGO+okXDT7ztn/w3Eptv/+gSIdMdKsJo0u4CfYNFJPy+4SKMuCqGw2wxnA+URMg3t8a/bQ==}
 
-  deepl-node@1.17.2:
-    resolution: {integrity: sha512-bJ7O5qho/g4umhmrdkaX8BwwzM/7xFLMqwfxSk/CeTYeC5DMRIAkhHPjLaF5Ft3byz4Mn2JyJFRIf0yxxlhhlw==}
+  deepl-node@1.17.3:
+    resolution: {integrity: sha512-1Gbsz7tSAQ43VrwTHk8ttkPwRrTu0SRt461JgRzk0W5zeCf9sMRkg3svbc6357x+B4+UZ/2PU/sOOG5b+ywIWg==}
     engines: {node: '>=12.0'}
 
   define-data-property@1.1.4:
@@ -4896,7 +4896,7 @@ snapshots:
 
   deep-is@0.1.4: {}
 
-  deepl-node@1.17.2:
+  deepl-node@1.17.3:
     dependencies:
       '@types/node': 22.13.10
       adm-zip: 0.5.16
