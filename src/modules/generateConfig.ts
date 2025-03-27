@@ -21,6 +21,7 @@ export const generateConfig = (): ExtendedClient["config"] => {
     || process.env.GITHUB_TOKEN === undefined
     || process.env.GITHUB_INSTALLATION_ID === undefined
     || process.env.GHOST_KEY === undefined
+    || process.env.STARBOARD_HOOK === undefined
   ) {
     throw new Error("Missing required config variables");
   }
@@ -39,6 +40,7 @@ export const generateConfig = (): ExtendedClient["config"] => {
     mongoUrl:        process.env.MONGO_URI,
     privateCategory: process.env.PRIVATE_CATEGORY ?? "no category set",
     reportChannel:   process.env.REPORT_CHANNEL,
+    starboardHook:   new WebhookClient({ url: process.env.STARBOARD_HOOK }),
     token:           process.env.TOKEN,
     welcomeHook:     new WebhookClient({ url: process.env.WELCOME_HOOK }),
   };
