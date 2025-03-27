@@ -8,6 +8,7 @@ import { handleMemberRemove } from "./handlers/handleMemberRemove.js";
 import { handleMessageCreate } from "./handlers/handleMessageCreate.js";
 import { handleMessageDelete } from "./handlers/handleMessageDelete.js";
 import { handleMessageEdit } from "./handlers/handleMessageEdit.js";
+import { handleReactionAdd } from "./handlers/handleReactionAdd.js";
 import { handleReady } from "./handlers/handleReady.js";
 import { handleThreadCreate } from "./handlers/handleThreadCreate.js";
 import { handleVoiceStateUpdate } from "./handlers/handleVoiceStateUpdate.js";
@@ -80,6 +81,12 @@ export const registerEvents = async(
       for (const message of messages.values()) {
         void handleMessageDelete(camperChan, message);
       }
+    });
+    camperChan.on(Events.MessageReactionAdd, (reaction) => {
+      if (!reaction.message.inGuild() || reaction.partial) {
+        return;
+      }
+      void handleReactionAdd(camperChan, reaction);
     });
   } catch (error) {
     await errorHandler(camperChan, "register events", error);

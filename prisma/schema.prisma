@@ -74,3 +74,8 @@ model rss {
   esYoutubeId String @unique
   ptYoutubeId String @unique
 }
+
+model starboard {
+  id      String @id @default(auto()) @map("_id") @db.ObjectId
+  messageId    String @unique
+}

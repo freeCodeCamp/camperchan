@@ -22,6 +22,7 @@ export interface ExtendedClient extends Client {
     messageHook:          WebhookClient;
     modHook:              WebhookClient;
     welcomeHook:          WebhookClient;
+    starboardHook:        WebhookClient;
     homeGuild:            Snowflake;
     botId:                Snowflake;
     modRole:              Snowflake;
