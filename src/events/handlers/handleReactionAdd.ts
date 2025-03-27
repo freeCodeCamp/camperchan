@@ -15,7 +15,7 @@ export const handleReactionAdd = async(
     if (reaction.emoji.name !== "⭐") {
       return;
     }
-    if (reaction.count < 2) {
+    if (reaction.count < 3) {
       return;
     }
     const message = await reaction.message.fetch();
