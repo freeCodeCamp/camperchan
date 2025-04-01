@@ -30,6 +30,9 @@ export const handleReactionAdd = async(
     }
 
     await camperChan.config.starboardHook.send({
+      allowedMentions: {
+        parse: [],
+      },
       avatarURL: message.author.displayAvatarURL(),
       content:   message.content,
       embeds:    message.embeds,
