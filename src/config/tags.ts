@@ -22,6 +22,11 @@ export const tags: Array<Tag> = [
       "Don't ask to ask, just ask\n<https://dontasktoask.com>. For details on how to ask a strong question, visit https://canary.discord.com/channels/692816967895220344/1033845883822948502",
     name: "How to ask a question",
   },
+    {
+    message:
+      "Please email donors@freecodecamp.org and provide the email you use to log into fCC and your donation receipt.",
+    name: "Donation Problems",
+  },
   {
     message:
       "It looks like you're asking about your attempted solution rather than your actual problem. We need to know what your problem is before we can help.\n"
