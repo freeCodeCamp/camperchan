@@ -24,6 +24,11 @@ export const tags: Array<Tag> = [
   },
   {
     message:
+      "Please email donors@freecodecamp.org and provide the email you use to log into freecodecamp.org/learn, your donation receipt, and a brief explanation of your issue.",
+    name: "Donation Problems",
+  },
+  {
+    message:
       "It looks like you're asking about your attempted solution rather than your actual problem. We need to know what your problem is before we can help.\n"
       + "https://xyproblem.info",
     name: "XY Problem",
