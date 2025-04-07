@@ -24,7 +24,7 @@ export const tags: Array<Tag> = [
   },
     {
     message:
-      "Please email donors@freecodecamp.org and provide the email you use to log into fCC and your donation receipt.",
+      "Please email donors@freecodecamp.org and provide the email you use to log into freecodecamp.org/learn, your donation receipt, and a brief explanation of your issue.",
     name: "Donation Problems",
   },
   {
