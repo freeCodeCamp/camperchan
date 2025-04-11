@@ -14,6 +14,7 @@ import { hasNonApprovedInvite }
   from "../../modules/automod/hasNonApprovedInvite.js";
 import { checkHacktoberfestMessage }
   from "../../modules/checkHacktoberfestMessage.js";
+import { githubListener } from "../../modules/githubListener.js";
 import { levelListener } from "../../modules/levelListener.js";
 import { loadRoles } from "../../modules/loadRoles.js";
 import { messageCounter } from "../../modules/messageCounter.js";
@@ -156,6 +157,7 @@ export const handleMessageCreate = async(
 
   await messageCounter(camperChan, message);
   await levelListener(camperChan, message);
+  await githubListener(camperChan, message);
 
   if (
     message.channel.type !== ChannelType.GuildText
