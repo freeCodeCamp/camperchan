@@ -49,7 +49,11 @@ export const githubListener = async(
       return;
     }
 
-    const numberRegex = /#(?<number>\d+)/g;
+    /**
+     * Note that we must invert the \b flag at the start of this regex because # is NOT a word character, so
+     * we do not want to match boundaries - it IS a boundary.
+     */
+    const numberRegex = /\B#(?<number>\d+)\b/g;
 
     const matches = [ ...content.matchAll(numberRegex) ];
 
