@@ -22,7 +22,7 @@
   },
   "license": "MIT",
   "dependencies": {
-    "@prisma/client": "6.7.0",
+    "@prisma/client": "6.8.0",
     "@tryghost/admin-api": "1.13.15",
     "deepl-node": "1.18.0",
     "diff": "7.0.0",
@@ -51,7 +51,7 @@
     "@vitest/coverage-istanbul": "2.1.9",
     "discordjs-testing": "0.2.0",
     "eslint": "9.23.0",
-    "prisma": "6.7.0",
+    "prisma": "6.8.0",
     "rimraf": "6.0.1",
     "tsx": "4.19.4",
     "typescript": "5.8.2",
