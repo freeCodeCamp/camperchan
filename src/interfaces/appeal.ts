@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/naming-convention -- This is what we get.*/
 export interface Appeal {
   table_id:     number;
   database_id:  number;
