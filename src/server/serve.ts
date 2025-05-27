@@ -269,11 +269,20 @@ export const instantiateServer = async(
           },
           method: "POST",
         },
-      ).catch(
-        (error: unknown) => {
-          return void errorHandler(camperChan, "send appeal message", error);
-        },
-      );
+      ).
+        then((responseInner) => {
+          if (!responseInner.ok) {
+            throw new Error(
+              `Failed to send appeal message: ${responseInner.statusText}`,
+            );
+          }
+        }).
+        catch(
+          (error: unknown) => {
+            logHandler.error(JSON.stringify(error));
+            return void errorHandler(camperChan, "send appeal message", error);
+          },
+        );
     });
 
     server.listen({ port: 1443 }, (error) => {
