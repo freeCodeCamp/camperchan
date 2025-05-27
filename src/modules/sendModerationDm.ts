@@ -37,7 +37,7 @@ export const sendModerationDm = async(
     if (action === "ban") {
       embed.addFields({
         name:  "Appeals",
-        value: `You can use [this google form](https://docs.google.com/forms/d/e/1FAIpQLSdhJjpK8dPlktQMEatUwmXworqZF9ig14oiwmiZzd0skz5ekQ/viewform) to appeal your ban after you have [read our code of conduct](https://www.freecodecamp.org/news/code-of-conduct).`,
+        value: `You can use [this form](https://forms.nhcarrigan.com/form/2Z1ohoTrVaiXVtboIVB1CKn8OZID7dHhslhnZO4---s) to appeal your ban after you have [read our code of conduct](https://www.freecodecamp.org/news/code-of-conduct).`,
       });
     }
 

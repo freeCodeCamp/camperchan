@@ -9,6 +9,7 @@ import { readFile } from "node:fs/promises";
 import { ChannelType } from "discord.js";
 import fastify from "fastify";
 import { errorHandler } from "../utils/errorHandler.js";
+import type { Appeal } from "../interfaces/appeal.js";
 import type { ExtendedClient } from "../interfaces/extendedClient.js";
 
 /**
@@ -129,6 +130,129 @@ export const instantiateServer = async(
           }
         }
       }
+    });
+
+    server.post("/appeal", async(request, response) => {
+      const appealSecret = process.env.APPEAL_WEBHOOK_SECRET;
+      if (appealSecret === undefined) {
+        await response.status(500).send("No secret provided.");
+        return;
+      }
+      const secretHeader = request.headers["x-appeal-secret"];
+      if (typeof secretHeader !== "string") {
+        await response.
+          status(400).
+          send(`Invalid value ${String(secretHeader)} for X-Appeal-Secret`);
+        return;
+      }
+      if (secretHeader !== appealSecret) {
+        await response.status(401).send("Failed to verify appeal secret.");
+        return;
+      }
+      // eslint-disable-next-line @typescript-eslint/consistent-type-assertions -- I'll make a type guard at some point.
+      const { body } = request as { body: Appeal };
+      const [ appeal ] = body.items;
+      if (!appeal) {
+        await response.status(400).send("No appeal data provided.");
+        return;
+      }
+      // It's valid, so send an ok response immediately
+      await response.status(200).send("OK~!");
+      // eslint-disable-next-line stylistic/max-len -- This is a string.
+      await fetch("https://discord.com/api/v10/channels/987408145863307334/messages", {
+        body: JSON.stringify({ components: [
+          {
+            content: "# NEW BAN APPEAL",
+            type:    10,
+          },
+          {
+            // eslint-disable-next-line @typescript-eslint/naming-convention -- Discord API name.
+            accent_color: null,
+            components:   [
+              {
+                content: "**User Name and ID**",
+                type:    10,
+              },
+              {
+                content: `${appeal.Username} (${appeal["User ID"]})`,
+                type:    10,
+              },
+            ],
+            spoiler: false,
+            type:    17,
+          },
+          {
+            // eslint-disable-next-line @typescript-eslint/naming-convention -- Discord API name.
+            accent_color: null,
+            components:   [
+              {
+                content: "**I have read and will follow Code of Conduct**",
+                type:    10,
+              },
+              {
+                content: String(appeal["Code of Conduct"]),
+                type:    10,
+              },
+            ],
+            spoiler: false,
+            type:    17,
+          },
+          {
+            // eslint-disable-next-line @typescript-eslint/naming-convention -- Discord API name.
+            accent_color: null,
+            components:   [
+              {
+                content: "**Why were you banned?**",
+                type:    10,
+              },
+              {
+                content: appeal.Reason,
+                type:    10,
+              },
+            ],
+            spoiler: false,
+            type:    17,
+          },
+          {
+            // eslint-disable-next-line @typescript-eslint/naming-convention -- Discord API name.
+            accent_color: null,
+            components:   [
+              {
+                content: "**Was the ban fair? Why or why not?**",
+                type:    10,
+              },
+              {
+                content: appeal.Fair,
+                type:    10,
+              },
+            ],
+            spoiler: false,
+            type:    17,
+          },
+          {
+            // eslint-disable-next-line @typescript-eslint/naming-convention -- Discord API name.
+            accent_color: null,
+            components:   [
+              {
+                content: "**How will your behaviour improve?**",
+                type:    10,
+              },
+              {
+                content: appeal.Improve,
+                type:    10,
+              },
+            ],
+            spoiler: false,
+            type:    17,
+          },
+        ],
+        flags: 32_768 }),
+        headers: {
+          // eslint-disable-next-line @typescript-eslint/naming-convention -- Discord API name.
+          Authorization: `Bot ${process.env.DISCORD_TOKEN ?? ""}`,
+        },
+        method: "POST",
+      });
     });
 
     server.listen({ port: 1443 }, (error) => {
