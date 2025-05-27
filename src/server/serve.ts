@@ -249,7 +249,7 @@ export const instantiateServer = async(
         flags: 32_768 }),
         headers: {
           // eslint-disable-next-line @typescript-eslint/naming-convention -- Discord API name.
-          Authorization: `Bot ${process.env.DISCORD_TOKEN ?? ""}`,
+          Authorization: `Bot ${process.env.TOKEN ?? ""}`,
         },
         method: "POST",
       });
