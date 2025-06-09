@@ -92,6 +92,7 @@ export const handleMessageCreate = async(
         && !file.contentType.startsWith("video/")
       );
     })
+    && message.channel.id !== "1381662314540957787" // Resume review channel, so people can upload PDFs.
   ) {
     await message.delete();
     await message.channel.send({
